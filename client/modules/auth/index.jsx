@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ReactDipper from 'react-dipper';
 import classnames from 'classnames';
 import styles from './style.less';
-import {Row,Col, Input, Form, Button, Checkbox, Card, Icon} from 'antd';
+import {Row,Col, Input, Form, Button, Checkbox, Card, Icon, Tooltip} from 'antd';
 
 import img from './assets/user1.png';
 
@@ -39,10 +39,12 @@ let Auth = ({auth, form, dispatch}) => {
   return (
     <div className={styles.authContainer}>
       <div className={styles.canvansContainer}>
-        <ReactDipper />
+        <ReactDipper styleParams={{
+          'backgroundColor': '#374861'
+        }}/>
       </div>
 
-      <Card title="Welcome to Weasel" extra={<a href="#">Register</a>} style={{ width: 280 }} className={styles.loginCard}>
+      <Card title="Welcome" style={{ width: 280 }} className={styles.loginCard}>
         <img src={img} className={styles.iconStyle}/>
         <Form horizontal onSubmit={onSubmit}>
           <FormItem>
@@ -68,13 +70,28 @@ let Auth = ({auth, form, dispatch}) => {
             )}
           </FormItem>
 
-          <Button type="default" htmlType="submit">
-            Login
-          </Button>
+          <Row>
+            <Col span={11}>
+              <Button type="default" htmlType="submit" style={{'width':'100%', 'height': 36}}>
+                Login
+              </Button>
+            </Col>
+            <Col span={2}></Col>
+            <Col span={11}>
+              <Tooltip title="Weibo Login">
+                <Button type="default"  onClick={weiboLogin} style={{'width':'100%'}}>
+                  <i className="fa fa-weibo fa-2x"></i>
+                </Button>
+              </Tooltip>
+            </Col>
+          </Row>
 
-          <Button type="primary" onClick={weiboLogin} style={{'float':'right'}}>
-            weibo Login
-          </Button>
+
+
+
+
+
+
         </Form>
       </Card>
 
