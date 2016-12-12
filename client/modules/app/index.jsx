@@ -8,38 +8,11 @@ import { List, Map } from 'immutable';
 import Todos from '../todos';
 import Users from '../users';
 
-const App = ({location}) => {
+const App = ({children}) => {
 
-  let ele = null;
-  let url = location.hash.replace(/#\//, '');
-
-  const fn = (localUrl) => {
-    if (localUrl === '') {
-
-      ele = <div>
-        <h1>Welcome to index page</h1>
-        <DatePicker />
-      </div>;
-
-    }
-    else if (localUrl == 'todos'){
-
-      ele = <div>
-        <Todos />
-      </div>;
-
-    } else if(localUrl == 'users'){
-
-      ele = <Users />
-
-    }
-
-    return ele;
-  };
-
-  return (
+    return (
     <Layout>
-      { fn(url) }
+      { children }
     </Layout>
   );
 };

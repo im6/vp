@@ -33,13 +33,13 @@ const Layout = ({children}) =>{
               </h4>
             </Link>
             <br />
-            <Link to="/#/todos">
+            <Link to="/todos">
               <h4>
                 <i className="fa fa-list" />
                 Todos</h4>
             </Link>
             <br />
-            <Link to="/#/users">
+            <Link to="/users">
               <h4>
                 <i className="fa fa-user" />
                 Users</h4>

@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware,compose, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { browserHistory, Router, Route } from 'react-router';
+import { browserHistory, Router, Route, IndexRoute } from 'react-router';
 import { syncHistoryWithStore, routerReducer as routing } from 'react-router-redux';
 import createLogger from 'redux-logger';
 
@@ -18,7 +18,11 @@ const appDom = document.getElementById('app');
 const sagaMiddleware = createSagaMiddleware();
 const logger = createLogger();
 
-import App from '../modules/app/index.jsx';
+import App from '../modules/app';
+import Todos from '../modules/todos';
+import Users from '../modules/users';
+import ErrorPage from '../modules/errorPage';
+import Hello from '../modules/Hello';
 import Auth from '../modules/auth/index.jsx';
 
 const initialState = {};
@@ -40,11 +44,12 @@ let render = () => {
   ReactDOM.render(
     <Provider store={store}>
       <Router history={history} >
-        <Route path="/" component={App}/>
-        <Route path="/auth" component={Auth}/>
-        <Route path="/todos" component={App}/>
-        <Route path="/users" component={App} />
-        <Route path="*" component={App} />
+        <Route path="/" component={App}>
+          <IndexRoute component={Hello}/>
+          <Route path="todos" component={Todos}/>
+          <Route path="users" component={Users} />
+          <Route path="*" component={ErrorPage} />
+        </Route>
       </Router>
     </Provider>,
     appDom
