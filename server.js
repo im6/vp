@@ -1,5 +1,5 @@
 "use strict";
-let app = require('./bin/app'),
+let app = require('./server/bin/app'),
   port = process.env.PORT || 5000;
 
 app.listen(port, function () {

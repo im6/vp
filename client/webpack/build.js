@@ -10,11 +10,11 @@ Object.assign(baseTemplate, {
   module: {
     loaders: asset.loaders
   },
-  plugins: asset.plugins("watch"),
-  entry: asset.entry("watch"),
-  devtool: 'eval',
+  plugins: asset.plugins("build"),
+  entry: asset.entry("build"),
+  devtool: 'cheap-module-source-map',
   output: {
-    path: path.join(__dirname, '../../temp'),
+    path: path.join(__dirname, '../../public'),
     filename: 'app.js'
   }
 });

@@ -1,65 +1,35 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
-import { Row, Col, Button } from 'antd';
+import { createAction } from 'redux-actions';
+import { connect } from 'react-redux';
+import { Row, Col } from 'antd';
+
+import '!style!css!font-awesome/css/font-awesome.min.css';
 
 import styles from './style.less';
-import '!style!css!font-awesome/css/font-awesome.min.css';
 import img from '!file!./assets/gradient.jpg';
-
 import Footer from './components/footer/index.jsx';
 import Header from './components/header/index.jsx';
-import Background from './components/background/index.jsx';
+import Sidebar from './components/sidebar/index.jsx';
 
 
-const Layout = ({children}) =>{
+const Layout = ({children}) => {
 
-  var result = <div style={{background: `#f5f6f7 url(${img}) repeat-x 0 0`}}>
-    <Header className={styles.header}/>
-    <div className={styles.canvas}>
-      <Background />
-    </div>
-
-    <div className={styles.main}>
+  var result = <div className={styles.layoutBox} >
+    <Header className={styles.header} />
+    <div className={styles.main} style={{background: `#f5f6f7 url(${img}) repeat-x 0 0`}} >
       <Row>
-        <Col span={6}></Col>
-
-        <Col span={6}>
-          <div>
-            <h2 className={styles.routeName}>Route:</h2>
-            <Link to="/">
-              <h4>
-                <i className="fa fa-home" />
-                Home
-              </h4>
-            </Link>
-            <br />
-            <Link to="/todos">
-              <h4>
-                <i className="fa fa-list" />
-                Todos</h4>
-            </Link>
-            <br />
-            <Link to="/users">
-              <h4>
-                <i className="fa fa-user" />
-                Users</h4>
-            </Link>
-            <br />
-          </div>
+        <Col  xs={0} sm={0} md={1} lg={1} />
+        <Col  xs={24} sm={24} md={7} lg={5} >
+          <Sidebar />
         </Col>
-        <Col span={6}>
-          <div>
-            {children}
-          </div>
+        <Col  xs={24} sm={24} md={15} lg={17} >
+          {children}
         </Col>
-        <Col span={6}></Col>
+        <Col  xs={0} sm={0} md={1} lg={1} />
       </Row>
     </div>
-
-
-    <Footer className={styles.footer}/>
+    <Footer className={styles.footer} />
   </div>;
-
   return result;
 };
 

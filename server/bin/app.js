@@ -8,7 +8,7 @@ const path = require('path'),
   expressSession = require('express-session'),
   csrf = require('csurf');
 
-
+console.log(`NODE_ENV: ${globalConfig.isDev ? 'dev' : 'production'}`);
 const publicDir = globalConfig.isDev ? 'temp' : 'public';
 const app = express();
 
@@ -30,15 +30,19 @@ app.use(expressSession({
 if(!globalConfig.isDev){
   app.use(csrf());
 }else{
-  console.log('Under DEV environment...');
   app.locals.pretty = true;
 }
 
+app.get('/*', function (req, res) {
+  res.sendFile(path.resolve(__dirname,`../../${publicDir}/index.html`) );
+});
 
-app.use('/', require('../server/modules/main/route'));
-app.use('/zj', require('../server/modules/zj/route'));
-app.use('/login', require('../server/modules/login/route'));
-app.use('/api1', require('../server/modules/api1/route'));
+
+app.use('/', require('../modules/main/route'));
+app.use('/zj', require('../modules/zj/route'));
+app.use('/login', require('../modules/login/route'));
+app.use('/api1', require('../modules/api1/route'));
+
 
 
 
