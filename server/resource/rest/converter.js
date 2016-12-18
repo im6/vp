@@ -1,4 +1,4 @@
-var globalConfig = require('../../../env/config'),
+var globalConfig = require('../../config/env'),
     _ = require('lodash');
 module.exports = {
     createReqJson: function(method, url, obj){

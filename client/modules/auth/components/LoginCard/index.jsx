@@ -15,7 +15,7 @@ let LoginCard = ({form, onClickLogin}) => {
 
   const weiboLogin = ()=>{
     const client_id = "806813820",
-      redirect_uri = "http://127.0.0.1:5000",
+      redirect_uri = "http://127.0.0.1:4000",
       state = "9cea2e9021e86796b74cc",
       scope = "email";
 

@@ -1,7 +1,8 @@
 "use strict";
 let app = require('./server/bin/app'),
-  port = process.env.PORT || 5000;
+  globalConfig = require('./server/config/env'),
+  port = globalConfig.serverPort;
 
 app.listen(port, function () {
-    console.log('Example app listening on port: '+ port);
+    console.log('app is running on port: '+ port);
 });

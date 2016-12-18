@@ -1,7 +1,7 @@
 'use strict';
 var path = require('path'),
     appDir = path.dirname(require.main.filename),
-    globalConfig = require('../../../env/config'),
+    globalConfig = require('../../config/env'),
     uuid = require('uuid'),
     weiboRsc = require('../../resource/weibo/list');
 

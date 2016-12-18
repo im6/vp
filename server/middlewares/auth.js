@@ -1,5 +1,5 @@
 var weiboApi = require('../resource/weibo/list'),
-    globalConfig = require('../../env/config'),
+    globalConfig = require('../config/env'),
     url = require('url');
     _ = require('lodash');
 

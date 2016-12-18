@@ -1,7 +1,6 @@
 'use strict';
 var express = require('express'),
     router = express.Router(),
-    globalConfig = require('../../../env/config'),
     authMd = require('../../middlewares/auth'),
     ctr = require("./ctr");
 
