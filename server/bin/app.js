@@ -9,11 +9,11 @@ const path = require('path'),
   csrf = require('csurf');
 
 console.log(`NODE_ENV: ${globalConfig.isDev ? 'dev' : 'production'}`);
-const publicDir = globalConfig.isDev ? 'temp' : 'public';
+
 const app = express();
 
 app.set('x-powered-by', false);
-app.use(express.static(publicDir));
+app.use(express.static(globalConfig.publicDir));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
@@ -30,20 +30,15 @@ app.use(expressSession({
 if(!globalConfig.isDev){
   app.use(csrf());
 }else{
-  app.locals.pretty = true;
+  // some production setup here
 }
 
-app.get('/*', function (req, res) {
-  res.sendFile(path.resolve(__dirname,`../../${publicDir}/index.html`) );
-});
 
 
-app.use('/', require('../modules/main/route'));
+
 app.use('/zj', require('../modules/zj/route'));
-app.use('/login', require('../modules/login/route'));
-app.use('/api1', require('../modules/api1/route'));
-
-
+app.use('/api', require('../modules/api/route'));
+app.get('/*', require('../middlewares/renderStatic').main);
 
 
 app.use(function(err, req, res, next) {
@@ -55,7 +50,5 @@ app.use(function(err, req, res, next) {
     result: 'handle error in the end'
   });
 });
-
-
 
 module.exports = app;

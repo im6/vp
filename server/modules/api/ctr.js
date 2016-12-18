@@ -6,7 +6,6 @@ var path = require('path'),
   _ = require('lodash');
 
 
-
 module.exports = {
   test: function(req, res, next){
     res.json({
@@ -14,7 +13,4 @@ module.exports = {
       error: false
     });
   },
-  getSessionStatus: function(req, res, next){
-
-  }
 };

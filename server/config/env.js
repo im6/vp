@@ -12,4 +12,5 @@ module.exports = {
   weiboRedirectUrl: env.weiboRedirectUrl,
   restApi: env.restApi,
   mongodbUrl: env.mongodbUrl,
+  publicDir: env.NODE_ENV === 'dev' ? 'temp' : 'public'
 };

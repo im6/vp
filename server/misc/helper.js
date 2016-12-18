@@ -4,16 +4,16 @@ let privateFn = {
 };
 
 module.exports = {
-    resSuccessObj: (data)=>{
-        return {
-            status: 'success',
-            result: data
-        };
-    },
-    resFailObj: (err)=>{
-        return {
-            status: 'error',
-            result: err
-        };
-    }
+  resSuccessObj: (data)=>{
+    return {
+        error: false,
+        result: data
+    };
+  },
+  resFailObj: (err)=>{
+    return {
+      error: true,
+      result: err
+    };
+  }
 };

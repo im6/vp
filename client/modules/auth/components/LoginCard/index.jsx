@@ -10,12 +10,12 @@ import img from './assets/icon.png';
 const FormItem = Form.Item;
 
 
-let LoginCard = ({form, onClickLogin}) => {
+let LoginCard = ({form, onClickLogin, weiboUrl}) => {
   const {getFieldProps, getFieldsValue, getFieldDecorator} = form;
 
   const weiboLogin = ()=>{
     const client_id = "806813820",
-      redirect_uri = "http://127.0.0.1:4000",
+      redirect_uri = "http://127.0.0.1:4000/api/weibologin",
       state = "9cea2e9021e86796b74cc",
       scope = "email";
 
@@ -25,7 +25,7 @@ let LoginCard = ({form, onClickLogin}) => {
       "&state=" + state +
       "&redirect_uri=" + redirect_uri;
 
-    window.location = url;
+    window.location = weiboUrl;
   };
 
   const onSubmit = (e) =>{

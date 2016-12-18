@@ -20,7 +20,6 @@ const requester = (url, options) => {
 
   return fetch(url, opts)
     .then(jsonParse);
-
 };
 
 export default requester;

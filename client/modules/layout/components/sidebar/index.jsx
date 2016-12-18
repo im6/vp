@@ -41,6 +41,7 @@ const Sidebar = React.createClass({
               style={{ width: '85%' }}
               onOpenChange={this.onOpenChange}
               onClick={this.handleClick}>
+
           <Menu.Item key="home">
             <Link to="/">
               <h3>
@@ -49,53 +50,6 @@ const Sidebar = React.createClass({
             </Link>
           </Menu.Item>
 
-          <Menu.Item key="product">
-            <Link to="/product">
-              <h3>
-                <Icon type="windows-o" />Product
-              </h3>
-            </Link>
-          </Menu.Item>
-
-          <Menu.Item key="opt">
-            <Link to="/optimization">
-              <h3>
-                <Icon type="eye" />Optimization
-              </h3>
-            </Link>
-          </Menu.Item>
-
-          <SubMenu title={<h3><Icon type="save" />Saved</h3>}>
-            <Menu.Item key="setting:1">
-              <Link to="/users">
-                <h4>
-                  history 1
-                </h4>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="setting:2">
-              <h4>
-                history 2
-              </h4>
-            </Menu.Item>
-          </SubMenu>
-
-          <SubMenu title={<h3><Icon type="user" />User</h3>}>
-            <Menu.Item key="setting:1">
-              <Link to="/users">
-                <h4>
-                  <Icon type="team" />
-                  Admin
-                </h4>
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="setting:2">
-              <h4>
-                <Icon type="setting" />
-                Profile
-              </h4>
-            </Menu.Item>
-          </SubMenu>
 
           <Menu.Item key="support">
             <Link to="/support">

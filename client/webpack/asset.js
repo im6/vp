@@ -84,7 +84,7 @@ var plugins = {
     new HtmlWebpackPlugin({
       title: 'ZJ Guo',
       template: 'client/template/index.html',
-      //favicon: 'client/content/img/favicon.ico',
+      favicon: 'client/content/img/favicon.ico',
       hash:true,
       showErrors: false
     }),
@@ -92,7 +92,8 @@ var plugins = {
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: JSON.stringify("dev")
+        NODE_ENV: JSON.stringify("production"),
+        //NODE_ENV: JSON.stringify("dev"),
       }
     }),
   ],

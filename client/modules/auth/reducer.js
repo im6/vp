@@ -4,6 +4,14 @@ import Immutable, {Map, List} from 'immutable';
 
 
 const auth = handleActions({
+  ['auth/init'](state, action) {
+    debugger;
+    return state.merge({
+      isAuth: false,
+      userInfo: null,
+      weiboUrl: action.payload.weiboUrl
+    });
+  },
   ['auth/login'](state, action) {
     console.log('loading users...');
     return state.merge({
@@ -20,7 +28,8 @@ const auth = handleActions({
   }
 }, Immutable.fromJS({
   isAuth: false,
-  userInfo: null
+  userInfo: null,
+  weiboUrl: null
 }));
 
 export default auth;

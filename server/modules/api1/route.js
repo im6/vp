@@ -8,6 +8,7 @@ var express = require('express'),
 //router.get('/getUserById', authMd.checkAuth, ctr.getUserById);
 router.get.apply(router, ['/test', ctr.test]);
 router.get.apply(router, ['/getUserById', ctr.getUserById]);
+router.get.apply(router, ['/getUserById', ctr.getUserById]);
 
 
 

@@ -27,13 +27,14 @@ class Auth extends React.Component {
     });
 
     const dispatch = me.props.dispatch;
+    debugger;
     let actionCreater = createAction('auth/login');
     let action = actionCreater(d);
     dispatch(action);
 
     setTimeout(function(){
       browserHistory.push('/');
-    }, 800);
+    }, 0);
   }
 
   render(){
@@ -50,11 +51,16 @@ class Auth extends React.Component {
                  type={'bottom'}
                  ease={'easeOutQuart'} >
         <div key="a">
-          <LoginCard onClickLogin={me.onSubmit.bind(me)} />
+          <LoginCard onClickLogin={me.onSubmit.bind(me)} weiboUrl={me.props.auth.get('weiboUrl')}/>
         </div>
       </QueueAnim>
     </div>);
   }
 }
+function mapStateToProps({auth}){
+  return {
+    auth
+  }
+}
 
-export default connect()(Auth);
+export default connect(mapStateToProps)(Auth);

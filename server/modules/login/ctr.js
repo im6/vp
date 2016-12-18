@@ -44,12 +44,7 @@ module.exports = {
                 csrf: csrfStr
             };
 
-            res.render('login', obj);
+            res.json(obj);
         }
-    },
-    test: function(req, res, next){
-        res.json({
-            test:213
-        });
     }
 };

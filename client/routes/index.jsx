@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
 
 import { Global } from '../config/global';
-
+import { getInitialStatus } from '../services/resource.js';
 import App from '../modules/app/index.jsx';
 import ErrorPage from '../modules/errorPage';
 import Hello from '../modules/hello';
@@ -14,14 +14,30 @@ import Auth from '../modules/auth';
 const Routes = ({ history, store }) => {
 
   const checkAuth = (nextState, replace, callback) => {
+
     if(Global.isDev){
       callback();
     }else{
-      let isAuth = store.getState().auth.get('isAuth');
-      if(!isAuth && nextState.routes[0].path != '/auth'){
+      getInitialStatus().then((res) => {
+        debugger;
+        if(!res.isAuth){
+          store.dispatch({
+            type: 'auth/init',
+            payload: res
+          });
+          replace('/auth');
+        }
+      }, (res2) => {
         replace('/auth');
-      }
-      callback();
+      }).then(()=>{
+        debugger;
+        callback();
+      });
+      //let isAuth = store.getState().auth.get('isAuth');
+      //if(!isAuth && nextState.routes[0].path != '/auth'){
+      //  replace('/auth');
+      //}
+      //callback();
     }
   };
 

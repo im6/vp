@@ -1,17 +1,18 @@
 import requester from './requester';
+import fetchPromise from './requester';
 import qs from 'qs';
 
-export async function getList(obj) {
-  return requester('/test', {
-    method: "POST",
-    body: JSON.stringify(obj)
+export async function getInitialStatus() {
+  let result = await fetchPromise('/api/status', {
+    method: "POST"
   });
+
+  return result;
 }
 
 export async function getTodos(obj) {
-  return requester('/todos', {
-    method: "POST",
-    body: JSON.stringify(obj)
+  return await fetchPromise('/api/test', {
+    method: "POST"
   });
 }
 

@@ -1,10 +1,13 @@
 'use strict';
 var express = require('express'),
     router = express.Router(),
+    globalConfig = require('../../config/env'),
     authMd = require('../../middlewares/auth'),
     ctr = require("./ctr");
 
-router.get('/', authMd.checkAuth, ctr.main);
-router.get('/logout',ctr.logout);
+router.get.apply(router, ['/', ctr.test]);
+router.get.apply(router, ['/status', ctr.getSessionStatus]);
+
+
 
 module.exports = router;

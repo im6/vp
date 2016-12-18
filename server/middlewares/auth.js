@@ -5,8 +5,8 @@ var weiboApi = require('../resource/weibo/list'),
 
 module.exports = {
     checkAuth: function(req, res, next){
-        var qs = req.query; // code and state
       debugger;
+        var qs = req.query; // code and state
         if(qs.code && qs.state){
             // redirected by weibo
             console.log('redirected by weibo...');
@@ -38,7 +38,7 @@ module.exports = {
             });
         } else if (!req.session.app || !req.session.app.isAuth){
             console.log('unAuth..');
-            res.redirect('/login');
+            res.redirect('/auth');
         } else if(req.session.app.isAuth){
             console.log('auth check pass success.');
             next();

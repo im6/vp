@@ -4,7 +4,6 @@ var express = require('express'),
     ctr = require("./ctr");
 
 router.get('/',ctr.main);
-router.post('/test',ctr.test);
 
 
 module.exports = router;
