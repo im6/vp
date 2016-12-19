@@ -5,7 +5,6 @@ import Immutable, {Map, List} from 'immutable';
 
 const auth = handleActions({
   ['auth/init'](state, action) {
-    debugger;
     return state.merge({
       isAuth: false,
       userInfo: null,
@@ -17,6 +16,13 @@ const auth = handleActions({
     return state.merge({
       isAuth: true,
       userInfo: action.payload
+    });
+  },
+  ['auth/loadUser'](state, action) {
+    debugger;
+    return state.merge({
+      isAuth: false,
+      userInfo: null
     });
   },
   ['auth/logoff'](state, action) {

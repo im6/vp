@@ -12,9 +12,10 @@ const todos = handleActions({
   },
   ['todos/get/success'](state, action) {
     console.log('loading todos success!');
+    debugger;
     return state.merge({
       loading: false,
-      todoList: action.payload.get('data')
+      todoList: action.payload.data
     });
   },
   ['todos/get/fail'](state, action) {

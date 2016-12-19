@@ -34,6 +34,7 @@ let LoginCard = ({form, onClickLogin, weiboUrl}) => {
     onClickLogin(payload)
   };
 
+  const disableBtn = !weiboUrl;
   return (
     <Card title="Welcome to Vaporeon" style={{ width: 270 }}>
       <img src={img} className={styles.iconStyle}/>
@@ -70,7 +71,9 @@ let LoginCard = ({form, onClickLogin, weiboUrl}) => {
           <Col span={2}></Col>
           <Col span={11}>
             <Tooltip title="Weibo Login">
-              <Button type="default"  onClick={weiboLogin} style={{height: 38, width: '100%'}}>
+              <Button type="default" onClick={weiboLogin}
+                      disabled={disableBtn}
+                      style={{height: 38, width: '100%'}}>
                 <i className="fa fa-weibo fa-2x"></i>
               </Button>
             </Tooltip>

@@ -26,7 +26,6 @@ module.exports = {
 
   getSessionStatus: function(req, res, next){
     let session = req.session;
-    debugger;
     if(!session.app || !session.app.isAuth){
       var stateId = uuid.v1();
       res.json({
@@ -56,11 +55,10 @@ module.exports = {
         redirect_uri: globalConfig.weiboRedirectUrl
       };
 
-      debugger;
       weiboApi.accessToken({
         qs: qsObj
       }).then(function(data){
-debugger;
+
         if(data.access_token){
 
           req.session.app = {
@@ -72,7 +70,7 @@ debugger;
         }
       });
     }else{
-      next();
+      res.redirect("/");
     }
   }
 };

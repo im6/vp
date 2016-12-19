@@ -14,7 +14,7 @@ function* fetchTodos(action) {
     const payload = yield call(getTodos, action.payload);
     yield put({
       type: "todos/get/success",
-      payload: Immutable.fromJS(payload)
+      payload: payload
     });
   } catch (e) {
     yield put({

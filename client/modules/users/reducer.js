@@ -11,8 +11,9 @@ const users = handleActions({
   },
   ['users/get/success'](state, action) {
     console.log('loading users success!');
+    debugger;
     return state.merge({
-      list: action.payload.get('data'),
+      list: action.payload.data,
       loading: false
     });
   },

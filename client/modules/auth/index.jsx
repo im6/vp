@@ -27,7 +27,6 @@ class Auth extends React.Component {
     });
 
     const dispatch = me.props.dispatch;
-    debugger;
     let actionCreater = createAction('auth/login');
     let action = actionCreater(d);
     dispatch(action);

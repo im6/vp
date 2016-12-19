@@ -1,24 +1,24 @@
 import { takeEvery, takeLatest } from 'redux-saga';
 import { call, put, fork } from 'redux-saga/effects';
-import { getUsers } from '../../services/resource.js';
+import { getTodos } from '../../services/resource';
 import Immutable, {List} from 'immutable';
 
 function* watchers(a) {
   yield [
-    takeLatest("users/get", fetchUsers)
+    takeLatest("auth/logoff", authLogoff)
   ]
 }
 
-function* fetchUsers(action) {
+function* authLogoff(action) {
   try {
-    const payload = yield call(getUsers, action.payload);
+    const payload = yield call(getTodos, action.payload);
     yield put({
-      type: "users/get/success",
+      type: "todos/get/success",
       payload: payload
     });
   } catch (e) {
     yield put({
-      type: "users/get/fail",
+      type: "todos/get/fail",
       payload: {msg: e}
     });
   }
@@ -27,9 +27,9 @@ function* fetchUsers(action) {
 export default function*(){
   yield fork(watchers);
   yield put({
-    type:'users/get',
+    type:'todos/get',
     payload:{
-      test:"get some users initially"
+      test:"get some todos initially"
     }
   });
 }

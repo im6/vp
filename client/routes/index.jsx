@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
+import { createAction } from 'redux-actions';
 
 import { Global } from '../config/global';
 import { getInitialStatus } from '../services/resource.js';
@@ -13,6 +14,9 @@ import Auth from '../modules/auth';
 
 const Routes = ({ history, store }) => {
 
+  const initAuth = (nextState, replace, callback) => {
+
+  };
   const checkAuth = (nextState, replace, callback) => {
 
     if(Global.isDev){
@@ -21,29 +25,25 @@ const Routes = ({ history, store }) => {
       getInitialStatus().then((res) => {
         debugger;
         if(!res.isAuth){
-          store.dispatch({
-            type: 'auth/init',
-            payload: res
-          });
+          const ac = createAction('auth/init');
+          store.dispatch(ac(res));
           replace('/auth');
+        }else {
+          const ac = createAction('auth/loadUser');
+          store.dispatch(ac(res));
         }
       }, (res2) => {
         replace('/auth');
       }).then(()=>{
-        debugger;
         callback();
       });
-      //let isAuth = store.getState().auth.get('isAuth');
-      //if(!isAuth && nextState.routes[0].path != '/auth'){
-      //  replace('/auth');
-      //}
-      //callback();
     }
   };
 
   return <Router history={history} >
     <Route path="/auth"
            component={Auth}
+           onEnter={initAuth}
       />
     <Route path="/"
            component={App}

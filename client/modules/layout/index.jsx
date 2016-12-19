@@ -12,10 +12,15 @@ import Header from './components/header/index.jsx';
 import Sidebar from './components/sidebar/index.jsx';
 
 
-const Layout = ({children}) => {
+const Layout = ({children, dispatch}) => {
+
+  const logout = (v) => {
+    const ac = createAction('auth/logoff');
+    dispatch(ac());
+  };
 
   var result = <div className={styles.layoutBox} >
-    <Header className={styles.header} />
+    <Header className={styles.header} logout={logout}/>
     <div className={styles.main} style={{background: `#f5f6f7 url(${img}) repeat-x 0 0`}} >
       <Row>
         <Col  xs={0} sm={0} md={1} lg={1} />
@@ -38,4 +43,4 @@ Layout.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-export default Layout;
+export default connect()(Layout);
