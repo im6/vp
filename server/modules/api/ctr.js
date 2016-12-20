@@ -13,4 +13,15 @@ module.exports = {
       error: false
     });
   },
+  getUserById: function(req, res, next){
+    api1List.getUserById({
+      qs:{
+        id: req.query.id
+      }
+    }).then((data)=>{
+      res.json(helper.resSuccessObj(data));
+    }, (data)=>{
+      res.json(helper.resFailObj(data));
+    });
+  }
 };

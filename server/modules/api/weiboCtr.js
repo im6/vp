@@ -4,7 +4,7 @@ var path = require('path'),
   helper = require('../../misc/helper'),
   weiboApi = require('../../resource/weibo/list'),
   globalConfig = require('../../config/env'),
-  uuid = require('uuid');
+  uuid = require('uuid'),
   _ = require('lodash');
 
 var client_id = globalConfig.weiboAppKey,
@@ -28,6 +28,11 @@ module.exports = {
     let session = req.session;
     if(!session.app || !session.app.isAuth){
       var stateId = uuid.v1();
+      req.session.app = {
+        isAuth: false,
+        weiboState : stateId
+      };
+
       res.json({
         isAuth: false,
         weiboUrl: privateFn.createWeiboLink(stateId)

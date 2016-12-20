@@ -12,6 +12,4 @@ router.post.apply(router, ['/test', ctr.test]);
 router.post.apply(router, ['/status', weiboCtr.getSessionStatus]);
 router.get.apply(router, ['/weibologin', weiboCtr.auth]);
 
-
-
 module.exports = router;
