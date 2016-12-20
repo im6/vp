@@ -1,8 +1,15 @@
 import requester from './requester';
 import qs from 'qs';
 
-export async function getInitialStatus() {
+export async function getInitialUserStatus() {
   let result = await requester('/api/status', {
+    method: "POST"
+  });
+  return result;
+}
+
+export async function getInitialLogin() {
+  let result = await requester('/api/loginInfo', {
     method: "POST"
   });
   return result;

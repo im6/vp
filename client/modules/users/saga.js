@@ -26,10 +26,10 @@ function* fetchUsers(action) {
 
 export default function*(){
   yield fork(watchers);
-  yield put({
-    type:'users/get',
-    payload:{
-      test:"get some users initially"
-    }
-  });
+  //yield put({
+  //  type:'users/get',
+  //  payload:{
+  //    test:"get some users initially"
+  //  }
+  //});
 }

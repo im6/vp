@@ -23,6 +23,27 @@ var privateFn = {
 };
 
 module.exports = {
+  getLoginInfo: function(req, res, next){
+    let session = req.session;
+    if(!session.app || !session.app.isAuth){
+      var stateId = uuid.v1();
+      req.session.app = {
+        isAuth: false,
+        weiboState : stateId
+      };
+
+      res.json({
+        isAuth: false,
+        weiboUrl: privateFn.createWeiboLink(stateId)
+      });
+    }else {
+      console.log('already signing in...');
+      res.json({
+        isAuth: true,
+      });
+    }
+
+  },
 
   getSessionStatus: function(req, res, next){
     let session = req.session;

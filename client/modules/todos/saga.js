@@ -26,10 +26,10 @@ function* fetchTodos(action) {
 
 export default function*(){
   yield fork(watchers);
-  yield put({
-    type:'todos/get',
-    payload:{
-      test:"get some todos initially"
-    }
-  });
+  //yield put({
+  //  type:'todos/get',
+  //  payload:{
+  //    test:"get some todos initially"
+  //  }
+  //});
 }

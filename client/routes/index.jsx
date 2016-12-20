@@ -3,7 +3,7 @@ import { Router, Route, IndexRoute } from 'react-router';
 import { createAction } from 'redux-actions';
 
 import { Global } from '../config/global';
-import { getInitialStatus } from '../services/resource.js';
+import { getInitialUserStatus, getInitialLogin } from '../services/resource.js';
 import App from '../modules/app/index.jsx';
 import ErrorPage from '../modules/errorPage';
 import Hello from '../modules/hello';
@@ -15,18 +15,24 @@ import Auth from '../modules/auth';
 const Routes = ({ history, store }) => {
 
   const initAuth = (nextState, replace, callback) => {
-
+    getInitialLogin().then((res) => {
+      debugger;
+      const ac = createAction('auth/init');
+      store.dispatch(ac(res));
+      callback();
+    }, (res2) => {
+      replace('/auth');
+    }).then(()=>{
+      callback();
+    });
   };
   const checkAuth = (nextState, replace, callback) => {
 
     if(Global.isDev){
       callback();
     }else{
-      getInitialStatus().then((res) => {
-        debugger;
+      getInitialUserStatus().then((res) => {
         if(!res.isAuth){
-          const ac = createAction('auth/init');
-          store.dispatch(ac(res));
           replace('/auth');
         }else {
           const ac = createAction('auth/loadUser');
