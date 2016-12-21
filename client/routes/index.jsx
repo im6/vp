@@ -9,6 +9,7 @@ import ErrorPage from '../modules/errorPage';
 import Hello from '../modules/hello';
 import Support from '../modules/support';
 import Auth from '../modules/auth';
+import Color from '../modules/color';
 
 
 
@@ -16,7 +17,6 @@ const Routes = ({ history, store }) => {
 
   const initAuth = (nextState, replace, callback) => {
     getInitialLogin().then((res) => {
-      debugger;
       const ac = createAction('auth/init');
       store.dispatch(ac(res));
       callback();
@@ -56,6 +56,7 @@ const Routes = ({ history, store }) => {
            onEnter={checkAuth}>
       <IndexRoute component={Hello}/>
       <Route path="support" component={Support} />
+      <Route path="color" component={Color} />
       <Route path="*" component={ErrorPage} />
     </Route>
   </Router>;
