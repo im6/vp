@@ -5,20 +5,13 @@ import style from './style.less';
 import QueueAnim from 'rc-queue-anim';
 import Box from './components/Box'
 
-
 class BoxList extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-
-  }
-
-  componentWillUnmount() {
-  }
-
   render() {
+
     return <QueueAnim type="bottom"
                       delay={300}
                       className={classnames(style.list)}>
@@ -29,7 +22,6 @@ class BoxList extends React.Component {
       <Box key="5"/>
       <Box key="6"/>
       <Box key="7"/>
-
     </QueueAnim>
   }
 }
