@@ -27,16 +27,16 @@ class Product extends React.Component {
     return <div className={style.boxContainer}>
       <div className={style.box}>
         <div className={style.boxCanvas}>
-          {test.map((v) => {
-            return <ColorRow rowColor={v.value} />
+          {test.map((v, k) => {
+            return <ColorRow key={k} rowColor={v.value} />
           })}
         </div>
 
         <div className={style.boxFooter}>
-          <Button type="default" size="large" icon="like-o">
+          <Button type="default" icon="like-o">
             1,258
           </Button>
-          <Button type="default" size="large">
+          <Button type="default" >
             <i className="fa fa-weibo" />
           </Button>
         </div>

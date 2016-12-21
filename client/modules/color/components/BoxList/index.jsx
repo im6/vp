@@ -11,18 +11,20 @@ class BoxList extends React.Component {
   }
 
   render() {
+    let me = this;
 
-    return <QueueAnim type="bottom"
-                      delay={300}
-                      className={classnames(style.list)}>
-      <Box key="1"/>
-      <Box key="2"/>
-      <Box key="3"/>
-      <Box key="4"/>
-      <Box key="5"/>
-      <Box key="6"/>
-      <Box key="7"/>
-    </QueueAnim>
+    return <QueueAnim type="top"
+                 delay={300}
+                 className={classnames(style.list)}
+        >
+        <Box key="1"/>
+        <Box key="2"/>
+        <Box key="3"/>
+        <Box key="4"/>
+        <Box key="5"/>
+        <Box key="6"/>
+        <Box key="7"/>
+      </QueueAnim>
   }
 }
 

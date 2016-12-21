@@ -37,7 +37,7 @@ class ColorRow extends React.Component {
   render() {
     let me = this;
     return <div className={style.rowContainer}
-                style={{'background-color': me.props.rowColor}}
+                style={{'backgroundColor': me.props.rowColor}}
                 onMouseEnter={me.hoverHandler.bind(me)}
                 onMouseLeave={me.leaveHandler.bind(me)}>
 
