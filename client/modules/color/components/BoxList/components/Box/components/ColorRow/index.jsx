@@ -10,7 +10,7 @@ class ColorRow extends React.Component {
     let me = this;
     me.state = {
       showText : false
-    }
+    };
   }
 
   componentDidMount() {
@@ -39,7 +39,9 @@ class ColorRow extends React.Component {
     return <div style={{'background-color': me.props.rowColor}}
                 onMouseEnter={me.hoverHandler.bind(me)}
                 onMouseLeave={me.leaveHandler.bind(me)}>
+
       {me.state.showText ? <span className={style.fade}>{me.props.rowColor}</span> : null}
+
     </div>
   }
 }

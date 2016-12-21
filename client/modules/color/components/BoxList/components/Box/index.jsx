@@ -8,7 +8,7 @@ const test = [
   {value: '#F38181'},
   {value: '#FCE38A'},
   {value: '#EAFFD0'},
-  {value: '#95E1D3'},
+  {value: '#95E1D3'}
 ];
 
 class Product extends React.Component {
@@ -41,7 +41,6 @@ class Product extends React.Component {
           </Button>
         </div>
       </div>
-
     </div>;
   }
 }
