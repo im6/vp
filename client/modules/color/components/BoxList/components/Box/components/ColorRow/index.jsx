@@ -36,12 +36,15 @@ class ColorRow extends React.Component {
 
   render() {
     let me = this;
-    return <div style={{'background-color': me.props.rowColor}}
+    return <div className={style.rowContainer}
+                style={{'background-color': me.props.rowColor}}
                 onMouseEnter={me.hoverHandler.bind(me)}
                 onMouseLeave={me.leaveHandler.bind(me)}>
 
-      {me.state.showText ? <span className={style.fade}>{me.props.rowColor}</span> : null}
-
+      <span className={style.text}
+        style={{'opacity': me.state.showText ? 1 : 0}}>
+        {me.props.rowColor}
+      </span>
     </div>
   }
 }
