@@ -55,7 +55,7 @@ var loaders = [
 
   {
     test: /\.less$/,
-    loader: "style!css?module!less",
+    loader: "style!css?module!less!autoprefixer-loader?browsers=last 2 versions",
     exclude: antDir
   },
   {
