@@ -11,7 +11,7 @@ class BoxList extends React.Component {
     super(props);
     let me = this;
     me.state = {
-      num: 6,
+      num: 20,
       loading: false
     };
   }
@@ -21,6 +21,7 @@ class BoxList extends React.Component {
       return;
     }
     let result = a.currentTarget.scrollTop / (a.currentTarget.scrollHeight - a.currentTarget.clientHeight);
+    console.log(result);
     if(result > 0.96){
       me.setState({
         loading: true
