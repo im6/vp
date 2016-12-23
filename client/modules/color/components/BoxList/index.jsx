@@ -11,11 +11,14 @@ class BoxList extends React.Component {
     super(props);
     let me = this;
     me.state = {
-      num: 20,
+      num: 8,
       loading: false
     };
 
     document.addEventListener('scroll', function(ev){
+      if(me.state.loading){
+        return;
+      }
       let elem = ev.currentTarget.scrollingElement;
       let result = elem.scrollTop / (elem.scrollHeight - elem.clientHeight);
       me.addNewElement(result);
@@ -30,9 +33,9 @@ class BoxList extends React.Component {
 
       setTimeout(function(){
         me.setState({
-          num: me.state.num + 6
+          num: me.state.num + 8
         });
-      },800);
+      },700);
 
       setTimeout(function(){
         me.setState({
