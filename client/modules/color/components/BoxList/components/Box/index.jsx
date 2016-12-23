@@ -24,8 +24,7 @@ class Product extends React.Component {
   }
 
   render() {
-    return <div className={style.boxContainer}>
-      <div className={style.box}>
+    return <div className={style.box}>
         <div className={style.boxCanvas}>
           {test.map((v, k) => {
             return <ColorRow key={k} rowColor={v.value} />
@@ -40,7 +39,6 @@ class Product extends React.Component {
             <i className="fa fa-weibo" />
           </Button>
         </div>
-      </div>
     </div>;
   }
 }

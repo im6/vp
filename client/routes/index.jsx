@@ -6,8 +6,6 @@ import { Global } from '../config/global';
 import { getInitialUserStatus, getInitialLogin } from '../services/resource.js';
 import App from '../modules/app/index.jsx';
 import ErrorPage from '../modules/errorPage';
-import Hello from '../modules/hello';
-import Support from '../modules/support';
 import Auth from '../modules/auth';
 import Color from '../modules/color';
 
@@ -54,9 +52,7 @@ const Routes = ({ history, store }) => {
     <Route path="/"
            component={App}
            onEnter={checkAuth}>
-      <IndexRoute component={Hello}/>
-      <Route path="support" component={Support} />
-      <Route path="color" component={Color} />
+      <IndexRoute component={Color}/>
       <Route path="*" component={ErrorPage} />
     </Route>
   </Router>;

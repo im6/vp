@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, Steps } from 'antd';
+import { Card, Icon, Row, Col } from 'antd';
 import classnames from 'classnames';
 import style from './style.less';
 import QueueAnim from 'rc-queue-anim';
@@ -14,6 +14,12 @@ class BoxList extends React.Component {
       num: 20,
       loading: false
     };
+
+    document.addEventListener('scroll', function(ev){
+      let elem = ev.currentTarget.scrollingElement;
+      let result = elem.scrollTop / (elem.scrollHeight - elem.clientHeight);
+      console.log(result);
+    })
   }
   scrollHandler(a, event){
     let me = this;
@@ -46,7 +52,14 @@ class BoxList extends React.Component {
     let me = this;
     let result = [];
     for(let i = 0; i < me.state.num; i++){
-      result.push(<Box key={i}/>);
+      result.push(<Col xs={12}
+                       sm={12}
+                       md={8}
+                       lg={6}
+                       key={i}
+                       className={style.colContainer}>
+        <Box key={i}/>
+      </Col>);
     }
     return result;
 
