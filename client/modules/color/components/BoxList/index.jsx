@@ -18,16 +18,11 @@ class BoxList extends React.Component {
     document.addEventListener('scroll', function(ev){
       let elem = ev.currentTarget.scrollingElement;
       let result = elem.scrollTop / (elem.scrollHeight - elem.clientHeight);
-      console.log(result);
+      me.addNewElement(result);
     })
   }
-  scrollHandler(a, event){
+  addNewElement(result){
     let me = this;
-    if(me.state.loading){
-      return;
-    }
-    let result = a.currentTarget.scrollTop / (a.currentTarget.scrollHeight - a.currentTarget.clientHeight);
-    console.log(result);
     if(result > 0.96){
       me.setState({
         loading: true
@@ -70,13 +65,16 @@ class BoxList extends React.Component {
 
     return <QueueAnim type="top"
                       delay={300}
-                      className={classnames(style.list)}
-                      onScroll={me.scrollHandler.bind(me)}>
+                      className={classnames(style.list)}>
       { me.createBoxes()}
       { me.state.loading ?
-        <div className={style.spinContainer}>
+        <Col xs={24}
+             sm={24}
+             md={24}
+             lg={24}
+             className={style.spinContainer}>
           <SpinLoader />
-        </div> : null
+        </Col> : null
       }
 
       </QueueAnim>
