@@ -8,6 +8,7 @@ import App from '../modules/app/index.jsx';
 import ErrorPage from '../modules/errorPage';
 import Auth from '../modules/auth';
 import Color from '../modules/color';
+import NewColor from '../modules/newcolor';
 
 
 
@@ -53,6 +54,7 @@ const Routes = ({ history, store }) => {
            component={App}
            onEnter={checkAuth}>
       <IndexRoute component={Color}/>
+      <Route path="/new" component={NewColor} />
       <Route path="*" component={ErrorPage} />
     </Route>
   </Router>;
