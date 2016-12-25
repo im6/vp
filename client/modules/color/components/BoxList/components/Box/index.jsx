@@ -3,6 +3,7 @@ import { Button } from 'antd';
 import classnames from 'classnames';
 import style from './style.less';
 import ColorRow from './components/ColorRow';
+import Immutable from 'immutable';
 
 
 
@@ -16,6 +17,11 @@ class Product extends React.Component {
   }
 
   componentWillUnmount() {
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    let me = this;
+    return !Immutable.is(me.props.boxInfo, nextProps.boxInfo);
   }
 
   render() {

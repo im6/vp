@@ -4,7 +4,8 @@ import classnames from 'classnames';
 import QueueAnim from 'rc-queue-anim';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
-import BoxList from './components/BoxList'
+import BoxList from './components/BoxList';
+import SpinLoader from './components/SpinLoader';
 
 
 
@@ -21,7 +22,11 @@ class Color extends React.Component {
 
   render() {
     let me = this;
-    return <BoxList list={me.props.color.get('list')}/>
+
+    return <div>
+      <BoxList list={me.props.color.get('list')}/>
+      { me.props.color.get('loading') ? <SpinLoader /> : null }
+    </div>
   }
 }
 

@@ -4,12 +4,17 @@ import classnames from 'classnames';
 import style from './style.less';
 import QueueAnim from 'rc-queue-anim';
 import Box from './components/Box';
-import SpinLoader from './components/SpinLoader'
 
 class BoxList extends React.Component {
   constructor(props) {
     super(props);
     let me = this;
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    let me = this;
+    let same = nextProps.list.size === me.props.list.size;
+    return !same;
   }
 
   createBoxes(){
@@ -34,16 +39,6 @@ class BoxList extends React.Component {
                       delay={300}
                       className={classnames(style.list)}>
       { me.createBoxes()}
-      { me.props.loading ?
-        <Col xs={24}
-             sm={24}
-             md={24}
-             lg={24}
-             className={style.spinContainer}>
-          <SpinLoader />
-        </Col> : null
-      }
-
       </QueueAnim>
   }
 }

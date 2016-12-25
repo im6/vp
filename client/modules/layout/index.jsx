@@ -28,18 +28,15 @@ const Layout = ({children, dispatch}) => {
 
     let elem = ev.target.scrollingElement;
     let scrollProgress = elem.scrollTop / (elem.scrollHeight - elem.clientHeight);
-    console.log(scrollProgress);
     if(scrollProgress > 0.96){
       isloading = true;
 
-      setTimeout(function(){
-        let actcr = createAction('color/loadMore');
-        dispatch(actcr());
-      },700);
+      let actcr = createAction('color/loadMore');
+      dispatch(actcr());
 
       setTimeout(function(){
         isloading = false;
-      }, 1500);
+      }, 1800);
     }
 
   };
