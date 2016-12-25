@@ -22,18 +22,18 @@ class ColorRow extends React.Component {
     me.props.onRowClick();
   }
 
-  //shouldComponentUpdate(nextProps, nextState) {
-  //  let me = this;
-  //  let isSame = nextProps.colorValue == me.props.colorValue;
-  //  return !isSame;
-  //}
+  shouldComponentUpdate(nextProps, nextState) {
+    let me = this;
+    let isSame = nextProps.colorValue == me.props.colorValue && nextProps.isActive == me.props.isActive;
+    return !isSame;
+  }
 
   render() {
     let me = this;
     let rowStyle = me.props.colorValue ? {
       'backgroundColor': me.props.colorValue
     } : {
-      border: `1px solid ${me.props.isActive ? 'red' : '#cccccc'}`,
+      border: `1px solid ${me.props.isActive ? '#FF5BA1' : '#cccccc'}`,
       backgroundImage: "url('data:image/png;base64,R0lGODdhCgAKAPAAAOXl5f///ywAAAAACgAKAEACEIQdqXt9GxyETrI279OIgwIAOw==')"
     };
 

@@ -4,12 +4,7 @@ import classnames from 'classnames';
 import style from './style.less';
 import ColorRow from './components/ColorRow';
 
-const test = [
-  {value: '#F38181'},
-  {value: '#FCE38A'},
-  {value: '#EAFFD0'},
-  {value: '#95E1D3'}
-];
+
 
 class Product extends React.Component {
   constructor(props) {
@@ -24,16 +19,18 @@ class Product extends React.Component {
   }
 
   render() {
+    let me = this;
+
     return <div className={style.box}>
         <div className={style.boxCanvas}>
-          {test.map((v, k) => {
-            return <ColorRow key={k} rowColor={v.value} />
+          {me.props.boxInfo.get('value').split(',').map((v, k) => {
+            return <ColorRow key={k} rowColor={v} />
           })}
         </div>
 
         <div className={style.boxFooter}>
-          <Button type="default" icon="like-o">
-            1,258
+          <Button type="default" icon="heart-o">
+            {me.props.boxInfo.get('like')}
           </Button>
           <Button type="default" >
             <i className="fa fa-weibo" />

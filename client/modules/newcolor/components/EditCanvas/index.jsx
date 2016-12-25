@@ -9,9 +9,6 @@ class EditCanvas extends React.Component {
   constructor(props) {
     super(props);
     let me = this;
-    me.state = {
-
-    }
   }
 
   componentDidMount() {
@@ -32,10 +29,6 @@ class EditCanvas extends React.Component {
                              isActive ={k === me.props.activeIndex}
                              onRowClick={me.props.changeActive.bind(me, k)} />
           })}
-        </div>
-
-        <div className={style.boxFooter}>
-
         </div>
     </div>;
   }

@@ -10,67 +10,31 @@ class BoxList extends React.Component {
   constructor(props) {
     super(props);
     let me = this;
-    me.state = {
-      num: 8,
-      loading: false
-    };
-
-    document.addEventListener('scroll', function(ev){
-      if(me.state.loading){
-        return;
-      }
-      let elem = ev.currentTarget.scrollingElement;
-      let result = elem.scrollTop / (elem.scrollHeight - elem.clientHeight);
-      me.addNewElement(result);
-    })
-  }
-  addNewElement(result){
-    let me = this;
-    if(result > 0.96){
-      me.setState({
-        loading: true
-      });
-
-      setTimeout(function(){
-        me.setState({
-          num: me.state.num + 8
-        });
-      },700);
-
-      setTimeout(function(){
-        me.setState({
-          loading: false
-        });
-      }, 1500)
-
-    }
   }
 
   createBoxes(){
     let me = this;
     let result = [];
-    for(let i = 0; i < me.state.num; i++){
+    me.props.list.forEach((v, k) => {
       result.push(<Col xs={12}
                        sm={12}
                        md={8}
                        lg={6}
-                       key={i}
+                       key={k}
                        className={style.colContainer}>
-        <Box key={i}/>
+        <Box boxInfo={v}/>
       </Col>);
-    }
+    });
     return result;
-
   }
 
   render() {
     let me = this;
-
     return <QueueAnim type="top"
                       delay={300}
                       className={classnames(style.list)}>
       { me.createBoxes()}
-      { me.state.loading ?
+      { me.props.loading ?
         <Col xs={24}
              sm={24}
              md={24}

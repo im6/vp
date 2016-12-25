@@ -1,5 +1,5 @@
 
-const context = require.context('../modules/', true, /saga\.js$/);
+const context = require.context('../sagas/', true, /\.js$/);
 let keys = context.keys();
 
 

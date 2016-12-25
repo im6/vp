@@ -2,7 +2,10 @@ import React from 'react';
 import { Card, Icon, Steps } from 'antd';
 import classnames from 'classnames';
 import QueueAnim from 'rc-queue-anim';
+import { createAction } from 'redux-actions';
+import { connect } from 'react-redux';
 import BoxList from './components/BoxList'
+
 
 
 class Color extends React.Component {
@@ -17,8 +20,15 @@ class Color extends React.Component {
   }
 
   render() {
-    return <BoxList />
+    let me = this;
+    return <BoxList list={me.props.color.get('list')}/>
   }
 }
 
-export default Color;
+function mapStateToProps({color}){
+  return {
+    color
+  }
+}
+
+export default connect(mapStateToProps)(Color);
