@@ -82,9 +82,9 @@ var plugins = {
   ],
   watch: [
     new HtmlWebpackPlugin({
-      title: 'ZJ Guo',
+      title: 'colorphant',
       template: 'client/template/index.html',
-      favicon: 'client/content/img/favicon.ico',
+      favicon: 'client/content/img/favicon1.ico',
       hash:true,
       showErrors: false
     }),
@@ -115,16 +115,10 @@ var plugins = {
       }
     }),
     new HtmlWebpackPlugin({
-      title: 'ZJ Guo',
+      title: 'colorphant',
       template: 'client/template/index.html',
-      favicon: './client/content/img/favicon.ico',
+      favicon: './client/content/img/favicon1.ico',
       hash:true,
-      showErrors: false
-    }),
-    new HtmlWebpackPlugin({
-      template: 'client/template/error.html',
-      filename: 'error.html',
-      inject: false,
       showErrors: false
     }),
     commonsChunk

@@ -42,8 +42,11 @@ class Product extends React.Component {
               {me.props.boxInfo.get('like')}
             </h3>
           </Button>
-          <img src="http://tva4.sinaimg.cn/crop.0.0.180.180.50/4a377f76jw1e8qgp5bmzyj2050050aa8.jpg" alt="icon"/>
 
+          {
+            me.props.boxInfo.get('username') ?
+              <h3>Zijian Guo</h3> : null
+          }
 
         </div>
     </div>;

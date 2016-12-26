@@ -40,7 +40,7 @@ const HeaderCenter = ({logout}) => {
       <Col lg={3} md={3} sm={4} xs={4}>
         <Link to="/">
           <h1 className={style.title}>
-            <span>Color</span>phant
+            <span>color</span>phant
           </h1>
         </Link>
       </Col>

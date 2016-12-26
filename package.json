@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "clear && webpack-dev-server --progress --profile --colors --config client/webpack/hot.js",
+    "start": "webpack --progress --profile --colors --watch --config client/webpack/watch.js",
+    "hot": "clear && webpack-dev-server --progress --profile --colors --config client/webpack/hot.js",
     "watch": "webpack --progress --profile --colors --watch --config client/webpack/watch.js",
     "build": "webpack --config client/webpack/build.js",
     "lint": "eslint --ext .js,.jsx src/"
