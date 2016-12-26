@@ -7,8 +7,6 @@ import { connect } from 'react-redux';
 import BoxList from './components/BoxList';
 import SpinLoader from './components/SpinLoader';
 
-
-
 class Color extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +23,7 @@ class Color extends React.Component {
 
     return <div>
       <BoxList list={me.props.color.get('list')}/>
-      { me.props.color.get('loading') ? <SpinLoader /> : null }
+      { me.props.color.get('loading') ? <SpinLoader /> : <div style={{height: 22, marginTop: 20}}/> }
     </div>
   }
 }
