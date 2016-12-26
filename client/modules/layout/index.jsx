@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
+import { Affix } from 'antd';
 import EventListener, {withOptions} from 'react-event-listener';
 
 //import '!style!css!font-awesome/css/font-awesome.min.css';
@@ -49,8 +50,11 @@ const Layout = ({children, dispatch}) => {
       onScroll={scrollHandler}
       />
 
+    <Affix>
+      <HeaderCenter logout={logout}/>
+    </Affix>
 
-    <HeaderCenter logout={logout}/>
+
     <div className={styles.main} style={{background: `#f5f6f7 url(${img}) repeat-x 0 0`}} >
       {children}
     </div>

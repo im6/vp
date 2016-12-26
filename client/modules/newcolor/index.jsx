@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import ColorPicker from 'react-color-picker';
-import { Row, Col, Card, Button, Input } from 'antd';
+import { Row, Col, Card, Button, Input, Checkbox, Icon } from 'antd';
 import EditCanvas from './components/EditCanvas';
+import VibrantPalette from './components/VibrantPalette';
 
 import '!style!css!less!autoprefixer-loader?browsers=last 2 versions!react-color-picker/index.css';
 import style from './style.less';
@@ -13,14 +14,15 @@ class NewColor extends React.PureComponent {
     super(props);
     let me = this;
     me.state = {
-      editColor: '#000',
+      editColor: '#fcd4d4',
       activeIndex : 0,
       colorValue: [
         null,
         null,
         null,
         null
-      ]
+      ],
+      showUpload: false
     };
   }
 
@@ -64,18 +66,35 @@ class NewColor extends React.PureComponent {
     });
   }
 
+  onChkboxChange(ev){
+    let me = this;
+    me.setState({
+      showUpload: ev.target.checked
+    })
+
+  }
+
   render() {
     const me = this;
     return <Card title={<span><i className="fa fa-pencil-square-o" aria-hidden="true"/>&nbsp;&nbsp;Create New Color</span>}>
 
       <Row>
         <Col lg={2} md={1} sm={0} xs={0}></Col>
-
-
         <Col lg={9} md={10} sm={24} xs={24} className={style.makeCenter}>
           <EditCanvas colorValue={me.state.colorValue}
                       activeIndex={me.state.activeIndex}
                       changeActive={me.onChangeActive.bind(me)}/>
+
+          <div style={{margin: '10px 0 5px 0'}}>
+            <Checkbox onChange={me.onChkboxChange.bind(me)}>
+              <h3 style={{display: 'inline-block'}}>
+                Extract Image
+              </h3>
+            </Checkbox>
+          </div>
+
+          {me.state.showUpload ? <VibrantPalette /> : null}
+
         </Col>
         <Col lg={2} md={1} sm={0} xs={0}></Col>
         <Col lg={9} md={11} sm={24} xs={24}>
@@ -100,12 +119,15 @@ class NewColor extends React.PureComponent {
           <div className={style.btnGroup}>
             <Button type="primary"
                     size="large"
+                    icon="check"
                     onClick={me.submitColor.bind(me)}>
               Create
             </Button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
             <Link to="/">
-              <Button type="text" size="large">
+              <Button type="default"
+                      icon="close"
+                      size="large">
                 Cancel
               </Button>
             </Link>
