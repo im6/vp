@@ -1,20 +1,20 @@
 .box {
 
-  width: 80%;
+  width: 75%;
   height: 280px;
 
   background-color: white;
-  border-radius: 9px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 4px 0.6px #d9d9d9;
+  box-shadow: 0 2.5px 3px 0.6px #d9d9d9;
   transition: box-shadow 0.3s ease-in-out;
 
   &:hover {
     transition: box-shadow 0.8s;
-    box-shadow: 0 9px 12px 3px #cccccc;
+    box-shadow: 0 6.5px 9px 2px #cccccc;
   }
 
   .boxCanvas {
@@ -53,6 +53,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    img {
+        border-radius: 50%;
+        height: 27px;
+    }
   }
 }
 

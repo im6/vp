@@ -36,7 +36,9 @@ class BoxList extends React.Component {
   render() {
     let me = this;
     return <QueueAnim type="top"
-                      delay={300}
+                      appear={false}
+                      duration={350}
+                      interval={90}
                       className={classnames(style.list)}>
       { me.createBoxes()}
       </QueueAnim>

@@ -55,6 +55,8 @@ const Routes = ({ history, store }) => {
            onEnter={checkAuth}>
       <IndexRoute component={Color}/>
       <Route path="/new" component={NewColor} />
+      <Route path="/portfolio" component={Color} />
+      <Route path="/like" component={Color} />
       <Route path="*" component={ErrorPage} />
     </Route>
   </Router>;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Button, Icon } from 'antd';
 import classnames from 'classnames';
 import style from './style.less';
 import ColorRow from './components/ColorRow';
@@ -35,12 +35,16 @@ class Product extends React.Component {
         </div>
 
         <div className={style.boxFooter}>
-          <Button type="default" icon="heart-o">
-            {me.props.boxInfo.get('like')}
+          <Button type="default">
+            <h3 style={{display: 'inline'}}>
+              <Icon type="heart" style={{color: '#e86666'}}/>
+              &nbsp;&nbsp;
+              {me.props.boxInfo.get('like')}
+            </h3>
           </Button>
-          <Button type="default" >
-            <i className="fa fa-weibo" />
-          </Button>
+          <img src="http://tva4.sinaimg.cn/crop.0.0.180.180.50/4a377f76jw1e8qgp5bmzyj2050050aa8.jpg" alt="icon"/>
+
+
         </div>
     </div>;
   }

@@ -66,7 +66,7 @@ class NewColor extends React.PureComponent {
 
   render() {
     const me = this;
-    return <Card title={<span><i className="fa fa-pencil-square-o" aria-hidden="true"/>&nbsp;&nbsp;Create New Colors</span>}>
+    return <Card title={<span><i className="fa fa-pencil-square-o" aria-hidden="true"/>&nbsp;&nbsp;Create New Color</span>}>
 
       <Row>
         <Col lg={2} md={1} sm={0} xs={0}></Col>
@@ -93,6 +93,8 @@ class NewColor extends React.PureComponent {
         </Col>
         <Col lg={2} md={1} sm={0} xs={0} />
       </Row>
+
+
       <Row>
         <Col lg={24} md={24} sm={24} xs={24}>
           <div className={style.btnGroup}>

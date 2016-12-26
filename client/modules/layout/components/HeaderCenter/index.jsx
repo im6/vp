@@ -52,7 +52,7 @@ const HeaderCenter = ({logout}) => {
         <div className={style.btnGroup}>
 
           <Tooltip title="郭子剑" placement="bottom">
-            <img src="http://tva4.sinaimg.cn/crop.0.0.180.180.50/4a377f76jw1e8qgp5bmzyj2050050aa8.jpg" alt=""/>
+            <img src="http://tva4.sinaimg.cn/crop.0.0.180.180.50/4a377f76jw1e8qgp5bmzyj2050050aa8.jpg" alt="icon"/>
           </Tooltip>
           <ButtonGroup>
             <Tooltip title="Create" placement="bottom">
@@ -62,11 +62,17 @@ const HeaderCenter = ({logout}) => {
 
             </Tooltip>
             <Tooltip title="Like" placement="bottom">
-              <Button type="default" icon="heart"/>
+              <Link to="/like">
+                <Button type="default" icon="heart"/>
+              </Link>
             </Tooltip>
-            <Tooltip title="Mine" placement="bottom">
-              <Button type="default" icon="book" />
+
+            <Tooltip title="Portfolio" placement="bottom">
+              <Link to="/portfolio">
+                <Button type="default" icon="book" />
+              </Link>
             </Tooltip>
+
             <Tooltip title="logout" placement="bottom">
               <Button type="default" icon="logout"/>
             </Tooltip>

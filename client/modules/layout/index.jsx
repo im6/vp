@@ -3,7 +3,7 @@ import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 import EventListener, {withOptions} from 'react-event-listener';
 
-import '!style!css!font-awesome/css/font-awesome.min.css';
+//import '!style!css!font-awesome/css/font-awesome.min.css';
 
 import styles from './style.less';
 import img from '!file!./assets/gradient.jpg';

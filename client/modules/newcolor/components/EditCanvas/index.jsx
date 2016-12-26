@@ -18,7 +18,6 @@ class EditCanvas extends React.Component {
   componentWillUnmount() {
   }
 
-
   render() {
     let me = this;
     return <div className={style.box}>
