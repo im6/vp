@@ -172,7 +172,7 @@ class VibrantPalette extends React.Component {
              style={{display:'none'}}/>
 
         {me.state.imageReady ? <div className={style.previewContainer}>
-          <img src={me.state.imageUrl} alt="uploaded file"/>
+
           <div className={style.previewResult}>
             {
               me.state.imageResult.map((v,k) => {
@@ -182,6 +182,7 @@ class VibrantPalette extends React.Component {
               })
             }
           </div>
+          <img src={me.state.imageUrl} alt="uploaded file"/>
         </div> :
           <div className={classnames(style.upload, hoverStyle)}
                ref="uploadBox"

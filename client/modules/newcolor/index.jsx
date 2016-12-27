@@ -8,7 +8,7 @@ import VibrantPalette from './components/VibrantPalette';
 import '!style!css!less!autoprefixer-loader?browsers=last 2 versions!react-color-picker/index.css';
 import style from './style.less';
 
-const DEFAULTVALUE = '#f9e8ad';
+const DEFAULTVALUE = '#adeef9';
 
 class NewColor extends React.PureComponent {
   constructor(props) {
