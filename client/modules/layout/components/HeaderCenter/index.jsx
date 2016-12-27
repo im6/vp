@@ -69,7 +69,7 @@ const HeaderCenter = ({logout}) => {
 
             <Tooltip title="Portfolio" placement="bottom">
               <Link to="/portfolio">
-                <Button type="default" icon="book" />
+                <Button type="default" icon="smile-o" />
               </Link>
             </Tooltip>
 

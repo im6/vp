@@ -8,13 +8,14 @@ import VibrantPalette from './components/VibrantPalette';
 import '!style!css!less!autoprefixer-loader?browsers=last 2 versions!react-color-picker/index.css';
 import style from './style.less';
 
+const DEFAULTVALUE = '#f9e8ad';
 
 class NewColor extends React.PureComponent {
   constructor(props) {
     super(props);
     let me = this;
     me.state = {
-      editColor: '#fcd4d4',
+      editColor: DEFAULTVALUE,
       activeIndex : 0,
       colorValue: [
         null,
@@ -22,7 +23,7 @@ class NewColor extends React.PureComponent {
         null,
         null
       ],
-      showUpload: false
+      showUpload: true
     };
   }
 
@@ -59,7 +60,7 @@ class NewColor extends React.PureComponent {
 
   onChangeActive(v){
     let me = this;
-    let newCol = me.state.colorValue[v] || '#fff';
+    let newCol = me.state.colorValue[v] || DEFAULTVALUE;
     me.setState({
       activeIndex: v,
       editColor:newCol
@@ -72,6 +73,13 @@ class NewColor extends React.PureComponent {
       showUpload: ev.target.checked
     })
 
+  }
+
+  extractResult(data){
+    let me = this;
+    me.setState({
+      colorValue: data
+    });
   }
 
   render() {
@@ -88,12 +96,12 @@ class NewColor extends React.PureComponent {
           <div style={{margin: '10px 0 5px 0'}}>
             <Checkbox onChange={me.onChkboxChange.bind(me)}>
               <h3 style={{display: 'inline-block'}}>
-                Extract Image
+                {me.state.showUpload ? 'Reset': 'Extract Image'}
               </h3>
             </Checkbox>
           </div>
 
-          {me.state.showUpload ? <VibrantPalette /> : null}
+          {me.state.showUpload ? <VibrantPalette onResult={me.extractResult.bind(me)}/> : null}
 
         </Col>
         <Col lg={2} md={1} sm={0} xs={0}></Col>

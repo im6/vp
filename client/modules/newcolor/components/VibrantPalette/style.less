@@ -3,21 +3,54 @@
     display:flex;
     justify-content: center;
     align-items: center;
-}
 
-.upload {
-    border: 1px dashed #327ef7;
-    border-radius: 10px;
-    width: 100%;
-    //height: 300px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    .upload {
+        border: 2px dashed #327ef7;
+        border-radius: 10px;
+        width: 100%;
+        //height: 300px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
-    .uploadIcon {
-        color: #327ef7;
-        font-size: 8em;
+        .uploadIcon {
+            color: #327ef7;
+            font-size: 7em;
+        }
+    }
+
+    .previewContainer {
+        padding-top: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #8a8a8a;
+        border-radius: 10px;
+        img {
+            width: 90%;
+        }
+
+        .previewResult {
+            border: 1px solid red;
+            width: 90%;
+            margin: 8px 0;
+        }
+
+        .resultBox{
+            height: 20px;
+            width: 20px;
+            display: inline-block;
+            border-radius: 20%;
+        }
+    }
+
+    .hoverEffect{
+        background-color: #b0e5ff;
     }
 }
+
+
+
