@@ -84,7 +84,7 @@ var plugins = {
     new HtmlWebpackPlugin({
       title: 'colorphant',
       template: 'client/template/index.html',
-      favicon: 'client/content/img/favicon1.ico',
+      favicon: 'client/content/img/favicon.ico',
       hash:true,
       showErrors: false
     }),
@@ -117,7 +117,7 @@ var plugins = {
     new HtmlWebpackPlugin({
       title: 'colorphant',
       template: 'client/template/index.html',
-      favicon: './client/content/img/favicon1.ico',
+      favicon: './client/content/img/favicon.ico',
       hash:true,
       showErrors: false
     }),

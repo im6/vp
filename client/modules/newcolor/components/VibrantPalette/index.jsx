@@ -4,6 +4,8 @@ import classnames from 'classnames';
 import Vibrant from 'node-vibrant';
 import style from './style.less';
 
+const CheckboxGroup = Checkbox.Group;
+
 
 class VibrantPalette extends React.Component {
   constructor(props) {
@@ -13,6 +15,7 @@ class VibrantPalette extends React.Component {
       imageUrl: null,
       imageReady: false,
       imageResult: [],
+      imageResultSelection: [],
       isFileHover: false
     };
   }
@@ -24,7 +27,7 @@ class VibrantPalette extends React.Component {
   componentWillUnmount() {
   }
 
-  clickHandler(ev){
+  onClickHandler(ev){
     ev.stopPropagation();
     let me = this;
     let {fileInput} = me.refs;
@@ -36,7 +39,6 @@ class VibrantPalette extends React.Component {
     ev.stopPropagation();
     ev.preventDefault();
     ev.dataTransfer.dropEffect = "copy";
-    console.log('enter');
     me.setState({
       isFileHover: true
     });
@@ -70,8 +72,37 @@ class VibrantPalette extends React.Component {
     me.readImage(files);
   }
 
-  onResultChkboxClick(ev){
+  onResultChkboxClick(cl, ev){
     let me = this;
+    let isChecked = ev.target.checked;
+    let current = me.state.imageResultSelection;
+
+    if(isChecked){
+      let newList = null;
+      if(current.length == 4){
+        let removeIndex = Math.floor(Math.random() * current.length);
+        let current3 = current.filter((v,k) => {
+          return k != removeIndex;
+        });
+        newList = [...current3, cl];
+      }else{
+        newList = [...current, cl]
+      }
+      me.setState({
+        imageResultSelection: newList
+      });
+      if(newList.length == 4){
+        me.props.onResult(newList);
+      }
+    }else{
+      let newList = current.filter((v,k) => {
+        return v != cl;
+      });
+      me.setState({
+        imageResultSelection: newList
+      });
+    }
+
   }
 
   readImage(files){
@@ -110,10 +141,18 @@ class VibrantPalette extends React.Component {
         result.push(palette.Vibrant.getHex());
         result.push(palette.DarkVibrant.getHex());
         result.push(palette.LightVibrant.getHex());
+
+        let currentSelection = [
+          palette.Muted.getHex(),
+          palette.DarkMuted.getHex(),
+          palette.LightMuted.getHex(),
+          palette.Vibrant.getHex()
+        ];
         me.setState({
-          imageResult: result
+          imageResult: result,
+          imageResultSelection: currentSelection
         });
-        me.props.onResult(result);
+        me.props.onResult(currentSelection);
       }
 
     });
@@ -135,16 +174,13 @@ class VibrantPalette extends React.Component {
         {me.state.imageReady ? <div className={style.previewContainer}>
           <img src={me.state.imageUrl} alt="uploaded file"/>
           <div className={style.previewResult}>
-            <div>
-              {
-                me.state.imageResult.map((v,k) => {
-                  return (<Checkbox key={k} onChange={me.onResultChkboxClick.bind(me)}>
-                    <div className={style.resultBox} style={{backgroundColor: v}}/>
-                  </Checkbox>);
-                })
-              }
-            </div>
-
+            {
+              me.state.imageResult.map((v,k) => {
+                return (<Checkbox key={k} checked={me.state.imageResultSelection.indexOf(v) > -1} onChange={me.onResultChkboxClick.bind(me, v)}>
+                  <div className={style.resultBox} style={{backgroundColor: v}}/>
+                </Checkbox>);
+              })
+            }
           </div>
         </div> :
           <div className={classnames(style.upload, hoverStyle)}
@@ -153,7 +189,7 @@ class VibrantPalette extends React.Component {
                onDragOver={me.onDragOverHandler.bind(me)}
                onDragLeave={me.onDragLeaveHandler.bind(me)}
                onDrop={me.onDropHandler.bind(me)}
-               onClick={me.clickHandler.bind(me)}>
+               onClick={me.onClickHandler.bind(me)}>
 
             <Icon type="inbox" className={style.uploadIcon}/>
             <h2>
