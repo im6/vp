@@ -52,7 +52,6 @@ class VibrantPalette extends React.Component {
 
   onDragLeaveHandler(ev){
     let me = this;
-    console.log('leave');
     me.setState({
       isFileHover: false
     });
@@ -166,10 +165,6 @@ class VibrantPalette extends React.Component {
     hoverStyle[style.hoverEffect]= me.state.isFileHover;
 
     return <div className={style.container}>
-      <input type="file"
-             ref="fileInput"
-             onChange={me.fileInputOnChange.bind(me)}
-             style={{display:'none'}}/>
 
         {me.state.imageReady ? <div className={style.previewContainer}>
 
@@ -184,18 +179,24 @@ class VibrantPalette extends React.Component {
           </div>
           <img src={me.state.imageUrl} alt="uploaded file"/>
         </div> :
-          <div className={classnames(style.upload, hoverStyle)}
-               ref="uploadBox"
-               onDragEnter={me.onDragEnterHandler.bind(me)}
-               onDragOver={me.onDragOverHandler.bind(me)}
-               onDragLeave={me.onDragLeaveHandler.bind(me)}
-               onDrop={me.onDropHandler.bind(me)}
-               onClick={me.onClickHandler.bind(me)}>
+          <div style={{width: '100%'}}>
+            <input type="file"
+                   ref="fileInput"
+                   onChange={me.fileInputOnChange.bind(me)}
+                   style={{display:'none'}}/>
+            <div className={classnames(style.upload, hoverStyle)}
+                 ref="uploadBox"
+                 onDragEnter={me.onDragEnterHandler.bind(me)}
+                 onDragOver={me.onDragOverHandler.bind(me)}
+                 onDragLeave={me.onDragLeaveHandler.bind(me)}
+                 onDrop={me.onDropHandler.bind(me)}
+                 onClick={me.onClickHandler.bind(me)}>
 
-            <Icon type="inbox" className={style.uploadIcon}/>
-            <h2>
-              Click or drag file to this area to upload
-            </h2>
+              <Icon type="inbox" className={style.uploadIcon}/>
+              <h2>
+                Click or drag file to this area to upload
+              </h2>
+            </div>
           </div>
         }
 
