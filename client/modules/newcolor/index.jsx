@@ -1,9 +1,13 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 import ColorPicker from 'react-color-picker';
-import { Row, Col, Card, Button, Input, Checkbox, Icon } from 'antd';
+import { Row, Col, Card, Button, Input, Checkbox, Icon, Select } from 'antd';
 import EditCanvas from './components/EditCanvas';
 import VibrantPalette from './components/VibrantPalette';
+
+
+const Option = Select.Option;
 
 import '!style!css!less!autoprefixer-loader?browsers=last 2 versions!react-color-picker/index.css';
 import style from './style.less';
@@ -23,7 +27,8 @@ class NewColor extends React.PureComponent {
         null,
         null
       ],
-      showUpload: true
+      showUpload: true,
+      colorType: [],
     };
   }
 
@@ -75,6 +80,10 @@ class NewColor extends React.PureComponent {
 
   }
 
+  onColorTypeChange(ev){
+    let me = this;
+  }
+
   extractResult(data){
     let me = this;
     me.setState({
@@ -84,9 +93,31 @@ class NewColor extends React.PureComponent {
 
   render() {
     const me = this;
+    let types = me.props.colorType.get('list').toJS();
+
     return <Card title={<span><i className="fa fa-pencil-square-o" aria-hidden="true"/>&nbsp;&nbsp;Create New Color</span>}>
 
       <Row>
+        <Col lg={24} md={24} sm={24} xs={24} style={{marginBottom: 30, display: 'flex', justifyContent:'center'}}>
+          <div style={{width: '50%'}}>
+            <label> Color Type: &nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <Select
+              multiple
+              style={{ width: '67%' }}
+              placeholder="Please select type"
+              defaultValue={me.state.colorType}
+              onChange={me.onColorTypeChange.bind(me)}
+              >
+              {
+                types.map((v,k) => {
+                  return <Option key={k}>{v.value}</Option>
+                })
+              }
+            </Select>
+          </div>
+
+        </Col>
+
         <Col lg={2} md={1} sm={0} xs={0}></Col>
         <Col lg={9} md={10} sm={24} xs={24} className={style.makeCenter}>
           <EditCanvas colorValue={me.state.colorValue}
@@ -146,4 +177,10 @@ class NewColor extends React.PureComponent {
   }
 }
 
-export default NewColor;
+function mapStateToProps({colorType}){
+  return {
+    colorType
+  }
+}
+
+export default connect(mapStateToProps)(NewColor);

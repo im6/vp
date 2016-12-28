@@ -2,14 +2,12 @@ import React, { PropTypes } from 'react';
 import QueueAnim from 'rc-queue-anim';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
-import ReactDipper from 'react-dipper';
 
 import style from './style.less'
 import {Row,Col, Input, Form, Button, Checkbox, Card, Icon, Tooltip} from 'antd';
 import { browserHistory } from 'react-router';
 
 import LoginCard from './components/LoginCard';
-import Footer from '../layout/components/footer';
 
 class Auth extends React.Component {
   constructor(prop) {
@@ -41,9 +39,7 @@ class Auth extends React.Component {
     return (<div className={style.authContainer}>
 
       <div className={style.canvansContainer}>
-        <ReactDipper styleParams={{
-          'backgroundColor': '#374861'
-        }}/>
+
       </div>
 
       <QueueAnim delay={[100 ,0]}

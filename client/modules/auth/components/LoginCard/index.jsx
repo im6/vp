@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import QueueAnim from 'rc-queue-anim';
-import ReactDipper from 'react-dipper';
 import styles from './style.less'
 import {Row,Col, Input, Form, Button, Checkbox, Card, Icon, Tooltip} from 'antd';
 import { browserHistory } from 'react-router';
