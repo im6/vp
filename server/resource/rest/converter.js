@@ -16,7 +16,7 @@ module.exports = {
 
         var result0 = {
             method: method,
-            baseUrl: globalConfig.restApi,
+            baseUrl: '127.0.0.1',
             url: url,
             timeout: 20000
         };

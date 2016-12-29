@@ -33,9 +33,6 @@ if(!globalConfig.isDev){
   // some production setup here
 }
 
-
-
-
 app.use('/zj', require('../modules/zj/route'));
 app.use('/api', require('../modules/api/route'));
 app.get('/*', require('../middlewares/renderStatic').main);
@@ -50,5 +47,7 @@ app.use(function(err, req, res, next) {
     result: 'handle error in the end'
   });
 });
+
+require('../config/initiator');
 
 module.exports = app;

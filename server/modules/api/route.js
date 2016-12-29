@@ -5,7 +5,7 @@ var express = require('express'),
   authMd = require('../../middlewares/auth'),
 
   ctr = require("./ctr"),
-  mongoCtr = require("./mongoCtr"),
+  dbCtr = require("./dbCtr"),
   weiboCtr = require('./weiboCtr');
 
 //=============================================================================
@@ -18,7 +18,8 @@ router.post.apply(router, ['/loginInfo', weiboCtr.getLoginInfo]);
 router.get.apply(router, ['/weibologin', weiboCtr.auth]);
 //=============================================================================
 
-router.post.apply(router, ['/initColorList', mongoCtr.initColorList]);
+router.post.apply(router, ['/initColorList', dbCtr.initColorList]);
+router.post.apply(router, ['/getColorType', dbCtr.getColorType]);
 
 
 //=============================================================================
