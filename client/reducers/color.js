@@ -12,7 +12,7 @@ const users = handleActions({
   ['color/get/success'](state, action) {
     console.log('loading color success!');
     return state.merge({
-      list: action.payload.data,
+      list: action.payload,
       loading: false
     });
   },
@@ -31,8 +31,7 @@ const users = handleActions({
   },
   ['color/loadMore/success'](state, action) {
     console.log('loading color success!');
-    let newList = state.get('list').concat(Immutable.fromJS(action.payload.data));
-
+    let newList = state.get('list').concat(Immutable.fromJS(action.payload));
     return state.merge({
       list: newList,
       loading: false

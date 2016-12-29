@@ -16,7 +16,7 @@ function* initColorList(action) {
     const payload = yield call(requester, '/api/initColorList');
     yield put({
       type: "color/get/success",
-      payload: payload
+      payload: payload.result
     });
   } catch (e) {
     yield put({
@@ -31,7 +31,7 @@ function* colorLoadMore(action) {
     const payload = yield call(requester, '/api/initColorList');
     yield put({
       type: "color/loadMore/success",
-      payload: payload
+      payload: payload.result
     });
   } catch (e) {
     yield put({
