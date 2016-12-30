@@ -56,8 +56,6 @@ class Color extends React.Component {
 }
 
 function mapStateToProps({color}){
-
-
   return {
     color: color
   }

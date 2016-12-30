@@ -7,6 +7,7 @@ function* watchers(a) {
   yield [
     takeLatest("color/get", initColorList),
     takeLatest("color/loadMore", colorLoadMore),
+    takeLatest("color/toggleLike", toggleLike),
   ]
 }
 
@@ -38,6 +39,13 @@ function* colorLoadMore(action) {
       type: "color/loadMore/fail",
       payload: {msg: e}
     });
+  }
+}
+
+function* toggleLike(action) {
+  try {
+    const payload = yield call(requester, '/api/toggleLike', action.payload);
+  } catch (e) {
   }
 }
 

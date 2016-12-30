@@ -20,6 +20,7 @@ router.get.apply(router, ['/weibologin', weiboCtr.auth]);
 
 router.post.apply(router, ['/initColorList', dbCtr.initColorList]);
 router.post.apply(router, ['/getColorType', dbCtr.getColorType]);
+router.post.apply(router, ['/toggleLike', dbCtr.toggleLike]);
 
 
 //=============================================================================

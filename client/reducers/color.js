@@ -45,8 +45,7 @@ const color = handleActions({
     });
   },
   ['color/toggleLike'](state, action) {
-    let newLiked = null,
-      newList = null;
+    let newLiked = null;
 
     let gonnaLike = action.payload.willLike;
 
@@ -58,7 +57,7 @@ const color = handleActions({
       });
     }
 
-    newList = state.get('list').update(action.payload.index, function(v){
+    let newList = state.get('list').update(action.payload.index, function(v){
       return v.merge({
         liked: gonnaLike,
         like: v.get('like') + (gonnaLike ? 1 : -1)
