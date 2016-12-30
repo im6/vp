@@ -54,7 +54,7 @@ class Product extends React.Component {
 
           {
             me.props.boxInfo.get('author') ?
-              <h3>Zijian Guo</h3> : null
+              <h3>{me.props.boxInfo.get('author')}</h3> : null
           }
 
         </div>
