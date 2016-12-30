@@ -26,7 +26,7 @@ class Product extends React.Component {
   onClickHander(a,b,c,d){
     let me = this;
     me.props.onLikeClick({
-      current: me.props.boxInfo.get('hasLike') || false,
+      willLike: !me.props.boxInfo.get('liked'),
       id: me.props.boxInfo.get('id')
     });
   }
@@ -34,7 +34,7 @@ class Product extends React.Component {
   render() {
     let me = this;
     let likeStyle = {};
-    likeStyle[style.hasLike] = me.props.boxInfo.get('hasLike') || false;
+    likeStyle[style.hasLike] = me.props.boxInfo.get('liked') || false;
 
     return <div className={style.box}>
         <div className={style.boxCanvas}>

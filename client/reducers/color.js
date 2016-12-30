@@ -2,7 +2,7 @@
 import { handleActions } from 'redux-actions';
 import Immutable, {Map, List} from 'immutable';
 
-const users = handleActions({
+const color = handleActions({
   ['color/get'](state, action) {
     console.log('loading color...');
     return state.merge({
@@ -43,10 +43,37 @@ const users = handleActions({
       list: [],
       loading: false
     });
-  }
+  },
+  ['color/toggleLike'](state, action) {
+    let newLiked = null,
+      newList = null;
+
+    let gonnaLike = action.payload.willLike;
+
+    if(gonnaLike){
+      newLiked = state.get('liked').push(action.payload.id);
+    }else{
+      newLiked = state.get('liked').filter(v => {
+        return v !== action.payload.id;
+      });
+    }
+
+    newList = state.get('list').update(action.payload.index, function(v){
+      return v.merge({
+        liked: gonnaLike,
+        like: v.get('like') + (gonnaLike ? 1 : -1)
+      });
+    });
+
+    return state.merge({
+      liked: newLiked,
+      list: newList
+    });
+  },
 }, Immutable.fromJS({
   list: [],
+  liked: [],
   loading: true,
 }));
 
-export default users;
+export default color;

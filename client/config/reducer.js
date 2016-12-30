@@ -1,4 +1,4 @@
-const context = require.context('../reducers/', true, /\.js$/);
+const context = require.context('../reducers/', false, /\.js$/);
 const keys = context.keys();
 
 export const moduleReducers = keys.reduce(function(res, v) {

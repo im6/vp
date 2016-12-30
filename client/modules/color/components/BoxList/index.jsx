@@ -27,7 +27,7 @@ class BoxList extends React.Component {
                        lg={6}
                        key={k}
                        className={style.colContainer}>
-        <Box boxInfo={v}/>
+        <Box boxInfo={v} onLikeClick={me.props.onLikeClick}/>
       </Col>);
     });
     return result;
