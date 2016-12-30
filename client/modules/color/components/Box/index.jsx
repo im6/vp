@@ -38,8 +38,8 @@ class Product extends React.Component {
 
     return <div className={style.box}>
         <div className={style.boxCanvas}>
-          {me.props.boxInfo.get('value').split(',').map((v, k) => {
-            return <ColorRow key={k} rowColor={v} />
+          {me.props.boxInfo.get('value').split('#').map((v, k) => {
+            return <ColorRow key={k} rowColor={'#' + v} />
           })}
         </div>
 

@@ -12,7 +12,7 @@ const color = handleActions({
   ['color/get/success'](state, action) {
     console.log('loading color success!');
     return state.merge({
-      list: action.payload,
+      list: action.payload || [] ,
       loading: false
     });
   },

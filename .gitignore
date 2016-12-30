@@ -4,3 +4,4 @@ npm-debug.log
 temp/
 public/
 !public/index.html
+client/webpack
