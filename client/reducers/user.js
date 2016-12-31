@@ -3,14 +3,33 @@ import { handleActions } from 'redux-actions';
 import Immutable, {Map, List} from 'immutable';
 
 const user = handleActions({
-  ['user/toggleLike'](state, action) {
+  ['user/initAuth'](state, action) {
     return state.merge({
-      loading: true
+      weiboUrl: action.payload.weiboUrl
+    });
+  },
+  ['user/initUser'](state, action) {
+    return state.merge({
+      isAuth: action.payload.isAuth,
+      detail: action.payload.userInfo,
+    });
+  },
+  ['user/login'](state, action) {
+    return state.merge({
+      isAuth: true,
+      detail: action.payload
+    });
+  },
+  ['user/logoff'](state, action) {
+    return state.merge({
+      isAuth: false,
+      detail: null
     });
   }
 }, Immutable.fromJS({
   isAuth: false,
-  detail: null
+  detail: null,
+  weiboUrl: null
 }));
 
 export default user;

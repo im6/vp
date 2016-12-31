@@ -1,7 +1,6 @@
 
 
-var fs = require('fs'),
-    path = require('path');
+var fs = require('fs');
 
 
 module.exports = {

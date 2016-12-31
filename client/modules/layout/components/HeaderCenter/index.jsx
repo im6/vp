@@ -7,7 +7,7 @@ const MenuItemGroup = Menu.ItemGroup;
 const ButtonGroup = Button.Group;
 
 
-const HeaderCenter = ({logout}) => {
+const HeaderCenter = ({logout, userInfo}) => {
   const isAuth = true;
   const clickHandler = (e) => {
     e.preventDefault();
@@ -48,11 +48,11 @@ const HeaderCenter = ({logout}) => {
       <Col lg={15} md={13} sm={9} xs={7}/>
 
       <Col lg={4} md={6} sm={8} xs={10}>
-        { isAuth ?
+        { userInfo.get('isAuth') ?
         <div className={style.btnGroup}>
 
-          <Tooltip title="郭子剑" placement="bottom">
-            <img src="http://tva4.sinaimg.cn/crop.0.0.180.180.50/4a377f76jw1e8qgp5bmzyj2050050aa8.jpg" alt="icon"/>
+          <Tooltip title={userInfo.get('detail').get('name')} placement="bottom">
+            <img src={userInfo.get('detail').get('profile_image_url')} alt="icon"/>
           </Tooltip>
           <ButtonGroup>
             <Tooltip title="Create" placement="bottom">
@@ -74,7 +74,9 @@ const HeaderCenter = ({logout}) => {
             </Tooltip>
 
             <Tooltip title="logout" placement="bottom">
-              <Button type="default" icon="logout"/>
+              <Button type="default"
+                      onClick={clickHandler}
+                      icon="logout"/>
             </Tooltip>
           </ButtonGroup>
         </div> :
@@ -91,20 +93,8 @@ const HeaderCenter = ({logout}) => {
           </div>
         }
 
-
       </Col>
     </Row>
-
-
-
-
-
-
-
-
-
-
-
 
   </header>;
 };

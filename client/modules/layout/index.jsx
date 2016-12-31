@@ -10,7 +10,7 @@ import styles from './style.less';
 import img from '!file!./assets/gradient.jpg';
 import HeaderCenter from './components/HeaderCenter/index.jsx';
 
-const Layout = ({children, dispatch}) => {
+const Layout = ({children, user, dispatch}) => {
   let isloading = false;
 
   const logout = (v) => {
@@ -51,7 +51,7 @@ const Layout = ({children, dispatch}) => {
       />
 
     <Affix>
-      <HeaderCenter logout={logout}/>
+      <HeaderCenter logout={logout} userInfo={user}/>
     </Affix>
 
 
@@ -67,4 +67,10 @@ Layout.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-export default connect()(Layout);
+function mapStateToProps({user}){
+  return {
+    user
+  }
+}
+
+export default connect(mapStateToProps)(Layout);

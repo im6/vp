@@ -1,6 +1,5 @@
 "use strict";
-const path = require('path'),
-  express = require('express'),
+const express = require('express'),
   methodOverride = require('method-override'),
   bodyParser = require('body-parser'),
   globalConfig = require('../config/env'),

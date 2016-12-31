@@ -46,15 +46,15 @@ class Auth extends React.Component {
                  type={'bottom'}
                  ease={'easeOutQuart'} >
         <div key="a">
-          <LoginCard onClickLogin={me.onSubmit.bind(me)} weiboUrl={me.props.auth.get('weiboUrl')}/>
+          <LoginCard onClickLogin={me.onSubmit.bind(me)} weiboUrl={me.props.user.get('weiboUrl')}/>
         </div>
       </QueueAnim>
     </div>);
   }
 }
-function mapStateToProps({auth}){
+function mapStateToProps({user}){
   return {
-    auth
+    user
   }
 }
 
