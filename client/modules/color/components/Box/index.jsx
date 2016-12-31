@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Icon } from 'antd';
 import classnames from 'classnames';
 import style from './style.less';
-import ColorRow from './components/ColorRow';
+import ColorCanvas from './components/ColorCanvas';
 import Immutable from 'immutable';
 
 
@@ -37,12 +37,7 @@ class Product extends React.Component {
     likeStyle[style.hasLike] = me.props.boxInfo.get('liked') || false;
 
     return <div className={style.box}>
-        <div className={style.boxCanvas}>
-          {me.props.boxInfo.get('value').split('#').map((v, k) => {
-            return <ColorRow key={k} rowColor={'#' + v} />
-          })}
-        </div>
-
+        <ColorCanvas colorValue={me.props.boxInfo.get('value')}/>
         <div className={style.boxFooter}>
           <Button type="default" onClick={me.onClickHander.bind(me)}>
             <h3 style={{display: 'inline'}}>

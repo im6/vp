@@ -88,7 +88,7 @@ const HeaderCenter = ({logout, userInfo}) => {
             &nbsp;
             <Link to="/auth">
               <Button type="default" icon="user">
-                Sign In
+                Log In
               </Button>
             </Link>
           </div>

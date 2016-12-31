@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { handleActions } from 'redux-actions';
 import Immutable, {Map, List} from 'immutable';
+import { message } from 'antd';
 
 const user = handleActions({
   ['user/initAuth'](state, action) {
@@ -9,18 +10,18 @@ const user = handleActions({
     });
   },
   ['user/initUser'](state, action) {
+    if(action.payload.isAuth){
+      message.success('Welcome! ' + action.payload.userInfo.name);
+    }
+
     return state.merge({
       isAuth: action.payload.isAuth,
       detail: action.payload.userInfo,
     });
   },
-  ['user/login'](state, action) {
-    return state.merge({
-      isAuth: true,
-      detail: action.payload
-    });
-  },
+
   ['user/logoff'](state, action) {
+    message.success('Log off successfully!');
     return state.merge({
       isAuth: false,
       detail: null,

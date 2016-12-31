@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
-import { Affix, message } from 'antd';
+import { Affix } from 'antd';
 import EventListener, {withOptions} from 'react-event-listener';
 
 //import '!style!css!font-awesome/css/font-awesome.min.css';
@@ -16,7 +16,6 @@ const Layout = ({children, user, dispatch}) => {
   const logout = (v) => {
     const ac = createAction('user/logoff');
     dispatch(ac());
-    message.success('Log off successfully!');
   };
 
   const resizeHandler = (ev) => {
