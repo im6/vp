@@ -23,7 +23,8 @@ const user = handleActions({
   ['user/logoff'](state, action) {
     return state.merge({
       isAuth: false,
-      detail: null
+      detail: null,
+      weiboUrl: null
     });
   }
 }, Immutable.fromJS({

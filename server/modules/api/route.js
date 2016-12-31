@@ -4,16 +4,16 @@ var express = require('express'),
   globalConfig = require('../../config/env'),
   authMd = require('../../middlewares/auth'),
 
-  ctr = require("./ctr"),
   dbCtr = require("./dbCtr"),
   weiboCtr = require('./weiboCtr');
 
-//=============================================================================
-
-router.post.apply(router, ['/test', ctr.test]);
 
 //=============================================================================
 router.post.apply(router, ['/getUserInfo', weiboCtr.getUserInfo]);
+router.post.apply(router, ['/getInitAuth', weiboCtr.getInitAuth]);
+router.post.apply(router, ['/logoff', weiboCtr.logoff]);
+
+
 router.get.apply(router, ['/weibologin', weiboCtr.weibologin]);
 //=============================================================================
 

@@ -15,5 +15,16 @@ module.exports = {
   },
   getPool: function(){
     return pool;
+  },
+  sqlExecOne: function(qr){
+    return new Promise(function(resolve, reject){
+      pool.query(qr, function(err, rows, fields){
+        if(err){
+          reject(rows);
+        }else{
+          resolve(rows);
+        }
+      });
+    });
   }
 };

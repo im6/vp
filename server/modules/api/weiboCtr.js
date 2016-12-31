@@ -5,6 +5,7 @@ var path = require('path'),
   weiboApi = require('../../resource/weibo/list'),
   globalConfig = require('../../config/env'),
   uuid = require('uuid'),
+  mysql = require('../../resource/db/mysqlConnection'),
   _ = require('lodash');
 
 var client_id = globalConfig.weiboAppKey,
@@ -23,7 +24,7 @@ var privateFn = {
 };
 
 module.exports = {
-  getUserInfo: function(req, res, next){
+  getInitAuth: function(req, res, next){
     let session = req.session;
     if(!session.app || !session.app.isAuth){
       var stateId = uuid.v1();
@@ -35,6 +36,26 @@ module.exports = {
       res.json({
         isAuth: false,
         weiboUrl: privateFn.createWeiboLink(stateId)
+      });
+    }
+    else {
+      res.json({
+        isAuth: true
+      });
+    }
+  },
+  getUserInfo: function(req, res, next){
+    let session = req.session;
+    if(!session.app || !session.app.isAuth){
+      var stateId = uuid.v1();
+      req.session.app = {
+        isAuth: false,
+        weiboState : stateId
+      };
+
+      res.json({
+        isAuth: false,
+        //weiboUrl: privateFn.createWeiboLink(stateId)
       });
     }
     else {
@@ -93,5 +114,12 @@ module.exports = {
       // invalid weibo auth request
       res.redirect("/");
     }
-  }
+  },
+  logoff: function(req, res, next){
+    console.log('logoff and delete session');
+    delete req.session.app;
+    res.json({
+      error: false
+    })
+  },
 };

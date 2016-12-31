@@ -8,7 +8,7 @@ const ButtonGroup = Button.Group;
 
 
 const HeaderCenter = ({logout, userInfo}) => {
-  const isAuth = true;
+
   const clickHandler = (e) => {
     e.preventDefault();
     logout();
@@ -86,10 +86,11 @@ const HeaderCenter = ({logout, userInfo}) => {
             </Button>
             &nbsp;
             &nbsp;
-            <Button type="default">
-              <i className="fa fa-user"/>
-              &nbsp;&nbsp;Login
-            </Button>
+            <Link to="/auth">
+              <Button type="default" icon="user">
+                Sign In
+              </Button>
+            </Link>
           </div>
         }
 

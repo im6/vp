@@ -3,7 +3,7 @@ import { Router, Route, IndexRoute } from 'react-router';
 import { createAction } from 'redux-actions';
 
 import { Global } from '../config/global';
-import { getUserStatus } from '../services/resource.js';
+import { getUserStatus, getInitAuth } from '../services/resource.js';
 import App from '../modules/app/index.jsx';
 import ErrorPage from '../modules/errorPage';
 import Auth from '../modules/auth';
@@ -15,12 +15,12 @@ import NewColor from '../modules/newcolor';
 const Routes = ({ history, store }) => {
 
   const initAuth = (nextState, replace, callback) => {
-    getUserStatus().then((res) => {
+    getInitAuth().then((res) => {
       const ac = createAction('user/initAuth');
       store.dispatch(ac(res));
-    }, (res2) => {
-      replace('/auth');
-    }).then(()=>{
+      if(res.isAuth){
+        replace('/');
+      }
       callback();
     });
   };
@@ -30,15 +30,8 @@ const Routes = ({ history, store }) => {
       callback();
     }else{
       getUserStatus().then((res) => {
-        if(!res.isAuth){
-          replace('/auth');
-        }else {
-          const ac = createAction('user/initUser');
-          store.dispatch(ac(res));
-        }
-      }, (res2) => {
-        replace('/auth');
-      }).then(()=>{
+        const ac = createAction('user/initUser');
+        store.dispatch(ac(res));
         callback();
       });
     }

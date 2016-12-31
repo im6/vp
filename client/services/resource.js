@@ -6,9 +6,7 @@ export async function getUserStatus() {
   return result;
 }
 
-//export async function getInitialLogin() {
-//  let result = await requester('/api/getUserInfo', {
-//    method: "POST"
-//  });
-//  return result;
-//}
+export async function getInitAuth() {
+  let result = await requester('/api/getInitAuth');
+  return result;
+}
