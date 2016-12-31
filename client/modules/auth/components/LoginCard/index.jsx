@@ -1,3 +1,4 @@
+//https://www.iconfinder.com/icons/762279/communication_connection_media_message_social_talk_weibo_icon#size=128
 import React, { PropTypes } from 'react';
 import QueueAnim from 'rc-queue-anim';
 import styles from './style.less'
@@ -5,6 +6,8 @@ import {Row,Col, Input, Form, Button, Checkbox, Card, Icon, Tooltip} from 'antd'
 import { browserHistory } from 'react-router';
 
 import img from './assets/icon.png';
+import imgo1 from './assets/oauth1.png';
+import imgo2 from './assets/oauth2.png';
 
 const FormItem = Form.Item;
 
@@ -35,7 +38,7 @@ let LoginCard = ({form, onClickLogin, weiboUrl}) => {
 
   const disableBtn = !weiboUrl;
   return (
-    <Card title="Welcome to Vaporeon" style={{ width: 270 }}>
+    <Card title="Welcome to xXX" style={{ width: 270 }}>
       <img src={img} className={styles.iconStyle}/>
       <Form horizontal onSubmit={onSubmit}>
         <FormItem>
@@ -59,25 +62,29 @@ let LoginCard = ({form, onClickLogin, weiboUrl}) => {
           })(
             <Checkbox>Remember me</Checkbox>
           )}
+
+          <div style={{float:'right'}}>
+            <Tooltip title="Weibo">
+              <img src={imgo1}
+                   onClick={weiboLogin}
+                   className={styles.oauthStyle}/>
+            </Tooltip>
+            <Tooltip title="Facebook">
+              <img src={imgo2} className={styles.oauthStyle}/>
+            </Tooltip>
+          </div>
         </FormItem>
 
-        <Row>
-          <Col span={11}>
-            <Button type="default" htmlType="submit" style={{height: 38, width: '100%'}}>
-              Login
-            </Button>
-          </Col>
-          <Col span={2}></Col>
-          <Col span={11}>
-            <Tooltip title="Weibo Login">
-              <Button type="default" onClick={weiboLogin}
-                      disabled={disableBtn}
-                      style={{height: 38, width: '100%'}}>
-                <i className="fa fa-weibo fa-2x"></i>
-              </Button>
-            </Tooltip>
-          </Col>
-        </Row>
+
+
+        <Button type="default" htmlType="submit" style={{width: '100%'}}>
+          Login
+        </Button>
+
+
+
+
+
 
       </Form>
     </Card>
