@@ -102,6 +102,11 @@ const color = handleActions({
     });
   },
 
+  ['color/addNew/fail'](state, action) {
+    message.error('create new color failed! ' + action.payload.msg.code);
+    return state;
+  },
+
 }, Immutable.fromJS({
   list: [],
   liked: [],

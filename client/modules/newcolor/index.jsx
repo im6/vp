@@ -29,7 +29,7 @@ class NewColor extends React.PureComponent {
         null,
         null
       ],
-      showUpload: true,
+      showUpload: false,
       colorType: [],
     };
   }

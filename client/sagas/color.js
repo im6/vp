@@ -54,19 +54,23 @@ function* addNew(action) {
   try {
     const result = yield call(requester, '/api/addNewColor', action.payload);
     let colorinfo = action.payload;
-    yield put({
-      type: "color/addNew/success",
-      payload: {
-        ...colorinfo,
-        id: result.result.id,
-        username: result.result.username
-      }
-    });
+    if(result.error){
+      yield put({
+        type: "color/addNew/fail",
+        payload: {msg: result.result}
+      });
+    } else {
+      yield put({
+        type: "color/addNew/success",
+        payload: {
+          ...colorinfo,
+          id: result.result.id,
+          username: result.result.username
+        }
+      });
+    }
   } catch (e) {
-    yield put({
-      type: "color/addNew/fail",
-      payload: {msg: e}
-    });
+
   }
 }
 

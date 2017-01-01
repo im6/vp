@@ -228,7 +228,7 @@ module.exports = {
         username: hasAuth ? req.session.app.dbInfo.username : null
       }));
     }, function(err){
-      res.json(helper.resFailObj(row.insertId));
+      res.json(helper.resFailObj(err));
     });
   },
 };

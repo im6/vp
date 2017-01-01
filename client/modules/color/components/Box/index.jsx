@@ -51,7 +51,6 @@ class Product extends React.Component {
             me.props.boxInfo.get('username') ?
               <h3>{me.props.boxInfo.get('username')}</h3> : null
           }
-
         </div>
     </div>;
   }
