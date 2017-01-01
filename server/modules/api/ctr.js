@@ -96,6 +96,7 @@ module.exports = {
 
               session.app.dbInfo = {
                 id: row2.insertId,
+                username: data.name,
                 isAdmin: false
               };
 
@@ -112,6 +113,7 @@ module.exports = {
 
             session.app.dbInfo = {
               id: row1[0].id,
+              username: data.name,
               isAdmin: row1[0].isadmin || false
             };
 
@@ -181,7 +183,7 @@ module.exports = {
     })
   },
   initColorList: function(req, res, next){
-    var qr = 'select a.id, a.like, a.color AS `value`, a.author, false as `liked` from color a';
+    var qr = 'select a.id, a.like, a.color AS `value`, a.username, false as `liked` from color a';
     mysql.sqlExecOne(qr).then(function(data){
       res.json(helper.resSuccessObj(data));
     }, function(data){
@@ -211,5 +213,22 @@ module.exports = {
         privateFn.removeUserLike(req.session.app.dbInfo.id, req.body.id);
       }
     }
+  },
+
+  addNewColor: function(req, res, next){
+    let hasAuth = req.session.app && req.session.app.isAuth;
+    let username = (hasAuth && req.session.app.dbInfo.username)? `'${req.session.app.dbInfo.username}'` : 'NULL';
+    let userid = (hasAuth && req.session.app.dbInfo.id)? `${req.session.app.dbInfo.id}` : 'NULL';
+    let displayItem = userid == 'NULL' ? 1 : 0;
+    var qr = `INSERT INTO color (\`like\`, color, userid, username, colortype, display, createdate) VALUES (0, '${req.body.value}', ${userid}, ${username}, '${req.body.colorType}', ${displayItem}, NOW())`;
+
+    mysql.sqlExecOne(qr).then(function(row){
+      res.json(helper.resSuccessObj({
+        id:row.insertId,
+        username: hasAuth ? req.session.app.dbInfo.username : null
+      }));
+    }, function(err){
+      res.json(helper.resFailObj(row.insertId));
+    });
   },
 };

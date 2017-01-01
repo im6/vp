@@ -81,9 +81,11 @@ const HeaderCenter = ({logout, userInfo}) => {
           </ButtonGroup>
         </div> :
           <div className={style.btnGroup}>
-            <Button type="primary" icon="plus">
-              Create
-            </Button>
+            <Link to="/new">
+              <Button type="primary" icon="plus">
+                Create
+              </Button>
+            </Link>
             &nbsp;
             &nbsp;
             <Link to="/auth">

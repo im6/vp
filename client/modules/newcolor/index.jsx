@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { createAction } from 'redux-actions';
 import ColorPicker from 'react-color-picker';
-import { Row, Col, Card, Button, Input, Checkbox, Icon, Select } from 'antd';
+import { browserHistory } from 'react-router';
+import { Row, Col, Card, Button, Input, Checkbox, Icon, Select, message } from 'antd';
 import EditCanvas from './components/EditCanvas';
 import VibrantPalette from './components/VibrantPalette';
 
@@ -41,9 +43,18 @@ class NewColor extends React.PureComponent {
       }
     });
     if(good){
-      alert('color Good');
+      let cl0 = me.state.colorValue.map(v =>{
+        return v.substr(1);
+      });
+      let cl1 = cl0.join('#');
+      const ac = createAction('color/addNew');
+      me.props.dispatch(ac({
+        value : cl1,
+        colorType: me.state.colorType.join(',')
+      }));
+      browserHistory.push('/');
     }else{
-      alert('color not ready');
+      message.error('Invalid color.');
     }
   }
 
@@ -82,6 +93,9 @@ class NewColor extends React.PureComponent {
 
   onColorTypeChange(ev){
     let me = this;
+    me.setState({
+      colorType: ev
+    });
   }
 
   extractResult(data){
@@ -105,7 +119,7 @@ class NewColor extends React.PureComponent {
               multiple
               style={{ width: '67%' }}
               placeholder="Please select type"
-              defaultValue={me.state.colorType}
+              value={me.state.colorType}
               onChange={me.onColorTypeChange.bind(me)}
               >
               {

@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { handleActions } from 'redux-actions';
 import Immutable, {Map, List} from 'immutable';
+import { message } from 'antd';
 
 const color = handleActions({
   ['color/get'](state, action) {
@@ -86,8 +87,21 @@ const color = handleActions({
     } else {
       return state;
     }
-
   },
+
+  ['color/addNew/success'](state, action) {
+    message.success('create new color successfully!');
+    let newData = action.payload;
+    let newColor = {
+      ...newData,
+      like: 0,
+      liked: false
+    };
+    return state.merge({
+      list: [newColor, ...state.get('list')]
+    });
+  },
+
 }, Immutable.fromJS({
   list: [],
   liked: [],
