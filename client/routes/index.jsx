@@ -30,8 +30,11 @@ const Routes = ({ history, store }) => {
       callback();
     }else{
       getUserStatus().then((res) => {
-        const ac = createAction('user/initUser');
-        store.dispatch(ac(res));
+        const ac1 = createAction('user/initUser');
+        store.dispatch(ac1(res));
+
+        const ac2 = createAction('color/initLike');
+        store.dispatch(ac2(res));
         callback();
       });
     }

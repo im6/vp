@@ -69,6 +69,25 @@ const color = handleActions({
       list: newList
     });
   },
+
+  ['color/initLike'](state, action) {
+
+    let saved = action.payload.like;
+    if(saved){
+      let newList = state.get('list').map(function(v) {
+        return v.merge({
+          liked: saved.indexOf(v.get('id')) > -1
+        });
+      });
+      return state.merge({
+        liked: saved,
+        list: newList
+      });
+    } else {
+      return state;
+    }
+
+  },
 }, Immutable.fromJS({
   list: [],
   liked: [],

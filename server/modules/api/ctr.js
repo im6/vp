@@ -37,6 +37,10 @@ var privateFn = {
     var qr = `DELETE FROM userlike WHERE userid= '${userid}' AND colorid = '${colorid}'`;
     return mysql.sqlExecOne(qr);
   },
+  getUserLike: function(userid){
+    var qr = `SELECT colorid FROM userlike WHERE userid= '${userid}'`;
+    return mysql.sqlExecOne(qr);
+  }
 };
 
 
@@ -84,11 +88,10 @@ module.exports = {
         qs:qsObj
       }).then(function(data){
 
-        var like = null;
+        var like = [];
 
         privateFn.checkUserInfo('wb', data.id).then(function(row1){
           if(row1.length < 1){
-            like = [];
             privateFn.createNewUser('wb', data.name, data.id).then(function(row2){
 
               session.app.dbInfo = {
@@ -112,10 +115,15 @@ module.exports = {
               isAdmin: row1[0].isadmin || false
             };
 
-            res.json({
-              isAuth: true,
-              weiboInfo: data,
-              like: like
+            privateFn.getUserLike(row1[0].id).then(function(row2){
+              like = row2.map(function(v,k){
+                return v.colorid;
+              });
+              res.json({
+                isAuth: true,
+                weiboInfo: data,
+                like: like
+              });
             });
           }
         });
