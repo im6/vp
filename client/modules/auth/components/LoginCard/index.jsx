@@ -11,32 +11,15 @@ import imgo2 from './assets/oauth2.png';
 
 const FormItem = Form.Item;
 
-
-let LoginCard = ({form, onClickLogin, weiboUrl}) => {
+let LoginCard = ({form, loginClick, wbClick, fbClick}) => {
   const {getFieldProps, getFieldsValue, getFieldDecorator} = form;
-
-  const weiboLogin = ()=>{
-    const client_id = "806813820",
-      redirect_uri = "http://127.0.0.1:4000/api/weibologin",
-      state = "9cea2e9021e86796b74cc",
-      scope = "email";
-
-    let url = "https://api.weibo.com/oauth2/authorize?" +
-      "client_id=" + client_id +
-      "&scope=" + scope +
-      "&state=" + state +
-      "&redirect_uri=" + redirect_uri;
-
-    window.location = weiboUrl;
-  };
 
   const onSubmit = (e) =>{
     e.preventDefault();
     let payload = getFieldsValue();
-    onClickLogin(payload)
+    loginClick(payload)
   };
 
-  const disableBtn = !weiboUrl;
   return (
     <Card title="Welcome to xXX" style={{ width: 270 }}>
       <img src={img} className={styles.iconStyle}/>
@@ -66,25 +49,21 @@ let LoginCard = ({form, onClickLogin, weiboUrl}) => {
           <div style={{float:'right'}}>
             <Tooltip title="Weibo">
               <img src={imgo1}
-                   onClick={weiboLogin}
+                   onClick={wbClick}
                    className={styles.oauthStyle}/>
             </Tooltip>
             <Tooltip title="Facebook">
-              <img src={imgo2} className={styles.oauthStyle}/>
+              <img src={imgo2}
+                   onClick={fbClick}
+                   className={styles.oauthStyle}/>
             </Tooltip>
           </div>
         </FormItem>
 
 
-
         <Button type="default" htmlType="submit" style={{width: '100%'}}>
           Login
         </Button>
-
-
-
-
-
 
       </Form>
     </Card>

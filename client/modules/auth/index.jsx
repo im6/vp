@@ -18,7 +18,7 @@ class Auth extends React.Component {
     };
   }
 
-  onSubmit(d){
+  loginClickHandler(d){
     let me = this;
     me.setState({
       isloging: true
@@ -34,6 +34,32 @@ class Auth extends React.Component {
     }, 0);
   }
 
+  fbClickHandler(){
+    let me = this;
+    FB.login(function(response){
+      console.log('statusChangeCallback');
+      console.log(response);
+      if (response.status === 'connected') {
+        FB.api('/me', function(response) {
+          console.log(JSON.stringify(response));
+        });
+
+        FB.api('/me/picture?type=square', function(response) {
+          console.log(JSON.stringify(response));
+        });
+      } else if (response.status === 'not_authorized') {
+        alert('no auth');
+      } else {
+        alert('else')
+      }
+    });
+  }
+
+  wbClickHandler(){
+    let me = this;
+    window.location = me.props.user.get('weiboUrl');
+  }
+
   render(){
     let me = this;
     return (<div className={style.authContainer}>
@@ -46,7 +72,9 @@ class Auth extends React.Component {
                  type={'bottom'}
                  ease={'easeOutQuart'} >
         <div key="a">
-          <LoginCard onClickLogin={me.onSubmit.bind(me)} weiboUrl={me.props.user.get('weiboUrl')}/>
+          <LoginCard loginClick={me.loginClickHandler.bind(me)}
+                     fbClick={me.fbClickHandler.bind(me)}
+                     wbClick={me.wbClickHandler.bind(me)}/>
         </div>
       </QueueAnim>
     </div>);
