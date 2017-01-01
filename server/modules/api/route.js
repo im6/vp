@@ -4,22 +4,21 @@ var express = require('express'),
   globalConfig = require('../../config/env'),
   authMd = require('../../middlewares/auth'),
 
-  dbCtr = require("./dbCtr"),
-  weiboCtr = require('./weiboCtr');
+  ctr = require("./ctr");
 
 
 //=============================================================================
-router.post.apply(router, ['/getUserInfo', weiboCtr.getUserInfo]);
-router.post.apply(router, ['/getInitAuth', weiboCtr.getInitAuth]);
-router.post.apply(router, ['/logoff', weiboCtr.logoff]);
+router.get.apply(router, ['/weibologin', ctr.weibologin]);
 
 
-router.get.apply(router, ['/weibologin', weiboCtr.weibologin]);
-//=============================================================================
+router.post.apply(router, ['/getUserInfo', ctr.getUserInfo]);
+router.post.apply(router, ['/getInitAuth', ctr.getInitAuth]);
+router.post.apply(router, ['/logoff', ctr.logoff]);
 
-router.post.apply(router, ['/initColorList', dbCtr.initColorList]);
-router.post.apply(router, ['/getColorType', dbCtr.getColorType]);
-router.post.apply(router, ['/toggleLike', dbCtr.toggleLike]);
+
+router.post.apply(router, ['/initColorList', ctr.initColorList]);
+router.post.apply(router, ['/getColorType', ctr.getColorType]);
+router.post.apply(router, ['/toggleLike', ctr.toggleLike]);
 
 
 //=============================================================================

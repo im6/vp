@@ -11,12 +11,12 @@ const user = handleActions({
   },
   ['user/initUser'](state, action) {
     if(action.payload.isAuth){
-      message.success('Welcome! ' + action.payload.userInfo.name);
+      message.success('Welcome! ' + action.payload.weiboInfo.name);
     }
 
     return state.merge({
       isAuth: action.payload.isAuth,
-      detail: action.payload.userInfo,
+      detail: action.payload.weiboInfo,
     });
   },
 
