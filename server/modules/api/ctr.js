@@ -3,22 +3,32 @@
 var globalConfig = require('../../config/env'),
   mysql = require('../../resource/db/mysqlConnection'),
   weiboApi = require('../../resource/weibo/list'),
+  facebookApi = require('../../resource/facebook/list'),
   uuid = require('uuid'),
   helper = require('../../misc/helper'),
   _ = require('lodash');
 
 
-var client_id = globalConfig.weiboAppKey,
-  redirect_uri = globalConfig.weiboRedirectUrl,
+var redirect_uri_wb = globalConfig.oauthRedirectDomin + '/api/weiboLogin',
+  redirect_uri_fb = (globalConfig.isDev? 'http://localhost:4000': globalConfig.oauthRedirectDomin) + '/api/facebookLogin',
+
   scope = "all";
 
 var privateFn = {
   createWeiboLink: function(state){
     var url = "https://api.weibo.com/oauth2/authorize?" +
-      "client_id=" + client_id +
+      "client_id=" + globalConfig.weiboAppKey +
       "&scope=" + scope +
       "&state=" + state +
-      "&redirect_uri=" + redirect_uri;
+      "&redirect_uri=" + redirect_uri_wb;
+    return url;
+  },
+  createFacebookLink: function(state){
+    var url = "https://www.facebook.com/v2.8/dialog/oauth?" +
+      "client_id=" + globalConfig.facebookAppKey +
+      "&response_type=code" +
+      "&state=" + state +
+      "&redirect_uri=" + redirect_uri_fb;
     return url;
   },
   checkUserInfo: function(oauth, uid){
@@ -40,6 +50,63 @@ var privateFn = {
   getUserLike: function(userid){
     var qr = `SELECT colorid FROM userlike WHERE userid= '${userid}'`;
     return mysql.sqlExecOne(qr);
+  },
+
+  convertOauthIntoLocalDB: function(oauthType, session, data, res){
+    let me = this;
+    var like = [];
+
+    var imgUrl = oauthType == 'wb' ? data.profile_image_url : data.picture.data.url;
+
+    me.checkUserInfo(oauthType, data.id).then(function(row1){
+      if(row1.length < 1){
+        me.createNewUser(oauthType, data.name, data.id).then(function(row2){
+
+          session.app.dbInfo = {
+            id: row2.insertId,
+            name: data.name,
+            isAdmin: false
+          };
+
+          res.json({
+            isAuth: true,
+            like: like,
+            profile: {
+              id: data.id,
+              name: data.name,
+              img: imgUrl,
+              isAdmin: false
+            }
+          });
+        }, function(row2error){
+          console.error('create user error');
+        });
+
+      }else{
+
+        session.app.dbInfo = {
+          id: row1[0].id,
+          name: data.name,
+          isAdmin: row1[0].isadmin || false
+        };
+
+        me.getUserLike(row1[0].id).then(function(row2){
+          like = row2.map(function(v,k){
+            return v.colorid;
+          });
+          res.json({
+            isAuth: true,
+            like: like,
+            profile: {
+              id: data.id,
+              name: data.name,
+              img: imgUrl,
+              isAdmin: session.app.dbInfo.isAdmin
+            }
+          });
+        });
+      }
+    });
   }
 };
 
@@ -47,16 +114,20 @@ var privateFn = {
 module.exports = {
   getInitAuth: function(req, res, next){
     let session = req.session;
+
     if(!session.app || !session.app.isAuth){
       var stateId = uuid.v1();
       req.session.app = {
         isAuth: false,
-        weiboState : stateId
+        oauthState : stateId
       };
+
+      console.log('initial session!');
 
       res.json({
         isAuth: false,
-        weiboUrl: privateFn.createWeiboLink(stateId)
+        weiboUrl: privateFn.createWeiboLink(stateId),
+        facebookUrl: privateFn.createFacebookLink(stateId)
       });
     }
     else {
@@ -71,7 +142,7 @@ module.exports = {
       var stateId = uuid.v1();
       req.session.app = {
         isAuth: false,
-        weiboState : stateId
+        oauthState : stateId
       };
 
       res.json({
@@ -79,88 +150,86 @@ module.exports = {
       });
     }
     else {
+
       console.log('already signing in...');
-      var qsObj = {
+
+      //===========v
+
+      var qsWb = {
         access_token: session.app.tokenInfo.access_token,
         uid: session.app.tokenInfo.uid
       };
-      weiboApi.showUser({
+
+      var qsFb = {
+        access_token: session.app.tokenInfo.access_token,
+        fields: 'id,name,picture'
+      };
+
+      var qsObj = session.app.oauth === 'wb' ? qsWb : (session.app.oauth === 'fb' ? qsFb : null);
+      if(!qsObj){
+        console.error('session set error on authed users.');
+        return;
+      }
+
+      var  sourceApi = session.app.oauth === 'wb' ? weiboApi : facebookApi;
+      sourceApi.showUser({
         qs:qsObj
       }).then(function(data){
 
-        var like = [];
-
-        privateFn.checkUserInfo('wb', data.id).then(function(row1){
-          if(row1.length < 1){
-            privateFn.createNewUser('wb', data.name, data.id).then(function(row2){
-
-              session.app.dbInfo = {
-                id: row2.insertId,
-                name: data.name,
-                isAdmin: false
-              };
-
-              res.json({
-                isAuth: true,
-                like: like,
-                profile: {
-                  id: data.id,
-                  name: data.name,
-                  img: data.profile_image_url,
-                  isAdmin: false
-                }
-              });
-            }, function(row2error){
-
-            });
-
-          }else{
-
-            session.app.dbInfo = {
-              id: row1[0].id,
-              name: data.name,
-              isAdmin: row1[0].isadmin || false
-            };
-
-            privateFn.getUserLike(row1[0].id).then(function(row2){
-              like = row2.map(function(v,k){
-                return v.colorid;
-              });
-              res.json({
-                isAuth: true,
-                like: like,
-                profile: {
-                  id: data.id,
-                  name: data.name,
-                  img: data.profile_image_url,
-                  isAdmin: session.app.dbInfo.isAdmin
-                }
-              });
-            });
-          }
-        });
-
-
+        privateFn.convertOauthIntoLocalDB(session.app.oauth, session, data, res)
 
       }, function(data){
         res.json({
           isAuth: false
         });
       });
+      //===========^
+
     }
   },
 
   facebookLogin: function(req, res, next){
-
-  },
-
-  weibologin: function(req, res, next){
     var qs = req.query; // code and state
 
     if(qs.code &&
       qs.state &&
       req.session.app &&
-      qs.state === req.session.app.weiboState){
+      qs.state === req.session.app.oauthState){
+      console.log('redirected by facebook auth...');
+
+      var qsObj = {
+        client_id: globalConfig.facebookAppKey,
+        client_secret: globalConfig.facebookAppSecret,
+        code: qs.code,
+        redirect_uri: redirect_uri_fb
+      };
+
+      facebookApi.accessToken({
+        qs: qsObj
+      }).then(function(data){
+        if(data.access_token){
+          req.session.app = {
+            oauth: 'fb',
+            isAuth: true,
+            tokenInfo: data
+          };
+
+          res.redirect("/");
+        }
+      });
+    }else{
+      // invalid weibo auth request
+      res.redirect("/");
+    }
+  },
+
+  weiboLogin: function(req, res, next){
+    var qs = req.query;
+
+    if(qs.code &&
+      qs.state &&
+      req.session.app &&
+      qs.state === req.session.app.oauthState){
       // redirected by weibo
       console.log('redirected by weibo auth...');
 
@@ -169,7 +238,7 @@ module.exports = {
         client_secret: globalConfig.weiboAppSecret,
         grant_type: 'authorization_code',
         code: qs.code,
-        redirect_uri: globalConfig.weiboRedirectUrl
+        redirect_uri: redirect_uri_wb
       };
 
       weiboApi.accessToken({
@@ -178,6 +247,7 @@ module.exports = {
 
         if(data.access_token){
           req.session.app = {
+            oauth: 'wb',
             isAuth: true,
             tokenInfo: data
           };

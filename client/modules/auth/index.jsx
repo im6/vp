@@ -36,23 +36,7 @@ class Auth extends React.Component {
 
   fbClickHandler(){
     let me = this;
-    FB.login(function(response){
-      console.log('statusChangeCallback');
-      console.log(response);
-      if (response.status === 'connected') {
-        FB.api('/me', function(response) {
-          console.log(JSON.stringify(response));
-        });
-
-        FB.api('/me/picture?type=square', function(response) {
-          console.log(JSON.stringify(response));
-        });
-      } else if (response.status === 'not_authorized') {
-        alert('no auth');
-      } else {
-        alert('else')
-      }
-    });
+    window.location = me.props.user.get('facebookUrl');
   }
 
   wbClickHandler(){

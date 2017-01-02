@@ -6,7 +6,8 @@ import { message } from 'antd';
 const user = handleActions({
   ['user/initAuth'](state, action) {
     return state.merge({
-      weiboUrl: action.payload.weiboUrl
+      weiboUrl: action.payload.weiboUrl,
+      facebookUrl: action.payload.facebookUrl
     });
   },
   ['user/initUser'](state, action) {
@@ -25,13 +26,15 @@ const user = handleActions({
     return state.merge({
       isAuth: false,
       detail: null,
-      weiboUrl: null
+      weiboUrl: null,
+      facebookUrl: null
     });
   }
 }, Immutable.fromJS({
   isAuth: false,
   detail: null,
-  weiboUrl: null
+  weiboUrl: null,
+  facebookUrl: null
 }));
 
 export default user;

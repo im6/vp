@@ -25,7 +25,6 @@ const Routes = ({ history, store }) => {
     });
   };
   const checkAuth = (nextState, replace, callback) => {
-
     if(Global.isDev){
       callback();
     }else{

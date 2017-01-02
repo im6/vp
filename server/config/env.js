@@ -13,7 +13,12 @@ module.exports = {
   weiboApi: 'https://api.weibo.com',
   weiboAppKey: env.weiboAppKey,
   weiboAppSecret: env.weiboAppSecret,
-  weiboRedirectUrl: env.weiboRedirectUrl,
+
+  facebookApi: 'https://graph.facebook.com/v2.8',
+  facebookAppKey: env.facebookAppKey,
+  facebookAppSecret: env.facebookAppSecret,
+
+  oauthRedirectDomin: env.oauthRedirectDomin,
 
   sessionSecret: env.sessionSecret || 'bigAndHUgeSecret',
   mongodbUrl: env.mongodbUrl
