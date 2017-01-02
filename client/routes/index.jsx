@@ -3,7 +3,7 @@ import { Router, Route, IndexRoute } from 'react-router';
 import { createAction } from 'redux-actions';
 
 import { Global } from '../config/global';
-import { getUserStatus, getInitAuth } from '../services/resource.js';
+import { getUserInfo, getInitAuth } from '../services/resource.js';
 import App from '../modules/app/index.jsx';
 import ErrorPage from '../modules/errorPage';
 import Auth from '../modules/auth';
@@ -29,7 +29,7 @@ const Routes = ({ history, store }) => {
     if(Global.isDev){
       callback();
     }else{
-      getUserStatus().then((res) => {
+      getUserInfo().then((res) => {
         const ac1 = createAction('user/initUser');
         store.dispatch(ac1(res));
 

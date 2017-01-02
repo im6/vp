@@ -170,13 +170,6 @@ class NewColor extends React.PureComponent {
       <Row>
         <Col lg={24} md={24} sm={24} xs={24}>
           <div className={style.btnGroup}>
-            <Button type="primary"
-                    size="large"
-                    icon="check"
-                    onClick={me.submitColor.bind(me)}>
-              Create
-            </Button>
-            &nbsp;&nbsp;&nbsp;&nbsp;
             <Link to="/">
               <Button type="default"
                       icon="close"
@@ -184,6 +177,13 @@ class NewColor extends React.PureComponent {
                 Cancel
               </Button>
             </Link>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <Button type="primary"
+                    size="large"
+                    icon="check"
+                    onClick={me.submitColor.bind(me)}>
+              Submit
+            </Button>
           </div>
         </Col>
       </Row>

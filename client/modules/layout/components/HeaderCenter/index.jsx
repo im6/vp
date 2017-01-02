@@ -52,7 +52,7 @@ const HeaderCenter = ({logout, userInfo}) => {
         <div className={style.btnGroup}>
 
           <Tooltip title={userInfo.get('detail').get('name')} placement="bottom">
-            <img src={userInfo.get('detail').get('profile_image_url')} alt="icon"/>
+            <img src={userInfo.get('detail').get('img')} alt="icon"/>
           </Tooltip>
           <ButtonGroup>
             <Tooltip title="Create" placement="bottom">

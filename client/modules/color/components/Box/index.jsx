@@ -48,8 +48,8 @@ class Product extends React.Component {
           </Button>
 
           {
-            me.props.boxInfo.get('username') ?
-              <h3>{me.props.boxInfo.get('username')}</h3> : null
+            me.props.boxInfo.get('name') ?
+              <h3>{me.props.boxInfo.get('name')}</h3> : null
           }
         </div>
     </div>;

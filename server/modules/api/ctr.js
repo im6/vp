@@ -96,14 +96,19 @@ module.exports = {
 
               session.app.dbInfo = {
                 id: row2.insertId,
-                username: data.name,
+                name: data.name,
                 isAdmin: false
               };
 
               res.json({
                 isAuth: true,
-                weiboInfo: data,
-                like: like
+                like: like,
+                profile: {
+                  id: data.id,
+                  name: data.name,
+                  img: data.profile_image_url,
+                  isAdmin: false
+                }
               });
             }, function(row2error){
 
@@ -113,7 +118,7 @@ module.exports = {
 
             session.app.dbInfo = {
               id: row1[0].id,
-              username: data.name,
+              name: data.name,
               isAdmin: row1[0].isadmin || false
             };
 
@@ -123,8 +128,13 @@ module.exports = {
               });
               res.json({
                 isAuth: true,
-                weiboInfo: data,
-                like: like
+                like: like,
+                profile: {
+                  id: data.id,
+                  name: data.name,
+                  img: data.profile_image_url,
+                  isAdmin: session.app.dbInfo.isAdmin
+                }
               });
             });
           }
@@ -138,6 +148,10 @@ module.exports = {
         });
       });
     }
+  },
+
+  facebookLogin: function(req, res, next){
+
   },
 
   weibologin: function(req, res, next){
@@ -183,7 +197,7 @@ module.exports = {
     })
   },
   initColorList: function(req, res, next){
-    var qr = 'select a.id, a.like, a.color AS `value`, a.username, false as `liked` from color a';
+    var qr = 'select a.id, a.like, a.color AS `value`, a.username as `name`, false as `liked` from color a';
     mysql.sqlExecOne(qr).then(function(data){
       res.json(helper.resSuccessObj(data));
     }, function(data){
@@ -217,7 +231,7 @@ module.exports = {
 
   addNewColor: function(req, res, next){
     let hasAuth = req.session.app && req.session.app.isAuth;
-    let username = (hasAuth && req.session.app.dbInfo.username)? `'${req.session.app.dbInfo.username}'` : 'NULL';
+    let username = (hasAuth && req.session.app.dbInfo.name)? `'${req.session.app.dbInfo.name}'` : 'NULL';
     let userid = (hasAuth && req.session.app.dbInfo.id)? `${req.session.app.dbInfo.id}` : 'NULL';
     let displayItem = userid == 'NULL' ? 1 : 0;
     var qr = `INSERT INTO color (\`like\`, color, userid, username, colortype, display, createdate) VALUES (0, '${req.body.value}', ${userid}, ${username}, '${req.body.colorType}', ${displayItem}, NOW())`;
@@ -225,7 +239,7 @@ module.exports = {
     mysql.sqlExecOne(qr).then(function(row){
       res.json(helper.resSuccessObj({
         id:row.insertId,
-        username: hasAuth ? req.session.app.dbInfo.username : null
+        name: hasAuth ? req.session.app.dbInfo.name : null
       }));
     }, function(err){
       res.json(helper.resFailObj(err));

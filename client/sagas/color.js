@@ -65,7 +65,7 @@ function* addNew(action) {
         payload: {
           ...colorinfo,
           id: result.result.id,
-          username: result.result.username
+          name: result.result.name
         }
       });
     }
