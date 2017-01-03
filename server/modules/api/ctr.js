@@ -14,47 +14,46 @@ var redirect_uri_wb = globalConfig.oauthRedirectDomin + '/api/login/wb',
 var privateFn = {
   createWeiboLink: function(state){
     var url = "https://api.weibo.com/oauth2/authorize?" +
-      "client_id=" + globalConfig.weiboAppKey +
+      "client_id=" + globalConfig.wbAppKey +
       "&scope=all" +
       "&state=" + state +
       "&redirect_uri=" + redirect_uri_wb;
     return url;
   },
+
   createFacebookLink: function(state){
     var url = "https://www.facebook.com/v2.8/dialog/oauth?" +
-      "client_id=" + globalConfig.facebookAppKey +
+      "client_id=" + globalConfig.fbAppKey +
       "&response_type=code" +
       "&state=" + state +
       "&redirect_uri=" + redirect_uri_fb;
     return url;
   },
 
+
   getOauthQsObj: function(oauthName, qs){
-    let result = null;
+    let result = {
+      client_id: globalConfig[oauthName + 'AppKey'],
+      client_secret: globalConfig[oauthName + 'AppSecret'],
+      code: qs.code,
+    };
+
     switch (oauthName){
       case 'wb':
-        result = {
-          client_id: globalConfig.weiboAppKey,
-          client_secret: globalConfig.weiboAppSecret,
+        _.merge(result, {
           grant_type: 'authorization_code',
-          code: qs.code,
           redirect_uri: redirect_uri_wb
-        };
+        });
         break;
       case 'fb':
-        result = {
-          client_id: globalConfig.facebookAppKey,
-          client_secret: globalConfig.facebookAppSecret,
-          code: qs.code,
+        _.merge(result, {
           redirect_uri: redirect_uri_fb
-        };
+        });
         break;
       default :
         console.error('error in generaing the query object for the access_token');
         break;
     }
-
-
 
     return result;
   },
@@ -111,7 +110,7 @@ var privateFn = {
           console.error('create user error');
         });
 
-      }else{
+      } else {
 
         session.app.dbInfo = {
           id: row1[0].id,
@@ -152,6 +151,7 @@ module.exports = {
       };
 
       console.log('initial session!');
+      console.log(req.session.app);
 
       res.json({
         isAuth: false,
@@ -182,7 +182,6 @@ module.exports = {
 
       console.log('already signing in...');
 
-      //===========v
 
       var qsWb = {
         access_token: session.app.tokenInfo.access_token,
@@ -211,7 +210,6 @@ module.exports = {
           isAuth: false
         });
       });
-      //===========^
 
     }
   },
@@ -246,6 +244,9 @@ module.exports = {
         }
       });
     }else{
+      console.log('redirect fail:');
+      console.log(qs);
+      console.log(req.session.app);
       res.redirect("/");
     }
 
@@ -258,6 +259,8 @@ module.exports = {
       error: false
     })
   },
+
+
   initColorList: function(req, res, next){
     var qr = 'select a.id, a.like, a.color AS `value`, a.username as `name`, false as `liked` from color a';
     mysql.sqlExecOne(qr).then(function(data){

@@ -3,22 +3,7 @@ var globalConfig = require('../../config/env'),
 module.exports = {
   createReqJson: function(oauthType, method, url, obj){
 
-    var urlBase = null;
-    switch(oauthType){
-      case 'wb':
-        urlBase = globalConfig.weiboApi;
-        break;
-      case 'fb':
-        urlBase = globalConfig.facebookApi;
-        break;
-      case 'gg':
-        urlBase = globalConfig.googleApi;
-        break;
-      default:
-        console.error('error in oauth setup');
-        break;
-    }
-
+    var urlBase = globalConfig[oauthType + 'Api'];
     var reqObj = {};
     for(var onep in obj){
         if(obj.hasOwnProperty(onep)){

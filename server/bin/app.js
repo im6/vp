@@ -16,13 +16,15 @@ app.use(express.static(globalConfig.publicDir));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
-app.use(cookieParser());
 app.use(expressSession({
   //store: new RedisStore,
   secret: globalConfig.sessionSecret,
   resave: false,
   saveUninitialized: true,
-  //cookie: { secure: true }   /// this secure is set to be true only if https site
+  cookie: {
+    secure: false,
+    //sameSite: false
+  }
 }));
 
 
@@ -32,7 +34,6 @@ if(!globalConfig.isDev){
   // some production setup here
 }
 
-app.use('/zj', require('../modules/zj/route'));
 app.use('/api', require('../modules/api/route'));
 app.get('/*', require('../middlewares/renderStatic').main);
 

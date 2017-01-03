@@ -1,6 +1,4 @@
-var weiboApi = require('../resource/weibo/list'),
-  globalConfig = require('../config/env'),
-  url = require('url'),
+var globalConfig = require('../config/env'),
   path = require('path');
 
 module.exports = {
