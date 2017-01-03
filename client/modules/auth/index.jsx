@@ -49,7 +49,6 @@ class Auth extends React.Component {
     return (<div className={style.authContainer}>
 
       <div className={style.canvansContainer}>
-
       </div>
 
       <QueueAnim delay={[100 ,0]}

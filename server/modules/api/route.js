@@ -8,8 +8,7 @@ var express = require('express'),
 
 
 //=============================================================================
-router.get.apply(router, ['/weiboLogin', ctr.weiboLogin]);
-router.get.apply(router, ['/facebookLogin', ctr.facebookLogin]);
+router.get.apply(router, ['/login/:oauth', ctr.oauthLogin]);
 
 
 router.post.apply(router, ['/getUserInfo', ctr.getUserInfo]);

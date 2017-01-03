@@ -27,14 +27,14 @@ const user = handleActions({
       isAuth: false,
       detail: null,
       weiboUrl: null,
-      facebookUrl: null
+      facebookUrl: null,
     });
   }
 }, Immutable.fromJS({
   isAuth: false,
   detail: null,
   weiboUrl: null,
-  facebookUrl: null
+  facebookUrl: null,
 }));
 
 export default user;

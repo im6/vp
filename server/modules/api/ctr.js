@@ -2,23 +2,20 @@
 'use strict';
 var globalConfig = require('../../config/env'),
   mysql = require('../../resource/db/mysqlConnection'),
-  weiboApi = require('../../resource/weibo/list'),
-  facebookApi = require('../../resource/facebook/list'),
+  oauthApi = require('../../resource/oauth/list'),
   uuid = require('uuid'),
   helper = require('../../misc/helper'),
   _ = require('lodash');
 
 
-var redirect_uri_wb = globalConfig.oauthRedirectDomin + '/api/weiboLogin',
-  redirect_uri_fb = (globalConfig.isDev? 'http://localhost:4000': globalConfig.oauthRedirectDomin) + '/api/facebookLogin',
-
-  scope = "all";
+var redirect_uri_wb = globalConfig.oauthRedirectDomin + '/api/login/wb',
+  redirect_uri_fb = (globalConfig.isDev? 'http://localhost:4000': globalConfig.oauthRedirectDomin) + '/api/login/fb';
 
 var privateFn = {
   createWeiboLink: function(state){
     var url = "https://api.weibo.com/oauth2/authorize?" +
       "client_id=" + globalConfig.weiboAppKey +
-      "&scope=" + scope +
+      "&scope=all" +
       "&state=" + state +
       "&redirect_uri=" + redirect_uri_wb;
     return url;
@@ -31,6 +28,38 @@ var privateFn = {
       "&redirect_uri=" + redirect_uri_fb;
     return url;
   },
+
+  getOauthQsObj: function(oauthName, qs){
+    let result = null;
+    switch (oauthName){
+      case 'wb':
+        result = {
+          client_id: globalConfig.weiboAppKey,
+          client_secret: globalConfig.weiboAppSecret,
+          grant_type: 'authorization_code',
+          code: qs.code,
+          redirect_uri: redirect_uri_wb
+        };
+        break;
+      case 'fb':
+        result = {
+          client_id: globalConfig.facebookAppKey,
+          client_secret: globalConfig.facebookAppSecret,
+          code: qs.code,
+          redirect_uri: redirect_uri_fb
+        };
+        break;
+      default :
+        console.error('error in generaing the query object for the access_token');
+        break;
+    }
+
+
+
+    return result;
+  },
+
+
   checkUserInfo: function(oauth, uid){
     var qr = `SELECT * FROM user WHERE oauth = '${oauth}' AND oauthid = ${uid}`;
     return mysql.sqlExecOne(qr);
@@ -171,8 +200,7 @@ module.exports = {
         return;
       }
 
-      var  sourceApi = session.app.oauth === 'wb' ? weiboApi : facebookApi;
-      sourceApi.showUser({
+      oauthApi[session.app.oauth].showUser({
         qs:qsObj
       }).then(function(data){
 
@@ -188,77 +216,41 @@ module.exports = {
     }
   },
 
-  facebookLogin: function(req, res, next){
-    var qs = req.query; // code and state
+  oauthLogin: function(req, res, next){
+
+    var qs = req.query,
+      oauthName = req.params.oauth;
 
     if(qs.code &&
       qs.state &&
       req.session.app &&
       qs.state === req.session.app.oauthState){
-      console.log('redirected by facebook auth...');
 
-      var qsObj = {
-        client_id: globalConfig.facebookAppKey,
-        client_secret: globalConfig.facebookAppSecret,
-        code: qs.code,
-        redirect_uri: redirect_uri_fb
-      };
+      console.log(`redirected by ${oauthName} auth...`);
 
-      facebookApi.accessToken({
-        qs: qsObj
-      }).then(function(data){
-        if(data.access_token){
-          req.session.app = {
-            oauth: 'fb',
-            isAuth: true,
-            tokenInfo: data
-          };
+      var qsObj = privateFn.getOauthQsObj(oauthName, qs);
 
-          res.redirect("/");
-        }
-      });
-    }else{
-      // invalid weibo auth request
-      res.redirect("/");
-    }
-  },
-
-  weiboLogin: function(req, res, next){
-    var qs = req.query;
-
-    if(qs.code &&
-      qs.state &&
-      req.session.app &&
-      qs.state === req.session.app.oauthState){
-      // redirected by weibo
-      console.log('redirected by weibo auth...');
-
-      var qsObj = {
-        client_id: globalConfig.weiboAppKey,
-        client_secret: globalConfig.weiboAppSecret,
-        grant_type: 'authorization_code',
-        code: qs.code,
-        redirect_uri: redirect_uri_wb
-      };
-
-      weiboApi.accessToken({
+      oauthApi[oauthName].accessToken({
         qs: qsObj
       }).then(function(data){
 
         if(data.access_token){
           req.session.app = {
-            oauth: 'wb',
+            oauth: oauthName,
             isAuth: true,
             tokenInfo: data
           };
           res.redirect("/");
+        }else{
+          res.redirect("/auth");
         }
       });
     }else{
-      // invalid weibo auth request
       res.redirect("/");
     }
+
   },
+
   logoff: function(req, res, next){
     console.log('logoff and delete session');
     delete req.session.app;
