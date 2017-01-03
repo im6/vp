@@ -16,6 +16,7 @@ app.use(express.static(globalConfig.publicDir));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
+app.use(cookieParser());
 app.use(expressSession({
   //store: new RedisStore,
   secret: globalConfig.sessionSecret,

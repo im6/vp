@@ -145,19 +145,25 @@ module.exports = {
 
     if(!session.app || !session.app.isAuth){
       var stateId = uuid.v1();
+
+      console.log('initial session!');
+
+      let reesult = {
+        isAuth: false,
+        weiboUrl: privateFn.createWeiboLink(stateId),
+        facebookUrl: privateFn.createFacebookLink(stateId)
+      };
+
+      if(req.session.app && req.session.app.alert){
+        reesult['alert'] = req.session.app.alert;
+      }
+
       req.session.app = {
         isAuth: false,
         oauthState : stateId
       };
 
-      console.log('initial session!');
-      console.log(req.session.app);
-
-      res.json({
-        isAuth: false,
-        weiboUrl: privateFn.createWeiboLink(stateId),
-        facebookUrl: privateFn.createFacebookLink(stateId)
-      });
+      res.json(reesult);
     }
     else {
       res.json({
@@ -244,10 +250,15 @@ module.exports = {
         }
       });
     }else{
-      console.log('redirect fail:');
-      console.log(qs);
-      console.log(req.session.app);
-      res.redirect("/");
+      console.log('inconsistant session : redirect fail:');
+      req.session.app = {
+        isAuth: false,
+        alert: {
+          type: 0,
+          detail: 'Sorry, something error, please try again.'
+        }
+      };
+      res.redirect("/auth");
     }
 
   },
