@@ -3,7 +3,9 @@ var globalConfig = require('../config/env'),
 
 module.exports = {
   main: function(req, res, next){
-    console.log(`${req.method}: ${req.originalUrl}`);
+    if(globalConfig.isDev){
+      console.log(`${req.method}: ${req.originalUrl}`);
+    }
     res.sendFile(path.resolve(__dirname,`../../${globalConfig.publicDir}/index.html`) );
   }
 };

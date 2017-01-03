@@ -5,11 +5,29 @@ const express = require('express'),
   globalConfig = require('../config/env'),
   cookieParser = require('cookie-parser'),
   expressSession = require('express-session'),
-  csrf = require('csurf');
+  csrf = require('csurf'),
+  MongoStore = require('connect-mongo')(expressSession);
 
 console.log(`NODE_ENV: ${globalConfig.isDev ? 'dev' : 'production'}`);
 
 const app = express();
+
+
+var sessionOpt = {
+  secret: globalConfig.sessionSecret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: false,
+  }
+};
+if(!globalConfig.isDev){
+  sessionOpt.store = new MongoStore({
+    url: process.env["mongodbUrl"],
+    ttl: 2 * 24 * 60 * 60
+  });
+  console.log('session is now using mongo');
+}
 
 app.set('x-powered-by', false);
 app.use(express.static(globalConfig.publicDir));
@@ -17,16 +35,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
 app.use(cookieParser());
-app.use(expressSession({
-  //store: new RedisStore,
-  secret: globalConfig.sessionSecret,
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    secure: false,
-    //sameSite: false
-  }
-}));
+app.use(expressSession(sessionOpt));
 
 
 if(!globalConfig.isDev){
