@@ -11,13 +11,6 @@ import imgo2 from './assets/oauth2.png';
 import imgo3 from './assets/oauth3.png';
 
 let LoginCard = ({loginClick, wbClick, fbClick, tbClick}) => {
-
-  const onSubmit = (e) =>{
-    e.preventDefault();
-    let payload = getFieldsValue();
-    loginClick(payload)
-  };
-
   return (
     <Card title="Welcome to ColorPK" style={{ width: 270 }}>
       <img src={img} className={styles.iconStyle}/>
@@ -25,7 +18,9 @@ let LoginCard = ({loginClick, wbClick, fbClick, tbClick}) => {
       <br/>
       <Input addonBefore={<Icon type="lock" />} type="password" placeholder="Password" />
       <br/>
-      <Button type="primary" style={{width: '100%'}}>
+      <Button type="primary"
+              onClick={loginClick}
+              style={{width: '100%'}}>
         Login
       </Button>
 

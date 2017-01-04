@@ -4,7 +4,7 @@ import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 
 import style from './style.less'
-import {Row,Col, Input, Form, Button, Checkbox, Card, Icon, Tooltip} from 'antd';
+import {Row,Col, message, Card, Icon } from 'antd';
 import { browserHistory } from 'react-router';
 
 import LoginCard from './components/LoginCard';
@@ -13,25 +13,16 @@ class Auth extends React.Component {
   constructor(prop) {
     super(prop);
     let me = this;
-    me.state = {
-      isloging: false
-    };
   }
 
-  loginClickHandler(d){
+  loginClickHandler(ev){
     let me = this;
-    me.setState({
-      isloging: true
-    });
-
-    const dispatch = me.props.dispatch;
-    let actionCreater = createAction('auth/login');
-    let action = actionCreater(d);
-    dispatch(action);
+    ev.preventDefault();
+    message.error('Credential is not correct, will be continue in anonymous mode.', 2.5);
 
     setTimeout(function(){
       browserHistory.push('/');
-    }, 0);
+    }, 3000);
   }
 
   fbClickHandler(){

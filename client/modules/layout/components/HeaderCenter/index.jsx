@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Row, Col, Menu, Icon, Button, Tooltip } from 'antd';
+import { Row, Col, Menu, Icon, Button, Dropdown } from 'antd';
 import { Link } from 'react-router';
 import style from './style.less';
 const SubMenu = Menu.SubMenu;
@@ -14,6 +14,37 @@ const HeaderCenter = ({logout, userInfo}) => {
     logout();
   };
 
+  let profileMenu = userInfo.get('isAuth') ? <Menu>
+    <Menu.Item>
+      {userInfo.get('detail').get('name')}
+    </Menu.Item>
+    <Menu.Divider />
+    <Menu.Item>
+      <Link to="/portfolio">
+        <Icon type="smile-o" />
+        &nbsp;&nbsp;
+        Portfolio
+      </Link>
+    </Menu.Item>
+    <Menu.Item>
+      <Link to="/like">
+        <Icon type="heart-o" />
+        &nbsp;&nbsp;
+        Like
+      </Link>
+    </Menu.Item>
+    <Menu.Divider />
+    <Menu.Item>
+      <a onClick={clickHandler}>
+        <Icon type="logout" />
+        &nbsp;&nbsp;
+        Logout
+      </a>
+    </Menu.Item>
+  </Menu>: null;
+
+
+
   return <header className={style.header}>
     <Row>
       <Col lg={2} md={2} sm={3} xs={3}>
@@ -21,16 +52,16 @@ const HeaderCenter = ({logout, userInfo}) => {
           <SubMenu title={<h1><Icon type="bars" /></h1>}>
             <Menu.Item key="order1">
               <Icon type="line-chart" />
-              Popular
+              Portfolio
             </Menu.Item>
             <Menu.Item key="order2">
               <Icon type="appstore" />
-              Latest
+              Like
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item key="about">
               <Icon type="info-circle" />
-              About
+              Logout
             </Menu.Item>
           </SubMenu>
         </Menu>
@@ -40,7 +71,7 @@ const HeaderCenter = ({logout, userInfo}) => {
       <Col lg={3} md={3} sm={4} xs={4}>
         <Link to="/">
           <h1 className={style.title}>
-            <span>color</span>phant
+            <span>Color</span>PK
           </h1>
         </Link>
       </Col>
@@ -48,53 +79,29 @@ const HeaderCenter = ({logout, userInfo}) => {
       <Col lg={15} md={13} sm={9} xs={7}/>
 
       <Col lg={4} md={6} sm={8} xs={10}>
-        { userInfo.get('isAuth') ?
+
         <div className={style.btnGroup}>
 
-          <Tooltip title={userInfo.get('detail').get('name')} placement="bottom">
-            <img src={userInfo.get('detail').get('img')} alt="icon"/>
-          </Tooltip>
-          <ButtonGroup>
-            <Tooltip title="Create" placement="bottom">
-              <Link to="/new">
-                <Button type="primary" icon="plus"/>
-              </Link>
+          <Link to="/new">
+            <Button type="primary" icon="plus">
+              Create
+            </Button>
+          </Link>
+          &nbsp;&nbsp;&nbsp;
 
-            </Tooltip>
-            <Tooltip title="Like" placement="bottom">
-              <Link to="/like">
-                <Button type="default" icon="heart"/>
-              </Link>
-            </Tooltip>
-
-            <Tooltip title="Portfolio" placement="bottom">
-              <Link to="/portfolio">
-                <Button type="default" icon="smile-o" />
-              </Link>
-            </Tooltip>
-
-            <Tooltip title="logout" placement="bottom">
-              <Button type="default"
-                      onClick={clickHandler}
-                      icon="logout"/>
-            </Tooltip>
-          </ButtonGroup>
-        </div> :
-          <div className={style.btnGroup}>
-            <Link to="/new">
-              <Button type="primary" icon="plus">
-                Create
-              </Button>
-            </Link>
-            &nbsp;
-            &nbsp;
+          { userInfo.get('isAuth') ?
+            <Dropdown overlay={profileMenu}>
+              <img src={userInfo.get('detail').get('img')} alt="icon"/>
+            </Dropdown>
+            :
             <Link to="/auth">
               <Button type="default" icon="user">
                 Log In
               </Button>
             </Link>
-          </div>
-        }
+          }
+
+        </div>
 
       </Col>
     </Row>
