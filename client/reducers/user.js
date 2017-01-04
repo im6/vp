@@ -1,15 +1,12 @@
 /* eslint-disable */
 import { handleActions } from 'redux-actions';
 import Immutable, {Map, List} from 'immutable';
-import { message, notification } from 'antd';
+import { message } from 'antd';
 
 const user = handleActions({
   ['user/initAuth'](state, action) {
     if(action.payload.alert){
-      notification.error({
-        message: 'Error',
-        description: action.payload.alert.detail + ` (error: ${action.payload.alert.type})`,
-      });
+      message.error(action.payload.alert.detail + ` (error: ${action.payload.alert.type})`, 5);
     }
 
     return state.merge({
