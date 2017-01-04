@@ -8,7 +8,10 @@
         display: inline-block;
         margin-top: 7px;
         color: #909090;
-        span {
+        span:nth-child(1) {
+            color: #929292;
+        }
+        span:nth-child(2) {
             color: #57a5e4;
         }
     }
@@ -16,10 +19,13 @@
         margin-top: 10px;
         display: flex;
         img {
-            margint: 15px 0;
             height: 29px;
             border-radius: 10%;
             border: 1px solid #d1d0d6;
+
+            &:hover{
+                border: 1px solid #f387be;
+            }
         }
     }
 }

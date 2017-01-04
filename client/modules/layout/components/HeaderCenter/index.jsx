@@ -14,6 +14,25 @@ const HeaderCenter = ({logout, userInfo}) => {
     logout();
   };
 
+  let homeMenu = <Menu mode="vertical" style={{zIndex: 2}}>
+    <Menu.Item key="order1">
+      <Icon type="line-chart" />
+      &nbsp;&nbsp;
+      Popular
+    </Menu.Item>
+    <Menu.Item key="order2">
+      <Icon type="appstore" />
+      &nbsp;&nbsp;
+      Latest
+    </Menu.Item>
+    <Menu.Divider />
+    <Menu.Item key="about">
+      <Icon type="info-circle" />
+      &nbsp;&nbsp;
+      About
+    </Menu.Item>
+  </Menu>;
+
   let profileMenu = userInfo.get('isAuth') ? <Menu>
     <Menu.Item>
       {userInfo.get('detail').get('name')}
@@ -48,30 +67,19 @@ const HeaderCenter = ({logout, userInfo}) => {
   return <header className={style.header}>
     <Row>
       <Col lg={2} md={2} sm={3} xs={3}>
-        <Menu mode="horizontal" style={{zIndex: 2}}>
-          <SubMenu title={<h1><Icon type="bars" /></h1>}>
-            <Menu.Item key="order1">
-              <Icon type="line-chart" />
-              Portfolio
-            </Menu.Item>
-            <Menu.Item key="order2">
-              <Icon type="appstore" />
-              Like
-            </Menu.Item>
-            <Menu.Divider />
-            <Menu.Item key="about">
-              <Icon type="info-circle" />
-              Logout
-            </Menu.Item>
-          </SubMenu>
-        </Menu>
+        <Dropdown overlay={homeMenu}>
+          <h1 style={{fontSize: '2.5em'}}>
+            <Icon type="bars" />
+          </h1>
+        </Dropdown>
       </Col>
 
 
       <Col lg={3} md={3} sm={4} xs={4}>
         <Link to="/">
           <h1 className={style.title}>
-            <span>Color</span>PK
+            <span>Color</span>
+            <span>PK</span>
           </h1>
         </Link>
       </Col>
@@ -81,13 +89,6 @@ const HeaderCenter = ({logout, userInfo}) => {
       <Col lg={4} md={6} sm={8} xs={10}>
 
         <div className={style.btnGroup}>
-
-          <Link to="/new">
-            <Button type="primary" icon="plus">
-              Create
-            </Button>
-          </Link>
-          &nbsp;&nbsp;&nbsp;
 
           { userInfo.get('isAuth') ?
             <Dropdown overlay={profileMenu}>
@@ -100,6 +101,13 @@ const HeaderCenter = ({logout, userInfo}) => {
               </Button>
             </Link>
           }
+          &nbsp;&nbsp;&nbsp;
+          <Link to="/new">
+            <Button type="primary" icon="plus">
+              Create
+            </Button>
+          </Link>
+
 
         </div>
 
