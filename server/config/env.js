@@ -17,6 +17,10 @@ module.exports = {
   fbAppKey: env.fbAppKey,
   fbAppSecret: env.fbAppSecret,
 
+  ggApi: 'https://www.googleapis.com',
+  ggAppKey: env.ggAppKey,
+  ggAppSecret: env.ggAppSecret,
+
   oauthRedirectDomin: env.oauthRedirectDomin,
 
   sessionSecret: env.sessionSecret || 'bigAndHUgeSecret',

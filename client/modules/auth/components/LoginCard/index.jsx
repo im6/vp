@@ -8,9 +8,9 @@ import { browserHistory } from 'react-router';
 import img from './assets/icon3.png';
 import imgo1 from './assets/oauth1.png';
 import imgo2 from './assets/oauth2.png';
-import imgo3 from './assets/oauth3.png';
+import imgo4 from './assets/oauth4.png';
 
-let LoginCard = ({loginClick, wbClick, fbClick, tbClick}) => {
+let LoginCard = ({loginClick, wbClick, fbClick, ggClick}) => {
   return (
     <Card title="Welcome to ColorPK" style={{ width: 270 }}>
       <img src={img} className={styles.iconStyle}/>
@@ -36,9 +36,9 @@ let LoginCard = ({loginClick, wbClick, fbClick, tbClick}) => {
                onClick={fbClick}
                className={styles.oauthStyle}/>
         </Tooltip>
-        <Tooltip title="Twitter">
-          <img src={imgo3}
-               onClick={tbClick}
+        <Tooltip title="Google+">
+          <img src={imgo4}
+               onClick={ggClick}
                className={styles.oauthStyle}/>
         </Tooltip>
       </div>

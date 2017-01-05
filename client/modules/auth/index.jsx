@@ -34,6 +34,10 @@ class Auth extends React.Component {
     let me = this;
     window.location = me.props.user.get('weiboUrl');
   }
+  ggClickHandler(){
+    let me = this;
+    window.location = me.props.user.get('googleUrl');
+  }
 
   render(){
     let me = this;
@@ -48,6 +52,7 @@ class Auth extends React.Component {
         <div key="a">
           <LoginCard loginClick={me.loginClickHandler.bind(me)}
                      fbClick={me.fbClickHandler.bind(me)}
+                     ggClick={me.ggClickHandler.bind(me)}
                      wbClick={me.wbClickHandler.bind(me)}/>
         </div>
       </QueueAnim>

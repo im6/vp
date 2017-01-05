@@ -46,7 +46,7 @@ module.exports = {
     },
 
     showUser: function(obj){
-      var obj2 = util.createReqJson('gg', "GET", "/me", obj);
+      var obj2 = util.createReqJson('gg', "GET", "/plus/v1/people/me", obj);
       return requester.one(obj2);
     }
   }

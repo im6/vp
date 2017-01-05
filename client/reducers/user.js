@@ -11,7 +11,8 @@ const user = handleActions({
 
     return state.merge({
       weiboUrl: action.payload.weiboUrl,
-      facebookUrl: action.payload.facebookUrl
+      facebookUrl: action.payload.facebookUrl,
+      googleUrl: action.payload.googleUrl,
     });
   },
   ['user/initUser'](state, action) {
@@ -32,6 +33,7 @@ const user = handleActions({
       detail: null,
       weiboUrl: null,
       facebookUrl: null,
+      googleUrl: null,
     });
   }
 }, Immutable.fromJS({
@@ -39,6 +41,7 @@ const user = handleActions({
   detail: null,
   weiboUrl: null,
   facebookUrl: null,
+  googleUrl: null,
 }));
 
 export default user;

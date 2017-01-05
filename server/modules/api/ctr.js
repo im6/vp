@@ -9,7 +9,8 @@ var globalConfig = require('../../config/env'),
 
 
 var redirect_uri_wb = globalConfig.oauthRedirectDomin + '/api/login/wb',
-  redirect_uri_fb = (globalConfig.isDev? 'http://localhost:4000': globalConfig.oauthRedirectDomin) + '/api/login/fb';
+  redirect_uri_fb = (globalConfig.isDev? 'http://localhost:4000': globalConfig.oauthRedirectDomin) + '/api/login/fb',
+  redirect_uri_gg = (globalConfig.isDev? 'http://localhost:4000': globalConfig.oauthRedirectDomin) + '/api/login/gg';
 
 var privateFn = {
   createWeiboLink: function(state){
@@ -27,6 +28,16 @@ var privateFn = {
       "&response_type=code" +
       "&state=" + state +
       "&redirect_uri=" + redirect_uri_fb;
+    return url;
+  },
+
+  createGoogleLink: function(state){
+    var url = "https://accounts.google.com/o/oauth2/v2/auth?" +
+      "client_id=" + globalConfig.ggAppKey +
+      "&response_type=code" +
+      "&state=" + state +
+      "&scope=profile" +
+      "&redirect_uri=" + redirect_uri_gg;
     return url;
   },
 
@@ -48,6 +59,12 @@ var privateFn = {
       case 'fb':
         _.merge(result, {
           redirect_uri: redirect_uri_fb
+        });
+        break;
+      case 'gg':
+        _.merge(result, {
+          redirect_uri: redirect_uri_gg,
+          grant_type: 'authorization_code',
         });
         break;
       default :
@@ -79,20 +96,43 @@ var privateFn = {
     var qr = `SELECT colorid FROM userlike WHERE userid= '${userid}'`;
     return mysql.sqlExecOne(qr);
   },
+  updateUserLoginDate: function(userid){
+    var qr = `UPDATE user SET lastlogin=NOW() WHERE id=${userid}`;
+    return mysql.sqlExecOne(qr);
+  },
 
   convertOauthIntoLocalDB: function(oauthType, session, data, res){
     let me = this;
     var like = [];
 
-    var imgUrl = oauthType == 'wb' ? data.profile_image_url : data.picture.data.url;
+    var imgUrl = null,
+      genericName = null;
+
+    switch (oauthType){
+      case 'wb':
+        imgUrl = data.profile_image_url;
+        genericName = data.name;
+        break;
+      case 'fb':
+        imgUrl = data.picture.data.url;
+        genericName = data.name;
+        break;
+      case 'gg':
+        imgUrl = data.image.url;
+        genericName = data.displayName;
+        break;
+      default:
+        break;
+    }
+
 
     me.checkUserInfo(oauthType, data.id).then(function(row1){
       if(row1.length < 1){
-        me.createNewUser(oauthType, data.name, data.id).then(function(row2){
+        me.createNewUser(oauthType, genericName, data.id).then(function(row2){
 
           session.app.dbInfo = {
             id: row2.insertId,
-            name: data.name,
+            name: genericName,
             isAdmin: false
           };
 
@@ -101,7 +141,7 @@ var privateFn = {
             like: like,
             profile: {
               id: data.id,
-              name: data.name,
+              name: genericName,
               img: imgUrl,
               isAdmin: false
             }
@@ -114,10 +154,11 @@ var privateFn = {
 
         session.app.dbInfo = {
           id: row1[0].id,
-          name: data.name,
+          name: genericName,
           isAdmin: row1[0].isadmin || false
         };
 
+        me.updateUserLoginDate(row1[0].id);
         me.getUserLike(row1[0].id).then(function(row2){
           like = row2.map(function(v,k){
             return v.colorid;
@@ -127,12 +168,13 @@ var privateFn = {
             like: like,
             profile: {
               id: data.id,
-              name: data.name,
+              name: genericName,
               img: imgUrl,
               isAdmin: session.app.dbInfo.isAdmin
             }
           });
         });
+
       }
     });
   }
@@ -151,7 +193,8 @@ module.exports = {
       let reesult = {
         isAuth: false,
         weiboUrl: privateFn.createWeiboLink(stateId),
-        facebookUrl: privateFn.createFacebookLink(stateId)
+        facebookUrl: privateFn.createFacebookLink(stateId),
+        googleUrl: privateFn.createGoogleLink(stateId),
       };
 
       if(req.session.app && req.session.app.alert){
@@ -188,18 +231,23 @@ module.exports = {
 
       console.log('already signing in...');
 
-
-      var qsWb = {
-        access_token: session.app.tokenInfo.access_token,
-        uid: session.app.tokenInfo.uid
+      var qsObj0 = {
+        wb: {
+          access_token: session.app.tokenInfo.access_token,
+          uid: session.app.tokenInfo.uid
+        },
+        fb: {
+          access_token: session.app.tokenInfo.access_token,
+          fields: 'id,name,picture'
+        },
+        gg: {
+          access_token: session.app.tokenInfo.access_token,
+          key: globalConfig.ggAppKey
+        },
       };
 
-      var qsFb = {
-        access_token: session.app.tokenInfo.access_token,
-        fields: 'id,name,picture'
-      };
+      var qsObj =  qsObj0[session.app.oauth];
 
-      var qsObj = session.app.oauth === 'wb' ? qsWb : (session.app.oauth === 'fb' ? qsFb : null);
       if(!qsObj){
         console.error('session set error on authed users.');
         return;
@@ -237,7 +285,6 @@ module.exports = {
       oauthApi[oauthName].accessToken({
         qs: qsObj
       }).then(function(data){
-
         if(data.access_token){
           req.session.app = {
             oauth: oauthName,
