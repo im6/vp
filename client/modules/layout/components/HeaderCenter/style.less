@@ -2,30 +2,29 @@
 .header{
     background-color: #fff;
     width: 100%;
-    height: 46px;
+    height: 47px;
 
-    .title {
-        display: inline-block;
-        margin-top: 7px;
-        color: #909090;
-        span:nth-child(1) {
-            color: #929292;
-        }
-        span:nth-child(2) {
-            color: #57a5e4;
-        }
-    }
     .btnGroup{
-        margin-top: 10px;
+        margin-top: 8px;
+        display: flex;
+        justify-content: center;
+    }
+    .navGroup{
+        margin: 7px 0 0 20px;
         display: flex;
         img {
-            height: 29px;
-            border-radius: 10%;
+            height: 32px;
+            border-radius: 15%;
             border: 1px solid #d1d0d6;
-
             &:hover{
                 border: 1px solid #f387be;
             }
         }
+    }
+
+    .shareBtnGroup{
+        display: flex;
+        justify-content: flex-end;
+        padding: 10px 15px 0 0;
     }
 }

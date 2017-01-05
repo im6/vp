@@ -1,11 +1,10 @@
 import React, { PropTypes } from 'react';
-import { Row, Col, Menu, Icon, Button, Dropdown } from 'antd';
+import { Row, Col, Menu, Icon, Button, Dropdown, Radio, Tooltip } from 'antd';
 import { Link } from 'react-router';
 import style from './style.less';
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
-const ButtonGroup = Button.Group;
 
+const RadioButton = Radio.Button;
+const RadioGroup = Radio.Group;
 
 const HeaderCenter = ({logout, userInfo}) => {
 
@@ -13,25 +12,6 @@ const HeaderCenter = ({logout, userInfo}) => {
     e.preventDefault();
     logout();
   };
-
-  let homeMenu = <Menu mode="vertical" style={{zIndex: 2}}>
-    <Menu.Item key="order1">
-      <Icon type="line-chart" />
-      &nbsp;&nbsp;
-      Popular
-    </Menu.Item>
-    <Menu.Item key="order2">
-      <Icon type="appstore" />
-      &nbsp;&nbsp;
-      Latest
-    </Menu.Item>
-    <Menu.Divider />
-    <Menu.Item key="about">
-      <Icon type="info-circle" />
-      &nbsp;&nbsp;
-      About
-    </Menu.Item>
-  </Menu>;
 
   let profileMenu = userInfo.get('isAuth') ? <Menu>
     <Menu.Item>
@@ -66,54 +46,79 @@ const HeaderCenter = ({logout, userInfo}) => {
 
   return <header className={style.header}>
     <Row>
-      <Col lg={2} md={2} sm={3} xs={3}>
-        <Dropdown overlay={homeMenu}>
-          <h1 style={{fontSize: '2.5em'}}>
-            <Icon type="bars" />
-          </h1>
-        </Dropdown>
-      </Col>
 
+      <Col lg={5} md={7} sm={10} xs={14}>
+        <div className={style.navGroup}>
+          <RadioGroup defaultValue="popular" size="large">
+            <RadioButton value="popular">
+              <Tooltip placement="bottom" title="Popular">
+                <Icon type="line-chart" />
+              </Tooltip>
+            </RadioButton>
 
-      <Col lg={3} md={3} sm={4} xs={4}>
-        <Link to="/">
-          <h1 className={style.title}>
-            <span>Color</span>
-            <span>PK</span>
-          </h1>
-        </Link>
-      </Col>
+            <RadioButton value="latest">
+              <Tooltip placement="bottom" title="Latest">
+                <Icon type="clock-circle-o" />
+              </Tooltip>
+            </RadioButton>
 
-      <Col lg={15} md={13} sm={9} xs={7}/>
-
-      <Col lg={4} md={6} sm={8} xs={10}>
-
-        <div className={style.btnGroup}>
-
+            <RadioButton value="about">
+              <Tooltip placement="bottom" title="About">
+                <Icon type="info-circle" />
+              </Tooltip>
+            </RadioButton>
+          </RadioGroup>
+          &nbsp;&nbsp;&nbsp;&nbsp;
           { userInfo.get('isAuth') ?
             <Dropdown overlay={profileMenu}>
               <img src={userInfo.get('detail').get('img')} alt="icon"/>
             </Dropdown>
             :
             <Link to="/auth">
-              <Button type="default" icon="user">
-                Log In
-              </Button>
+              <Tooltip placement="bottom" title="Log In">
+                <Button type="default"
+                        size="large">
+                  <h4>
+                    <Icon type="user" />
+                  </h4>
+                </Button>
+              </Tooltip>
             </Link>
           }
-          &nbsp;&nbsp;&nbsp;
-          <Link to="/new">
-            <Button type="primary" icon="plus">
-              Create
-            </Button>
-          </Link>
-
-
         </div>
 
       </Col>
-    </Row>
 
+      <Col lg={14} md={10} sm={8} xs={10}>
+
+        <div className={style.btnGroup}>
+
+          <Link to="/new">
+            <Button type="primary">
+              <h3>
+                <Icon type="plus" />
+                &nbsp;&nbsp;
+                New Color
+              </h3>
+            </Button>
+          </Link>
+        </div>
+
+      </Col>
+
+      <Col lg={5} md={7} sm={6} xs={0}>
+        <div className={style.shareBtnGroup}>
+          <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&width=118&layout=button_count&action=like&size=small&show_faces=true&share=true&height=46&appId=1602309996451051"
+                  width="146"
+                  height="46"
+                  style={{border:"none", overflow:"hidden"}}
+                  scrolling="no"
+                  frameborder="0"
+                  allowTransparency="true" />
+        </div>
+      </Col>
+
+    </Row>
   </header>;
 };
 
