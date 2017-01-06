@@ -1,13 +1,10 @@
 import React, { PropTypes } from 'react';
-import { Row, Col, Menu, Icon, Button, Dropdown, Radio, Tooltip } from 'antd';
+import { Row, Col, Menu, Icon, Button, Dropdown } from 'antd';
+import MenuButton from './components/MenuButton';
 import { Link } from 'react-router';
 import style from './style.less';
 
-const RadioButton = Radio.Button;
-const RadioGroup = Radio.Group;
-
-const HeaderCenter = ({logout, userInfo}) => {
-
+const HeaderCenter = ({logout, userInfo, isNavBtnActive, currentPath}) => {
   const clickHandler = (e) => {
     e.preventDefault();
     logout();
@@ -42,69 +39,44 @@ const HeaderCenter = ({logout, userInfo}) => {
     </Menu.Item>
   </Menu>: null;
 
-
-
   return <header className={style.header}>
     <Row>
 
-      <Col lg={5} md={7} sm={10} xs={14}>
-        <div className={style.navGroup}>
-          <RadioGroup defaultValue="popular" size="large">
-            <RadioButton value="popular">
-              <Tooltip placement="bottom" title="Popular">
-                <Icon type="line-chart" />
-              </Tooltip>
-            </RadioButton>
+      <Col lg={19} md={14} sm={18} xs={24} className={style.leftHeaderContainer}>
 
-            <RadioButton value="latest">
-              <Tooltip placement="bottom" title="Latest">
-                <Icon type="clock-circle-o" />
-              </Tooltip>
-            </RadioButton>
+        <MenuButton isNavBtnActive={isNavBtnActive}/>
 
-            <RadioButton value="about">
-              <Tooltip placement="bottom" title="About">
-                <Icon type="info-circle" />
-              </Tooltip>
-            </RadioButton>
-          </RadioGroup>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          { userInfo.get('isAuth') ?
-            <Dropdown overlay={profileMenu}>
-              <img src={userInfo.get('detail').get('img')} alt="icon"/>
-            </Dropdown>
-            :
-            <Link to="/auth">
-              <Tooltip placement="bottom" title="Log In">
-                <Button type="default"
-                        size="large">
-                  <h4>
-                    <Icon type="user" />
-                  </h4>
-                </Button>
-              </Tooltip>
-            </Link>
-          }
-        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-      </Col>
-
-      <Col lg={14} md={10} sm={8} xs={10}>
-
-        <div className={style.btnGroup}>
-
+        {
+          currentPath === '/new'?
+          <Link to="/">
+          <Button type="primary" icon="home">
+          Back home
+          </Button>
+          </Link> :
           <Link to="/new">
-            <Button type="primary">
-              <h3>
-                <Icon type="plus" />
-                &nbsp;&nbsp;
-                New Color
-              </h3>
+            <Button type="primary" icon="plus">
+              &nbsp;&nbsp;New Color
             </Button>
           </Link>
-        </div>
+        }
+
+        &nbsp;&nbsp;&nbsp;
+        { userInfo.get('isAuth') ?
+          <Dropdown overlay={profileMenu}>
+            <img src={userInfo.get('detail').get('img')} alt="icon"/>
+          </Dropdown>
+          :
+          <Link to="/auth">
+            <Button type="default" icon="user">
+              Sign In
+            </Button>
+          </Link>
+        }
 
       </Col>
+
 
       <Col lg={5} md={7} sm={6} xs={0}>
         <div className={style.shareBtnGroup}>

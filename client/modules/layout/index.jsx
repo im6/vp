@@ -2,23 +2,57 @@ import React, { PropTypes } from 'react';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 import { Affix } from 'antd';
+import Slideout from 'slideout';
 import EventListener, {withOptions} from 'react-event-listener';
 
 import styles from './style.less';
+import '!style!css!./slideout.css';
+
 import img from '!file!./assets/gradient.jpg';
-import HeaderCenter from './components/HeaderCenter/index.jsx';
+
+import HeaderCenter from './components/HeaderCenter';
+import SlideoutMenu from './components/SlideoutMenu';
 
 class Layout extends React.Component {
   constructor(props) {
     super(props);
     let me = this;
     me.isloading = false;
+    me.state = {
+      isMenuView: false
+    };
   }
 
   componentDidMount() {
+    let me = this;
+    me.initSlideout();
   }
 
   componentWillUnmount() {
+  }
+
+  initSlideout(){
+    let me = this;
+    var slideout = new Slideout({
+      'panel': document.getElementById('panel'),
+      'menu': document.getElementById('menu'),
+      'padding': 230,
+      'tolerance': 70
+    });
+    document.querySelector('.toggle-button').addEventListener('click', function() {
+      slideout.toggle();
+
+    });
+    slideout.on('open', () => {
+      me.setState({
+        isMenuView: true
+      });
+    });
+    slideout.on('close', () => {
+      me.setState({
+        isMenuView: false
+      });
+    });
   }
 
   logout(){
@@ -61,16 +95,23 @@ class Layout extends React.Component {
         onScroll={me.scrollHandler.bind(me)}
         />
 
-      <Affix>
-        <HeaderCenter logout={me.logout.bind(me)} userInfo={me.props.user}/>
-      </Affix>
+      <nav id="menu" style={{overflow:'hidden'}}>
+        <SlideoutMenu/>
+      </nav>
 
+      <main id="panel">
+        <Affix>
+          <HeaderCenter logout={me.logout.bind(me)}
+                        isNavBtnActive={me.state.isMenuView}
+                        currentPath={me.props.currentPath}
+                        userInfo={me.props.user}/>
+        </Affix>
+        <div className={styles.main} style={{background: `#f5f6f7 url(${img}) repeat-x 0 0`}} >
+          {me.props.children}
+        </div>
+      </main>
 
-      <div className={styles.main} style={{background: `#f5f6f7 url(${img}) repeat-x 0 0`}} >
-        {me.props.children}
-      </div>
     </div>;
-
 
     return result;
   }
@@ -80,9 +121,10 @@ Layout.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-function mapStateToProps({user}){
+function mapStateToProps({routing, user}){
   return {
-    user
+    user,
+    currentPath: routing.locationBeforeTransitions.pathname
   }
 }
 
