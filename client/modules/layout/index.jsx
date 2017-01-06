@@ -4,64 +4,77 @@ import { connect } from 'react-redux';
 import { Affix } from 'antd';
 import EventListener, {withOptions} from 'react-event-listener';
 
-//import '!style!css!font-awesome/css/font-awesome.min.css';
-
 import styles from './style.less';
 import img from '!file!./assets/gradient.jpg';
 import HeaderCenter from './components/HeaderCenter/index.jsx';
 
-const Layout = ({children, user, dispatch}) => {
-  let isloading = false;
+class Layout extends React.Component {
+  constructor(props) {
+    super(props);
+    let me = this;
+    me.isloading = false;
+  }
 
-  const logout = (v) => {
+  componentDidMount() {
+  }
+
+  componentWillUnmount() {
+  }
+
+  logout(){
+    let me = this;
     const ac = createAction('user/logoff');
-    dispatch(ac());
+    me.props.dispatch(ac());
+  }
+
+  resizeHandler(ev) {
+    let me = this;
   };
 
-  const resizeHandler = (ev) => {
-
-  };
-
-  const scrollHandler = (ev) => {
-    if(isloading){
+  scrollHandler(ev) {
+    let me = this;
+    if(me.isloading){
       return false;
     }
 
     let elem = ev.target.scrollingElement;
     let scrollProgress = elem.scrollTop / (elem.scrollHeight - elem.clientHeight);
     if(scrollProgress > 0.96){
-      isloading = true;
+      me.isloading = true;
 
       let actcr = createAction('color/loadMore');
-      dispatch(actcr());
+      me.props.dispatch(actcr());
 
       setTimeout(function(){
-        isloading = false;
+        me.isloading = false;
       }, 1800);
     }
 
   };
 
+  render() {
+    let me = this;
+    var result = <div className={styles.layoutBox} >
+      <EventListener
+        target="window"
+        onResize={me.resizeHandler.bind(me)}
+        onScroll={me.scrollHandler.bind(me)}
+        />
 
-  var result = <div className={styles.layoutBox} >
-    <EventListener
-      target="window"
-      onResize={resizeHandler}
-      onScroll={scrollHandler}
-      />
-
-    <Affix>
-      <HeaderCenter logout={logout} userInfo={user}/>
-    </Affix>
+      <Affix>
+        <HeaderCenter logout={me.logout.bind(me)} userInfo={me.props.user}/>
+      </Affix>
 
 
-    <div className={styles.main} style={{background: `#f5f6f7 url(${img}) repeat-x 0 0`}} >
-      {children}
-    </div>
-  </div>;
-  return result;
-};
+      <div className={styles.main} style={{background: `#f5f6f7 url(${img}) repeat-x 0 0`}} >
+        {me.props.children}
+      </div>
+    </div>;
 
+
+    return result;
+  }
+}
 
 Layout.propTypes = {
   children: PropTypes.element.isRequired,

@@ -113,7 +113,7 @@ const HeaderCenter = ({logout, userInfo}) => {
                   height="46"
                   style={{border:"none", overflow:"hidden"}}
                   scrolling="no"
-                  frameborder="0"
+                  frameBorder="0"
                   allowTransparency="true" />
         </div>
       </Col>
