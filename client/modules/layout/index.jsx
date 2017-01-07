@@ -62,7 +62,7 @@ class Layout extends React.Component {
     let me = this;
     setTimeout(()=>{
       slideout.close();
-    }, 700);
+    }, 650);
   }
 
   logout(){
