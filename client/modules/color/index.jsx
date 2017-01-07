@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import QueueAnim from 'rc-queue-anim';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
+import EventListener, {withOptions} from 'react-event-listener';
 
 import Box from './components/Box';
 import SpinLoader from './components/SpinLoader';
@@ -30,9 +31,28 @@ class Color extends React.Component {
     }));
   }
 
+  scrollHandler(ev) {
+    let me = this;
+    let isloading = me.props.color.get('loading');
+    if(isloading){
+      return false;
+    }
+
+    let elem = ev.target.scrollingElement;
+    let scrollProgress = elem.scrollTop / (elem.scrollHeight - elem.clientHeight);
+    if(scrollProgress > 0.96){
+      let actcr = createAction('color/loadMore');
+      me.props.dispatch(actcr());
+    }
+  };
+
   render() {
     let me = this;
     return <div>
+      <EventListener
+        target="window"
+        onScroll={me.scrollHandler.bind(me)}
+        />
       <QueueAnim type="top"
                  duration={350}
                  interval={90}

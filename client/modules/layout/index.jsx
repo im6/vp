@@ -20,7 +20,6 @@ class Layout extends React.Component {
   constructor(props) {
     super(props);
     let me = this;
-    me.isloading = false;
     me.state = {
       isMenuView: false
     };
@@ -75,34 +74,12 @@ class Layout extends React.Component {
     let me = this;
   };
 
-  scrollHandler(ev) {
-    let me = this;
-    if(me.isloading){
-      return false;
-    }
-
-    let elem = ev.target.scrollingElement;
-    let scrollProgress = elem.scrollTop / (elem.scrollHeight - elem.clientHeight);
-    if(scrollProgress > 0.96){
-      me.isloading = true;
-
-      let actcr = createAction('color/loadMore');
-      me.props.dispatch(actcr());
-
-      setTimeout(function(){
-        me.isloading = false;
-      }, 1800);
-    }
-
-  };
-
   render() {
     let me = this;
     var result = <div className={styles.layoutBox} >
       <EventListener
         target="window"
         onResize={me.resizeHandler.bind(me)}
-        onScroll={me.scrollHandler.bind(me)}
         />
 
       <nav id="menu" style={{overflow:'hidden'}}>

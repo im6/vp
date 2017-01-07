@@ -30,12 +30,12 @@ class About extends React.PureComponent {
 
         <div key="a2" className={style.subBoxWidth}>
           <h3>
-            Not a PK person, but I am a firm believer that colors' capability to bring all kinds of mood.
+            Did you ever try to figure out the mood behind the colors ? I Did.
           </h3>
         </div>
         <div key="a3" className={style.subBoxWidth}>
           <h3>
-            This web is designed sincerely to keep track of your mood by capturing the colors.
+            ColorPK.com is designed sincerely to keep track of your mood by capturing the colors.
           </h3>
         </div>
         <div key="a4" className={style.subBoxWidth}>
@@ -45,10 +45,16 @@ class About extends React.PureComponent {
         </div>
         <div key="a5" className={style.subBoxWidth}>
           <h3>
-            You are encouraged to sign in with
-            your social account, and more functions will come by.
+            It is a SOCIAL PLATFORM after all :)
           </h3>
         </div>
+
+        <div key="a6" className={style.subBoxWidth}>
+          <h3>
+            And, more functions will be available.
+          </h3>
+        </div>
+
         <div key="b1" className={style.subBoxWidth}>
           <a href="http://www.zjgallo.com" target="_blank">
             <img src={img} alt=""/>
@@ -56,13 +62,7 @@ class About extends React.PureComponent {
         </div>
         <div key="b2" className={style.subBoxWidth}>
           <h3>
-            My name is Zijian Guo. I am a software engineer in New York City.
-          </h3>
-        </div>
-
-        <div key="c1" className={style.subBoxWidth}>
-          <h3>
-            Special thanks go to...
+            I'm Zijian Guo, a software engineer in New York City.
           </h3>
         </div>
 
