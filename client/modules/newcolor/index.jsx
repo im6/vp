@@ -109,7 +109,7 @@ class NewColor extends React.PureComponent {
     const me = this;
     let types = me.props.colorType.get('list').toJS();
 
-    return <Card title={<span><i className="fa fa-pencil-square-o" aria-hidden="true"/>&nbsp;&nbsp;Create New Color</span>}>
+    return <Card title={<span><Icon type="edit" />&nbsp;&nbsp;Create New Color</span>}>
 
       <Row>
         <Col lg={24} md={24} sm={24} xs={24} style={{marginBottom: 30, display: 'flex', justifyContent:'center'}}>

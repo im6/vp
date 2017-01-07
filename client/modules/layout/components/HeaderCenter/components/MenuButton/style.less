@@ -8,6 +8,10 @@
   position: relative;
   display: inline-block;
 
+  &:hover > i {
+      background-color: #108ee9;
+  }
+
   i {
     background-color: @color;
     border-radius: 2px;
@@ -15,6 +19,7 @@
     display: block;
     width: 100%;
     height: 4px;
+    transition: background-color .4s ease-out;
 
     &:nth-child(1) {
         -webkit-animation: outT 0.8s backwards;

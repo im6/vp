@@ -51,7 +51,7 @@ const HeaderCenter = ({logout, userInfo, isNavBtnActive, currentPath}) => {
         {
           currentPath === '/new'?
           <Link to="/">
-          <Button type="primary" icon="home">
+          <Button type="default" icon="home">
           Back home
           </Button>
           </Link> :

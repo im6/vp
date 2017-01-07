@@ -13,6 +13,9 @@ import img from '!file!./assets/gradient.jpg';
 import HeaderCenter from './components/HeaderCenter';
 import SlideoutMenu from './components/SlideoutMenu';
 
+
+let slideout = null;
+
 class Layout extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +36,7 @@ class Layout extends React.Component {
 
   initSlideout(){
     let me = this;
-    var slideout = new Slideout({
+    slideout = new Slideout({
       'panel': document.getElementById('panel'),
       'menu': document.getElementById('menu'),
       'padding': 230,
@@ -53,6 +56,13 @@ class Layout extends React.Component {
         isMenuView: false
       });
     });
+  }
+
+  onSlideoutMenuClick(selection){
+    let me = this;
+    setTimeout(()=>{
+      slideout.close();
+    }, 700);
   }
 
   logout(){
@@ -96,7 +106,7 @@ class Layout extends React.Component {
         />
 
       <nav id="menu" style={{overflow:'hidden'}}>
-        <SlideoutMenu/>
+        <SlideoutMenu onClick={me.onSlideoutMenuClick.bind(me)}/>
       </nav>
 
       <main id="panel">

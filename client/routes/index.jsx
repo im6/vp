@@ -9,7 +9,8 @@ import ErrorPage from '../modules/errorPage';
 import Auth from '../modules/auth';
 import Color from '../modules/color';
 import NewColor from '../modules/newcolor';
-
+import About from '../modules/about';
+import ResourceApi from '../modules/resourceApi';
 
 
 const Routes = ({ history, store }) => {
@@ -48,10 +49,15 @@ const Routes = ({ history, store }) => {
            component={App}
            onEnter={checkAuth}>
       <IndexRoute component={Color}/>
-      <Route path="/new" component={NewColor} />
+      <Route path="/latest" component={Color} />
       <Route path="/portfolio" component={Color} />
       <Route path="/like" component={Color} />
+
+      <Route path="/new" component={NewColor} />
+      <Route path="/resourceapi" component={ResourceApi} />
+      <Route path="/about" component={About} />
       <Route path="*" component={ErrorPage} />
+
     </Route>
   </Router>;
 };
