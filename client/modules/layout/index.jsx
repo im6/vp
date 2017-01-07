@@ -35,9 +35,10 @@ class Layout extends React.Component {
 
   initSlideout(){
     let me = this;
+    let { panel, menu } = me.refs;
     slideout = new Slideout({
-      'panel': document.getElementById('panel'),
-      'menu': document.getElementById('menu'),
+      'panel': panel,
+      'menu': menu,
       'padding': 230,
       'tolerance': 70
     });
@@ -55,13 +56,16 @@ class Layout extends React.Component {
         isMenuView: false
       });
     });
+
+    menu.addEventListener("mouseleave", function(ev){
+      setTimeout(()=>{
+        slideout.close();
+      }, 350);
+    });
   }
 
   onSlideoutMenuClick(selection){
     let me = this;
-    setTimeout(()=>{
-      slideout.close();
-    }, 650);
   }
 
   logout(){
@@ -82,11 +86,11 @@ class Layout extends React.Component {
         onResize={me.resizeHandler.bind(me)}
         />
 
-      <nav id="menu" style={{overflow:'hidden'}}>
+      <nav ref="menu" style={{overflow:'hidden'}}>
         <SlideoutMenu onClick={me.onSlideoutMenuClick.bind(me)}/>
       </nav>
 
-      <main id="panel">
+      <main ref="panel">
         <Affix>
           <HeaderCenter logout={me.logout.bind(me)}
                         isNavBtnActive={me.state.isMenuView}

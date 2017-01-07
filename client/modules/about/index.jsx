@@ -20,7 +20,7 @@ class About extends React.PureComponent {
     const me = this;
 
     return <Card
-      style={{minHeight: 600}}
+      style={{minHeight: window.innerHeight * 0.8}}
       title={<span><Icon type="info-circle" />&nbsp;&nbsp;&nbsp;About ColorPK</span>}>
       <QueueAnim
         delay={500}

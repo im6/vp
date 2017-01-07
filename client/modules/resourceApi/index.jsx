@@ -17,9 +17,9 @@ class ResourceApi extends React.PureComponent {
 
   render() {
     const me = this;
-
     return <Card
       className={style.container}
+      style={{height: window.innerHeight * 0.8}}
       title={<span><Icon type="hdd" /> &nbsp;&nbsp;&nbsp;API Support</span>}>
       <h3>
         We appreciate opensource, so we are glad to announce that colorPK
