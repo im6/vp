@@ -11,6 +11,7 @@ import Color from '../modules/color';
 import NewColor from '../modules/newcolor';
 import About from '../modules/about';
 import ResourceApi from '../modules/resourceApi';
+import AdminPanel from '../modules/adminPanel';
 
 
 const Routes = ({ history, store }) => {
@@ -25,6 +26,7 @@ const Routes = ({ history, store }) => {
       callback();
     });
   };
+
   const checkAuth = (nextState, replace, callback) => {
     getUserInfo().then((res) => {
       const ac1 = createAction('user/initUser');
@@ -32,6 +34,19 @@ const Routes = ({ history, store }) => {
 
       const ac2 = createAction('color/initLike');
       store.dispatch(ac2(res));
+      callback();
+    });
+  };
+
+  const initAdmin = (nextState, replace, callback) => {
+    getUserInfo().then((res) => {
+      if(res.profile && res.profile.isAdmin){
+        const ac0 = createAction('admin/getList');
+        store.dispatch(ac0());
+      }else{
+        replace('/');
+      }
+
       callback();
     });
   };
@@ -52,6 +67,7 @@ const Routes = ({ history, store }) => {
       <Route path="/new" component={NewColor} />
       <Route path="/resourceapi" component={ResourceApi} />
       <Route path="/about" component={About} />
+      <Route path="/adminpanel" component={AdminPanel} onEnter={initAdmin} />
       <Route path="*" component={ErrorPage} />
 
     </Route>

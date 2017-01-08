@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { Menu, Icon } from 'antd';
+
+import {Global} from '../../../../config/global.js';
 const SubMenu = Menu.SubMenu;
 
 import style from './style.less';
@@ -110,7 +112,7 @@ class SlideoutMenu extends React.Component {
 
           </Menu.Item>
           <Menu.Item key="zj">
-            <a href="http://www.baidu.com" target="_blank">
+            <a href={Global.zjweb} target="_blank">
               <h3>
                 <Icon type="user" />Auther
               </h3>

@@ -10,6 +10,7 @@ import style from './style.less';
 
 const HeaderCenter = ({logout, userInfo, isNavBtnActive, currentPath}) => {
 
+  const isAdmin = userInfo.get('detail') && userInfo.get('detail').get('isAdmin');
 
   let profileMenu = userInfo.get('isAuth') ?
     <ProfileMenu
@@ -50,6 +51,13 @@ const HeaderCenter = ({logout, userInfo, isNavBtnActive, currentPath}) => {
               Sign In
             </Button>
           </Link>
+        }
+        &nbsp;&nbsp;&nbsp;
+        {
+          isAdmin ? <Link to="/adminPanel">
+            <Button type="default" icon="setting" />
+          </Link> : null
+
         }
 
       </Col>

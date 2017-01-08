@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import QueueAnim from 'rc-queue-anim';
+import { Global } from '../../../../config/global.js';
 
 import style from './style.less';
 import img from '!file!./assets/me.jpg';
@@ -54,7 +55,7 @@ class SiteDesc extends React.PureComponent {
         </div>
 
         <div key="b1" className={style.subBoxWidth}>
-          <a href="http://www.zjgallo.com" target="_blank">
+          <a href={Global.zjweb} target="_blank">
             <img src={img} alt=""/>
           </a>
         </div>
