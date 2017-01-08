@@ -6,6 +6,7 @@ import { createAction } from 'redux-actions';
 function* watchers(a) {
   yield [
     takeLatest("admin/getList", getAnonymousColor),
+    takeLatest("admin/decideColor", postDecideColor),
   ]
 }
 
@@ -20,6 +21,24 @@ function* getAnonymousColor(action) {
   } catch (e) {
     yield put({
       type: "admin/getList/fail",
+      payload: {msg: e}
+    });
+  }
+}
+
+
+function* postDecideColor(action) {
+  try {
+    const payload = yield call(requester, '/api/postDecideColor', action.payload);
+    yield put({
+      type: "admin/decideColor/success",
+      payload: {
+        id: action.payload.id
+      }
+    });
+  } catch (e) {
+    yield put({
+      type: "admin/decideColor/fail",
       payload: {msg: e}
     });
   }

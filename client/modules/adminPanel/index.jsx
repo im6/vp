@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
-import { Table, Icon, Card, Button, Popconfirm, Tooltip } from 'antd';
+import { Table, Icon, Card, Button, Popconfirm, Tooltip, Modal } from 'antd';
+import ColorCanvas from '../color/components/Box/components/ColorCanvas';
 
 import ColorBar from './components/ColorBar';
 import style from './style.less';
@@ -10,21 +11,42 @@ class AdminPanel extends React.PureComponent {
   constructor(props) {
     super(props);
     let me = this;
+    me.state = {
+      showModal: false,
+      modalContent: null
+    }
   }
 
   onApprove(record){
     let me = this;
-    debugger;
-  } //onDelete
+    let actcr = createAction('admin/decideColor');
+    me.props.dispatch(actcr({
+      id: record.id,
+      display: 0
+    }));
+  };
 
   onDelete(record){
     let me = this;
-    debugger;
+    let actcr = createAction('admin/decideColor');
+    me.props.dispatch(actcr({
+      id: record.id,
+      display: 1
+    }));
   }
 
   showInModal(record){
     let me = this;
-    debugger;
+    me.setState({
+      showModal: true,
+      modalContent: record.color
+    })
+  }
+  onModalClose(){
+    let me = this;
+    me.setState({
+      showModal: false
+    });
   }
 
   getColumns(){
@@ -67,7 +89,7 @@ class AdminPanel extends React.PureComponent {
                 title="Sure to approve?"
                 okText="Confirm"
                 cancelText="Cancel"
-                onConfirm={me.onApprove.bind(me,record)}
+                onConfirm={me.onApprove.bind(me, record)}
                 >
                 <Button
                   shape="circle"
@@ -105,6 +127,10 @@ class AdminPanel extends React.PureComponent {
       title={<span><Icon type="info-circle" />&nbsp;&nbsp;&nbsp;Color Management</span>}>
 
       <Table columns={me.getColumns()} dataSource={list} />
+      <Modal title="Color Preview" visible={me.state.showModal}
+             onOk={me.onModalClose.bind(me)} onCancel={me.onModalClose.bind(me)}>
+        <ColorCanvas colorValue={me.state.modalContent}/>
+      </Modal>
     </Card>
   }
 }

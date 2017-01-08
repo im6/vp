@@ -33,10 +33,11 @@ class Product extends React.Component {
 
   render() {
     let me = this;
+    let bWidth = me.props.boxWidth ? me.props.boxWidth : 90;
     let likeStyle = {};
     likeStyle[style.hasLike] = me.props.boxInfo.get('liked') || false;
-    return <div className={style.box} style={{width: me.props.boxWidth + '%'}}>
-        <ColorCanvas colorValue={me.props.boxInfo.get('value')}/>
+    return <div className={style.box} style={{width: bWidth + '%'}}>
+        <ColorCanvas colorValue={me.props.boxInfo.get('color')}/>
         <div className={style.boxFooter}>
           <Button type="default" onClick={me.onClickHander.bind(me)}>
             <h3 style={{display: 'inline'}}>
@@ -47,8 +48,8 @@ class Product extends React.Component {
           </Button>
 
           {
-            me.props.boxInfo.get('name') ?
-              <h3>{me.props.boxInfo.get('name')}</h3> : null
+            me.props.boxInfo.get('username') ?
+              <h3>{me.props.boxInfo.get('username')}</h3> : null
           }
         </div>
     </div>;

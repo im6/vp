@@ -320,7 +320,7 @@ module.exports = {
 
 
   initColorList: function(req, res, next){
-    var qr = 'select a.id, a.like, a.color AS `value`, a.username as `name`, false as `liked` from color a';
+    var qr = 'select a.*, false as `liked` from color a';
     mysql.sqlExecOne(qr).then(function(data){
       res.json(helper.resSuccessObj(data));
     }, function(data){

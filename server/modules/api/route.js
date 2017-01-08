@@ -27,6 +27,7 @@ router.post.apply(router, ['/addNewColor', ctr.addNewColor]);
 
 
 router.post.apply(router, ['/getAnonymousColor', md.isAdmin, adminCtr.getAnonymousColor]);
+router.post.apply(router, ['/postDecideColor', md.isAdmin, adminCtr.postDecideColor]);
 
 
 
