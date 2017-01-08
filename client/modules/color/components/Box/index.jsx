@@ -35,8 +35,7 @@ class Product extends React.Component {
     let me = this;
     let likeStyle = {};
     likeStyle[style.hasLike] = me.props.boxInfo.get('liked') || false;
-
-    return <div className={style.box}>
+    return <div className={style.box} style={{width: me.props.boxWidth + '%'}}>
         <ColorCanvas colorValue={me.props.boxInfo.get('value')}/>
         <div className={style.boxFooter}>
           <Button type="default" onClick={me.onClickHander.bind(me)}>

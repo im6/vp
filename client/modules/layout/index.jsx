@@ -14,7 +14,8 @@ import HeaderCenter from './components/HeaderCenter';
 import SlideoutMenu from './components/SlideoutMenu';
 
 
-let slideout = null;
+let slideout = null,
+  justClicked = false;
 
 class Layout extends React.Component {
   constructor(props) {
@@ -58,14 +59,18 @@ class Layout extends React.Component {
     });
 
     menu.addEventListener("mouseleave", function(ev){
-      setTimeout(()=>{
-        slideout.close();
-      }, 350);
+      if(justClicked){
+        setTimeout(()=>{
+          slideout.close();
+        }, 350);
+        justClicked = false;
+      }
     });
   }
 
   onSlideoutMenuClick(selection){
     let me = this;
+    //justClicked = true;
   }
 
   logout(){

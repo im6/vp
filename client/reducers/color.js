@@ -107,6 +107,26 @@ const color = handleActions({
     return state;
   },
 
+  ['color/getLikeColor'](state, action) {
+    return state.merge({
+      list: [],
+      loading: true
+    });
+  },
+  ['color/getLikeColor/fail'](state, action) {
+    let newList = state.get('list').concat(Immutable.fromJS(action.payload));
+    return state.merge({
+      list: newList,
+      loading: false
+    });
+  },
+  ['color/getLikeColor/fail'](state, action) {
+    message.error('Getting favourite color error. Please try again');
+    return state.merge({
+      loading: false
+    });
+  },
+
 }, Immutable.fromJS({
   list: [],
   liked: [],

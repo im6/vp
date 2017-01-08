@@ -46,8 +46,25 @@ class Color extends React.Component {
     }
   };
 
+  getBoxWidth(){
+    let me = this;
+    let result = 0;
+    let w = window.innerWidth;
+    if(w >= 1200){
+      result = 75;
+    }else if(w >= 992){
+      result = 80;
+    }else if(w >= 768){
+      result = 80;
+    }else {
+      result = 92;
+    }
+    return result;
+  }
+
   render() {
     let me = this;
+    let boxW = me.getBoxWidth();
     return <div>
       <EventListener
         target="window"
@@ -65,7 +82,9 @@ class Color extends React.Component {
                          lg={6}
                          key={k}
                          className={style.colContainer}>
-              <Box boxInfo={v} onLikeClick={me.onLikeClickHandler.bind(me, k)} />
+              <Box boxInfo={v}
+                   boxWidth={boxW}
+                   onLikeClick={me.onLikeClickHandler.bind(me, k)} />
             </Col>);
           })
         }
