@@ -26,18 +26,14 @@ const Routes = ({ history, store }) => {
     });
   };
   const checkAuth = (nextState, replace, callback) => {
-    if(Global.isDev){
-      callback();
-    }else{
-      getUserInfo().then((res) => {
-        const ac1 = createAction('user/initUser');
-        store.dispatch(ac1(res));
+    getUserInfo().then((res) => {
+      const ac1 = createAction('user/initUser');
+      store.dispatch(ac1(res));
 
-        const ac2 = createAction('color/initLike');
-        store.dispatch(ac2(res));
-        callback();
-      });
-    }
+      const ac2 = createAction('color/initLike');
+      store.dispatch(ac2(res));
+      callback();
+    });
   };
 
   return <Router history={history} >

@@ -51,7 +51,7 @@ class Color extends React.Component {
     let result = 0;
     let w = window.innerWidth;
     if(w >= 1200){
-      result = 75;
+      result = 72;
     }else if(w >= 992){
       result = 80;
     }else if(w >= 768){
