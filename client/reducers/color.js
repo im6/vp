@@ -4,10 +4,37 @@ import Immutable, {Map, List} from 'immutable';
 import { message } from 'antd';
 
 const color = handleActions({
+  ['color/getLatest'](state, action) {
+    console.log('loading color...');
+    return state.merge({
+      loading: true,
+      list: [],
+      type: 'latest'
+    });
+  },
+
+  ['color/getPortfolio'](state, action) {
+    console.log('loading color...');
+    return state.merge({
+      loading: true,
+      list: [],
+      type: 'portfolio'
+    });
+  },
+
+  ['color/getLike'](state, action) {
+    console.log('loading color...');
+    return state.merge({
+      loading: true,
+      list: [],
+      type: 'like'
+    });
+  },
   ['color/get'](state, action) {
     console.log('loading color...');
     return state.merge({
-      loading: true
+      loading: true,
+      list: []
     });
   },
   ['color/get/success'](state, action) {
@@ -65,6 +92,10 @@ const color = handleActions({
       });
     });
 
+    if(state.get('type')=='like' && !gonnaLike){
+      newList = newList.filter(v => v.get('id') != action.payload.id);
+    }
+
     return state.merge({
       liked: newLiked,
       list: newList
@@ -72,21 +103,10 @@ const color = handleActions({
   },
 
   ['color/initLike'](state, action) {
-
     let saved = action.payload.like;
-    if(saved){
-      let newList = state.get('list').map(function(v) {
-        return v.merge({
-          liked: saved.indexOf(v.get('id')) > -1
-        });
-      });
-      return state.merge({
-        liked: saved,
-        list: newList
-      });
-    } else {
-      return state;
-    }
+    return state.merge({
+      liked: saved
+    });
   },
 
   ['color/addNew/success'](state, action) {
@@ -131,6 +151,7 @@ const color = handleActions({
   list: [],
   liked: [],
   loading: true,
+  type: null
 }));
 
 export default color;

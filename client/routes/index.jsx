@@ -51,6 +51,33 @@ const Routes = ({ history, store }) => {
     });
   };
 
+  const initColor = (nextState, replace, callback) => {
+    let nextUrl = nextState.location.pathname,
+      actName = null;
+
+    switch (nextUrl){
+      case '/':
+        actName = 'color/get';
+        break;
+      case '/latest':
+        actName = 'color/getLatest';
+        break;
+      case '/portfolio':
+        actName = 'color/getPortfolio';
+        break;
+      case '/like':
+        actName = 'color/getLike';
+        break;
+      default:
+        break;
+    }
+
+    const ac = createAction(actName);
+    store.dispatch(ac());
+    callback();
+
+  };
+
   return <Router history={history} >
     <Route path="/auth"
            component={Auth}
@@ -59,10 +86,10 @@ const Routes = ({ history, store }) => {
     <Route path="/"
            component={App}
            onEnter={checkAuth}>
-      <IndexRoute component={Color}/>
-      <Route path="/latest" component={Color} />
-      <Route path="/portfolio" component={Color} />
-      <Route path="/like" component={Color} />
+      <IndexRoute component={Color} onEnter={initColor}/>
+      <Route path="/latest" component={Color} onEnter={initColor} />
+      <Route path="/portfolio" component={Color} onEnter={initColor} />
+      <Route path="/like" component={Color} onEnter={initColor} />
 
       <Route path="/new" component={NewColor} />
       <Route path="/resourceapi" component={ResourceApi} />

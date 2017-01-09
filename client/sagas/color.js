@@ -6,12 +6,59 @@ import { createAction } from 'redux-actions';
 function* watchers(a) {
   yield [
     takeLatest("color/get", initColorList),
+    takeLatest("color/getLatest", initColorLatest),
+    takeLatest("color/getPortfolio", initColorPortfolio),
+    takeLatest("color/getLike", initColorLike),
     takeLatest("color/loadMore", colorLoadMore),
     takeLatest("color/toggleLike", toggleLike),
     takeLatest("color/addNew", addNew),
   ]
 }
 
+function* initColorLike(action) {
+  try {
+    const payload = yield call(requester, '/api/initColorLike');
+    yield put({
+      type: "color/get/success",
+      payload: payload.result
+    });
+  } catch (e) {
+    yield put({
+      type: "color/get/fail",
+      payload: {msg: e}
+    });
+  }
+}
+
+function* initColorPortfolio(action) {
+  try {
+    const payload = yield call(requester, '/api/initColorPortfolio');
+    yield put({
+      type: "color/get/success",
+      payload: payload.result
+    });
+  } catch (e) {
+    yield put({
+      type: "color/get/fail",
+      payload: {msg: e}
+    });
+  }
+}
+
+function* initColorLatest(action) {
+  try {
+    const payload = yield call(requester, '/api/initColorLatest');
+    yield put({
+      type: "color/get/success",
+      payload: payload.result
+    });
+  } catch (e) {
+    yield put({
+      type: "color/get/fail",
+      payload: {msg: e}
+    });
+  }
+}
 
 function* initColorList(action) {
   try {
@@ -77,8 +124,4 @@ function* addNew(action) {
 
 export default function*(){
   yield fork(watchers);
-
-  let actCreater = createAction('color/get');
-  yield put(actCreater());
-
 }

@@ -8,6 +8,8 @@ import ProfileMenu from './components/ProfileMenu';
 import { Link } from 'react-router';
 import style from './style.less';
 
+const showReturnUrl = ['/new', '/portfolio', '/like'];
+
 const HeaderCenter = ({logout, userInfo, isNavBtnActive, currentPath}) => {
 
   const isAdmin = userInfo.get('detail') && userInfo.get('detail').get('isAdmin');
@@ -27,7 +29,7 @@ const HeaderCenter = ({logout, userInfo, isNavBtnActive, currentPath}) => {
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
         {
-          currentPath === '/new'?
+          showReturnUrl.indexOf(currentPath) > -1?
           <Link to="/">
           <Button type="default" icon="home">
           Back home

@@ -33,7 +33,7 @@ class Color extends React.Component {
 
   scrollHandler(ev) {
     let me = this;
-    let isloading = me.props.color.get('loading');
+    let isloading = me.props.loading;
     if(isloading){
       return false;
     }
@@ -75,7 +75,7 @@ class Color extends React.Component {
                  interval={90}
                  className={classnames(style.list)}>
         {
-          me.props.color.get('list').map((v, k) => {
+          me.props.list.map((v, k) => {
             return (<Col xs={12}
                          sm={12}
                          md={8}
@@ -89,14 +89,23 @@ class Color extends React.Component {
           })
         }
       </QueueAnim>
-      { me.props.color.get('loading') ? <SpinLoader /> : <div style={{height: 22, marginTop: 20}}/> }
+      { me.props.loading ? <SpinLoader /> : <div style={{height: 22, marginTop: 20}}/> }
     </div>
   }
 }
 
 function mapStateToProps({color}){
+
+  let saved = color.get('liked');
+  let color0 = color.get('list').map(v => {
+    return v.merge({
+      liked: saved.indexOf(v.get('id')) > -1
+    });
+  });
+
   return {
-    color
+    list: color0,
+    loading: color.get('loading')
   }
 }
 

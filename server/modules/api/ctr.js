@@ -320,15 +320,50 @@ module.exports = {
 
 
   initColorList: function(req, res, next){
-    var qr = 'select a.*, false as `liked` from color a';
+    var qr = 'SELECT a.*, false as `liked` FROM color a ORDER BY \`like\` DESC';
     mysql.sqlExecOne(qr).then(function(data){
       res.json(helper.resSuccessObj(data));
     }, function(data){
       res.json(helper.resFailObj(data));
     });
   },
+
+  initColorLatest: function(req, res, next){
+    var qr = 'SELECT a.*, false as `liked` FROM color a ORDER BY id DESC ';
+    mysql.sqlExecOne(qr).then(function(data){
+      res.json(helper.resSuccessObj(data));
+    }, function(data){
+      res.json(helper.resFailObj(data));
+    });
+  },
+  initColorPortfolio: function(req, res, next){
+    var qr = `SELECT a.*, false as \`liked\` FROM color a WHERE userid = '${req.session.app.dbInfo.id}' `;
+    mysql.sqlExecOne(qr).then(function(data){
+      res.json(helper.resSuccessObj(data));
+    }, function(data){
+      res.json(helper.resFailObj(data));
+    });
+  },
+
+  initColorLike: function(req, res, next){
+    var qr1 = `SELECT a.colorid FROM userlike a WHERE a.userid = '${req.session.app.dbInfo.id}' `;
+    mysql.sqlExecOne(qr1).then(function(data){
+      let idList = data.map((v, k) => {
+        return v.colorid;
+      });
+      var qr2 = `SELECT a.*, false as \`liked\` FROM color a WHERE a.id IN (${idList.join(',')}) `;
+      mysql.sqlExecOne(qr2).then(function(data2){
+        res.json(helper.resSuccessObj(data2));
+      }, function(data2){
+        res.json(helper.resFailObj(data2));
+      });
+    }, function(data0){
+      res.json(helper.resFailObj(data0));
+    });
+  },
+
   getColorType: function(req, res, next){
-    var qr = 'select a.id AS `key`, a.name AS `value` from colortype a';
+    var qr = 'SELECT a.id AS `key`, a.name AS `value` FROM colortype a';
     mysql.sqlExecOne(qr).then(function(data){
       res.json(helper.resSuccessObj(data));
     }, function(data){
@@ -336,7 +371,7 @@ module.exports = {
     });
   },
   toggleLike: function(req, res, next){
-    var qr = `update color set \`like\` = \`like\` ${req.body.willLike ? '+' : '-'}  1 where id = ${req.body.id}`;
+    var qr = `UPDATE color SET \`like\` = \`like\` ${req.body.willLike ? '+' : '-'}  1 WHERE id = ${req.body.id}`;
     mysql.sqlExecOne(qr).then(function(data){
       res.json(helper.resSuccessObj(data));
     }, function(data){

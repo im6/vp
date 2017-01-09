@@ -21,6 +21,10 @@ router.post.apply(router, ['/logoff', ctr.logoff]);
 
 
 router.post.apply(router, ['/initColorList', ctr.initColorList]);
+router.post.apply(router, ['/initColorLatest', ctr.initColorLatest]);
+router.post.apply(router, ['/initColorPortfolio', ctr.initColorPortfolio]);
+router.post.apply(router, ['/initColorLike', ctr.initColorLike]);
+
 router.post.apply(router, ['/getColorType', ctr.getColorType]);
 router.post.apply(router, ['/toggleLike', ctr.toggleLike]);
 router.post.apply(router, ['/addNewColor', ctr.addNewColor]);
