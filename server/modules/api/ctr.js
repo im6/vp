@@ -392,7 +392,7 @@ module.exports = {
     let username = (hasAuth && req.session.app.dbInfo.name)? `'${req.session.app.dbInfo.name}'` : 'NULL';
     let userid = (hasAuth && req.session.app.dbInfo.id)? `${req.session.app.dbInfo.id}` : 'NULL';
     let displayItem = userid == 'NULL' ? 1 : 0;
-    var qr = `INSERT INTO color (\`like\`, color, userid, username, colortype, display, createdate) VALUES (0, '${req.body.value}', ${userid}, ${username}, '${req.body.colorType}', ${displayItem}, NOW())`;
+    var qr = `INSERT INTO color (\`like\`, color, userid, username, colortype, display, createdate) VALUES (0, '${req.body.color}', ${userid}, ${username}, '${req.body.colorType}', ${displayItem}, NOW())`;
 
     mysql.sqlExecOne(qr).then(function(row){
       res.json(helper.resSuccessObj({

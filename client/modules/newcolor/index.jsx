@@ -49,7 +49,7 @@ class NewColor extends React.PureComponent {
       let cl1 = cl0.join('#');
       const ac = createAction('color/addNew');
       me.props.dispatch(ac({
-        value : cl1,
+        color : cl1,
         colorType: me.state.colorType.join(',')
       }));
       browserHistory.push('/');

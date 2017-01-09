@@ -102,7 +102,12 @@ class Layout extends React.Component {
                         currentPath={me.props.currentPath}
                         userInfo={me.props.user}/>
         </Affix>
-        <div className={styles.main} style={{background: `#f5f6f7 url(${img}) repeat-x 0 0`}} >
+        <div
+          className={styles.main}
+          style={{
+          background: `#f5f6f7 url(${img}) repeat-x 0 0`,
+          minHeight: window.innerHeight-43
+          }} >
           {me.props.children}
         </div>
       </main>

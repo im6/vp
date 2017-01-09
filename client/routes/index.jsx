@@ -72,8 +72,11 @@ const Routes = ({ history, store }) => {
         break;
     }
 
-    const ac = createAction(actName);
-    store.dispatch(ac());
+    if(actName){
+      const ac = createAction(actName);
+      store.dispatch(ac());
+    }
+
     callback();
 
   };
