@@ -8,8 +8,8 @@ const color = handleActions({
     console.log('loading color...');
     return state.merge({
       loading: true,
-      list: [],
-      type: 'latest'
+      type: 'latest',
+      list: []
     });
   },
 
@@ -17,7 +17,6 @@ const color = handleActions({
     console.log('loading color...');
     return state.merge({
       loading: true,
-      list: [],
       type: 'portfolio'
     });
   },
@@ -26,7 +25,6 @@ const color = handleActions({
     console.log('loading color...');
     return state.merge({
       loading: true,
-      list: [],
       type: 'like'
     });
   },
@@ -105,7 +103,7 @@ const color = handleActions({
   ['color/initLike'](state, action) {
     let saved = action.payload.like;
     return state.merge({
-      liked: saved
+      liked: saved || []
     });
   },
 
