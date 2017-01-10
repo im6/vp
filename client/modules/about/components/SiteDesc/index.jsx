@@ -24,45 +24,49 @@ class SiteDesc extends React.PureComponent {
 
         <div key="a1" className={style.subBoxWidth}>
           <h3>
-            Did you ever try to figure out the mood behind the colors ?
+            Hi, Welcome!
           </h3>
         </div>
         <div key="a2" className={style.subBoxWidth}>
           <h3>
-            I Did.
+            This is ColorPK.com.
           </h3>
         </div>
         <div key="a3" className={style.subBoxWidth}>
           <h3>
-            ColorPK.com is designed sincerely to keep track of your mood by capturing the colors.
+            We build this site sincerely for the people who LOVE colors.
           </h3>
         </div>
         <div key="a4" className={style.subBoxWidth}>
           <h3>
-            Feel free to fiddle out whatever palette in your mind, and share with others.
+            Feel free to fiddle out whatever palette in your mind,
           </h3>
         </div>
         <div key="a5" className={style.subBoxWidth}>
+          <h3>
+            and share with others.
+          </h3>
+        </div>
+        <div key="a6" className={style.subBoxWidth}>
           <h3>
             It is a SOCIAL PLATFORM after all :)
           </h3>
         </div>
 
-        <div key="a6" className={style.subBoxWidth}>
+        <div key="a7" className={style.subBoxWidth}>
           <h3>
-            And, more functions will be available.
+            - Zijian Guo
           </h3>
         </div>
-
+        <div key="a8" className={style.subBoxWidth}>
+          <h3>
+            Jan-09-2017
+          </h3>
+        </div>
         <div key="b1" className={style.subBoxWidth}>
           <a href={Global.zjweb} target="_blank">
             <img src={img} alt=""/>
           </a>
-        </div>
-        <div key="b2" className={style.subBoxWidth}>
-          <h3>
-            I'm Zijian Guo, a software engineer in New York City.
-          </h3>
         </div>
 
       </QueueAnim>

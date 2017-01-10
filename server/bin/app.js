@@ -12,7 +12,6 @@ console.log(`NODE_ENV: ${globalConfig.isDev ? 'dev' : 'production'}`);
 
 const app = express();
 
-
 var sessionOpt = {
   secret: globalConfig.sessionSecret,
   resave: false,
@@ -21,10 +20,11 @@ var sessionOpt = {
     secure: false,
   }
 };
+
 if(!globalConfig.isDev){
   sessionOpt.store = new MongoStore({
     url: process.env["mongodbUrl"],
-    ttl: 2 * 24 * 60 * 60
+    ttl: 2 * 60 * 60
   });
   console.log('session is now using mongo');
 }
@@ -37,11 +37,10 @@ app.use(methodOverride());
 app.use(cookieParser());
 app.use(expressSession(sessionOpt));
 
-
-if(!globalConfig.isDev){
-  app.use(csrf());
+if(globalConfig.isDev){
+  // some dev config
 }else{
-  // some production setup here
+  app.use(csrf());
 }
 
 app.use('/api', require('../modules/api/route'));

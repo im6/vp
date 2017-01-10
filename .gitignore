@@ -3,5 +3,5 @@ node_modules/
 npm-debug.log
 temp/
 public/
-!public/index.html
+views/
 client/webpack
