@@ -160,14 +160,16 @@ var privateFn = {
 
         me.updateUserLoginDate(row1[0].id);
         me.getUserLike(row1[0].id).then(function(row2){
+
           like = row2.map(function(v,k){
             return v.colorid;
           });
+
           res.json({
             isAuth: true,
             like: like,
             profile: {
-              id: data.id,
+              id: row1[0].id,
               name: genericName,
               img: imgUrl,
               isAdmin: session.app.dbInfo.isAdmin
@@ -348,15 +350,21 @@ module.exports = {
   initColorLike: function(req, res, next){
     var qr1 = `SELECT a.colorid FROM userlike a WHERE a.userid = '${req.session.app.dbInfo.id}' `;
     mysql.sqlExecOne(qr1).then(function(data){
-      let idList = data.map((v, k) => {
-        return v.colorid;
-      });
-      var qr2 = `SELECT a.*, false as \`liked\` FROM color a WHERE a.id IN (${idList.join(',')}) `;
-      mysql.sqlExecOne(qr2).then(function(data2){
-        res.json(helper.resSuccessObj(data2));
-      }, function(data2){
-        res.json(helper.resFailObj(data2));
-      });
+      if(data.length < 1){
+        res.json(helper.resSuccessObj([]));
+      }else{
+        let idList = data.map((v, k) => {
+          return v.colorid;
+        });
+
+        var qr2 = `SELECT a.*, false as \`liked\` FROM color a WHERE a.id IN (${idList.join(',')}) `;
+        mysql.sqlExecOne(qr2).then(function(data2){
+          res.json(helper.resSuccessObj(data2));
+        }, function(data2){
+          res.json(helper.resFailObj(data2));
+        });
+      }
+
     }, function(data0){
       res.json(helper.resFailObj(data0));
     });

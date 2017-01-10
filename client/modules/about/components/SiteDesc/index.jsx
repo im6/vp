@@ -58,11 +58,7 @@ class SiteDesc extends React.PureComponent {
             - Zijian Guo
           </h3>
         </div>
-        <div key="a8" className={style.subBoxWidth}>
-          <h3>
-            Jan-09-2017
-          </h3>
-        </div>
+
         <div key="b1" className={style.subBoxWidth}>
           <a href={Global.zjweb} target="_blank">
             <img src={img} alt=""/>
