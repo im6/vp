@@ -8,6 +8,7 @@ import EventListener, {withOptions} from 'react-event-listener';
 
 import Box from './components/Box';
 import SpinLoader from './components/SpinLoader';
+import HeadBanner from './components/HeadBanner';
 
 import style from './style.less';
 
@@ -67,13 +68,19 @@ class Color extends React.Component {
     let boxW = me.getBoxWidth();
     return <div>
       {
-        me.props.enableScrollLoad ?
+        me.props.colorType != 'portfolio' && me.props.colorType != 'like' ?
           <EventListener
             target="window"
             onScroll={me.scrollHandler.bind(me)}
             />:
           null
       }
+
+      <HeadBanner
+        colorSize={me.props.list.size}
+        colorType={me.props.colorType}
+        />
+
       <QueueAnim type="top"
                  duration={350}
                  interval={90}
@@ -110,7 +117,7 @@ function mapStateToProps({color}){
   return {
     list: color0,
     loading: color.get('loading'),
-    enableScrollLoad: color.get('type') != 'portfolio' && color.get('type') != 'like'
+    colorType: color.get('type')
   }
 }
 
