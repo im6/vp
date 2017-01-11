@@ -18,10 +18,17 @@ function* watchers(a) {
 function* initColorLike(action) {
   try {
     const payload = yield call(requester, '/api/initColorLike');
-    yield put({
-      type: "color/get/success",
-      payload: payload.result
-    });
+    if(payload.error){
+      yield put({
+        type: "color/get/fail",
+        payload: {msg: e}
+      });
+    }else{
+      yield put({
+        type: "color/get/success",
+        payload: payload.result
+      });
+    }
   } catch (e) {
     yield put({
       type: "color/get/fail",

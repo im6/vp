@@ -12,7 +12,19 @@ module.exports = {
         req.session.app.dbInfo.isAdmin){
       next();
     }else{
-      res.json({
+      res.status(401).json({
+        error: true,
+        result: 'no auth'
+      });
+    }
+  },
+  isAuth: function(req, res, next){
+    let me = this;
+    if(req.session.app &&
+      req.session.app.isAuth){
+      next();
+    }else{
+      res.status(401).json({
         error: true,
         result: 'no auth'
       });

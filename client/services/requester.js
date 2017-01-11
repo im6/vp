@@ -17,8 +17,11 @@ function jsonParse(res) {
 
 const requester = (url, body) => {
 
-  if(!body) body = {};
-  body['_csrf'] = cookie.get('_csrf');
+  let rfToken = cookie.get('_csrf');
+  if(rfToken){
+    if(!body) body = {};
+    body['_csrf'] = rfToken;
+  }
 
   var opts = merge.recursive(true, DEFAULTCONFIG, {
     body: JSON.stringify(body)

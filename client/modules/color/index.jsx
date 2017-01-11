@@ -66,10 +66,14 @@ class Color extends React.Component {
     let me = this;
     let boxW = me.getBoxWidth();
     return <div>
-      <EventListener
-        target="window"
-        onScroll={me.scrollHandler.bind(me)}
-        />
+      {
+        me.props.enableScrollLoad ?
+          <EventListener
+            target="window"
+            onScroll={me.scrollHandler.bind(me)}
+            />:
+          null
+      }
       <QueueAnim type="top"
                  duration={350}
                  interval={90}
@@ -105,7 +109,8 @@ function mapStateToProps({color}){
 
   return {
     list: color0,
-    loading: color.get('loading')
+    loading: color.get('loading'),
+    enableScrollLoad: color.get('type') != 'portfolio' && color.get('type') != 'like'
   }
 }
 

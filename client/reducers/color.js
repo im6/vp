@@ -9,7 +9,8 @@ const color = handleActions({
     return state.merge({
       loading: true,
       type: 'latest',
-      list: []
+      list: [],
+      type: 'latest'
     });
   },
 
@@ -32,7 +33,8 @@ const color = handleActions({
     console.log('loading color...');
     return state.merge({
       loading: true,
-      list: []
+      list: [],
+      type: 'popular'
     });
   },
   ['color/get/success'](state, action) {
