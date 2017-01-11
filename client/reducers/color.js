@@ -76,11 +76,11 @@ const color = handleActions({
     let gonnaLike = action.payload.willLike;
 
     if(gonnaLike){
-      newLiked = state.get('liked').push(action.payload.id);
+      let newMap = {};
+      newMap['d'+action.payload.id] = true;
+      newLiked = state.get('liked').merge(newMap);
     }else{
-      newLiked = state.get('liked').filter(v => {
-        return v !== action.payload.id;
-      });
+      newLiked = state.get('liked').delete('d'+action.payload.id);
     }
 
     let newList = state.get('list').update(action.payload.index, function(v){
@@ -101,10 +101,15 @@ const color = handleActions({
   },
 
   ['color/initLike'](state, action) {
-    let saved = action.payload.like;
-    return state.merge({
-      liked: saved || []
-    });
+    let likedList = action.payload.like,
+      lcjs = {};
+    if(likedList){
+      likedList.forEach(v => {
+        lcjs['d' + v] = true
+      })
+    }
+
+    return state.update('liked', (v) => v.merge(lcjs));
   },
 
   ['color/addNew/success'](state, action) {
@@ -147,7 +152,9 @@ const color = handleActions({
 
 }, Immutable.fromJS({
   list: [],
-  liked: [],
+  liked: {
+    'z': 0
+  },
   loading: true,
   type: null
 }));

@@ -99,7 +99,7 @@ function mapStateToProps({color}){
   let saved = color.get('liked');
   let color0 = color.get('list').map(v => {
     return v.merge({
-      liked: saved.indexOf(v.get('id')) > -1
+      liked: saved.get('d' + v.get('id')) || false
     });
   });
 
