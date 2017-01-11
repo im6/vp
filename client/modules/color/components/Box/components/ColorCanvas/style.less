@@ -1,3 +1,4 @@
+@br: 4px;
 .boxCanvas {
     width: 90%;
     height: 80%;
@@ -5,7 +6,7 @@
     flex-direction: column;
 
     div:nth-child(1){
-      border-radius: 8px 8px 0px 0px;
+      border-radius: @br @br 0px 0px;
       background-color: rgb(52, 43, 43);
       height: 40%;
     }
@@ -23,6 +24,6 @@
     div:nth-child(4){
       background-color: rgb(222, 251, 194);
       height: 17.5%;
-      border-radius: 0px 0px 8px 8px;
+      border-radius: 0px 0px @br @br;
     }
   }
