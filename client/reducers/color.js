@@ -115,7 +115,7 @@ const color = handleActions({
   },
 
   ['color/addNew/success'](state, action) {
-    message.success('create new color successfully!');
+    //message.success('create new color successfully!');
     let newData = action.payload;
     let newColor = {
       ...newData,

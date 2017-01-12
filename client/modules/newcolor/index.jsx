@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import { createAction } from 'redux-actions';
 import ColorPicker from 'react-color-picker';
 import { browserHistory } from 'react-router';
-import { Row, Col, Card, Button, Input, Checkbox, Icon, Select, message } from 'antd';
+import { Row, Col, Card, Button, Input, Checkbox, Icon, Select, message, Modal } from 'antd';
+
 import EditCanvas from './components/EditCanvas';
 import VibrantPalette from './components/VibrantPalette';
+import FinishModal from './components/FinishModal';
 
 
 const Option = Select.Option;
@@ -34,6 +36,20 @@ class NewColor extends React.PureComponent {
     };
   }
 
+  showModal(){
+    let me = this;
+    let isAuth = me.props.user.get('isAuth');
+    Modal.success({
+      title: 'Thank you for new colors',
+      okText: 'Got it',
+      content: <FinishModal isAuth={isAuth} />,
+      onOk: (close) => {
+        close();
+        browserHistory.push('/');
+      }
+    });
+  }
+
   submitColor(){
     let me = this;
     let good = true;
@@ -52,7 +68,7 @@ class NewColor extends React.PureComponent {
         color : cl1,
         colorType: me.state.colorType.join(',')
       }));
-      browserHistory.push('/');
+      me.showModal();
     }else{
       message.error('Invalid color.');
     }
@@ -191,9 +207,10 @@ class NewColor extends React.PureComponent {
   }
 }
 
-function mapStateToProps({colorType}){
+function mapStateToProps({colorType, user}){
   return {
-    colorType
+    colorType,
+    user
   }
 }
 
