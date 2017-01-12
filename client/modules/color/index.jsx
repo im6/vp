@@ -82,8 +82,8 @@ class Color extends React.Component {
         />
 
       <QueueAnim type="top"
-                 duration={350}
-                 interval={90}
+                 duration={280}
+                 interval={80}
                  className={classnames(style.list)}>
         {
           me.props.list.map((v, k) => {

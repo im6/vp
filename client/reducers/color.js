@@ -5,7 +5,6 @@ import { message } from 'antd';
 
 const color = handleActions({
   ['color/getLatest'](state, action) {
-    console.log('loading color...');
     return state.merge({
       loading: true,
       type: 'latest',
@@ -13,24 +12,19 @@ const color = handleActions({
       type: 'latest'
     });
   },
-
   ['color/getPortfolio'](state, action) {
-    console.log('loading color...');
     return state.merge({
       loading: true,
       type: 'portfolio'
     });
   },
-
   ['color/getLike'](state, action) {
-    console.log('loading color...');
     return state.merge({
       loading: true,
       type: 'like'
     });
   },
   ['color/get'](state, action) {
-    console.log('loading color...');
     return state.merge({
       loading: true,
       list: [],
@@ -38,7 +32,6 @@ const color = handleActions({
     });
   },
   ['color/get/success'](state, action) {
-    console.log('loading color success!');
     return state.merge({
       list: action.payload || [] ,
       loading: false
@@ -52,13 +45,11 @@ const color = handleActions({
     });
   },
   ['color/loadMore'](state, action) {
-    console.log('loading color...');
     return state.merge({
       loading: true
     });
   },
   ['color/loadMore/success'](state, action) {
-    console.log('loading color success!');
     let newList = state.get('list').concat(Immutable.fromJS(action.payload));
     return state.merge({
       list: newList,

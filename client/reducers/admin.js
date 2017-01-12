@@ -4,7 +4,6 @@ import Immutable, {Map, List} from 'immutable';
 
 const admin = handleActions({
   ['admin/getList'](state, action) {
-    console.log('loading admin list');
     return state.merge({
       loading: true
     });

@@ -27,6 +27,7 @@ module.exports = {
       query = `UPDATE color SET \`display\` = 0 WHERE id = ${id}`;
     }
 
+
     mysql.sqlExecOne(query).then(function(data){
       res.json(helper.resSuccessObj(data));
     }, function(data){

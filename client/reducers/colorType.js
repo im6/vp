@@ -4,13 +4,11 @@ import Immutable, {Map, List} from 'immutable';
 
 const colorType = handleActions({
   ['colorType/get'](state, action) {
-    console.log('loading type...');
     return state.merge({
       loading: true
     });
   },
   ['colorType/get/success'](state, action) {
-    console.log('loading type success!');
     return state.merge({
       list: action.payload,
       loading: false
