@@ -1,17 +1,13 @@
 import React, { PropTypes } from 'react';
 
 const FinishModal = ({isAuth}) => {
-  const goLogin = (ev) => {
-    ev.preventDefault();
-  };
-
   let noAuth = <div>
     <p>
       Your new color is created successfully. We will review it before publish.
     </p>
     <h2>
       <b>OR</b> <br/>
-      you could <a onClick={goLogin}>sign in</a> and have it published instantly.
+      you could <a href="/auth">sign in</a> and have it published instantly.
     </h2>
   </div>;
 
