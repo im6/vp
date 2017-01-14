@@ -22,10 +22,10 @@ class ResourceApi extends React.PureComponent {
       style={{height: window.innerHeight * 0.8}}
       title={<span><Icon type="hdd" /> &nbsp;&nbsp;&nbsp;API Support</span>}>
       <h3>
-        We appreciate opensource, so we are glad to announce that colorPK
+        We appreciate OpenSource, so we are glad to announce that colorPK
         will launch API interface, not only for those who are keen on creating colors idea,
-        but also the people who thinking about using our huge mount of color resource
-        within their application.
+        but also for the people who are thinking about leveraging our huge mount of color resource
+        for their application.
       </h3>
       <div className={style.alertContainer}>
         <br/>

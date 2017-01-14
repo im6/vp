@@ -66,6 +66,11 @@ class Color extends React.Component {
   render() {
     let me = this;
     let boxW = me.getBoxWidth();
+    let listClass = {};
+    listClass[style.pcPadding] = !me.props.isMobile;
+    listClass[style.list] = true;
+    let clsStr = classnames(listClass);
+
     return <div>
       {
         me.props.colorType != 'portfolio' && me.props.colorType != 'like' ?
@@ -84,7 +89,7 @@ class Color extends React.Component {
       <QueueAnim type="top"
                  duration={280}
                  interval={80}
-                 className={classnames(style.list)}>
+                 className={clsStr}>
         {
           me.props.list.map((v, k) => {
             return (<Col xs={12}
@@ -105,7 +110,7 @@ class Color extends React.Component {
   }
 }
 
-function mapStateToProps({color}){
+function mapStateToProps({color, user}){
 
   let saved = color.get('liked');
   let color0 = color.get('list').map(v => {
@@ -117,7 +122,8 @@ function mapStateToProps({color}){
   return {
     list: color0,
     loading: color.get('loading'),
-    colorType: color.get('type')
+    colorType: color.get('type'),
+    isMobile: user.get('isMobile')
   }
 }
 

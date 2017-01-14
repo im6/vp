@@ -27,21 +27,22 @@ class About extends React.PureComponent {
       title={<span><Icon type="info-circle" />&nbsp;&nbsp;&nbsp;About ColorPK</span>}>
       <Row>
         <Col
-          className={style.col2Box}
+          className={style.colBox}
           xs={24}
           sm={12}
-          md={14}
-          lg={14}>
-          <SiteDesc />
-        </Col>
-        <Col
-          className={style.col1Box}
-          xs={24}
-          sm={12}
-          md={10}
-          lg={10}>
+          md={12}
+          lg={12}>
           <SiteTimeline />
         </Col>
+        <Col
+          className={style.colBox}
+          xs={24}
+          sm={12}
+          md={12}
+          lg={12}>
+          <SiteDesc />
+        </Col>
+
       </Row>
 
     </Card>
