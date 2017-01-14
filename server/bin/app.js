@@ -6,7 +6,7 @@ const express = require('express'),
   cookieParser = require('cookie-parser'),
   expressSession = require('express-session'),
   csrf = require('csurf'),
-  MongoStore = require('connect-mongo')(expressSession);
+  MySQLStore = require('express-mysql-session')(expressSession);
 
 console.log(`NODE_ENV: ${globalConfig.isDev ? 'dev' : 'production'}`);
 
@@ -22,11 +22,16 @@ var sessionOpt = {
 };
 
 if(!globalConfig.isDev){
-  sessionOpt.store = new MongoStore({
-    url: process.env["mongodbUrl"],
-    ttl: 2 * 60 * 60
+  sessionOpt.store = new MySQLStore({
+    host     : process.env['OPENSHIFT_MYSQL_DB_HOST'],
+    port     : process.env['OPENSHIFT_MYSQL_DB_PORT'],
+    user     : process.env['SQL_USERNAME'],
+    password : process.env['SQL_PASSWORD'],
+    database : process.env['SQL_DATABASE'],
+    checkExpirationInterval: 0.5 * 3600 * 1000,
+    expiration: 2 * 3600 * 1000,
   });
-  console.log('session is now using mongo');
+  console.log('session is now using mysql');
 }
 
 app.set('x-powered-by', false);

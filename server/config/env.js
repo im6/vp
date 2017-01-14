@@ -1,7 +1,6 @@
 var env = process.env;
 
 module.exports = {
-
   isDev: env.NODE_ENV === 'dev',
   publicDir: env.NODE_ENV === 'dev' ? 'temp' : 'public',
   requireAuth: true,
@@ -22,8 +21,5 @@ module.exports = {
   ggAppSecret: env.ggAppSecret,
 
   oauthRedirectDomin: env.oauthRedirectDomin,
-
   sessionSecret: env.sessionSecret || 'bigAndHUgeSecret',
-  mongodbUrl: env.mongodbUrl
-
 };
