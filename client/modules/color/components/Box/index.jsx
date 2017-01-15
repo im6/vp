@@ -36,10 +36,18 @@ class Product extends React.Component {
     let bWidth = me.props.boxWidth ? me.props.boxWidth : 90;
     let likeStyle = {};
     likeStyle[style.hasLike] = me.props.boxInfo.get('liked') || false;
-    return <div className={style.box} style={{width: bWidth + '%'}}>
+
+
+    let btnSize = me.props.isMobile ? 'small': 'default';
+    let boxHt = me.props.isMobile ? 230 : 280;
+
+    return <div className={style.box} style={{width: bWidth + '%', height: boxHt}}>
         <ColorCanvas colorValue={me.props.boxInfo.get('color')}/>
         <div className={style.boxFooter}>
-          <Button type="default" onClick={me.onClickHander.bind(me)}>
+          <Button
+            type="default"
+            size={btnSize}
+            onClick={me.onClickHander.bind(me)}>
             <h3 style={{display: 'inline'}}>
               <Icon type="heart" className={likeStyle}/>
               &nbsp;&nbsp;

@@ -66,8 +66,9 @@ class Color extends React.Component {
   render() {
     let me = this;
     let boxW = me.getBoxWidth();
-    let listClass = {};
-    listClass[style.pcPadding] = !me.props.isMobile;
+    let listClass = {},
+      im = me.props.isMobile;
+    listClass[style.pcPadding] = !im;
     listClass[style.list] = true;
     let clsStr = classnames(listClass);
 
@@ -100,6 +101,7 @@ class Color extends React.Component {
                          className={style.colContainer}>
               <Box boxInfo={v}
                    boxWidth={boxW}
+                   isMobile={im}
                    onLikeClick={me.onLikeClickHandler.bind(me, k)} />
             </Col>);
           })

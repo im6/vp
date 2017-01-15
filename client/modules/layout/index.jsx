@@ -41,7 +41,8 @@ class Layout extends React.Component {
       'panel': panel,
       'menu': menu,
       'padding': 230,
-      'tolerance': 70
+      'tolerance': 70,
+      'touch': false
     });
     document.querySelector('.toggle-button').addEventListener('click', function() {
       slideout.toggle();
