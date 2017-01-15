@@ -8,7 +8,7 @@ import ProfileMenu from './components/ProfileMenu';
 import { Link } from 'react-router';
 import style from './style.less';
 
-const showReturnUrl = ['/new', '/portfolio', '/like'];
+const showReturnUrl = ['/new', '/portfolio', '/like', '/about', '/resourceapi'];
 
 const HeaderCenter = ({logout, userInfo, isNavBtnActive, currentPath}) => {
 

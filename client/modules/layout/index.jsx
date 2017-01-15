@@ -3,6 +3,7 @@ import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 import { Affix } from 'antd';
 import Slideout from 'slideout';
+import { Global } from '../../config/global.js';
 import EventListener, {withOptions} from 'react-event-listener';
 
 import styles from './style.less';
@@ -14,8 +15,7 @@ import HeaderCenter from './components/HeaderCenter';
 import SlideoutMenu from './components/SlideoutMenu';
 
 
-let slideout = null,
-  justClicked = false;
+let slideout = null;
 
 class Layout extends React.Component {
   constructor(props) {
@@ -45,7 +45,6 @@ class Layout extends React.Component {
     });
     document.querySelector('.toggle-button').addEventListener('click', function() {
       slideout.toggle();
-
     });
     slideout.on('open', () => {
       me.setState({
@@ -57,20 +56,15 @@ class Layout extends React.Component {
         isMenuView: false
       });
     });
-
-    menu.addEventListener("mouseleave", function(ev){
-      if(justClicked){
-        setTimeout(()=>{
-          slideout.close();
-        }, 350);
-        justClicked = false;
-      }
-    });
   }
 
   onSlideoutMenuClick(selection){
     let me = this;
-    //justClicked = true;
+    if(!Global.isDev){
+      setTimeout(()=>{
+        slideout.close();
+      }, 500);
+    }
   }
 
   logout(){
@@ -91,7 +85,7 @@ class Layout extends React.Component {
         onResize={me.resizeHandler.bind(me)}
         />
 
-      <nav ref="menu" style={{overflow:'hidden'}}>
+      <nav ref="menu">
         <SlideoutMenu onClick={me.onSlideoutMenuClick.bind(me)}/>
       </nav>
 
