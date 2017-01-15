@@ -98,7 +98,7 @@ class Layout extends React.Component {
           className={styles.main}
           style={{
           background: `#f5f6f7 url(${img}) repeat-x 0 0`,
-          minHeight: window.innerHeight-43
+          minHeight: document.body.clientHeight
           }} >
           {me.props.children}
         </div>

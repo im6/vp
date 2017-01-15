@@ -39,6 +39,7 @@
     "babel-runtime": "^6.11.6",
     "classnames": "^2.2.5",
     "css-loader": "^0.25.0",
+    "es6-promise": "^4.0.5",
     "eslint": "^3.7.0",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^1.16.0",

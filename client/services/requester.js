@@ -1,4 +1,5 @@
 /* eslint-disable */
+require('es6-promise').polyfill();
 import fetch from 'isomorphic-fetch';
 import cookie from 'js-cookie';
 import merge from 'merge';
