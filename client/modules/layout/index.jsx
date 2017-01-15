@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
-import { Affix } from 'antd';
 import Slideout from 'slideout';
 import { Global } from '../../config/global.js';
 import EventListener, {withOptions} from 'react-event-listener';
@@ -91,12 +90,10 @@ class Layout extends React.Component {
       </nav>
 
       <main ref="panel">
-        <Affix>
-          <HeaderCenter logout={me.logout.bind(me)}
-                        isNavBtnActive={me.state.isMenuView}
-                        currentPath={me.props.currentPath}
-                        userInfo={me.props.user}/>
-        </Affix>
+        <HeaderCenter logout={me.logout.bind(me)}
+                      isNavBtnActive={me.state.isMenuView}
+                      currentPath={me.props.currentPath}
+                      userInfo={me.props.user}/>
         <div
           className={styles.main}
           style={{

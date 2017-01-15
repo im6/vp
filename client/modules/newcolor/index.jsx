@@ -125,7 +125,10 @@ class NewColor extends React.PureComponent {
     const me = this;
     let types = me.props.colorType.get('list').toJS();
 
-    return <Card title={<span><Icon type="edit" />&nbsp;&nbsp;Create New Color</span>}>
+    return <Card
+      style={{width: '96%', 'margin':'0 auto'}}
+      title={<span><Icon type="edit" />&nbsp;&nbsp;Create New Color</span>}
+      >
 
       <Row>
         <Col lg={24} md={24} sm={24} xs={24} style={{marginBottom: 30, display: 'flex', justifyContent:'center'}}>
@@ -150,18 +153,19 @@ class NewColor extends React.PureComponent {
 
         <Col lg={3} md={1} sm={0} xs={0}></Col>
         <Col lg={9} md={11} sm={24} xs={24}>
-          <ColorPicker hueWidth={'20%'}
-                       saturationWidth={'75%'}
+          <ColorPicker hueWidth={'15%'}
+                       saturationWidth={'78%'}
                        value={me.state.editColor}
                        onDrag={me.onPickColor.bind(me)}/>
           <br/>
 
           <Input placeholder="hex"
                  addonBefore="#"
-                 style={{'width': '73%'}}
+                 style={{'width': '77%'}}
                  size="large"
                  value={me.state.editColor.substring(1)}
                  onChange={me.onInputChange.bind(me)}/>
+          <br/>
         </Col>
 
         <Col lg={1} md={1} sm={0} xs={0} />
