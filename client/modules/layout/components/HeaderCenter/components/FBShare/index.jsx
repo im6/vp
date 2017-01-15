@@ -1,10 +1,13 @@
 import React, { PropTypes } from 'react';
+import style from './style.less';
+
+const iframeSrc = "https://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.colorpk.com&width=78&layout=button&action=like&size=small&show_faces=false&share=true&height=65&appId=104200920090730";
 
 const FBShare = () => {
-  return <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&width=118&layout=button_count&action=like&size=small&show_faces=true&share=true&height=46&appId=1602309996451051"
+  return <iframe src={iframeSrc}
                  width="146"
                  height="46"
-                 style={{border:"none", overflow:"hidden"}}
+                 className={style.container}
                  scrolling="no"
                  frameBorder="0"
                  allowTransparency="true" />;

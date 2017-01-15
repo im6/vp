@@ -22,7 +22,7 @@ const HeaderCenter = ({logout, userInfo, isNavBtnActive, currentPath}) => {
   return <header className={style.header}>
     <Row>
 
-      <Col lg={19} md={14} sm={18} xs={24} className={style.leftHeaderContainer}>
+      <Col lg={20} md={19} sm={18} xs={24} className={style.leftHeaderContainer}>
 
         <MenuButton isNavBtnActive={isNavBtnActive}/>
 
@@ -65,7 +65,7 @@ const HeaderCenter = ({logout, userInfo, isNavBtnActive, currentPath}) => {
       </Col>
 
 
-      <Col lg={5} md={7} sm={6} xs={0}>
+      <Col lg={4} md={5} sm={6} xs={0}>
         <div className={style.shareBtnGroup}>
           <FBShare/>
         </div>

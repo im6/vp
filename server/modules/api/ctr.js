@@ -16,7 +16,7 @@ var privateFn = {
   createWeiboLink: function(state){
     var url = "https://api.weibo.com/oauth2/authorize?" +
       "client_id=" + globalConfig.wbAppKey +
-      "&scope=all" +
+      "&scope=follow_app_official_microblog" +
       "&state=" + state +
       "&redirect_uri=" + redirect_uri_wb;
     return url;
