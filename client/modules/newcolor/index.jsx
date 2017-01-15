@@ -129,7 +129,7 @@ class NewColor extends React.PureComponent {
 
       <Row>
         <Col lg={24} md={24} sm={24} xs={24} style={{marginBottom: 30, display: 'flex', justifyContent:'center'}}>
-          <div style={{width: '50%'}}>
+          <div style={{width: '80%'}}>
             <label> Color Type: &nbsp;&nbsp;&nbsp;&nbsp;</label>
             <Select
               multiple
@@ -148,8 +148,24 @@ class NewColor extends React.PureComponent {
 
         </Col>
 
-        <Col lg={2} md={1} sm={0} xs={0}></Col>
-        <Col lg={9} md={10} sm={24} xs={24} className={style.makeCenter}>
+        <Col lg={3} md={1} sm={0} xs={0}></Col>
+        <Col lg={9} md={11} sm={24} xs={24}>
+          <ColorPicker hueWidth={'20%'}
+                       saturationWidth={'75%'}
+                       value={me.state.editColor}
+                       onDrag={me.onPickColor.bind(me)}/>
+          <br/>
+
+          <Input placeholder="hex"
+                 addonBefore="#"
+                 style={{'width': '73%'}}
+                 size="large"
+                 value={me.state.editColor.substring(1)}
+                 onChange={me.onInputChange.bind(me)}/>
+        </Col>
+
+        <Col lg={1} md={1} sm={0} xs={0} />
+        <Col lg={8} md={10} sm={24} xs={24} className={style.makeCenter}>
           <EditCanvas colorValue={me.state.colorValue}
                       activeIndex={me.state.activeIndex}
                       changeActive={me.onChangeActive.bind(me)}/>
@@ -165,22 +181,9 @@ class NewColor extends React.PureComponent {
           {me.state.showUpload ? <VibrantPalette onResult={me.extractResult.bind(me)}/> : null}
 
         </Col>
-        <Col lg={2} md={1} sm={0} xs={0}></Col>
-        <Col lg={9} md={11} sm={24} xs={24}>
-          <ColorPicker hueWidth={55}
-                       value={me.state.editColor}
-                       onDrag={me.onPickColor.bind(me)}/>
-          <br/>
-
-          <Input placeholder="hex"
-                 addonBefore="#"
-                 style={{'width': 276}}
-                 size="large"
-                 value={me.state.editColor.substring(1)}
-                 onChange={me.onInputChange.bind(me)}/>
-        </Col>
-        <Col lg={2} md={1} sm={0} xs={0} />
+        <Col lg={3} md={1} sm={0} xs={0} />
       </Row>
+
 
 
       <Row>
