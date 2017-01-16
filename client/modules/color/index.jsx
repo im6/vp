@@ -39,7 +39,7 @@ class Color extends React.Component {
       return false;
     }
 
-    let elem = ev.target.scrollingElement;
+    let elem = ev.target.body;
     let scrollProgress = elem.scrollTop / (elem.scrollHeight - elem.clientHeight);
     if(scrollProgress > 0.96){
       let actcr = createAction('color/loadMore');

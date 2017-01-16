@@ -31,9 +31,9 @@ const HeaderCenter = ({logout, userInfo, isNavBtnActive, currentPath}) => {
         {
           showReturnUrl.indexOf(currentPath) > -1?
           <Link to="/">
-          <Button type="default" icon="home">
-          Back home
-          </Button>
+            <Button type="default" icon="home">
+            Back home
+            </Button>
           </Link> :
           <Link to="/new">
             <Button type="primary" icon="plus">
