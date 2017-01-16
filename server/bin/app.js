@@ -28,8 +28,8 @@ if(!globalConfig.isDev){
     user     : process.env['SQL_USERNAME'],
     password : process.env['SQL_PASSWORD'],
     database : process.env['SQL_DATABASE'],
-    checkExpirationInterval: 0.5 * 3600 * 1000,
-    expiration: 2 * 3600 * 1000,
+    checkExpirationInterval: 4 * 3600 * 1000,
+    expiration: 12 * 3600 * 1000,
   });
   console.log('session is now using mysql');
 }

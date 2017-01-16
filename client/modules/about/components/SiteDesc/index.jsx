@@ -15,47 +15,26 @@ class SiteDesc extends React.PureComponent {
     const me = this;
 
     return <div className={style.container}>
-      <QueueAnim
-        delay={500}
-        type={'bottom'}
-        ease={['easeOutQuart', 'easeInOutQuart']}
-        className={style.container}>
+      <div className={style.container}>
+        <h2>
+          I'd like to get you the BEST ColorPicKer,
+          <br/>
+          so here is ColorPK.com. Welcome!
+          <br/>
+          (No Player Killing stuff at all)
+          <br/>
+          The site is designed sincerely for people who LOVE colors.
+          <br/>
+          Feel free to fiddle out whatever palette in your mind,
+          <br/>
+          and share with others.
+          <br/>
+          It is a SOCIAL PLATFORM after all :)
 
-        <div key="a1" className={style.subBoxWidth}>
-          <h2>
-            Hi, Welcome to ColorPK.com
-          </h2>
-        </div>
-
-        <div key="a3" className={style.subBoxWidth}>
-          <h2>
-            We build this site sincerely for the people who LOVE colors.
-          </h2>
-        </div>
-        <div key="a4" className={style.subBoxWidth}>
-          <h2>
-            Feel free to fiddle out whatever palette in your mind,
-          </h2>
-        </div>
-        <div key="a5" className={style.subBoxWidth}>
-          <h2>
-            and share with others.
-          </h2>
-        </div>
-        <div key="a6" className={style.subBoxWidth}>
-          <h2>
-            It is a SOCIAL PLATFORM after all :)
-          </h2>
-        </div>
-
-        <div key="a7" className={style.subBoxWidth}>
-          <h2>
-
-            <br/>
-            - Zijian Guo
-          </h2>
-        </div>
-      </QueueAnim>
+          <br/><br/>
+          - <a href={Global.zjweb} target="_blank">Zijian Guo</a>, New York City.
+        </h2>
+      </div>
     </div>
   }
 }
