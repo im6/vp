@@ -5,7 +5,7 @@ import styles from './style.less'
 import {Row,Col, Input, Button, Checkbox, Card, Icon, Tooltip} from 'antd';
 import { browserHistory } from 'react-router';
 
-import img from './assets/icon3.png';
+import img from './assets/icon2.png';
 import imgo1 from './assets/oauth1.png';
 import imgo2 from './assets/oauth2.png';
 import imgo4 from './assets/oauth4.png';

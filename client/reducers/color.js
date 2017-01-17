@@ -7,7 +7,6 @@ const color = handleActions({
   ['color/getLatest'](state, action) {
     return state.merge({
       loading: true,
-      type: 'latest',
       list: [],
       type: 'latest'
     });

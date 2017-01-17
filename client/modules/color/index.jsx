@@ -35,7 +35,7 @@ class Color extends React.Component {
   scrollHandler(ev) {
     let me = this;
     let isloading = me.props.loading;
-    if(isloading){
+    if(isloading || me.isAnimating){
       return false;
     }
 
@@ -63,6 +63,16 @@ class Color extends React.Component {
     return result;
   }
 
+  onAnimEnd(endKey, type){
+    let me = this;
+    if(endKey === type.key){
+      if(type.type === 'enter' &&
+        (me.props.colorType === 'popular' || me.props.colorType === 'latest')){
+        me.isAnimating = false;
+      }
+    }
+  }
+
   render() {
     let me = this;
     let boxW = me.getBoxWidth();
@@ -71,6 +81,8 @@ class Color extends React.Component {
     listClass[style.pcPadding] = !im;
     listClass[style.list] = true;
     let clsStr = classnames(listClass);
+    let endKey = (me.props.list.size-1).toString();
+    me.isAnimating = true;
 
     return <div>
       {
@@ -88,6 +100,7 @@ class Color extends React.Component {
         />
 
       <QueueAnim type="top"
+                 onEnd={me.onAnimEnd.bind(me, endKey)}
                  duration={280}
                  interval={80}
                  className={clsStr}>
