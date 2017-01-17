@@ -42,7 +42,9 @@ class Product extends React.Component {
     let boxHt = me.props.isMobile ? 230 : 280;
 
     return <div className={style.box} style={{width: bWidth + '%', height: boxHt}}>
-        <ColorCanvas colorValue={me.props.boxInfo.get('color')}/>
+        <ColorCanvas
+          isMobile={me.props.isMobile}
+          colorValue={me.props.boxInfo.get('color')}/>
         <div className={style.boxFooter}>
           <Button
             type="default"

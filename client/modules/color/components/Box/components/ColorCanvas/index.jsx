@@ -27,7 +27,10 @@ class ColorCanvas extends React.Component {
     let me = this;
     return <div className={style.boxCanvas}>
       {me.props.colorValue.split('#').map((v, k) => {
-        return <ColorRow key={k} rowColor={'#' + v} />
+        return <ColorRow
+          isMobile={me.props.isMobile}
+          key={k}
+          rowColor={'#' + v} />
       })}
     </div>;
   }
