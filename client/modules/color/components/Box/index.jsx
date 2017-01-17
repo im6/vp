@@ -43,7 +43,6 @@ class Product extends React.Component {
 
     return <div className={style.box} style={{width: bWidth + '%', height: boxHt}}>
         <ColorCanvas
-          isMobile={me.props.isMobile}
           colorValue={me.props.boxInfo.get('color')}/>
         <div className={style.boxFooter}>
           <Button

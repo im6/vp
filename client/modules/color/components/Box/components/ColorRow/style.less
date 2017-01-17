@@ -3,11 +3,17 @@
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
+
+    .text {
+        transition: opacity 0.3s ease-in-out;
+        background-color: rgba(0,0,0,0.22);
+        color: white;
+        font-size: 1.8em;
+        opacity: 0;
+    }
+
+    &:hover .text{
+        opacity: 1;
+    }
 }
 
-.text {
-    transition: opacity 0.3s ease-in-out;
-    background-color: rgba(0,0,0,0.22);
-    color: white;
-    font-size: 1.8em;
-}
