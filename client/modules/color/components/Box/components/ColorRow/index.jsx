@@ -3,35 +3,10 @@ import { Button } from 'antd';
 import classnames from 'classnames';
 import style from './style.less';
 
-
 class ColorRow extends React.Component {
   constructor(props) {
     super(props);
     let me = this;
-    me.state = {
-      showText : false
-    };
-  }
-
-  componentDidMount() {
-
-  }
-
-  componentWillUnmount() {
-  }
-
-  hoverHandler(){
-    let me = this;
-    me.setState({
-      showText: true
-    });
-  }
-
-  leaveHandler(){
-    let me = this;
-    me.setState({
-      showText: false
-    });
   }
 
   render() {
