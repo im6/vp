@@ -38,8 +38,8 @@ class ColorRow extends React.Component {
     let me = this;
 
     let eventBinder = me.props.isMobile ? {
-      onTouchEnd : me.leaveHandler.bind(me),
-      onTouchStart : me.hoverHandler.bind(me)
+      //onTouchEnd : me.leaveHandler.bind(me),
+      //onTouchStart : me.hoverHandler.bind(me)
     } : {
       onMouseEnter : me.hoverHandler.bind(me),
       onMouseLeave : me.leaveHandler.bind(me)
