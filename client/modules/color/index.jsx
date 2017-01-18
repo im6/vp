@@ -12,6 +12,8 @@ import HeadBanner from './components/HeadBanner';
 
 import style from './style.less';
 
+const SCROLLTOLERANCE = [150, 90];
+
 class Color extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +34,7 @@ class Color extends React.Component {
     }));
   }
 
-  scrollHandler(ev) {
+  scrollHandler(st, ev) {
     let me = this;
     let isloading = me.props.loading;
     if(isloading || me.isAnimating){
@@ -40,8 +42,8 @@ class Color extends React.Component {
     }
 
     let elem = ev.target.body;
-    let scrollProgress = elem.scrollTop / (elem.scrollHeight - elem.clientHeight);
-    if(scrollProgress > 0.96){
+    let scrollBtn = elem.scrollHeight - elem.clientHeight - elem.scrollTop;
+    if(scrollBtn < st){
       let actcr = createAction('color/loadMore');
       me.props.dispatch(actcr());
     }
@@ -84,12 +86,13 @@ class Color extends React.Component {
     let endKey = (me.props.list.size-1).toString();
     me.isAnimating = true;
 
+    let sctr = im ? SCROLLTOLERANCE[0] : SCROLLTOLERANCE[1];
     return <div>
       {
         me.props.colorType != 'portfolio' && me.props.colorType != 'like' ?
           <EventListener
             target="window"
-            onScroll={me.scrollHandler.bind(me)}
+            onScroll={me.scrollHandler.bind(me, sctr)}
             />:
           null
       }

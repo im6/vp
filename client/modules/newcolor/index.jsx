@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createAction } from 'redux-actions';
 import ColorPicker from 'react-color-picker';
 import { browserHistory } from 'react-router';
-import { Row, Col, Card, Button, Input, Checkbox, Icon, Select, message, Modal } from 'antd';
+import { Row, Col, Card, Button, Input, Checkbox, Icon, Select, message, Modal, Tooltip } from 'antd';
 
 import EditCanvas from './components/EditCanvas';
 import VibrantPalette from './components/VibrantPalette';
@@ -121,6 +121,18 @@ class NewColor extends React.PureComponent {
     });
   }
 
+  resetColor(){
+    let me = this;
+    me.setState({
+      colorValue: [
+        null,
+        null,
+        null,
+        null
+      ]
+    });
+  }
+
   render() {
     const me = this;
     let types = me.props.colorType.get('list').toJS();
@@ -193,13 +205,14 @@ class NewColor extends React.PureComponent {
       <Row>
         <Col lg={24} md={24} sm={24} xs={24}>
           <div className={style.btnGroup}>
+
             <Button type="primary"
                     size="large"
                     icon="check"
                     onClick={me.submitColor.bind(me)}>
               Submit
             </Button>
-            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;
             <Link to="/">
               <Button type="default"
                       icon="close"
@@ -207,6 +220,14 @@ class NewColor extends React.PureComponent {
                 Cancel
               </Button>
             </Link>
+            &nbsp;&nbsp;&nbsp;
+            <Tooltip placement="top" title="Reset">
+              <Button type="default"
+                      size="large"
+                      icon="reload"
+                      onClick={me.resetColor.bind(me)} />
+            </Tooltip>
+
           </div>
         </Col>
       </Row>

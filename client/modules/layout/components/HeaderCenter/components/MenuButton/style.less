@@ -1,4 +1,5 @@
 @color: #a1a5d2;
+@animPeriod: 0.5s;
 
 .navTrigger {
   cursor: pointer;
@@ -22,21 +23,21 @@
     transition: background-color .4s ease-out;
 
     &:nth-child(1) {
-        -webkit-animation: outT 0.8s backwards;
-        animation: outT 0.8s backwards;
+        -webkit-animation: outT @animPeriod backwards;
+        animation: outT @animPeriod backwards;
         -webkit-animation-direction: reverse;
         animation-direction: reverse;
       }
     &:nth-child(2) {
         margin: 5px 0;
-        -webkit-animation: outM 0.8s backwards;
-        animation: outM 0.8s backwards;
+        -webkit-animation: outM @animPeriod backwards;
+        animation: outM @animPeriod backwards;
         -webkit-animation-direction: reverse;
         animation-direction: reverse;
       }
     &:nth-child(3) {
-        -webkit-animation: outBtm 0.8s backwards;
-        animation: outBtm 0.8s backwards;
+        -webkit-animation: outBtm @animPeriod backwards;
+        animation: outBtm @animPeriod backwards;
         -webkit-animation-direction: reverse;
         animation-direction: reverse;
       }
@@ -45,16 +46,16 @@
 
 .navTrigger.active i{
     &:nth-child(1) {
-        -webkit-animation: inT 0.8s forwards;
-        animation: inT 0.8s forwards;
+        -webkit-animation: inT @animPeriod forwards;
+        animation: inT @animPeriod forwards;
       }
     &:nth-child(2) {
-        -webkit-animation: inM 0.8s forwards;
-        animation: inM 0.8s forwards;
+        -webkit-animation: inM @animPeriod forwards;
+        animation: inM @animPeriod forwards;
       }
     &:nth-child(3) {
-        -webkit-animation: inBtm 0.8s forwards;
-        animation: inBtm 0.8s forwards;
+        -webkit-animation: inBtm @animPeriod forwards;
+        animation: inBtm @animPeriod forwards;
       }
 }
 
