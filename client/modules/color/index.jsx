@@ -12,7 +12,7 @@ import HeadBanner from './components/HeadBanner';
 
 import style from './style.less';
 
-const SCROLLTOLERANCE = [150, 90];
+const SCROLLTOLERANCE = 150;
 
 class Color extends React.Component {
   constructor(props) {
@@ -86,13 +86,12 @@ class Color extends React.Component {
     let endKey = (me.props.list.size-1).toString();
     me.isAnimating = true;
 
-    let sctr = im ? SCROLLTOLERANCE[0] : SCROLLTOLERANCE[1];
-    return <div>
+    return <div style={{minHeight: 800}}>
       {
         me.props.colorType != 'portfolio' && me.props.colorType != 'like' ?
           <EventListener
             target="window"
-            onScroll={me.scrollHandler.bind(me, sctr)}
+            onScroll={me.scrollHandler.bind(me, SCROLLTOLERANCE)}
             />:
           null
       }
@@ -123,7 +122,7 @@ class Color extends React.Component {
           })
         }
       </QueueAnim>
-      { me.props.loading ? <SpinLoader /> : <div style={{height: 22, marginTop: 20}}/> }
+      { me.props.loading ? <SpinLoader /> : <div style={{height: 60}}/> }
     </div>
   }
 }
