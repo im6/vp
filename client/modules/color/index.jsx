@@ -5,6 +5,7 @@ import QueueAnim from 'rc-queue-anim';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 import EventListener, {withOptions} from 'react-event-listener';
+import debounce from 'debounce';
 
 import Box from './components/Box';
 import SpinLoader from './components/SpinLoader';
@@ -91,7 +92,7 @@ class Color extends React.Component {
         me.props.colorType != 'portfolio' && me.props.colorType != 'like' ?
           <EventListener
             target="window"
-            onScroll={me.scrollHandler.bind(me, SCROLLTOLERANCE)}
+            onScroll={debounce(me.scrollHandler.bind(me, SCROLLTOLERANCE))}
             />:
           null
       }
