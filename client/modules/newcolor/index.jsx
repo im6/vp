@@ -10,7 +10,6 @@ import EditCanvas from './components/EditCanvas';
 import VibrantPalette from './components/VibrantPalette';
 import FinishModal from './components/FinishModal';
 
-
 const Option = Select.Option;
 
 import '!style!css!less!autoprefixer-loader?browsers=last 2 versions!react-color-picker/index.css';
@@ -33,7 +32,16 @@ class NewColor extends React.PureComponent {
       ],
       showUpload: false,
       colorType: [],
+      pickerWd: 200,
     };
+  }
+
+  componentDidMount(){
+    let me = this;
+    let { cpbox } = me.refs;
+    me.setState({
+      pickerWd: cpbox.offsetWidth
+    });
   }
 
   showModal(){
@@ -165,10 +173,13 @@ class NewColor extends React.PureComponent {
 
         <Col lg={3} md={1} sm={0} xs={0}></Col>
         <Col lg={9} md={11} sm={24} xs={24}>
-          <ColorPicker hueWidth={'15%'}
-                       saturationWidth={'78%'}
-                       value={me.state.editColor}
-                       onDrag={me.onPickColor.bind(me)}/>
+          <div ref="cpbox">
+            <ColorPicker hueWidth={me.state.pickerWd * 0.15}
+                         saturationWidth={me.state.pickerWd * 0.78}
+                         value={me.state.editColor}
+                         onDrag={me.onPickColor.bind(me)}/>
+          </div>
+
           <br/>
 
           <Input placeholder="hex"
