@@ -4,6 +4,7 @@ import { createAction } from 'redux-actions';
 
 import { Global } from '../config/global';
 import { getUserInfo, getInitAuth } from '../services/resource.js';
+
 import App from '../modules/app/index.jsx';
 import ErrorPage from '../modules/errorPage';
 import Auth from '../modules/auth';
