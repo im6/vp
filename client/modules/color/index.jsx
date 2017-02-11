@@ -19,12 +19,18 @@ class Color extends React.Component {
   constructor(props) {
     super(props);
     let me = this;
+    me.isAnimating = true;
   }
 
   componentDidMount() {
   }
 
   componentWillUnmount() {
+  }
+
+  componentWillReceiveProps(nextProps){
+    let me = this;
+    me.isAnimating = nextProps.list.size != this.props.list.size;
   }
   onLikeClickHandler(index, btnStatus){
     let me = this;
@@ -85,7 +91,6 @@ class Color extends React.Component {
     listClass[style.list] = true;
     let clsStr = classnames(listClass);
     let endKey = (me.props.list.size-1).toString();
-    me.isAnimating = true;
 
     return <div style={{minHeight: 800}}>
       {
