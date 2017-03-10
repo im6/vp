@@ -10,10 +10,17 @@ import imgo1 from './assets/oauth1.png';
 import imgo2 from './assets/oauth2.png';
 import imgo4 from './assets/oauth4.png';
 
+let goBackMain =()=> {
+  browserHistory.push('/');
+};
+
 let LoginCard = ({loginClick, wbClick, fbClick, ggClick}) => {
   return (
     <Card title="Welcome to ColorPK" style={{ width: 270 }}>
-      <img src={img} className={styles.iconStyle}/>
+      <img onClick={goBackMain.bind(null)}
+           src={img}
+           className={styles.iconStyle}
+        />
       <Input addonBefore={<Icon type="user" />} placeholder="Username" />
       <br/>
       <Input addonBefore={<Icon type="lock" />} type="password" placeholder="Password" />
