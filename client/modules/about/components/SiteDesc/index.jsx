@@ -17,22 +17,19 @@ class SiteDesc extends React.PureComponent {
     return <div className={style.container}>
       <div className={style.container}>
         <h2>
-          I'd like to get you the BEST ColorPicKer,
+          I'd like to get you the best ColorPicKer.
           <br/>
-          so here is ColorPK.com. Welcome!
-          <br/>
-          (No Player Killing stuff at all)
-          <br/>
-          The site is designed sincerely for people who LOVE colors.
+          So I create ColorPK, Welcome!
           <br/>
           Feel free to fiddle out whatever palette in your mind,
           <br/>
           and share with others.
           <br/>
-          It is a SOCIAL PLATFORM after all :)
+          It is a Social Platform after all :)
 
           <br/><br/>
-          - <a href={Global.zjweb} target="_blank">Zijian Guo</a>, New York City.
+          - <a href={Global.zjweb} target="_blank">Zijian Guo</a>
+          &nbsp;&nbsp;NYC, Jan 2017
         </h2>
       </div>
     </div>
