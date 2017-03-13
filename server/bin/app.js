@@ -6,6 +6,7 @@ const express = require('express'),
   cookieParser = require('cookie-parser'),
   expressSession = require('express-session'),
   csrf = require('csurf'),
+  helmet = require('helmet'),
   MySQLStore = require('express-mysql-session')(expressSession);
 
 console.log(`NODE_ENV: ${globalConfig.isDev ? 'dev' : 'production'}`);
@@ -35,6 +36,7 @@ if(!globalConfig.isDev){
 }
 
 app.set('x-powered-by', false);
+app.use(helmet());
 app.use(express.static(globalConfig.publicDir));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

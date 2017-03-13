@@ -87,6 +87,7 @@
     "express": "^4.14.0",
     "express-mysql-session": "^1.2.0",
     "express-session": "^1.14.1",
+    "helmet": "^3.5.0",
     "lodash": "^4.15.0",
     "method-override": "^2.3.6",
     "mysql": "^2.12.0",
