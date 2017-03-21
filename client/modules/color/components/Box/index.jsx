@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import { Button, Icon } from 'antd';
 import classnames from 'classnames';
 import style from './style.less';
@@ -7,7 +7,7 @@ import Immutable from 'immutable';
 
 
 
-class Product extends React.Component {
+class Box extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -33,7 +33,7 @@ class Product extends React.Component {
 
   render() {
     let me = this;
-    let bWidth = me.props.boxWidth ? me.props.boxWidth : 90;
+    let bWidth = me.props.boxWidth || 90;
     let likeStyle = {};
     likeStyle[style.hasLike] = me.props.boxInfo.get('liked') || false;
 
@@ -65,4 +65,11 @@ class Product extends React.Component {
   }
 }
 
-export default Product;
+Box.propTypes = {
+  boxInfo: PropTypes.object.isRequired,
+  onLikeClick: PropTypes.func.isRequired,
+  isMobile: PropTypes.bool,
+  boxWidth: PropTypes.number
+};
+
+export default Box;

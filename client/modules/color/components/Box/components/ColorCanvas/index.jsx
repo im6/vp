@@ -1,9 +1,7 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import { Button, Icon } from 'antd';
-import classnames from 'classnames';
 import style from './style.less';
 import ColorRow from '../ColorRow';
-import Immutable from 'immutable';
 
 
 class ColorCanvas extends React.Component {
@@ -34,5 +32,10 @@ class ColorCanvas extends React.Component {
     </div>;
   }
 }
+
+ColorCanvas.propTypes = {
+  colorValue: PropTypes.string.isRequired
+};
+
 
 export default ColorCanvas;

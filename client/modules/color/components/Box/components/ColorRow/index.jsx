@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import { Button } from 'antd';
-import classnames from 'classnames';
 import style from './style.less';
 
 class ColorRow extends React.Component {
@@ -20,5 +19,9 @@ class ColorRow extends React.Component {
     </div>
   }
 }
+
+ColorRow.propTypes = {
+  rowColor: PropTypes.string.isRequired
+};
 
 export default ColorRow;
