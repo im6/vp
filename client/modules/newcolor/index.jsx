@@ -30,7 +30,7 @@ class NewColor extends React.PureComponent {
         null,
         null
       ],
-      showUpload: false,
+      showUpload: me.props.routePath === '/extract',
       colorType: [],
       pickerWd: 200,
     };
@@ -246,8 +246,10 @@ class NewColor extends React.PureComponent {
   }
 }
 
-function mapStateToProps({colorType, user}){
+function mapStateToProps({colorType, user, routing}){
+  let routePath = routing.locationBeforeTransitions.pathname;
   return {
+    routePath,
     colorType,
     user
   }

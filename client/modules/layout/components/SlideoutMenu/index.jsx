@@ -14,13 +14,15 @@ const groupNameMap = {
   '/latest':'list',
   '/resourceapi':'service',
   '/new':'service',
+  '/extract':'service',
   '/about':'about'
 };
 const itemKeyNameMap = {
   '/':'index',
   '/latest':'latest',
   '/resourceapi':'resourceapi',
-  '/new':'new',
+  '/new':'extract',
+  '/extract':'extract',
   '/about':'about'
 };
 
@@ -91,8 +93,8 @@ class SlideoutMenu extends React.Component {
               </h3>
             </Link>
           </Menu.Item>
-          <Menu.Item key="new">
-            <Link to="/new">
+          <Menu.Item key="extract">
+            <Link to="/extract">
               <h3>
                 <Icon type="filter" />
                 Extraction

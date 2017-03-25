@@ -96,6 +96,7 @@ const Routes = ({ history, store }) => {
       <Route path="/like" component={Color} onEnter={initColor} />
 
       <Route path="/new" component={NewColor} />
+      <Route path="/extract" component={NewColor} />
       <Route path="/resourceapi" component={ResourceApi} />
       <Route path="/about" component={About} />
       <Route path="/adminpanel" component={AdminPanel} onEnter={initAdmin} />

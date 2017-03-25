@@ -10,6 +10,7 @@ var FRONTURLs = [
   '/about',
 
   '/new',
+  '/extract',
   '/resourceapi',
   '/about',
   '/adminpanel'
