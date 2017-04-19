@@ -96,10 +96,7 @@ class Layout extends React.Component {
                       userInfo={me.props.user}/>
         <div
           className={styles.main}
-          style={{
-          background: `#f5f6f7 url(${img}) repeat-x 0 0`,
-          minHeight: document.body.clientHeight
-          }} >
+          style={{minHeight: document.body.clientHeight}} >
           {me.props.children}
         </div>
       </main>
