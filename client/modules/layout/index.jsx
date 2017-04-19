@@ -8,8 +8,6 @@ import EventListener, {withOptions} from 'react-event-listener';
 import styles from './style.less';
 import '!style!css!./slideout.css';
 
-import img from '!file!./assets/gradient.jpg';
-
 import HeaderCenter from './components/HeaderCenter';
 import SlideoutMenu from './components/SlideoutMenu';
 
