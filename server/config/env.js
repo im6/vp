@@ -1,5 +1,7 @@
 var env = process.env;
 
+//NPM_CONFIG_PRODUCTION = true  or NPM_USE_PRODUCTION
+
 module.exports = {
   isDev: env.NODE_ENV === 'dev',
   publicDir: env.NODE_ENV === 'dev' ? 'temp' : 'public',
