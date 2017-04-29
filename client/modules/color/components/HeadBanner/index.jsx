@@ -35,7 +35,7 @@ const HeadBanner = ({colorSize, colorType}) => {
     </div>;
   } else {
     ele = <Alert
-      message={<h3>Congrat to ColorPK</h3>}
+      message={<h3>Recognized by community</h3>}
       description={
       <h3>
         <br/>
@@ -43,9 +43,8 @@ const HeadBanner = ({colorSize, colorType}) => {
         <a href="http://www.javascript.fun/site" target="_blank">
         JavaScript.Fun
         </a>&nbsp;
-        alone with other great providers as recommendated websites.
-        <br/>
-        We will keep providing our users with more colorful solutions.
+        as a recommendated color picker.&nbsp;
+        We will keep delivering our users innovative and adaptive color solutions.
         <br/>
         Way to go &nbsp; :)
       </h3>
