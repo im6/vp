@@ -43,7 +43,7 @@ const HeadBanner = ({colorSize, colorType}) => {
         <a href="http://www.javascript.fun/site" target="_blank">
         JavaScript.Fun
         </a>&nbsp;
-        as a recommendated color picker.&nbsp;
+        as a recommendated colorpicker website.&nbsp;
         We will keep delivering our users innovative and adaptive color solutions.
         <br/>
         Way to go &nbsp; :)

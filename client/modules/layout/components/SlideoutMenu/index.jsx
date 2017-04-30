@@ -103,24 +103,15 @@ class SlideoutMenu extends React.Component {
 
           </Menu.Item>
         </SubMenu>
-        <SubMenu key="about" title={<h3><Icon type="info-circle" />About</h3>}>
-          <Menu.Item key="about">
-            <Link to="/about">
-              <h3>
-                <Icon type="book" />
-                Site
-              </h3>
-            </Link>
+        <Menu.Item key="about">
+          <Link to="/about">
+            <h3>
+              <Icon type="book" />
+              About
+            </h3>
+          </Link>
 
-          </Menu.Item>
-          <Menu.Item key="zj">
-            <a href={Global.zjweb} target="_blank">
-              <h3>
-                <Icon type="user" />Auther
-              </h3>
-            </a>
-          </Menu.Item>
-        </SubMenu>
+        </Menu.Item>
       </Menu>
     </div>;
 
@@ -134,3 +125,25 @@ function mapStateToProps({routing}){
   }
 }
 export default connect(mapStateToProps)(SlideoutMenu) ;
+
+
+/*
+* <SubMenu key="about" title={<h3><Icon type="info-circle" />About</h3>}>
+ <Menu.Item key="about">
+ <Link to="/about">
+ <h3>
+ <Icon type="book" />
+ Site
+ </h3>
+ </Link>
+
+ </Menu.Item>
+ <Menu.Item key="zj">
+ <a href={Global.zjweb} target="_blank">
+ <h3>
+ <Icon type="user" />Auther
+ </h3>
+ </a>
+ </Menu.Item>
+ </SubMenu>
+* */
