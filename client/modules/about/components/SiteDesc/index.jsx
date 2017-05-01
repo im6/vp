@@ -28,11 +28,7 @@ class SiteDesc extends React.PureComponent {
           It is a Social Platform after all :)
 
           <br/><br/>
-          {
-            // - <a href={Global.zjweb} target="_blank">Zijian Guo</a>
-          }
           - ColorPK team @Jan,2017
-
         </h2>
       </div>
     </div>
