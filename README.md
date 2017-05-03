@@ -19,3 +19,4 @@ SPA and admin template.
 - eslint
 - immutable.js
 - isomorphic-fetch
+-facebook/weibo/google+ oAuth
