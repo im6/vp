@@ -1,4 +1,4 @@
-# [ColorPK.com](http://www.colorpk.com/)
+# [ColorPK.com](http://www.javascript.fun/demo/)
 
 SPA and admin template.
 
