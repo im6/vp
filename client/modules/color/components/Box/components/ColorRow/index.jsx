@@ -12,9 +12,10 @@ class ColorRow extends React.Component {
     let me = this;
     return <div className={style.rowContainer}
                 style={{'backgroundColor': me.props.rowColor}} >
-      <h1 className={`${style.text} ${style.share}`}>
+      <a href={`/color/${me.props.colorId}`}
+         className={style.text}>
         <Icon type="export" />
-      </h1>
+      </a>
       <h1 className={style.text}>
         {me.props.rowColor}
       </h1>

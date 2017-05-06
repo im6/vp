@@ -27,6 +27,7 @@ class ColorCanvas extends React.Component {
       {me.props.colorValue.split('#').map((v, k) => {
         return <ColorRow
           key={k}
+          colorId={me.props.colorId}
           rowColor={'#' + v} />
       })}
     </div>;

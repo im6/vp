@@ -44,6 +44,7 @@ class Box extends React.Component {
 
     return <div className={style.box} style={{width: bWidth + '%', height: boxHt}}>
         <ColorCanvas
+          colorId={me.props.boxInfo.get('id')}
           colorValue={me.props.boxInfo.get('color')}/>
         <div className={style.boxFooter}>
           <Button
