@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import { Button } from 'antd';
+import { Button, Icon } from 'antd';
 import style from './style.less';
 
 class ColorRow extends React.Component {
@@ -12,10 +12,12 @@ class ColorRow extends React.Component {
     let me = this;
     return <div className={style.rowContainer}
                 style={{'backgroundColor': me.props.rowColor}} >
-
-      <span className={style.text}>
+      <h1 className={`${style.text} ${style.share}`}>
+        <Icon type="export" />
+      </h1>
+      <h1 className={style.text}>
         {me.props.rowColor}
-      </span>
+      </h1>
     </div>
   }
 }
