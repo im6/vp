@@ -2,24 +2,24 @@ var globalConfig = require('../config/env'),
   path = require('path');
 
 var FRONTURLs = [
-  '/auth',
-  '/',
-  '/portfolio',
-  '/latest',
-  '/like',
-  '/about',
-
-  '/new',
-  '/extract',
-  '/resourceapi',
-  '/about',
-  '/adminpanel'
+  'auth',
+  'portfolio',
+  'latest',
+  'like',
+  'about',
+  'color',
+  'new',
+  'extract',
+  'resourceapi',
+  'about',
+  'adminpanel'
 ];
 
 module.exports = {
   main: function(req, res, next){
-    if(FRONTURLs.indexOf(req.originalUrl) < 0){
-      res.redirect('/')
+    var subUrl = req.originalUrl.split('/');
+    if(FRONTURLs.indexOf(subUrl[1]) < 0){
+      res.redirect('/');
     }else{
       if(globalConfig.isDev){
         console.log(`${req.method}: ${req.originalUrl}`);

@@ -14,6 +14,7 @@ Object.assign(baseTemplate, {
   entry: asset.entry("watch"),
   devtool: 'eval',
   output: {
+    publicPath: '/',
     path: path.join(__dirname, '../../temp'),
     filename: 'bundle.js'
   }

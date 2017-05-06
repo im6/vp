@@ -14,6 +14,7 @@ Object.assign(baseTemplate, {
   entry: asset.entry("hot"),
   devtool: 'source-map',
   output: {
+    publicPath: '/',
     path: path.join(__dirname, '../../public'),
     filename: 'bundle.js'
   },
