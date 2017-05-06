@@ -36,6 +36,7 @@ class Box extends React.Component {
     let bWidth = me.props.boxWidth || 90;
     let likeStyle = {};
     likeStyle[style.hasLike] = me.props.boxInfo.get('liked') || false;
+    let likeIcon = me.props.boxInfo.get('liked') ? 'heart' : 'heart-o';
 
 
     let btnSize = me.props.isMobile ? 'small': 'default';
@@ -50,7 +51,7 @@ class Box extends React.Component {
             size={btnSize}
             onClick={me.onClickHander.bind(me)}>
             <h3 style={{display: 'inline'}}>
-              <Icon type="heart" className={likeStyle}/>
+              <Icon type={likeIcon} className={likeStyle}/>
               &nbsp;&nbsp;
               {me.props.boxInfo.get('like')}
             </h3>
