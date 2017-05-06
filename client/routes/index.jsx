@@ -91,6 +91,7 @@ const Routes = ({ history, store }) => {
            component={App}
            onEnter={checkAuth}>
       <IndexRoute component={Color} onEnter={initColor}/>
+      <Route path="/color/:id" component={Color} onEnter={initColor} />
       <Route path="/latest" component={Color} onEnter={initColor} />
       <Route path="/portfolio" component={Color} onEnter={initColor} />
       <Route path="/like" component={Color} onEnter={initColor} />
