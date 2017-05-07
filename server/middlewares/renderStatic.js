@@ -2,6 +2,7 @@ var globalConfig = require('../config/env'),
   path = require('path');
 
 var FRONTURLs = [
+  '',
   'auth',
   'portfolio',
   'latest',
@@ -17,7 +18,8 @@ var FRONTURLs = [
 
 module.exports = {
   main: function(req, res, next){
-    var subUrl = req.originalUrl.split('/');
+    var subUrl = req.url.split('/');
+
     if(FRONTURLs.indexOf(subUrl[1]) < 0){
       res.redirect('/');
     }else{
@@ -26,7 +28,6 @@ module.exports = {
       }else{
         res.cookie('_csrf',req.csrfToken());
       }
-
       res.sendFile(path.resolve(__dirname,`../../views/index.html`));
     }
   }
