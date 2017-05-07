@@ -6,6 +6,7 @@ import { createAction } from 'redux-actions';
 function* watchers(a) {
   yield [
     takeLatest("color/get", initColorList),
+    takeLatest("color/getSelected", initColorList),
     takeLatest("color/getLatest", initColorLatest),
     takeLatest("color/getPortfolio", initColorPortfolio),
     takeLatest("color/getLike", initColorLike),

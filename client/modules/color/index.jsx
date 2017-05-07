@@ -107,6 +107,16 @@ class Color extends React.Component {
         colorType={me.props.colorType}
         />
 
+      {
+        me.props.selectedIndex < 0 ? null:
+          <div className={style.selectedBox}>
+            <Box boxInfo={me.props.list.get(me.props.selectedIndex)}
+                 boxWidth={im? 70: 30}
+                 isMobile={im}
+                 onLikeClick={me.onLikeClickHandler.bind(me, me.props.selectedIndex)} />
+          </div>
+      }
+
       <QueueAnim type="top"
                  onEnd={me.onAnimEnd.bind(me, endKey)}
                  duration={280}
@@ -133,8 +143,7 @@ class Color extends React.Component {
   }
 }
 
-function mapStateToProps({color, user}){
-
+function mapStateToProps({color, user, routing}){
   let saved = color.get('liked');
   let color0 = color.get('list').map(v => {
     return v.merge({
@@ -142,11 +151,22 @@ function mapStateToProps({color, user}){
     });
   });
 
+  let selectedIndex = -1,
+    selectedColorIdStr = routing.locationBeforeTransitions.pathname.replace('/color/',''),
+    pttId = parseInt(selectedColorIdStr);
+
+  if(!Number.isNaN(pttId)){
+    selectedIndex = color.get('list').findIndex((v,k)=> {
+      return v.get('id') === pttId;
+    });
+  }
+
   return {
     list: color0,
     loading: color.get('loading'),
     colorType: color.get('type'),
-    isMobile: user.get('isMobile')
+    isMobile: user.get('isMobile'),
+    selectedIndex
   }
 }
 

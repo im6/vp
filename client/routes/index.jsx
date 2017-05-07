@@ -82,6 +82,14 @@ const Routes = ({ history, store }) => {
 
   };
 
+  const initColor2 = (nextState, replace, callback) => {
+    if(store. getState().color.get('list').size < 1){
+      const ac = createAction('color/getSelected');
+      store.dispatch(ac());
+    }
+    callback();
+  };
+
   return <Router history={history} >
     <Route path="/auth"
            component={Auth}
@@ -91,7 +99,7 @@ const Routes = ({ history, store }) => {
            component={App}
            onEnter={checkAuth}>
       <IndexRoute component={Color} onEnter={initColor}/>
-      <Route path="/color/:id" component={Color} onEnter={initColor} />
+      <Route path="/color/:id" component={Color} onEnter={initColor2} />
       <Route path="/latest" component={Color} onEnter={initColor} />
       <Route path="/portfolio" component={Color} onEnter={initColor} />
       <Route path="/like" component={Color} onEnter={initColor} />

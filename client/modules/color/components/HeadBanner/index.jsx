@@ -33,6 +33,10 @@ const HeadBanner = ({colorSize, colorType}) => {
         </Button>
       </Link>
     </div>;
+  } else if(true){
+    //todo:
+
+
   } else {
     ele = <Alert
       message={<h3>Recognized by community</h3>}
