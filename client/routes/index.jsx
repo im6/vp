@@ -23,6 +23,11 @@ const Routes = ({ history, store }) => {
     }
   };
 
+  const setView = (viewName) => {
+    const ac = createAction('color/setView');
+    store.dispatch(ac(viewName));
+  };
+
   const initAuth = (nextState, replace, callback) => {
     getInitAuth().then((res) => {
       const ac = createAction('user/initAuth');
@@ -46,19 +51,18 @@ const Routes = ({ history, store }) => {
   };
 
   const initAdmin = (nextState, replace, callback) => {
-    getUserInfo().then((res) => {
-      if(res.profile && res.profile.isAdmin){
-        const ac0 = createAction('admin/getList');
-        store.dispatch(ac0());
-      }else{
-        replace('/');
-      }
+    let user = store.getState().user;
+    if(user.getIn(['detail', 'isAdmin'])){
+      const ac0 = createAction('admin/getList');
+      store.dispatch(ac0());
+    }else{
+      replace('/');
+    }
 
-      callback();
-    });
+    callback();
   };
 
-  const initColor = (nextState, replace, callback) => {
+  const initBoxes = (nextState, replace, callback) => {
     fillColors();
     let nextUrl = nextState.location.pathname,
       actName = null,
@@ -83,9 +87,11 @@ const Routes = ({ history, store }) => {
         break;
       case '/portfolio':
         actName = 'color/getPortfolio';
+        param = 'portfolio';
         break;
       case '/like':
         actName = 'color/getLike';
+        param = 'like';
         break;
       default:
         break;
@@ -100,6 +106,12 @@ const Routes = ({ history, store }) => {
 
   };
 
+  const initView = (nextState, replace, callback) => {
+    let viewName = nextState.location.pathname.substring(1);
+    setView(viewName);
+    callback();
+  };
+
   return <Router history={history} >
     <Route path="/auth"
            component={Auth}
@@ -108,19 +120,21 @@ const Routes = ({ history, store }) => {
     <Route path="/"
            component={App}
            onEnter={checkAuth}>
-      <IndexRoute component={Color} onEnter={initColor}/>
-      <Route path="/color/:id" component={Color} onEnter={initColor} />
-      <Route path="/latest" component={Color} onEnter={initColor} />
-      <Route path="/portfolio" component={Color} onEnter={initColor} />
-      <Route path="/like" component={Color} onEnter={initColor} />
 
-      <Route path="/new" component={NewColor} />
-      <Route path="/extract" component={NewColor} />
-      <Route path="/resourceapi" component={ResourceApi} />
-      <Route path="/about" component={About} />
+      <IndexRoute component={Color} onEnter={initBoxes}/>
+      <Route path="/color/:id" component={Color} onEnter={initBoxes} />
+      <Route path="/latest" component={Color} onEnter={initBoxes} />
+      <Route path="/portfolio" component={Color} onEnter={initBoxes} />
+      <Route path="/like" component={Color} onEnter={initBoxes} />
+
+      <Route path="/new" component={NewColor} onEnter={initView}/>
+      <Route path="/extract" component={NewColor} onEnter={initView}/>
+      <Route path="/resourceapi" component={ResourceApi} onEnter={initView}/>
+      <Route path="/about" component={About} onEnter={initView}/>
+
       <Route path="/adminpanel" component={AdminPanel} onEnter={initAdmin} />
-      <Route path="*" component={ErrorPage} />
 
+      <Route path="*" component={ErrorPage} onEnter={initView}/>
     </Route>
   </Router>;
 };
