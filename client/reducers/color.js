@@ -4,32 +4,13 @@ import Immutable, {Map, List} from 'immutable';
 import { message } from 'antd';
 
 const color = handleActions({
-  ['color/getLatest'](state, action) {
-    return state.merge({
-      loading: true,
-      list: [],
-      type: 'latest'
-    });
-  },
-  ['color/getPortfolio'](state, action) {
-    return state.merge({
-      loading: true,
-      type: 'portfolio'
-    });
-  },
-  ['color/getLike'](state, action) {
-    return state.merge({
-      loading: true,
-      type: 'like'
-    });
-  },
+
   ['color/get'](state, action) {
     return state.merge({
-      loading: true,
-      list: [],
-      type: 'popular'
+      loading: true
     });
   },
+
   ['color/get/success'](state, action) {
     return state.merge({
       list: action.payload || [] ,
@@ -43,6 +24,52 @@ const color = handleActions({
       loading: false
     });
   },
+
+  ['color/setView'](state, action) {
+    return state.merge({
+      view: action.payload
+    });
+  },
+
+  ['color/getPortfolio'](state, action) {
+    return state.merge({
+      loading: true,
+      view: 'portfolio'
+    });
+  },
+  ['color/getPortfolio/success'](state, action) {
+    return state.merge({
+      loading: false,
+      myPortfolio: action.payload || []
+    });
+  },
+
+  ['color/getPortfolio/fail'](state, action) {
+    return state.merge({
+      loading: false,
+      myPortfolio: []
+    });
+  },
+
+  ['color/getLike'](state, action) {
+    return state.merge({
+      loading: true,
+      view: 'like'
+    });
+  },
+  ['color/getLike/success'](state, action) {
+    return state.merge({
+      loading: false,
+      myLiked: action.payload || []
+    });
+  },
+  ['color/getLike/fail'](state, action) {
+    return state.merge({
+      loading: false,
+      myLiked: action.payload || []
+    });
+  },
+
   ['color/loadMore'](state, action) {
     return state.merge({
       loading: true
@@ -82,7 +109,7 @@ const color = handleActions({
       });
     });
 
-    if(state.get('type')=='like' && !gonnaLike){
+    if(state.get('view')=='like' && !gonnaLike){
       newList = newList.filter(v => v.get('id') != action.payload.id);
     }
 
@@ -144,11 +171,13 @@ const color = handleActions({
 
 }, Immutable.fromJS({
   list: [],
+  myPortfolio: [],
+  myLiked: [],
   liked: {
     'z': 0
   },
   loading: true,
-  type: null
+  view: null  // portfolio | like | popular | latest
 }));
 
 export default color;

@@ -13,7 +13,7 @@ class AdminPanel extends React.PureComponent {
     let me = this;
     me.state = {
       showModal: false,
-      modalContent: null
+      modalContent: ''
     }
   }
 

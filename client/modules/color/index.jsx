@@ -13,7 +13,8 @@ import HeadBanner from './components/HeadBanner';
 
 import style from './style.less';
 
-const SCROLLTOLERANCE = 150;
+const SCROLLTOLERANCE = 150,
+  INFINITESCROLL = false;
 
 class Color extends React.Component {
   constructor(props) {
@@ -94,7 +95,7 @@ class Color extends React.Component {
 
     return <div style={{minHeight: 800}}>
       {
-        me.props.colorType != 'portfolio' && me.props.colorType != 'like' ?
+        (INFINITESCROLL && me.props.colorType != 'portfolio' && me.props.colorType != 'like') ?
           <EventListener
             target="window"
             onScroll={debounce(me.scrollHandler.bind(me, SCROLLTOLERANCE))}
@@ -108,13 +109,16 @@ class Color extends React.Component {
         />
 
       {
-        me.props.selectedIndex < 0 ? null:
-          <div className={style.selectedBox}>
-            <Box boxInfo={me.props.list.get(me.props.selectedIndex)}
-                 boxWidth={im? 70: 30}
-                 isMobile={im}
-                 onLikeClick={me.onLikeClickHandler.bind(me, me.props.selectedIndex)} />
-          </div>
+        me.props.selectedIndex >= 0 ?
+          (
+            <div className={style.selectedBox}>
+              <Box boxInfo={me.props.list.get(me.props.selectedIndex)}
+                   boxWidth={im? 70: 30}
+                   isMobile={im}
+                   onLikeClick={me.onLikeClickHandler.bind(me, me.props.selectedIndex)} />
+            </div>
+          ) : null
+
       }
 
       <QueueAnim type="top"
@@ -144,19 +148,36 @@ class Color extends React.Component {
 }
 
 function mapStateToProps({color, user, routing}){
-  let saved = color.get('liked');
-  let color0 = color.get('list').map(v => {
+  let saved = color.get('liked'),
+    view = color.get('view'),
+    listName = 'list';
+
+  if(view === 'portfolio'){
+    listName = 'myPortfolio';
+  }else if(view === 'like'){
+    listName = 'myLiked';
+  }
+
+  let color0 = color.get(listName).map(v => {
     return v.merge({
       liked: saved.get('d' + v.get('id')) || false
     });
   });
 
-  let selectedIndex = -1,
-    selectedColorIdStr = routing.locationBeforeTransitions.pathname.replace('/color/',''),
-    pttId = parseInt(selectedColorIdStr);
+  //========== order ==============
+  if(view === 'latest'){
+    color0 = color0.sortBy(v => {
+      return v.get('like');
+    });
+  }
+  //========== order END ==============
 
-  if(!Number.isNaN(pttId)){
-    selectedIndex = color.get('list').findIndex((v,k)=> {
+
+  let selectedIndex = -1;
+  if(view === 'color'){
+    let selectedColorIdStr = routing.locationBeforeTransitions.pathname.replace('/color/',''),
+      pttId = parseInt(selectedColorIdStr);
+    selectedIndex = color0.findIndex((v,k)=> {
       return v.get('id') === pttId;
     });
   }

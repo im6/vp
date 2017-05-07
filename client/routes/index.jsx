@@ -16,6 +16,12 @@ import AdminPanel from '../modules/adminPanel';
 
 
 const Routes = ({ history, store }) => {
+  const fillColors = () => {
+    if(store. getState().color.get('list').size < 1){
+      const ac = createAction('color/get');
+      store.dispatch(ac());
+    }
+  };
 
   const initAuth = (nextState, replace, callback) => {
     getInitAuth().then((res) => {
@@ -53,15 +59,27 @@ const Routes = ({ history, store }) => {
   };
 
   const initColor = (nextState, replace, callback) => {
+    fillColors();
     let nextUrl = nextState.location.pathname,
-      actName = null;
+      actName = null,
+      param = null;
+
+    if(nextUrl.substring(0,7) === "/color/"){
+      nextUrl = '/color';
+    }
 
     switch (nextUrl){
       case '/':
-        actName = 'color/get';
+        actName = 'color/setView';
+        param = 'popular';
         break;
       case '/latest':
-        actName = 'color/getLatest';
+        actName = 'color/setView';
+        param = 'latest';
+        break;
+      case '/color':
+        actName = 'color/setView';
+        param = 'color';
         break;
       case '/portfolio':
         actName = 'color/getPortfolio';
@@ -75,19 +93,11 @@ const Routes = ({ history, store }) => {
 
     if(actName){
       const ac = createAction(actName);
-      store.dispatch(ac());
+      store.dispatch(ac(param));
     }
 
     callback();
 
-  };
-
-  const initColor2 = (nextState, replace, callback) => {
-    if(store. getState().color.get('list').size < 1){
-      const ac = createAction('color/getSelected');
-      store.dispatch(ac());
-    }
-    callback();
   };
 
   return <Router history={history} >
@@ -99,7 +109,7 @@ const Routes = ({ history, store }) => {
            component={App}
            onEnter={checkAuth}>
       <IndexRoute component={Color} onEnter={initColor}/>
-      <Route path="/color/:id" component={Color} onEnter={initColor2} />
+      <Route path="/color/:id" component={Color} onEnter={initColor} />
       <Route path="/latest" component={Color} onEnter={initColor} />
       <Route path="/portfolio" component={Color} onEnter={initColor} />
       <Route path="/like" component={Color} onEnter={initColor} />

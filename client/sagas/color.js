@@ -6,8 +6,6 @@ import { createAction } from 'redux-actions';
 function* watchers(a) {
   yield [
     takeLatest("color/get", initColorList),
-    takeLatest("color/getSelected", initColorList),
-    takeLatest("color/getLatest", initColorLatest),
     takeLatest("color/getPortfolio", initColorPortfolio),
     takeLatest("color/getLike", initColorLike),
     takeLatest("color/loadMore", colorLoadMore),
@@ -21,18 +19,18 @@ function* initColorLike(action) {
     const payload = yield call(requester, '/api/initColorLike');
     if(payload.error){
       yield put({
-        type: "color/get/fail",
+        type: "color/getLike/fail",
         payload: {msg: e}
       });
     }else{
       yield put({
-        type: "color/get/success",
+        type: "color/getLike/success",
         payload: payload.result
       });
     }
   } catch (e) {
     yield put({
-      type: "color/get/fail",
+      type: "color/getLike/fail",
       payload: {msg: e}
     });
   }
@@ -42,27 +40,12 @@ function* initColorPortfolio(action) {
   try {
     const payload = yield call(requester, '/api/initColorPortfolio');
     yield put({
-      type: "color/get/success",
+      type: "color/getPortfolio/success",
       payload: payload.result
     });
   } catch (e) {
     yield put({
-      type: "color/get/fail",
-      payload: {msg: e}
-    });
-  }
-}
-
-function* initColorLatest(action) {
-  try {
-    const payload = yield call(requester, '/api/initColorLatest');
-    yield put({
-      type: "color/get/success",
-      payload: payload.result
-    });
-  } catch (e) {
-    yield put({
-      type: "color/get/fail",
+      type: "color/getPortfolio/fail",
       payload: {msg: e}
     });
   }

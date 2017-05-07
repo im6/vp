@@ -8,9 +8,12 @@ import ProfileMenu from './components/ProfileMenu';
 import { Link } from 'react-router';
 import style from './style.less';
 
-const showReturnUrl = ['/new', '/portfolio', '/like', '/about', '/resourceapi'];
+const hideReturn = [
+  'popular',
+  'latest'
+];
 
-const HeaderCenter = ({logout, userInfo, isNavBtnActive, currentPath}) => {
+const HeaderCenter = ({logout, userInfo, isNavBtnActive, currentView}) => {
 
   const isAdmin = userInfo.get('detail') && userInfo.get('detail').get('isAdmin');
 
@@ -29,7 +32,7 @@ const HeaderCenter = ({logout, userInfo, isNavBtnActive, currentPath}) => {
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
         {
-          showReturnUrl.indexOf(currentPath) > -1?
+          hideReturn.indexOf(currentView) < 0?
           <Link to="/">
             <Button type="default" icon="home">
             Back home

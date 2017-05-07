@@ -90,7 +90,7 @@ class Layout extends React.Component {
       <main ref="panel">
         <HeaderCenter logout={me.logout.bind(me)}
                       isNavBtnActive={me.state.isMenuView}
-                      currentPath={me.props.currentPath}
+                      currentView={me.props.view}
                       userInfo={me.props.user}/>
         <div
           className={styles.main}
@@ -109,10 +109,10 @@ Layout.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-function mapStateToProps({routing, user}){
+function mapStateToProps({color, user}){
   return {
     user,
-    currentPath: routing.locationBeforeTransitions.pathname
+    view: color.get('view')
   }
 }
 
