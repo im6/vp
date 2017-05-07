@@ -19,6 +19,7 @@ class SiteTimeline extends React.PureComponent {
         <Timeline.Item>2017-01-03 Publish v.0.0.1 </Timeline.Item>
         <Timeline.Item>2017-01-15 Release v.0.1</Timeline.Item>
         <Timeline.Item>2017-03-11 Release v.0.2</Timeline.Item>
+        <Timeline.Item>2017-05-07 Release v.0.3</Timeline.Item>
       </Timeline>
     </div>
   }

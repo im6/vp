@@ -177,7 +177,7 @@ const color = handleActions({
     'z': 0
   },
   loading: true,
-  view: null  // portfolio | like | popular | latest
+  view: null // portfolio | like | popular | latest
 }));
 
 export default color;

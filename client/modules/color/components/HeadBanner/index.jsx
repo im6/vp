@@ -3,9 +3,9 @@ import { Link } from 'react-router';
 import { Alert, Button } from 'antd';
 import style from './style.less';
 
-const HeadBanner = ({colorSize, colorType}) => {
+const HeadBanner = ({colorSize, colorView}) => {
   let ele = null;
-  if(colorType === 'like' && colorSize === 0){
+  if(colorView === 'like' && colorSize === 0){
     ele = <div>
       <Alert
         message="You have no favorite colors yet."
@@ -19,7 +19,7 @@ const HeadBanner = ({colorSize, colorType}) => {
         </Button>
       </Link>
     </div>;
-  } else if(colorType === 'portfolio' && colorSize === 0){
+  } else if(colorView === 'portfolio' && colorSize === 0){
     ele = <div>
       <Alert
         message="You haven't create any colors yet."
@@ -33,10 +33,8 @@ const HeadBanner = ({colorSize, colorType}) => {
         </Button>
       </Link>
     </div>;
-  } else if(true){
-    //todo:
-
-
+  } else if(colorView === 'color'){
+    // do nothing;
   } else {
     ele = <Alert
       message={<h3>Recognized by community</h3>}

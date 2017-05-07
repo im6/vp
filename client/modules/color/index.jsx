@@ -48,7 +48,6 @@ class Color extends React.Component {
     if(isloading || me.isAnimating){
       return false;
     }
-
     let elem = ev.target.body;
     let scrollBtn = elem.scrollHeight - elem.clientHeight - elem.scrollTop;
     if(scrollBtn < st){
@@ -77,7 +76,7 @@ class Color extends React.Component {
     let me = this;
     if(endKey === type.key){
       if(type.type === 'enter' &&
-        (me.props.colorType === 'popular' || me.props.colorType === 'latest')){
+        (me.props.view === 'popular' || me.props.view === 'latest')){
         me.isAnimating = false;
       }
     }
@@ -95,7 +94,7 @@ class Color extends React.Component {
 
     return <div style={{minHeight: 800}}>
       {
-        (INFINITESCROLL && me.props.colorType != 'portfolio' && me.props.colorType != 'like') ?
+        (INFINITESCROLL && (me.props.view === 'latest' || me.props.view === 'popular')) ?
           <EventListener
             target="window"
             onScroll={debounce(me.scrollHandler.bind(me, SCROLLTOLERANCE))}
@@ -105,7 +104,7 @@ class Color extends React.Component {
 
       <HeadBanner
         colorSize={me.props.list.size}
-        colorType={me.props.colorType}
+        colorView={me.props.view}
         />
 
       {
@@ -185,9 +184,9 @@ function mapStateToProps({color, user, routing}){
   return {
     list: color0,
     loading: color.get('loading'),
-    colorType: color.get('type'),
     isMobile: user.get('isMobile'),
-    selectedIndex
+    selectedIndex,
+    view
   }
 }
 

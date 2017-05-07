@@ -56,7 +56,7 @@ class Layout extends React.Component {
     });
   }
 
-  onSlideoutMenuClick(selection){
+  onSlideoutMenuClick(){
     let me = this;
     if(!Global.isDev){
       setTimeout(()=>{
@@ -84,7 +84,9 @@ class Layout extends React.Component {
         />
 
       <nav ref="menu">
-        <SlideoutMenu onClick={me.onSlideoutMenuClick.bind(me)}/>
+        <SlideoutMenu view={me.props.view}
+                      onClick={me.onSlideoutMenuClick.bind(me)}
+          />
       </nav>
 
       <main ref="panel">

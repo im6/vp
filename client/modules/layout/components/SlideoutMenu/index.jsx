@@ -2,66 +2,63 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { Menu, Icon } from 'antd';
-
-import {Global} from '../../../../config/global.js';
-const SubMenu = Menu.SubMenu;
-
 import style from './style.less';
 
-
-const groupNameMap = {
-  '/':'list',
-  '/latest':'list',
-  '/resourceapi':'service',
-  '/new':'service',
-  '/extract':'service',
-  '/about':'about'
-};
-const itemKeyNameMap = {
-  '/':'index',
-  '/latest':'latest',
-  '/resourceapi':'resourceapi',
-  '/new':'extract',
-  '/extract':'extract',
-  '/about':'about'
+const SubMenu = Menu.SubMenu,
+  groupNameMap = {
+  'popular':'list',
+  'color':'list',
+  'latest':'list',
+  'resourceapi':'service',
+  'new':'service',
+  'extract':'service',
+  'about':'about'
+},
+  itemKeyNameMap = {
+  'popular':'index',
+  'color':'index',
+  'latest':'latest',
+  'resourceapi':'resourceapi',
+  'new':'extract',
+  'extract':'extract',
+  'about':''
 };
 
 class SlideoutMenu extends React.Component {
   constructor(props) {
     super(props);
-    let me = this;
-    me.state={
-      current: [groupNameMap[me.props.currentPath], itemKeyNameMap[me.props.currentPath]]
-    }
   }
 
   componentDidMount() {
-
   }
 
   componentWillUnmount() {
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    let me = this,
+      c = me.props.view,
+      n = nextProps.view;
+
+    return n != c;
+  }
+
   handleClick(selection){
     let me = this;
-
-    if(selection.key != 'zj'){
-      me.setState({
-        current: selection.keyPath
-      });
-      me.props.onClick(selection);
-    }
-
+    me.props.onClick();
   }
 
   render() {
-    let me = this;
+    let me = this,
+      current = [groupNameMap[me.props.view], itemKeyNameMap[me.props.view]];
+
     var result = <div className={style.menuContainer}>
       <Menu
         theme="dark"
         onClick={me.handleClick.bind(me)}
         style={{ width: '100%' }}
-        selectedKeys={me.state.current}
-        defaultOpenKeys={me.state.current}
+        selectedKeys={current}
+        defaultOpenKeys={current}
         mode="inline"
         >
         <SubMenu key="list" title={<h3><Icon type="home" />ColorPK.com</h3>}>
@@ -110,7 +107,6 @@ class SlideoutMenu extends React.Component {
               About
             </h3>
           </Link>
-
         </Menu.Item>
       </Menu>
     </div>;
@@ -119,31 +115,4 @@ class SlideoutMenu extends React.Component {
   }
 }
 
-function mapStateToProps({routing}){
-  return {
-    currentPath: routing.locationBeforeTransitions.pathname
-  }
-}
-export default connect(mapStateToProps)(SlideoutMenu) ;
-
-
-/*
-* <SubMenu key="about" title={<h3><Icon type="info-circle" />About</h3>}>
- <Menu.Item key="about">
- <Link to="/about">
- <h3>
- <Icon type="book" />
- Site
- </h3>
- </Link>
-
- </Menu.Item>
- <Menu.Item key="zj">
- <a href={Global.zjweb} target="_blank">
- <h3>
- <Icon type="user" />Auther
- </h3>
- </a>
- </Menu.Item>
- </SubMenu>
-* */
+export default SlideoutMenu;
