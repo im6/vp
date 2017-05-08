@@ -33,12 +33,12 @@ class Color extends React.Component {
     let me = this;
     me.isAnimating = nextProps.list.size != this.props.list.size;
   }
-  onLikeClickHandler(index, btnStatus){
+  onLikeClickHandler(id, btnStatus){
     let me = this;
     const ac = createAction('color/toggleLike');
     me.props.dispatch(ac({
       ...btnStatus,
-      index
+      id
     }));
   }
 
@@ -114,7 +114,7 @@ class Color extends React.Component {
               <Box boxInfo={me.props.list.get(me.props.selectedIndex)}
                    boxWidth={im? 70: 30}
                    isMobile={im}
-                   onLikeClick={me.onLikeClickHandler.bind(me, me.props.selectedIndex)} />
+                   onLikeClick={me.onLikeClickHandler.bind(me, me.props.list.getIn([me.props.selectedIndex, 'id']))} />
             </div>
           ) : null
 
@@ -136,7 +136,7 @@ class Color extends React.Component {
               <Box boxInfo={v}
                    boxWidth={boxW}
                    isMobile={im}
-                   onLikeClick={me.onLikeClickHandler.bind(me, k)} />
+                   onLikeClick={me.onLikeClickHandler.bind(me, v.get('id'))} />
             </Col>);
           })
         }
@@ -146,7 +146,7 @@ class Color extends React.Component {
   }
 }
 
-function mapStateToProps({color, user, routing}){
+function mapStateToProps({color, user, routing}) {
   let saved = color.get('liked'),
     view = color.get('view'),
     listName = 'list';
@@ -166,11 +166,10 @@ function mapStateToProps({color, user, routing}){
   //========== order ==============
   if(view === 'latest'){
     color0 = color0.sortBy(v => {
-      return v.get('like');
-    });
+      return v.get('id');
+    }, (a,b) => b-a);
   }
   //========== order END ==============
-
 
   let selectedIndex = -1;
   if(view === 'color'){

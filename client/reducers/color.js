@@ -3,6 +3,14 @@ import { handleActions } from 'redux-actions';
 import Immutable, {Map, List} from 'immutable';
 import { message } from 'antd';
 
+const SourceMap = {
+  "like":"myLiked",
+  "portfolio":"myPortfolio",
+  "color": "list",
+  "popular": "list",
+  "latest": "list"
+};
+
 const color = handleActions({
 
   ['color/get'](state, action) {
@@ -89,34 +97,46 @@ const color = handleActions({
       loading: false
     });
   },
-  ['color/toggleLike'](state, action) {
-    let newLiked = null;
 
-    let gonnaLike = action.payload.willLike;
+  ['color/toggleLike'](state, action) {
+    let newLiked = null,
+      listName = SourceMap[state.get('view')],
+      list = state.get(listName),
+      selectedId = action.payload.id,
+      gonnaLike = action.payload.willLike;
 
     if(gonnaLike){
       let newMap = {};
-      newMap['d'+action.payload.id] = true;
+      newMap['d'+ selectedId] = true;
       newLiked = state.get('liked').merge(newMap);
     }else{
-      newLiked = state.get('liked').delete('d'+action.payload.id);
+      newLiked = state.get('liked').delete('d'+ selectedId);
     }
 
-    let newList = state.get('list').update(action.payload.index, function(v){
+    let index = list.findIndex(v => v.get('id') === selectedId);
+    let newList = list.update(index, function(v){
       return v.merge({
         liked: gonnaLike,
         like: v.get('like') + (gonnaLike ? 1 : -1)
       });
     });
 
-    if(state.get('view')=='like' && !gonnaLike){
-      newList = newList.filter(v => v.get('id') != action.payload.id);
+    let mgObj = {
+      liked: newLiked,
+    };
+
+    if(state.get('view') === 'like'){
+      if(gonnaLike){
+        // no need to update
+      }else{
+        newList = newList.filter(v => v.get('id') != selectedId);
+      }
+      mgObj.myLiked = newList;
+    } else{
+      mgObj[listName] = newList;
     }
 
-    return state.merge({
-      liked: newLiked,
-      list: newList
-    });
+    return state.merge(mgObj);
   },
 
   ['color/initLike'](state, action) {
@@ -132,7 +152,6 @@ const color = handleActions({
   },
 
   ['color/addNew/success'](state, action) {
-    //message.success('create new color successfully!');
     let newData = action.payload;
     let newColor = {
       ...newData,
