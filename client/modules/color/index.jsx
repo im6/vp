@@ -60,10 +60,12 @@ class Color extends React.Component {
     let me = this;
     let result = 0;
     let w = window.innerWidth;
-    if(w >= 1200){
-      result = 72;
-    }else if(w >= 992){
-      result = 80;
+    if(w >= 1440){
+      result = 74;
+    } else if(w >= 1280){
+      result = 85;
+    }else if(w >= 1024){
+      result = 78;
     }else if(w >= 768){
       result = 80;
     }else {
@@ -92,7 +94,7 @@ class Color extends React.Component {
     let clsStr = classnames(listClass);
     let endKey = (me.props.list.size-1).toString();
 
-    return <div style={{minHeight: 800}}>
+    return <div>
       {
         (INFINITESCROLL && (me.props.view === 'latest' || me.props.view === 'popular')) ?
           <EventListener
