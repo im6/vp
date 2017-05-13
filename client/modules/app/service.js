@@ -23,6 +23,19 @@ const output = {
     }
 
     return same;
+  },
+  determineEffect(r1, r2){
+    let result = null;
+    if(r2.substring(1,6) === 'color' && (r1 === '/latest' || r1 === '/')){
+      result = false;
+    } else if (r1.substring(1,6) === 'color' && (r2 === '/latest' || r2 === '/')){
+      result = false;
+    }else{
+      result = true;
+    }
+
+    return result;
+
   }
 };
 

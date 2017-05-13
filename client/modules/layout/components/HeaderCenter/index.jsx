@@ -10,11 +10,11 @@ import style from './style.less';
 
 const hideReturn = [
   'popular',
-  'latest'
+  'latest',
+  'color'
 ];
 
 const HeaderCenter = ({logout, userInfo, isNavBtnActive, currentView}) => {
-
   const isAdmin = userInfo.get('detail') && userInfo.get('detail').get('isAdmin');
 
   let profileMenu = userInfo.get('isAuth') ?

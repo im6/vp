@@ -14,7 +14,6 @@ class App extends React.Component {
   }
   shouldComponentUpdate(nextprops, nextstate){
     let me = this;
-
     const isSame = appService.compareRoutes(nextprops.routes, me.props.routes);
     let willChange = !isSame || me.state.isTransitionSlot;
     return willChange;
@@ -32,7 +31,15 @@ class App extends React.Component {
     if(isSame){
       return;
     }else{
-      me.setDelayEffect();
+      let shouldEffect = appService.determineEffect(me.props.location.pathname, nextProps.location.pathname);
+      if(shouldEffect){
+        me.setDelayEffect();
+      }else{
+        me.setState({
+          childrenCurrent: nextProps.children,
+          isTransitionSlot: false
+        });
+      }
     }
 
   }
