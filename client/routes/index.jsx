@@ -28,6 +28,12 @@ const Routes = ({ history, store }) => {
     store.dispatch(ac(viewName));
   };
 
+  const scrollTop = () => {
+    if(window.scrollY > 220){
+      window.scrollTo(0, 0);
+    }
+  };
+
   const initAuth = (nextState, replace, callback) => {
     getInitAuth().then((res) => {
       const ac = createAction('user/initAuth');
@@ -82,6 +88,7 @@ const Routes = ({ history, store }) => {
         param = 'latest';
         break;
       case '/color':
+        scrollTop();
         actName = 'color/setView';
         param = 'color';
         break;
