@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Router, Route, IndexRoute } from 'react-router';
 import { createAction } from 'redux-actions';
 

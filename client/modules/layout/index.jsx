@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 import Slideout from 'slideout';

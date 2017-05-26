@@ -1,5 +1,6 @@
 //http://codepen.io/dicson/pen/waKPgQ
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import style from '!style!css!less!autoprefixer-loader!./style.less';
 
 const triggerClassName = 'toggle-button';
