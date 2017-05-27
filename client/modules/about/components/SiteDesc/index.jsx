@@ -16,7 +16,7 @@ class SiteDesc extends React.PureComponent {
 
     return <div className={style.container}>
       <h2>
-        I'd like to get you the best ColorPicKer.
+        We'd like to get you the best ColorPicKer.
         <br/>
         So I create ColorPK, Welcome!
         <br/>

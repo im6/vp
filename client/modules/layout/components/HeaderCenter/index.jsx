@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Row, Col, Menu, Icon, Button, Dropdown } from 'antd';
 
 import MenuButton from './components/MenuButton';
-import FBShare from './components/FBShare';
 import ProfileMenu from './components/ProfileMenu';
 
 import { Link } from 'react-router';
@@ -25,53 +24,46 @@ const HeaderCenter = ({logout, userInfo, isNavBtnActive, currentView}) => {
 
   return <header className={style.header}>
     <Row>
-
-      <Col lg={20} md={19} sm={18} xs={24} className={style.leftHeaderContainer}>
-
+      <Col lg={1} md={1} sm={1} xs={1}>
         <MenuButton isNavBtnActive={isNavBtnActive}/>
-
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-        {
-          hideReturn.indexOf(currentView) < 0?
-          <Link to="/">
-            <Button type="default" icon="home">
-            Back home
-            </Button>
-          </Link> :
-          <Link to="/new">
-            <Button type="primary" icon="plus">
-              &nbsp;&nbsp;New Color
-            </Button>
-          </Link>
-        }
-
-        &nbsp;&nbsp;&nbsp;
-        { userInfo.get('isAuth') ?
-          <Dropdown overlay={profileMenu}>
-            <img src={userInfo.get('detail').get('img')} alt="icon"/>
-          </Dropdown>
-          :
-          <Link to="/auth">
-            <Button type="default" icon="user">
-              Sign In
-            </Button>
-          </Link>
-        }
-        &nbsp;&nbsp;&nbsp;
-        {
-          isAdmin ? <Link to="/adminPanel">
-            <Button type="default" icon="setting" />
-          </Link> : null
-
-        }
-
       </Col>
 
 
-      <Col lg={4} md={5} sm={6} xs={0}>
-        <div className={style.shareBtnGroup}>
-          <FBShare/>
+      <Col lg={23} md={23} sm={23} xs={23}>
+        <div className={style.rightBtns}>
+          {
+            hideReturn.indexOf(currentView) < 0?
+              <Link to="/">
+                <Button type="default" icon="home">
+                  Back home
+                </Button>
+              </Link> :
+              <Link to="/new">
+                <Button type="primary" icon="plus">
+                  &nbsp;&nbsp;New Color
+                </Button>
+              </Link>
+          }
+
+          &nbsp;&nbsp;&nbsp;
+          { userInfo.get('isAuth') ?
+            <Dropdown overlay={profileMenu}>
+              <img src={userInfo.get('detail').get('img')} alt="icon"/>
+            </Dropdown>
+            :
+            <Link to="/auth">
+              <Button type="default" icon="user">
+                Sign In
+              </Button>
+            </Link>
+          }
+          &nbsp;&nbsp;&nbsp;
+          {
+            isAdmin ? <Link to="/adminPanel">
+              <Button type="default" icon="setting" />
+            </Link> : null
+
+          }
         </div>
       </Col>
 

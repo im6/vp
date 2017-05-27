@@ -126,7 +126,9 @@ class AdminPanel extends React.PureComponent {
       style={{minHeight: window.innerHeight * 0.85}}
       title={<span><Icon type="info-circle" />&nbsp;&nbsp;&nbsp;Color Management</span>}>
 
-      <Table columns={me.getColumns()} dataSource={list} />
+      <Table columns={me.getColumns()}
+             rowKey="id"
+             dataSource={list} />
       <Modal title="Color Preview" visible={me.state.showModal}
              onOk={me.onModalClose.bind(me)} onCancel={me.onModalClose.bind(me)}>
         <ColorCanvas colorValue={me.state.modalContent}/>

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 import style from './style.less';
 
@@ -14,13 +14,12 @@ class ColorBar extends React.PureComponent {
     let v1 = v0.split('#');
     return <div>
       {
-        v1.map(v => <div
+        v1.map((v, k) => <div key={k}
           className={style.oneBar}
           style={{backgroundColor: '#'+v}} />)
       }
     </div>
   }
 }
-
 
 export default ColorBar;
