@@ -1,5 +1,5 @@
 //https://www.iconfinder.com/icons/762279/communication_connection_media_message_social_talk_weibo_icon#size=128
-import React, { PropTypes } from 'react';
+import React from 'react';
 import QueueAnim from 'rc-queue-anim';
 import styles from './style.less'
 import {Row,Col, Input, Button, Checkbox, Card, Icon, Tooltip} from 'antd';
