@@ -19,7 +19,7 @@ class EditCanvas extends React.Component {
   }
 
   render() {
-    let me = this;
+    const me = this;
     return <div className={style.box}>
         <div className={style.boxCanvas}>
           {me.props.colorValue.map((v, k) => {

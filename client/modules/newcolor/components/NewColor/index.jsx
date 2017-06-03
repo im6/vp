@@ -14,7 +14,7 @@ const DEFAULTVALUE = '#adeef9',
 class NewColor extends React.PureComponent {
   constructor(props) {
     super(props);
-    let me = this;
+    const me = this;
     me.state = {
       editColor: DEFAULTVALUE,
       activeIndex : 0,
@@ -31,7 +31,7 @@ class NewColor extends React.PureComponent {
   }
 
   componentDidMount(){
-    let me = this;
+    const me = this;
     let { cpbox } = me.refs;
     me.setState({
       pickerWd: cpbox.offsetWidth
@@ -39,7 +39,7 @@ class NewColor extends React.PureComponent {
   }
 
   showModal(){
-    let me = this;
+    const me = this;
     let isAuth = me.props.user.get('isAuth');
     Modal.success({
       title: 'Thank you for new colors',
@@ -53,7 +53,7 @@ class NewColor extends React.PureComponent {
   }
 
   submitColor(){
-    let me = this;
+    const me = this;
     let good = true;
     me.state.colorValue.forEach(v => {
       if(!/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(v)) {
@@ -69,7 +69,7 @@ class NewColor extends React.PureComponent {
   }
 
   onPickColor(color){
-    let me = this;
+    const me = this;
     let oper = me.state.colorValue;
     oper[me.state.activeIndex] = color;
     me.setState({
@@ -79,13 +79,13 @@ class NewColor extends React.PureComponent {
   }
 
   onInputChange(ev){
-    let me = this;
+    const me = this;
     let inputVal = ev.target.value;
     me.onPickColor('#' + inputVal);
   }
 
   onChangeActive(v){
-    let me = this;
+    const me = this;
     let newCol = me.state.colorValue[v] || DEFAULTVALUE;
     me.setState({
       activeIndex: v,
@@ -94,7 +94,7 @@ class NewColor extends React.PureComponent {
   }
 
   onChkboxChange(ev){
-    let me = this;
+    const me = this;
     me.setState({
       showUpload: ev.target.checked
     })
@@ -102,21 +102,21 @@ class NewColor extends React.PureComponent {
   }
 
   onColorTypeChange(ev){
-    let me = this;
+    const me = this;
     me.setState({
       colorType: ev
     });
   }
 
   extractResult(data){
-    let me = this;
+    const me = this;
     me.setState({
       colorValue: data
     });
   }
 
   resetColor(){
-    let me = this;
+    const me = this;
     me.setState({
       colorValue: [
         null,

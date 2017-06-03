@@ -3,11 +3,10 @@ import { Button } from 'antd';
 import classnames from 'classnames';
 import style from './style.less';
 
-
 class ColorRow extends React.Component {
   constructor(props) {
     super(props);
-    let me = this;
+    const me = this;
   }
 
   componentDidMount() {
@@ -18,18 +17,18 @@ class ColorRow extends React.Component {
   }
 
   clickHandler(){
-    let me = this;
+    const me = this;
     me.props.onRowClick();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    let me = this;
+    const me = this;
     let isSame = nextProps.colorValue == me.props.colorValue && nextProps.isActive == me.props.isActive;
     return !isSame;
   }
 
   render() {
-    let me = this;
+    const me = this;
     let rowStyle = (me.props.colorValue && me.props.colorValue != '#') ? {
       'backgroundColor': me.props.colorValue
     } : {
