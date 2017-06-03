@@ -11,7 +11,9 @@ const FBShare = ({username, onClick}) => {
 
   return <Menu>
     <Menu.Item>
-      {username}
+      <Link to="/">
+        {username}
+      </Link>
     </Menu.Item>
     <Menu.Divider />
     <Menu.Item>
