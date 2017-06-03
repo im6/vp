@@ -4,28 +4,18 @@ import { Button, Icon } from 'antd';
 import classnames from 'classnames';
 import style from './style.less';
 import ColorCanvas from './components/ColorCanvas';
-import Immutable from 'immutable';
-
-
 
 class Box extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-
-  }
-
-  componentWillUnmount() {
-  }
-
   shouldComponentUpdate(nextProps, nextState){
-    let me = this;
-    return !Immutable.is(me.props.boxInfo, nextProps.boxInfo);
+    const me = this;
+    const isSame = me.props.boxInfo.get('liked') === nextProps.boxInfo.get('liked') &&
+        me.props.boxInfo.get('color') === nextProps.boxInfo.get('color');
+
+    return !isSame;
   }
-  onClickHander(a,b,c,d){
-    let me = this;
+
+  onClickHander() {
+    const me = this;
     me.props.onLikeClick({
       willLike: !me.props.boxInfo.get('liked'),
       id: me.props.boxInfo.get('id')
@@ -33,17 +23,14 @@ class Box extends React.Component {
   }
 
   render() {
-    let me = this;
-    let bWidth = me.props.boxWidth || 90;
-    let likeStyle = {};
+    const me = this;
+    const likeStyle = {};
     likeStyle[style.hasLike] = me.props.boxInfo.get('liked') || false;
-    let likeIcon = me.props.boxInfo.get('liked') ? 'heart' : 'heart-o';
+    const likeIcon = me.props.boxInfo.get('liked') ? 'heart' : 'heart-o';
+    const btnSize = me.props.isMobile ? 'small': 'default';
+    const boxHt = me.props.isMobile ? 230 : 280;
 
-
-    let btnSize = me.props.isMobile ? 'small': 'default';
-    let boxHt = me.props.isMobile ? 230 : 280;
-
-    return <div className={style.box} style={{width: bWidth + '%', height: boxHt}}>
+    return <div className={style.box} style={{width: me.props.boxWidth + '%', height: boxHt}}>
         <ColorCanvas
           colorId={me.props.boxInfo.get('id')}
           colorValue={me.props.boxInfo.get('color')}/>
@@ -58,7 +45,6 @@ class Box extends React.Component {
               {me.props.boxInfo.get('like')}
             </h3>
           </Button>
-
           {
             me.props.boxInfo.get('username') ?
               <h3>{me.props.boxInfo.get('username')}</h3> : null

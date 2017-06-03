@@ -1,32 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Icon } from 'antd';
 import { Link } from 'react-router';
+import { Icon } from 'antd';
 import style from './style.less';
 
-class ColorRow extends React.Component {
-  constructor(props) {
-    super(props);
-    let me = this;
+const ColorRow = ({ rowColor, colorId }) => (<div className={style.rowContainer}
+                             style={{'backgroundColor': rowColor}} >
+  {
+    colorId ? (<Link
+      to={`/color/${colorId}`}
+      className={style.text}>
+      <Icon type="export" />
+    </Link>) : <div />
   }
 
-  render() {
-    let me = this;
-    return <div className={style.rowContainer}
-                style={{'backgroundColor': me.props.rowColor}} >
-      {
-        me.props.colorId ? <Link to={`/color/${me.props.colorId}`}
-                                 className={style.text}>
-          <Icon type="export" />
-        </Link> : <div />
-      }
-
-      <h1 className={style.text}>
-        {me.props.rowColor}
-      </h1>
-    </div>
-  }
-}
+  <h1 className={style.text}>
+    {rowColor}
+  </h1>
+</div>);
 
 ColorRow.propTypes = {
   rowColor: PropTypes.string.isRequired

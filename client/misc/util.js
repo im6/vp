@@ -22,4 +22,10 @@ export function mobileDetect() {
   }
 
   return isMobile;
-};
+}
+
+export function scrollTop() {
+  if(window.scrollY > 220){
+    window.scrollTo(0, 0);
+  }
+}

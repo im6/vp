@@ -15,8 +15,9 @@ class Color extends React.Component {
 
   render() {
     const me = this;
+    const im = me.props.isMobile;
     const listClass = {};
-    listClass[style.pcPadding] = !me.props.isMobile;
+    listClass[style.pcPadding] = !im;
     listClass[style.list] = true;
     const clsStr = classnames(listClass);
 
@@ -39,7 +40,7 @@ class Color extends React.Component {
 
       }
 
-      <QueueAnim type="top"
+      <QueueAnim type="scale"
                  duration={280}
                  interval={80}
                  className={clsStr}>
@@ -53,7 +54,7 @@ class Color extends React.Component {
                          className={style.colContainer}>
               <Box boxInfo={v}
                    boxWidth={me.props.boxWidth}
-                   isMobile={me.props.isMobile}
+                   isMobile={im}
                    onLikeClick={me.onLikeClickHandler.bind(me, v.get('id'))} />
             </Col>);
           })

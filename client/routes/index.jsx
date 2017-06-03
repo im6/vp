@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Router, Route, IndexRoute } from 'react-router';
 import { createAction } from 'redux-actions';
 import { getUserInfo, getInitAuth } from '../services/resource.js';
+import { scrollTop } from '../misc/util.js';
 import App from '../modules/app/index.jsx';
 import Auth from '../modules/auth';
 import Color from '../modules/color';
@@ -22,12 +23,6 @@ const Routes = ({ history, store }) => {
   const setView = (viewName) => {
     const ac = createAction('color/setView');
     store.dispatch(ac(viewName));
-  };
-
-  const scrollTop = () => {
-    if(window.scrollY > 220){
-      window.scrollTo(0, 0);
-    }
   };
 
   const initAuth = (nextState, replace, callback) => {
