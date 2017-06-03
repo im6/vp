@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Card } from 'antd';
 
 const ErrorPage = () => <Card>
   This is the Error page
-</Card>
+</Card>;
 
 export default ErrorPage;
