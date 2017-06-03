@@ -23,10 +23,10 @@ const mapDispatchToProps = (dispatch) => {
       window.location = url;
     },
     onWB(url) {
-
+      window.location = url;
     },
     onGG(url) {
-
+      window.location = url;
     }
   }
 };
