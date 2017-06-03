@@ -7,31 +7,30 @@ import { default as appService } from './service';
 class App extends React.Component {
   constructor(prop){
     super(prop);
-    let me = this;
+    const me = this;
     me.state = {
       childrenCurrent: null,
       isTransitionSlot: false
     };
   }
   shouldComponentUpdate(nextprops, nextstate){
-    let me = this;
+    const me = this;
     const isSame = appService.compareRoutes(nextprops.routes, me.props.routes);
     let willChange = !isSame || me.state.isTransitionSlot;
     return willChange;
   }
 
   componentWillMount() {
-    let me = this;
+    const me = this;
     me.setDelayEffect();
   }
 
   componentWillReceiveProps(nextProps){
-
-    let me = this;
+    const me = this;
     let isSame = appService.compareRoutes(nextProps.routes, me.props.routes);
-    if(isSame){
+    if(isSame) {
       return;
-    }else{
+    } else {
       let shouldEffect = appService.determineEffect(me.props.location.pathname, nextProps.location.pathname);
       if(shouldEffect){
         me.setDelayEffect();
@@ -42,11 +41,10 @@ class App extends React.Component {
         });
       }
     }
-
   }
 
   setDelayEffect(){
-    let me = this;
+    const me = this;
     me.setState({
       childrenCurrent: null,
       isTransitionSlot: true,
@@ -60,7 +58,7 @@ class App extends React.Component {
   }
 
   render(){
-    let me = this;
+    const me = this;
     return (<Layout>
       <QueueAnim delay={50}
                  type={['right','left']}

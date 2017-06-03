@@ -59,6 +59,7 @@ const Routes = ({ history, store }) => {
 
   const initAdmin = (nextState, replace, callback) => {
     let user = store.getState().user;
+    setView('adminpanel');
     if(user.getIn(['detail', 'isAdmin'])){
       const ac0 = createAction('admin/getList');
       store.dispatch(ac0());
