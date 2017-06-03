@@ -10,6 +10,11 @@ class Auth extends React.Component {
     me.props.onLogin();
   }
 
+  goBack(){
+    const me = this;
+    me.props.goBack();
+  }
+
   fbClickHandler(){
     const me = this;
     me.props.onFB(me.props.user.get('facebookUrl'));
@@ -25,14 +30,15 @@ class Auth extends React.Component {
   }
 
   render(){
-    let me = this;
+    const me = this;
     return (<div className={style.authContainer}>
       <div className={style.canvansContainer} />
       <QueueAnim delay={[100 ,0]}
                  type={'bottom'}
                  ease={'easeOutQuart'} >
         <div key="a">
-          <LoginCard loginClick={me.loginClickHandler.bind(me)}
+          <LoginCard onLogin={me.loginClickHandler.bind(me)}
+                     goBack={me.goBack.bind(me)}
                      fbClick={me.fbClickHandler.bind(me)}
                      ggClick={me.ggClickHandler.bind(me)}
                      wbClick={me.wbClickHandler.bind(me)}/>

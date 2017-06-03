@@ -1,23 +1,17 @@
 //https://www.iconfinder.com/icons/762279/communication_connection_media_message_social_talk_weibo_icon#size=128
 import React from 'react';
-import QueueAnim from 'rc-queue-anim';
 import styles from './style.less'
-import {Row,Col, Input, Button, Checkbox, Card, Icon, Tooltip} from 'antd';
-import { browserHistory } from 'react-router';
+import {Input, Button, Card, Icon, Tooltip} from 'antd';
 
 import img from './assets/icon2.png';
 import imgo1 from './assets/oauth1.png';
 import imgo2 from './assets/oauth2.png';
 import imgo4 from './assets/oauth4.png';
 
-let goBackMain =()=> {
-  browserHistory.push('/');
-};
-
-let LoginCard = ({loginClick, wbClick, fbClick, ggClick}) => {
+const LoginCard = ({onLogin, goBack, wbClick, fbClick, ggClick}) => {
   return (
     <Card title="Welcome to ColorPK" style={{ width: 270 }}>
-      <img onClick={goBackMain.bind(null)}
+      <img onClick={goBack}
            src={img}
            className={styles.iconStyle}
         />
@@ -26,7 +20,7 @@ let LoginCard = ({loginClick, wbClick, fbClick, ggClick}) => {
       <Input addonBefore={<Icon type="lock" />} type="password" placeholder="Password" />
       <br/>
       <Button type="primary"
-              onClick={loginClick}
+              onClick={onLogin}
               style={{width: '100%'}}>
         Login
       </Button>
@@ -49,9 +43,6 @@ let LoginCard = ({loginClick, wbClick, fbClick, ggClick}) => {
                className={styles.oauthStyle}/>
         </Tooltip>
       </div>
-
-
-
     </Card>
   );
 };

@@ -27,6 +27,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onGG(url) {
       window.location = url;
+    },
+    goBack() {
+      browserHistory.push('/');
     }
   }
 };
