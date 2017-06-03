@@ -4,8 +4,10 @@ import { Link } from 'react-router';
 import { Icon } from 'antd';
 import style from './style.less';
 
-const ColorRow = ({ rowColor, colorId }) => (<div className={style.rowContainer}
-                             style={{'backgroundColor': rowColor}} >
+const ColorRow = ({ rowColor, colorId }) => (
+  <div className={style.rowContainer}
+       style={{'backgroundColor': rowColor}}
+    >
   {
     colorId ? (<Link
       to={`/color/${colorId}`}

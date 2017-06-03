@@ -10,7 +10,6 @@ function* watchers(a) {
   ]
 }
 
-
 function* getAnonymousColor(action) {
   try {
     const payload = yield call(requester, '/api/getAnonymousColor');
@@ -25,7 +24,6 @@ function* getAnonymousColor(action) {
     });
   }
 }
-
 
 function* postDecideColor(action) {
   try {
@@ -43,7 +41,6 @@ function* postDecideColor(action) {
     });
   }
 }
-
 
 export default function*(){
   yield fork(watchers);
