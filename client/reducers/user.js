@@ -2,15 +2,7 @@
 import { handleActions } from 'redux-actions';
 import Immutable, {Map, List} from 'immutable';
 import { message } from 'antd';
-
-const mobileDetect = ()=>{
-  var isMobile = false;
-  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    isMobile = true;
-  }
-
-  return isMobile;
-};
+import { mobileDetect } from '../misc/util.js';
 
 const user = handleActions({
   ['user/initAuth'](state, action) {

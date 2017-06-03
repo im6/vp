@@ -28,8 +28,4 @@ function* getColorType(action) {
 
 export default function*(){
   yield fork(watchers);
-
-  let actCreater = createAction('colorType/get');
-  yield put(actCreater());
-
 }

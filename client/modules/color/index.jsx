@@ -42,7 +42,8 @@ const mapStateToProps = ({color, user, routing}) => {
     loading: color.get('loading'),
     isMobile: user.get('isMobile'),
     selectedIndex,
-    view
+    view,
+    boxWidth: color.get('boxWidth')
   }
 };
 

@@ -2,12 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Router, Route, IndexRoute } from 'react-router';
 import { createAction } from 'redux-actions';
-
-import { Global } from '../config/global';
 import { getUserInfo, getInitAuth } from '../services/resource.js';
-
 import App from '../modules/app/index.jsx';
-import ErrorPage from '../modules/errorPage';
 import Auth from '../modules/auth';
 import Color from '../modules/color';
 import NewColor from '../modules/newcolor';
@@ -15,10 +11,9 @@ import About from '../modules/about';
 import ResourceApi from '../modules/resourceApi';
 import AdminPanel from '../modules/adminPanel';
 
-
 const Routes = ({ history, store }) => {
-  const fillColors = () => {
-    if(store. getState().color.get('list').size < 1){
+  const getColors = () => {
+    if(store. getState().color.get('list').size < 1) {
       const ac = createAction('color/get');
       store.dispatch(ac());
     }
@@ -46,15 +41,16 @@ const Routes = ({ history, store }) => {
     });
   };
 
-  const checkAuth = (nextState, replace, callback) => {
+  const initApp = (nextState, replace, callback) => {
     getUserInfo().then((res) => {
       const ac1 = createAction('user/initUser');
       store.dispatch(ac1(res));
 
       const ac2 = createAction('color/initLike');
       store.dispatch(ac2(res));
-      callback();
     });
+
+    callback();
   };
 
   const initAdmin = (nextState, replace, callback) => {
@@ -71,7 +67,7 @@ const Routes = ({ history, store }) => {
   };
 
   const initBoxes = (nextState, replace, callback) => {
-    fillColors();
+    getColors();
     let nextUrl = nextState.location.pathname,
       actName = null,
       param = null;
@@ -106,7 +102,7 @@ const Routes = ({ history, store }) => {
         break;
     }
 
-    if(actName){
+    if(actName) {
       const ac = createAction(actName);
       store.dispatch(ac(param));
     }
@@ -116,7 +112,15 @@ const Routes = ({ history, store }) => {
   };
 
   const initView = (nextState, replace, callback) => {
-    let viewName = nextState.location.pathname.substring(1);
+    const viewName = nextState.location.pathname.substring(1);
+    setView(viewName);
+    callback();
+  };
+
+  const initCreate = (nextState, replace, callback) => {
+    const ac0 = createAction('colorType/get');
+    store.dispatch(ac0());
+    const viewName = nextState.location.pathname.substring(1);
     setView(viewName);
     callback();
   };
@@ -128,7 +132,7 @@ const Routes = ({ history, store }) => {
       />
     <Route path="/"
            component={App}
-           onEnter={checkAuth}>
+           onEnter={initApp}>
 
       <IndexRoute component={Color} onEnter={initBoxes}/>
       <Route path="/color/:id" component={Color} onEnter={initBoxes} />
@@ -136,14 +140,13 @@ const Routes = ({ history, store }) => {
       <Route path="/portfolio" component={Color} onEnter={initBoxes} />
       <Route path="/like" component={Color} onEnter={initBoxes} />
 
-      <Route path="/new" component={NewColor} onEnter={initView}/>
-      <Route path="/extract" component={NewColor} onEnter={initView}/>
+      <Route path="/new" component={NewColor} onEnter={initCreate}/>
+      <Route path="/extract" component={NewColor} onEnter={initCreate}/>
+
       <Route path="/resourceapi" component={ResourceApi} onEnter={initView}/>
       <Route path="/about" component={About} onEnter={initView}/>
 
       <Route path="/adminpanel" component={AdminPanel} onEnter={initAdmin} />
-
-      <Route path="*" component={ErrorPage} onEnter={initView}/>
     </Route>
   </Router>;
 };

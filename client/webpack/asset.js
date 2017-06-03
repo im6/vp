@@ -119,7 +119,7 @@ var entry = {
       './client/entry/index.jsx'
     ],
     watch: './client/entry/index.jsx',
-    build: './client/entry/index.jsx'
+    build: './client/entry/index_prod.jsx'
 };
 
 
