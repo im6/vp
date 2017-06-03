@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { createAction } from 'redux-actions';
-import { connect } from 'react-redux';
 import Slideout from 'slideout';
 import { Global } from '../../../../config/global.js';
 import styles from './style.less';

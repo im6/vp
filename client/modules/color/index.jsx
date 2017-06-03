@@ -1,124 +1,9 @@
 import React from 'react';
-import { Card, Icon, Row, Col } from 'antd';
-import classnames from 'classnames';
-import QueueAnim from 'rc-queue-anim';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
-import Box from './components/Box';
-import SpinLoader from './components/SpinLoader';
-import HeadBanner from './components/HeadBanner';
-import style from './style.less';
+import Color from './components/Color';
 
-class Color extends React.Component {
-  constructor(props) {
-    super(props);
-    let me = this;
-    me.isAnimating = true;
-  }
-
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  componentWillReceiveProps(nextProps){
-    let me = this;
-    me.isAnimating = nextProps.list.size != this.props.list.size;
-  }
-  onLikeClickHandler(id, btnStatus){
-    let me = this;
-    const ac = createAction('color/toggleLike');
-    me.props.dispatch(ac({
-      ...btnStatus,
-      id
-    }));
-  }
-
-  getBoxWidth(){
-    let me = this;
-    let result = 0;
-    let w = window.innerWidth;
-    if(w >= 1440){
-      result = 74;
-    } else if(w >= 1280){
-      result = 85;
-    }else if(w >= 1024){
-      result = 78;
-    }else if(w >= 768){
-      result = 80;
-    }else {
-      result = 92;
-    }
-    return result;
-  }
-
-  onAnimEnd(endKey, type){
-    let me = this;
-    if(endKey === type.key){
-      if(type.type === 'enter' &&
-        (me.props.view === 'popular' || me.props.view === 'latest')){
-        me.isAnimating = false;
-      }
-    }
-  }
-
-  render() {
-    let me = this;
-    let boxW = me.getBoxWidth();
-    let listClass = {},
-      im = me.props.isMobile;
-    listClass[style.pcPadding] = !im;
-    listClass[style.list] = true;
-    let clsStr = classnames(listClass);
-    let endKey = (me.props.list.size-1).toString();
-
-    return <div>
-      <HeadBanner
-        colorSize={me.props.list.size}
-        colorView={me.props.view}
-        />
-
-      {
-        me.props.selectedIndex >= 0 ?
-          (
-            <div className={style.selectedBox}>
-              <Box boxInfo={me.props.list.get(me.props.selectedIndex)}
-                   boxWidth={im? 70: 30}
-                   isMobile={im}
-                   onLikeClick={me.onLikeClickHandler.bind(me, me.props.list.getIn([me.props.selectedIndex, 'id']))} />
-            </div>
-          ) : null
-
-      }
-
-      <QueueAnim type="top"
-                 onEnd={me.onAnimEnd.bind(me, endKey)}
-                 duration={280}
-                 interval={80}
-                 className={clsStr}>
-        {
-          me.props.list.map((v, k) => {
-            return (<Col xs={12}
-                         sm={12}
-                         md={8}
-                         lg={6}
-                         key={k}
-                         className={style.colContainer}>
-              <Box boxInfo={v}
-                   boxWidth={boxW}
-                   isMobile={im}
-                   onLikeClick={me.onLikeClickHandler.bind(me, v.get('id'))} />
-            </Col>);
-          })
-        }
-      </QueueAnim>
-      { me.props.loading ? <SpinLoader /> : <div style={{height: 60}}/> }
-    </div>
-  }
-}
-
-function mapStateToProps({color, user, routing}) {
+const mapStateToProps = ({color, user, routing}) => {
   let saved = color.get('liked'),
     view = color.get('view'),
     listName = 'list';
@@ -159,6 +44,18 @@ function mapStateToProps({color, user, routing}) {
     selectedIndex,
     view
   }
-}
+};
 
-export default connect(mapStateToProps)(Color);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLike(id, btnStatus) {
+      const ac = createAction('color/toggleLike');
+      dispatch(ac({
+        ...btnStatus,
+        id
+      }));
+    }
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Color);
