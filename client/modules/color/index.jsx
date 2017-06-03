@@ -4,17 +4,10 @@ import classnames from 'classnames';
 import QueueAnim from 'rc-queue-anim';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
-import EventListener, {withOptions} from 'react-event-listener';
-import debounce from 'debounce';
-
 import Box from './components/Box';
 import SpinLoader from './components/SpinLoader';
 import HeadBanner from './components/HeadBanner';
-
 import style from './style.less';
-
-const SCROLLTOLERANCE = 150,
-  INFINITESCROLL = false;
 
 class Color extends React.Component {
   constructor(props) {
@@ -41,20 +34,6 @@ class Color extends React.Component {
       id
     }));
   }
-
-  scrollHandler(st, ev) {
-    let me = this;
-    let isloading = me.props.loading;
-    if(isloading || me.isAnimating){
-      return false;
-    }
-    let elem = ev.target.body;
-    let scrollBtn = elem.scrollHeight - elem.clientHeight - elem.scrollTop;
-    if(scrollBtn < st){
-      let actcr = createAction('color/loadMore');
-      me.props.dispatch(actcr());
-    }
-  };
 
   getBoxWidth(){
     let me = this;
@@ -95,15 +74,6 @@ class Color extends React.Component {
     let endKey = (me.props.list.size-1).toString();
 
     return <div>
-      {
-        (INFINITESCROLL && (me.props.view === 'latest' || me.props.view === 'popular')) ?
-          <EventListener
-            target="window"
-            onScroll={debounce(me.scrollHandler.bind(me, SCROLLTOLERANCE))}
-            />:
-          null
-      }
-
       <HeadBanner
         colorSize={me.props.list.size}
         colorView={me.props.view}
