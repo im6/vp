@@ -17,16 +17,16 @@ class Auth extends React.Component {
 
   fbClickHandler(){
     const me = this;
-    me.props.onFB(me.props.user.get('facebookUrl'));
+    me.props.onOAuth(me.props.user.get('facebookUrl'));
   }
 
   wbClickHandler(){
     const me = this;
-    me.props.onWB(me.props.user.get('weiboUrl'));
+    me.props.onOAuth(me.props.user.get('weiboUrl'));
   }
   ggClickHandler(){
     const me = this;
-    me.props.onGG(me.props.user.get('googleUrl'));
+    me.props.onOAuth(me.props.user.get('googleUrl'));
   }
 
   render(){

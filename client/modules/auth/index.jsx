@@ -19,18 +19,9 @@ const mapDispatchToProps = (dispatch) => {
         browserHistory.push('/');
       }, 3000);
     },
-    onFB(url) {
+    onOAuth(url) {
       window.location = url;
     },
-    onWB(url) {
-      window.location = url;
-    },
-    onGG(url) {
-      window.location = url;
-    },
-    goBack() {
-      browserHistory.push('/');
-    }
   }
 };
 
