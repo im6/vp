@@ -1,6 +1,6 @@
 const privateFn = {
   getWhoteRoute(r) {
-    let a = r.reduce((accumulator, currentValue, currentIndex, array) => {
+    const a = r.reduce((accumulator, currentValue, currentIndex, array) => {
       return accumulator + (currentValue.path || '');
     }, '');
     return a;
@@ -11,8 +11,8 @@ const colorUrls = ['/', '//like', '//portfolio','//latest'];
 
 const output = {
   compareRoutes(r1, r2){
-    let r1str = privateFn.getWhoteRoute(r1);
-    let r2str = privateFn.getWhoteRoute(r2);
+    const r1str = privateFn.getWhoteRoute(r1);
+    const r2str = privateFn.getWhoteRoute(r2);
 
     let same = null;
 
