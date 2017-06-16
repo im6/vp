@@ -12,14 +12,14 @@ const About = ({ isMobile }) => (<Card
   <Row>
     <Col
       xs={0}
-      sm={1}
-      md={2}
-      lg={3}/>
+      sm={4}
+      md={5}
+      lg={5}/>
     <Col
       xs={24}
-      sm={11}
-      md={10}
-      lg={9}>
+      sm={8}
+      md={7}
+      lg={7}>
       <Polygons />
     </Col>
     <Col
