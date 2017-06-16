@@ -3,7 +3,7 @@ import style from './style.less';
 
 const SiteDesc = () => (<div className={style.container}>
   <h2>
-    We'd like to get you the best ColorPicKer.
+    I'd like to get you the best ColorPicKer.
     <br/>
     So I create ColorPK, Welcome!
     <br/>

@@ -1,30 +1,46 @@
 import React from 'react';
-import { Row, Col, Card, Icon } from 'antd';
+import { Row, Col, Card } from 'antd';
+import { connect } from 'react-redux';
 import style from './style.less';
 import SiteDesc from './components/SiteDesc';
-import SiteTimeline from './components/SiteTimeline';
+//import SiteTimeline from './components/SiteTimeline';
+import Polygons from './components/Polygons';
 
-const About = () => (<Card
-  className={style.container}
-  title={<span><Icon type="info-circle" />&nbsp;&nbsp;&nbsp;About ColorPK</span>}>
+const About = ({ isMobile }) => (<Card
+  style={{ width: isMobile ? "100%": "95%" }}
+  className={style.container}>
   <Row>
     <Col
-      className={style.colBox}
+      xs={0}
+      sm={1}
+      md={2}
+      lg={3}/>
+    <Col
       xs={24}
-      sm={12}
-      md={12}
-      lg={12}>
-      <SiteTimeline />
+      sm={11}
+      md={10}
+      lg={9}>
+      <Polygons />
     </Col>
     <Col
-      className={style.colBox}
       xs={24}
-      sm={12}
-      md={12}
-      lg={12}>
+      sm={11}
+      md={10}
+      lg={9}>
       <SiteDesc />
     </Col>
+    <Col
+      xs={0}
+      sm={1}
+      md={2}
+      lg={3}/>
   </Row>
 </Card>);
 
-export default About;
+const mapStateToProps = ({ user }) => {
+  return {
+    isMobile: user.get('isMobile'),
+  }
+};
+
+export default connect(mapStateToProps)(About);
