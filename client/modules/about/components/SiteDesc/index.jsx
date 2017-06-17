@@ -13,8 +13,10 @@ const SiteDesc = () => (<div className={style.container}>
     <br/>
     It is a Social Platform after all :)
 
-    <br/><br/>
-    - ColorPK team @Jan,2017
+    <br/>
+    <br/>
+    <br/>
+    - ColorPK
   </h2>
 </div>);
 

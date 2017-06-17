@@ -22,6 +22,9 @@ const mapDispatchToProps = (dispatch) => {
     onOAuth(url) {
       window.location = url;
     },
+    goBack(){
+      browserHistory.push('/');
+    },
   }
 };
 
