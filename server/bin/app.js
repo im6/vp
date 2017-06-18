@@ -52,7 +52,8 @@ if(globalConfig.isDev){
 }
 
 app.get('/article', function(req, res){
-  res.sendFile(path.join(__dirname + '../../../redirect/article1.html'));
+  var filePath = path.join(__dirname, '../../redirect/article1.html');
+  res.sendFile(filePath);
 });
 app.use('/api', require('../modules/api/route'));
 app.get('/*', require('../middlewares/renderStatic').main);
