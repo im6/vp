@@ -1,5 +1,6 @@
 "use strict";
 const express = require('express'),
+  path = require('path'),
   methodOverride = require('method-override'),
   bodyParser = require('body-parser'),
   globalConfig = require('../config/env'),
@@ -50,6 +51,9 @@ if(globalConfig.isDev){
   app.use(csrf());
 }
 
+app.get('/article', function(req, res){
+  res.sendFile(path.join(__dirname + '../../../redirect/article1.html'));
+});
 app.use('/api', require('../modules/api/route'));
 app.get('/*', require('../middlewares/renderStatic').main);
 
