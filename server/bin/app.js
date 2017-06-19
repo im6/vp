@@ -38,7 +38,7 @@ if(!globalConfig.isDev){
 
 app.set('x-powered-by', false);
 app.use(helmet());
-app.use(express.static(globalConfig.publicDir));
+//app.use(express.static(globalConfig.publicDir));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
