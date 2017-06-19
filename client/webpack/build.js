@@ -12,9 +12,9 @@ Object.assign(baseTemplate, {
   },
   plugins: asset.plugins("build"),
   entry: asset.entry("build"),
-  devtool: 'cheap-module-source-map',
+  //devtool: 'cheap-module-source-map',
   output: {
-    publicPath: '/',
+    publicPath: 'http://dkny.oss-cn-hangzhou.aliyuncs.com/2/',
     path: path.join(__dirname, '../../public'),
     filename: 'bundle.js'
   }
