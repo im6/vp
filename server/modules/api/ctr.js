@@ -5,7 +5,8 @@ var globalConfig = require('../../config/env'),
   oauthApi = require('../../resource/oauth/list'),
   uuid = require('uuid'),
   helper = require('../../misc/helper'),
-  _ = require('lodash');
+  _ = require('lodash'),
+  escape = require('mysql').escape;
 
 
 var redirect_uri_wb = globalConfig.oauthRedirectDomin + '/api/login/wb',
@@ -77,27 +78,27 @@ var privateFn = {
 
 
   checkUserInfo: function(oauth, uid){
-    var qr = `SELECT * FROM user WHERE oauth = '${oauth}' AND oauthid = ${uid}`;
+    var qr = `SELECT * FROM user WHERE oauth = '${escape(oauth)}' AND oauthid = ${uid}`;
     return mysql.sqlExecOne(qr);
   },
   createNewUser: function(oauth, name, id){
-    var qr = `INSERT INTO user (oauth, name, oauthid, lastlogin) VALUES ('${oauth}', '${name}', '${id}', NOW())`;
+    var qr = `INSERT INTO user (oauth, name, oauthid, lastlogin) VALUES ('${escape(oauth)}', '${escape(name)}', '${escape(id)}', NOW())`;
     return mysql.sqlExecOne(qr);
   },
   addUserLike: function(userid, colorid){
-    var qr = `INSERT INTO userlike (userid, colorid) VALUES ('${userid}', '${colorid}')`;
+    var qr = `INSERT INTO userlike (userid, colorid) VALUES ('${escape(userid)}', '${colorid}')`;
     return mysql.sqlExecOne(qr);
   },
   removeUserLike: function(userid, colorid){
-    var qr = `DELETE FROM userlike WHERE userid= '${userid}' AND colorid = '${colorid}'`;
+    var qr = `DELETE FROM userlike WHERE userid= '${escape(userid)}' AND colorid = '${colorid}'`;
     return mysql.sqlExecOne(qr);
   },
   getUserLike: function(userid){
-    var qr = `SELECT colorid FROM userlike WHERE userid= '${userid}'`;
+    var qr = `SELECT colorid FROM userlike WHERE userid= '${escape(userid)}'`;
     return mysql.sqlExecOne(qr);
   },
   updateUserLoginDate: function(userid){
-    var qr = `UPDATE user SET lastlogin=NOW() WHERE id=${userid}`;
+    var qr = `UPDATE user SET lastlogin=NOW() WHERE id=${escape(userid)}`;
     return mysql.sqlExecOne(qr);
   },
 

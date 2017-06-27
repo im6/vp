@@ -6,6 +6,7 @@ module.exports = {
   init: function(){
     pool = mysql.createPool({
       connectionLimit : 8,
+      multipleStatements: false,
       host     : process.env['OPENSHIFT_MYSQL_DB_HOST'],
       port     : process.env['OPENSHIFT_MYSQL_DB_PORT'],
       user     : process.env['SQL_USERNAME'],

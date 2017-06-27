@@ -8,7 +8,7 @@ module.exports = {
   //publicDir: 'public',
   requireAuth: true,
 
-  serverPort: env.OPENSHIFT_NODEJS_PORT || 4000,
+  serverPort: env.OPENSHIFT_NODEJS_PORT || 3000,
   serverIp: env.OPENSHIFT_NODEJS_IP || 'localhost',
 
   wbApi: 'https://api.weibo.com',
