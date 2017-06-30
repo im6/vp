@@ -120,6 +120,11 @@ const Routes = ({ history, store }) => {
     callback();
   };
 
+  const goHome = (nextState, replace, callback) => {
+    replace('/');
+    callback();
+  };
+
   return <Router history={history} >
     <Route path="/auth"
            component={Auth}
@@ -142,6 +147,7 @@ const Routes = ({ history, store }) => {
       <Route path="/about" component={About} onEnter={initView}/>
 
       <Route path="/adminpanel" component={AdminPanel} onEnter={initAdmin} />
+      <Route path="*" onEnter={goHome} />
     </Route>
   </Router>;
 };

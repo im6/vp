@@ -2,7 +2,7 @@ var webpack = require('webpack'),
   HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const HOST = "127.0.0.1",
-  PORT = "3000",
+  PORT = "3001",
   antDir = process.platform === 'win32' ? /node_modules\\antd\\lib/ :  /node_modules\/antd\/lib/,
   FAVICON = './client/content/img/favicon.ico';
 

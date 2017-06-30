@@ -3,7 +3,6 @@ var webpack = require('webpack');
 var path = require('path');
 var asset = require('./asset');
 
-
 var baseTemplate = asset.template;
 
 Object.assign(baseTemplate, {
@@ -29,7 +28,13 @@ Object.assign(baseTemplate, {
     // serve index.html in place of 404 responses to allow HTML5 history
     historyApiFallback: true,
     port: asset.constant.port,
-    host: asset.constant.host
+    host: asset.constant.host,
+    proxy: {
+      '*': {
+        target: 'http://localhost:3000',
+        secure: false
+      }
+    }
   }
 });
 

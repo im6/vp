@@ -38,7 +38,7 @@ if(!globalConfig.isDev){
 
 app.set('x-powered-by', false);
 app.use(helmet());
-//app.use(express.static(globalConfig.publicDir));
+app.use(express.static(globalConfig.publicDir));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
@@ -56,7 +56,9 @@ app.get('/article', function(req, res){
   res.sendFile(filePath);
 });
 app.use('/api', require('../modules/api/route'));
-app.get('/*', require('../middlewares/renderStatic').main);
+app.get('/*', function(req, res, next){
+  res.sendFile(path.resolve(__dirname,`../../${globalConfig.publicDir}/index.html`));
+});
 
 
 app.use(function(err, req, res, next) {

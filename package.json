@@ -4,13 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --progress --profile --colors --watch --config client/webpack/watch.js",
-    "hot": "clear && webpack-dev-server --progress --profile --colors --config client/webpack/hot.js",
-    "watch": "webpack --progress --profile --colors --watch --config client/webpack/watch.js",
+    "start": "clear && webpack-dev-server --progress --profile --colors --config client/webpack/hot.js",
     "prebuild": "clear && echo start cleaning... && rm -rf public && rm -rf views/index.html && echo clearning fininshed!",
     "build": "webpack --config client/webpack/build.js",
-    "postbuild": "mv public/index.html views/ &&  echo jade conversion successfully!",
     "lint": "eslint --ext .js,.jsx src/"
   },
   "repository": {
