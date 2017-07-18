@@ -1,9 +1,6 @@
-# [ColorPK.com](http://www.javascript.fun/demo/)
-
-SPA and admin template.
-
+# [ColorPK.com](http://www.colorpk.com)
+![logo](https://github.com/zj1926/vp/blob/master/logo.jpg "colorpk.com")
 ## Highlight
-
 - ant.design
 - express.js
 - mysql
