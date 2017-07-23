@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 import { Menu, Icon } from 'antd';
 
-const FBShare = ({username, onClick}) => {
+const ProfileMenu = ({username, onClick}) => {
 
   const onClick0 = (ev) => {
     ev.preventDefault();
@@ -41,4 +41,4 @@ const FBShare = ({username, onClick}) => {
   </Menu>;
 };
 
-export default FBShare;
+export default ProfileMenu;
