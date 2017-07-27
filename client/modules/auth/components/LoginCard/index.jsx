@@ -10,7 +10,7 @@ import imgo4 from './assets/oauth4.png';
 
 const LoginCard = ({onLogin, goBack, wbClick, fbClick, ggClick}) => {
   return (
-    <Card title="Welcome to ColorPK" style={{ width: 270 }}>
+    <Card style={{ width: 270, borderRadius: 9 }}>
       <img onClick={goBack}
            src={img}
            className={styles.iconStyle}

@@ -10,8 +10,8 @@ var globalConfig = require('../../config/env'),
 
 
 var redirect_uri_wb = globalConfig.oauthRedirectDomin + '/api/login/wb',
-  redirect_uri_fb = (globalConfig.isDev? 'http://localhost:4000': globalConfig.oauthRedirectDomin) + '/api/login/fb',
-  redirect_uri_gg = (globalConfig.isDev? 'http://localhost:4000': globalConfig.oauthRedirectDomin) + '/api/login/gg';
+  redirect_uri_fb = (globalConfig.isDev? 'http://localhost:3001': globalConfig.oauthRedirectDomin) + '/api/login/fb',
+  redirect_uri_gg = (globalConfig.isDev? 'http://localhost:3001': globalConfig.oauthRedirectDomin) + '/api/login/gg';
 
 var privateFn = {
   createWeiboLink: function(state){
