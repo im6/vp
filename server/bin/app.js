@@ -8,7 +8,8 @@ const express = require('express'),
   expressSession = require('express-session'),
   csrf = require('csurf'),
   helmet = require('helmet'),
-  MySQLStore = require('express-mysql-session')(expressSession);
+  MySQLStore = require('express-mysql-session')(expressSession),
+  mainHandler = require('../middlewares/renderStatic').main;
 
 console.log(`NODE_ENV: ${globalConfig.isDev ? 'dev' : 'production'}`);
 
@@ -56,9 +57,7 @@ app.get('/article', function(req, res){
   res.sendFile(filePath);
 });
 app.use('/api', require('../modules/api/route'));
-app.get('/*', function(req, res, next){
-  res.sendFile(path.resolve(__dirname,`../../${globalConfig.publicDir}/index.html`));
-});
+app.get('/*', mainHandler);
 
 
 app.use(function(err, req, res, next) {
