@@ -4,8 +4,6 @@ var env = process.env;
 
 module.exports = {
   isDev: env.NODE_ENV === 'dev',
-  publicDir: env.NODE_ENV === 'dev' ? 'temp' : 'public',
-  //publicDir: 'public',
   requireAuth: true,
 
   serverPort: env.OPENSHIFT_NODEJS_PORT || 3000,

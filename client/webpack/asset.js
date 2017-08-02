@@ -77,6 +77,7 @@ var plugins = {
         NODE_ENV: JSON.stringify("dev")
       }
     }),
+    htmlHelper,
     //commonsChunk
   ],
   watch: [

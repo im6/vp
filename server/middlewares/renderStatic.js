@@ -28,7 +28,7 @@ module.exports = {
       }else{
         res.cookie('_csrf',req.csrfToken());
       }
-      res.sendFile(path.resolve(__dirname,`../../views/index.html`));
+      res.sendFile(path.resolve(__dirname,`../../dist/index.html`));
     }
   }
 };

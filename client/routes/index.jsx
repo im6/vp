@@ -11,7 +11,6 @@ import NewColor from '../modules/newcolor';
 import About from '../modules/about';
 import ResourceApi from '../modules/resourceApi';
 import AdminPanel from '../modules/adminPanel';
-
 const Routes = ({ history, store }) => {
   const getColors = () => {
     if(store. getState().color.get('list').size < 1) {
