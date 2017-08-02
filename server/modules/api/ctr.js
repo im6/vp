@@ -402,7 +402,7 @@ module.exports = {
     let userid = (hasAuth && req.session.app.dbInfo.id)? `${req.session.app.dbInfo.id}` : 'NULL';
     let displayItem = userid == 'NULL' ? 1 : 0;
     let random = (Math.random() * 10).toFixed();
-    var qr = `INSERT INTO color (\`like\`, color, userid, username, colortype, display, createdate) VALUES (${random}, '${req.body.color}', ${escape(userid)}, ${escape(username)}, '${escape(req.body.colorType)}', ${escape(displayItem)}, NOW())`;
+    var qr = `INSERT INTO color (\`like\`, color, userid, username, colortype, display, createdate) VALUES (${random}, '${req.body.color}', ${userid}, ${username}, '${req.body.colorType}', ${displayItem}, NOW())`;
     mysql.sqlExecOne(qr).then(function(row){
       res.json(helper.resSuccessObj({
         id:row.insertId,
