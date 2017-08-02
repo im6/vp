@@ -78,7 +78,7 @@ var privateFn = {
 
 
   checkUserInfo: function(oauth, uid){
-    var qr = `SELECT * FROM user WHERE oauth = '${escape(oauth)}' AND oauthid = ${uid}`;
+    var qr = `SELECT * FROM user WHERE oauth = '${escape(oauth)}' AND oauthid = ${escape(uid)}`;
     return mysql.sqlExecOne(qr);
   },
   createNewUser: function(oauth, name, id){
@@ -86,11 +86,11 @@ var privateFn = {
     return mysql.sqlExecOne(qr);
   },
   addUserLike: function(userid, colorid){
-    var qr = `INSERT INTO userlike (userid, colorid) VALUES ('${escape(userid)}', '${colorid}')`;
+    var qr = `INSERT INTO userlike (userid, colorid) VALUES ('${escape(userid)}', '${escape(colorid)}')`;
     return mysql.sqlExecOne(qr);
   },
   removeUserLike: function(userid, colorid){
-    var qr = `DELETE FROM userlike WHERE userid= '${escape(userid)}' AND colorid = '${colorid}'`;
+    var qr = `DELETE FROM userlike WHERE userid= '${escape(userid)}' AND colorid = '${escape(colorid)}'`;
     return mysql.sqlExecOne(qr);
   },
   getUserLike: function(userid){
@@ -380,7 +380,7 @@ module.exports = {
     });
   },
   toggleLike: function(req, res, next){
-    var qr = `UPDATE color SET \`like\` = \`like\` ${req.body.willLike ? '+' : '-'}  1 WHERE id = ${req.body.id}`;
+    var qr = `UPDATE color SET \`like\` = \`like\` ${req.body.willLike ? '+' : '-'}  1 WHERE id = ${escape(req.body.id)}`;
     mysql.sqlExecOne(qr).then(function(data){
       res.json(helper.resSuccessObj(data));
     }, function(data){
@@ -402,7 +402,7 @@ module.exports = {
     let userid = (hasAuth && req.session.app.dbInfo.id)? `${req.session.app.dbInfo.id}` : 'NULL';
     let displayItem = userid == 'NULL' ? 1 : 0;
     let random = (Math.random() * 10).toFixed();
-    var qr = `INSERT INTO color (\`like\`, color, userid, username, colortype, display, createdate) VALUES (${random}, '${req.body.color}', ${userid}, ${username}, '${req.body.colorType}', ${displayItem}, NOW())`;
+    var qr = `INSERT INTO color (\`like\`, color, userid, username, colortype, display, createdate) VALUES (${random}, '${req.body.color}', ${escape(userid)}, ${escape(username)}, '${escape(req.body.colorType)}', ${escape(displayItem)}, NOW())`;
     mysql.sqlExecOne(qr).then(function(row){
       res.json(helper.resSuccessObj({
         id:row.insertId,
