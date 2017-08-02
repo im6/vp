@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { Menu, Icon } from 'antd';
@@ -103,7 +103,7 @@ class SlideoutMenu extends React.Component {
         <Menu.Item key="about">
           <Link to="/about">
             <h3>
-              <Icon type="book" />
+              <Icon type="user" />
               About
             </h3>
           </Link>

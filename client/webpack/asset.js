@@ -16,7 +16,7 @@ var htmlHelper = new HtmlWebpackPlugin({
     title: 'ColorPK | Your Best Color Picker, Pal',
     template: 'client/template/index.html',
     //favicon: FAVICON,
-    hash:true,
+    //hash:true,
     showErrors: false
   });
 

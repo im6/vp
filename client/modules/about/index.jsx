@@ -2,7 +2,6 @@ import React from 'react';
 import { Row, Col, Card } from 'antd';
 import { connect } from 'react-redux';
 import style from './style.less';
-import img from '../auth/components/LoginCard/assets/icon2.png';
 
 const About = ({isMobile}) => (<Card
   style={{ width: isMobile ? "95%": 600 }}
@@ -14,7 +13,7 @@ const About = ({isMobile}) => (<Card
       md={8}
       lg={8}>
       <div className={style.img}>
-        <img src={img}/>
+        <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/icon.png" />
       </div>
     </Col>
 

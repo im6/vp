@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Slideout from 'slideout';
-import { Global } from '../../../../config/global.js';
 import styles from './style.less';
 import '!style!css!./slideout.css';
 import HeaderCenter from '../HeaderCenter';
@@ -52,12 +51,9 @@ class Layout extends React.Component {
   }
 
   onSlideoutMenuClick(){
-    const me = this;
-    if(!Global.isDev){
-      setTimeout(()=>{
-        slideout.close();
-      }, 500);
-    }
+    setTimeout(()=>{
+      slideout.close();
+    }, 500);
   }
 
   logout(){

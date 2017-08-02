@@ -3,16 +3,11 @@ import React from 'react';
 import styles from './style.less'
 import {Input, Button, Card, Icon, Tooltip} from 'antd';
 
-import img from './assets/icon2.png';
-import imgo1 from './assets/oauth1.png';
-import imgo2 from './assets/oauth2.png';
-import imgo4 from './assets/oauth4.png';
-
 const LoginCard = ({onLogin, goBack, wbClick, fbClick, ggClick}) => {
   return (
     <Card style={{ width: 270, borderRadius: 9 }}>
       <img onClick={goBack}
-           src={img}
+           src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/icon.png"
            className={styles.iconStyle}
         />
       <Input addonBefore={<Icon type="user" />} placeholder="Username" />
@@ -28,17 +23,17 @@ const LoginCard = ({onLogin, goBack, wbClick, fbClick, ggClick}) => {
       <br/>
       <div style={{float:'right', padding: '20px 0 20px 0'}}>
         <Tooltip title="Weibo">
-          <img src={imgo1}
+          <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth1.png"
                onClick={wbClick}
                className={styles.oauthStyle}/>
         </Tooltip>
         <Tooltip title="Facebook">
-          <img src={imgo2}
+          <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth2.png"
                onClick={fbClick}
                className={styles.oauthStyle}/>
         </Tooltip>
         <Tooltip title="Google+">
-          <img src={imgo4}
+          <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth4.png"
                onClick={ggClick}
                className={styles.oauthStyle}/>
         </Tooltip>
