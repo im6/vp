@@ -78,27 +78,27 @@ var privateFn = {
 
 
   checkUserInfo: function(oauth, uid){
-    var qr = `SELECT * FROM user WHERE oauth = '${escape(oauth)}' AND oauthid = ${escape(uid)}`;
+    var qr = `SELECT * FROM user WHERE oauth = '${oauth}' AND oauthid = ${uid}`;
     return mysql.sqlExecOne(qr);
   },
   createNewUser: function(oauth, name, id){
-    var qr = `INSERT INTO user (oauth, name, oauthid, lastlogin) VALUES ('${escape(oauth)}', '${escape(name)}', '${escape(id)}', NOW())`;
+    var qr = `INSERT INTO user (oauth, name, oauthid, lastlogin) VALUES ('${oauth}', '${name}', '${id}', NOW())`;
     return mysql.sqlExecOne(qr);
   },
   addUserLike: function(userid, colorid){
-    var qr = `INSERT INTO userlike (userid, colorid) VALUES ('${escape(userid)}', '${escape(colorid)}')`;
+    var qr = `INSERT INTO userlike (userid, colorid) VALUES ('${userid}', '${escape(colorid)}')`;
     return mysql.sqlExecOne(qr);
   },
   removeUserLike: function(userid, colorid){
-    var qr = `DELETE FROM userlike WHERE userid= '${escape(userid)}' AND colorid = '${escape(colorid)}'`;
+    var qr = `DELETE FROM userlike WHERE userid= '${userid}' AND colorid = '${escape(colorid)}'`;
     return mysql.sqlExecOne(qr);
   },
   getUserLike: function(userid){
-    var qr = `SELECT colorid FROM userlike WHERE userid= '${escape(userid)}'`;
+    var qr = `SELECT colorid FROM userlike WHERE userid= '${userid}'`;
     return mysql.sqlExecOne(qr);
   },
   updateUserLoginDate: function(userid){
-    var qr = `UPDATE user SET lastlogin=NOW() WHERE id=${escape(userid)}`;
+    var qr = `UPDATE user SET lastlogin=NOW() WHERE id=${userid}`;
     return mysql.sqlExecOne(qr);
   },
 
@@ -260,7 +260,7 @@ module.exports = {
         qs:qsObj
       }).then(function(data){
 
-        privateFn.convertOauthIntoLocalDB(session.app.oauth, session, data, res)
+        privateFn.convertOauthIntoLocalDB(session.app.oauth, session, data, res);
 
       }, function(data){
         res.json({
@@ -380,7 +380,7 @@ module.exports = {
     });
   },
   toggleLike: function(req, res, next){
-    var qr = `UPDATE color SET \`like\` = \`like\` ${req.body.willLike ? '+' : '-'}  1 WHERE id = ${escape(req.body.id)}`;
+    var qr = `UPDATE color SET \`like\` = \`like\` ${req.body.willLike ? '+' : '-'}  1 WHERE id = ${req.body.id}`;
     mysql.sqlExecOne(qr).then(function(data){
       res.json(helper.resSuccessObj(data));
     }, function(data){
