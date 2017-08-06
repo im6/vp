@@ -4,7 +4,27 @@ var webpack = require('webpack'),
 const HOST = "127.0.0.1",
   PORT = "3001",
   antDir = process.platform === 'win32' ? /node_modules\\antd\\lib/ :  /node_modules\/antd\/lib/,
-  FAVICON = './client/content/img/favicon.ico';
+  FAVICON = './client/content/img/favicon.ico',
+  VENDORS = [
+    'react',
+    'react-dom',
+    'redux',
+    'react-redux',
+    'react-router',
+    'react-router-redux',
+    'redux-saga',
+    'redux-actions',
+    'immutable',
+    'classnames',
+    'es6-promise',
+    'isomorphic-fetch',
+    'js-cookie',
+    'merge',
+    'rc-queue-anim',
+    'react-color-picker',
+    'node-vibrant',
+    'slideout',
+  ];
 
 var commonsChunk = new webpack.optimize.CommonsChunkPlugin({
   name: 'vendor',
@@ -109,18 +129,21 @@ var plugins = {
       }
     }),
     htmlHelper,
-    //commonsChunk
+    commonsChunk,
   ]
 };
 
 var entry = {
-    hot:[
-      'webpack-dev-server/client?http://' + HOST + ':' + PORT,
-      'webpack/hot/only-dev-server',
-      './client/entry/index.jsx'
-    ],
-    watch: './client/entry/index.jsx',
-    build: './client/entry/index_prod.jsx'
+  hot:[
+    'webpack-dev-server/client?http://' + HOST + ':' + PORT,
+    'webpack/hot/only-dev-server',
+    './client/entry/index.jsx'
+  ],
+  watch: './client/entry/index.jsx',
+  build:{
+    app: './client/entry/index_prod.jsx',
+    vendor: VENDORS
+  }
 };
 
 

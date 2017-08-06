@@ -1,5 +1,4 @@
 import requester from './requester';
-import qs from 'qs';
 
 export async function getUserInfo() {
   let result = await requester('/api/getUserInfo');
