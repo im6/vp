@@ -6,8 +6,8 @@ const HOST = "127.0.0.1",
   antDir = process.platform === 'win32' ? /node_modules\\antd\\lib/ :  /node_modules\/antd\/lib/,
   FAVICON = './client/content/img/favicon.ico',
   VENDORS = [
-    'react',
-    'react-dom',
+    //'react',
+    //'react-dom',
     'redux',
     'react-redux',
     'react-router',
@@ -38,7 +38,7 @@ var htmlHelper = new HtmlWebpackPlugin({
     //favicon: FAVICON,
     //hash:true,
     showErrors: false
-  });
+});
 
 var baseTemplate = {
   resolve: {
@@ -128,7 +128,13 @@ var plugins = {
         NODE_ENV: JSON.stringify("production")
       }
     }),
-    htmlHelper,
+    new HtmlWebpackPlugin({
+      title: 'ColorPK | Your Best Color Picker, Pal',
+      template: 'client/template/index_prod.html',
+      //favicon: FAVICON,
+      //hash:true,
+      showErrors: false
+    }),
     commonsChunk,
   ]
 };

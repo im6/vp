@@ -10,6 +10,10 @@ Object.assign(baseTemplate, {
   module: {
     loaders: asset.loaders
   },
+  externals : {
+    'react': 'React',
+    'react-dom': 'ReactDOM'
+  },
   plugins: asset.plugins("build"),
   entry: asset.entry("build"),
   //devtool: 'cheap-module-source-map',
