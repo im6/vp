@@ -21,7 +21,7 @@ class Color extends React.Component {
     listClass[style.list] = true;
     const clsStr = classnames(listClass);
 
-    return (<div>
+    return (<div style={{minHeight: 1500}}>
       <HeadBanner
         colorSize={me.props.list.size}
         colorView={me.props.view}
