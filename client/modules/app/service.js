@@ -27,10 +27,14 @@ const output = {
   determineEffect(r1, r2){
     let result = null;
     if(r2.substring(1,6) === 'color' && (r1 === '/latest' || r1 === '/')){
+      // share color page
       result = false;
     } else if (r1.substring(1,6) === 'color' && (r2 === '/latest' || r2 === '/')){
+      // return from color page
       result = false;
-    }else{
+    } else if (r2 === '/new') {
+      result = false;
+    } else{
       result = true;
     }
 
