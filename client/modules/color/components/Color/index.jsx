@@ -20,6 +20,8 @@ class Color extends React.Component {
     listClass[style.pcPadding] = !im;
     listClass[style.list] = true;
     const clsStr = classnames(listClass);
+    const selected = me.props.selectedIndex;
+    const selectedWidth = im ? 250 : 270;
 
     return (<div style={{minHeight: 1500}}>
       <HeadBanner
@@ -28,13 +30,13 @@ class Color extends React.Component {
         />
 
       {
-        me.props.selectedIndex >= 0 ?
+        selected >= 0 ?
           (
             <div className={style.selectedBox}>
-              <Box boxInfo={me.props.list.get(me.props.selectedIndex)}
-                   boxWidth={im? 70: 30}
+              <Box boxInfo={me.props.list.get(selected)}
+                   boxWidth={selectedWidth}
                    isMobile={im}
-                   onLikeClick={me.onLikeClickHandler.bind(me, me.props.list.getIn([me.props.selectedIndex, 'id']))} />
+                   onLikeClick={me.onLikeClickHandler.bind(me, me.props.list.getIn([selected, 'id']))} />
             </div>
           ) : null
 

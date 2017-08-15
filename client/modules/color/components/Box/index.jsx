@@ -30,7 +30,10 @@ class Box extends React.Component {
     const btnSize = me.props.isMobile ? 'small': 'default';
     const boxHt = me.props.isMobile ? 230 : 280;
 
-    return <div className={style.box} style={{width: me.props.boxWidth + '%', height: boxHt}}>
+    return <div
+      className={style.box}
+      style={{width: me.props.boxWidth, height: boxHt}}
+      >
         <ColorCanvas
           colorId={me.props.boxInfo.get('id')}
           colorValue={me.props.boxInfo.get('color')}/>
@@ -58,7 +61,7 @@ Box.propTypes = {
   boxInfo: PropTypes.object.isRequired,
   onLikeClick: PropTypes.func.isRequired,
   isMobile: PropTypes.bool,
-  boxWidth: PropTypes.number
+  boxWidth: PropTypes.any
 };
 
 export default Box;

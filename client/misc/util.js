@@ -12,6 +12,8 @@ export function getBoxPercWidth() {
   }else {
     result = 92;
   }
+
+  result += '%';
   return result;
 }
 
