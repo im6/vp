@@ -6,6 +6,7 @@ import Box from '../Box';
 import SpinLoader from '../SpinLoader';
 import HeadBanner from '../HeadBanner';
 import style from './style.less';
+import { downloadCanvas } from '../../../../misc/util.js';
 
 class Color extends React.Component {
   onLikeClickHandler(id, btnStatus){
@@ -23,6 +24,12 @@ class Color extends React.Component {
     const selected = me.props.selectedIndex;
     const selectedWidth = im ? 250 : 270;
 
+    let downloadUrl = 'javascript:void(0)';
+    if(selected > -1) {
+      downloadUrl = downloadCanvas(me.props.list.getIn([selected, 'color']));
+    }
+
+
     return (<div style={{minHeight: 1500}}>
       <HeadBanner
         colorSize={me.props.list.size}
@@ -33,10 +40,17 @@ class Color extends React.Component {
         selected >= 0 ?
           (
             <div className={style.selectedBox}>
-              <Box boxInfo={me.props.list.get(selected)}
-                   boxWidth={selectedWidth}
-                   isMobile={im}
-                   onLikeClick={me.onLikeClickHandler.bind(me, me.props.list.getIn([selected, 'id']))} />
+              <div>
+                <Box boxInfo={me.props.list.get(selected)}
+                     boxWidth={selectedWidth}
+                     isMobile={im}
+                     onLikeClick={me.onLikeClickHandler.bind(me, me.props.list.getIn([selected, 'id']))}
+                  />
+                <br/>
+                <div style={{textAlign: 'center'}}>
+                  <a href={downloadUrl} download="colorpk_download.png">Download</a>
+                </div>
+              </div>
             </div>
           ) : null
 
