@@ -80,7 +80,9 @@ export function downloadCanvas(color) {
   ctx.fillText(colors[3], MARGIN, colorTxtPosition + space * 3);
 
   const url = myCanvas.toDataURL();
-  myCanvas.remove();
+  if('remove' in myCanvas){
+    myCanvas.remove();
+  }
 
   return url;
 

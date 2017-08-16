@@ -25,7 +25,7 @@ class Color extends React.Component {
     const selectedWidth = im ? 250 : 270;
 
     let downloadUrl = 'javascript:void(0)';
-    if(selected > -1) {
+    if(!im && selected > -1) {
       downloadUrl = downloadCanvas(me.props.list.getIn([selected, 'color']));
     }
 
@@ -47,9 +47,11 @@ class Color extends React.Component {
                      onLikeClick={me.onLikeClickHandler.bind(me, me.props.list.getIn([selected, 'id']))}
                   />
                 <br/>
-                <div style={{textAlign: 'center'}}>
-                  <a href={downloadUrl} download="colorpk_download.png">Download</a>
-                </div>
+                {
+                  im? null: (<div style={{textAlign: 'center'}}>
+                    <a href={downloadUrl} download="colorpk_download.png">Download</a>
+                  </div>)
+                }
               </div>
             </div>
           ) : null
