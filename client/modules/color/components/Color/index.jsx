@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, Row, Col } from 'antd';
+import { Card, Icon, Row, Col, Button } from 'antd';
 import classnames from 'classnames';
 import QueueAnim from 'rc-queue-anim';
 import Box from '../Box';
@@ -49,7 +49,9 @@ class Color extends React.Component {
                 <br/>
                 {
                   im? null: (<div style={{textAlign: 'center'}}>
-                    <a href={downloadUrl} download="colorpk_download.png">Download</a>
+                    <a href={downloadUrl} download="colorpk_download.png">
+                      <Button size="large" type="default" icon="download">Download</Button>
+                    </a>
                   </div>)
                 }
               </div>
