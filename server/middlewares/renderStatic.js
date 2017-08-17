@@ -13,14 +13,16 @@ var FRONTURLs = [
   'extract',
   'resourceapi',
   'about',
-  'adminpanel'
+  'adminpanel',
 ];
 
 module.exports = {
   main: function(req, res, next){
     var subUrl = req.url.split('/');
 
-    if(FRONTURLs.indexOf(subUrl[1]) < 0){
+    if(subUrl[1] === 'bundle.js'){
+      res.sendFile(path.resolve(__dirname,`../../dist/bundle.js`));
+    } else if(FRONTURLs.indexOf(subUrl[1]) < 0){
       res.redirect('/');
     }else{
       if(globalConfig.isDev){

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "clear && webpack-dev-server --progress --profile --colors --config client/webpack/hot.js",
     "build": "webpack --config client/webpack/build.js",
+    "build1": "webpack --config client/webpack/build1.js",
     "lint": "eslint --ext .js,.jsx src/"
   },
   "repository": {

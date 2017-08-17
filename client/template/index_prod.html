@@ -25,5 +25,19 @@
     </head>
     <body>
         <div id="app"></div>
+        <script>
+            setTimeout(function(){
+                if(!window._COLORPK){
+                    var script = document.createElement('script');
+                    script.type = "text/javascript";
+                    script.charset = "utf-8";
+                    script.src = '/bundle.js';
+                    script.onload = function () {
+                        console.warn('Local script loaded.');
+                    };
+                    document.head.appendChild(script);
+                }
+            }, 5500);
+        </script>
     </body>
 </html>

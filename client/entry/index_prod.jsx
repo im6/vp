@@ -11,6 +11,7 @@ import { moduleReducers } from '../config/reducer';
 import { Global } from '../config/global';
 import Routes from '../routes/index.jsx';
 
+const APPKEY = '_COLORPK';
 const sagaMiddleware = createSagaMiddleware();
 const enhancer = compose(
   applyMiddleware(sagaMiddleware),
@@ -26,9 +27,14 @@ sagaInitiator(sagaMiddleware);
 
 const history = syncHistoryWithStore(browserHistory, store);
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Routes history={history} store={store} />
-  </Provider>,
-  document.getElementById('app')
-);
+if(!window[APPKEY]){
+  ReactDOM.render(
+    <Provider store={store}>
+      <Routes history={history} store={store} />
+    </Provider>,
+    document.getElementById('app')
+  );
+  window[APPKEY] = true;
+} else {
+  console.warn("ColorPK is already loaded!")
+}
