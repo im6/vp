@@ -68,6 +68,7 @@ class AdminPanel extends React.PureComponent {
               <Tooltip title="View">
                 <Button
                   shape="circle"
+                  className={style.btn}
                   icon="eye"
                   onClick={me.showInModal.bind(me, record)}
                   />
@@ -82,6 +83,7 @@ class AdminPanel extends React.PureComponent {
                 <Button
                   shape="circle"
                   icon="check"
+                  className={style.btn}
                   />
               </Popconfirm>
               <Popconfirm
