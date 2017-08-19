@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { Alert, Button } from 'antd';
 import style from './style.less';
 
-const HeadBanner = ({colorSize, colorView}) => {
+const HeadBanner = ({colorSize, colorView, bannerStart}) => {
   let ele = null;
   if(colorView === 'like' && colorSize === 0){
     ele = <div>
@@ -37,27 +37,22 @@ const HeadBanner = ({colorSize, colorView}) => {
     // do nothing;
   } else {
     ele = <Alert
-      message={<h3>Recognized by community</h3>}
       description={
-      <h3>
-        <br/>
+      <h3 style={{fontSize: "1.25em"}}>
         ColorPK is selected by &nbsp;
-        <a href="http://www.javascript.fun/site" target="_blank">
-        JavaScript.Fun
+        <a href="http://www.javascript.fun" target="_blank">
+          JavaScript.Fun
         </a>&nbsp;
-        as a recommendated colorpicker website.&nbsp;
-        We will keep delivering our users innovative and adaptive color solutions.
-        <br/>
-        Way to go &nbsp; :)
+        as a recommendated colorpicker website.
       </h3>
       }
-      type="success"
+      type="info"
       showIcon
       closable
       />
   }
 
-  return <div className={style.wrapper}>
+  return <div className={style.wrapper} style={{padding: `0 ${bannerStart}px`}}>
     {ele}
   </div>;
 };

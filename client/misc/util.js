@@ -2,7 +2,7 @@ export function getBoxPercWidth() {
   let result = 0;
   let w = window.innerWidth;
   if(w >= 1440){
-    result = 74;
+    result = 75;
   } else if(w >= 1280){
     result = 85;
   }else if(w >= 1024){
@@ -13,8 +13,17 @@ export function getBoxPercWidth() {
     result = 92;
   }
 
-  result += '%';
   return result;
+}
+
+export function bannerStartLocation(){
+  const w = window.innerWidth,
+    p = mobileDetect() ? 0 : 0.04,
+    RATION = getBoxPercWidth()/100,
+    NUM = w > 1199 ? 4 : w > 991 ? 3 : 2;
+  let v0 = (1 - 2 * p) * (1 - RATION) / (2 * NUM);
+  let v1 = w * (p + v0);
+  return v1;
 }
 
 export function mobileDetect() {

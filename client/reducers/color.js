@@ -2,7 +2,7 @@
 import { handleActions } from 'redux-actions';
 import Immutable, {Map, List} from 'immutable';
 import { message } from 'antd';
-import { getBoxPercWidth } from '../misc/util.js';
+import { getBoxPercWidth, bannerStartLocation } from '../misc/util.js';
 
 const SourceMap = {
   "like":"myLiked",
@@ -190,7 +190,8 @@ const color = handleActions({
   },
 }, Immutable.fromJS({
   list: [],
-  boxWidth: getBoxPercWidth(),
+  boxWidth: getBoxPercWidth() +  '%',
+  bannerStart: bannerStartLocation(),
   myPortfolio: [],
   myLiked: [],
   liked: {

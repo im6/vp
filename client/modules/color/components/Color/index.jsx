@@ -32,6 +32,7 @@ class Color extends React.Component {
 
     return (<div style={{minHeight: 1500}}>
       <HeadBanner
+        bannerStart={me.props.bannerStart}
         colorSize={me.props.list.size}
         colorView={me.props.view}
         />
