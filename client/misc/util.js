@@ -23,6 +23,7 @@ export function bannerStartLocation(){
     NUM = w > 1199 ? 4 : w > 991 ? 3 : 2;
   let v0 = (1 - 2 * p) * (1 - RATION) / (2 * NUM);
   let v1 = w * (p + v0);
+  v1 += -1.5;
   return v1;
 }
 
