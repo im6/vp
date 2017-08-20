@@ -6,6 +6,7 @@ import Box from '../Box';
 import SpinLoader from '../SpinLoader';
 import HeadBanner from '../HeadBanner';
 import style from './style.less';
+import { downloadCanvas } from '../../../../misc/util.js';
 import { Global } from '../../../../config/global.js';
 
 const { ISMOBILE } = Global;
@@ -40,9 +41,10 @@ class Color extends React.Component {
         selected >= 0 ?
           (
             <div className={style.selectedBox}>
-              <div>
+              <div style={{width: 275}}>
                 <Box
                   boxInfo={me.props.list.get(selected)}
+                  width="100%"
                   onLikeClick={me.onLikeClickHandler.bind(me, me.props.list.getIn([selected, 'id']))}
                   />
                 <br/>

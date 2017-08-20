@@ -30,10 +30,11 @@ class Box extends React.Component {
     const likeStyle = {};
     likeStyle[style.hasLike] = me.props.boxInfo.get('liked') || false;
     const likeIcon = me.props.boxInfo.get('liked') ? 'heart' : 'heart-o';
+    const wd = me.props.width || BOXWD;
 
     return <div
       className={style.box}
-      style={{width: BOXWD, height: BOXHT}}
+      style={{width: wd, height: BOXHT}}
       >
         <ColorCanvas
           colorId={me.props.boxInfo.get('id')}
