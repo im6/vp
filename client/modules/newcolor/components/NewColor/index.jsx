@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import ColorPicker from 'react-color-picker';
-import { Row, Col, Card, Button, Input, Checkbox, Icon, Select, message, Modal, Tooltip } from 'antd';
+import { Row, Col, Card, Button, Input, Checkbox, Icon, Select, message, Modal } from 'antd';
 import EditCanvas from '../EditCanvas';
 import VibrantPalette from '../VibrantPalette';
 import FinishModal from '../FinishModal';
@@ -218,12 +218,12 @@ class NewColor extends React.PureComponent {
               </Button>
             </Link>
             &nbsp;&nbsp;&nbsp;
-            <Tooltip placement="top" title="Reset">
-              <Button type="default"
-                      size="large"
-                      icon="reload"
-                      onClick={me.resetColor.bind(me)} />
-            </Tooltip>
+            <Button
+              type="default"
+              size="large"
+              icon="reload"
+              onClick={me.resetColor.bind(me)}
+              />
 
           </div>
         </Col>

@@ -24,16 +24,19 @@ const LoginCard = ({onLogin, goBack, wbClick, fbClick, ggClick}) => {
       <div style={{float:'right', padding: '20px 0 20px 0'}}>
         <Tooltip title="Weibo">
           <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth1.png"
+               alt="weibo"
                onClick={wbClick}
                className={styles.oauthStyle}/>
         </Tooltip>
         <Tooltip title="Facebook">
           <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth2.png"
+               alt="facebook"
                onClick={fbClick}
                className={styles.oauthStyle}/>
         </Tooltip>
         <Tooltip title="Google+">
           <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth4.png"
+               alt="google+"
                onClick={ggClick}
                className={styles.oauthStyle}/>
         </Tooltip>
