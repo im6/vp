@@ -29,10 +29,10 @@ class ColorRow extends React.Component {
 
   render() {
     const me = this;
-    let rowStyle = (me.props.colorValue && me.props.colorValue != '#') ? {
+    const rowStyle = (me.props.colorValue && me.props.colorValue != '#') ? {
       'backgroundColor': me.props.colorValue
     } : {
-      border: `1px solid ${me.props.isActive ? '#FF5BA1' : '#cccccc'}`,
+      border: `1px solid ${me.props.isActive ? '#1a4cb6' : '#cccccc'}`,
       backgroundImage: "url('data:image/png;base64,R0lGODdhCgAKAPAAAOXl5f///ywAAAAACgAKAEACEIQdqXt9GxyETrI279OIgwIAOw==')"
     };
 

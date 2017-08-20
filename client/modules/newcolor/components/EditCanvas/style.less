@@ -1,30 +1,32 @@
+@cornerValue: 7px;
+@cornerValueInner: 3px;
 .box {
   height: 302px;
   width: 100%;
 
   border: 1px solid #cccccc;
-  background-color: white;
-  border-radius: 9px;
+
+  border-radius: @cornerValue;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 1px 3px 0.6px #d9d9d9;
+  box-shadow: 0 0 3px 0.6px #d9d9d9;
   transition: box-shadow 0.3s ease-in-out;
+  padding: 8px;
 
   &:hover {
-    transition: box-shadow 0.4s;
-    box-shadow: 0 2px 22px 3px #cccccc;
+    box-shadow: 0 1px 18px 2px #cccccc;
   }
 
   .boxCanvas {
-    width: 94%;
-    height: 90%;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
 
     div:nth-child(1){
-      border-radius: 8px 8px 0px 0px;
+      border-radius: @cornerValueInner @cornerValueInner 0px 0px;
       background-color: rgb(52, 43, 43);
       height: 40%;
     }
@@ -42,7 +44,7 @@
     div:nth-child(4){
       background-color: rgb(222, 251, 194);
       height: 17.5%;
-      border-radius: 0px 0px 8px 8px;
+      border-radius: 0px 0px @cornerValueInner @cornerValueInner;
     }
   }
 }
