@@ -1,10 +1,12 @@
 import React from 'react';
 import { Row, Col, Card } from 'antd';
-import { connect } from 'react-redux';
 import style from './style.less';
+import { mobileDetect } from '../../misc/util.js';
 
-const About = ({isMobile}) => (<Card
-  style={{ width: isMobile ? "95%": 600 }}
+const IM = mobileDetect();
+
+const About = () => (<Card
+  style={{ width: IM ? "95%": 600 }}
   className={style.container}>
   <Row>
     <Col
@@ -24,7 +26,7 @@ const About = ({isMobile}) => (<Card
       lg={16}>
       <div className={style.text}>
         {
-          isMobile? <div>
+          IM? <div>
             <br/>
             <br/>
             <br/>
@@ -50,10 +52,4 @@ const About = ({isMobile}) => (<Card
   </Row>
 </Card>);
 
-const mapStateToProps = ({ user }) => {
-  return {
-    isMobile: user.get('isMobile'),
-  }
-};
-
-export default connect(mapStateToProps)(About);
+export default About;

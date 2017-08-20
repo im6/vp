@@ -2,7 +2,6 @@
 import { handleActions } from 'redux-actions';
 import Immutable, {Map, List} from 'immutable';
 import { message } from 'antd';
-import { mobileDetect } from '../misc/util.js';
 
 const user = handleActions({
   ['user/initAuth'](state, action) {
@@ -43,7 +42,6 @@ const user = handleActions({
   weiboUrl: null,
   facebookUrl: null,
   googleUrl: null,
-  isMobile: mobileDetect()
 }));
 
 export default user;

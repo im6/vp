@@ -40,7 +40,6 @@ const mapStateToProps = ({color, user, routing}) => {
   return {
     list: color0,
     loading: color.get('loading'),
-    isMobile: user.get('isMobile'),
     selectedIndex,
     view,
   }

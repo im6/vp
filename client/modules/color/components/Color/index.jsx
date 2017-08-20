@@ -6,7 +6,9 @@ import Box from '../Box';
 import SpinLoader from '../SpinLoader';
 import HeadBanner from '../HeadBanner';
 import style from './style.less';
-import { downloadCanvas } from '../../../../misc/util.js';
+import { downloadCanvas, mobileDetect } from '../../../../misc/util.js';
+
+const ISMOBILE = mobileDetect();
 
 class Color extends React.Component {
   onLikeClickHandler(id, btnStatus){
@@ -16,15 +18,14 @@ class Color extends React.Component {
 
   render() {
     const me = this;
-    const im = me.props.isMobile;
     const listClass = {};
-    listClass[style.pcPadding] = !im;
+    listClass[style.pcPadding] = !ISMOBILE;
     listClass[style.list] = true;
     const clsStr = classnames(listClass);
     const selected = me.props.selectedIndex;
 
     let downloadUrl = 'javascript:void(0)';
-    if(!im && selected > -1) {
+    if(!ISMOBILE && selected > -1) {
       downloadUrl = downloadCanvas(me.props.list.getIn([selected, 'color']));
     }
 
@@ -46,7 +47,7 @@ class Color extends React.Component {
                   />
                 <br/>
                 {
-                  im? null: (<div style={{textAlign: 'center'}}>
+                  ISMOBILE? null: (<div style={{textAlign: 'center'}}>
                     <a href={downloadUrl} download="colorpk_download.png">
                       <Button size="large" type="default" icon="download">Download</Button>
                     </a>
