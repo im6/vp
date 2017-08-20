@@ -40,11 +40,10 @@ class NewColor extends React.PureComponent {
 
   showModal(){
     const me = this;
-    let isAuth = me.props.user.get('isAuth');
     Modal.success({
       title: 'Thank you for new colors',
       okText: 'Got it',
-      content: <FinishModal isAuth={isAuth} />,
+      content: <FinishModal isAuth={me.props.isAuth} />,
       onOk: (close) => {
         close();
         me.props.onRedirect();

@@ -12,7 +12,6 @@ import createLogger from 'redux-logger';
 
 import { sagaInitiator } from '../config/saga';
 import { moduleReducers } from '../config/reducer';
-import { Global } from '../config/global';
 import Routes from '../routes/index.jsx';
 
 const appDom = document.getElementById('app');
@@ -21,10 +20,8 @@ const logger = createLogger();
 
 
 const initialState = {};
-let middlewares = [sagaMiddleware];
-if(Global.isDev){
-  middlewares.push(logger);
-}
+const middlewares = [sagaMiddleware, logger];
+
 const enhancer = compose(
   applyMiddleware.apply(null, middlewares),
   window.devToolsExtension ? window.devToolsExtension() : f => f
@@ -49,7 +46,7 @@ let render = () => {
 };
 
 
-if (module.hot && Global.isDev) {
+if (module.hot) {
   const renderNormally = render;
   const renderException = (error) => {
     const RedBox = require('redbox-react').default;
@@ -62,10 +59,6 @@ if (module.hot && Global.isDev) {
       renderException(error);
     }
   };
-
-  //module.hot.accept('../routes/index.jsx', () => {
-  //  render();
-  //});
 }
 
 render();

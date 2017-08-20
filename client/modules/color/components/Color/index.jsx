@@ -6,9 +6,9 @@ import Box from '../Box';
 import SpinLoader from '../SpinLoader';
 import HeadBanner from '../HeadBanner';
 import style from './style.less';
-import { downloadCanvas, mobileDetect } from '../../../../misc/util.js';
+import { Global } from '../../../../config/global.js';
 
-const ISMOBILE = mobileDetect();
+const { ISMOBILE } = Global;
 
 class Color extends React.Component {
   onLikeClickHandler(id, btnStatus){

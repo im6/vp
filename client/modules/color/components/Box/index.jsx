@@ -4,12 +4,9 @@ import { Button, Icon } from 'antd';
 import classnames from 'classnames';
 import style from './style.less';
 import ColorCanvas from './components/ColorCanvas';
-import { mobileDetect, getBoxPercWidth } from '../../../../misc/util.js';
+import { Global } from '../../../../config/global.js';
 
-const isMobile = mobileDetect(),
-  BTNSIZE = isMobile ? 'small': 'default',
-  BOXHT = isMobile ? 230 : 285,
-  BOXWD = getBoxPercWidth() + '%';
+const { BTNSIZE, BOXHT, BOXWD } = Global;
 
 class Box extends React.Component {
   shouldComponentUpdate(nextProps, nextState){

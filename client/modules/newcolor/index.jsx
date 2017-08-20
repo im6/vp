@@ -7,11 +7,12 @@ import NewColor from './components/NewColor';
 const mapStateToProps = ({colorType, user, routing}) => {
   const routePath = routing.locationBeforeTransitions.pathname;
   const showUpload = routePath === '/extract';
+  const isAuth = user.get('isAuth');
   return {
     showUpload,
     routePath,
     colorType,
-    user
+    isAuth,
   }
 };
 

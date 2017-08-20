@@ -2,11 +2,12 @@ import React from 'react';
 import { Row, Col, Card } from 'antd';
 import style from './style.less';
 import { mobileDetect } from '../../misc/util.js';
+import { Global } from '../../config/global.js';
 
-const IM = mobileDetect();
+const { ISMOBILE } = Global;
 
 const About = () => (<Card
-  style={{ width: IM ? "95%": 600 }}
+  style={{ width: ISMOBILE ? "95%": 600 }}
   className={style.container}>
   <Row>
     <Col
@@ -26,7 +27,7 @@ const About = () => (<Card
       lg={16}>
       <div className={style.text}>
         {
-          IM? <div>
+          ISMOBILE? <div>
             <br/>
             <br/>
             <br/>
