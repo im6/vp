@@ -1,3 +1,8 @@
+var isMobile = false;
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+  isMobile = true;
+}
+
 export function getBoxPercWidth() {
   let result = 0;
   let w = window.innerWidth;
@@ -28,11 +33,6 @@ export function bannerStartLocation(){
 }
 
 export function mobileDetect() {
-  var isMobile = false;
-  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    isMobile = true;
-  }
-
   return isMobile;
 }
 

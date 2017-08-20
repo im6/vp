@@ -2,8 +2,11 @@ import React from 'react';
 import { Link } from 'react-router';
 import { Alert, Button } from 'antd';
 import style from './style.less';
+import { bannerStartLocation } from '../../../../misc/util.js';
 
-const HeadBanner = ({colorSize, colorView, bannerStart}) => {
+const BNNRPADDING = bannerStartLocation();
+
+const HeadBanner = ({colorSize, colorView}) => {
   let ele = null;
   if(colorView === 'like' && colorSize === 0){
     ele = <div>
@@ -52,7 +55,7 @@ const HeadBanner = ({colorSize, colorView, bannerStart}) => {
       />
   }
 
-  return <div className={style.wrapper} style={{padding: `0 ${bannerStart}px`}}>
+  return <div className={style.wrapper} style={{padding: `0 ${BNNRPADDING}px`}}>
     {ele}
   </div>;
 };

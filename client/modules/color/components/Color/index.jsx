@@ -22,7 +22,6 @@ class Color extends React.Component {
     listClass[style.list] = true;
     const clsStr = classnames(listClass);
     const selected = me.props.selectedIndex;
-    const selectedWidth = im ? 250 : 270;
 
     let downloadUrl = 'javascript:void(0)';
     if(!im && selected > -1) {
@@ -32,7 +31,6 @@ class Color extends React.Component {
 
     return (<div style={{minHeight: 1500}}>
       <HeadBanner
-        bannerStart={me.props.bannerStart}
         colorSize={me.props.list.size}
         colorView={me.props.view}
         />
@@ -42,10 +40,9 @@ class Color extends React.Component {
           (
             <div className={style.selectedBox}>
               <div>
-                <Box boxInfo={me.props.list.get(selected)}
-                     boxWidth={selectedWidth}
-                     isMobile={im}
-                     onLikeClick={me.onLikeClickHandler.bind(me, me.props.list.getIn([selected, 'id']))}
+                <Box
+                  boxInfo={me.props.list.get(selected)}
+                  onLikeClick={me.onLikeClickHandler.bind(me, me.props.list.getIn([selected, 'id']))}
                   />
                 <br/>
                 {
@@ -73,10 +70,10 @@ class Color extends React.Component {
                          lg={6}
                          key={k}
                          className={style.colContainer}>
-              <Box boxInfo={v}
-                   boxWidth={me.props.boxWidth}
-                   isMobile={im}
-                   onLikeClick={me.onLikeClickHandler.bind(me, v.get('id'))} />
+              <Box
+                boxInfo={v}
+                onLikeClick={me.onLikeClickHandler.bind(me, v.get('id'))}
+                />
             </Col>);
           })
         }
