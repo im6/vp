@@ -1,14 +1,15 @@
 //https://www.iconfinder.com/icons/762279/communication_connection_media_message_social_talk_weibo_icon#size=128
 import React from 'react';
-import styles from './style.less'
+import style from './style.less'
 import {Input, Button, Card, Icon, Tooltip} from 'antd';
 
 const LoginCard = ({onLogin, goBack, wbClick, fbClick, ggClick}) => {
   return (
-    <Card style={{ width: 270, borderRadius: 9 }}>
+    <Card className={style.container}>
       <img onClick={goBack}
+           alt="icon"
            src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/icon.png"
-           className={styles.iconStyle}
+           className={style.iconStyle}
         />
       <Input addonBefore={<Icon type="user" />} placeholder="Username" />
       <br/>
@@ -26,19 +27,19 @@ const LoginCard = ({onLogin, goBack, wbClick, fbClick, ggClick}) => {
           <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth1.png"
                alt="weibo"
                onClick={wbClick}
-               className={styles.oauthStyle}/>
+               className={style.oauthStyle}/>
         </Tooltip>
         <Tooltip title="Facebook">
           <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth2.png"
                alt="facebook"
                onClick={fbClick}
-               className={styles.oauthStyle}/>
+               className={style.oauthStyle}/>
         </Tooltip>
         <Tooltip title="Google+">
           <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth4.png"
                alt="google+"
                onClick={ggClick}
-               className={styles.oauthStyle}/>
+               className={style.oauthStyle}/>
         </Tooltip>
       </div>
     </Card>
