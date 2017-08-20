@@ -5,9 +5,13 @@ import { mobileDetect } from '../../misc/util.js';
 import { Global } from '../../config/global.js';
 
 const { ISMOBILE } = Global;
+const boxStyle = {
+  width: ISMOBILE ? "95%": 600,
+  margin: ISMOBILE ? "0 auto" : "40px auto",
+};
 
 const About = () => (<Card
-  style={{ width: ISMOBILE ? "95%": 600 }}
+  style={boxStyle}
   className={style.container}>
   <Row>
     <Col
@@ -35,7 +39,7 @@ const About = () => (<Card
         }
 
         <h2>
-          I'd like to get you the best ColorPicKer.
+          I'd like to get you the best ColorPicker.
           <br/>
           So I create ColorPK, Welcome!
           <br/>
