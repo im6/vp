@@ -1,7 +1,7 @@
 //https://www.iconfinder.com/icons/762279/communication_connection_media_message_social_talk_weibo_icon#size=128
 import React from 'react';
 import style from './style.less'
-import {Input, Button, Card, Icon, Tooltip} from 'antd';
+import {Input, Button, Card, Icon } from 'antd';
 
 const LoginCard = ({onLogin, goBack, wbClick, fbClick, ggClick}) => {
   return (
@@ -23,24 +23,18 @@ const LoginCard = ({onLogin, goBack, wbClick, fbClick, ggClick}) => {
 
       <br/>
       <div style={{float:'right', padding: '20px 0 20px 0'}}>
-        <Tooltip title="Weibo">
-          <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth1.png"
-               alt="weibo"
-               onClick={wbClick}
-               className={style.oauthStyle}/>
-        </Tooltip>
-        <Tooltip title="Facebook">
-          <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth2.png"
-               alt="facebook"
-               onClick={fbClick}
-               className={style.oauthStyle}/>
-        </Tooltip>
-        <Tooltip title="Google+">
-          <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth4.png"
-               alt="google+"
-               onClick={ggClick}
-               className={style.oauthStyle}/>
-        </Tooltip>
+        <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth1.png"
+             alt="weibo"
+             onClick={wbClick}
+             className={style.oauthStyle}/>
+        <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth2.png"
+             alt="facebook"
+             onClick={fbClick}
+             className={style.oauthStyle}/>
+        <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth4.png"
+             alt="google+"
+             onClick={ggClick}
+             className={style.oauthStyle}/>
       </div>
     </Card>
   );

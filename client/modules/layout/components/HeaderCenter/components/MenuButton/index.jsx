@@ -8,7 +8,7 @@ const triggerClassName = 'toggle-button';
 class MenuButton extends React.Component {
   constructor(props) {
     super(props);
-    let me = this;
+    const me = this;
   }
   componentDidMount() {
   }
@@ -17,9 +17,9 @@ class MenuButton extends React.Component {
   }
 
   render() {
-    let me = this;
-    let classStr = 'navTrigger '+ triggerClassName + (me.props.isNavBtnActive ? ' active' : '');
-    var result = <div className={classStr}>
+    const me = this;
+    const classStr = 'navTrigger '+ triggerClassName + (me.props.isNavBtnActive ? ' active' : '');
+    const result = <div className={classStr}>
       <i/>
       <i/>
       <i/>

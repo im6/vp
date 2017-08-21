@@ -40,14 +40,14 @@ const HeadBanner = ({colorSize, colorView}) => {
     // do nothing;
   } else {
     ele = <Alert
-      description={
-      <h3 style={{fontSize: "1.25em"}}>
+      message={
+      <div>
         ColorPK is selected by &nbsp;
         <a href="http://www.javascript.fun" target="_blank">
           JavaScript.Fun
         </a>&nbsp;
         as a recommendated colorpicker website.
-      </h3>
+      </div>
       }
       type="info"
       showIcon
