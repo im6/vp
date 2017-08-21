@@ -4,7 +4,7 @@ import { Button, Icon } from 'antd';
 import classnames from 'classnames';
 import style from './style.less';
 import ColorCanvas from './components/ColorCanvas';
-import { Global } from '../../../../config/global.js';
+import Global from '../../../../config/global.js';
 
 const { BTNSIZE, BOXHT, BOXWD } = Global;
 

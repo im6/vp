@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router';
 import { Alert, Button } from 'antd';
 import style from './style.less';
-import { bannerStartLocation } from '../../../../misc/util.js';
+import Global from '../../../../config/global.js';
 
-const BNNRPADDING = bannerStartLocation();
+const { BNNRPADDING } = Global;
 
 const HeadBanner = ({colorSize, colorView}) => {
   let ele = null;

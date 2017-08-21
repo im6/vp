@@ -7,7 +7,7 @@ import SpinLoader from '../SpinLoader';
 import HeadBanner from '../HeadBanner';
 import style from './style.less';
 import { downloadCanvas } from '../../../../misc/util.js';
-import { Global } from '../../../../config/global.js';
+import Global from '../../../../config/global.js';
 
 const { ISMOBILE } = Global;
 

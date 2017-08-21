@@ -11,7 +11,7 @@ const ISMOBILE = mobileDetect(),
   BOXWD = getBoxPercWidth() + '%',
   BNNRPADDING = bannerStartLocation();
 
-export const Global = {
+export default {
   isDev: env.NODE_ENV === 'dev',
   appKey: '_COLORPK',
 

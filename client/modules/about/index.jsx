@@ -2,11 +2,11 @@ import React from 'react';
 import { Row, Col, Card } from 'antd';
 import style from './style.less';
 import { mobileDetect } from '../../misc/util.js';
-import { Global } from '../../config/global.js';
+import Global from '../../config/global.js';
 
 const { ISMOBILE } = Global;
 const boxStyle = {
-  width: ISMOBILE ? "95%": 600,
+  width: ISMOBILE ? "95%": 580,
   margin: ISMOBILE ? "0 auto" : "40px auto",
 };
 
@@ -38,7 +38,7 @@ const About = () => (<Card
           </div> : null
         }
 
-        <h2>
+        <h3>
           I'd like to get you the best ColorPicker.
           <br/>
           So I create ColorPK, Welcome!
@@ -51,7 +51,7 @@ const About = () => (<Card
           <br/>
           <br/>
           - ColorPK
-        </h2>
+        </h3>
       </div>
     </Col>
   </Row>
