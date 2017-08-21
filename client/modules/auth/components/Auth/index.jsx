@@ -31,12 +31,12 @@ class Auth extends React.Component {
 
   render(){
     const me = this;
-    return (<div className={style.authContainer}>
+    return (<div>
       <div className={style.canvansContainer} />
       <QueueAnim delay={[100 ,0]}
                  type={'bottom'}
                  ease={'easeOutQuart'} >
-        <div key="a">
+        <div key="a" className={style.centerBox}>
           <LoginCard onLogin={me.loginClickHandler.bind(me)}
                      goBack={me.goBack.bind(me)}
                      fbClick={me.fbClickHandler.bind(me)}
