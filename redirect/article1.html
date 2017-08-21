@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Loading</title>
+        <title>JS Loading Test</title>
         <meta charset="UTF-8">
         <meta name="robots" content="INDEX,FOLLOW"/>
-        <meta name="keywords" content="colorpk, colorpicker, color picker, palette, color combination" />
+        <meta name="keywords" content="JS Loading Test" />
         <meta name="description" content="Welcome to ColorPK, your best color picker." />
-        <meta http-equiv="refresh" content="0;url=http://www.javascript.fun/article/3/" />
+        <style type="text/css">
+            h2{
+                color: red;
+            }
+        </style>
     </head>
     <body>
-        <div></div>
+        <h1>Javascript Size Test:</h1>
+        <h2 id="local"></h2>
+        <h2 id="cdn"></h2>
+        <h2>
+            Open console network to check file different, chrome(F12);
+        </h2>
+
+        <script>
+            function ready(src){
+                document.getElementById(src).innerText = "File Loaded: " + src;
+            }
+        </script>
+        <script type="text/javascript" onload="ready('local')" src="/react.js"></script>
+        <script type="text/javascript" onload="ready('cdn')" src="//cdn.bootcss.com/react/15.6.1/react.js"></script>
     </body>
 </html>
