@@ -1,5 +1,6 @@
 var webpack = require('webpack'),
-  HtmlWebpackPlugin = require('html-webpack-plugin');
+  HtmlWebpackPlugin = require('html-webpack-plugin'),
+  CompressionPlugin = require("compression-webpack-plugin");
 
 const HOST = "127.0.0.1",
   PORT = "3001",
@@ -134,6 +135,11 @@ var plugins = {
       //favicon: FAVICON,
       //hash:true,
       showErrors: false
+    }),
+    new CompressionPlugin({
+      asset: "[path]",
+      algorithm: "gzip",
+      test: /\.js$/,
     }),
     commonsChunk,
   ],

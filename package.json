@@ -34,6 +34,7 @@
     "babel-preset-stage-1": "^6.13.0",
     "babel-runtime": "^6.11.6",
     "classnames": "^2.2.5",
+    "compression-webpack-plugin": "^1.0.0",
     "css-loader": "^0.25.0",
     "es6-promise": "^4.0.5",
     "eslint": "^3.7.0",
