@@ -3,7 +3,7 @@ export function getBoxPercWidth() {
   const w = window.innerWidth;
   let result = 0;
   if(w >= 1600){
-    result = 72;
+    result = 71;
   } else if(w >= 1440){
     result = 75;
   } else if(w >= 1280){
