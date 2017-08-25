@@ -17,21 +17,27 @@ module.exports = {
     });
   },
   postDecideColor: function(req, res, next){
-
     let decision = req.body.display,
       id = req.body.id,
       query = null;
-    if(decision){
-      query = `DELETE FROM color WHERE id = '${id}'`;
-    }else{
-      query = `UPDATE color SET \`display\` = 0 WHERE id = ${id}`;
+
+    if(typeof id === 'number'){
+      if(decision){
+        query = `DELETE FROM color WHERE id = '${id}'`;
+      }else{
+        query = `UPDATE color SET \`display\` = 0 WHERE id = ${id}`;
+      }
+
+      mysql.sqlExecOne(query).then(function(data){
+        res.json(helper.resSuccessObj(data));
+      }, function(data){
+        res.json(helper.resFailObj(data));
+      });
+    } else {
+      res.json({
+        error: true,
+      });
     }
 
-
-    mysql.sqlExecOne(query).then(function(data){
-      res.json(helper.resSuccessObj(data));
-    }, function(data){
-      res.json(helper.resFailObj(data));
-    });
   },
 };
