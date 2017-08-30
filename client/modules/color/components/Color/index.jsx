@@ -26,7 +26,7 @@ class Color extends React.Component {
     const selected = me.props.selectedIndex;
 
     let downloadUrl = 'javascript:void(0)';
-    if(!ISMOBILE && selected > -1) {
+    if(selected > -1) {
       downloadUrl = downloadCanvas(me.props.list.getIn([selected, 'color']));
     }
 
@@ -48,13 +48,11 @@ class Color extends React.Component {
                   onLikeClick={me.onLikeClickHandler.bind(me, me.props.list.getIn([selected, 'id']))}
                   />
                 <br/>
-                {
-                  ISMOBILE? null: (<div style={{textAlign: 'center'}}>
-                    <a href={downloadUrl} download="colorpk_download.png">
-                      <Button size="large" type="default" icon="download">Download</Button>
-                    </a>
-                  </div>)
-                }
+                <div style={{textAlign: 'center'}}>
+                  <a href={downloadUrl} download="colorpk_download.png">
+                    <Button size="large" type="default" icon="download">Download</Button>
+                  </a>
+                </div>
               </div>
             </div>
           ) : null

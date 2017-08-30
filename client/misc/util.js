@@ -56,7 +56,7 @@ export function downloadCanvas(color) {
 
   myCanvas.width = WIDTH;
   myCanvas.height = HEIGHT;
-  myCanvas.style = 'border: 1px solid #c1c1c1';
+  myCanvas.style.border = '1px solid #c1c1c1';
 
   const boxHts = [
     HEIGHT * CANVASRATIO * 0.4,
