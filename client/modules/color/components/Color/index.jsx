@@ -41,18 +41,16 @@ class Color extends React.Component {
         selected >= 0 ?
           (
             <div className={style.selectedBox}>
-              <div style={{width: 275}}>
-                <Box
-                  boxInfo={me.props.list.get(selected)}
-                  width="100%"
-                  onLikeClick={me.onLikeClickHandler.bind(me, me.props.list.getIn([selected, 'id']))}
-                  />
-                <br/>
-                <div style={{textAlign: 'center'}}>
-                  <a href={downloadUrl} download="colorpk_download.png">
-                    <Button size="large" type="default" icon="download">Download</Button>
-                  </a>
-                </div>
+              <Box
+                boxInfo={me.props.list.get(selected)}
+                width="100%"
+                onLikeClick={me.onLikeClickHandler.bind(me, me.props.list.getIn([selected, 'id']))}
+                />
+              <br/>
+              <div style={{textAlign: 'center'}}>
+                <a href={downloadUrl} download="colorpk_download.png">
+                  <Button size="large" type="default" icon="download">Download</Button>
+                </a>
               </div>
             </div>
           ) : null
