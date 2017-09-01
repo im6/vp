@@ -75,10 +75,8 @@ class Layout extends React.Component {
                       isNavBtnActive={me.state.isMenuView}
                       currentView={me.props.view}
                       userInfo={me.props.user}/>
-        <div
-          className={styles.main}
-          style={{minHeight: document.body.clientHeight}} >
-          {me.props.children}
+        <div className={styles.main}>
+            {me.props.children}
         </div>
       </main>
 
