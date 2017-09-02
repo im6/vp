@@ -11,18 +11,15 @@ let slideout = null;
 class Layout extends React.Component {
   constructor(props) {
     super(props);
-    let me = this;
+    const me = this;
     me.state = {
       isMenuView: false
     };
   }
 
   componentDidMount() {
-    let me = this;
+    const me = this;
     me.initSlideout();
-  }
-
-  componentWillUnmount() {
   }
 
   initSlideout(){
@@ -57,7 +54,7 @@ class Layout extends React.Component {
   }
 
   logout(){
-    let me = this;
+    const me = this;
     me.props.onLogout();
   }
 
@@ -75,7 +72,9 @@ class Layout extends React.Component {
                       isNavBtnActive={me.state.isMenuView}
                       currentView={me.props.view}
                       userInfo={me.props.user}/>
-        <div className={styles.main}>
+        <div
+          style={{minHeight: document.body.clientHeight + 2}}
+          className={styles.main}>
             {me.props.children}
         </div>
       </main>
