@@ -33,7 +33,7 @@ class Auth extends React.Component {
     const me = this;
     return (<div>
       <div className={style.canvansContainer} />
-      <QueueAnim delay={[100 ,0]}
+      <QueueAnim delay={300}
                  type={'bottom'}
                  ease={'easeOutQuart'} >
         <div key="a" className={style.centerBox}>
