@@ -28,7 +28,7 @@ class Layout extends React.Component {
     slideout = new Slideout({
       'panel': panel,
       'menu': menu,
-      'padding': 230,
+      'padding': 235,
       'tolerance': 70,
       'touch': false
     });
