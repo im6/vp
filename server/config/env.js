@@ -6,8 +6,8 @@ module.exports = {
   isDev: env.NODE_ENV === 'dev',
   requireAuth: true,
 
-  serverPort: env.OPENSHIFT_NODEJS_PORT || 3000,
-  serverIp: env.OPENSHIFT_NODEJS_IP || 'localhost',
+  serverPort: env.PORT || 3000,
+  serverIp: 'localhost',
 
   wbApi: 'https://api.weibo.com',
   wbAppKey: env.wbAppKey,
