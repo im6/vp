@@ -50,7 +50,7 @@ const About = () => (<Card
           It is a Social Platform after all :)
           <br/>
           <br/>
-          - <a href="//colorpk.com" target="_blank">ColorPK</a>
+          - <a href="//www.javascript.fun/about/" target="_blank">ColorPK</a>
         </h3>
       </div>
     </Col>
