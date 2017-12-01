@@ -8,7 +8,7 @@ import FinishModal from '../FinishModal';
 import '!style!css!less!autoprefixer-loader?browsers=last 2 versions!react-color-picker/index.css';
 import style from './style.less';
 
-const DEFAULTVALUE = '#adeef9',
+const DEFAULTVALUE = '#',
   Option = Select.Option;
 
 class NewColor extends React.PureComponent {
