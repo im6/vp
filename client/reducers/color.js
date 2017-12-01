@@ -26,7 +26,7 @@ const color = handleActions({
     });
   },
   ['color/get/fail'](state, action) {
-    console.error('loading color fail!');
+    message.error('create new color failed! ' + action.payload.code);
     return state.merge({
       list: [],
       loading: false

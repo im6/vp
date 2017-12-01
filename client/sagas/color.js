@@ -52,16 +52,16 @@ function* initColorPortfolio(action) {
 }
 
 function* initColorList(action) {
-  try {
-    const payload = yield call(requester, '/api/initColorList');
+  const payload = yield call(requester, '/api/initColorList');
+  if(payload.error){
+    yield put({
+      type: "color/get/fail",
+      payload: payload.result,
+    });
+  } else {
     yield put({
       type: "color/get/success",
       payload: payload.result
-    });
-  } catch (e) {
-    yield put({
-      type: "color/get/fail",
-      payload: {msg: e}
     });
   }
 }
