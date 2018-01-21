@@ -113,7 +113,7 @@ const Routes = ({ history, store }) => {
 
   const initCreate = (nextState, replace, callback) => {
     const ac0 = createAction('colorType/get');
-    store.dispatch(ac0());
+    //store.dispatch(ac0());
     const viewName = nextState.location.pathname.substring(1);
     setView(viewName);
     callback();

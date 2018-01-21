@@ -9,7 +9,7 @@ var globalConfig = require('../../config/env'),
 
 module.exports = {
   getAnonymousColor: function(req, res, next){
-    var qr = 'SELECT * FROM color a WHERE a.display = 1';
+    var qr = 'SELECT * FROM colorpk_color a WHERE a.display = 1';
     mysql.sqlExecOne(qr).then(function(data){
       res.json(helper.resSuccessObj(data));
     }, function(data){
@@ -23,9 +23,9 @@ module.exports = {
 
     if(typeof id === 'number'){
       if(decision){
-        query = `DELETE FROM color WHERE id = '${id}'`;
+        query = `DELETE FROM colorpk_color WHERE id = '${id}'`;
       }else{
-        query = `UPDATE color SET \`display\` = 0 WHERE id = ${id}`;
+        query = `UPDATE colorpk_color SET \`display\` = 0 WHERE id = ${id}`;
       }
 
       mysql.sqlExecOne(query).then(function(data){
