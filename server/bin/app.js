@@ -33,6 +33,14 @@ if(!globalConfig.isDev){
     database : process.env['SQL_DATABASE'],
     checkExpirationInterval: 4 * 3600 * 1000,
     expiration: 12 * 3600 * 1000,
+    schema: {
+      tableName: 'old_sessions',
+      columnNames: {
+        session_id: 'session_id',
+        expires: 'expires',
+        data: 'data'
+      }
+    }
   });
   console.log('session is now using mysql');
 }
