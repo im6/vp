@@ -137,7 +137,7 @@ class NewColor extends React.PureComponent {
 
       <Row>
         <Col lg={24} md={24} sm={24} xs={24} style={{marginBottom: 30, display: 'flex', justifyContent:'center'}}>
-          <div style={{width: '80%'}}>
+          <div style={{width: '80%', display: 'none'}}>
             <label> Color Type: &nbsp;&nbsp;&nbsp;&nbsp;</label>
             <Select
               multiple
