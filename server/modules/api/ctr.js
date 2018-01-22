@@ -86,15 +86,15 @@ var privateFn = {
     return mysql.sqlExecOne(qr);
   },
   addUserLike: function(userid, colorid){
-    var qr = `INSERT INTO colorpk_userlike (userid, colorid) VALUES ('${userid}', '${escape(colorid)}')`;
+    var qr = `INSERT INTO colorpk_userlike (user_id, color_id) VALUES ('${userid}', '${escape(colorid)}')`;
     return mysql.sqlExecOne(qr);
   },
   removeUserLike: function(userid, colorid){
-    var qr = `DELETE FROM colorpk_userlike WHERE userid= '${userid}' AND colorid = '${escape(colorid)}'`;
+    var qr = `DELETE FROM colorpk_userlike WHERE user_id= '${userid}' AND color_id = '${escape(colorid)}'`;
     return mysql.sqlExecOne(qr);
   },
   getUserLike: function(userid){
-    var qr = `SELECT colorid FROM colorpk_userlike WHERE userid= '${userid}'`;
+    var qr = `SELECT colorid FROM colorpk_userlike WHERE user_id= '${userid}'`;
     return mysql.sqlExecOne(qr);
   },
   updateUserLoginDate: function(userid){
@@ -349,7 +349,7 @@ module.exports = {
   },
 
   initColorLike: function(req, res, next){
-    var qr1 = `SELECT a.colorid FROM colorpk_userlike a WHERE a.userid = '${req.session.app.dbInfo.id}' `;
+    var qr1 = `SELECT a.colorid FROM colorpk_userlike a WHERE a.user_id = '${req.session.app.dbInfo.id}' `;
     mysql.sqlExecOne(qr1).then(function(data){
       if(data.length < 1){
         res.json(helper.resSuccessObj([]));
