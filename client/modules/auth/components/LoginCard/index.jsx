@@ -34,6 +34,7 @@ const LoginCard = ({onLogin, goBack, wbClick, fbClick, ggClick}) => {
         <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth4.png"
              alt="google+"
              onClick={ggClick}
+             style={{display: 'none'}}
              className={style.oauthStyle}/>
       </div>
     </Card>
