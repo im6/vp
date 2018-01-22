@@ -94,7 +94,7 @@ var privateFn = {
     return mysql.sqlExecOne(qr);
   },
   getUserLike: function(userid){
-    var qr = `SELECT colorid FROM colorpk_userlike WHERE user_id= '${userid}'`;
+    var qr = `SELECT color_id FROM colorpk_userlike WHERE user_id= '${userid}'`;
     return mysql.sqlExecOne(qr);
   },
   updateUserLoginDate: function(userid){
@@ -349,7 +349,7 @@ module.exports = {
   },
 
   initColorLike: function(req, res, next){
-    var qr1 = `SELECT a.colorid FROM colorpk_userlike a WHERE a.user_id = '${req.session.app.dbInfo.id}' `;
+    var qr1 = `SELECT a.color_id FROM colorpk_userlike a WHERE a.user_id = '${req.session.app.dbInfo.id}' `;
     mysql.sqlExecOne(qr1).then(function(data){
       if(data.length < 1){
         res.json(helper.resSuccessObj([]));
