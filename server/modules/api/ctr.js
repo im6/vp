@@ -163,7 +163,7 @@ var privateFn = {
         me.getUserLike(row1[0].id).then(function(row2){
 
           like = row2.map(function(v,k){
-            return v.colorid;
+            return v.color_id;
           });
 
           res.json({
@@ -355,7 +355,7 @@ module.exports = {
         res.json(helper.resSuccessObj([]));
       }else{
         let idList = data.map((v, k) => {
-          return v.colorid;
+          return v.color_id;
         });
 
         var qr2 = `SELECT a.*, false as \`liked\` FROM colorpk_color a WHERE a.id IN (${idList.join(',')}) `;

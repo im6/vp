@@ -59,7 +59,7 @@ class Color extends React.Component {
 
       <QueueAnim type="top"
                  duration={300}
-                 interval={100}
+                 interval={75}
                  className={clsStr}>
         {
           me.props.list.map((v, k) => {
