@@ -17,7 +17,6 @@ Object.assign(baseTemplate, {
   entry: './client/entry/index_prod.jsx',
   //devtool: 'cheap-module-source-map',
   output: {
-    publicPath: 'http://dkny.oss-cn-hangzhou.aliyuncs.com/2/',
     path: path.join(__dirname, '../../dist'),
     filename: 'bundle.js'
   }

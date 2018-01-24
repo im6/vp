@@ -1,5 +1,4 @@
-var _ = require('lodash'),
-    request = require("request");
+var request = require("request");
 
 module.exports = {
     one: function(reqObj){
