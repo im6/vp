@@ -26,6 +26,7 @@ const LoginCard = ({onLogin, goBack, wbClick, fbClick, ggClick}) => {
         <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth1.png"
              alt="weibo"
              onClick={wbClick}
+             style={{display: 'none'}}
              className={style.oauthStyle}/>
         <img src="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/oauth2.png"
              alt="facebook"
