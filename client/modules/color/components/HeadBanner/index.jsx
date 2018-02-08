@@ -56,6 +56,20 @@ const HeadBanner = ({colorSize, colorView}) => {
   }
 
   return <div className={style.wrapper} style={{padding: `0 ${BNNRPADDING}px`}}>
+    <Alert
+      message={
+      <div>
+        A &nbsp;
+        <a href="http://www.colorpk.com" target="_blank">
+          New version
+        </a>&nbsp;
+        of ColorPK just release!
+      </div>
+      }
+      type="success"
+      showIcon
+      closable
+    />
     {ele}
   </div>;
 };
