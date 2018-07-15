@@ -402,14 +402,19 @@ module.exports = {
     let userid = (hasAuth && req.session.app.dbInfo.id)? `${req.session.app.dbInfo.id}` : 'NULL';
     let displayItem = userid == 'NULL' ? 1 : 0;
     let random = (Math.random() * 10).toFixed();
-    var qr = `INSERT INTO colorpk_color (\`like\`, color, userid, username, colortype, display, createdate) VALUES (${random}, '${req.body.color}', ${userid}, ${username}, '${req.body.colorType}', ${displayItem}, NOW())`;
-    mysql.sqlExecOne(qr).then(function(row){
-      res.json(helper.resSuccessObj({
-        id:row.insertId,
-        name: hasAuth ? req.session.app.dbInfo.name : null
-      }));
-    }, function(err){
-      res.json(helper.resFailObj(err));
-    });
+
+    if(req.body.color.length === 27) {
+      var qr = `INSERT INTO colorpk_color (\`like\`, color, userid, username, colortype, display, createdate) VALUES (${random}, '${req.body.color}', ${userid}, ${username}, '${req.body.colorType}', ${displayItem}, NOW())`;
+      mysql.sqlExecOne(qr).then(function(row){
+        res.json(helper.resSuccessObj({
+          id:row.insertId,
+          name: hasAuth ? req.session.app.dbInfo.name : null
+        }));
+      }, function(err){
+        res.json(helper.resFailObj(err));
+      });
+    } else {
+      res.json(helper.resFailObj("invalid json"));
+    }
   },
 };

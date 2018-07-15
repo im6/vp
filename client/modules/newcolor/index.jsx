@@ -24,10 +24,15 @@ const mapDispatchToProps = (dispatch) => {
       });
 
       const ac = createAction('color/addNew');
-      dispatch(ac({
-        color : cl0.join('#'),
-        colorType: colorType.join(','),
-      }));
+      const colorStr = cl0.join('#');
+      if(colorStr.length === 27) {
+        dispatch(ac({
+          color : colorStr,
+          colorType: colorType.join(','),
+        }));
+      } else {
+        console.error("illegal color value size")
+      }
     },
     onRedirect(){
       browserHistory.push('/');
