@@ -3,18 +3,18 @@ const express = require('express'),
   path = require('path'),
   methodOverride = require('method-override'),
   bodyParser = require('body-parser'),
-  globalConfig = require('../config/env'),
+  globalConfig = require('./config/env'),
   cookieParser = require('cookie-parser'),
   expressSession = require('express-session'),
   csrf = require('csurf'),
   helmet = require('helmet'),
   MySQLStore = require('express-mysql-session')(expressSession),
-  mainHandler = require('../middlewares/renderStatic').main;
+  staticRender = require('./middlewares/staticRender'),
+  errorHandler = require('./middlewares/errorHandler');
 
+require('./config/initiator');
 console.log(`NODE_ENV: ${globalConfig.isDev ? 'dev' : 'production'}`);
-
-const app = express();
-
+var app = express();
 var sessionOpt = {
   secret: globalConfig.sessionSecret,
   resave: false,
@@ -52,31 +52,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
 app.use(cookieParser());
 app.use(expressSession(sessionOpt));
-
 if(globalConfig.isDev){
   // some dev config
 }else{
   app.use(csrf());
 }
-
-app.get('/article', function(req, res){
-  var filePath = path.join(__dirname, '../../redirect/article1.html');
-  res.sendFile(filePath);
-});
-app.use('/api', require('../modules/api/route'));
-app.get('/*', mainHandler);
-
-
-app.use(function(err, req, res, next) {
-  console.log('come finally to the route error handler...');
-  if(err){
-    console.log(err);
-  }
-  res.json({
-    result: 'handle error in the end'
-  });
-});
-
-require('../config/initiator');
+app.use('/api', require('./modules/api/route'));
+app.get('/*', staticRender.h5Route, staticRender.h5Route);
+app.use(errorHandler.onError);
+app.use(errorHandler.notFound);
 
 module.exports = app;

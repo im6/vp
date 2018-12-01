@@ -1,5 +1,5 @@
 "use strict";
-var app = require('./server/bin/app'),
+var app = require('./server/app'),
   globalConfig = require('./server/config/env'),
   ip = globalConfig.serverIp,
   port = globalConfig.serverPort;

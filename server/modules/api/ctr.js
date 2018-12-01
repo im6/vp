@@ -382,9 +382,9 @@ module.exports = {
   toggleLike: function(req, res, next){
     var qr = `UPDATE colorpk_color SET \`like\` = \`like\` ${req.body.willLike ? '+' : '-'}  1 WHERE id = ${req.body.id}`;
     mysql.sqlExecOne(qr).then(function(data){
-      res.json(helper.resSuccessObj(data));
+      res.json(helper.resSuccessObj(1));
     }, function(data){
-      res.json(helper.resFailObj(data));
+      res.json(helper.resFailObj(0));
     });
 
     if(req.session.app && req.session.app.isAuth){

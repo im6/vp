@@ -83,7 +83,7 @@ function* colorLoadMore(action) {
 
 function* toggleLike(action) {
   try {
-    const payload = yield call(requester, '/api/toggleLike', action.payload);
+    yield call(requester, '/api/toggleLike', action.payload);
   } catch (e) {
   }
 }
