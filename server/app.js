@@ -58,7 +58,7 @@ if(globalConfig.isDev){
   app.use(csrf());
 }
 app.use('/api', require('./modules/api/route'));
-app.get('/*', staticRender.h5Route, staticRender.h5Route);
+app.get('/*', staticRender.h5Route, staticRender.staticFile);
 app.use(errorHandler.onError);
 app.use(errorHandler.notFound);
 
