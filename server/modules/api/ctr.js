@@ -1,4 +1,3 @@
-
 'use strict';
 const globalConfig = require('../../config/env'),
   mysql = require('../../resource/db/mysqlConnection'),

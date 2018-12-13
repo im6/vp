@@ -10,22 +10,19 @@ const express = require('express'),
   helmet = require('helmet'),
   MySQLStore = require('express-mysql-session')(expressSession),
   staticRender = require('./middlewares/staticRender'),
-  errorHandler = require('./middlewares/errorHandler');
-
-require('./config/initiator');
-
-const app = express();
-const sessionOpt = {
-  secret: globalConfig.sessionSecret,
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    secure: false,
-  }
-};
+  errorHandler = require('./middlewares/errorHandler'),
+  app = express(),
+  sessionConfig = {
+    secret: globalConfig.sessionSecret,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      secure: false,
+    }
+  };
 
 if(!globalConfig.isDev){
-  sessionOpt.store = new MySQLStore({
+  sessionConfig.store = new MySQLStore({
     host     : process.env['SQL_HOST'],
     port     : process.env['SQL_PORT'],
     user     : process.env['SQL_USERNAME'],
@@ -51,13 +48,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
 app.use(cookieParser());
-app.use(expressSession(sessionOpt));
+app.use(expressSession(sessionConfig));
 if(globalConfig.isDev){
   // some dev config
 }else{
   app.use(csrf());
 }
-app.use('/api', require('./modules/api/route'));
+app.all('/api', require('./modules/api/route'));
 app.get('/*', staticRender.h5Route, staticRender.staticFile);
 app.use(errorHandler.onError);
 app.use(errorHandler.notFound);
