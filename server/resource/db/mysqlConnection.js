@@ -1,6 +1,6 @@
-var mysql = require('mysql');
+const mysql = require('mysql');
 
-var pool = null;
+let pool = null;
 
 module.exports = {
   init: function(){

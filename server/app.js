@@ -13,9 +13,9 @@ const express = require('express'),
   errorHandler = require('./middlewares/errorHandler');
 
 require('./config/initiator');
-console.log(`NODE_ENV: ${globalConfig.isDev ? 'dev' : 'production'}`);
-var app = express();
-var sessionOpt = {
+
+const app = express();
+const sessionOpt = {
   secret: globalConfig.sessionSecret,
   resave: false,
   saveUninitialized: true,

@@ -1,11 +1,10 @@
 "use strict";
-var app = require('./server/app'),
+const app = require('./server/app'),
   globalConfig = require('./server/config/env'),
   ip = globalConfig.serverIp,
-  port = globalConfig.serverPort;
-
-var server = app.listen(port, ip, function () {
-    console.log(`app is running on ${ip}:${port}`);
-});
+  port = globalConfig.serverPort,
+  server = app.listen(port, ip, () => {
+    console.log(`${globalConfig.isDev ? 'dev' : 'production'} is running: ${ip}:${port}`);
+  });
 
 server.timeout = 1000 * 60;

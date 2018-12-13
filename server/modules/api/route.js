@@ -1,31 +1,24 @@
 'use strict';
-var express = require('express'),
+const express = require('express'),
   router = express.Router(),
   globalConfig = require('../../config/env'),
   authMd = require('../../middlewares/auth'),
-
-
   md = require('../../middlewares/auth'),
-
   ctr = require("./ctr"),
   adminCtr = require("./adminCtr");
 
-router.get.apply(router, ['/login/:oauth', ctr.oauthLogin]);
-
-router.post.apply(router, ['/getUserInfo', ctr.getUserInfo]);
-router.post.apply(router, ['/getInitAuth', ctr.getInitAuth]);
-router.post.apply(router, ['/logoff', ctr.logoff]);
-
-router.post.apply(router, ['/initColorList', ctr.initColorList]);
-router.post.apply(router, ['/initColorLatest', ctr.initColorLatest]);
-router.post.apply(router, ['/initColorPortfolio', md.isAuth, ctr.initColorPortfolio]);
-router.post.apply(router, ['/initColorLike', md.isAuth, ctr.initColorLike]);
-
-router.post.apply(router, ['/getColorType', ctr.getColorType]);
-router.post.apply(router, ['/toggleLike', ctr.toggleLike]);
-router.post.apply(router, ['/addNewColor', ctr.addNewColor]);
-
-router.post.apply(router, ['/getAnonymousColor', md.isAuth, md.isAdmin, adminCtr.getAnonymousColor]);
-router.post.apply(router, ['/postDecideColor', md.isAuth, md.isAdmin, adminCtr.postDecideColor]);
+router.get('/login/:oauth', ctr.oauthLogin);
+router.post('/getUserInfo', ctr.getUserInfo);
+router.post('/getInitAuth', ctr.getInitAuth);
+router.post('/logoff', ctr.logoff);
+router.post('/initColorList', ctr.initColorList);
+router.post('/initColorLatest', ctr.initColorLatest);
+router.post('/initColorPortfolio', md.isAuth, ctr.initColorPortfolio);
+router.post('/initColorLike', md.isAuth, ctr.initColorLike);
+router.post('/getColorType', ctr.getColorType);
+router.post('/toggleLike', ctr.toggleLike);
+router.post('/addNewColor', ctr.addNewColor);
+router.post('/getAnonymousColor', md.isAuth, md.isAdmin, adminCtr.getAnonymousColor);
+router.post('/postDecideColor', md.isAuth, md.isAdmin, adminCtr.postDecideColor);
 
 module.exports = router;
