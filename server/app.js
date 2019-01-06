@@ -1,6 +1,4 @@
-
 const express = require('express');
-const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const globalConfig = require('./config/env');
 const cookieParser = require('cookie-parser');
@@ -47,7 +45,6 @@ app.set('x-powered-by', false);
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(methodOverride());
 app.use(cookieParser());
 app.use(expressSession(sessionConfig));
 if (globalConfig.isDev) {

@@ -1,7 +1,4 @@
-var env = process.env;
-
-//NPM_CONFIG_PRODUCTION = true  or NPM_USE_PRODUCTION
-
+const { env } = process;
 module.exports = {
   isDev: env.NODE_ENV === 'dev',
   requireAuth: true,
