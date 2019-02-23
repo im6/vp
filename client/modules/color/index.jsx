@@ -3,14 +3,14 @@ import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 import Color from './components/Color';
 
-const mapStateToProps = ({color, user, routing}) => {
-  let saved = color.get('liked'),
-    view = color.get('view'),
-    listName = 'list';
+const mapStateToProps = ({ color, routing }) => {
+  const saved = color.get('liked');
+  const view = color.get('view');
+  let listName = 'list';
 
-  if(view === 'portfolio'){
+  if (view === 'portfolio') {
     listName = 'myPortfolio';
-  }else if(view === 'like'){
+  } else if (view === 'like') {
     listName = 'myLiked';
   }
 
@@ -21,7 +21,7 @@ const mapStateToProps = ({color, user, routing}) => {
   });
 
   //========== order ==============
-  if(view === 'latest'){
+  if (view === 'latest'){
     color0 = color0.sortBy(v => {
       return v.get('id');
     }, (a,b) => b-a);
@@ -29,12 +29,10 @@ const mapStateToProps = ({color, user, routing}) => {
   //========== order END ==============
 
   let selectedIndex = -1;
-  if(view === 'color'){
-    let selectedColorIdStr = routing.locationBeforeTransitions.pathname.replace('/color/',''),
-      pttId = parseInt(selectedColorIdStr);
-    selectedIndex = color0.findIndex((v,k)=> {
-      return v.get('id') === pttId;
-    });
+  if (view === 'color') {
+    const selectedColorIdStr = routing.locationBeforeTransitions.pathname.replace('/color/', '');
+    const pttId = parseInt(selectedColorIdStr, 10);
+    selectedIndex = color0.findIndex(v => v.get('id') === pttId);
   }
 
   return {
@@ -42,7 +40,7 @@ const mapStateToProps = ({color, user, routing}) => {
     loading: color.get('loading'),
     selectedIndex,
     view,
-  }
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
