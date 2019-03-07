@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Slideout from 'slideout';
 import styles from './style.less';
-import '!style!css!./slideout.css';
+import './slideout.css';
 import HeaderCenter from '../HeaderCenter';
 import SlideoutMenu from '../SlideoutMenu';
 

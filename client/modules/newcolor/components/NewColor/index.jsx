@@ -5,7 +5,7 @@ import { Row, Col, Card, Button, Input, Checkbox, Icon, Select, message, Modal }
 import EditCanvas from '../EditCanvas';
 import VibrantPalette from '../VibrantPalette';
 import FinishModal from '../FinishModal';
-import '!style!css!less!autoprefixer-loader?browsers=last 2 versions!react-color-picker/index.css';
+import 'react-color-picker/index.css';
 import style from './style.less';
 
 const DEFAULTVALUE = '#',
