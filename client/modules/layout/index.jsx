@@ -1,7 +1,7 @@
 import React from 'react';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
+import { browserHistory } from 'react-router-dom';
 import Layout from './components/Layout';
 
 const mapStateToProps = ({color, user}) => {

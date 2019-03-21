@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Router, Route, IndexRoute } from 'react-router';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { createAction } from 'redux-actions';
 import { getUserInfo, getInitAuth } from '../services/resource.js';
 import { scrollTop } from '../misc/util.js';

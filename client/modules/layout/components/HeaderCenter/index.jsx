@@ -5,7 +5,7 @@ import { Menu, Icon, Button, Dropdown } from 'antd';
 import MenuButton from './components/MenuButton';
 import ProfileMenu from './components/ProfileMenu';
 
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import style from './style.less';
 
 const hideReturn = [

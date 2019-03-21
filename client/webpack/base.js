@@ -18,17 +18,17 @@ module.exports = {
               ['import', {
                 libraryName: 'antd',
                 libraryDirectory: 'lib',
-                style: true,  // use less, 'css' to css build
+                style: 'css',  // use less, 'css' to css build
               }],
             ],
           },
         }],
       },
-      {
-        test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader'],
-        include: antDir,
-      },
+      // {
+      //   test: /\.less$/,
+      //   use: ['style-loader', 'css-loader', 'less-loader'],
+      //   include: antDir,
+      // },
       {
         test: /\.less$/,
         use: [
@@ -42,7 +42,7 @@ module.exports = {
           },
           'less-loader',
         ],
-        exclude: antDir,
+        //exclude: antDir,
       },
       {
         test: /\.css$/,

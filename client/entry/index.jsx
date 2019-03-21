@@ -2,38 +2,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { browserHistory } from 'react-router';
-import { syncHistoryWithStore, routerReducer as routing } from 'react-router-redux';
-import createLogger from 'redux-logger';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { createLogger } from 'redux-logger'
 import { sagaInitiator } from '../config/saga';
 import { moduleReducers } from '../config/reducer';
-import Routes from '../routes/index.jsx';
+
+
+
+
+import { createAction } from 'redux-actions';
+import { getUserInfo, getInitAuth } from '../services/resource.js';
+import { scrollTop } from '../misc/util.js';
+import App from '../modules/app/index.jsx';
+import Auth from '../modules/auth';
+import Color from '../modules/color';
+import NewColor from '../modules/newcolor';
+import About from '../modules/about';
+import ResourceApi from '../modules/resourceApi';
+import AdminPanel from '../modules/adminPanel';
+
 
 const appDom = document.getElementById('app');
 const sagaMiddleware = createSagaMiddleware();
 const logger = createLogger();
 
-const initialState = {};
-const middlewares = [sagaMiddleware, logger];
-
-const enhancer = compose(
-  applyMiddleware(...middlewares),
-  window.devToolsExtension ? window.devToolsExtension() : f => f
-);
-
-const store = createStore(combineReducers({
-  ...moduleReducers, routing,
-}), initialState, enhancer);
+const store = createStore(combineReducers(moduleReducers), applyMiddleware(sagaMiddleware));
 
 sagaInitiator(sagaMiddleware);
-const history = syncHistoryWithStore(browserHistory, store);
 
 let render = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <Routes history={history} store={store} />
+      <Router>
+        <Route path="/" component={App} />
+      </Router>
     </Provider>,
     appDom
   );
