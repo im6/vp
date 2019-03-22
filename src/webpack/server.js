@@ -11,7 +11,6 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   entry: [
-    '@babel/polyfill',
     './src/server/index.js',
   ],
   output: {
@@ -28,6 +27,9 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: [
+              "@babel/plugin-proposal-class-properties"
+            ],
           },
         }],
       },

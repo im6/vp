@@ -1,19 +1,18 @@
 import React from 'react';
+import Footer from './components/footer';
+import Header from './components/header';
 import PropTypes from 'prop-types';
 
 class Layout extends React.Component {
   constructor(props) {
     super(props);
-    const me = this;
   }
   render() {
-    const me = this;
-    const result = (<div>
-      <h1>this is layout</h1>
-
-    </div>);
-
-    return result;
+    return <div>
+      <Header />
+        { this.props.children }
+      <Footer />
+    </div>;
   }
 }
 

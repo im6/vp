@@ -1,30 +1,25 @@
 import express from 'express';
 import React from 'react';
-import { renderToString } from "react-dom/server";
-import Layout from '../components/layout';
+import { renderToString, renderToStaticMarkup } from "react-dom/server";
+import App from '../modules/app';
+
+import Html from '../modules/Html';
 
 const app = express()
 const port = 3000
-function htmlTemplate( reactDom ) {
-  return `
-      <!DOCTYPE html>
-      <html>
-      <head>
-          <meta charset="utf-8">
-          <title>React SSR</title>
-      </head>
-      
-      <body>
-          <div id="app">${ reactDom }</div>
-          <script src="./app.bundle.js"></script>
-      </body>
-      </html>
-  `;
-}
 app.get('/', (req, res) => {
-    const reactDom = renderToString(<Layout />);
-    res.writeHead( 200, { "Content-Type": "text/html" } );
-    res.end( htmlTemplate( reactDom ) );
+  const data = {
+    title: 'ColorPK - v3',
+    description: 'Welcome to ColorPK',
+  };
+  data.children = renderToString(<App>
+      <h1> hello world from app body</h1>
+  </App>)
+
+  const html = renderToStaticMarkup(<Html {...data} />);
+  console.log(html)
+  res.status(200);
+  res.send(`<!DOCTYPE html>${html}`);
 });
 
 app.listen(port, () => console.log(`app is listening on port ${port}!`))
