@@ -3,7 +3,6 @@ import React from 'react';
 import { renderToString, renderToStaticMarkup } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import App from '../modules/app';
-
 import Html from '../modules/Html';
 
 const app = express()
