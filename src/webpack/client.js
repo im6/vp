@@ -1,6 +1,7 @@
 const path = require('path');
 const ServerCompilePlugin = require('./plugins/ServerCompilePlugin');
 const serverConfig = require('./server');
+const { PORT, DEVPORT } = require('../constant');
 
 module.exports = {
   mode: 'development',
@@ -44,17 +45,17 @@ module.exports = {
     noInfo: true,
     hot: true,
     inline: true,
-    port: '3001',
+    port: DEVPORT,
     host: 'localhost',
     open: 'Google Chrome',
     proxy: {
       '*': {
-        target: 'http://localhost:3000',
+        target: `http://localhost:${PORT}`,
         secure: false
       }
     },
     watchOptions: {
-      aggregateTimeout: 1000,
+      aggregateTimeout: 800,
     }
   },
 };

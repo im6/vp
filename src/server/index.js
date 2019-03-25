@@ -1,15 +1,13 @@
 import express from 'express';
 import React from 'react';
 import { renderToString, renderToStaticMarkup } from "react-dom/server";
-import { StaticRouter, Link } from "react-router";
+import { StaticRouter } from "react-router";
 import App from '../components/App';
 import Html from '../components/Html';
+import { PORT } from '../constant';
 
-const port = 3000
 const app = express()
 app.use(express.static('dist'))
-
-console.log('12')
 
 app.get('/*', (req, res) => {
   const context = {}
@@ -17,7 +15,6 @@ app.get('/*', (req, res) => {
   const appDOM = <StaticRouter location={req.url} context={context}>
     <App />
   </StaticRouter>
-
   const htmlDOM = <Html
     title={'ColorPK - v3'}
     description={'Welcome to ColorPK'}
@@ -30,4 +27,4 @@ app.get('/*', (req, res) => {
   res.send(`<!DOCTYPE html>${html}`);
 });
 
-app.listen(port, () => console.log(`app is listening on port http://localhost:${port}!`))
+app.listen(PORT, () => console.log(`app is listening on port http://localhost:${PORT}`))
