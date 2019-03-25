@@ -5,10 +5,15 @@ import { StaticRouter, Link } from "react-router";
 import App from '../components/App';
 import Html from '../components/Html';
 
-const app = express()
 const port = 3000
+const app = express()
+app.use(express.static('dist'))
+
+console.log('12')
+
 app.get('/*', (req, res) => {
   const context = {}
+  const scripts = ['bundle.js']
   const appDOM = <StaticRouter location={req.url} context={context}>
     <App />
   </StaticRouter>
@@ -16,6 +21,7 @@ app.get('/*', (req, res) => {
   const htmlDOM = <Html
     title={'ColorPK - v3'}
     description={'Welcome to ColorPK'}
+    scripts={scripts}
     >
     { renderToString(appDOM) }
   </Html>

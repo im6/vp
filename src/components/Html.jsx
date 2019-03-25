@@ -40,6 +40,9 @@ class Html extends React.Component {
         <body>
           <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
         </body>
+        {scripts.map(script => (
+          <script key={script} src={script} />
+        ))}
       </html>
     );
   }

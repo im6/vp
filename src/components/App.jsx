@@ -8,9 +8,9 @@ function App() {
   return <div>
     <Link to="/">Popular</Link>
     <Link to="/latest">Latest</Link>
-    <Link to="/about">About</Link>
+    <Link to="/about">About2</Link>
     <Switch>
-      { 
+      {
         routes.map(r => <Route key={r.path} {...r} />) 
       }
     </Switch> 

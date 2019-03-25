@@ -1,4 +1,5 @@
 const path = require('path')
+const ServerStartPlugin = require('./plugins/ServerStartPlugin');
 
 module.exports = {
   watch: true,
@@ -32,7 +33,9 @@ module.exports = {
       },
     ],
   },
-  plugins: [],
+  plugins: [
+    new ServerStartPlugin(),
+  ],
   watchOptions: {
     ignored: /node_modules/
   }

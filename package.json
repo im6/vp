@@ -4,10 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --config ./src/webpack/server.js",
-    "build": "webpack --config client/webpack/build.js",
-    "build1": "webpack --config client/webpack/build1.js",
-    "server": "nodemon ./dist/server.js",
+    "start": "webpack-dev-server --config ./src/webpack/client.js",
     "lint": "eslint --ext .js,.jsx src/"
   },
   "repository": {
@@ -21,8 +18,8 @@
   },
   "homepage": "https://github.com/jinouwuque/vp#readme",
   "devDependencies": {
-    "nodemon": "^1.18.10",
-    "webpack-cli": "^3.3.0"
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
     "@babel/core": "^7.4.0",
