@@ -19,7 +19,8 @@
   "homepage": "https://github.com/jinouwuque/vp#readme",
   "devDependencies": {
     "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.2.1"
+    "webpack-dev-server": "^3.2.1",
+    "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
     "@babel/core": "^7.4.0",

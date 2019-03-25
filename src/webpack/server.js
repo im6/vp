@@ -1,9 +1,11 @@
 const path = require('path')
+const nodeExternals = require('webpack-node-externals');
 const ServerStartPlugin = require('./plugins/ServerStartPlugin');
 
 module.exports = {
   watch: true,
   mode: 'development',
+  externals: [nodeExternals()],
   target: 'node',
   resolve: {
     extensions: ['.js', '.jsx'],
