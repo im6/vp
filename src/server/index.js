@@ -1,7 +1,7 @@
 import express from 'express';
 import React from 'react';
 import { renderToString, renderToStaticMarkup } from "react-dom/server";
-import { StaticRouter } from "react-router";
+import { StaticRouter } from 'react-router';
 import App from '../components/App';
 import Html from '../components/Html';
 import { PORT } from '../constant';
@@ -12,7 +12,7 @@ app.use(express.static('dist'))
 app.get('/*', (req, res) => {
   const context = {}
   const scripts = ['bundle.js']
-  const appDOM = <StaticRouter location={req.url} context={context}>
+  const app = <StaticRouter location={req.url} context={context}>
     <App />
   </StaticRouter>
   const htmlDOM = <Html
@@ -20,7 +20,7 @@ app.get('/*', (req, res) => {
     description={'Welcome to ColorPK'}
     scripts={scripts}
     >
-    { renderToString(appDOM) }
+    { renderToString(app) }
   </Html>
   const html = renderToStaticMarkup(htmlDOM);
   res.status(200);
