@@ -7,26 +7,28 @@
     "start": "webpack-dev-server --config ./src/webpack/client.js",
     "lint": "eslint --ext .js,.jsx src/"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jinouwuque/vp.git"
-  },
-  "author": "",
+  "repository": "git+https://github.com/jinouwuque/vp.git",
+  "author": "im6 <ee2win@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jinouwuque/vp/issues"
   },
   "homepage": "https://github.com/jinouwuque/vp#readme",
   "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel-plugin-import": "^1.11.0",
+    "css-loader": "^2.1.1",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "style-loader": "^0.23.1",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1",
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "@babel/core": "^7.4.0",
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@babel/preset-env": "^7.4.2",
-    "@babel/preset-react": "^7.0.0",
+    "antd": "^3.15.2",
     "babel-loader": "^8.0.5",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
@@ -34,8 +36,8 @@
     "express-session": "^1.15.6",
     "mysql": "^2.16.0",
     "prop-types": "^15.7.2",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
     "react-router-dom": "^5.0.0",
     "request": "^2.88.0",
     "webpack": "^4.29.6"

@@ -2,28 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-/* eslint-disable react/no-danger */
-
 class Html extends React.Component {
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    styles: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        cssText: PropTypes.string.isRequired,
-      }).isRequired,
-    ),
-    scripts: PropTypes.arrayOf(PropTypes.string.isRequired),
-    app: PropTypes.object, // eslint-disable-line
-    children: PropTypes.string.isRequired,
-  };
-
-  static defaultProps = {
-    styles: [],
-    scripts: [],
-  };
-
   render() {
     const { title, description, styles, scripts, app, children } = this.props;
     return (
@@ -46,6 +25,25 @@ class Html extends React.Component {
       </html>
     );
   }
+}
+
+Html.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  styles: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      cssText: PropTypes.string.isRequired,
+    }).isRequired,
+  ),
+  scripts: PropTypes.arrayOf(PropTypes.string.isRequired),
+  app: PropTypes.object, // eslint-disable-line
+  children: PropTypes.string.isRequired,
+};
+
+Html.defaultProps = {
+  styles: [],
+  scripts: [],
 }
 
 export default Html;

@@ -3,6 +3,8 @@ const ServerCompilePlugin = require('./plugins/ServerCompilePlugin');
 const serverConfig = require('./server');
 const { PORT, DEVPORT } = require('../constant');
 
+const antDir = /node_modules\/antd\/es/;
+
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
@@ -27,11 +29,39 @@ module.exports = {
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
             plugins: [
-              "@babel/plugin-proposal-class-properties"
+              ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": true }]
             ],
           },
         }],
       },
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'less-loader',
+            options: { javascriptEnabled: true },
+          }
+        ],
+        include: antDir,
+      },
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[hash:base64:5]',
+            },
+          },
+          'less-loader',
+        ],
+        exclude: antDir,
+      },
+
     ],
   },
   plugins: [
