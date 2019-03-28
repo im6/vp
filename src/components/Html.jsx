@@ -1,10 +1,18 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import serialize from 'serialize-javascript';
 
 class Html extends React.Component {
   render() {
-    const { title, description, styles, scripts, app, children } = this.props;
+    const { 
+      title,
+      description,
+      styles,
+      scripts,
+      initState,
+      children,
+    } = this.props;
     return (
       <html lang="en">
         <head>
@@ -19,6 +27,9 @@ class Html extends React.Component {
         <body>
           <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
         </body>
+        <script
+          dangerouslySetInnerHTML={{ __html: `window._colorpk=${serialize(initState)}` }}
+        />
         {scripts.map(script => (
           <script key={script} src={script} />
         ))}

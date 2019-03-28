@@ -1,21 +1,21 @@
-import Home from './home'
-import About from './about'
+
+import Colors from './Colors';
 
 const routes =  [
   {
     path: '/',
     exact: true,
-    component: Home,
+    component: Colors,
   },
   {
-    path: '/latest',
+    path: '/popular',
     exact: true,
-    component: Home,
+    component: Colors,
   },
   {
     path: '/about',
     exact: true,
-    component: About,
+    component: Colors,
   }
 ]
 

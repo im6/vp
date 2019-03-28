@@ -1,6 +1,5 @@
 import React from 'react';
-import Footer from './components/footer';
-import Header from './components/header';
+import Head from './components/Head';
 import PropTypes from 'prop-types';
 
 class Layout extends React.Component {
@@ -9,7 +8,7 @@ class Layout extends React.Component {
   }
   render() {
     return <div>
-      <Header />
+      <Head />
       { this.props.children }
       <Footer />
     </div>;
