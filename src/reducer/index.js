@@ -44,9 +44,17 @@ const defaultState = {
 
 const reducer = handleActions(
   {
-    ['color/like']: (state, action) => {
-      console.log(action.payload);
-      return state;
+    ['color/toggleLike']: (state, action) => {
+      const { colors } = state;
+      colors.forEach(v => {
+        if(v.id === action.payload){
+          v.like += 1
+        }
+      });
+      const ns = Object.assign(state, {
+        colors
+      });
+      return ns;
     }
   },
   defaultState,

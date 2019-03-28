@@ -1,9 +1,5 @@
 import React from 'react'
 import { Menu, Icon } from 'antd';
-
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
-
 import { Link } from "react-router-dom";
 
 class Head extends React.Component {render() {
