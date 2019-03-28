@@ -9,8 +9,9 @@ class ServerWatchingPlugin {
     compiler.hooks.afterPlugins.tap('ServerWatchPluginHook', (cp) => {
       console.log('[server]: compile server');
       webpack(this.options, (err, stats) => {
-        if(err){
-          console.error(err.details);
+        if(err || stats.hasErrors()){
+          console.log(err)
+          console.log(stats)
         }
         console.log(stats.toString({
           chunks: false,

@@ -5,10 +5,11 @@ import { StaticRouter } from 'react-router';
 import App from '../components/App';
 import Html from '../components/Html';
 import { PORT } from '../constant';
+import routes from './routes';
 
 const app = express()
 app.use(express.static('dist'))
-
+app.use('/api', routes)
 app.get('/*', (req, res) => {
   const context = {}
   const scripts = ['bundle.js']
