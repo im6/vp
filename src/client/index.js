@@ -3,25 +3,25 @@ import { hydrate } from 'react-dom'
 import App from '../components/App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose as compose0 } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import reducer from '../reducer';
 import saga from './saga';
 import { fromJS } from 'immutable';
 
 const sagaMiddleware = createSagaMiddleware();
-const utils = [applyMiddleware(sagaMiddleware)];
+const middlewares = [sagaMiddleware];
+const compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose0;
 
-if(process.env.NODE_ENV === 'development'){
+if(__DEV__){
   const logger = require('redux-logger').default;
-  utils.push(applyMiddleware(window.__REDUX_DEVTOOLS_EXTENSION__));
-  utils.push(applyMiddleware(logger));
+  middlewares.push(logger);
 };
 
-const enhancers = compose(...utils);
+const enhancers = applyMiddleware(...middlewares);
 const initState = createStore(reducer,
   fromJS(window._colorpk),
-  enhancers,
+  compose(enhancers),
 );
 
 sagaMiddleware.run(saga);
@@ -37,7 +37,7 @@ let render = () => {
   );
 }
 
-if(process.env.NODE_ENV === 'development'){
+if(__DEV__){
   const renderNormally = render;
   const renderException = (error) => {
     const RedBox = require('redbox-react').default;

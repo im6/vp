@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config ./src/webpack/client.js",
+    "start": "NODE_ENV=development webpack-dev-server --config ./src/webpack/client.js",
     "lint": "eslint --ext .js,.jsx src/"
   },
   "repository": "git+https://github.com/jinouwuque/vp.git",
@@ -23,7 +23,6 @@
     "css-loader": "^2.1.1",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "redbox-react": "^1.6.0",
     "redux-logger": "^3.0.6",
     "style-loader": "^0.23.1",
     "webpack-cli": "^3.3.0",
