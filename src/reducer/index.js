@@ -1,4 +1,5 @@
 import { handleActions } from 'redux-actions';
+import { fromJS } from 'immutable';
 
 const dummy = [
   {
@@ -36,25 +37,17 @@ const dummy = [
   }
 ]
 
-const defaultState = {
+const defaultState = fromJS({
   user: null,
   colors: dummy,
   likes: {},
-};
+});
 
 const reducer = handleActions(
   {
     ['color/toggleLike']: (state, action) => {
-      const { colors } = state;
-      colors.forEach(v => {
-        if(v.id === action.payload){
-          v.like += 1
-        }
-      });
-      const ns = Object.assign(state, {
-        colors
-      });
-      return ns;
+      const currentLike = state.getIn(['colors', '0', 'like']);
+      return state.setIn(['colors', '0', 'like'], currentLike + 1);
     }
   },
   defaultState,

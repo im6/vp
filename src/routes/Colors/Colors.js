@@ -12,7 +12,7 @@ class Colors extends React.Component {
   render() {
     return <Card>
       Colors Like: &nbsp;&nbsp;
-      <h1>{ this.props.colors[0].like }</h1>
+      <h1>{ this.props.colors.getIn(['0', 'like']) }</h1>
       <Button onClick={this.onClickLike}>Like</Button>
     </Card>
   }

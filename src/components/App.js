@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import routes from '../routes'
-import Head from './layout/components/Head';
+import Head from './Head';
 import { Switch, Route, Link } from 'react-router-dom';
 
 class App extends React.Component {

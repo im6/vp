@@ -5,13 +5,9 @@ import { connect } from 'react-redux';
 import Colors from './Colors';
 
 const mapStateToProps = (state, route) => {
-  const { 
-    colors, 
-    loading
-  } = state;
+  const colors = state.get('colors');
   return {
     colors,
-    loading,
   };
 };
 

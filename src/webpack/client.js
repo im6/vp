@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const ServerCompilePlugin = require('./plugins/ServerCompilePlugin');
 const serverConfig = require('./server');
 const { PORT, DEVPORT } = require('../constant');
@@ -12,6 +13,7 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   entry: [
+    '@babel/polyfill',
     './src/client/index.js',
   ],
   output: {
@@ -66,6 +68,9 @@ module.exports = {
   },
   plugins: [
     new ServerCompilePlugin(serverConfig),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+    })
   ],
   watchOptions: {
     ignored: /node_modules/
