@@ -2,7 +2,8 @@ import React from 'react'
 import { Menu, Icon } from 'antd';
 import { Link } from "react-router-dom";
 
-class Head extends React.Component {render() {
+class Head extends React.Component {
+  render() {
     return (
       <Menu mode="horizontal">
         <Menu.Item key="popular">

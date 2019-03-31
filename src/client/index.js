@@ -26,7 +26,7 @@ const initState = createStore(reducer,
 
 sagaMiddleware.run(saga);
 
-let render = () => {
+const render = () => {
   hydrate(
     <Provider store={initState}>
       <BrowserRouter>
@@ -35,21 +35,6 @@ let render = () => {
     </Provider>,
     document.getElementById('app'),
   );
-}
-
-if(__DEV__){
-  const renderNormally = render;
-  const renderException = (error) => {
-    const RedBox = require('redbox-react').default;
-    ReactDOM.render(<RedBox error={error} />, appDom);
-  };
-  render = () => {
-    try {
-      renderNormally();
-    } catch (error) {
-      renderException(error);
-    }
-  };
 }
 
 render();
