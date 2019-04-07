@@ -14,7 +14,7 @@ module.exports = {
   },
   entry: [
     '@babel/polyfill',
-    './src/client/index.js',
+    './src/index.js',
   ],
   output: {
     publicPath: '/',

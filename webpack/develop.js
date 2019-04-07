@@ -16,7 +16,7 @@ const client = {
   },
   entry: [
     '@babel/polyfill',
-    './client/entry/index.jsx',
+    './client/index.js',
   ],
   output: {
     publicPath: '/',
