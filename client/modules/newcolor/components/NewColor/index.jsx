@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router';
-import ColorPicker from 'react-color-picker';
+import { Link } from 'react-router-dom';
+//import ColorPicker from 'react-color-picker';
 import { Row, Col, Card, Button, Input, Checkbox, Icon, Select, message, Modal } from 'antd';
 import EditCanvas from '../EditCanvas';
 import VibrantPalette from '../VibrantPalette';
 import FinishModal from '../FinishModal';
-import 'react-color-picker/index.css';
+import 'style-loader!css-loader!react-color-picker/index.css';
 import style from './style.less';
 
 const DEFAULTVALUE = '#',
@@ -159,10 +159,10 @@ class NewColor extends React.PureComponent {
         <Col lg={3} md={1} sm={0} xs={0}></Col>
         <Col lg={9} md={11} sm={24} xs={24}>
           <div ref="cpbox">
-            <ColorPicker hueWidth={me.state.pickerWd * 0.15}
+            {/* <ColorPicker hueWidth={me.state.pickerWd * 0.15}
                          saturationWidth={me.state.pickerWd * 0.78}
                          value={me.state.editColor}
-                         onDrag={me.onPickColor.bind(me)}/>
+                         onDrag={me.onPickColor.bind(me)}/> */}
           </div>
 
           <br/>

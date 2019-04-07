@@ -1,20 +1,26 @@
 import React from 'react'
-import { Card, Button } from 'antd';
+// import { Card, Button } from 'antd';
+import Box from '../../components/Box'
 
 class Colors extends React.Component {
   constructor(props) {
     super(props);
-    this.onClickLike = this.onClickLike.bind(this);
   }
-  onClickLike(){
-    this.props.onLike(475);
+  onLikeClickHandler(id, btnStatus){
+    debugger
+    this.props.onLike(id, btnStatus);
   }
   render() {
-    return <Card>
-      Colors Like: &nbsp;&nbsp;
-      <h1>{ this.props.colors.getIn(['0', 'like']) }</h1>
-      <Button onClick={this.onClickLike}>Like</Button>
-    </Card>
+    return <div>
+      {
+        this.props.colors.map((v, k) => {
+          return (<Box
+            boxInfo={v}
+            onLikeClick={me.onLikeClickHandler.bind(me, v.get('id'))}
+            />);
+        })
+      }
+    </div>
   }
 }
 

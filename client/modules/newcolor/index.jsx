@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createAction } from 'redux-actions';
-import { browserHistory } from 'react-router';
 import NewColor from './components/NewColor';
 
 const mapStateToProps = ({colorType, user, routing}) => {
@@ -35,7 +34,7 @@ const mapDispatchToProps = (dispatch) => {
       }
     },
     onRedirect(){
-      browserHistory.push('/');
+      
     }
   }
 };

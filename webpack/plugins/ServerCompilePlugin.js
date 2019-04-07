@@ -10,11 +10,8 @@ class ServerWatchingPlugin {
       console.log('[server]: compile server');
       webpack(this.options, (err, stats) => {
         if(err || stats.hasErrors()){
-          console.log(err.toString({
-            chunks: false,
-            colors: true
-          }))
-          console.log(stats)
+          console.log(err)
+          console.log(stats.toString())
         }
         console.log(stats.toString({
           chunks: false,

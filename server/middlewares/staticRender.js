@@ -15,13 +15,14 @@ var FRONTURLs = [
   'about',
   'adminpanel',
 ];
+const appRoot = process.env.PWD;
 
 module.exports = {
   staticFile: function(req, res, next){
     var subUrl = req.url.split('/');
     if(subUrl[1] === 'bundle.js'){
-      res.sendFile(path.resolve(__dirname,`../../dist/bundle.js`));
-    }else{
+      res.sendFile(path.resolve(appRoot,`./dist/public/bundle.js`));
+    } else {
       next();
     }
   },
@@ -30,10 +31,11 @@ module.exports = {
     if(FRONTURLs.indexOf(subUrl[1]) > -1){
       if(globalConfig.isDev){
         console.log(`${req.method}: ${req.originalUrl}`);
-      }else{
+      } else {
         res.cookie('_csrf',req.csrfToken());
       }
-      res.sendFile(path.resolve(__dirname,`../../dist/index.html`));
+      const indexPath = path.join(appRoot, './dist/public/index.html');
+      res.sendFile(indexPath);
     } else {
       next();
     }

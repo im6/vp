@@ -2,7 +2,6 @@ import React from 'react';
 import { message } from 'antd';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 import Auth from './components/Auth';
 
 const mapStateToProps = ({user}) => {
@@ -23,9 +22,7 @@ const mapDispatchToProps = (dispatch) => {
       window.location = url;
     },
     goBack(){
-      browserHistory.push('/');
     },
   }
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);

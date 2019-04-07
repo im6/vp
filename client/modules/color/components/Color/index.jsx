@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, Icon, Row, Col, Button } from 'antd';
 import classnames from 'classnames';
-import QueueAnim from 'rc-queue-anim';
 import Box from '../Box';
 import SpinLoader from '../SpinLoader';
 import HeadBanner from '../HeadBanner';
@@ -57,11 +56,7 @@ class Color extends React.Component {
 
       }
 
-      <QueueAnim type="top"
-                 duration={300}
-                 interval={70}
-                 className={clsStr}>
-        {
+{
           me.props.list.map((v, k) => {
             return (<Col xs={12}
                          sm={12}
@@ -76,7 +71,6 @@ class Color extends React.Component {
             </Col>);
           })
         }
-      </QueueAnim>
       { me.props.loading ? <SpinLoader /> : <div style={{height: 60}}/> }
     </div>);
   }

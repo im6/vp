@@ -2,50 +2,65 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose as compose0, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { createLogger } from 'redux-logger'
 import { sagaInitiator } from '../config/saga';
 import { moduleReducers } from '../config/reducer';
-
-
 import App from '../modules/app/index.jsx';
 
-import { createAction } from 'redux-actions';
-import { getUserInfo, getInitAuth } from '../services/resource.js';
-import { scrollTop } from '../misc/util.js';
-
-
-
-const appDom = document.getElementById('app');
 const sagaMiddleware = createSagaMiddleware();
-const logger = createLogger();
+const middlewares = [sagaMiddleware];
+const compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose0;
 
-const store = createStore(combineReducers(moduleReducers), applyMiddleware(sagaMiddleware));
+if(__DEV__){
+  const logger = require('redux-logger').default;
+  middlewares.push(logger);
+};
+const enhancers = applyMiddleware(...middlewares);
+const initState = createStore(combineReducers(moduleReducers),
+  {},
+  compose(enhancers),
+);
 
 sagaInitiator(sagaMiddleware);
-let render = () => {
-  ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    appDom
-  );
-};
+ReactDOM.render(
+  <Provider store={initState}>
+    <App />
+  </Provider>,
+  document.getElementById('app'),
+);
 
-if (module.hot) {
-  const renderNormally = render;
-  const renderException = (error) => {
-    const RedBox = require('redbox-react').default;
+// import App from '../modules/app/index.jsx';
 
-    ReactDOM.render(<RedBox error={error} />, appDom);
-  };
-  render = () => {
-    try {
-      renderNormally();
-    } catch (error) {
-      renderException(error);
-    }
-  };
-}
-render();
+// const appDom = document.getElementById('app');
+// const sagaMiddleware = createSagaMiddleware();
+// const logger = createLogger();
+
+// const store = createStore(combineReducers(moduleReducers), applyMiddleware(sagaMiddleware));
+
+// sagaInitiator(sagaMiddleware);
+// let render = () => {
+//   ReactDOM.render(
+//     <Provider store={store}>
+//       <App />
+//     </Provider>,
+//     appDom
+//   );
+// };
+
+// if (module.hot) {
+//   const renderNormally = render;
+//   const renderException = (error) => {
+//     const RedBox = require('redbox-react').default;
+
+//     ReactDOM.render(<RedBox error={error} />, appDom);
+//   };
+//   render = () => {
+//     try {
+//       renderNormally();
+//     } catch (error) {
+//       renderException(error);
+//     }
+//   };
+// }
+// render();
