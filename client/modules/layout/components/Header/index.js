@@ -2,12 +2,12 @@ import React from 'react';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 import Header from './Header';
+import { withRouter } from 'react-router-dom';
 
-const mapStateToProps = ({user, color},b,c,d) => {
-  debugger;
+const mapStateToProps = (state, { location }) => {
+  const { pathname } = location;
   return {
-    user,
-    view: color.get('view')
+    url: pathname
   }
 };
 
@@ -20,4 +20,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

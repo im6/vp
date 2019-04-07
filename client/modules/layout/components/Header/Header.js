@@ -5,9 +5,6 @@ import { Link } from 'react-router-dom';
 class Header extends React.Component {
   constructor(props){
     super(props)
-    this.state = {
-      current: 'Latest',
-    }
   }
 
   handleClick(e) {
@@ -17,22 +14,22 @@ class Header extends React.Component {
     return (
       <Menu
         onClick={this.handleClick}
-        selectedKeys={[this.state.current]}
+        selectedKeys={[this.props.url]}
         mode="horizontal"
       >
-        <Menu.Item key="Popular">
+        <Menu.Item key="/popular">
           <Link to="/popular">
             <Icon type="rise" />
             Popular
           </Link>
         </Menu.Item>
-        <Menu.Item key="Latest">
+        <Menu.Item key="/">
           <Link to="/">
             <Icon type="clock-circle" />
             Latest
           </Link>
         </Menu.Item>
-        <Menu.Item key="About">
+        <Menu.Item key="/about">
           <Link to="/about">
             <Icon type="user" />
             About
