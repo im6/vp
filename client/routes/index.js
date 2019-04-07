@@ -7,7 +7,7 @@ class Routes extends React.Component {
   render(){
     return <Fragment>
       <Route exact path="/" component={Color} />
-      <Route path="/latest" component={Color} />
+      <Route path="/popular" component={Color} />
       <Route path="/about" component={About} />
     </Fragment>
   }
