@@ -1,11 +1,14 @@
+const fs = require('fs')
 const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const ServerStartPlugin = require('./plugins/ServerStartPlugin');
 
-const PORT = 3000
-
 const antDir = /node_modules\/antd\/es/;
+
+const json0 = fs.readFileSync(path.join(__dirname, '../.vscode/launch.json'), {encoding: 'utf8'});
+const json1 = JSON.parse(json0)
+const appEnvs = json1.configurations[0].env;
 
 const client = {
   watch: true,
@@ -133,7 +136,7 @@ const server = {
     ],
   },
   plugins: [
-    new ServerStartPlugin(),
+    new ServerStartPlugin(appEnvs),
   ],
   watchOptions: {
     ignored: /node_modules/

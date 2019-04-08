@@ -16,6 +16,7 @@ export const sqlExecOne = qr => {
   return new Promise((resolve, reject) => {
     pool.query(qr, (err, rows, fields) => {
       if(err) {
+        console.error(err);
         reject(err);
       } else {
         resolve(rows);
