@@ -1,14 +1,14 @@
 import mysql from 'mysql';
-import config from '../../config/env';
+const env = process.env;
 
 const pool = mysql.createPool({
   connectionLimit : 8,
   multipleStatements: false,
-  host     : config['SQL_HOST'],
-  port     : config['SQL_PORT'],
-  user     : config['SQL_USERNAME'],
-  password : config['SQL_PASSWORD'],
-  database : config['SQL_DATABASE']
+  host     : env['SQL_HOST'],
+  port     : env['SQL_PORT'],
+  user     : env['SQL_USERNAME'],
+  password : env['SQL_PASSWORD'],
+  database : env['SQL_DATABASE']
 });
 
 export const getPool = () => pool;
