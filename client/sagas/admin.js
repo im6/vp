@@ -4,10 +4,8 @@ import requester from '../services/requester';
 import { createAction } from 'redux-actions';
 
 function* watchers(a) {
-  yield [
-    takeLatest("admin/getList", getAnonymousColor),
-    takeLatest("admin/decideColor", postDecideColor),
-  ]
+  yield takeLatest("admin/getList", getAnonymousColor);
+  yield takeLatest("admin/decideColor", postDecideColor);
 }
 
 function* getAnonymousColor(action) {

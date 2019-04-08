@@ -9,40 +9,40 @@ const BOXHT = 285
 const BOXWD = 250
 
 class Box extends React.Component {
+  constructor(props){
+    super(props);
+    this.onClickHander = this.onClickHander.bind(this);
+  }
+
   onClickHander() {
-    const me = this;
-    me.props.onLikeClick({
-      willLike: !me.props.boxInfo.get('liked'),
-      id: me.props.boxInfo.get('id')
+    this.props.onLikeClick({
+      willLike: !this.props.boxInfo.get('liked'),
+      id: this.props.boxInfo.get('id')
     });
   }
 
   render() {
-    const me = this;
     const likeStyle = {};
-    likeStyle[style.hasLike] = me.props.boxInfo.get('liked') || false;
-    const likeIcon = me.props.boxInfo.get('liked') ? 'heart' : 'heart-o';
+    likeStyle[style.hasLike] = this.props.boxInfo.get('liked') || false;
 
     return <div
       className={style.box}
       style={{width: BOXWD, height: BOXHT}}
       >
-        <ColorCanvas
-          colorId={me.props.boxInfo.get('id')}
-          colorValue={me.props.boxInfo.get('color')}/>
+        <ColorCanvas colorValue={this.props.boxInfo.get('color')}/>
         <div className={style.boxFooter}>
           <Button
             size={BTNSIZE}
-            onClick={me.onClickHander.bind(me)}>
+            onClick={this.onClickHander}>
             <h3 style={{display: 'inline'}}>
-              <Icon type={likeIcon} className={likeStyle}/>
+              <Icon type="heart" className={likeStyle}/>
               &nbsp;&nbsp;
-              {me.props.boxInfo.get('like')}
+              {this.props.boxInfo.get('like')}
             </h3>
           </Button>
           {
-            me.props.boxInfo.get('username') ?
-              <h3>{me.props.boxInfo.get('username')}</h3> : null
+            this.props.boxInfo.get('username') ?
+              <h3>{this.props.boxInfo.get('username')}</h3> : null
           }
         </div>
     </div>;
