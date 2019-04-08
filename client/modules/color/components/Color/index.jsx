@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, Row, Col, Button } from 'antd';
+import { Button } from 'antd';
 import classnames from 'classnames';
 import Box from '../Box';
 import SpinLoader from '../SpinLoader';
@@ -57,18 +57,11 @@ class Color extends React.Component {
       }
 
 {
-          me.props.list.map((v, k) => {
-            return (<Col xs={12}
-                         sm={12}
-                         md={8}
-                         lg={6}
-                         key={k}
-                         className={style.colContainer}>
-              <Box
-                boxInfo={v}
-                onLikeClick={me.onLikeClickHandler.bind(me, v.get('id'))}
-                />
-            </Col>);
+          me.props.list.map((v) => {
+            return <Box key={v.get('id')}
+              boxInfo={v}
+              onLikeClick={me.onLikeClickHandler.bind(me, v.get('id'))}
+            />;
           })
         }
       { me.props.loading ? <SpinLoader /> : <div style={{height: 60}}/> }
