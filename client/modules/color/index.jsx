@@ -1,44 +1,38 @@
 import React from 'react';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 import Color from './components/Color';
 
-const mapStateToProps = ({ color, routing }) => {
+const mapStateToProps = ({ color }, { location: { pathname }}) => {
   const saved = color.get('liked');
   const view = color.get('view');
-  let listName = 'list';
-
-  if (view === 'portfolio') {
-    listName = 'myPortfolio';
-  } else if (view === 'like') {
-    listName = 'myLiked';
+  let list;
+  if(pathname === '/'){
+    list = color.get('list');
+  } else if(pathname === '/popular') {
+    list = color.get('list').sort((a, b) => {
+      return b.get('like') - a.get('like');
+    })
   }
+  // let color0 = color.get(listName).map(v => {
+  //   return v.merge({
+  //     liked: saved.get('d' + v.get('id')) || false
+  //   });
+  // });
 
-  let color0 = color.get(listName).map(v => {
-    return v.merge({
-      liked: saved.get('d' + v.get('id')) || false
-    });
-  });
+  // //========== order ==============
+  // if (view === 'latest'){
+  //   color0 = color0.sortBy(v => {
+  //     return v.get('id');
+  //   }, (a,b) => b-a);
+  // }
+  // //========== order END ==============
 
-  //========== order ==============
-  if (view === 'latest'){
-    color0 = color0.sortBy(v => {
-      return v.get('id');
-    }, (a,b) => b-a);
-  }
-  //========== order END ==============
-
-  let selectedIndex = -1;
-  if (view === 'color') {
-    const selectedColorIdStr = routing.locationBeforeTransitions.pathname.replace('/color/', '');
-    const pttId = parseInt(selectedColorIdStr, 10);
-    selectedIndex = color0.findIndex(v => v.get('id') === pttId);
-  }
 
   return {
-    list: color0,
+    list,
     loading: color.get('loading'),
-    selectedIndex,
     view,
   };
 };
@@ -55,4 +49,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Color);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Color));

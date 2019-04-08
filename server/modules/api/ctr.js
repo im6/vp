@@ -321,7 +321,7 @@ module.exports = {
 
 
   initColorList: function(req, res, next){
-    const qr = 'SELECT a.*, false as `liked` FROM colorpk_color a WHERE a.display=0 ORDER BY \`like\` DESC';
+    const qr = 'SELECT a.*, false as `liked` FROM colorpk_color a WHERE a.display=0 ORDER BY \`id\` DESC';
     mysql.sqlExecOne(qr).then(function(data){
       res.json(helper.resSuccessObj(data));
     }, function(data){

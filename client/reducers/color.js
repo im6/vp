@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { handleActions } from 'redux-actions';
-import Immutable, {Map, List} from 'immutable';
+import Immutable, { fromJS } from 'immutable';
 import { message } from 'antd';
 
 const SourceMap = {
@@ -21,7 +21,7 @@ const color = handleActions({
 
   ['color/get/success'](state, action) {
     return state.merge({
-      list: action.payload || [] ,
+      list: fromJS(action.payload),
       loading: false
     });
   },
