@@ -25,7 +25,7 @@ const initState = createStore(combineReducers(moduleReducers),
 sagaInitiator(sagaMiddleware);
 ReactDOM.render(
   <Provider store={initState}>
-    <App />
+    <App dispatch={initState.dispatch} />
   </Provider>,
   document.getElementById('app'),
 );

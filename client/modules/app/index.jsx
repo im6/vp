@@ -12,7 +12,7 @@ class App extends React.Component {
 
   render(){
     return <Layout>
-      <Routes />
+      <Routes dispatch={this.props.dispatch} />
     </Layout>;
   }
 }
