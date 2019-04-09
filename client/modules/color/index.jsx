@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import Color from './components/Color';
 
-const mapStateToProps = ({ color }, { location: { pathname }}) => {
-  const saved = color.get('liked');
+const shared = {};
+
+const mapStateToProps = ({ color }, { location: { pathname }, history }) => {
   const view = color.get('view');
+  shared.history = history;
   let list;
   if(pathname === '/'){
     list = color.get('list');
@@ -28,23 +30,25 @@ const mapStateToProps = ({ color }, { location: { pathname }}) => {
   //   }, (a,b) => b-a);
   // }
   // //========== order END ==============
-
-
   return {
     list,
     loading: color.get('loading'),
     view,
+    history,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLike(id, btnStatus) {
+    onLike(id, willLike) {
       const ac = createAction('color/toggleLike');
       dispatch(ac({
-        ...btnStatus,
+        willLike,
         id
       }));
+    },
+    onEnter(id) {
+      shared.history.push(`/color/${id}`);
     }
   }
 };

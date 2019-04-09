@@ -11,9 +11,19 @@ import Global from '../../../../config/global.js';
 const { ISMOBILE } = Global;
 
 class Color extends React.Component {
-  onLikeClickHandler(id, btnStatus){
-    const me = this;
-    me.props.onLike(id, btnStatus);
+  constructor(props) {
+    super(props);
+    this.onEnterClick = this.onEnterClick.bind(this);
+    this.onLikeClick = this.onLikeClick.bind(this);
+  }
+
+  onLikeClick(newState){
+    const { id, willLike } = newState;
+    this.props.onLike(id, willLike);
+  }
+
+  onEnterClick(id) {
+    this.props.onEnter(id);
   }
 
   render() {
@@ -43,7 +53,7 @@ class Color extends React.Component {
               <Box
                 boxInfo={me.props.list.get(selected)}
                 width="100%"
-                onLikeClick={me.onLikeClickHandler.bind(me, me.props.list.getIn([selected, 'id']))}
+                onLikeClick={me.onLikeClick}
                 />
               <br/>
               <div style={{textAlign: 'center'}}>
@@ -60,7 +70,8 @@ class Color extends React.Component {
           me.props.list.map((v) => {
             return <Box key={v.get('id')}
               boxInfo={v}
-              onLikeClick={me.onLikeClickHandler.bind(me, v.get('id'))}
+              onLikeClick={this.onLikeClick}
+              onCanvasClick={this.onEnterClick}
             />;
           })
         }

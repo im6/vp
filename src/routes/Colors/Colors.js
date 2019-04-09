@@ -7,7 +7,6 @@ class Colors extends React.Component {
     super(props);
   }
   onLikeClickHandler(id, btnStatus){
-    debugger
     this.props.onLike(id, btnStatus);
   }
   render() {

@@ -11,14 +11,19 @@ const BOXWD = 250
 class Box extends React.Component {
   constructor(props){
     super(props);
-    this.onClickHander = this.onClickHander.bind(this);
+    this.onLikeClick = this.onLikeClick.bind(this);
+    this.onCanvasClick = this.onCanvasClick.bind(this);
   }
 
-  onClickHander() {
+  onLikeClick() {
     this.props.onLikeClick({
       willLike: !this.props.boxInfo.get('liked'),
       id: this.props.boxInfo.get('id')
     });
+  }
+
+  onCanvasClick() {
+    this.props.onCanvasClick(this.props.boxInfo.get('id'));
   }
 
   render() {
@@ -29,11 +34,14 @@ class Box extends React.Component {
       className={style.box}
       style={{width: BOXWD, height: BOXHT}}
       >
-        <ColorCanvas colorValue={this.props.boxInfo.get('color')}/>
+        <ColorCanvas 
+          colorValue={this.props.boxInfo.get('color')}
+          onClick={this.onCanvasClick}
+        />
         <div className={style.boxFooter}>
           <Button
             size={BTNSIZE}
-            onClick={this.onClickHander}>
+            onClick={this.onLikeClick}>
             <h3 style={{display: 'inline'}}>
               <Icon type="heart" className={likeStyle}/>
               &nbsp;&nbsp;
