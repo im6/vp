@@ -28,10 +28,6 @@ class Color extends React.Component {
 
   render() {
     const me = this;
-    const listClass = {};
-    listClass[style.pcPadding] = !ISMOBILE;
-    listClass[style.list] = true;
-    const clsStr = classnames(listClass);
     const selected = me.props.selectedIndex;
 
     let downloadUrl = 'javascript:void(0)';
@@ -66,7 +62,8 @@ class Color extends React.Component {
 
       }
 
-{
+      <div className={style.list}>
+        {
           me.props.list.map((v) => {
             return <Box key={v.get('id')}
               boxInfo={v}
@@ -75,6 +72,7 @@ class Color extends React.Component {
             />;
           })
         }
+      </div>
       { me.props.loading ? <SpinLoader /> : <div style={{height: 60}}/> }
     </div>);
   }
