@@ -6,9 +6,6 @@ import SpinLoader from '../SpinLoader';
 import HeadBanner from '../HeadBanner';
 import style from './style.less';
 import { downloadCanvas } from '../../../../misc/util.js';
-import Global from '../../../../config/global.js';
-
-const { ISMOBILE } = Global;
 
 class Color extends React.Component {
   constructor(props) {
@@ -27,19 +24,18 @@ class Color extends React.Component {
   }
 
   render() {
-    const me = this;
-    const selected = me.props.selectedIndex;
+    const selected = this.props.selectedIndex;
 
     let downloadUrl = 'javascript:void(0)';
     if(selected > -1) {
-      downloadUrl = downloadCanvas(me.props.list.getIn([selected, 'color']));
+      downloadUrl = downloadCanvas(this.props.list.getIn([selected, 'color']));
     }
 
 
     return (<div>
       <HeadBanner
-        colorSize={me.props.list.size}
-        colorView={me.props.view}
+        colorSize={this.props.list.size}
+        colorView={this.props.view}
         />
 
       {
@@ -47,9 +43,9 @@ class Color extends React.Component {
           (
             <div className={style.selectedBox}>
               <Box
-                boxInfo={me.props.list.get(selected)}
+                boxInfo={this.props.list.get(selected)}
                 width="100%"
-                onLikeClick={me.onLikeClick}
+                onLikeClick={this.onLikeClick}
                 />
               <br/>
               <div style={{textAlign: 'center'}}>
@@ -59,12 +55,11 @@ class Color extends React.Component {
               </div>
             </div>
           ) : null
-
       }
 
       <div className={style.list}>
         {
-          me.props.list.map((v) => {
+          this.props.list.map((v) => {
             return <Box key={v.get('id')}
               boxInfo={v}
               onLikeClick={this.onLikeClick}
@@ -73,7 +68,7 @@ class Color extends React.Component {
           })
         }
       </div>
-      { me.props.loading ? <SpinLoader /> : <div style={{height: 60}}/> }
+      { this.props.loading ? <SpinLoader /> : <div style={{height: 60}}/> }
     </div>);
   }
 }

@@ -48,8 +48,7 @@ class Box extends React.Component {
               {this.props.boxInfo.get('like')}
           </Button>
           {
-            this.props.boxInfo.get('username') ?
-              <h3>{this.props.boxInfo.get('username')}</h3> : null
+            this.props.boxInfo.get('username') && <h3>{this.props.boxInfo.get('username')}</h3>
           }
         </div>
     </div>;
