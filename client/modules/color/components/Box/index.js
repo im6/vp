@@ -40,13 +40,12 @@ class Box extends React.Component {
         />
         <div className={style.boxFooter}>
           <Button
+            className={style.btnText}
             size={BTNSIZE}
             onClick={this.onLikeClick}>
-            <h3 style={{display: 'inline'}}>
-              <Icon type="heart" className={likeStyle}/>
-              &nbsp;&nbsp;
+            <Icon type="heart" className={likeStyle}/>
+              &nbsp;
               {this.props.boxInfo.get('like')}
-            </h3>
           </Button>
           {
             this.props.boxInfo.get('username') ?
