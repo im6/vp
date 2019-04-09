@@ -4,14 +4,12 @@ import requester from '../services/requester';
 import { createAction } from 'redux-actions';
 
 function* watchers(a) {
-  yield [
-    takeLatest("color/get", initColorList),
-    takeLatest("color/getPortfolio", initColorPortfolio),
-    takeLatest("color/getLike", initColorLike),
-    takeLatest("color/loadMore", colorLoadMore),
-    takeLatest("color/toggleLike", toggleLike),
-    takeLatest("color/addNew", addNew),
-  ]
+  yield takeLatest("color/get", initColorList);
+  yield takeLatest("color/getPortfolio", initColorPortfolio);
+  yield takeLatest("color/getLike", initColorLike);
+  yield takeLatest("color/loadMore", colorLoadMore);
+  yield takeLatest("color/toggleLike", toggleLike);
+  yield takeLatest("color/addNew", addNew);
 }
 
 function* initColorLike(action) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Alert, Button } from 'antd';
 import style from './style.less';
 import Global from '../../../../config/global.js';

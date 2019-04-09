@@ -4,9 +4,7 @@ import requester from '../services/requester';
 import { createAction } from 'redux-actions';
 
 function* watchers(a) {
-  yield [
-    takeLatest("user/logoff", logoff),
-  ]
+  yield takeLatest("user/logoff", logoff);
 }
 
 function* logoff(action) {

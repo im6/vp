@@ -1,6 +1,6 @@
 const { env } = process;
 module.exports = {
-  isDev: env.NODE_ENV === 'dev',
+  isDev: env.NODE_ENV === 'development',
   requireAuth: true,
 
   serverPort: env.PORT || 3000,

@@ -3,4 +3,3 @@ node_modules
 .vscode
 npm-debug.log
 dist
-!dist/bundle.js

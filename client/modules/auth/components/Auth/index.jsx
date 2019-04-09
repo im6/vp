@@ -1,5 +1,4 @@
 import React from 'react';
-import QueueAnim from 'rc-queue-anim';
 import style from './style.less';
 import LoginCard from '../LoginCard';
 
@@ -33,17 +32,13 @@ class Auth extends React.Component {
     const me = this;
     return (<div>
       <div className={style.canvansContainer} />
-      <QueueAnim delay={300}
-                 type={'bottom'}
-                 ease={'easeOutQuart'} >
-        <div key="a" className={style.centerBox}>
-          <LoginCard onLogin={me.loginClickHandler.bind(me)}
-                     goBack={me.goBack.bind(me)}
-                     fbClick={me.fbClickHandler.bind(me)}
-                     ggClick={me.ggClickHandler.bind(me)}
-                     wbClick={me.wbClickHandler.bind(me)}/>
-        </div>
-      </QueueAnim>
+      <div key="a" className={style.centerBox}>
+        <LoginCard onLogin={me.loginClickHandler.bind(me)}
+                    goBack={me.goBack.bind(me)}
+                    fbClick={me.fbClickHandler.bind(me)}
+                    ggClick={me.ggClickHandler.bind(me)}
+                    wbClick={me.wbClickHandler.bind(me)}/>
+      </div>
     </div>);
   }
 }

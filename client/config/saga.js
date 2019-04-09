@@ -1,6 +1,6 @@
 
 const context = require.context('../sagas/', true, /\.js$/);
-let keys = context.keys();
+const keys = context.keys();
 
 
 export const sagaInitiator = (sagaMiddleware) => {

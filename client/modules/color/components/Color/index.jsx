@@ -1,7 +1,6 @@
 import React from 'react';
-import { Card, Icon, Row, Col, Button } from 'antd';
+import { Button } from 'antd';
 import classnames from 'classnames';
-import QueueAnim from 'rc-queue-anim';
 import Box from '../Box';
 import SpinLoader from '../SpinLoader';
 import HeadBanner from '../HeadBanner';
@@ -12,17 +11,23 @@ import Global from '../../../../config/global.js';
 const { ISMOBILE } = Global;
 
 class Color extends React.Component {
-  onLikeClickHandler(id, btnStatus){
-    const me = this;
-    me.props.onLike(id, btnStatus);
+  constructor(props) {
+    super(props);
+    this.onEnterClick = this.onEnterClick.bind(this);
+    this.onLikeClick = this.onLikeClick.bind(this);
+  }
+
+  onLikeClick(newState){
+    const { id, willLike } = newState;
+    this.props.onLike(id, willLike);
+  }
+
+  onEnterClick(id) {
+    this.props.onEnter(id);
   }
 
   render() {
     const me = this;
-    const listClass = {};
-    listClass[style.pcPadding] = !ISMOBILE;
-    listClass[style.list] = true;
-    const clsStr = classnames(listClass);
     const selected = me.props.selectedIndex;
 
     let downloadUrl = 'javascript:void(0)';
@@ -44,7 +49,7 @@ class Color extends React.Component {
               <Box
                 boxInfo={me.props.list.get(selected)}
                 width="100%"
-                onLikeClick={me.onLikeClickHandler.bind(me, me.props.list.getIn([selected, 'id']))}
+                onLikeClick={me.onLikeClick}
                 />
               <br/>
               <div style={{textAlign: 'center'}}>
@@ -57,26 +62,17 @@ class Color extends React.Component {
 
       }
 
-      <QueueAnim type="top"
-                 duration={300}
-                 interval={70}
-                 className={clsStr}>
+      <div className={style.list}>
         {
-          me.props.list.map((v, k) => {
-            return (<Col xs={12}
-                         sm={12}
-                         md={8}
-                         lg={6}
-                         key={k}
-                         className={style.colContainer}>
-              <Box
-                boxInfo={v}
-                onLikeClick={me.onLikeClickHandler.bind(me, v.get('id'))}
-                />
-            </Col>);
+          me.props.list.map((v) => {
+            return <Box key={v.get('id')}
+              boxInfo={v}
+              onLikeClick={this.onLikeClick}
+              onCanvasClick={this.onEnterClick}
+            />;
           })
         }
-      </QueueAnim>
+      </div>
       { me.props.loading ? <SpinLoader /> : <div style={{height: 60}}/> }
     </div>);
   }

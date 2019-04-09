@@ -1,58 +1,56 @@
 import React from 'react';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
 import Color from './components/Color';
 
-const mapStateToProps = ({ color, routing }) => {
-  const saved = color.get('liked');
+const shared = {};
+
+const mapStateToProps = ({ color }, { location: { pathname }, history }) => {
   const view = color.get('view');
-  let listName = 'list';
-
-  if (view === 'portfolio') {
-    listName = 'myPortfolio';
-  } else if (view === 'like') {
-    listName = 'myLiked';
+  shared.history = history;
+  let list;
+  if(pathname === '/'){
+    list = color.get('list');
+  } else if(pathname === '/popular') {
+    list = color.get('list').sort((a, b) => {
+      return b.get('like') - a.get('like');
+    })
   }
+  // let color0 = color.get(listName).map(v => {
+  //   return v.merge({
+  //     liked: saved.get('d' + v.get('id')) || false
+  //   });
+  // });
 
-  let color0 = color.get(listName).map(v => {
-    return v.merge({
-      liked: saved.get('d' + v.get('id')) || false
-    });
-  });
-
-  //========== order ==============
-  if (view === 'latest'){
-    color0 = color0.sortBy(v => {
-      return v.get('id');
-    }, (a,b) => b-a);
-  }
-  //========== order END ==============
-
-  let selectedIndex = -1;
-  if (view === 'color') {
-    const selectedColorIdStr = routing.locationBeforeTransitions.pathname.replace('/color/', '');
-    const pttId = parseInt(selectedColorIdStr, 10);
-    selectedIndex = color0.findIndex(v => v.get('id') === pttId);
-  }
-
+  // //========== order ==============
+  // if (view === 'latest'){
+  //   color0 = color0.sortBy(v => {
+  //     return v.get('id');
+  //   }, (a,b) => b-a);
+  // }
+  // //========== order END ==============
   return {
-    list: color0,
+    list,
     loading: color.get('loading'),
-    selectedIndex,
     view,
+    history,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLike(id, btnStatus) {
+    onLike(id, willLike) {
       const ac = createAction('color/toggleLike');
       dispatch(ac({
-        ...btnStatus,
+        willLike,
         id
       }));
+    },
+    onEnter(id) {
+      shared.history.push(`/color/${id}`);
     }
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Color);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Color));

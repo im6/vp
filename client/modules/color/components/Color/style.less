@@ -1,10 +1,10 @@
 .list {
   display: flex;
   flex-wrap: wrap;
-}
-.colContainer {
-    margin-bottom: 30px;
-    //border: 1px solid red;
+  justify-content: center;
+  width: 92%;
+  margin: 0 auto;
+  // border: 1px solid blue;
 }
 
 .pcPadding {
@@ -14,4 +14,16 @@
 .selectedBox {
     width: 275px;
     margin: 40px auto;
+}
+
+@media (max-width: 768px) {
+  .list {
+    width: 99%;
+  }
+}
+
+@media (max-width: 321px) {
+  .list {
+    width: 100%;
+  }
 }

@@ -1,4 +1,3 @@
-const env = process.env;
 import {
   bannerStartLocation,
   mobileDetect,
@@ -12,7 +11,6 @@ const ISMOBILE = mobileDetect(),
   BNNRPADDING = bannerStartLocation();
 
 export default {
-  isDev: env.NODE_ENV === 'dev',
   appKey: '_COLORPK',
 
   ISMOBILE,

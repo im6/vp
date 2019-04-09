@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { handleActions } from 'redux-actions';
-import Immutable, {Map, List} from 'immutable';
+import Immutable, { fromJS } from 'immutable';
 import { message } from 'antd';
 
 const SourceMap = {
@@ -21,7 +21,7 @@ const color = handleActions({
 
   ['color/get/success'](state, action) {
     return state.merge({
-      list: action.payload || [] ,
+      list: fromJS(action.payload),
       loading: false
     });
   },
@@ -99,44 +99,54 @@ const color = handleActions({
   },
 
   ['color/toggleLike'](state, action) {
-    let newLiked = null,
-      listName = SourceMap[state.get('view')],
-      list = state.get(listName),
-      selectedId = action.payload.id,
-      gonnaLike = action.payload.willLike;
-
-    if(gonnaLike){
-      let newMap = {};
-      newMap['d'+ selectedId] = true;
-      newLiked = state.get('liked').merge(newMap);
-    }else{
-      newLiked = state.get('liked').delete('d'+ selectedId);
-    }
-
-    let index = list.findIndex(v => v.get('id') === selectedId);
-    let newList = list.update(index, function(v){
+    const { willLike, id } = action.payload;
+    const index = state.get('list').findIndex(v => v.get('id') === id);
+    const newList = state.get('list').update(index, (v) => {
       return v.merge({
-        liked: gonnaLike,
-        like: v.get('like') + (gonnaLike ? 1 : -1)
+        liked: willLike,
+        like: v.get('like') + (willLike ? 1 : -1)
       });
     });
+    return state.set('list', newList);
 
-    let mgObj = {
-      liked: newLiked,
-    };
+    // let newLiked = null,
+    //   listName = SourceMap[state.get('view')],
+    //   list = state.get(listName),
+    //   selectedId = action.payload.id,
+    //   gonnaLike = action.payload.willLike;
 
-    if(state.get('view') === 'like'){
-      if(gonnaLike){
-        // no need to update
-      }else{
-        newList = newList.filter(v => v.get('id') != selectedId);
-      }
-      mgObj.myLiked = newList;
-    } else{
-      mgObj[listName] = newList;
-    }
+    // if(gonnaLike){
+    //   let newMap = {};
+    //   newMap['d'+ selectedId] = true;
+    //   newLiked = state.get('liked').merge(newMap);
+    // }else{
+    //   newLiked = state.get('liked').delete('d'+ selectedId);
+    // }
 
-    return state.merge(mgObj);
+    // let index = list.findIndex(v => v.get('id') === selectedId);
+    // let newList = list.update(index, function(v){
+    //   return v.merge({
+    //     liked: gonnaLike,
+    //     like: v.get('like') + (gonnaLike ? 1 : -1)
+    //   });
+    // });
+
+    // let mgObj = {
+    //   liked: newLiked,
+    // };
+
+    // if(state.get('view') === 'like'){
+    //   if(gonnaLike){
+    //     // no need to update
+    //   }else{
+    //     newList = newList.filter(v => v.get('id') != selectedId);
+    //   }
+    //   mgObj.myLiked = newList;
+    // } else{
+    //   mgObj[listName] = newList;
+    // }
+
+    // return state.merge(mgObj);
   },
 
   ['color/initLike'](state, action) {

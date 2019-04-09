@@ -1,30 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Icon } from 'antd';
 import style from './style.less';
 import ColorRow from '../ColorRow';
 
 class ColorCanvas extends React.Component {
   shouldComponentUpdate(nextProps, nextState){
-    const me = this;
-    return me.props.colorValue !== nextProps.colorValue;
+    return this.props.colorValue !== nextProps.colorValue;
   }
 
   render() {
-    const me = this;
-    return <div className={style.boxCanvas}>
-      {me.props.colorValue.split('#').map((v, k) => {
+    return <div
+      className={style.boxCanvas}
+      onClick={this.props.onClick}
+    >
+      {this.props.colorValue.split('#').map((v) => {
         return <ColorRow
-          key={k}
-          colorId={me.props.colorId}
-          rowColor={'#' + v} />
+          key={v}
+          color={'#' + v} />
       })}
     </div>;
   }
 }
 
 ColorCanvas.propTypes = {
-  colorValue: PropTypes.string.isRequired
+  colorValue: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
 };
 
 
