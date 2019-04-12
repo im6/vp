@@ -1,18 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Card, Button, Input, Checkbox, Icon, Select, message, Modal } from 'antd';
+import { Row, Col, Card, Button, Icon, message, Modal } from 'antd';
+import { ChromePicker } from 'react-color';
 import EditCanvas from '../EditCanvas';
 import FinishModal from '../FinishModal';
 import style from './style.less';
 
-const DEFAULTVALUE = '#',
-  Option = Select.Option;
+const DEFAULTVALUE = '#81EEFF';
 
 class NewColor extends React.PureComponent {
   constructor(props) {
     super(props);
-    const me = this;
-    me.state = {
+    this.state = {
       editColor: DEFAULTVALUE,
       activeIndex : 0,
       colorValue: [
@@ -21,84 +20,66 @@ class NewColor extends React.PureComponent {
         null,
         null
       ],
-      showUpload: false,
       pickerWd: 200,
     };
+    this.onChangeActive = this.onChangeActive.bind(this);
+    this.submitColor = this.submitColor.bind(this);
+    this.resetColor = this.resetColor.bind(this);
+    this.onPickColor = this.onPickColor.bind(this);
   }
 
   showModal(){
-    const me = this;
     Modal.success({
       title: 'Thank you for new colors',
       okText: 'Got it',
-      content: <FinishModal isAuth={me.props.isAuth} />,
+      content: <FinishModal isAuth={this.props.isAuth} />,
       onOk: (close) => {
         close();
-        me.props.onRedirect();
+        this.props.onRedirect();
       }
     });
   }
 
   submitColor(){
-    const me = this;
     let good = true;
-    me.state.colorValue.forEach(v => {
+    this.state.colorValue.forEach(v => {
       if(!/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(v)) {
         good = false;
       }
     });
     if(good){
-      me.props.onAdd(me.state.colorValue);
-      me.showModal();
+      this.props.onAdd(this.state.colorValue);
+      this.showModal();
     }else{
       message.error('Invalid color.');
     }
   }
 
-  onPickColor(color){
-    const me = this;
-    let oper = me.state.colorValue;
-    oper[me.state.activeIndex] = color;
-    me.setState({
+  onPickColor({ hex }){
+    const oper = this.state.colorValue;
+    oper[this.state.activeIndex] = hex;
+    this.setState({
       colorValue: oper,
-      editColor: color
+      editColor: hex
     });
   }
 
-  onInputChange(ev){
-    const me = this;
-    let inputVal = ev.target.value;
-    me.onPickColor('#' + inputVal);
-  }
-
-  onChangeActive(v){
-    const me = this;
-    debugger;
-    let newCol = me.state.colorValue[v] || DEFAULTVALUE;
-    me.setState({
-      activeIndex: v,
-      editColor:newCol
+  onChangeActive(activeIndex){
+    const editColor = this.state.colorValue[activeIndex] || DEFAULTVALUE;
+    this.setState({
+      activeIndex,
+      editColor
     });
-  }
-
-  onChkboxChange(ev){
-    const me = this;
-    me.setState({
-      showUpload: ev.target.checked
-    })
-
   }
 
   extractResult(data){
-    const me = this;
-    me.setState({
+    this.setState({
       colorValue: data
     });
   }
 
   resetColor(){
-    const me = this;
-    me.setState({
+    this.setState({
       colorValue: [
         null,
         null,
@@ -109,57 +90,18 @@ class NewColor extends React.PureComponent {
   }
 
   render() {
-    const me = this;
-
-    return <Card
-      style={{width: '96%', 'margin':'0 auto'}}
-      title={<span><Icon type="edit" />&nbsp;&nbsp;Create New Color</span>}
-      >
-
+    return <div className={style.container}>
       <Row>
-        <Col lg={3} md={1} sm={0} xs={0}></Col>
-        <Col lg={9} md={11} sm={24} xs={24}>
-          
-
-          <br/>
-
-          <Input placeholder="hex"
-                 addonBefore="#"
-                 style={{'width': '77%'}}
-                 size="large"
-                 value={me.state.editColor.substring(1)}
-                 onChange={me.onInputChange.bind(me)}/>
-          <br/>
-        </Col>
-
-        <Col lg={1} md={1} sm={0} xs={0} />
-        <Col lg={8} md={10} sm={24} xs={24} className={style.makeCenter}>
-          <EditCanvas colorValue={me.state.colorValue}
-                      activeIndex={me.state.activeIndex}
-                      changeActive={me.onChangeActive.bind(me)}/>
-
-          <div style={{margin: '10px 0 5px 0'}}>
-            <Checkbox onChange={me.onChkboxChange.bind(me)}>
-              <h3 style={{display: 'inline-block'}}>
-                {me.state.showUpload ? 'Reset': 'Extract Image'}
-              </h3>
-            </Checkbox>
-          </div>
-
-        </Col>
-        <Col lg={3} md={1} sm={0} xs={0} />
-      </Row>
-
-
-
-      <Row>
-        <Col lg={24} md={24} sm={24} xs={24}>
-          <div className={style.btnGroup}>
-
+        <Col span={17}>
+          <ChromePicker
+            color={ this.state.editColor }
+            onChangeComplete={this.onPickColor}
+          />
+          <div style={{marginTop: 35}}>
             <Button type="primary"
                     size="large"
                     icon="check"
-                    onClick={me.submitColor.bind(me)}>
+                    onClick={this.submitColor}>
               Submit
             </Button>
             &nbsp;&nbsp;&nbsp;
@@ -170,18 +112,26 @@ class NewColor extends React.PureComponent {
                 Cancel
               </Button>
             </Link>
-            &nbsp;&nbsp;&nbsp;
+          </div>
+        </Col>
+        <Col span={7}>
+          <EditCanvas colorValue={this.state.colorValue}
+                      activeIndex={this.state.activeIndex}
+                      changeActive={this.onChangeActive}
+          />
+          <div style={{marginTop: 30}}>
             <Button
               type="default"
               size="large"
               icon="reload"
-              onClick={me.resetColor.bind(me)}
-              />
-
+              onClick={this.resetColor}
+              style={{width: '100%'}}
+            >Reset</Button>
           </div>
         </Col>
       </Row>
-    </Card>
+
+    </div>
   }
 }
 
