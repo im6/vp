@@ -1,11 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-//import ColorPicker from 'react-color-picker';
 import { Row, Col, Card, Button, Input, Checkbox, Icon, Select, message, Modal } from 'antd';
 import EditCanvas from '../EditCanvas';
-import VibrantPalette from '../VibrantPalette';
 import FinishModal from '../FinishModal';
-import 'style-loader!css-loader!react-color-picker/index.css';
 import style from './style.less';
 
 const DEFAULTVALUE = '#',
@@ -24,18 +21,9 @@ class NewColor extends React.PureComponent {
         null,
         null
       ],
-      showUpload: me.props.showUpload,
-      colorType: [],
+      showUpload: false,
       pickerWd: 200,
     };
-  }
-
-  componentDidMount(){
-    const me = this;
-    let { cpbox } = me.refs;
-    me.setState({
-      pickerWd: cpbox.offsetWidth
-    });
   }
 
   showModal(){
@@ -60,7 +48,7 @@ class NewColor extends React.PureComponent {
       }
     });
     if(good){
-      me.props.onAdd(me.state.colorValue, me.state.colorType);
+      me.props.onAdd(me.state.colorValue);
       me.showModal();
     }else{
       message.error('Invalid color.');
@@ -85,6 +73,7 @@ class NewColor extends React.PureComponent {
 
   onChangeActive(v){
     const me = this;
+    debugger;
     let newCol = me.state.colorValue[v] || DEFAULTVALUE;
     me.setState({
       activeIndex: v,
@@ -98,13 +87,6 @@ class NewColor extends React.PureComponent {
       showUpload: ev.target.checked
     })
 
-  }
-
-  onColorTypeChange(ev){
-    const me = this;
-    me.setState({
-      colorType: ev
-    });
   }
 
   extractResult(data){
@@ -128,7 +110,6 @@ class NewColor extends React.PureComponent {
 
   render() {
     const me = this;
-    let types = me.props.colorType.get('list').toJS();
 
     return <Card
       style={{width: '96%', 'margin':'0 auto'}}
@@ -136,34 +117,9 @@ class NewColor extends React.PureComponent {
       >
 
       <Row>
-        <Col lg={24} md={24} sm={24} xs={24} style={{marginBottom: 30, display: 'flex', justifyContent:'center'}}>
-          <div style={{width: '80%', display: 'none'}}>
-            <label> Color Type: &nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <Select
-              multiple
-              style={{ width: '67%' }}
-              placeholder="Please select type"
-              value={me.state.colorType}
-              onChange={me.onColorTypeChange.bind(me)}
-              >
-              {
-                types.map((v,k) => {
-                  return <Option key={k}>{v.value}</Option>
-                })
-              }
-            </Select>
-          </div>
-
-        </Col>
-
         <Col lg={3} md={1} sm={0} xs={0}></Col>
         <Col lg={9} md={11} sm={24} xs={24}>
-          <div ref="cpbox">
-            {/* <ColorPicker hueWidth={me.state.pickerWd * 0.15}
-                         saturationWidth={me.state.pickerWd * 0.78}
-                         value={me.state.editColor}
-                         onDrag={me.onPickColor.bind(me)}/> */}
-          </div>
+          
 
           <br/>
 
@@ -189,8 +145,6 @@ class NewColor extends React.PureComponent {
               </h3>
             </Checkbox>
           </div>
-
-          {me.state.showUpload ? <VibrantPalette onResult={me.extractResult.bind(me)}/> : null}
 
         </Col>
         <Col lg={3} md={1} sm={0} xs={0} />

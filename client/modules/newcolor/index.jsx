@@ -1,16 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createAction } from 'redux-actions';
+import { withRouter } from 'react-router-dom'
 import NewColor from './components/NewColor';
 
-const mapStateToProps = ({colorType, user, routing}) => {
-  const routePath = routing.locationBeforeTransitions.pathname;
-  const showUpload = routePath === '/extract';
+const mapStateToProps = ({ user }, { location: { pathname } }) => {
+  const showUpload = pathname === '/extract';
   const isAuth = user.get('isAuth');
   return {
     showUpload,
-    routePath,
-    colorType,
     isAuth,
   }
 };
@@ -39,4 +37,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewColor);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewColor));

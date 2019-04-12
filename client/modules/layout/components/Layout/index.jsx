@@ -18,6 +18,7 @@ class Layout extends React.Component {
     const result = (<div className={styles.layoutBox} >
       <Router>
         <Header />
+        <div style={{height: '60px'}} />
         { this.props.children}
       </Router>
     </div>);

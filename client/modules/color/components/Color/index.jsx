@@ -31,7 +31,6 @@ class Color extends React.Component {
       downloadUrl = downloadCanvas(this.props.list.getIn([selected, 'color']));
     }
 
-
     return (<div>
       <HeadBanner
         colorSize={this.props.list.size}
