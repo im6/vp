@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Card, Button, Icon, message, Modal } from 'antd';
+import { Row, Col, Button, message, Modal } from 'antd';
 import { ChromePicker } from 'react-color';
 import EditCanvas from '../EditCanvas';
 import FinishModal from '../FinishModal';
 import style from './style.less';
 
 const DEFAULTVALUE = '#81EEFF';
-
 class NewColor extends React.PureComponent {
   constructor(props) {
     super(props);
