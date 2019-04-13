@@ -13,6 +13,10 @@ const mapStateToProps = (state, { location }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onFbLogin() {
+      const ac = createAction('user/initAuth');
+      dispatch(ac());
+    },
     onLogout() {
       const ac = createAction('user/logoff');
       dispatch(ac());

@@ -98,19 +98,17 @@ class NewColor extends React.PureComponent {
           />
           <div style={{marginTop: 35}}>
             <Button type="primary"
-                    size="large"
                     icon="check"
                     onClick={this.submitColor}>
               Submit
             </Button>
             &nbsp;&nbsp;&nbsp;
-            <Link to="/">
-              <Button type="default"
-                      icon="close"
-                      size="large">
-                Cancel
-              </Button>
-            </Link>
+            <Button
+              type="default"
+              icon="reload"
+              onClick={this.resetColor}
+            >Reset</Button>
+            
           </div>
         </Col>
         <Col span={7}>
@@ -119,13 +117,15 @@ class NewColor extends React.PureComponent {
                       changeActive={this.onChangeActive}
           />
           <div style={{marginTop: 30}}>
-            <Button
-              type="default"
-              size="large"
-              icon="reload"
-              onClick={this.resetColor}
-              style={{width: '100%'}}
-            >Reset</Button>
+            <Link to="/">
+              <Button
+                type="default"
+                icon="arrow-left"
+                style={{width: '100%'}}
+              >
+                Return
+              </Button>
+            </Link>
           </div>
         </Col>
       </Row>

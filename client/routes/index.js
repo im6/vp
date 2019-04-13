@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Route, Switch } from "react-router-dom";
 import { createAction } from 'redux-actions';
 import Color from '../modules/color';
@@ -7,14 +7,15 @@ import New from '../modules/newcolor';
 import Auth from '../modules/auth';
 
 class Routes extends React.Component {
-  render(){
+  constructor(props){
+    super(props)
     const { dispatch } = this.props;
+    const ac = createAction('color/get');
+    dispatch(ac());
+  }
+  render(){
     return <Switch>
-      <Route exact path="/" render={(r) => {
-        const ac = createAction('color/get');
-        dispatch(ac());
-        return <Color />
-      }} />
+      <Route exact path="/" render={Color} />
       <Route path="/popular" component={Color} />
       <Route path="/about" component={About} />
       <Route path="/new" component={New} />

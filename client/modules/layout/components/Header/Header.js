@@ -1,6 +1,6 @@
 import React from 'react';
 import { ISMOBILE } from '../../../../config/global';
-import { Menu, Icon, Button } from 'antd';
+import { Menu, Icon, Button, Dropdown } from 'antd';
 import { Link } from 'react-router-dom';
 import style from './style.less';
 class Header extends React.Component {
@@ -12,6 +12,14 @@ class Header extends React.Component {
   }
 
   render() {
+    const menu = <div>
+      <Button type="default"
+        icon="facebook"
+        onClick={this.props.onFbLogin}
+      >
+        Login With Facebook
+      </Button>
+    </div>
     const { url } = this.props;
     return (
       <div className={style.lock}>
@@ -43,7 +51,7 @@ class Header extends React.Component {
           
         </Menu>
         <div className={style.buttonGroup}>
-          {
+        {
             url !== '/new' && <Link to="/new">
               <Button type="primary" icon="plus">
                 { ISMOBILE ? null: 'New Color'}
@@ -52,11 +60,15 @@ class Header extends React.Component {
           }
           &nbsp;&nbsp;
           {
-            url !== '/auth' && <Link to="/auth">
-              <Button type="default" icon="user">
-                { ISMOBILE ? null: 'Sign In'}
-              </Button>
-            </Link>
+            url !== '/auth' &&
+            <Dropdown
+              overlay={menu}
+              trigger={["click"]}
+              placement="bottomRight">
+                <Button icon="user">
+                  { ISMOBILE ? null: 'Sign In'}
+                </Button>
+            </Dropdown>
           }
           
         </div>
