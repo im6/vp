@@ -9,13 +9,15 @@ class Header extends React.Component {
     this.onClickLogin = this.onClickLogin.bind(this);
     this.onFBClick = this.onFBClick.bind(this);
   }
-  
+
   onFBClick(){
     this.props.onOAuth(this.props.facebookUrl);
   }
   
   onClickLogin() {
-    this.props.onInitAuth();
+    if(!this.props.authReady){
+      this.props.onInitAuth();
+    }
   }
 
   render() {
