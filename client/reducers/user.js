@@ -4,16 +4,17 @@ import Immutable, {Map, List} from 'immutable';
 import { message } from 'antd';
 
 const user = handleActions({
-  ['user/initAuth'](state, action) {
-    if(action.payload.alert){
-      message.error(action.payload.alert.detail + ` (error: ${action.payload.alert.type})`, 5);
-    }
-
+  ['user/initAuth/success'](state, action) {
     return state.merge({
+      authReady: true,
       weiboUrl: action.payload.weiboUrl,
       facebookUrl: action.payload.facebookUrl,
       googleUrl: action.payload.googleUrl,
     });
+  },
+  ['user/initAuth/fail'](state, action) {
+    console.error('init auth error');
+    return state;
   },
   ['user/initUser'](state, action) {
     if(action.payload.isAuth){
@@ -37,6 +38,7 @@ const user = handleActions({
     });
   }
 }, Immutable.fromJS({
+  authReady: false,
   isAuth: false,
   detail: null,
   weiboUrl: null,

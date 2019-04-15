@@ -6,19 +6,24 @@ import style from './style.less';
 class Header extends React.Component {
   constructor(props){
     super(props)
+    this.onClickLogin = this.onClickLogin.bind(this);
+    this.onFBClick = this.onFBClick.bind(this);
   }
-
-  handleClick(e) {
+  
+  onFBClick(){
+    this.props.onOAuth(this.props.facebookUrl);
+  }
+  
+  onClickLogin() {
+    this.props.onInitAuth();
   }
 
   render() {
-    const menu = <div>
-      <Button type="default"
-        icon="facebook"
-        onClick={this.props.onFbLogin}
-      >
-        Login With Facebook
-      </Button>
+    const menu = <div className={style.loginBox}>
+      <img className={this.props.authReady? '' : style.disableClick}
+        src="//dkny.oss-cn-hangzhou.aliyuncs.com/4/fb.png"
+        onClick={this.onFBClick}
+      />
     </div>
     const { url } = this.props;
     return (
@@ -63,8 +68,9 @@ class Header extends React.Component {
             url !== '/auth' &&
             <Dropdown
               overlay={menu}
+              onVisibleChange={this.onClickLogin}
               trigger={["click"]}
-              placement="bottomRight">
+            >
                 <Button icon="user">
                   { ISMOBILE ? null: 'Sign In'}
                 </Button>

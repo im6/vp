@@ -4,18 +4,24 @@ import { connect } from 'react-redux';
 import Header from './Header';
 import { withRouter } from 'react-router-dom';
 
-const mapStateToProps = (state, { location }) => {
+const mapStateToProps = ({ user }, { location }) => {
   const { pathname } = location;
   return {
-    url: pathname
+    authReady: user.get('authReady'),
+    url: pathname,
+    facebookUrl: user.get('facebookUrl'),
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFbLogin() {
+    onInitAuth() {
       const ac = createAction('user/initAuth');
       dispatch(ac());
+    },
+    onOAuth(url) {
+      const ac = createAction('user/onOAuth');
+      dispatch(ac(url));
     },
     onLogout() {
       const ac = createAction('user/logoff');
