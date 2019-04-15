@@ -47,8 +47,12 @@ const mapDispatchToProps = (dispatch) => {
         id
       }));
     },
-    onEnter(id) {
-      shared.history.push(`/color/${id}`);
+    onEnter(color) {
+      const ac = createAction('color/download');
+      dispatch(ac({
+        color: color.get('color'),
+        id: color.get('id')
+      }));
     }
   }
 };

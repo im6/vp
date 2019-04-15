@@ -2,6 +2,7 @@ import { takeEvery, takeLatest } from 'redux-saga/effects';
 import { call, put, fork } from 'redux-saga/effects';
 import requester from '../services/requester';
 import { createAction } from 'redux-actions';
+import { downloadCanvas } from '../misc/util.js';
 
 function* watchers(a) {
   yield takeLatest("color/get", initColorList);
@@ -10,6 +11,16 @@ function* watchers(a) {
   yield takeLatest("color/loadMore", colorLoadMore);
   yield takeLatest("color/toggleLike", toggleLike);
   yield takeLatest("color/addNew", addNew);
+  yield takeLatest('color/download', download)
+}
+
+function download(action){
+  const downloadUrl = downloadCanvas(action.payload.color);
+  const aElem = document.createElement('a');
+  aElem.href = downloadUrl;
+  aElem.download = `colorpk_${action.payload.id}.png`;
+  aElem.click();
+  aElem.parentNode && aElem.parentNode.removeChild(elem);
 }
 
 function* initColorLike(action) {

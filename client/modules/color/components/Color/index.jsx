@@ -19,8 +19,8 @@ class Color extends React.Component {
     this.props.onLike(id, willLike);
   }
 
-  onEnterClick(id) {
-    this.props.onEnter(id);
+  onEnterClick(color) {
+    this.props.onEnter(color);
   }
 
   render() {

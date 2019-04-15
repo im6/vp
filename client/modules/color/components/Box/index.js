@@ -23,7 +23,7 @@ class Box extends React.Component {
   }
 
   onCanvasClick() {
-    this.props.onCanvasClick(this.props.boxInfo.get('id'));
+    this.props.onCanvasClick(this.props.boxInfo);
   }
 
   render() {

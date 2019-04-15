@@ -14,7 +14,7 @@ class Routes extends React.Component {
   }
   render(){
     return <Switch>
-      <Route exact path="/" render={Color} />
+      <Route exact path="/" component={Color} />
       <Route path="/popular" component={Color} />
       <Route path="/about" component={About} />
       <Route path="/new" component={New} />

@@ -22,7 +22,7 @@ function* logoff(action) {
   yield call(requester, '/api/logoff');
 }
 
-function* onOAuth(action) {
+function onOAuth(action) {
   window.location.replace(action.payload);
 }
 
