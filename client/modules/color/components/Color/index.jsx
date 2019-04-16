@@ -1,11 +1,8 @@
 import React from 'react';
-import { Button } from 'antd';
-import classnames from 'classnames';
 import Box from '../Box';
 import SpinLoader from '../SpinLoader';
 import HeadBanner from '../HeadBanner';
 import style from './style.less';
-import { downloadCanvas } from '../../../../misc/util.js';
 
 class Color extends React.Component {
   constructor(props) {
@@ -24,38 +21,12 @@ class Color extends React.Component {
   }
 
   render() {
-    const selected = this.props.selectedIndex;
-
-    let downloadUrl = 'javascript:void(0)';
-    if(selected > -1) {
-      downloadUrl = downloadCanvas(this.props.list.getIn([selected, 'color']));
-    }
-
     return (<div>
       <HeadBanner
         colorSize={this.props.list.size}
         colorView={this.props.view}
         />
-
-      {
-        selected >= 0 ?
-          (
-            <div className={style.selectedBox}>
-              <Box
-                boxInfo={this.props.list.get(selected)}
-                width="100%"
-                onLikeClick={this.onLikeClick}
-                />
-              <br/>
-              <div style={{textAlign: 'center'}}>
-                <a href={downloadUrl} download="colorpk_download.png">
-                  <Button size="large" type="default" icon="download">Download</Button>
-                </a>
-              </div>
-            </div>
-          ) : null
-      }
-
+        { this.props.loading || true ? <SpinLoader /> : <div style={{height: 60}}/> }
       <div className={style.list}>
         {
           this.props.list.map((v) => {
@@ -67,7 +38,7 @@ class Color extends React.Component {
           })
         }
       </div>
-      { this.props.loading ? <SpinLoader /> : <div style={{height: 60}}/> }
+      
     </div>);
   }
 }

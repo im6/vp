@@ -114,7 +114,7 @@ function* addNew(action) {
           id: result.result.id,
           name: result.result.name
         }
-      });
+      }); 
     }
   } catch (e) {
 
