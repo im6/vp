@@ -19,17 +19,19 @@ class Color extends React.Component {
   }
 
   render() {
-    return (<div className={style.list}>
-        {
-          this.props.list.map((v) => {
-            return <Box key={v.get('id')}
-              boxInfo={v}
-              onLikeClick={this.onLikeClick}
-              onCanvasClick={this.onEnterClick}
-            />;
-          })
-        }
-    </div>);
+    return <div className={style.container}>
+      <div className={style.list}>
+          {
+            this.props.list.map((v) => {
+              return <Box key={v.get('id')}
+                boxInfo={v}
+                onLikeClick={this.onLikeClick}
+                onCanvasClick={this.onEnterClick}
+              />;
+            })
+          }
+      </div>
+    </div>;
   }
 }
 

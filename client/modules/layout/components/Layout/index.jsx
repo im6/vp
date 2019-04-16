@@ -11,7 +11,7 @@ class Layout extends React.Component {
   }
 
   render() {
-    const result = (<div className={styles.layoutBox} >
+    const result = (<div className={styles.layout} >
       <Router>
         <Header />
         <div style={{height: '60px'}} />
