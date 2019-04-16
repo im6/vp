@@ -1,7 +1,5 @@
 import React from 'react';
 import Box from '../Box';
-import SpinLoader from '../SpinLoader';
-import HeadBanner from '../HeadBanner';
 import style from './style.less';
 
 class Color extends React.Component {
@@ -21,13 +19,7 @@ class Color extends React.Component {
   }
 
   render() {
-    return (<div>
-      <HeadBanner
-        colorSize={this.props.list.size}
-        colorView={this.props.view}
-        />
-        { this.props.loading || true ? <SpinLoader /> : <div style={{height: 60}}/> }
-      <div className={style.list}>
+    return (<div className={style.list}>
         {
           this.props.list.map((v) => {
             return <Box key={v.get('id')}
@@ -37,8 +29,6 @@ class Color extends React.Component {
             />;
           })
         }
-      </div>
-      
     </div>);
   }
 }

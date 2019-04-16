@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '../color/components/Box';
 import { Button } from 'antd';
 import style from './style.less';
-
+import { noop } from '../../misc/util';
 
 class OneColor extends React.Component {
   constructor(props){
@@ -26,6 +26,7 @@ class OneColor extends React.Component {
         <Box key={this.props.selected.get('id')}
           boxInfo={this.props.selected}
           onLikeClick={this.onLikeClick}
+          onCanvasClick={noop}
         />
         <div className={style.center}>
           <Button icon='download'

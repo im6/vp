@@ -44,6 +44,8 @@ export function scrollTop() {
   }
 }
 
+export const noop = () => {}
+
 export function downloadCanvas(color) {
   const HEIGHT = 420,
     WIDTH = 340,
