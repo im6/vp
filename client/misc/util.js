@@ -1,35 +1,4 @@
 
-export function getBoxPercWidth() {
-  const w = window.innerWidth;
-  let result = 0;
-  if(w >= 1600){
-    result = 70;
-  } else if(w >= 1440){
-    result = 75;
-  } else if(w >= 1280){
-    result = 85;
-  }else if(w >= 1024){
-    result = 78;
-  }else if(w >= 768){
-    result = 80;
-  }else {
-    result = 92;
-  }
-
-  return result;
-}
-
-export function bannerStartLocation(){
-  const w = window.innerWidth,
-    p = mobileDetect() ? 0 : 0.04,
-    RATION = getBoxPercWidth()/100,
-    NUM = w > 1199 ? 4 : w > 991 ? 3 : 2;
-  let v0 = (1 - 2 * p) * (1 - RATION) / (2 * NUM);
-  let v1 = w * (p + v0);
-  v1 += -1.5;
-  return v1;
-}
-
 export function mobileDetect() {
   let isMobile = false;
   if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {

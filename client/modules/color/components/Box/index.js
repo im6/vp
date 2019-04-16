@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import { Button, Icon } from 'antd';
 import style from './style.less';
 import ColorCanvas from './components/ColorCanvas';
+import { ISMOBILE } from '../../../../config/global';
 
-const BTNSIZE = 'default';
-const BOXHT = 285
-const BOXWD = 250
+const BTNSIZE = ISMOBILE ? 'small': 'default';
 
 class Box extends React.Component {
   constructor(props){
@@ -32,7 +31,6 @@ class Box extends React.Component {
 
     return <div
       className={style.box}
-      style={{width: BOXWD, height: BOXHT}}
       >
         <ColorCanvas 
           colorValue={this.props.boxInfo.get('color')}

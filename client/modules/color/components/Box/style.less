@@ -1,13 +1,13 @@
 .box {
-  max-width: 270px;
-  margin: 0 auto;
+  width: 250px;
+  height: 285px;
+  margin: 8px;
   border-radius: 4px;
   background-color: white;
   display: inline-block;
 
   box-shadow: 0 2px 3px 0.6px #d9d9d9;
   transition: box-shadow 0.3s ease-in-out;
-  margin: 5px 8px;
 
   &:hover {
     transition: box-shadow 0.8s;
@@ -32,5 +32,16 @@
   }
 }
 
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 812px) 
+and (-webkit-device-pixel-ratio : 3)
+and (orientation : portrait) { 
+  .box {
+    width: 160px;
+    height: 180px;
+    margin: 5px;
+  }
+}
 
 
