@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Box from '../Box';
 import OneColor from '../OneColor';
 import style from './style.less';
@@ -26,7 +26,7 @@ class Color extends React.Component {
 
   render() {
     const { selectedId } = this.props;
-    return <React.Fragment>
+    return <Fragment>
       {
         selectedId &&
         <OneColor
@@ -50,7 +50,7 @@ class Color extends React.Component {
             }
         </div>
       </div>
-    </React.Fragment>;
+    </Fragment>;
   }
 }
 

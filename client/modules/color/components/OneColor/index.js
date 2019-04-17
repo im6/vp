@@ -18,6 +18,7 @@ class OneColor extends React.Component {
   }
   render(){
     const { liked, selected } = this.props;
+    if(!selected) return null;
     return <div className={style.center}>
       <div>
         <Box
