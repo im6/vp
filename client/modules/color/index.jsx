@@ -1,12 +1,10 @@
-import React from 'react';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import Color from './components/Color';
 
 const shared = {};
-const mapStateToProps = ({ color }, { location: { pathname }, history }) => {
-  const view = color.get('view');
+const mapStateToProps = ({ color }, { location: { pathname }, match: { params: { id }}, history }) => {
   const colorDef = color.get('colorDef');
   const liked = color.get('liked');
   shared.history = history;
@@ -16,6 +14,7 @@ const mapStateToProps = ({ color }, { location: { pathname }, history }) => {
     list,
     colorDef,
     liked,
+    selectedId: id,
   };
 };
 
@@ -30,6 +29,13 @@ const mapDispatchToProps = (dispatch) => {
     },
     onEnter(color) {
       shared.history.push(`/color/${color.get('id')}`);
+    },
+    onDownload(color) {
+      const ac = createAction('color/download');
+      dispatch(ac({
+        color: color.get('color'),
+        id: color.get('id')
+      }));
     }
   }
 };

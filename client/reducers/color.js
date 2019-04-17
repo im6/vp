@@ -153,7 +153,7 @@ const color = handleActions({
   colorIdByLike: [],
   colorDef: {},
   liked: {},
-  
+
   myPortfolio: [],
   myLiked: [],
 }));

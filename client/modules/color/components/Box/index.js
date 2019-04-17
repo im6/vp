@@ -31,6 +31,7 @@ class Box extends React.Component {
 
   render() {
     const likeStyle = {};
+    console.log(this.props.boxInfo.get('id'));
     likeStyle[style.hasLike] = this.props.liked;
     return <div
       className={style.box}

@@ -1,8 +1,8 @@
 import React from 'react';
-import Box from '../color/components/Box';
+import Box from '../Box';
 import { Button } from 'antd';
 import style from './style.less';
-import { noop } from '../../misc/util';
+import { noop } from '../../../../misc/util';
 
 class OneColor extends React.Component {
   constructor(props){
@@ -11,20 +11,18 @@ class OneColor extends React.Component {
     this.onDownload = this.onDownload.bind(this);
   }
   onLikeClick(data){
-    const { id, willLike } = data;
-    this.props.onLike(id, willLike);
+    this.props.onLike(data);
   }
   onDownload(){
     this.props.onDownload(this.props.selected);
   }
   render(){
-    if(!this.props.selected) {
-      return null;
-    }
+    const { liked, selected } = this.props;
     return <div className={style.center}>
       <div>
-        <Box key={this.props.selected.get('id')}
-          boxInfo={this.props.selected}
+        <Box
+          liked={liked}
+          boxInfo={selected}
           onLikeClick={this.onLikeClick}
           onCanvasClick={noop}
         />
