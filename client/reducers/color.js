@@ -13,12 +13,16 @@ const color = handleActions({
 
   ['color/get/success'](state, action) {
     const colorId = [], colorDef = {};
+
     action.payload.forEach(v => {
       colorId.push(v.id.toString());
       colorDef[v.id] = v;
-    })
+    });
+    const colorIdByLike = action.payload.sort((a, b) => (b.like - a.like)).map(v => v.id.toString());
+
     return state.merge({
       colorId: colorId,
+      colorIdByLike,
       colorDef: fromJS(colorDef),
       loading: false
     });
@@ -31,16 +35,9 @@ const color = handleActions({
     });
   },
 
-  ['color/setView'](state, action) {
-    return state.merge({
-      view: action.payload
-    });
-  },
-
   ['color/getPortfolio'](state, action) {
     return state.merge({
       loading: true,
-      view: 'portfolio'
     });
   },
   ['color/getPortfolio/success'](state, action) {
@@ -60,7 +57,6 @@ const color = handleActions({
   ['color/getLike'](state, action) {
     return state.merge({
       loading: true,
-      view: 'like'
     });
   },
   ['color/getLike/success'](state, action) {
@@ -152,13 +148,14 @@ const color = handleActions({
     });
   },
 }, Immutable.fromJS({
+  loading: true,
   colorId: [],
+  colorIdByLike: [],
   colorDef: {},
   liked: {},
+  
   myPortfolio: [],
   myLiked: [],
-  loading: true,
-  view: null // portfolio | like | popular | latest
 }));
 
 export default color;

@@ -5,12 +5,8 @@ import { withRouter } from 'react-router-dom'
 import OneColor from './OneColor';
 
 const mapStateToProps = ({ color }, { match: { params: { id }} }) => {
-  let selected = null;
-  if (color.get('list').size > 0) {
-    selected = color.get('list').find(v => v.get('id') === parseInt(id));
-  }
   return {
-    selected,
+    selected: color.getIn(['colorDef', id])
   };
 };
 

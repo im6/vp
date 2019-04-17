@@ -14,6 +14,10 @@ class Box extends React.Component {
     this.onCanvasClick = this.onCanvasClick.bind(this);
   }
 
+  shouldComponentUpdate(nextProps) {
+    return nextProps.liked !== this.props.liked;
+  }
+
   onLikeClick() {
     this.props.onLikeClick({
       willLike: !this.props.liked,
@@ -28,7 +32,6 @@ class Box extends React.Component {
   render() {
     const likeStyle = {};
     likeStyle[style.hasLike] = this.props.liked;
-
     return <div
       className={style.box}
       >

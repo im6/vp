@@ -10,19 +10,12 @@ const mapStateToProps = ({ color }, { location: { pathname }, history }) => {
   const colorDef = color.get('colorDef');
   const liked = color.get('liked');
   shared.history = history;
-  let list = color.get('colorId');
-  // if(pathname === '/popular') {
-  //   list = color.get('colorId').sort((a, b) => {
-  //     return b.get('like') - a.get('like');
-  //   })
-  // }
+  const list = color.get(pathname === '/popular' ? 'colorIdByLike' : 'colorId');
   return {
+    loading: color.get('loading'),
     list,
     colorDef,
     liked,
-    loading: color.get('loading'),
-    view,
-    history,
   };
 };
 

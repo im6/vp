@@ -12,7 +12,6 @@ router.post('/getUserInfo', ctr.getUserInfo);
 router.post('/getInitAuth', ctr.getInitAuth);
 router.post('/logoff', ctr.logoff);
 router.post('/initColorList', ctr.initColorList);
-router.post('/initColorLatest', ctr.initColorLatest);
 router.post('/initColorPortfolio', md.isAuth, ctr.initColorPortfolio);
 router.post('/initColorLike', md.isAuth, ctr.initColorLike);
 router.post('/getColorType', ctr.getColorType);

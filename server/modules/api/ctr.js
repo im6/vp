@@ -321,7 +321,7 @@ module.exports = {
 
 
   initColorList: function(req, res, next){
-    const qr = 'SELECT a.*, false as `liked` FROM colorpk_color a WHERE a.display=0 ORDER BY \`id\` DESC';
+    const qr = 'SELECT a.* FROM colorpk_color a WHERE a.display=0 ORDER BY \`id\` DESC';
     mysql.sqlExecOne(qr).then(function(data){
       res.json(helper.resSuccessObj(data));
     }, function(data){
@@ -329,14 +329,6 @@ module.exports = {
     });
   },
 
-  initColorLatest: function(req, res, next){
-    const qr = 'SELECT a.*, false as `liked` FROM colorpk_color a WHERE a.display=0 ORDER BY id DESC ';
-    mysql.sqlExecOne(qr).then(function(data){
-      res.json(helper.resSuccessObj(data));
-    }, function(data){
-      res.json(helper.resFailObj(data));
-    });
-  },
   initColorPortfolio: function(req, res, next){
     const qr = `SELECT a.*, false as \`liked\` FROM colorpk_color a WHERE userid = '${req.session.app.dbInfo.id}' `;
     mysql.sqlExecOne(qr).then(function(data){
