@@ -1,5 +1,6 @@
 import React from 'react';
 import Box from '../Box';
+import OneColor from '../../../onecolor';
 import style from './style.less';
 
 class Color extends React.Component {
@@ -20,6 +21,7 @@ class Color extends React.Component {
 
   render() {
     return <div className={style.container}>
+      <OneColor />
       <div className={style.list}>
           {
             this.props.list.map((v) => {
