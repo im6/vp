@@ -7,15 +7,19 @@ import Color from './components/Color';
 const shared = {};
 const mapStateToProps = ({ color }, { location: { pathname }, history }) => {
   const view = color.get('view');
+  const colorDef = color.get('colorDef');
+  const liked = color.get('liked');
   shared.history = history;
-  let list = color.get('list');
-  if(pathname === '/popular') {
-    list = color.get('list').sort((a, b) => {
-      return b.get('like') - a.get('like');
-    })
-  }
+  let list = color.get('colorId');
+  // if(pathname === '/popular') {
+  //   list = color.get('colorId').sort((a, b) => {
+  //     return b.get('like') - a.get('like');
+  //   })
+  // }
   return {
     list,
+    colorDef,
+    liked,
     loading: color.get('loading'),
     view,
     history,

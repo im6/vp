@@ -16,8 +16,8 @@ class Box extends React.Component {
 
   onLikeClick() {
     this.props.onLikeClick({
-      willLike: !this.props.boxInfo.get('liked'),
-      id: this.props.boxInfo.get('id')
+      willLike: !this.props.liked,
+      id: this.props.boxInfo.get('id').toString(),
     });
   }
 
@@ -27,7 +27,7 @@ class Box extends React.Component {
 
   render() {
     const likeStyle = {};
-    likeStyle[style.hasLike] = this.props.boxInfo.get('liked') || false;
+    likeStyle[style.hasLike] = this.props.liked;
 
     return <div
       className={style.box}
@@ -56,6 +56,7 @@ class Box extends React.Component {
 Box.propTypes = {
   boxInfo: PropTypes.object.isRequired,
   onLikeClick: PropTypes.func.isRequired,
+  liked: PropTypes.bool,
 };
 
 export default Box;

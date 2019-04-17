@@ -23,8 +23,9 @@ class Color extends React.Component {
       <div className={style.list}>
           {
             this.props.list.map((v) => {
-              return <Box key={v.get('id')}
-                boxInfo={v}
+              return <Box key={v}
+                liked={this.props.liked.get(v)}
+                boxInfo={this.props.colorDef.get(v)}
                 onLikeClick={this.onLikeClick}
                 onCanvasClick={this.onEnterClick}
               />;
