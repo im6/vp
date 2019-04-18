@@ -1,15 +1,20 @@
-import React from 'react';
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 import Header from './Header';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = ({ user }, { location }) => {
-  const { pathname } = location;
+  const { pathname: url } = location;
+  const isAuth = user.get('isAuth');
+  const detail = user.get('detail');
+  const authReady = user.get('authReady');
+  const facebookUrl = user.get('facebookUrl');
   return {
-    authReady: user.get('authReady'),
-    url: pathname,
-    facebookUrl: user.get('facebookUrl'),
+    url,
+    isAuth,
+    detail,
+    authReady,
+    facebookUrl,
   }
 };
 

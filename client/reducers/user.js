@@ -28,8 +28,10 @@ const user = handleActions({
   },
   ['user/get/success'](state, action) {
     const { isAuth, profile } = action.payload;
-    state = state.set('isAuth', isAuth);
-    state = state.set('detail', fromJS(profile));
+    if(isAuth){
+      state = state.set('isAuth', isAuth);
+      state = state.set('detail', fromJS(profile));
+    }
     return state;
   },
   ['user/logoff'](state, action) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ISMOBILE } from '../../../../config/global';
+import { ISMOBILE } from '../../../config/global';
 import { Menu, Icon, Button, Dropdown } from 'antd';
 import { Link } from 'react-router-dom';
 import style from './style.less';
@@ -27,7 +27,7 @@ class Header extends React.Component {
         onClick={this.onFBClick}
       />
     </div>
-    const { url } = this.props;
+    const { url, isAuth } = this.props;
     return (
       <div className={style.lock}>
         <Menu
@@ -67,7 +67,7 @@ class Header extends React.Component {
           }
           &nbsp;&nbsp;
           {
-            url !== '/auth' &&
+            !isAuth &&
             <Dropdown
               overlay={menu}
               onVisibleChange={this.onClickLogin}

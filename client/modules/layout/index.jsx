@@ -1,23 +1,40 @@
 import React from 'react';
-import { createAction } from 'redux-actions';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import styles from './style.less';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Header from './Header';
+import { Alert } from 'antd';
 
-import Layout from './components/Layout';
+class Layout extends React.Component {
+  render() {
+    const result = (<div className={styles.layout} >
+      <Router>
+        <Header />
+        <div style={{height: '60px'}} />
+        <Alert
+          message={
+          <div>
+            A &nbsp;
+            <a href="http://www.colorpk.com" target="_blank">
+              New version
+            </a>&nbsp;
+            of ColorPK just release!
+          </div>
+          }
+          type="success"
+          showIcon
+          closable
+        />
 
-const mapStateToProps = ({color, user}) => {
-  return {
-    user,
-    view: color.get('view')
+        { this.props.children}
+      </Router>
+    </div>);
+    return result;
   }
+}
+
+Layout.propTypes = {
+  children: PropTypes.element.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onLogout() {
-      const ac = createAction('user/logoff');
-      dispatch(ac());
-    }
-  }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+export default Layout;
