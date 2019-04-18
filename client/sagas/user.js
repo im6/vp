@@ -26,10 +26,25 @@ function onOAuth(action) {
   window.location.replace(action.payload);
 }
 
+function* getUserInfo(action) {
+  const payload = yield call(requester, '/api/getUserInfo');
+  yield put({
+    type: "user/get/success",
+    payload,
+  });
+  if(payload.isAuth && payload.like && payload.like.length) {
+    yield put({
+      type: "color/set/likes",
+      payload: payload.like
+    });
+  }
+}
+
 function* watchers(a) {
   yield takeLatest("user/logoff", logoff);
   yield takeLatest("user/initAuth", initAuth);
   yield takeLatest('user/onOAuth', onOAuth)
+  yield takeLatest('user/get', getUserInfo)
 }
 
 export default function*(){

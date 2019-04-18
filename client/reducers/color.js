@@ -146,6 +146,14 @@ const color = handleActions({
       loading: false
     });
   },
+  ['color/set/likes'](state, action) {
+    const liked = action.payload.reduce((acc, cur) => {
+      acc[cur] = true;
+      return acc;
+    }, {})
+    state = state.set('liked', fromJS(liked));
+    return state;
+  }
 }, Immutable.fromJS({
   loading: true,
   colorId: [],

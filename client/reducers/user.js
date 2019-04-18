@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { handleActions } from 'redux-actions';
-import Immutable, {Map, List} from 'immutable';
+import Immutable, { fromJS } from 'immutable';
 import { message } from 'antd';
 
 const user = handleActions({
@@ -26,7 +26,12 @@ const user = handleActions({
       detail: action.payload.profile,
     });
   },
-
+  ['user/get/success'](state, action) {
+    const { isAuth, profile } = action.payload;
+    state = state.set('isAuth', isAuth);
+    state = state.set('detail', fromJS(profile));
+    return state;
+  },
   ['user/logoff'](state, action) {
     message.success('Log off successfully!');
     return state.merge({

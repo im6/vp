@@ -9,8 +9,11 @@ class Routes extends React.Component {
   constructor(props){
     super(props)
     const { dispatch } = this.props;
-    const ac = createAction('color/get');
-    dispatch(ac());
+    const ac0 = createAction('color/get');
+    dispatch(ac0());
+
+    const ac1 = createAction('user/get');
+    dispatch(ac1());
   }
   render(){
     return <Switch>
