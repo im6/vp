@@ -15,17 +15,16 @@ const mapStateToProps = ({ user }, { location: { pathname } }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAdd(colorValue, colorType) {
+    onAdd(colorValue) {
       const cl0 = colorValue.map(v =>{
         return v.substr(1);
       });
 
       const ac = createAction('color/addNew');
-      const colorStr = cl0.join('#');
-      if(colorStr.length === 27) {
+      const color = cl0.join('#');
+      if(color.length === 27) {
         dispatch(ac({
-          color : colorStr,
-          colorType: colorType.join(','),
+          color,
         }));
       } else {
         console.error("illegal color value size")

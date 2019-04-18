@@ -111,8 +111,9 @@ function* addNew(action) {
         type: "color/addNew/success",
         payload: {
           ...colorinfo,
-          id: result.result.id,
-          name: result.result.name
+          id: result.result.id.toString(),
+          name: result.result.name,
+          like: 0
         }
       }); 
     }

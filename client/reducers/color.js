@@ -112,15 +112,14 @@ const color = handleActions({
   },
 
   ['color/addNew/success'](state, action) {
-    let newData = action.payload;
-    let newColor = {
-      ...newData,
-      like: 0,
-      liked: false
-    };
-    return state.merge({
-      list: [newColor, ...state.get('list')]
+    const { color, id } = action.payload;
+    state = state.setIn(['colorDef', id], fromJS(action.payload));
+    state = state.updateIn(['colorId'], v => {
+      v.unshift(id);
+      return v;
     });
+
+    return state;
   },
 
   ['color/addNew/fail'](state, action) {
