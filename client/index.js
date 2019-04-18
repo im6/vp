@@ -6,7 +6,7 @@ import { createStore, applyMiddleware, compose as compose0, combineReducers } fr
 import createSagaMiddleware from 'redux-saga';
 import { sagaInitiator } from './config/saga';
 import { moduleReducers } from './config/reducer';
-import App from './modules/app/index.jsx';
+import App from './modules/app';
 
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
