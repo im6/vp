@@ -4,10 +4,6 @@ import style from './style.less';
 import ColorRow from '../ColorRow';
 
 class ColorCanvas extends React.Component {
-  shouldComponentUpdate(nextProps, nextState){
-    return this.props.colorValue !== nextProps.colorValue;
-  }
-
   render() {
     return <div
       className={style.boxCanvas}
