@@ -188,10 +188,7 @@ module.exports = {
 
     if(!session.app || !session.app.isAuth){
       var stateId = uuid.v1();
-
-      console.log('initial session!');
-
-      let reesult = {
+      let result = {
         isAuth: false,
         weiboUrl: privateFn.createWeiboLink(stateId),
         facebookUrl: privateFn.createFacebookLink(stateId),
@@ -199,7 +196,7 @@ module.exports = {
       };
 
       if(req.session.app && req.session.app.alert){
-        reesult['alert'] = req.session.app.alert;
+        result['alert'] = req.session.app.alert;
       }
 
       req.session.app = {
@@ -207,7 +204,7 @@ module.exports = {
         oauthState : stateId
       };
 
-      res.json(reesult);
+      res.json(result);
     }
     else {
       res.json({
