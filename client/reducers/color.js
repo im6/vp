@@ -27,51 +27,12 @@ const color = handleActions({
       loading: false
     });
   },
-  ['color/get/fail'](state, action) {
-    message.error('create new color failed! ' + action.payload.code);
+  ['color/get/fail'](state) {
     return state.merge({
       colorId: [],
       loading: false
     });
   },
-
-  ['color/getPortfolio'](state, action) {
-    return state.merge({
-      loading: true,
-    });
-  },
-  ['color/getPortfolio/success'](state, action) {
-    return state.merge({
-      loading: false,
-      myPortfolio: action.payload || []
-    });
-  },
-
-  ['color/getPortfolio/fail'](state, action) {
-    return state.merge({
-      loading: false,
-      myPortfolio: []
-    });
-  },
-
-  ['color/getLike'](state, action) {
-    return state.merge({
-      loading: true,
-    });
-  },
-  ['color/getLike/success'](state, action) {
-    return state.merge({
-      loading: false,
-      myLiked: action.payload || []
-    });
-  },
-  ['color/getLike/fail'](state, action) {
-    return state.merge({
-      loading: false,
-      myLiked: action.payload || []
-    });
-  },
-
   ['color/loadMore'](state, action) {
     return state.merge({
       loading: true
@@ -123,29 +84,34 @@ const color = handleActions({
   },
 
   ['color/addNew/fail'](state, action) {
-    message.error('create new color failed! ' + action.payload.msg.code);
     return state;
   },
 
-  ['color/getLikeColor'](state, action) {
+  ['color/getUserColor'](state, action) {
     return state.merge({
-      list: [],
       loading: true
     });
   },
-  ['color/getLikeColor/fail'](state, action) {
-    let newList = state.get('list').concat(Immutable.fromJS(action.payload));
-    return state.merge({
-      list: newList,
-      loading: false
+  ['color/getUserColor/success'](state, action) {
+    const newList = [];
+    action.payload.data.forEach(cur => {
+      const idStr = cur.id.toString();
+      newList.push(idStr);
+      if(!state.getIn(['colorDef', idStr])){
+        state = state.setIn(['colorDef', idStr], fromJS(cur));
+      }
     });
+    state = state.set(action.payload.name, newList);
+    state = state.set('loading', false);
+    return state;
   },
-  ['color/getLikeColor/fail'](state, action) {
-    message.error('Getting favourite color error. Please try again');
-    return state.merge({
-      loading: false
-    });
+
+  ['color/getUserColor/fail'](state, action) {
+    state = state.set('loading', false);
+    state = state.set(action.payload.name, []);
+    return state;
   },
+
   ['color/set/likes'](state, action) {
     const liked = action.payload.reduce((acc, cur) => {
       acc[cur] = true;
@@ -160,7 +126,6 @@ const color = handleActions({
   colorIdByLike: [],
   colorDef: {},
   liked: {},
-
   myPortfolio: [],
   myLiked: [],
 }));

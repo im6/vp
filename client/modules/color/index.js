@@ -4,11 +4,18 @@ import { withRouter } from 'react-router-dom'
 import Color from './components/Color';
 
 const shared = {};
+const storeMap = {
+  '/popular': 'colorIdByLike',
+  '/': 'colorId',
+  '/like': 'myLiked',
+  '/portfolio': 'myPortfolio'
+}
 const mapStateToProps = ({ color }, { location: { pathname }, match: { params: { id }}, history }) => {
   const colorDef = color.get('colorDef');
   const liked = color.get('liked');
   shared.history = history;
-  const list = color.get(pathname === '/popular' ? 'colorIdByLike' : 'colorId');
+  const list = color.get(storeMap[pathname] || 'colorId');
+
   return {
     loading: color.get('loading'),
     list,
