@@ -1,7 +1,6 @@
 /* eslint-disable */
 import { handleActions } from 'redux-actions';
 import Immutable, { fromJS } from 'immutable';
-import { message } from 'antd';
 
 const user = handleActions({
   ['user/initAuth/success'](state, action) {
@@ -13,18 +12,8 @@ const user = handleActions({
     });
   },
   ['user/initAuth/fail'](state, action) {
-    console.error('init auth error');
+    console.error('init auth error'); // todo
     return state;
-  },
-  ['user/initUser'](state, action) {
-    if(action.payload.isAuth){
-      message.success('Welcome! ' + action.payload.profile.name);
-    }
-
-    return state.merge({
-      isAuth: action.payload.isAuth,
-      detail: action.payload.profile,
-    });
   },
   ['user/get/success'](state, action) {
     const { isAuth, profile } = action.payload;

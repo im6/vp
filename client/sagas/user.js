@@ -34,11 +34,14 @@ function* getUserInfo(action) {
     type: "user/get/success",
     payload,
   });
-  if(payload.isAuth && payload.like && payload.like.length) {
-    yield put({
-      type: "color/set/likes",
-      payload: payload.like
-    });
+  if(payload.isAuth) {
+    message.success('Welcome! ' + payload.profile.name);
+    if(payload.like && payload.like.length) {
+      yield put({
+        type: "color/set/likes",
+        payload: payload.like
+      });
+    }
   }
 }
 
