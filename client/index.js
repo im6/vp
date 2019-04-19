@@ -17,15 +17,15 @@ if(__DEV__){
   middlewares.push(logger);
 };
 const enhancers = applyMiddleware(...middlewares);
-const initState = createStore(combineReducers(moduleReducers),
+const store = createStore(combineReducers(moduleReducers),
   {},
   compose(enhancers),
 );
 
 sagaInitiator(sagaMiddleware);
 ReactDOM.render(
-  <Provider store={initState}>
-    <App dispatch={initState.dispatch} />
+  <Provider store={store}>
+    <App dispatch={store.dispatch} />
   </Provider>,
   document.getElementById('app'),
 );

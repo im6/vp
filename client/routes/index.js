@@ -15,20 +15,14 @@ class Routes extends React.Component {
     const ac1 = createAction('user/get');
     dispatch(ac1());
   }
+
   render(){
     return <Switch>
       <Route exact path="/" component={Color} />
       <Route path="/popular" component={Color} />
       <Route path="/color/:id" component={Color} />
-      <Route path="/portfolio" render={() => {
-        
-        return <Color />
-      }} />
-      <Route path="/like" render={() => {
-        
-        return <Color />
-      }} />
-      
+      <Route path="/like" component={Color} />
+      <Route path="/portfolio" component={Color} />
       <Route path="/about" component={About} />
       <Route path="/new" component={New} />
     </Switch>
