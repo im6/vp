@@ -18,5 +18,5 @@
 - less
 - eslint
 - immutable.js
-- isomorphic-fetch
+- axios
 - oAuth: google+/facebook/weibo

@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "antd": "^3.15.2",
+    "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
@@ -43,9 +44,7 @@
     "helmet": "^3.16.0",
     "immutable": "^4.0.0-rc.12",
     "js-cookie": "^2.2.0",
-    "merge": "^1.2.1",
     "mysql": "^2.16.0",
-    "node-vibrant": "^3.2.0-alpha",
     "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "react-color": "^2.17.0",
@@ -56,7 +55,6 @@
     "redux-actions": "^2.6.5",
     "redux-saga": "^1.0.2",
     "request": "^2.88.0",
-    "serialize-javascript": "^1.6.1",
     "webpack": "^4.29.6"
   },
   "pre-commit": []

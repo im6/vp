@@ -1,35 +1,20 @@
 /* eslint-disable */
 require('es6-promise').polyfill();
-import fetch from 'isomorphic-fetch';
+import axios from 'axios';
 import cookie from 'js-cookie';
-import merge from 'merge';
 
-const DEFAULTCONFIG = {
-  method: 'POST',
-  headers: {
-    "Content-Type": 'application/json',
-  },
-  credentials: 'same-origin'
-};
-
-function jsonParse(res) {
-  return res.json();
-}
-
+const rfToken = cookie.get('_csrf');
 const requester = (url, body) => {
-
-  let rfToken = cookie.get('_csrf');
-  if(rfToken){
-    if(!body) body = {};
-    body['_csrf'] = rfToken;
-  }
-
-  var opts = merge.recursive(true, DEFAULTCONFIG, {
-    body: JSON.stringify(body)
-  });
-
-  return fetch(url, opts)
-    .then(jsonParse);
+  const options = {
+    method: 'post',
+    url,
+    data: {
+      _csrf: rfToken,
+      ...body,
+    },
+  };
+  return axios(options)
+    .then(res => res.data);
 };
 
 export default requester;
