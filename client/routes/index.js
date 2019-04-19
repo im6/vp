@@ -29,7 +29,7 @@ class Routes extends React.Component {
       }} />
       <Route path="/portfolio" render={() => {
         const ac = createAction('color/getUserColor');
-        dispatch(ac('myPortfolio'));
+        dispatch(ac('myPortfolio')); //todo
         return <Color />
       }} />
       <Route path="/about" component={About} />
