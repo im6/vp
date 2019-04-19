@@ -22,7 +22,7 @@ class NewColor extends React.PureComponent {
       pickerWd: 200,
     };
     this.onChangeActive = this.onChangeActive.bind(this);
-    this.submitColor = this.submitColor.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     this.resetColor = this.resetColor.bind(this);
     this.onPickColor = this.onPickColor.bind(this);
   }
@@ -39,7 +39,7 @@ class NewColor extends React.PureComponent {
     });
   }
 
-  submitColor(){
+  onSubmit(){
     let good = true;
     this.state.colorValue.forEach(v => {
       if(!/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(v)) {
@@ -99,7 +99,7 @@ class NewColor extends React.PureComponent {
           <div style={{marginTop: 35}}>
             <Button type="primary"
                     icon="check"
-                    onClick={this.submitColor}>
+                    onClick={this.onSubmit}>
               Submit
             </Button>
             &nbsp;&nbsp;&nbsp;

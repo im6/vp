@@ -1,7 +1,6 @@
 /* eslint-disable */
 import { handleActions } from 'redux-actions';
 import Immutable, { fromJS } from 'immutable';
-import { message } from 'antd';
 
 const color = handleActions({
 
@@ -73,7 +72,7 @@ const color = handleActions({
   },
 
   ['color/addNew/success'](state, action) {
-    const { color, id } = action.payload;
+    const { id } = action.payload;
     state = state.setIn(['colorDef', id], fromJS(action.payload));
     state = state.updateIn(['colorId'], v => {
       v.unshift(id);

@@ -1,8 +1,9 @@
-import { takeEvery, takeLatest } from 'redux-saga/effects';
+import { takeLatest } from 'redux-saga/effects';
 import { call, put, fork } from 'redux-saga/effects';
 import requester from '../services/requester';
 import { createAction } from 'redux-actions';
 import { downloadCanvas } from '../misc/util.js';
+import { message } from 'antd';
 
 function* watchers(a) {
   yield takeLatest("color/get", initColorList);
