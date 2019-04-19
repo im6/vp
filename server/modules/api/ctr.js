@@ -8,8 +8,8 @@ const globalConfig = require('../../config/env'),
   escape = require('mysql').escape;
 
 const redirect_uri_wb = globalConfig.oauthRedirectDomin + '/api/login/wb',
-  redirect_uri_fb = (globalConfig.isDev? 'http://localhost:3000': globalConfig.oauthRedirectDomin) + '/api/login/fb',
-  redirect_uri_gg = (globalConfig.isDev? 'http://localhost:3000': globalConfig.oauthRedirectDomin) + '/api/login/gg';
+  redirect_uri_fb = (globalConfig.isDev? `http://localhost:${globalConfig.serverPort}`: globalConfig.oauthRedirectDomin) + '/api/login/fb',
+  redirect_uri_gg = (globalConfig.isDev? `http://localhost:${globalConfig.serverPort}`: globalConfig.oauthRedirectDomin) + '/api/login/gg';
 
 const privateFn = {
   createWeiboLink: function(state){

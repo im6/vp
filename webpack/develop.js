@@ -83,25 +83,7 @@ const client = {
   ],
   watchOptions: {
     ignored: /node_modules/
-  },
-  devServer: {
-    contentBase: './public', // set 'public' path, relative to root
-    noInfo: true,
-    hot: true,
-    inline: true,
-    port: 3002,
-    host: 'localhost',
-    open: 'Google Chrome',
-    proxy: {
-      '*': {
-        target: `http://localhost:${3001}`,
-        secure: false
-      }
-    },
-    watchOptions: {
-      aggregateTimeout: 800,
-    }
-  },
+  }
 };
 
 const server = {

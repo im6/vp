@@ -3,7 +3,7 @@ module.exports = {
   isDev: env.NODE_ENV === 'development',
   requireAuth: true,
 
-  serverPort: env.PORT || 3000,
+  serverPort: env.PORT,
   serverIp: 'localhost',
 
   wbApi: 'https://api.weibo.com',
