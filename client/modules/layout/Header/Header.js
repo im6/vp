@@ -30,7 +30,7 @@ class Header extends React.Component {
     const { url, isAuth, detail } = this.props;
     const profileMenu = isAuth ?
     <ProfileMenu
-      onClick={this.onLogout}
+      onClickLogout={this.onLogout}
       username={detail.get('name')} /> : null;
     const menu = <div className={style.loginBox}>
       <img className={this.props.authReady? '' : style.disableClick}
