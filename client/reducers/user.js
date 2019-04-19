@@ -34,8 +34,7 @@ const user = handleActions({
     }
     return state;
   },
-  ['user/logoff'](state, action) {
-    message.success('Log off successfully!');
+  ['user/logoff'](state) {
     return state.merge({
       isAuth: false,
       detail: null,

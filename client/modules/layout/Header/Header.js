@@ -2,12 +2,14 @@ import React from 'react';
 import { ISMOBILE } from '../../../config/global';
 import { Menu, Icon, Button, Dropdown } from 'antd';
 import { Link } from 'react-router-dom';
+import ProfileMenu from '../ProfileMenu';
 import style from './style.less';
 class Header extends React.Component {
   constructor(props){
     super(props)
     this.onClickLogin = this.onClickLogin.bind(this);
     this.onFBClick = this.onFBClick.bind(this);
+    this.onLogout = this.onLogout.bind(this);
   }
 
   onFBClick(){
@@ -20,14 +22,23 @@ class Header extends React.Component {
     }
   }
 
+  onLogout() {
+    this.props.onLogout();
+  }
+
   render() {
+    const { url, isAuth, detail } = this.props;
+    const profileMenu = isAuth ?
+    <ProfileMenu
+      onClick={this.onLogout}
+      username={detail.get('name')} /> : null;
     const menu = <div className={style.loginBox}>
       <img className={this.props.authReady? '' : style.disableClick}
         src="//dkny.oss-cn-hangzhou.aliyuncs.com/4/fb.png"
         onClick={this.onFBClick}
       />
     </div>
-    const { url, isAuth } = this.props;
+    
     return (
       <div className={style.lock}>
         <Menu
@@ -67,8 +78,11 @@ class Header extends React.Component {
           }
           &nbsp;&nbsp;
           {
-            !isAuth &&
-            <Dropdown
+            isAuth ?
+            (<Dropdown overlay={profileMenu}>
+              <img src={detail.get('img')} alt="icon"/>
+            </Dropdown>) :
+            (<Dropdown
               overlay={menu}
               onVisibleChange={this.onClickLogin}
               trigger={["click"]}
@@ -76,7 +90,7 @@ class Header extends React.Component {
                 <Button icon="user">
                   { ISMOBILE ? null: 'Sign In'}
                 </Button>
-            </Dropdown>
+            </Dropdown>)
           }
           
         </div>

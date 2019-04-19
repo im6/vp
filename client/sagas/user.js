@@ -2,6 +2,7 @@ import { takeLatest } from 'redux-saga/effects';
 import { call, put, fork } from 'redux-saga/effects';
 import requester from '../services/requester';
 import { createAction } from 'redux-actions';
+import { message } from 'antd';
 
 function* initAuth() {
   try {
@@ -18,8 +19,9 @@ function* initAuth() {
   }
 }
 
-function* logoff(action) {
+function* logoff() {
   yield call(requester, '/api/logoff');
+  message.success('Log off successfully!');
 }
 
 function onOAuth(action) {
