@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import style from './style.less';
+import style from './style.sass';
 import ColorRow from '../ColorRow';
 
 class ColorCanvas extends React.Component {

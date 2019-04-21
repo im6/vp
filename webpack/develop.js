@@ -5,6 +5,7 @@ const nodeExternals = require('webpack-node-externals');
 const ServerStartPlugin = require('./plugins/ServerStartPlugin');
 
 const antDir = /node_modules\/antd\/es/;
+const bulmaDir = /node_modules\/bulma\/sass/;
 
 const json0 = fs.readFileSync(path.join(__dirname, '../.vscode/launch.json'), {encoding: 'utf8'});
 const json1 = JSON.parse(json0)
@@ -15,7 +16,7 @@ const client = {
   mode: 'development',
   devtool: 'inline-source-map',
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', 'sass'],
   },
   entry: [
     '@babel/polyfill',
@@ -71,6 +72,31 @@ const client = {
           'less-loader',
         ],
         exclude: antDir,
+      },
+
+      {
+        test: /\.sass$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
+        include: bulmaDir,
+      },
+      {
+        test: /\.sass$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[hash:base64:5]',
+            },
+          },
+          'sass-loader',
+        ],
+        exclude: bulmaDir,
       },
 
     ],
