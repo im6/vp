@@ -10,18 +10,17 @@ const storeMap = {
   '/like': 'myLiked',
   '/portfolio': 'myPortfolio'
 }
-const mapStateToProps = ({ color }, { location: { pathname }, match: { params: { id }}, history }) => {
+const mapStateToProps = ({ color }, { location: { pathname }, match: { params: { id: selectedId }}, history }) => {
   const colorDef = color.get('colorDef');
   const liked = color.get('liked');
   shared.history = history;
   const list = color.get(storeMap[pathname] || 'colorId');
-
   return {
     loading: color.get('loading'),
     list,
     colorDef,
     liked,
-    selectedId: id,
+    selectedId,
   };
 };
 

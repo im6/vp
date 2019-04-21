@@ -14,7 +14,8 @@ class Box extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.liked !== this.props.liked;
+    return nextProps.liked !== this.props.liked ||
+    nextProps.boxInfo.get('id') !== this.props.boxInfo.get('id');
   }
 
   onLikeClick() {

@@ -5,10 +5,6 @@ import Layout from '../layout';
 import './bulma.modules.sass';
 
 class App extends React.Component {
-  constructor(prop){
-    super(prop);
-  }
-
   render(){
     const { dispatch } = this.props;
     return <Layout>
@@ -16,5 +12,7 @@ class App extends React.Component {
     </Layout>;
   }
 }
-
+App.propTypes = {
+  dispatch: PropTypes.func.isRequired
+};
 export default App;
