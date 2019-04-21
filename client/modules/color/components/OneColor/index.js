@@ -1,6 +1,5 @@
 import React from 'react';
 import Box from '../Box';
-import { Button } from 'antd';
 import style from './style.sass';
 import { noop } from '../../../../misc/util';
 
@@ -28,13 +27,12 @@ class OneColor extends React.Component {
           onCanvasClick={noop}
         />
         <div className={style.center}>
-          <Button icon='download'
-            type='primary'
+          <button
             onClick={this.onDownload}
-            className={style.btn}
+            className='button is-fullwidth is-info'
           >
             Download
-          </Button>
+          </button>
         </div>
       </div>
     </div>

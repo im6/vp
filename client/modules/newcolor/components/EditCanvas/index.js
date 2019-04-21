@@ -1,32 +1,18 @@
 import React from 'react';
-import { Button } from 'antd';
-import classnames from 'classnames';
 import style from './style.sass';
 import ColorRow from './components/ColorRow';
 
-
 class EditCanvas extends React.Component {
-  constructor(props) {
-    super(props);
-    let me = this;
-  }
-
-  componentDidMount() {
-
-  }
-
-  componentWillUnmount() {
-  }
-
   render() {
-    const me = this;
     return <div className={style.box}>
         <div className={style.boxCanvas}>
-          {me.props.colorValue.map((v, k) => {
-            return <ColorRow key={k}
-                             colorValue={v}
-                             isActive ={k === me.props.activeIndex}
-                             onRowClick={me.props.changeActive.bind(me, k)} />
+          {this.props.colorValue.map((v, k) => {
+            return <ColorRow
+              key={k}
+              colorValue={v}
+              isActive ={k === this.props.activeIndex}
+              onRowClick={this.props.changeActive.bind(me, k)}
+            />
           })}
         </div>
     </div>;
