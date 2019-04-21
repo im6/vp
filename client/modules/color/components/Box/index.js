@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Icon } from 'antd';
-import style from './style.less';
+import style from './style.sass';
 import ColorCanvas from './components/ColorCanvas';
 import { ISMOBILE } from '../../../../config/global';
 

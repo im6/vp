@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Box from '../Box';
 import OneColor from '../OneColor';
-import style from './style.less';
+import style from './style.sass';
 
 class Color extends React.Component {
   constructor(props) {

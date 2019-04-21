@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from '../Box';
 import { Button } from 'antd';
-import style from './style.less';
+import style from './style.sass';
 import { noop } from '../../../../misc/util';
 
 class OneColor extends React.Component {
