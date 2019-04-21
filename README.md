@@ -19,4 +19,4 @@
 - eslint
 - immutable.js
 - axios
-- oAuth: google+/facebook/weibo
+- oAuth

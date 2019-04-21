@@ -37,7 +37,6 @@
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
     "csurf": "^1.9.0",
-    "es6-promise": "^4.2.6",
     "express": "^4.16.4",
     "express-mysql-session": "^2.1.0",
     "express-session": "^1.15.6",
@@ -54,7 +53,6 @@
     "redux": "^4.0.1",
     "redux-actions": "^2.6.5",
     "redux-saga": "^1.0.2",
-    "request": "^2.88.0",
     "webpack": "^4.29.6"
   },
   "pre-commit": []
