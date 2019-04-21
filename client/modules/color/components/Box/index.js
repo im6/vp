@@ -29,9 +29,8 @@ class Box extends React.Component {
   }
 
   render() {
-    const likeStyle = {};
     // console.log(this.props.boxInfo.get('id'));
-    likeStyle[style.hasLike] = this.props.liked;
+    const heartUrl = `//dkny.oss-cn-hangzhou.aliyuncs.com/4/hrt${this.props.liked ? 'r': ''}.svg`
     return <div
       className={style.box}
       >
@@ -44,7 +43,7 @@ class Box extends React.Component {
             className='button is-small'
             size={BTNSIZE}
             onClick={this.onLikeClick}>
-              &nbsp;
+              <img src={heartUrl} />
               {this.props.boxInfo.get('like')}
           </button>
           {
