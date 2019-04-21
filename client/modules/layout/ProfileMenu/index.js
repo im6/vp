@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
-import style from './style.less';
+import style from './style.sass';
 
 class ProfileMenu extends Component {
   constructor(props){

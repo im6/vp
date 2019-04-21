@@ -6,7 +6,7 @@ import MenuButton from './components/MenuButton';
 import ProfileMenu from './components/ProfileMenu';
 
 import { Link } from 'react-router-dom';
-import style from './style.less';
+import style from './style.sass';
 
 const hideReturn = [
   'popular',

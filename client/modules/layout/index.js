@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './style.less';
+import styles from './style.sass';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Header from './Header';
 import { Alert } from 'antd';

@@ -3,7 +3,7 @@ import { ISMOBILE } from '../../../config/global';
 import { Menu, Icon, Button, Dropdown } from 'antd';
 import { Link } from 'react-router-dom';
 import ProfileMenu from '../ProfileMenu';
-import style from './style.less';
+import style from './style.sass';
 class Header extends React.Component {
   constructor(props){
     super(props)
