@@ -38,8 +38,8 @@ const mapDispatchToProps = (dispatch) => {
     onEnterProfile(name) {
       const ac = createAction('color/getUserColor');
       dispatch(ac(name));
-    }
-  }
+    },
+  };
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

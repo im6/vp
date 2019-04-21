@@ -1,9 +1,10 @@
 var path = require('path');
+const appRoot = process.env.PWD;
 
 module.exports = {
   notFound: function(req, res, next) {
     console.error('NOT FOUND! url: ', req.url);
-    res.status(404).sendFile(path.resolve(__dirname,'../view/404.html'));
+    res.status(404).sendFile(path.resolve(appRoot,'./dist/public/404.html'));
   },
   onError: function(err, req, res, next){
     if(err === 403){
