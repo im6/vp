@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Icon } from 'antd';
 import style from './style.sass';
 import ColorCanvas from './components/ColorCanvas';
 import { ISMOBILE } from '../../../../config/global';
@@ -41,14 +40,13 @@ class Box extends React.Component {
           onClick={this.onCanvasClick}
         />
         <div className={style.boxFooter}>
-          <Button
-            className={style.btnText}
+          <button
+            className='button is-small'
             size={BTNSIZE}
             onClick={this.onLikeClick}>
-            <Icon type="heart" className={likeStyle}/>
               &nbsp;
               {this.props.boxInfo.get('like')}
-          </Button>
+          </button>
           {
             this.props.boxInfo.get('username') && <h3>{this.props.boxInfo.get('username')}</h3>
           }
