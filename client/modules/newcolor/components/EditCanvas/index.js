@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
 import classnames from 'classnames';
-import style from './style.less';
+import style from './style.sass';
 import ColorRow from './components/ColorRow';
 
 

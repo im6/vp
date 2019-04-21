@@ -1,21 +1,9 @@
 import React from 'react';
 import { Button } from 'antd';
 import classnames from 'classnames';
-import style from './style.less';
+import style from './style.sass';
 
 class ColorRow extends React.Component {
-  constructor(props) {
-    super(props);
-    const me = this;
-  }
-
-  componentDidMount() {
-
-  }
-
-  componentWillUnmount() {
-  }
-
   clickHandler(){
     const me = this;
     me.props.onRowClick();
