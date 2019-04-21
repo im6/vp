@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, Card } from 'antd';
-import style from './style.less';
+import style from './style.sass';
 import { ISMOBILE } from '../../config/global.js';
 
 const boxStyle = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './style.less';
+import style from './style.sass';
 
 class ColorBar extends React.PureComponent {
   render() {

@@ -4,7 +4,7 @@ import { Row, Col, Button, message, Modal } from 'antd';
 import { ChromePicker } from 'react-color';
 import EditCanvas from '../EditCanvas';
 import FinishModal from '../FinishModal';
-import style from './style.less';
+import style from './style.sass';
 
 const DEFAULTVALUE = '#81EEFF';
 class NewColor extends React.PureComponent {

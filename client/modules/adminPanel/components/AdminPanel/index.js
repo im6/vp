@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Icon, Card, Button, Popconfirm, Tooltip, Modal } from 'antd';
 import ColorCanvas from '../../../color/components/Box/components/ColorCanvas';
 import ColorBar from '../ColorBar';
-import style from './style.less';
+import style from './style.sass';
 
 class AdminPanel extends React.PureComponent {
   constructor(props) {

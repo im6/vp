@@ -58,21 +58,6 @@ const client = {
         ],
         include: antDir,
       },
-      {
-        test: /\.less$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              localIdentName: '[hash:base64:5]',
-            },
-          },
-          'less-loader',
-        ],
-        exclude: antDir,
-      },
 
       {
         test: /\.sass$/,
