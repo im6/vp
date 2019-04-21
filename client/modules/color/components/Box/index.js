@@ -38,18 +38,16 @@ class Box extends React.Component {
           colorValue={this.props.boxInfo.get('color')}
           onClick={this.onCanvasClick}
         />
-        <div className={style.boxFooter}>
-          <button
-            className='button is-small'
-            size={BTNSIZE}
-            onClick={this.onLikeClick}>
-              <img src={heartUrl} />
-              {this.props.boxInfo.get('like')}
-          </button>
-          {
-            this.props.boxInfo.get('username') && <h3>{this.props.boxInfo.get('username')}</h3>
-          }
-        </div>
+        <button
+          className='button is-small'
+          size={BTNSIZE}
+          onClick={this.onLikeClick}>
+            <img src={heartUrl} />
+            {this.props.boxInfo.get('like')}
+        </button>
+        {
+          this.props.boxInfo.get('username') && <p>{this.props.boxInfo.get('username')}</p>
+        }
     </div>;
   }
 }
