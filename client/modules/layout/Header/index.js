@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import Header from './Header';
 import { withRouter } from 'react-router-dom';
 
-const mapStateToProps = ({ user }, { location }) => {
+const shared = {};
+const mapStateToProps = ({ user }, { location, history }) => {
+  shared.history = history;
   const { pathname: url } = location;
   const isAuth = user.get('isAuth');
   const detail = user.get('detail');
@@ -31,6 +33,7 @@ const mapDispatchToProps = (dispatch) => {
     onLogout() {
       const ac = createAction('user/logoff');
       dispatch(ac());
+      shared.history.push('/');
     }
   }
 };

@@ -1,5 +1,4 @@
 /* eslint-disable */
-require('es6-promise').polyfill();
 import axios from 'axios';
 import cookie from 'js-cookie';
 
