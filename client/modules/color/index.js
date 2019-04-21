@@ -43,6 +43,10 @@ const mapDispatchToProps = (dispatch) => {
         color: color.get('color'),
         id: color.get('id')
       }));
+    },
+    onEnterProfile(name) {
+      const ac = createAction('color/getUserColor');
+      dispatch(ac(name));
     }
   }
 };

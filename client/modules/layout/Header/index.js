@@ -34,6 +34,10 @@ const mapDispatchToProps = (dispatch) => {
       const ac = createAction('user/logoff');
       dispatch(ac());
       shared.history.push('/');
+    },
+    onEnterProfile(name) {
+      const ac = createAction('color/getUserColor');
+      dispatch(ac(name));
     }
   }
 };

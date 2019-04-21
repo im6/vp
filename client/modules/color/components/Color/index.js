@@ -10,6 +10,14 @@ class Color extends React.Component {
     this.onLikeClick = this.onLikeClick.bind(this);
     this.onDownloadClick = this.onDownloadClick.bind(this);
   }
+  componentDidMount(){
+    const { url } = this.props.match;
+    if(url === '/portfolio') {
+      this.props.onEnterProfile('myPortfolio');
+    } else if(url === '/like') {
+      this.props.onEnterProfile('myLiked');
+    }
+  }
 
   onLikeClick(newState){
     const { id, willLike } = newState;

@@ -21,14 +21,14 @@ class ProfileMenu extends Component {
       </h3>
       <hr/>
       <h4>
-        <Link to="/portfolio">
+        <Link to="/portfolio" onClick={()=>{this.props.onClickProfile('myPortfolio')}}>
           <Icon type="smile-o" />
           &nbsp;&nbsp;
           Portfolio
         </Link>
       </h4>
       <h4>
-        <Link to="/like">
+        <Link to="/like" onClick={()=>{this.props.onClickProfile('myLiked')}}>
           <Icon type="heart-o" />
           &nbsp;&nbsp;
           Like

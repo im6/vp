@@ -31,6 +31,7 @@ class Header extends React.Component {
     const profileMenu = isAuth ?
     <ProfileMenu
       onClickLogout={this.onLogout}
+      onClickProfile={this.props.onEnterProfile}
       username={detail.get('name')} /> : null;
     const menu = <div className={style.loginBox}>
       <img className={this.props.authReady? '' : style.disableClick}
