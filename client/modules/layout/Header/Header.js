@@ -7,11 +7,19 @@ import style from './style.sass';
 class Header extends React.Component {
   constructor(props){
     super(props)
+    this.state = {
+      showMenu: false,
+    }
     this.onClickLogin = this.onClickLogin.bind(this);
     this.onFBClick = this.onFBClick.bind(this);
     this.onLogout = this.onLogout.bind(this);
+    this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
   }
-
+  toggleMobileMenu(){
+    this.setState({
+      showMenu: !this.state.showMenu,
+    });
+  }
   onFBClick(){
     this.props.onOAuth(this.props.facebookUrl);
   }
@@ -27,6 +35,72 @@ class Header extends React.Component {
   }
 
   render() {
+    return (<nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div className="navbar-brand">
+      <a className="navbar-item" href="/">
+        <img src="//dkny.oss-cn-hangzhou.aliyuncs.com/2/icon.png" height="28" />
+        <h1>ColorPK</h1>
+      </a>
+      <a
+        role="button"
+        className="navbar-burger burger"
+        aria-label="menu"
+        aria-expanded="false"
+        onClick={this.toggleMobileMenu}
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  
+    <div className={`navbar-menu ${this.state.showMenu ? 'is-active' : ''}`}>
+      <div className="navbar-start">
+        <a class="navbar-item">
+          Popular
+        </a>
+
+        <a class="navbar-item">
+          Latest
+        </a>
+  
+        <div className="navbar-item has-dropdown is-hoverable">
+          <a className="navbar-link">
+            More
+          </a>
+  
+          <div className="navbar-dropdown">
+            <a className="navbar-item">
+              About
+            </a>
+            <a className="navbar-item">
+              ColorPK v2.0
+            </a>
+            <hr className="navbar-divider" />
+            <a className="navbar-item">
+              Report an issue
+            </a>
+          </div>
+        </div>
+      </div>
+  
+      <div className="navbar-end">
+        <div className="navbar-item">
+          <div className="buttons">
+            <a className="button is-primary">
+              <strong>New Color</strong>
+            </a>
+            <a className="button is-light">
+              Log in
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>)
+  }
+
+  render_old() {
     const { url, isAuth, detail } = this.props;
     const profileMenu = isAuth ?
     <ProfileMenu
