@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=development webpack --config ./webpack/develop.js",
+    "build": "NODE_ENV=production webpack --config ./webpack/production.js",
     "lint": "eslint --ext .js,.jsx"
   },
   "repository": "git+https://github.com/jinouwuque/vp.git",
@@ -26,6 +27,7 @@
     "mini-css-extract-plugin": "^0.5.0",
     "redux-logger": "^3.0.6",
     "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1",
     "webpack-node-externals": "^1.7.2"
