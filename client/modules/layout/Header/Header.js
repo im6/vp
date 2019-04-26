@@ -86,10 +86,10 @@ class Header extends React.Component {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <Link className="button is-primary" to="/new">
+            <Link className="button is-primary is-small" to="/new">
               <strong>New Color</strong>
             </Link>
-            <Link className="button is-light" to="/auth">
+            <Link className="button is-light is-small" to="/auth">
               Facebook Login
             </Link>
           </div>
