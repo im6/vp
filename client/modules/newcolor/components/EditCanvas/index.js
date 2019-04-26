@@ -11,7 +11,7 @@ class EditCanvas extends React.Component {
               key={k}
               colorValue={v}
               isActive ={k === this.props.activeIndex}
-              onRowClick={this.props.changeActive.bind(me, k)}
+              onRowClick={this.props.changeActive.bind(this, k)}
             />
           })}
         </div>

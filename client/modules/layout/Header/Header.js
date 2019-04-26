@@ -39,7 +39,6 @@ class Header extends React.Component {
     <div className="navbar-brand">
       <a className="navbar-item" href="/">
         <img src="//dkny.oss-cn-hangzhou.aliyuncs.com/2/icon.png" height="28" />
-        <h1>ColorPK</h1>
       </a>
       <a
         role="button"
@@ -56,13 +55,13 @@ class Header extends React.Component {
   
     <div className={`navbar-menu ${this.state.showMenu ? 'is-active' : ''}`}>
       <div className="navbar-start">
-        <a class="navbar-item">
+        <Link to="/popular" className="navbar-item">
           Popular
-        </a>
+        </Link>
 
-        <a class="navbar-item">
+        <Link to="/" className="navbar-item">
           Latest
-        </a>
+        </Link>
   
         <div className="navbar-item has-dropdown is-hoverable">
           <a className="navbar-link">
@@ -70,14 +69,14 @@ class Header extends React.Component {
           </a>
   
           <div className="navbar-dropdown">
-            <a className="navbar-item">
+            <Link className="navbar-item" to="/about">
               About
-            </a>
-            <a className="navbar-item">
+            </Link>
+            <a className="navbar-item" href="http://www.colorpk.com" target="_blank">
               ColorPK v2.0
             </a>
             <hr className="navbar-divider" />
-            <a className="navbar-item">
+            <a className="navbar-item" href="https://github.com/im6/vp/issues" target="_blank">
               Report an issue
             </a>
           </div>
@@ -87,12 +86,12 @@ class Header extends React.Component {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <a className="button is-primary">
+            <Link className="button is-primary" to="/new">
               <strong>New Color</strong>
-            </a>
-            <a className="button is-light">
-              Log in
-            </a>
+            </Link>
+            <Link className="button is-light" to="/auth">
+              Facebook Login
+            </Link>
           </div>
         </div>
       </div>
