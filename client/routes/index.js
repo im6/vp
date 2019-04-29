@@ -12,6 +12,8 @@ class Routes extends React.Component {
     dispatch(ac0());
     const ac1 = createAction('user/get');
     dispatch(ac1());
+    const ac2 = createAction('user/initAuth');
+    dispatch(ac2());
   }
 
   render(){

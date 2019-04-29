@@ -22,10 +22,6 @@ const mapStateToProps = ({ user }, { location, history }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onInitAuth() {
-      const ac = createAction('user/initAuth');
-      dispatch(ac());
-    },
     onOAuth(url) {
       const ac = createAction('user/onOAuth');
       dispatch(ac(url));

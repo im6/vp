@@ -10,7 +10,6 @@ class Header extends React.Component {
     this.state = {
       showMenu: false,
     }
-    this.onClickLogin = this.onClickLogin.bind(this);
     this.onFBClick = this.onFBClick.bind(this);
     this.onLogout = this.onLogout.bind(this);
     this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
@@ -23,23 +22,22 @@ class Header extends React.Component {
   onFBClick(){
     this.props.onOAuth(this.props.facebookUrl);
   }
-  
-  onClickLogin() {
-    if(!this.props.authReady){
-      this.props.onInitAuth();
-    }
-  }
 
   onLogout() {
     this.props.onLogout();
   }
 
   render() {
+    const { url, isAuth, detail, authReady } = this.props;
+    let imagUrl = isAuth ? detail.get('img') : '//dkny.oss-cn-hangzhou.aliyuncs.com/2/icon.png'
+    if (__DEV__) {
+      imagUrl = 'http://dkny.oss-cn-hangzhou.aliyuncs.com/temp/test_profile.jpeg';
+    }
     return (<nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
-      <a className="navbar-item" href="/">
-        <img src="//dkny.oss-cn-hangzhou.aliyuncs.com/2/icon.png" height="28" />
-      </a>
+      <Link className="navbar-item" to="/">
+        <img src={imagUrl} height="28" />
+      </Link>
       <a
         role="button"
         className="navbar-burger burger"
@@ -55,14 +53,38 @@ class Header extends React.Component {
   
     <div className={`navbar-menu ${this.state.showMenu ? 'is-active' : ''}`}>
       <div className="navbar-start">
+        {
+          isAuth &&
+          <div className="navbar-item has-dropdown is-hoverable">
+            <a className="navbar-link">
+              More
+            </a>
+    
+            <div className="navbar-dropdown">
+              <Link className="navbar-item"
+                to="/portfolio"
+                onClick={this.props.onEnterProfile.bind(null, 'myPortfolio')}
+              >
+                Profile
+              </Link>
+              <Link className="navbar-item"
+                to="/like"
+                onClick={this.props.onEnterProfile.bind(null, 'myLiked')}
+              >
+                Like
+              </Link>
+            </div>
+          </div>
+        }
+        
         <Link to="/popular" className="navbar-item">
           Popular
         </Link>
-
+        <hr className="navbar-divider" />
         <Link to="/" className="navbar-item">
           Latest
         </Link>
-  
+
         <div className="navbar-item has-dropdown is-hoverable">
           <a className="navbar-link">
             More
@@ -87,11 +109,14 @@ class Header extends React.Component {
         <div className="navbar-item">
           <div className="buttons">
             <Link className="button is-primary is-small" to="/new">
-              <strong>New Color</strong>
+              New Color
             </Link>
-            <Link className="button is-light is-small" to="/auth">
-              Facebook Login
-            </Link>
+            {
+              !isAuth && authReady &&
+              <button className="button is-info is-small" onClick={this.onFBClick}>
+                Facebook Login
+              </button>
+            }
           </div>
         </div>
       </div>
@@ -158,7 +183,7 @@ class Header extends React.Component {
             </Dropdown>) :
             (<Dropdown
               overlay={menu}
-              onVisibleChange={this.onClickLogin}
+              // onVisibleChange={this.onClickLogin}
               trigger={["click"]}
             >
                 <Button icon="user">
