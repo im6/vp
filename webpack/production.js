@@ -1,4 +1,3 @@
-const fs = require('fs')
 const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
@@ -7,13 +6,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const antDir = /node_modules\/antd\/es/;
 const bulmaDir = /client\/modules\/app/;
 
-const json0 = fs.readFileSync(path.join(__dirname, '../.vscode/launch.json'), {encoding: 'utf8'});
-const json1 = JSON.parse(json0)
-const appEnvs = json1.configurations[0].env;
-
 const client = {
   mode: 'production',
-  devtool: 'cheap-module-source-map',
   resolve: {
     extensions: ['.js', 'sass'],
   },
@@ -82,7 +76,6 @@ const client = {
         ],
         exclude: bulmaDir,
       },
-
     ],
   },
   plugins: [
@@ -98,7 +91,6 @@ const client = {
 
 const server = {
   mode: 'production',
-  devtool: 'cheap-module-source-map',
   externals: [nodeExternals()],
   target: 'node',
   resolve: {

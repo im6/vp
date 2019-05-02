@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development webpack --config ./webpack/develop.js",
-    "build": "NODE_ENV=production webpack --config ./webpack/production.js",
+    "start": "webpack --config ./webpack/develop.js",
+    "build": "webpack --config ./webpack/production.js",
     "lint": "eslint --ext .js,.jsx"
   },
   "repository": "git+https://github.com/jinouwuque/vp.git",

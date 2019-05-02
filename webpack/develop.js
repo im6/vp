@@ -8,7 +8,7 @@ const antDir = /node_modules\/antd\/es/;
 const bulmaDir = /client\/modules\/app/;
 
 const json0 = fs.readFileSync(path.join(__dirname, '../.vscode/launch.json'), {encoding: 'utf8'});
-const json1 = JSON.parse(json0)
+const json1 = JSON.parse(json0);
 const appEnvs = json1.configurations[0].env;
 
 const client = {
