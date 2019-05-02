@@ -57,7 +57,7 @@ class Header extends React.Component {
           isAuth &&
           <div className="navbar-item has-dropdown is-hoverable">
             <a className="navbar-link">
-              More
+              { detail.get('name') }
             </a>
     
             <div className="navbar-dropdown">
@@ -73,6 +73,14 @@ class Header extends React.Component {
               >
                 Like
               </Link>
+              <hr className="navbar-divider" />
+              <a className="navbar-item"
+                onClick={ev => {
+                ev.preventDefault();
+                this.onLogout();
+              }}>
+                Log out
+              </a>
             </div>
           </div>
         }
