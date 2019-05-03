@@ -3,7 +3,6 @@ import { call, put, fork } from 'redux-saga/effects';
 import requester from '../services/requester';
 import { createAction } from 'redux-actions';
 import { downloadCanvas } from '../misc/util.js';
-import { message } from 'antd';
 
 function* watchers(a) {
   yield takeLatest("color/get", initColorList);
@@ -49,7 +48,7 @@ function* initColorList() {
       type: "color/get/fail",
       payload: null,
     });
-    message.error('create new color failed! ' + payload.result.code);
+    console.error('create new color failed! ' + payload.result.code);
   } else {
     yield put({
       type: "color/get/success",
@@ -88,7 +87,7 @@ function* addNew(action) {
       type: "color/addNew/fail",
       payload: null
     });
-    message.error('create new color failed! ' + result.result.code);
+    console.error('create new color failed! ' + result.result.code);
   } else {
     yield put({
       type: "color/addNew/success",

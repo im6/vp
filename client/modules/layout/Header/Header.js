@@ -97,14 +97,14 @@ class Header extends React.Component {
           </a>
   
           <div className="navbar-dropdown">
-            <Link className="navbar-item" to="/about">
+            <a className="navbar-item" href="//www.javascript.fun/about">
               About
-            </Link>
-            <a className="navbar-item" href="http://www.colorpk.com" target="_blank">
+            </a>
+            <a className="navbar-item" href="//www.colorpk.com" target="_blank">
               ColorPK v2.0
             </a>
             <hr className="navbar-divider" />
-            <a className="navbar-item" href="https://github.com/im6/vp/issues" target="_blank">
+            <a className="navbar-item" href="//github.com/im6/vp/issues" target="_blank">
               Report an issue
             </a>
           </div>

@@ -2,7 +2,6 @@ import { takeLatest } from 'redux-saga/effects';
 import { call, put, fork } from 'redux-saga/effects';
 import requester from '../services/requester';
 import { createAction } from 'redux-actions';
-import { message } from 'antd';
 
 function* initAuth() {
   try {
@@ -21,7 +20,6 @@ function* initAuth() {
 
 function* logoff() {
   yield call(requester, '/api/logoff');
-  message.success('Log off successfully!');
 }
 
 function onOAuth(action) {
@@ -35,7 +33,6 @@ function* getUserInfo(action) {
     payload,
   });
   if(payload.isAuth) {
-    message.success('Welcome! ' + payload.profile.name);
     if(payload.like && payload.like.length) {
       yield put({
         type: "color/set/likes",

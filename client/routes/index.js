@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { createAction } from 'redux-actions';
 import Color from '../modules/color';
 import About from '../modules/about';
@@ -23,7 +23,6 @@ class Routes extends React.Component {
       <Route path="/color/:id" component={Color} />
       <Route path="/like" component={Color} />
       <Route path="/portfolio" component={Color} />
-      <Route path="/about" component={About} />
       <Route path="/new" component={New} />
     </Switch>
   }

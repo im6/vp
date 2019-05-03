@@ -11,8 +11,6 @@ var FRONTURLs = [
   'color',
   'new',
   'extract',
-  'resourceapi',
-  'about',
   'adminpanel',
 ];
 const appRoot = process.env.PWD;

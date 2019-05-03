@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Button, message, Modal } from 'antd';
+import { Row, Col, Modal } from 'antd';
 import { ChromePicker } from 'react-color';
 import EditCanvas from '../EditCanvas';
 import FinishModal from '../FinishModal';
@@ -46,11 +46,11 @@ class NewColor extends React.PureComponent {
         good = false;
       }
     });
-    if(good){
+    if(good) {
       this.props.onAdd(this.state.colorValue);
       this.showModal();
-    }else{
-      message.error('Invalid color.');
+    } else {
+      console.error('Invalid color');
     }
   }
 
@@ -97,17 +97,14 @@ class NewColor extends React.PureComponent {
             onChangeComplete={this.onPickColor}
           />
           <div style={{marginTop: 35}}>
-            <Button type="primary"
-                    icon="check"
-                    onClick={this.onSubmit}>
+            <button className="button is-primary" onClick={this.onSubmit}>
               Submit
-            </Button>
+            </button>
             &nbsp;&nbsp;&nbsp;
-            <Button
-              type="default"
-              icon="reload"
+            <button
+              className="button"
               onClick={this.resetColor}
-            >Reset</Button>
+            >Reset</button>
             
           </div>
         </Col>
@@ -118,13 +115,9 @@ class NewColor extends React.PureComponent {
           />
           <div style={{marginTop: 30}}>
             <Link to="/">
-              <Button
-                type="default"
-                icon="arrow-left"
-                style={{width: '100%'}}
-              >
+              <button className="button is-fullwidth is-info">
                 Return
-              </Button>
+              </button>
             </Link>
           </div>
         </Col>
