@@ -20,10 +20,7 @@
     "@babel/polyfill": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
-    "babel-plugin-import": "^1.11.0",
     "css-loader": "^2.1.1",
-    "less": "^3.9.0",
-    "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.5.0",
     "redux-logger": "^3.0.6",
     "style-loader": "^0.23.1",
@@ -33,7 +30,6 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "antd": "^3.15.2",
     "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
     "body-parser": "^1.18.3",

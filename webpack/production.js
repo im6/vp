@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-const antDir = /node_modules\/antd\/es/;
 const bulmaDir = /client\/modules\/app/;
 
 const client = {
@@ -29,27 +28,8 @@ const client = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: [
-              ["import", { 
-                "libraryName": "antd",
-                "libraryDirectory": "es",
-                "style": true
-              }]
-            ],
           },
         }],
-      },
-      {
-        test: /\.less$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'less-loader',
-            options: { javascriptEnabled: true },
-          }
-        ],
-        include: antDir,
       },
 
       {
