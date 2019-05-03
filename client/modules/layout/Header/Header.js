@@ -86,7 +86,6 @@ class Header extends React.Component {
         <Link to="/popular" className="navbar-item">
           Popular
         </Link>
-        <hr className="navbar-divider" />
         <Link to="/" className="navbar-item">
           Latest
         </Link>
@@ -114,9 +113,12 @@ class Header extends React.Component {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <Link className="button is-primary is-small" to="/new">
-              New Color
+            <Link to="/new">
+              <button className="button is-primary is-small">
+                New Color
+              </button>
             </Link>
+            &nbsp;&nbsp;
             {
               !isAuth && authReady &&
               <button className="button is-info is-small" onClick={this.onFBClick}>
