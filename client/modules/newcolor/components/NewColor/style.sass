@@ -1,5 +1,20 @@
 $mw: 375px;
+
 .container
-    margin: 85px auto 0 auto;
-    max-width: $mw;
-    width: 96%;
+  border: 1px solid red;
+  margin: 0 auto 0 auto;
+  max-width: $mw;
+  width: 96%;
+  
+  .floor0
+    display: flex;
+    &>div:first-child
+      width: 65%;
+    &>div:nth-child(2)
+      width: 35%;
+
+  .floor1
+    display: flex;
+    &>button
+      flex: 1
+      margin: 5px;

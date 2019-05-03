@@ -1,12 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Row, Col, Modal } from 'antd';
 import { ChromePicker } from 'react-color';
 import EditCanvas from '../EditCanvas';
-import FinishModal from '../FinishModal';
 import style from './style.sass';
 
 const DEFAULTVALUE = '#81EEFF';
+
 class NewColor extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -28,15 +26,7 @@ class NewColor extends React.PureComponent {
   }
 
   showModal(){
-    Modal.success({
-      title: 'Thank you for new colors',
-      okText: 'Got it',
-      content: <FinishModal isAuth={this.props.isAuth} />,
-      onOk: (close) => {
-        close();
-        this.props.onRedirect();
-      }
-    });
+    alert('Thank you for new colors');
   }
 
   onSubmit(){
@@ -90,39 +80,34 @@ class NewColor extends React.PureComponent {
 
   render() {
     return <div className={style.container}>
-      <Row>
-        <Col span={17}>
+      <div className={style.floor0}>
+        <div>
           <ChromePicker
             color={ this.state.editColor }
             onChangeComplete={this.onPickColor}
           />
-          <div style={{marginTop: 35}}>
-            <button className="button is-primary" onClick={this.onSubmit}>
-              Submit
-            </button>
-            &nbsp;&nbsp;&nbsp;
-            <button
-              className="button"
-              onClick={this.resetColor}
-            >Reset</button>
-            
-          </div>
-        </Col>
-        <Col span={7}>
+        </div>
+        <div>
           <EditCanvas colorValue={this.state.colorValue}
                       activeIndex={this.state.activeIndex}
                       changeActive={this.onChangeActive}
           />
-          <div style={{marginTop: 30}}>
-            <Link to="/">
-              <button className="button is-fullwidth is-info">
-                Return
-              </button>
-            </Link>
-          </div>
-        </Col>
-      </Row>
-
+        </div>
+      </div>
+      <div className={style.floor1}>
+        <button className="button is-primary" onClick={this.onSubmit}>
+          Submit
+        </button>
+        <button
+          className="button"
+          onClick={this.resetColor}
+        >
+          Reset
+        </button>
+        <button className="button is-info">
+          Return
+        </button>
+      </div>
     </div>
   }
 }
