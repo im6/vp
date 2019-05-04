@@ -83,7 +83,7 @@ class Header extends React.Component {
           </div>
         }
         
-        <Link to="/popular" className="navbar-item">
+        <Link to="/popular" className={`navbar-item ${url === '/popular' ? style.selected : null}`}>
           Popular
         </Link>
         <Link to="/" className="navbar-item">
