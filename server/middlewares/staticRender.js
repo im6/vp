@@ -6,6 +6,7 @@ var FRONTURLs = [
   'auth',
   'portfolio',
   'popular',
+  'latest',
   'like',
   'about',
   'color',

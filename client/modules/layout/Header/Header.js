@@ -29,7 +29,7 @@ class Header extends React.Component {
   render() {
     const { url, isAuth, detail, authReady } = this.props;
     let imagUrl = isAuth ? detail.get('img') : '//dkny.oss-cn-hangzhou.aliyuncs.com/2/icon.png'
-    if (__DEV__) {
+    if (__DEV__ && isAuth) {
       imagUrl = 'http://dkny.oss-cn-hangzhou.aliyuncs.com/temp/test_profile.jpeg';
     }
     return (<nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
@@ -95,7 +95,7 @@ class Header extends React.Component {
         <Link to="/popular" className={`navbar-item ${url === '/popular' ? style.selected : ''}`}>
           Popular
         </Link>
-        <Link to="/" className={`navbar-item ${['/', '/latest'].includes(url) ? style.selected : ''}`}>
+        <Link to="/latest" className={`navbar-item ${['/', '/latest'].includes(url) ? style.selected : ''}`}>
           Latest
         </Link>
 
