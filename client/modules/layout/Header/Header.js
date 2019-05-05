@@ -17,7 +17,8 @@ class Header extends React.Component {
       showMenu: !this.state.showMenu,
     });
   }
-  onFBClick(){
+  onFBClick(evt){
+    evt.preventDefault();
     this.props.onOAuth(this.props.facebookUrl);
   }
 
@@ -121,17 +122,15 @@ class Header extends React.Component {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <Link to="/new">
-              <button className="button is-primary is-small">
-                New Color
-              </button>
+            <Link to="/new" className="button is-small">
+              New Color
             </Link>
             &nbsp;&nbsp;
             {
               !isAuth && authReady &&
-              <button className="button is-info is-small" onClick={this.onFBClick}>
+              <a className="button is-small" onClick={this.onFBClick}>
                 Facebook Login
-              </button>
+              </a>
             }
           </div>
         </div>
