@@ -9,6 +9,9 @@ class OneColor extends React.Component {
     this.onLikeClick = this.onLikeClick.bind(this);
     this.onDownload = this.onDownload.bind(this);
   }
+  componentDidUpdate() {
+    window.scrollTo(0, 0);
+  }
   onLikeClick(data){
     this.props.onLike(data);
   }
