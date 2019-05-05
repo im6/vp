@@ -37,8 +37,9 @@ class NewColor extends React.PureComponent {
       }
     });
     if(good) {
-      this.props.onAdd(this.state.colorValue);
+      this.props.onAdd([...this.state.colorValue]);
       this.showModal();
+      this.resetColor();
     } else {
       console.error('Invalid color');
     }
