@@ -2,9 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import style from './style.sass';
 import ColorCanvas from './components/ColorCanvas';
-import { ISMOBILE } from '../../../../config/global';
-
-const BTNSIZE = ISMOBILE ? 'small': 'default';
 
 class Box extends React.Component {
   constructor(props){
@@ -30,7 +27,6 @@ class Box extends React.Component {
   }
 
   render() {
-    // console.log(this.props.boxInfo.get('id'));
     const heartUrl = `//dkny.oss-cn-hangzhou.aliyuncs.com/4/hrt${this.props.liked ? 'r': ''}.svg`
     return <div
       className={style.box}
@@ -41,7 +37,6 @@ class Box extends React.Component {
         />
         <button
           className='button is-small'
-          size={BTNSIZE}
           onClick={this.onLikeClick}>
             <img src={heartUrl} />
             {this.props.boxInfo.get('like')}
