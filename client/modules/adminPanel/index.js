@@ -11,6 +11,10 @@ function mapStateToProps({admin}){
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onInitLoad() {
+      const actcr = createAction('admin/getList');
+      dispatch(actcr());
+    },
     onApprove(id) {
       const actcr = createAction('admin/decideColor');
       dispatch(actcr({

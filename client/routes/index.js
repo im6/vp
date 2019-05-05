@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { createAction } from 'redux-actions';
 import Color from '../modules/color';
 import New from '../modules/newcolor';
+import AdminPanel from '../modules/adminPanel';
 
 class Routes extends React.Component {
   componentDidMount(){
@@ -23,6 +24,7 @@ class Routes extends React.Component {
       <Route path="/like" component={Color} />
       <Route path="/portfolio" component={Color} />
       <Route path="/new" component={New} />
+      <Route path="/adminpanel" component={AdminPanel} />
     </Switch>
   }
 }

@@ -71,6 +71,14 @@ class Header extends React.Component {
               >
                 Like
               </Link>
+              {
+                detail.get('isAdmin') &&
+                <Link className="navbar-item"
+                  to="/adminpanel"
+                >
+                  Admin
+                </Link>
+              }
               <hr className="navbar-divider" />
               <a className="navbar-item"
                 onClick={ev => {

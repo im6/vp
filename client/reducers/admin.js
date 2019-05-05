@@ -1,9 +1,9 @@
 /* eslint-disable */
 import { handleActions } from 'redux-actions';
-import Immutable, {Map, List} from 'immutable';
+import Immutable from 'immutable';
 
 const admin = handleActions({
-  ['admin/getList'](state, action) {
+  ['admin/getList'](state) {
     return state.merge({
       loading: true
     });
@@ -12,7 +12,7 @@ const admin = handleActions({
   ['admin/getList/success'](state, action) {
     return state.merge({
       loading: false,
-      list: action.payload
+      list: Immutable.fromJS(action.payload),
     });
   },
 
@@ -27,7 +27,7 @@ const admin = handleActions({
   ['admin/decideColor/success'](state, action) {
     return state.merge({
       loading: false,
-      list: state.get('list').filter(v => v.get('id') != action.payload.id)
+      list: state.get('list').filter(v => v.get('id') != action.payload),
     });
   },
 
