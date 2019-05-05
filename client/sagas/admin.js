@@ -16,10 +16,7 @@ function* getAnonymousColor(action) {
       payload: payload.result
     });
   } catch (e) {
-    yield put({
-      type: "admin/getList/fail",
-      payload: {msg: e}
-    });
+    window.location.replace('/');
   }
 }
 

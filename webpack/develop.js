@@ -15,7 +15,7 @@ const client = {
   mode: 'development',
   devtool: 'inline-source-map',
   resolve: {
-    extensions: ['.js', 'sass'],
+    extensions: ['.js'],
   },
   entry: [
     '@babel/polyfill',

@@ -8,7 +8,7 @@ const bulmaDir = /client\/modules\/app/;
 const client = {
   mode: 'production',
   resolve: {
-    extensions: ['.js', 'sass'],
+    extensions: ['.js'],
   },
   entry: [
     '@babel/polyfill',
@@ -74,7 +74,7 @@ const server = {
   externals: [nodeExternals()],
   target: 'node',
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js'],
   },
   entry: [
     path.join(__dirname, '../server/entry.js'),
@@ -99,9 +99,7 @@ const server = {
       },
     ],
   },
-  plugins: [
-    
-  ],
+  plugins: [],
   optimization: {
     minimizer: [new UglifyJsPlugin()],
   },
