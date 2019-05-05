@@ -92,10 +92,10 @@ class Header extends React.Component {
           </div>
         }
         
-        <Link to="/popular" className={`navbar-item ${url === '/popular' ? style.selected : null}`}>
+        <Link to="/popular" className={`navbar-item ${url === '/popular' ? style.selected : ''}`}>
           Popular
         </Link>
-        <Link to="/" className="navbar-item">
+        <Link to="/" className={`navbar-item ${['/', '/latest'].includes(url) ? style.selected : ''}`}>
           Latest
         </Link>
 
@@ -122,13 +122,13 @@ class Header extends React.Component {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <Link to="/new" className="button is-small">
+            <Link to="/new" className="button is-small is-primary">
               New Color
             </Link>
             &nbsp;&nbsp;
             {
               !isAuth && authReady &&
-              <a className="button is-small" onClick={this.onFBClick}>
+              <a className="button is-small is-info" onClick={this.onFBClick}>
                 Facebook Login
               </a>
             }
