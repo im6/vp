@@ -16,12 +16,16 @@ class AdminPanel extends React.PureComponent {
   }
 
   render() {
+    const colors = this.props.list.toJS();
     return <div className={style.container}>
       <br />
       <br />
       <br />
       {
-        this.props.list.toJS().map(v => {
+        colors.length === 0 && <h1>No colors to decide.</h1>
+      }
+      {
+        colors.map(v => {
           return <div key={v.id} className={style.oneRow}>
             <ColorBar value={v.color} />
             &nbsp;&nbsp;&nbsp;&nbsp;

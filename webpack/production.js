@@ -17,7 +17,7 @@ const client = {
   output: {
     publicPath: '/',
     path: path.join(__dirname, '../dist/public'),
-    filename: 'bundle.js',
+    filename: '[name].dist.js',
   },
   module: {
     rules: [
@@ -28,6 +28,7 @@ const client = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: ['@babel/plugin-syntax-dynamic-import'],
           },
         }],
       },
@@ -66,6 +67,13 @@ const client = {
   ],
   optimization: {
     minimizer: [new UglifyJsPlugin()],
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        default: false,
+        vendors: false,
+      }
+    },
   },
 };
 
@@ -82,7 +90,7 @@ const server = {
   output: {
     publicPath: '/',
     path: path.join(__dirname, '../dist'),
-    filename: 'server.js',
+    filename: 'server.dist.js',
   },
   module: {
     rules: [
@@ -93,7 +101,6 @@ const server = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],
-            plugins: [],
           },
         }],
       },

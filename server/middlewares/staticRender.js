@@ -1,7 +1,7 @@
 var globalConfig = require('../config/env'),
   path = require('path');
 
-var FRONTURLs = [
+const FRONTURLs = [
   '',
   'auth',
   'portfolio',
@@ -14,13 +14,19 @@ var FRONTURLs = [
   'extract',
   'adminpanel',
 ];
-const appRoot = process.env.PWD;
 
+const scriptUrl = [
+  'main.js',
+  'newColor.js',
+  'adminPanel.js',
+]
+const appRoot = process.env.PWD;
 module.exports = {
   staticFile: function(req, res, next){
     var subUrl = req.url.split('/');
-    if(subUrl[1] === 'bundle.js'){
-      res.sendFile(path.resolve(appRoot,`./dist/public/bundle.js`));
+    const filePath = path.resolve(appRoot,`./dist/public/${subUrl[1]}`);
+    if(scriptUrl.includes(subUrl[1])){
+      res.sendFile(filePath);
     } else {
       next();
     }

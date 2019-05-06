@@ -17,6 +17,15 @@ const client = {
   resolve: {
     extensions: ['.js'],
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        default: false,
+        vendors: false,
+      }
+    },
+  },
   entry: [
     '@babel/polyfill',
     './client/index.js',
@@ -24,7 +33,7 @@ const client = {
   output: {
     publicPath: '/',
     path: path.join(__dirname, '../dist/public'),
-    filename: 'bundle.js',
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -35,6 +44,7 @@ const client = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: ['@babel/plugin-syntax-dynamic-import']
           },
         }],
       },
@@ -63,8 +73,7 @@ const client = {
         ],
         exclude: bulmaDir,
       },
-
-    ],
+    ]
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -74,7 +83,7 @@ const client = {
   ],
   watchOptions: {
     ignored: /node_modules/
-  }
+  },
 };
 
 const server = {

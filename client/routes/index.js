@@ -1,9 +1,18 @@
 import React from 'react';
+import Loadable from 'react-loadable';
 import { Route, Switch } from "react-router-dom";
 import { createAction } from 'redux-actions';
 import Color from '../modules/color';
-import New from '../modules/newcolor';
-import AdminPanel from '../modules/adminPanel';
+
+const loading = () => <p>Loading...</p>
+const AsyncAdminPanel = Loadable({
+  loader: () => import(/* webpackChunkName: "adminPanel" */'../modules/adminPanel'),
+  loading,
+});
+const AsyncNewColor = Loadable({
+  loader: () => import(/* webpackChunkName: "newColor" */'../modules/newcolor'),
+  loading,
+});
 
 class Routes extends React.Component {
   componentDidMount(){
@@ -24,8 +33,8 @@ class Routes extends React.Component {
       <Route path="/color/:id" component={Color} />
       <Route path="/like" component={Color} />
       <Route path="/portfolio" component={Color} />
-      <Route path="/new" component={New} />
-      <Route path="/adminpanel" component={AdminPanel} />
+      <Route path="/new" component={AsyncNewColor} />
+      <Route path="/adminpanel" component={AsyncAdminPanel} />
     </Switch>
   }
 }
