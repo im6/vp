@@ -1,10 +1,9 @@
 const app = require('./app');
 const globalConfig = require('./config/env');
 
-const ip = globalConfig.serverIp;
-const port = globalConfig.serverPort;
-const server = app.listen(port, ip, () => {
-  console.log(`${globalConfig.isDev ? 'dev' : 'production'} is running: http://${ip}:${port}`);
+const { serverIp, serverPort } = globalConfig;
+const server = app.listen(serverPort, serverIp, () => {
+  console.log(`${process.env.NODE_ENV} is running: http://${serverIp}:${serverPort}`);
 });
 
 server.timeout = 1000 * 60;
