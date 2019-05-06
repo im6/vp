@@ -3,6 +3,9 @@ const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const ServerStartPlugin = require('./plugins/ServerStartPlugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const bulmaDir = /client\/modules\/app/;
 
@@ -79,7 +82,18 @@ const client = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
       '__DEV__': JSON.stringify(true)
-    })
+    }),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'ColorPK | Dev',
+      template: path.join(__dirname, '../client/template/index.html')
+    }),
+    new CopyPlugin([
+      {
+        from: path.join(__dirname, '../client/template/404.html'),
+        to: path.join(__dirname, '../dist/public/404.html')
+      },
+    ]),
   ],
   watchOptions: {
     ignored: /node_modules/
@@ -92,7 +106,7 @@ const server = {
   externals: [nodeExternals()],
   target: 'node',
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js'],
   },
   entry: [
     path.join(__dirname, '../server/entry.js'),
