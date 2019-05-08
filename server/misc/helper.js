@@ -1,19 +1,9 @@
-"use strict";
-let privateFn = {
+export const resSuccessObj = data => ({
+  error: false,
+  result: data
+})
 
-};
-
-module.exports = {
-  resSuccessObj: (data)=>{
-    return {
-        error: false,
-        result: data
-    };
-  },
-  resFailObj: (err)=>{
-    return {
-      error: true,
-      result: err
-    };
-  }
-};
+export const resFailObj = err => ({
+  error: true,
+  result: err
+})
