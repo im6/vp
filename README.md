@@ -4,19 +4,18 @@
 
 ## Highlight
 
-- ant.design
+- bulma
 - express.js
 - mysql
 - react
 - redux
 - react-redux
-- react-router 5.0
+- react-router
 - react-saga
 - webpack
-- ES6
 - babel
-- less
+- sass
 - eslint
 - immutable.js
 - axios
-- oAuth
+- oAuth2(Facebook)
