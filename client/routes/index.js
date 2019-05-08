@@ -3,15 +3,15 @@ import Loadable from 'react-loadable';
 import { Route, Switch } from "react-router-dom";
 import { createAction } from 'redux-actions';
 import Color from '../modules/color';
+import SpinLoader from '../modules/color/components/SpinLoader';
 
-const loading = () => <p>Loading...</p>
 const AsyncAdminPanel = Loadable({
   loader: () => import(/* webpackChunkName: "adminPanel" */'../modules/adminPanel'),
-  loading,
+  loading: SpinLoader,
 });
 const AsyncNewColor = Loadable({
   loader: () => import(/* webpackChunkName: "newColor" */'../modules/newcolor'),
-  loading,
+  loading: SpinLoader,
 });
 
 class Routes extends React.Component {
