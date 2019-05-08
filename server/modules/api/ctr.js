@@ -251,11 +251,9 @@ module.exports = {
         return;
       }
 
-      oauthApi[session.app.oauth].showUser({
-        qs:qsObj
-      }).then(function(data){
-
-        privateFn.convertOauthIntoLocalDB(session.app.oauth, session, data, res);
+      oauthApi[session.app.oauth].showUser(qsObj)
+      .then(function(data){
+        privateFn.convertOauthIntoLocalDB(session.app.oauth, session, data.data, res);
 
       }, function(data){
         res.json({
@@ -279,9 +277,9 @@ module.exports = {
 
       var qsObj = privateFn.getOauthQsObj(oauthName, qs);
 
-      oauthApi[oauthName].accessToken({
-        qs: qsObj
-      }).then(function(data){
+      oauthApi[oauthName].accessToken(qsObj)
+      .then(function(data){
+        data = data.data;
         if(data.access_token){
           req.session.app = {
             oauth: oauthName,

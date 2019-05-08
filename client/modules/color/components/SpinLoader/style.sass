@@ -4,16 +4,12 @@
     justify-content: center;
     align-items: center;
 
-
-
 @keyframes spinLoader-spin 
   0% 
     transform: rotate(0deg);
   
   100% 
     transform: rotate(-2160deg);
-  
-
 
 @keyframes spinLoader-normal-opacity 
   0% 
@@ -27,8 +23,6 @@
   
   100% 
     opacity: 1;
-  
-
 
 .spinLoader 
   animation: 1.25s spinLoader-spin cubic-bezier(0.46, -0.4, 0.2, 1.51) infinite both;
@@ -57,4 +51,3 @@
   
   &:after 
     animation: 1.25s spinLoader-normal-opacity cubic-bezier(0.46, -0.4, 0.2, 1.51) infinite both;
-  
