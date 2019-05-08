@@ -1,43 +1,38 @@
+import { sqlExecOne } from '../../resource/db/mysqlConnection';
+import {
+  resSuccessObj,
+  resFailObj,
+} from '../../misc/helper';
 
-'use strict';
-var globalConfig = require('../../config/env'),
-  mysql = require('../../resource/db/mysqlConnection'),
-  oauthApi = require('../../resource/oauth/list'),
-  uuid = require('uuid'),
-  helper = require('../../misc/helper'),
-  _ = require('lodash');
+export const getAnonymousColor = (req, res, next) => {
+  const qr = 'SELECT * FROM colorpk_color a WHERE a.display = 1';
+  sqlExecOne(qr).then((data) => {
+    res.json(resSuccessObj(data));
+  }, (data) => {
+    res.json(resFailObj(data));
+  });
+}
 
-module.exports = {
-  getAnonymousColor: function(req, res, next){
-    var qr = 'SELECT * FROM colorpk_color a WHERE a.display = 1';
-    mysql.sqlExecOne(qr).then(function(data){
-      res.json(helper.resSuccessObj(data));
-    }, function(data){
-      res.json(helper.resFailObj(data));
-    });
-  },
-  postDecideColor: function(req, res, next){
-    let decision = req.body.display,
-      id = req.body.id,
-      query = null;
+export const postDecideColor = (req, res, next) => {
+  let decision = req.body.display,
+    id = req.body.id,
+    query = null;
 
-    if(typeof id === 'number'){
-      if(decision){
-        query = `DELETE FROM colorpk_color WHERE id = '${id}'`;
-      }else{
-        query = `UPDATE colorpk_color SET \`display\` = 0 WHERE id = ${id}`;
-      }
-
-      mysql.sqlExecOne(query).then(function(data){
-        res.json(helper.resSuccessObj(data));
-      }, function(data){
-        res.json(helper.resFailObj(data));
-      });
-    } else {
-      res.json({
-        error: true,
-      });
+  if(typeof id === 'number'){
+    if(decision){
+      query = `DELETE FROM colorpk_color WHERE id = '${id}'`;
+    }else{
+      query = `UPDATE colorpk_color SET \`display\` = 0 WHERE id = ${id}`;
     }
 
-  },
-};
+    sqlExecOne(query).then((data) => {
+      res.json(resSuccessObj(data));
+    }, (data) => {
+      res.json(resFailObj(data));
+    });
+  } else {
+    res.json({
+      error: true,
+    });
+  }
+}

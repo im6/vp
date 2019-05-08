@@ -35,7 +35,7 @@ class Header extends React.Component {
     return (<nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
       <Link className="navbar-item" to="/">
-        <img src={imagUrl} height="28" />
+        <img src={imagUrl} height="32" />
       </Link>
       <a
         role="button"

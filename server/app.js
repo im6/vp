@@ -52,7 +52,7 @@ if (globalConfig.isDev) {
 } else {
   app.use(csrf());
 }
-app.use('/api', apiRoute);
+app.use('/api', apiRoute.default);
 app.get('/*', staticRender.h5Route, staticRender.staticFile);
 app.use(errorHandler.onError);
 app.use(errorHandler.notFound);

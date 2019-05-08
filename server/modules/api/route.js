@@ -20,4 +20,4 @@ router.post('/addNewColor', ctr.addNewColor);
 router.post('/getAnonymousColor', md.isAuth, md.isAdmin, adminCtr.getAnonymousColor);
 router.post('/postDecideColor', md.isAuth, md.isAdmin, adminCtr.postDecideColor);
 
-module.exports = router;
+export default router
