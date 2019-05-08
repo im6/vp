@@ -1,12 +1,12 @@
 const { env } = process;
 
 export const isDev = env.NODE_ENV === 'development';
-export const requireAuth = true;
 export const fbApi = 'https://graph.facebook.com/v2.8';
+export const serverIp = 'localhost';
+export const sessionSecret = env.sessionSecret || 'bigAndHUgeSecret';
 export const {
   oauthRedirectDomin,
   fbAppSecret,
   fbAppKey,
-  PORT
+  PORT: serverPort
 } = env;
-export const sessionSecret = env.sessionSecret || 'bigAndHUgeSecret';

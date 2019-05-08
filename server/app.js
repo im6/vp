@@ -1,18 +1,27 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const globalConfig = require('./config/env');
-const cookieParser = require('cookie-parser');
-const expressSession = require('express-session');
-const csrf = require('csurf');
-const helmet = require('helmet');
-const MySQLStore = require('express-mysql-session')(expressSession);
-const staticRender = require('./middlewares/staticRender');
-const errorHandler = require('./middlewares/errorHandler');
-const apiRoute = require('./modules/api/route');
+import express from 'express';
+import bodyParser from 'body-parser';
+import cookieParser  from 'cookie-parser';
+import expressSession from 'express-session';
+import csrf from 'csurf';
+import helmet from 'helmet';
+import mysqlSession from 'express-mysql-session';
+import route from './modules/api/route';
+import {
+  h5Route,
+  staticFile,
+} from './middlewares/staticRender';
+import {
+  onError,
+  notFound,
+} from './middlewares/errorHandler';
+import {
+  sessionSecret,
+  isDev,
+} from './config'
 
 const app = express();
 const sessionConfig = {
-  secret: globalConfig.sessionSecret,
+  secret: sessionSecret,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -20,8 +29,9 @@ const sessionConfig = {
   },
 };
 
-if (!globalConfig.isDev) {
-  sessionConfig.store = new MySQLStore({
+if (!isDev) {
+  const mySQLStore = mysqlSession(expressSession);
+  sessionConfig.store = new mySQLStore({
     host: process.env.SQL_HOST,
     port: process.env.SQL_PORT,
     user: process.env.SQL_USERNAME,
@@ -47,14 +57,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(expressSession(sessionConfig));
-if (globalConfig.isDev) {
+if (isDev) {
   // some dev config
 } else {
   app.use(csrf());
 }
-app.use('/api', apiRoute.default);
-app.get('/*', staticRender.h5Route, staticRender.staticFile);
-app.use(errorHandler.onError);
-app.use(errorHandler.notFound);
+app.use('/api', route);
+app.get('/*', h5Route, staticFile);
+app.use(onError);
+app.use(notFound);
 
-module.exports = app;
+export default app;
