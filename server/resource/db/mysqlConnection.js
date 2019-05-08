@@ -1,5 +1,5 @@
 import mysql from 'mysql';
-const env = process.env;
+const { env } = process;
 
 const pool = mysql.createPool({
   connectionLimit : 8,
@@ -23,4 +23,4 @@ export const sqlExecOne = qr => {
       }
     });
   });
-}
+};
