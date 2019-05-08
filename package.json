@@ -59,7 +59,8 @@
     "express-mysql-session": "^2.1.0",
     "express-session": "^1.15.6",
     "helmet": "^3.16.0",
-    "mysql": "^2.16.0"
+    "mysql": "^2.16.0",
+    "uuid": "^3.3.2"
   },
   "pre-commit": []
 }
