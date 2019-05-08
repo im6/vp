@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import Box from '../Box';
 import OneColor from '../OneColor';
 import style from './style.sass';
+import SpinLoader from '../SpinLoader';
 
 class Color extends React.Component {
   constructor(props) {
@@ -33,8 +34,11 @@ class Color extends React.Component {
   }
 
   render() {
-    const { selectedId } = this.props;
+    const { selectedId, loading } = this.props;
     return <Fragment>
+      {
+        loading && <SpinLoader />
+      }
       {
         selectedId &&
         <OneColor
