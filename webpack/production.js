@@ -20,7 +20,7 @@ const client = {
   output: {
     publicPath: '/',
     path: path.join(__dirname, '../dist/public'),
-    filename: '[name].dist.js',
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -104,7 +104,7 @@ const server = {
   output: {
     publicPath: '/',
     path: path.join(__dirname, '../dist'),
-    filename: 'server.dist.js',
+    filename: 'server.js',
   },
   module: {
     rules: [

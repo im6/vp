@@ -15,7 +15,7 @@ class ServerStartPlugin {
   apply(compiler) {
     compiler.hooks.done.tapAsync('ServerStartHook', (cp, callback) => {
       this.child && this.child.kill('SIGTERM');
-      this.child = spawn('node', ['./dist/server.js'], {
+      this.child = spawn('node', ['./local/server.js'], {
         env: Object.assign({
         }, process.env, this.envs),
         silent: false,

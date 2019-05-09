@@ -35,7 +35,7 @@ const client = {
   ],
   output: {
     publicPath: '/',
-    path: path.join(__dirname, '../dist/public'),
+    path: path.join(__dirname, '../local/public'),
     filename: '[name].js',
   },
   module: {
@@ -91,7 +91,7 @@ const client = {
     new CopyPlugin([
       {
         from: path.join(__dirname, '../client/template/404.html'),
-        to: path.join(__dirname, '../dist/public/404.html')
+        to: path.join(__dirname, '../local/public/404.html')
       },
     ]),
   ],
@@ -113,7 +113,7 @@ const server = {
   ],
   output: {
     publicPath: '/',
-    path: path.join(__dirname, '../dist'),
+    path: path.join(__dirname, '../local'),
     filename: 'server.js',
   },
   module: {
