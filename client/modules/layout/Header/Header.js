@@ -105,7 +105,7 @@ class Header extends React.Component {
           </a>
   
           <div className="navbar-dropdown">
-            <a className="navbar-item" href="//www.javascript.fun/about">
+            <a className="navbar-item" href="//www.javascript.fun/about" target="_blank">
               About
             </a>
             <a className="navbar-item" href="//www.colorpk.com" target="_blank">
@@ -122,13 +122,13 @@ class Header extends React.Component {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <Link to="/new" className="button is-small is-primary">
+            <Link to="/new" className="button is-primary">
               New Color
             </Link>
             &nbsp;&nbsp;
             {
               !isAuth && authReady &&
-              <a className="button is-small is-info" onClick={this.onFBClick}>
+              <a className="button is-info" onClick={this.onFBClick}>
                 Facebook Login
               </a>
             }
