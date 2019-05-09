@@ -55,7 +55,7 @@ class Header extends React.Component {
         {
           isAuth &&
           <div className="navbar-item has-dropdown is-hoverable">
-            <a className="navbar-link">
+            <a className={`navbar-link ${['/like', '/portfolio'].includes(url) ? style.selected : ''}`}>
               { detail.get('name') }
             </a>
     

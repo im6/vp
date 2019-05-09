@@ -1,4 +1,5 @@
 import path from 'path';
+import { isDev } from '../config'
 const FRONTURLs = [
   '',
   'auth',
@@ -33,7 +34,7 @@ export const staticFile = (req, res, next) => {
 export const h5Route = (req, res, next) => {
   var subUrl = req.url.split('/');
   if(FRONTURLs.indexOf(subUrl[1]) > -1){
-    if(process.env.NODE_ENV === 'development'){
+    if(isDev){
       console.log(`${req.method}: ${req.originalUrl}`);
     } else {
       res.cookie('_csrf',req.csrfToken());
