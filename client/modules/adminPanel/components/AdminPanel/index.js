@@ -33,7 +33,7 @@ class AdminPanel extends React.PureComponent {
             &nbsp;&nbsp;
             <button className="button is-danger is-small" onClick={this.onDelete.bind(this, v)}>Delete</button>
           </div>
-        }) 
+        })
       }
     </div>
   }
