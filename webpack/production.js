@@ -70,7 +70,8 @@ const client = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'ColorPK | Your best color picker, pal',
-      template: path.join(__dirname, '../client/template/index.html')
+      template: path.join(__dirname, '../client/template/index.html'),
+      hash: true,
     }),
     new CopyPlugin([
       {
