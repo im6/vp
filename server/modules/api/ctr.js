@@ -202,17 +202,14 @@ export const getUserInfo = (req, res, next) => {
 }
 
 export const oauthLogin = (req, res, next) => {
-  var qs = req.query,
+  const qs = req.query,
     oauthName = req.params.oauth;
   if(qs.code &&
     qs.state &&
     req.session.app &&
     qs.state === req.session.app.oauthState){
-
     console.log(`redirected by ${oauthName} auth...`);
-
-    var qsObj = privateFn.getOauthQsObj(oauthName, qs);
-
+    const qsObj = privateFn.getOauthQsObj(oauthName, qs);
     accessToken(qsObj).then((data) => {
       data = data.data;
       if(data.access_token){
@@ -221,10 +218,8 @@ export const oauthLogin = (req, res, next) => {
           isAuth: true,
           tokenInfo: data
         };
-        res.redirect("/");
-      }else{
-        res.redirect("/auth");
       }
+      res.redirect("/");
     });
   } else {
     console.log('inconsistant session : redirect fail:');
@@ -235,7 +230,7 @@ export const oauthLogin = (req, res, next) => {
         detail: 'Sorry, something error, please try again.'
       }
     };
-    res.redirect("/auth");
+    res.redirect("/");
   }
 }
 
