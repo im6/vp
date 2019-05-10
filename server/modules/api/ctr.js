@@ -222,7 +222,7 @@ export const oauthLogin = (req, res, next) => {
       res.redirect("/");
     });
   } else {
-    console.log('inconsistant session : redirect fail');
+    console.log('inconsistant session, error msg in session');
     req.session.app = {
       isAuth: false,
       alert: {
