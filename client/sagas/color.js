@@ -101,7 +101,6 @@ function* addNew(action) {
   }
 }
 
-
 export default function*(){
   yield fork(watchers);
 }

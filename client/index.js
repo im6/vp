@@ -10,12 +10,14 @@ import App from './modules/app';
 
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
-const compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose0;
+let compose = compose0;
 
 if(__DEV__){
   const logger = require('redux-logger').default;
   middlewares.push(logger);
+  compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 };
+
 const enhancers = applyMiddleware(...middlewares);
 const store = createStore(combineReducers(moduleReducers),
   {},
@@ -27,5 +29,5 @@ ReactDOM.render(
   <Provider store={store}>
     <App dispatch={store.dispatch} />
   </Provider>,
-  document.getElementById('app'),
+  document.getElementById('app')
 );
