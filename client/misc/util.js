@@ -1,18 +1,3 @@
-
-export function mobileDetect() {
-  let isMobile = false;
-  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    isMobile = true;
-  }
-  return isMobile;
-}
-
-export function scrollTop() {
-  if(window.scrollY > 220){
-    window.scrollTo(0, 0);
-  }
-}
-
 export const noop = () => {}
 
 export function downloadCanvas(color) {
@@ -66,7 +51,5 @@ export function downloadCanvas(color) {
   if('remove' in myCanvas){
     myCanvas.remove();
   }
-
   return url;
-
 }

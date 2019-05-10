@@ -15,13 +15,11 @@ const output = {
     const r2str = privateFn.getWhoteRoute(r2);
 
     let same = null;
-
     if(colorUrls.indexOf(r1str) > -1 && colorUrls.indexOf(r2str) > -1){
       same = true;
     }else{
       same = r1str === r2str;
     }
-
     return same;
   },
   determineEffect(r1, r2){
@@ -37,9 +35,7 @@ const output = {
     } else{
       result = true;
     }
-
     return result;
-
   }
 };
 

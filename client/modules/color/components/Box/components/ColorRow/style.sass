@@ -1,10 +1,10 @@
 
-.rowContainer 
+.rowContainer
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
 
-  .text 
+  .text
     transition: opacity 0.3s ease-in-out;
     background-color: rgba(0,0,0,0.22);
     color: white;
@@ -17,5 +17,8 @@
   &:hover .text
     opacity: 1;
     
+@media (max-width: 768px)
+  .rowContainer .text
+    font-size: 0.8em;
 
 
