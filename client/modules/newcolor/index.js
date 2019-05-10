@@ -1,16 +1,17 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { createAction } from 'redux-actions';
 import { withRouter } from 'react-router-dom'
 import NewColor from './components/NewColor';
 
-const mapStateToProps = ({ user }, { location: { pathname } }) => {
+const shared = {};
+const mapStateToProps = ({ user }, { location: { pathname }, history }) => {
   const showUpload = pathname === '/extract';
+  shared.history = history;
   const isAuth = user.get('isAuth');
   return {
     showUpload,
     isAuth,
-  }
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -31,7 +32,7 @@ const mapDispatchToProps = (dispatch) => {
       }
     },
     onRedirect(){
-      
+      shared.history.push('/');
     }
   }
 };

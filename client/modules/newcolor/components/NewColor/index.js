@@ -22,11 +22,15 @@ class NewColor extends React.PureComponent {
     this.onChangeActive = this.onChangeActive.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.resetColor = this.resetColor.bind(this);
+    this.onReturn = this.onReturn.bind(this);
     this.onPickColor = this.onPickColor.bind(this);
   }
 
   showModal(){
     alert('Thank you for new colors');
+  }
+  onReturn(){
+    this.props.onRedirect();
   }
 
   onSubmit(){
@@ -105,7 +109,7 @@ class NewColor extends React.PureComponent {
         >
           Reset
         </button>
-        <button className="button is-info">
+        <button className="button is-info" onClick={this.onReturn}>
           Return
         </button>
       </div>

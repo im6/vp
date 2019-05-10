@@ -11,11 +11,19 @@ class Header extends React.Component {
     this.onFBClick = this.onFBClick.bind(this);
     this.onLogout = this.onLogout.bind(this);
     this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
+    this.onClickNav = this.onClickNav.bind(this);
   }
   toggleMobileMenu(){
     this.setState({
       showMenu: !this.state.showMenu,
     });
+  }
+  onClickNav(){
+    if(this.state.showMenu){
+      this.setState({
+        showMenu: false,
+      });
+    }
   }
   onFBClick(evt){
     evt.preventDefault();
@@ -34,7 +42,7 @@ class Header extends React.Component {
     }
     return (<nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
-      <Link className="navbar-item" to="/">
+      <Link className="navbar-item" to="/" onClick={this.onClickNav}>
         <img src={imagUrl} height="32" />
       </Link>
       <a
@@ -62,13 +70,13 @@ class Header extends React.Component {
             <div className="navbar-dropdown">
               <Link className="navbar-item"
                 to="/portfolio"
-                onClick={this.props.onEnterProfile.bind(null, 'myPortfolio')}
+                onClick={() => {this.props.onEnterProfile('myPortfolio'); this.onClickNav();}}
               >
                 Profile
               </Link>
               <Link className="navbar-item"
                 to="/like"
-                onClick={this.props.onEnterProfile.bind(null, 'myLiked')}
+                onClick={() => {this.props.onEnterProfile('myLiked'); this.onClickNav();}}
               >
                 Like
               </Link>
@@ -76,6 +84,7 @@ class Header extends React.Component {
                 detail.get('isAdmin') &&
                 <Link className="navbar-item"
                   to="/adminpanel"
+                  onClick={this.onClickNav}
                 >
                   Admin
                 </Link>
@@ -92,10 +101,10 @@ class Header extends React.Component {
           </div>
         }
         
-        <Link to="/popular" className={`navbar-item ${url === '/popular' ? style.selected : ''}`}>
+        <Link to="/popular" className={`navbar-item ${url === '/popular' ? style.selected : ''}`} onClick={this.onClickNav}>
           Popular
         </Link>
-        <Link to="/latest" className={`navbar-item ${['/', '/latest'].includes(url) ? style.selected : ''}`}>
+        <Link to="/latest" className={`navbar-item ${['/', '/latest'].includes(url) ? style.selected : ''}`} onClick={this.onClickNav}>
           Latest
         </Link>
 
@@ -122,7 +131,7 @@ class Header extends React.Component {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <Link to="/new" className="button is-primary">
+            <Link to="/new" className="button is-primary" onClick={this.onClickNav}>
               New Color
             </Link>
             &nbsp;&nbsp;
