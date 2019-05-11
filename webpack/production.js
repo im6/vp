@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const bulmaDir = /client\/modules\/app/;
 
@@ -75,6 +76,14 @@ const client = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css'
+    }),
+    new CompressionPlugin({
+      // filename: '[path]'
+      filename: (info) => {
+        console.log(info);
+        return info.path;
+      },
+      cache: true,
     }),
     new HtmlWebpackPlugin({
       title: 'ColorPK | Your best color picker, pal',
