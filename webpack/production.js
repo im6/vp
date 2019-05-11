@@ -82,7 +82,7 @@ const client = {
       minRatio: 1,
     }),
     new HtmlWebpackPlugin({
-      title: 'ColorPK | Your best color picker, pal',
+      title: 'ColorPK | Your Best Color Picker, Pal',
       template: path.join(__dirname, '../client/template/index.html'),
       hash: true,
     }),
