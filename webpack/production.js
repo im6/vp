@@ -78,12 +78,8 @@ const client = {
       filename: '[name].css'
     }),
     new CompressionPlugin({
-      // filename: '[path]'
-      filename: (info) => {
-        console.log(info);
-        return info.path;
-      },
-      cache: true,
+      filename: '[path]',
+      minRatio: 1,
     }),
     new HtmlWebpackPlugin({
       title: 'ColorPK | Your best color picker, pal',
