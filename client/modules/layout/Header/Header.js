@@ -7,7 +7,7 @@ class Header extends React.Component {
     super(props)
     this.state = {
       showMenu: false,
-    }
+    };
     this.onFBClick = this.onFBClick.bind(this);
     this.onLogout = this.onLogout.bind(this);
     this.toggleMobileMenu = this.toggleMobileMenu.bind(this);

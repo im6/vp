@@ -6,6 +6,7 @@ const ServerStartPlugin = require('./plugins/ServerStartPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const bulmaDir = /client\/modules\/app/;
 
@@ -55,7 +56,12 @@ const client = {
       {
         test: /\.sass$/,
         use: [
-          'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: true,
+            },
+          },
           'css-loader',
           'sass-loader',
         ],
@@ -64,7 +70,12 @@ const client = {
       {
         test: /\.sass$/,
         use: [
-          'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: true,
+            },
+          },
           {
             loader: 'css-loader',
             options: {
@@ -84,6 +95,9 @@ const client = {
       '__DEV__': JSON.stringify(true)
     }),
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css'
+    }),
     new HtmlWebpackPlugin({
       title: 'ColorPK | Dev',
       template: path.join(__dirname, '../client/template/index.html')

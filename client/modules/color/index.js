@@ -34,6 +34,7 @@ const mapDispatchToProps = (dispatch) => {
       }));
     },
     onEnter(color) {
+      window.scrollTo(0, 0);
       shared.history.push(`/color/${color.get('id')}`);
     },
     onDownload(color) {

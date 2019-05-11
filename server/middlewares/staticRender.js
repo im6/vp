@@ -20,8 +20,11 @@ const FRONTURLs = [
 
 const scriptUrl = [
   'main.js',
+  'main.css',
   'newColor.js',
+  'newColor.css',
   'adminPanel.js',
+  'adminPanel.css',
 ];
 const { PWD } = process.env;
 

@@ -4,6 +4,7 @@ const nodeExternals = require('webpack-node-externals');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 const bulmaDir = /client\/modules\/app/;
@@ -39,7 +40,9 @@ const client = {
       {
         test: /\.sass$/,
         use: [
-          'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
           'css-loader',
           'sass-loader',
         ],
@@ -48,7 +51,9 @@ const client = {
       {
         test: /\.sass$/,
         use: [
-          'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
           {
             loader: 'css-loader',
             options: {
@@ -68,6 +73,9 @@ const client = {
       '__DEV__': JSON.stringify(false)
     }),
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css'
+    }),
     new HtmlWebpackPlugin({
       title: 'ColorPK | Your best color picker, pal',
       template: path.join(__dirname, '../client/template/index.html'),

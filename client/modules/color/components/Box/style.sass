@@ -1,6 +1,9 @@
+$box-padding: 7px;
+$box-padding-mobile: 5px;
+
 .box
   margin: 8px;
-  padding: 7px;
+  padding: $box-padding;
   border-radius: 4px;
   background-color: white;
   display: inline-block;
@@ -12,7 +15,8 @@
     transition: box-shadow 0.8s;
     box-shadow: 0 6px 9px 2px #cccccc;
   &>button
-    margin-top: 7px;
+    margin-top: $box-padding;
+    font-size: 1.3em;
     &>img
       width: 15px;
       margin-right: 5px;
@@ -22,8 +26,9 @@
 
 @media only screen and (min-device-width : 375px) and (max-device-width : 812px) and (-webkit-device-pixel-ratio : 3) and (orientation : portrait)
   .box
-    margin: 5px;
+    margin: $box-padding-mobile;
+    padding: $box-padding-mobile;
+    &>button
+      margin-top: $box-padding-mobile;
     &>p
       display: none;
-
-
