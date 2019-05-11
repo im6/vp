@@ -201,7 +201,7 @@ export const getUserInfo = (req, res, next) => {
   }
 }
 
-export const oauthLogin = (req, res, next) => {
+export const oauthLogin = (req, res) => {
   const qs = req.query,
     oauthName = req.params.oauth;
   if(qs.code &&
