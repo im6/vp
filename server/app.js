@@ -58,12 +58,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(expressSession(sessionConfig));
 if (isDev) {
-  // some dev config
+  app.get('/static/:fileName', staticFile);
 } else {
   app.use(csrf());
 }
 app.use('/api', route);
-app.get('/*', h5Route, staticFile);
+app.get('/*', h5Route);
 app.use(onError);
 app.use(notFound);
 

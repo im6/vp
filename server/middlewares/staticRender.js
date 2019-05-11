@@ -29,8 +29,7 @@ const scriptUrl = [
 const { PWD } = process.env;
 
 export const staticFile = (req, res, next) => {
-  var subUrl = req.url.split('/');
-  const fileName = subUrl[1].replace(/\?.*/, '');
+  const { fileName } = req.params;
   const filePath = path.resolve(PWD,`./${staticUrl}/public/${fileName}`);
   if(scriptUrl.includes(fileName)){
     res.sendFile(filePath);

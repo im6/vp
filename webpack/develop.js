@@ -35,7 +35,7 @@ const client = {
     './client/index.js',
   ],
   output: {
-    publicPath: '/',
+    publicPath: '/static/',
     path: path.join(__dirname, '../local/public'),
     filename: '[name].js',
   },

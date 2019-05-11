@@ -19,7 +19,7 @@ const client = {
     './client/index.js',
   ],
   output: {
-    publicPath: '/',
+    publicPath: '//dkny.oss-cn-hangzhou.aliyuncs.com/2/',
     path: path.join(__dirname, '../dist/public'),
     filename: '[name].js',
   },
