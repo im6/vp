@@ -1,10 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser  from 'cookie-parser';
-import expressSession from 'express-session';
+import cookieSession from 'cookie-session';
 import csrf from 'csurf';
 import helmet from 'helmet';
-import mysqlSession from 'express-mysql-session';
 import route from './modules/api/route';
 import {
   h5Route,
@@ -20,43 +19,21 @@ import {
 } from './config'
 
 const app = express();
-const sessionConfig = {
-  secret: sessionSecret,
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    secure: false,
-  },
-};
-
-if (!isDev) {
-  const mySQLStore = mysqlSession(expressSession);
-  sessionConfig.store = new mySQLStore({
-    host: process.env.SQL_HOST,
-    port: process.env.SQL_PORT,
-    user: process.env.SQL_USERNAME,
-    password: process.env.SQL_PASSWORD,
-    database: process.env.SQL_DATABASE,
-    checkExpirationInterval: 4 * 3600 * 1000,
-    expiration: 12 * 3600 * 1000,
-    schema: {
-      tableName: 'old_sessions',
-      columnNames: {
-        session_id: 'session_id',
-        expires: 'expires',
-        data: 'data',
-      },
-    },
-  });
-  console.log('session is now using mysql');
-}
 
 app.set('x-powered-by', false);
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(expressSession(sessionConfig));
+app.use(cookieSession({
+  name: 'session',
+  keys: [sessionSecret],
+  domain: isDev ? 'localhost' : 'react.colorpk.com',
+  maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
+  httpOnly: true,
+  secure: !isDev,
+}));
+
 if (isDev) {
   app.get('/static/:fileName', staticFile);
 } else {
