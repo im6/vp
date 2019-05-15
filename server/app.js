@@ -37,12 +37,7 @@ app.use(cookieSession({
 if (isDev) {
   app.get('/static/:fileName', staticFile);
 } else {
-  app.use(csrf({
-    cookie: {
-      secure: true,
-      domain: 'react.colorpk.com',
-    },
-  }));
+  app.use(csrf());
 }
 app.use('/api', route);
 app.get('/*', h5Route);
