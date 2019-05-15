@@ -33,11 +33,9 @@ app.use(cookieSession({
   httpOnly: true,
   secure: !isDev,
 }));
-
+app.use(csrf());
 if (isDev) {
   app.get('/static/:fileName', staticFile);
-} else {
-  app.use(csrf());
 }
 app.use('/api', route);
 app.get('/*', h5Route);
