@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { fbApi as baseURL } from '../../config';
+import { fbApi as baseURL } from '../config';
 
 export const accessToken = (params) => {
   const req = axios({

@@ -4,19 +4,19 @@ import cookieParser  from 'cookie-parser';
 import cookieSession from 'cookie-session';
 import csrf from 'csurf';
 import helmet from 'helmet';
-import route from './modules/api/route';
+import route from '../route';
 import {
   h5Route,
   staticFile,
-} from './middlewares/staticRender';
+} from '../middlewares/staticRender';
 import {
   onError,
   notFound,
-} from './middlewares/errorHandler';
+} from '../middlewares/errorHandler';
 import {
   sessionSecret,
   isDev,
-} from './config'
+} from '../config'
 
 const app = express();
 

@@ -1,8 +1,8 @@
 import path from 'path';
-const appRoot = process.env.PWD;
+const { PWD } = process.env;
 export const notFound = (req, res, next) => {
   console.error('NOT FOUND! url: ', req.url);
-  res.status(404).sendFile(path.resolve(appRoot,'./dist/public/404.html'));
+  res.status(404).sendFile(path.resolve(PWD,'./dist/public/404.html'));
 }
 export const onError = (err, req, res, next) => {
   if(err === 403){

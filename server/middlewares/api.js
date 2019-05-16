@@ -1,20 +1,20 @@
 
 import { escape } from 'mysql';
 import uuid from 'uuid';
-import { sqlExecOne } from '../../resource/db/mysqlConnection';
+import { sqlExecOne } from '../resource/mysqlConnection';
 import {
   resSuccessObj,
   resFailObj,
-} from '../../misc/helper';
+} from '../misc/helper';
 import {
   redirect_uri_fb,
   fbAppSecret,
   fbAppKey,
-} from '../../config';
+} from '../config';
 import {
   showUser,
   accessToken
-} from '../../resource/oauth/list';
+} from '../resource/oauth';
 
 const privateFn = {
   createFacebookLink: (state) => {
@@ -283,15 +283,6 @@ export const initColorLike = (req, res, next) => {
   });
 }
 
-export const getColorType = (req, res, next) => {
-  const qr = 'SELECT a.id AS `key`, a.name AS `value` FROM colorpk_colortype a';
-  sqlExecOne(qr).then((data) => {
-    res.json(resSuccessObj(data));
-  }, (data) => {
-    res.json(resFailObj(data));
-  });
-}
-
 export const toggleLike = (req, res, next) => {
   const qr = `UPDATE colorpk_color SET \`like\` = \`like\` ${req.body.willLike ? '+' : '-'}  1 WHERE id = ${req.body.id}`;
   sqlExecOne(qr).then(() => {
@@ -328,5 +319,40 @@ export const addNewColor = (req, res, next) => {
     });
   } else {
     res.json(resFailObj("invalid json"));
+  }
+}
+
+//=====  admin  ====
+
+export const getAnonymousColor = (req, res, next) => {
+  const qr = 'SELECT * FROM colorpk_color a WHERE a.display = 1';
+  sqlExecOne(qr).then((data) => {
+    res.json(resSuccessObj(data));
+  }, (data) => {
+    res.json(resFailObj(data));
+  });
+}
+
+export const postDecideColor = (req, res, next) => {
+  const decision = req.body.display,
+    id = req.body.id;
+  let query = null;
+
+  if(typeof id === 'number'){
+    if(decision){
+      query = `DELETE FROM colorpk_color WHERE id = '${id}'`;
+    }else{
+      query = `UPDATE colorpk_color SET \`display\` = 0 WHERE id = ${id}`;
+    }
+
+    sqlExecOne(query).then((data) => {
+      res.json(resSuccessObj(data));
+    }, (data) => {
+      res.json(resFailObj(data));
+    });
+  } else {
+    res.json({
+      error: true,
+    });
   }
 }

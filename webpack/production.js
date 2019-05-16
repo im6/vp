@@ -112,7 +112,7 @@ const server = {
     extensions: ['.js'],
   },
   entry: [
-    path.join(__dirname, '../server/entry.js'),
+    path.join(__dirname, '../server'),
   ],
   output: {
     publicPath: '/',
