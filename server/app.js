@@ -31,7 +31,6 @@ app.use(cookieSession({
   domain: isDev ? 'localhost:3000' : 'react.colorpk.com',
   maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
   httpOnly: true,
-  secure: !isDev,
 }));
 if (isDev) {
   app.get('/static/:fileName', staticFile);
