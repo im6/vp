@@ -8,12 +8,10 @@ import {
 } from '../misc/helper';
 import {
   redirect_uri_fb,
-  fbAppSecret,
   fbAppKey,
 } from '../config';
 import {
   showUser,
-  accessToken
 } from '../resource/oauth';
 
 const privateFn = {
@@ -24,16 +22,6 @@ const privateFn = {
       "&state=" + state +
       "&redirect_uri=" + redirect_uri_fb;
     return url;
-  },
-
-  getOauthQsObj: (oauthName, qs) => {
-    const result = {
-      client_id: fbAppKey,
-      client_secret: fbAppSecret,
-      code: qs.code,
-      redirect_uri: redirect_uri_fb
-    };
-    return result;
   },
 
   checkUserInfo: (oauth, uid) => {
@@ -198,39 +186,6 @@ export const getUserInfo = (req, res, next) => {
         isAuth: false,
       });
     });
-  }
-}
-
-export const oauthLogin = (req, res) => {
-  const qs = req.query,
-    oauthName = req.params.oauth;
-  if(qs.code &&
-    qs.state &&
-    req.session.app &&
-    qs.state === req.session.app.oauthState){
-    console.log(`redirected by ${oauthName} auth...`);
-    const qsObj = privateFn.getOauthQsObj(oauthName, qs);
-    accessToken(qsObj).then((data) => {
-      data = data.data;
-      if(data.access_token){
-        req.session.app = {
-          oauth: oauthName,
-          isAuth: true,
-          tokenInfo: data
-        };
-      }
-      res.redirect("/");
-    });
-  } else {
-    console.log('inconsistant session, error msg in session');
-    req.session.app = {
-      isAuth: false,
-      alert: {
-        type: 0,
-        detail: 'Sorry, something error, please try again.'
-      }
-    };
-    res.redirect("/");
   }
 }
 

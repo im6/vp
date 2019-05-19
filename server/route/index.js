@@ -5,7 +5,6 @@ import {
   isAdmin,
 } from '../middlewares/auth';
 import {
-  oauthLogin,
   getUserInfo,
   getInitAuth,
   logoff,
@@ -21,7 +20,6 @@ import {
 
 const router = express.Router();
 
-router.get('/login/:oauth', oauthLogin);
 router.post('/getUserInfo', getUserInfo);
 router.post('/getInitAuth', getInitAuth);
 router.post('/logoff', logoff);

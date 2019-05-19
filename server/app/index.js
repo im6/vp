@@ -5,6 +5,7 @@ import cookieSession from 'cookie-session';
 import csrf from 'csurf';
 import helmet from 'helmet';
 import route from '../route';
+import { oauthLogin } from '../middlewares/auth';
 import {
   h5Route,
   staticFile,
@@ -37,6 +38,7 @@ if (isDev) {
   app.get('/static/:fileName', staticFile);
 }
 app.use('/api', route);
+app.get('/auth/:oauth', oauthLogin);
 app.get('/*', h5Route);
 app.use(onError);
 app.use(notFound);
