@@ -25,7 +25,7 @@ const privateFn = {
   },
 
   checkUserInfo: (oauth, uid) => {
-    const qr = `SELECT * FROM colorpk_user WHERE oauth = '${oauth}' AND oauthid = ${uid}`;
+    const qr = `SELECT * FROM colorpk_user WHERE oauth = '${oauth}' AND oauthid = ${escape(uid)}`;
     return sqlExecOne(qr);
   },
   createNewUser: (oauth, name, id) => {
@@ -41,11 +41,11 @@ const privateFn = {
     return sqlExecOne(qr);
   },
   getUserLike: (userid) => {
-    const qr = `SELECT color_id FROM colorpk_userlike WHERE user_id= '${userid}'`;
+    const qr = `SELECT color_id FROM colorpk_userlike WHERE user_id= '${escape(userid)}'`;
     return sqlExecOne(qr);
   },
   updateUserLoginDate: (userid) => {
-    const qr = `UPDATE colorpk_user SET lastlogin=NOW() WHERE id=${userid}`;
+    const qr = `UPDATE colorpk_user SET lastlogin=NOW() WHERE id=${escape(userid)}`;
     return sqlExecOne(qr);
   },
 
@@ -207,7 +207,8 @@ export const initColorList = (req, res, next) => {
 }
 
 export const initColorPortfolio = (req, res, next) => {
-  const qr = `SELECT a.*, false as \`liked\` FROM colorpk_color a WHERE userid = '${req.session.app.dbInfo.id}' `;
+  const uid = escape(req.session.app.dbInfo.id);
+  const qr = `SELECT a.*, false as \`liked\` FROM colorpk_color a WHERE userid = '${uid}' `;
   sqlExecOne(qr).then((data) => {
     res.json(resSuccessObj(data));
   }, (data) => {
@@ -216,7 +217,8 @@ export const initColorPortfolio = (req, res, next) => {
 }
 
 export const initColorLike = (req, res, next) => {
-  const qr1 = `SELECT a.color_id FROM colorpk_userlike a WHERE a.user_id = '${req.session.app.dbInfo.id}' `;
+  const uid = escape(req.session.app.dbInfo.id);
+  const qr1 = `SELECT a.color_id FROM colorpk_userlike a WHERE a.user_id = '${uid}' `;
   sqlExecOne(qr1).then((data) => {
     if(data.length < 1){
       res.json(resSuccessObj([]));
@@ -239,7 +241,7 @@ export const initColorLike = (req, res, next) => {
 }
 
 export const toggleLike = (req, res, next) => {
-  const qr = `UPDATE colorpk_color SET \`like\` = \`like\` ${req.body.willLike ? '+' : '-'}  1 WHERE id = ${req.body.id}`;
+  const qr = `UPDATE colorpk_color SET \`like\` = \`like\` ${req.body.willLike ? '+' : '-'}  1 WHERE id = ${escape(req.body.id)}`;
   sqlExecOne(qr).then(() => {
     res.json(resSuccessObj(1));
   }, () => {
