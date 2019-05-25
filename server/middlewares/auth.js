@@ -8,10 +8,11 @@ import {
 } from '../resource/oauth';
 
 const getOauthQsObj = (_, qs) => {
+  const { code } = qs;
   const result = {
     client_id: fbAppKey,
     client_secret: fbAppSecret,
-    code: qs.code,
+    code,
     redirect_uri: redirect_uri_fb
   };
   return result;
