@@ -3,7 +3,6 @@ import { handleActions } from 'redux-actions';
 import Immutable, { fromJS } from 'immutable';
 
 const color = handleActions({
-
   ['color/get'](state) {
     return state.merge({
       loading: true
@@ -12,13 +11,11 @@ const color = handleActions({
 
   ['color/get/success'](state, action) {
     const colorId = [], colorDef = {};
-
     action.payload.forEach(v => {
       colorId.push(v.id.toString());
       colorDef[v.id] = v;
     });
     const colorIdByLike = action.payload.sort((a, b) => (b.like - a.like)).map(v => v.id.toString());
-
     return state.merge({
       colorId: colorId,
       colorIdByLike,
@@ -56,18 +53,22 @@ const color = handleActions({
     const { willLike, id } = action.payload;
     state = state.setIn(['liked', id], willLike);
     state = state.updateIn(['colorDef', id, 'like'], v => v + (willLike ? 1 : -1));
+    if(!willLike) {
+      state = state.updateIn(['myLiked'], v => {
+        return v.filter(v1 => v1 !== id );
+      });
+    }
     return state;
   },
 
   ['color/initLike'](state, action) {
-    let likedList = action.payload.like,
+    const likedList = action.payload.like,
       lcjs = {};
     if(likedList){
       likedList.forEach(v => {
         lcjs['d' + v] = true
-      })
+      });
     }
-
     return state.update('liked', (v) => v.merge(lcjs));
   },
 
@@ -78,7 +79,6 @@ const color = handleActions({
       v.unshift(id);
       return v;
     });
-
     return state;
   },
 
