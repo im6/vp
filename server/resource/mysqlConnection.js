@@ -14,7 +14,6 @@ const pool = mysql.createPool({
 export const getPool = () => pool;
 export const sqlExecOne = qr => {
   return new Promise((resolve, reject) => {
-    console.log(qr);
     pool.query(qr, (err, rows, fields) => {
       if(err) {
         console.error(err);
