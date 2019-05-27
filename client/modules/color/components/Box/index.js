@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import style from './style.sass';
 import ColorCanvas from './components/ColorCanvas';
+import Heart from './components/Heart';
 
 class Box extends React.Component {
   constructor(props){
@@ -27,7 +28,6 @@ class Box extends React.Component {
   }
 
   render() {
-    const heartUrl = `//dkny.oss-cn-hangzhou.aliyuncs.com/4/hrt${this.props.liked ? 'r': ''}.svg`
     return <div
       className={style.box}
       >
@@ -38,7 +38,8 @@ class Box extends React.Component {
         <button
           className='button is-small'
           onClick={this.onLikeClick}>
-            <img src={heartUrl} />
+            <Heart red={this.props.liked} />
+            &nbsp;&nbsp;
             {this.props.boxInfo.get('like')}
         </button>
         {
