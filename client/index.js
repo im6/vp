@@ -12,14 +12,12 @@ const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
 let compose = compose0;
 
-if(__DEV__){
+if(process.env.NODE_ENV === 'development'){
   const logger = require('redux-logger').default;
   middlewares.push(logger);
   compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 } else {
-  window.dataLayer.push({
-    'scriptLoadingTime': Date.now() - window._colorpk.load0
-  });
+  window.dispatchEvent(new Event('_COLORPK_SCRIPT_READY'));
 }
 
 const enhancers = applyMiddleware(...middlewares);

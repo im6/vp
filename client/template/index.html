@@ -15,6 +15,12 @@
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-5LX6LV3');
+
+            window.addEventListener('_COLORPK_SCRIPT_READY', function(){
+              window.dataLayer.push({
+                'scriptLoadingTime': Date.now() - window._colorpk.load0
+              });
+            });
           }
         </script>
     </head>

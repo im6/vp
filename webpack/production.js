@@ -69,9 +69,6 @@ const client = {
     ],
   },
   plugins: [
-    new webpack.DefinePlugin({
-      '__DEV__': JSON.stringify(false)
-    }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css'

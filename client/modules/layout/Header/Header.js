@@ -37,7 +37,7 @@ class Header extends React.Component {
   render() {
     const { url, isAuth, detail, authReady } = this.props;
     let imagUrl = isAuth ? detail.get('img') : '//dkny.oss-cn-hangzhou.aliyuncs.com/2/icon.png'
-    if (__DEV__ && isAuth) {
+    if (process.env.NODE_ENV === 'development' && isAuth) {
       imagUrl = 'http://dkny.oss-cn-hangzhou.aliyuncs.com/temp/test_profile.jpeg';
     }
     return (<nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
