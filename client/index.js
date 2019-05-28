@@ -16,7 +16,11 @@ if(__DEV__){
   const logger = require('redux-logger').default;
   middlewares.push(logger);
   compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
-};
+} else {
+  window.dataLayer.push({
+    'scriptLoadingTime': Date.now() - window._colorpk.load0
+  });
+}
 
 const enhancers = applyMiddleware(...middlewares);
 const store = createStore(combineReducers(moduleReducers),
