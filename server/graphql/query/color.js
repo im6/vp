@@ -4,9 +4,9 @@ import { sqlExecOne } from '../../resource/mysqlConnection';
 
 const color = {
   type: new List(ColorType),
-  resolve(a) {
+  resolve() {
     const qr = 'SELECT a.* FROM colorpk_color a WHERE a.display=0 ORDER BY \`id\` DESC';
-    sqlExecOne(qr).then((data) => {
+    return sqlExecOne(qr).then((data) => {
       return data.map(v => {
         const {
           id,
@@ -22,11 +22,10 @@ const color = {
           color,
           userid,
           username,
-          display,createdate
+          display,
+          createdate,
         }
-      })
-    }, (data) => {
-      return []
+      });
     });
   }
 };

@@ -6,9 +6,9 @@ import {
   GraphQLNonNull,
 } from 'graphql';
 
-const User = new GraphQLObjectType({
+const UserType = new GraphQLObjectType({
   name: 'User',
-  description: 'ColorPK Registered Users',
+  description: 'ColorPK User Model',
   fields: {
     id: { type: new GraphQLNonNull(GraphQLInt) },
     oauth: { type: new GraphQLNonNull(GraphQLString) },
@@ -19,4 +19,4 @@ const User = new GraphQLObjectType({
   },
 });
 
-export default User;
+export default UserType;

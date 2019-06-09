@@ -13,7 +13,7 @@ const schema = new Schema({
       color,
       user,
     },
-  }),
+  })
 });
 
 export default schema;
