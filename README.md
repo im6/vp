@@ -6,6 +6,7 @@
 
 - bulma
 - express.js
+- graphQL
 - mysql
 - react
 - redux

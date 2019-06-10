@@ -7,7 +7,7 @@ import csrf from 'csurf';
 import helmet from 'helmet';
 import route from '../route';
 import { oauthLogin } from '../middlewares/auth';
-import graphqlMd from '../middlewares/graphql';
+import graphql from '../middlewares/graphql';
 import {
   h5Route,
   staticFile,
@@ -42,7 +42,7 @@ if (isDev) {
   app.use(csrf());
 }
 
-app.use('/graphql', graphqlMd);
+app.use('/graphql', graphql);
 app.use('/api', route);
 app.get('/auth/:oauth', oauthLogin);
 app.get('/*', h5Route);
