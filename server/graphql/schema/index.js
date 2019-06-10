@@ -5,6 +5,7 @@ import {
 
 import color from '../query/color';
 import user from '../query/user';
+import likeColor from '../mutation/likeColor';
 
 const schema = new Schema({
   query: new ObjectType({
@@ -13,7 +14,13 @@ const schema = new Schema({
       color,
       user,
     },
-  })
+  }),
+  mutation: new ObjectType({
+    name: 'Mutation',
+    fields: {
+      likeColor,
+    },
+  }),
 });
 
 export default schema;

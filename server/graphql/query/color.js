@@ -2,7 +2,7 @@ import {
   GraphQLList as List,
   GraphQLInt,
 } from 'graphql';
-import ColorType from '../type/color';
+import ColorType from '../type/ColorType';
 import { sqlExecOne } from '../../resource/mysqlConnection';
 
 const color = {
@@ -10,7 +10,7 @@ const color = {
   args: {
     id: { type: GraphQLInt },
   },
-  resolve() {
+  resolve(obj, args, context, info) {
     const qr = 'SELECT a.* FROM colorpk_color a WHERE a.display=0 ORDER BY \`id\` DESC';
     return sqlExecOne(qr).then((data) => {
       return data.map(v => {

@@ -1,4 +1,4 @@
-import UserType from '../type/user';
+import UserType from '../type/UserType';
 import { sqlExecOne } from '../../resource/mysqlConnection';
 
 import {
@@ -29,7 +29,7 @@ const query = {
         return null;
       }
     });
-  }
+  },
 };
 
 export default query;
