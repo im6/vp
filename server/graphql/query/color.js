@@ -1,9 +1,15 @@
-import { GraphQLList as List } from 'graphql';
+import {
+  GraphQLList as List,
+  GraphQLInt,
+} from 'graphql';
 import ColorType from '../type/color';
 import { sqlExecOne } from '../../resource/mysqlConnection';
 
 const color = {
   type: new List(ColorType),
+  args: {
+    id: { type: GraphQLInt },
+  },
   resolve() {
     const qr = 'SELECT a.* FROM colorpk_color a WHERE a.display=0 ORDER BY \`id\` DESC';
     return sqlExecOne(qr).then((data) => {
@@ -14,7 +20,8 @@ const color = {
           color,
           userid,
           username,
-          display,createdate
+          display,
+          createdate,
         } = v;
         return {
           id,
