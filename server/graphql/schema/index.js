@@ -1,26 +1,46 @@
-import {
-  GraphQLSchema as Schema,
-  GraphQLObjectType as ObjectType,
-} from 'graphql';
+import { buildSchema } from 'graphql';
 
-import color from '../query/color';
-import user from '../query/user';
-import likeColor from '../mutation/likeColor';
+const schemaStr = `
+  type Color {
+    id: Int!,
+    like: Int!,
+    color: String!,
+    userid: Int,
+    username: String,
+    display: Boolean,
+    createdate: String,
+  }
+  type User {
+    id: Int!,
+    oauth: String!,
+    name: String,
+    oauthid: String!,
+    isadmin: Boolean,
+    lastlogin: String,
+  }
 
-const schema = new Schema({
-  query: new ObjectType({
-    name: 'Query',
-    fields: {
-      color,
-      user,
-    },
-  }),
-  mutation: new ObjectType({
-    name: 'Mutation',
-    fields: {
-      likeColor,
-    },
-  }),
-});
+  input LikeColorInputType {
+    id: Int!,
+    willLike: Boolean!
+  }
+  type MutationOutputType {
+    error: Boolean!,
+    data: String
+  }
 
+
+  type Mutation {
+    likeColor(input: LikeColorInputType!): MutationOutputType
+  }
+  type Query {
+    color: [Color],
+    user(oauth: String, oauthid: String): User
+  }
+  schema {
+    query: Query
+    mutation: Mutation
+  } 
+`;
+
+const schema = buildSchema(schemaStr);
 export default schema;

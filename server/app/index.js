@@ -8,6 +8,7 @@ import helmet from 'helmet';
 import route from '../route';
 import { oauthLogin } from '../middlewares/auth';
 import schema from '../graphql/schema';
+import root from '../graphql/root'
 import {
   h5Route,
   staticFile,
@@ -44,6 +45,7 @@ if (isDev) {
 
 app.use('/graphql', graphqlHTTP({
   schema,
+  rootValue: root,
   graphiql: isDev,
   pretty: isDev,
 }))
