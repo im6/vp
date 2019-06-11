@@ -1,7 +1,8 @@
 import { escape } from 'mysql';
+import { sqlExecOne } from '../../resource/mysqlConnection';
 
 const root = {
-  user: ({ oauth, oauthid }, { sqlExecOne }) => {
+  user: ({ oauth, oauthid }, req) => {
     const qr = `SELECT * FROM colorpk_user WHERE oauth = '${oauth}' AND oauthid = ${escape(oauthid)}`;
     return sqlExecOne(qr).then((data) => {
       if(data.length > 0){
@@ -18,7 +19,7 @@ const root = {
       }
     });
   },
-  color: (args, { sqlExecOne }) => {
+  color: (args, req) => {
     const qr = 'SELECT a.* FROM colorpk_color a WHERE a.display=0 ORDER BY \`id\` DESC';
     return sqlExecOne(qr).then((data) => {
       return data.map(v => {
@@ -44,7 +45,7 @@ const root = {
     });
   },
 
-  likeColor(args, { sqlExecOne }) {
+  likeColor(args, req) {
     const { id, willLike } = args.input;
     const qr = `UPDATE colorpk_color SET \`like\` = \`like\` ${willLike ? '+' : '-'}  1 WHERE id = ${escape(id)}`;
     return sqlExecOne(qr).then((resData) => {
