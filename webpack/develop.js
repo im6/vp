@@ -1,10 +1,9 @@
 const fs = require('fs')
 const path = require('path');
-const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const ServerStartPlugin = require('./plugins/ServerStartPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -79,8 +78,9 @@ const client = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
-              localIdentName: '[hash:base64:5]',
+              modules: {
+                localIdentName: '[hash:base64:5]',
+              },
             },
           },
           'sass-loader',

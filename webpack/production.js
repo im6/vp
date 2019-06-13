@@ -1,11 +1,9 @@
 const path = require('path');
-const webpack = require('webpack');
-const nodeExternals = require('webpack-node-externals');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
 const bulmaDir = /client\/modules\/app/;
@@ -37,7 +35,6 @@ const client = {
           },
         }],
       },
-
       {
         test: /\.sass$/,
         use: [
@@ -58,8 +55,9 @@ const client = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
-              localIdentName: '[hash:base64:5]',
+              modules: {
+                localIdentName: '[hash:base64:5]',
+              },
             },
           },
           'sass-loader',
@@ -90,7 +88,6 @@ const client = {
     ]),
   ],
   optimization: {
-    minimizer: [new UglifyJsPlugin()],
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
@@ -131,9 +128,6 @@ const server = {
     ],
   },
   plugins: [],
-  optimization: {
-    minimizer: [new UglifyJsPlugin()],
-  },
 };
 
 module.exports = [client, server];
