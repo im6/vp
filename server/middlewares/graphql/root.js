@@ -22,7 +22,34 @@ const root = {
     });
   },
   color: (args, req) => {
-    const qr = 'SELECT a.* FROM colorpk_color a WHERE a.display=0 ORDER BY \`id\` DESC';
+    const { category } = args;
+    const userId = get(req, 'session.app.dbInfo.id');
+    if (!userId && (['LIKES', 'PROFILE'].indexOf(category) > -1)) {
+      return new GraphQLError({
+        message: 'no user defined',
+      });
+    }
+    const uid = escape(userId);
+    let qr = null;
+
+    switch(category) {
+      case 'PUBLIC':
+        qr = 'SELECT a.* FROM colorpk_color a WHERE a.display=0 ORDER BY \`id\` DESC';
+        break;
+      case 'LIKES':
+        qr = `SELECT a.color_id FROM colorpk_userlike a WHERE a.user_id = ${uid} `;
+        break;
+      case 'PROFILE':
+        qr = `SELECT a.*, false as \`liked\` FROM colorpk_color a WHERE userid = ${uid} `;
+        break;
+      case 'ANONYMOUS':
+          qr = 'SELECT * FROM colorpk_color a WHERE a.display = 1';
+        break;
+      default:
+        qr = 'SELECT a.* FROM colorpk_color a WHERE a.display=0';
+        break;
+    }
+
     return sqlExecOne(qr).then((data) => {
       return data.map(v => {
         const {

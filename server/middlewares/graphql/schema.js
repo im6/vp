@@ -1,6 +1,13 @@
 import { buildSchema } from 'graphql';
 
 const schemaStr = `
+  enum ColorCategory {
+    PUBLIC
+    LIKES
+    PROFILE
+    ANONYMOUS
+  }
+
   type Color {
     id: Int!
     like: Int!
@@ -17,6 +24,8 @@ const schemaStr = `
     oauthid: String!
     isadmin: Boolean
     lastlogin: String
+    img: String
+    likes: [Int!]
   }
 
   input LikeColorInputType {
@@ -47,7 +56,7 @@ const schemaStr = `
     adjudicateColor(input: LikeColorInputType!): AdjudicateColorOutputType
   }
   type Query {
-    color: [Color]
+    color(category: ColorCategory!): [Color]
     user(oauth: String, oauthid: String): User
   }
   schema {
