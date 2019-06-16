@@ -1,4 +1,6 @@
 import { escape } from 'mysql';
+import { GraphQLError } from 'graphql';
+import get from 'lodash.get';
 import { sqlExecOne } from '../../resource/mysqlConnection';
 
 const root = {
@@ -40,7 +42,7 @@ const root = {
           username,
           display,
           createdate,
-        }
+        };
       });
     });
   },
@@ -53,11 +55,57 @@ const root = {
         error: resData.affectedRows !== 1,
         data: null,
       };
-    }, () => {
+    }, (message) => {
+      return new GraphQLError({
+        message,
+      });
+    });
+  },
+
+  createColor(args, req) {
+    const { color } = args.input;
+    const hasAuth = get(req, 'session.app.isAuth', false);
+    const sessionUsername = get(req, 'session.app.dbInfo.name', null);
+    const sessionUserid = get(req, 'session.app.dbInfo.id', null)
+    const username = (hasAuth && sessionUsername)? `'${sessionUsername}'` : 'NULL';
+    const userid = (hasAuth && sessionUserid)? `${sessionUserid}` : 'NULL';
+    const displayItem = userid == 'NULL' ? 1 : 0;
+    const random = (Math.random() * 10).toFixed();
+
+    if(color.length === 27) {
+      const qr = `INSERT INTO colorpk_color (\`like\`, color, userid, username, colortype, display, createdate) VALUES (${random}, '${color}', ${userid}, ${username}, NULL, ${displayItem}, NOW())`;
+      return sqlExecOne(qr).then((row) => {
+        return {
+          error: false,
+          data: row.insertId,
+        }
+      }, (err) => {
+        return new GraphQLError({
+          message: err,
+        });
+      });
+    } else {
+      return new GraphQLError({
+        message: 'invalid color input',
+      });
+    }
+  },
+
+  adjudicateColor(args, req) {
+    const { id, willLike } = args.input;
+    const qr = willLike ? 
+      `UPDATE colorpk_color SET \`display\` = 0 WHERE id = ${escape(id)}`:
+      `DELETE FROM colorpk_color WHERE id = '${id}'`;
+      
+    return sqlExecOne(qr).then((resData) => {
       return {
-        error: true,
+        error: resData.affectedRows !== 1,
         data: null,
       };
+    }, (err) => {
+      return new GraphQLError({
+        message: err,
+      });
     });
   },
 };

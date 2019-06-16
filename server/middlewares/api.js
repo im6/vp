@@ -291,8 +291,8 @@ export const postDecideColor = (req, res) => {
       query = `UPDATE colorpk_color SET \`display\` = 0 WHERE id = ${escape(id)}`;
     }
 
-    sqlExecOne(query).then((data) => {
-      res.json(resSuccessObj(data));
+    return sqlExecOne(query).then((data) => {
+      return 
     }, (data) => {
       res.json(resFailObj(data));
     });

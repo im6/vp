@@ -26,15 +26,25 @@ const schemaStr = `
   input CreateColorInputType {
     color: String!
   }
-  type MutationOutputType {
+
+  type LikeColorOutputType {
+    error: Boolean!
+    data: String
+  }
+  type CreateColorOutputType {
+    error: Boolean!
+    data: Int!
+  }
+  type AdjudicateColorOutputType {
     error: Boolean!
     data: String
   }
 
 
   type Mutation {
-    likeColor(input: LikeColorInputType!): MutationOutputType
-    createColor(input: CreateColorInputType!): MutationOutputType
+    likeColor(input: LikeColorInputType!): LikeColorOutputType
+    createColor(input: CreateColorInputType!): CreateColorOutputType
+    adjudicateColor(input: LikeColorInputType!): AdjudicateColorOutputType
   }
   type Query {
     color: [Color]
