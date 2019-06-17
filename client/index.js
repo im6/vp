@@ -1,4 +1,5 @@
 /* eslint global-require:0 */
+import 'core-js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';

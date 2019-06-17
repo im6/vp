@@ -21,7 +21,7 @@ const root = {
       }
     });
   },
-  color: (args, req) => {
+  async color (args, req) {
     const { category } = args;
     const userId = get(req, 'session.app.dbInfo.id');
     if (!userId && (['LIKES', 'PROFILE'].indexOf(category) > -1)) {
@@ -49,28 +49,17 @@ const root = {
         qr = 'SELECT a.* FROM colorpk_color a WHERE a.display=0';
         break;
     }
-
-    return sqlExecOne(qr).then((data) => {
-      return data.map(v => {
-        const {
-          id,
-          like,
-          color,
-          userid,
-          username,
-          display,
-          createdate,
-        } = v;
-        return {
-          id,
-          like,
-          color,
-          userid,
-          username,
-          display,
-          createdate,
-        };
-      });
+    const colors = await sqlExecOne(qr)
+    return colors.map(v => {
+      return {
+        id: v.id,
+        like: v.like,
+        color: v.color,
+        userid: v.userid,
+        username: v.username,
+        display: v.display,
+        createdate: v.createdate,
+      };
     });
   },
 

@@ -14,7 +14,6 @@ const client = {
     extensions: ['.js'],
   },
   entry: [
-    '@babel/polyfill',
     './client/index.js',
   ],
   output: {
@@ -106,6 +105,7 @@ const server = {
     extensions: ['.js'],
   },
   entry: [
+    "regenerator-runtime/runtime",
     path.join(__dirname, '../server'),
   ],
   output: {
