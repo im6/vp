@@ -14,7 +14,6 @@ const schemaStr = `
     color: String!
     userid: Int
     username: String
-    display: Boolean
     createdate: String
   }
   type User {
@@ -48,7 +47,6 @@ const schemaStr = `
     error: Boolean!
     data: String
   }
-
 
   type Mutation {
     likeColor(input: LikeColorInputType!): LikeColorOutputType

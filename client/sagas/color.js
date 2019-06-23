@@ -3,11 +3,11 @@ import { call, put, fork } from 'redux-saga/effects';
 import requester from '../services/requester';
 import { createAction } from 'redux-actions';
 import { downloadCanvas } from '../misc/util.js';
+import get from 'lodash.get';
 
 function* watchers(a) {
   yield takeLatest("color/get", initColorList);
   yield takeLatest("color/getUserColor", getUserColor);
-  yield takeLatest("color/loadMore", colorLoadMore);
   yield takeLatest("color/toggleLike", toggleLike);
   yield takeLatest("color/addNew", addNew);
   yield takeLatest('color/download', download);
@@ -42,33 +42,32 @@ function* getUserColor(action) {
 }
 
 function* initColorList() {
-  const payload = yield call(requester, '/api/initColorList');
-  if(payload.error){
+  const payload = yield call(requester, '/graphql', {
+    query: `
+      query {
+        color(category: PUBLIC) {
+          id
+          like
+          color
+          userid
+          username
+          createdate
+        }
+      }
+    `
+  });
+  const gqlRes = get(payload, 'data.color', null)
+  if(gqlRes){
+    yield put({
+      type: "color/get/success",
+      payload: gqlRes
+    });
+  } else {
     yield put({
       type: "color/get/fail",
       payload: null,
     });
     console.error('create new color failed! ' + payload.result.code);
-  } else {
-    yield put({
-      type: "color/get/success",
-      payload: payload.result
-    });
-  }
-}
-
-function* colorLoadMore() {
-  try {
-    const payload = yield call(requester, '/api/initColorList');
-    yield put({
-      type: "color/loadMore/success",
-      payload: payload.result
-    });
-  } catch (e) {
-    yield put({
-      type: "color/loadMore/fail",
-      payload: {msg: e}
-    });
   }
 }
 
