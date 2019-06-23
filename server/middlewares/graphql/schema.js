@@ -9,7 +9,7 @@ const schemaStr = `
   }
 
   type Color {
-    id: Int!
+    id: ID!
     like: Int!
     color: String!
     userid: Int
@@ -17,7 +17,7 @@ const schemaStr = `
     createdate: String
   }
   type User {
-    id: Int!
+    id: ID!
     oauth: String!
     name: String
     oauthid: String!
@@ -28,7 +28,7 @@ const schemaStr = `
   }
 
   input LikeColorInputType {
-    id: Int!
+    id: ID!
     willLike: Boolean!
   }
   input CreateColorInputType {

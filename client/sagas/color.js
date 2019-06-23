@@ -16,6 +16,14 @@ const colorql = `query($cate: ColorCategory!) {
   }
 }`;
 
+const likeql = `mutation($val: LikeColorInputType!) {
+    likeColor(input: $val) {
+      data
+      error
+    }
+  }
+`;
+
 function* watchers(a) {
   yield takeLatest("color/get", initColorList);
   yield takeLatest("color/getUserColor", getUserColor);
@@ -39,13 +47,13 @@ function* getUserColor(action) {
     query: colorql,
     variables: { cate },
   });
-  const gqlRes = get(payload, 'data.color', null)
+  const gqlRes = get(payload, 'data.color', null);
   if(gqlRes){
     yield put({
       type: "color/getUserColor/success",
       payload: {
         name: action.payload === 'myPortfolio' ? 'myPortfolio' : 'myLiked',
-        data: gqlRes
+        data: gqlRes,
       },
     });
   } else {
@@ -76,10 +84,16 @@ function* initColorList() {
 }
 
 function* toggleLike(action) {
-  yield call(requester, '/api/toggleLike', {
-    ...action.payload,
-    id: parseInt(action.payload.id),
+  const res = yield call(requester, '/graphql', {
+    query: likeql,
+    variables: {
+      val: action.payload
+    }
   });
+
+  if(get(res, 'data.likeColor.error', false)) {
+    console.error(get(res, 'data.likeColor.data'));
+  }
 }
 
 function* addNew(action) {

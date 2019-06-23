@@ -13,3 +13,18 @@ query($cate: ColorCategory!) {
   "cate": "PUBLIC"
 }
 
+
+
+mutation($val: LikeColorInputType!) {
+  likeColor(input: $val) {
+    data
+    error
+  }
+}
+
+{
+  "val": {
+    "id": 1,
+    "willLike": true
+  }
+}
