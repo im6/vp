@@ -23,20 +23,34 @@ function download(action){
 }
 
 function* getUserColor(action) {
-  const endpoint = action.payload === 'myPortfolio' ? 'initColorPortfolio' : 'initColorLike';
-  const resObj = yield call(requester, `/api/${endpoint}`);
-  if(resObj.error){
-    yield put({
-      type: "color/getUserColor/fail",
-      payload: action.payload,
-    });
-  } else {
+  const cate = action.payload === 'myPortfolio' ? 'PROFILE' : 'LIKES'
+  const payload = yield call(requester, '/graphql', {
+    query: `
+      query {
+        color(category: ${cate}) {
+          id
+          like
+          color
+          userid
+          username
+          createdate
+        }
+      }
+    `
+  });
+  const gqlRes = get(payload, 'data.color', null)
+  if(gqlRes){
     yield put({
       type: "color/getUserColor/success",
       payload: {
-        name: action.payload,
-        data: resObj.result,
+        name: action.payload === 'myPortfolio' ? 'myPortfolio' : 'myLiked',
+        data: gqlRes
       },
+    });
+  } else {
+    yield put({
+      type: "color/getUserColor/fail",
+      payload: null,
     });
   }
 }
@@ -67,7 +81,6 @@ function* initColorList() {
       type: "color/get/fail",
       payload: null,
     });
-    console.error('create new color failed! ' + payload.result.code);
   }
 }
 

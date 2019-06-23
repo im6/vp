@@ -37,7 +37,10 @@ const root = {
         qr = 'SELECT a.* FROM colorpk_color a WHERE a.display=0 ORDER BY \`id\` DESC';
         break;
       case 'LIKES':
-        qr = `SELECT a.color_id FROM colorpk_userlike a WHERE a.user_id = ${uid} `;
+        qr = `SELECT a.* FROM colorpk_color a
+          INNER JOIN 
+          (SELECT color_id FROM colorpk_userlike WHERE user_id = ${uid}) b
+          ON id = b.color_id`;
         break;
       case 'PROFILE':
         qr = `SELECT a.*, false as \`liked\` FROM colorpk_color a WHERE userid = ${uid} `;
@@ -49,6 +52,7 @@ const root = {
         qr = 'SELECT a.* FROM colorpk_color a WHERE a.display=0';
         break;
     }
+
     const colors = await sqlExecOne(qr)
     return colors.map(v => {
       return {
@@ -57,7 +61,6 @@ const root = {
         color: v.color,
         userid: v.userid,
         username: v.username,
-        display: v.display,
         createdate: v.createdate,
       };
     });
