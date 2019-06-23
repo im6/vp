@@ -5,6 +5,17 @@ import { createAction } from 'redux-actions';
 import { downloadCanvas } from '../misc/util.js';
 import get from 'lodash.get';
 
+const colorql = `query($cate: ColorCategory!) {
+  color(category: $cate) {
+    id
+    like
+    color
+    userid
+    username
+    createdate
+  }
+}`;
+
 function* watchers(a) {
   yield takeLatest("color/get", initColorList);
   yield takeLatest("color/getUserColor", getUserColor);
@@ -25,18 +36,8 @@ function download(action){
 function* getUserColor(action) {
   const cate = action.payload === 'myPortfolio' ? 'PROFILE' : 'LIKES'
   const payload = yield call(requester, '/graphql', {
-    query: `
-      query {
-        color(category: ${cate}) {
-          id
-          like
-          color
-          userid
-          username
-          createdate
-        }
-      }
-    `
+    query: colorql,
+    variables: { cate },
   });
   const gqlRes = get(payload, 'data.color', null)
   if(gqlRes){
@@ -57,18 +58,8 @@ function* getUserColor(action) {
 
 function* initColorList() {
   const payload = yield call(requester, '/graphql', {
-    query: `
-      query {
-        color(category: PUBLIC) {
-          id
-          like
-          color
-          userid
-          username
-          createdate
-        }
-      }
-    `
+    query: colorql,
+    variables: { cate: "PUBLIC" }
   });
   const gqlRes = get(payload, 'data.color', null)
   if(gqlRes){

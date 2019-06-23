@@ -1,0 +1,15 @@
+query($cate: ColorCategory!) {
+  color(category: $cate) {
+    id
+    like
+    color
+    userid
+    username
+    createdate
+  }
+}
+
+{
+  "cate": "PUBLIC"
+}
+
