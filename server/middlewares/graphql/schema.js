@@ -29,23 +29,22 @@ const schemaStr = `
     id: ID!
     willLike: Boolean!
   }
+  
   input CreateColorInputType {
     color: String!
   }
 
   type LikeColorOutputType {
     status: Int!
-    data: String
+  }
+
+  type AdjudicateColorOutputType {
+    status: Int!
   }
 
   type CreateColorOutputType {
     status: Int!
     data: Int!
-  }
-
-  type AdjudicateColorOutputType {
-    error: Boolean!
-    data: String
   }
 
   type AuthOutputType {

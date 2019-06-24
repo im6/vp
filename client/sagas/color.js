@@ -18,7 +18,6 @@ const colorql = `query($cate: ColorCategory!) {
 
 const likeql = `mutation($val: LikeColorInputType!) {
     likeColor(input: $val) {
-      data
       status
     }
   }

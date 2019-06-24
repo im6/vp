@@ -17,8 +17,7 @@ const colorql = `query($cate: ColorCategory!) {
 
 const adjudicateql = `mutation($val: LikeColorInputType!) {
   adjudicateColor(input: $val) {
-    data
-    error
+    status
   }
 }`
 
@@ -50,9 +49,8 @@ function* postDecideColor(action) {
       val: action.payload,
     },
   });
-  const error = get(res, 'data.adjudicateColor.error', false) || get(res, 'errors[0]');
-
-  if(error) {
+  const status = get(res, 'data.adjudicateColor.status', 1)
+  if(status !== 0) {
     const payload = get(res, 'data.adjudicateColor.data', '');
     yield put({
       type: "admin/decideColor/fail",

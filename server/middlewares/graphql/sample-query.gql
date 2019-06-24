@@ -15,14 +15,12 @@ query($cate: ColorCategory!) {
 
 mutation($val: LikeColorInputType!) {
   adjudicateColor(input: $val) {
-    data
-    error
+    status
   }
 }
 
 mutation($val: LikeColorInputType!) {
   likeColor(input: $val) {
-    data
     status
   }
 }

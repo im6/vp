@@ -162,7 +162,6 @@ const root = {
       const resData = await sqlExecOne(qr)
       return {
         status: resData.affectedRows === 1 ? 0 : 1,
-        data: null,
       };
     } catch(err) {
       return new GraphQLError(err);
@@ -204,15 +203,14 @@ const root = {
     const qr = willLike ? 
       `UPDATE colorpk_color SET \`display\` = 0 WHERE id = ${escape(id)}`:
       `DELETE FROM colorpk_color WHERE id = '${id}'`;
-      
-    return sqlExecOne(qr).then((resData) => {
+    try {
+      const resData = await sqlExecOne(qr);
       return {
-        error: resData.affectedRows !== 1,
-        data: null,
+        status: resData.affectedRows === 1 ? 0 : 1,
       };
-    }, (err) => {
+    } catch (error) {
       return new GraphQLError(err);
-    });
+    }
   },
 
   logoff(_, req) {
