@@ -68,6 +68,7 @@ const color = handleActions({
   },
 
   ['color/getUserColor'](state, action) {
+    state = state.set(action.payload, []);
     return state.merge({
       loading: true
     });
