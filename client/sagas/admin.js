@@ -50,7 +50,8 @@ function* postDecideColor(action) {
       val: action.payload,
     },
   });
-  const error = get(res, 'data.adjudicateColor.error', false);
+  const error = get(res, 'data.adjudicateColor.error', false) || get(res, 'errors[0]');
+
   if(error) {
     const payload = get(res, 'data.adjudicateColor.data', '');
     yield put({

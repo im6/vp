@@ -51,6 +51,11 @@ const schemaStr = `
     data: String
   }
 
+  type AuthOutputType {
+    isAuth: Boolean!
+    url: String
+  }
+
   type Mutation {
     likeColor(input: LikeColorInputType!): LikeColorOutputType
     createColor(input: CreateColorInputType!): CreateColorOutputType
@@ -60,6 +65,7 @@ const schemaStr = `
   type Query {
     color(category: ColorCategory!): [Color]
     user(oauth: String, oauthid: String): User
+    auth: AuthOutputType
   }
 
   schema {
