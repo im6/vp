@@ -19,14 +19,14 @@ const mapDispatchToProps = (dispatch) => {
       const actcr = createAction('admin/decideColor');
       dispatch(actcr({
         id,
-        display: 0,
+        willLike: true,
       }));
     },
     onDelete(id) {
       const actcr = createAction('admin/decideColor');
       dispatch(actcr({
         id,
-        display: 1,
+        willLike: false,
       }));
     }
   }

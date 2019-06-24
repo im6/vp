@@ -2,6 +2,25 @@ import { takeLatest } from 'redux-saga/effects';
 import { call, put, fork } from 'redux-saga/effects';
 import requester from '../services/requester';
 import { createAction } from 'redux-actions';
+import get from 'lodash.get';
+
+const colorql = `query($cate: ColorCategory!) {
+  color(category: $cate) {
+    id
+    like
+    color
+    userid
+    username
+    createdate
+  }
+}`;
+
+const adjudicateql = `mutation($val: LikeColorInputType!) {
+  adjudicateColor(input: $val) {
+    data
+    error
+  }
+}`
 
 function* watchers() {
   yield takeLatest("admin/getList", getAnonymousColor);
@@ -9,30 +28,41 @@ function* watchers() {
 }
 
 function* getAnonymousColor(action) {
-  try {
-    const payload = yield call(requester, '/api/getAnonymousColor');
+  const payload = yield call(requester, '/graphql', {
+    query: colorql,
+    variables: { cate: "ANONYMOUS" },
+  });
+  const gqlRes = get(payload, 'data.color', null)
+  if(gqlRes){
     yield put({
-      type: "admin/getList/success",
-      payload: payload.result
+      type: 'admin/getList/success',
+      payload: gqlRes,
     });
-  } catch (e) {
+  } else {
     window.location.replace('/');
   }
 }
 
 function* postDecideColor(action) {
-  const payload = yield call(requester, '/api/postDecideColor', action.payload);
-    if(payload.error){
-      yield put({
-        type: "admin/decideColor/fail",
-        payload
-      });
-    } else {
-      yield put({
-        type: "admin/decideColor/success",
-        payload: action.payload.id
-      });
-    }
+  const res = yield call(requester, '/graphql', {
+    query: adjudicateql,
+    variables: {
+      val: action.payload,
+    },
+  });
+  const error = get(res, 'data.adjudicateColor.error', false);
+  if(error) {
+    const payload = get(res, 'data.adjudicateColor.data', '');
+    yield put({
+      type: "admin/decideColor/fail",
+      payload,
+    });
+  } else {
+    yield put({
+      type: "admin/decideColor/success",
+      payload: action.payload.id
+    });
+  }
 }
 
 export default function*(){

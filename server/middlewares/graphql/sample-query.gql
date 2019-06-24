@@ -10,10 +10,15 @@ query($cate: ColorCategory!) {
 }
 
 {
-  "cate": "PUBLIC"
+  "cate": "PUBLIC" // "ANONYMOUS"
 }
 
-
+mutation($val: LikeColorInputType!) {
+  adjudicateColor(input: $val) {
+    data
+    error
+  }
+}
 
 mutation($val: LikeColorInputType!) {
   likeColor(input: $val) {
