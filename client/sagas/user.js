@@ -17,6 +17,7 @@ const query = `query {
     }
   }
 }`;
+
 const logoffQl = `mutation {
   logoff {
     url
