@@ -19,7 +19,7 @@ const colorql = `query($cate: ColorCategory!) {
 const likeql = `mutation($val: LikeColorInputType!) {
     likeColor(input: $val) {
       data
-      error
+      status
     }
   }
 `;
@@ -27,7 +27,7 @@ const likeql = `mutation($val: LikeColorInputType!) {
 const createql = `mutation($val: CreateColorInputType!) {
     createColor(input: $val) {
       data
-      error
+      status
     }
   }
 `
@@ -103,8 +103,8 @@ function* toggleLike(action) {
     }
   });
 
-  if(get(res, 'data.likeColor.error', false)) {
-    console.error(get(res, 'data.likeColor.data'));
+  if(get(res, 'data.likeColor.status', 1) === 0) {
+    console.error('toggle like error');
   }
 }
 
@@ -116,9 +116,8 @@ function* addNew(action) {
     },
   });
   
-  const error = get(res, 'data. createColor.error');
-
-  if(error){
+  const status = get(res, 'data.createColor.status', 1);
+  if(status !== 0){
     yield put({
       type: "color/addNew/fail",
       payload: null

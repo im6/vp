@@ -34,12 +34,12 @@ const schemaStr = `
   }
 
   type LikeColorOutputType {
-    error: Boolean!
+    status: Int!
     data: String
   }
 
   type CreateColorOutputType {
-    error: Boolean!
+    status: Int!
     data: Int!
   }
 

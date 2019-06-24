@@ -23,7 +23,7 @@ mutation($val: LikeColorInputType!) {
 mutation($val: LikeColorInputType!) {
   likeColor(input: $val) {
     data
-    error
+    status
   }
 }
 

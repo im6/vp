@@ -160,12 +160,10 @@ const root = {
     const qr = `UPDATE colorpk_color SET \`like\` = \`like\` ${willLike ? '+' : '-'}  1 WHERE id = ${escape(id)}`;
     try {
       const resData = await sqlExecOne(qr)
-      return colors.map(v => {
-        return {
-          error: resData.affectedRows !== 1,
-          data: null,
-        };
-      });
+      return {
+        status: resData.affectedRows === 1 ? 0 : 1,
+        data: null,
+      };
     } catch(err) {
       return new GraphQLError(err);
     }
@@ -184,9 +182,9 @@ const root = {
     if(color.length === 27) {
       const qr = `INSERT INTO colorpk_color (\`like\`, color, userid, username, colortype, display, createdate) VALUES (${random}, '${color}', ${userid}, ${username}, NULL, ${displayItem}, NOW())`;
       try {
-        const row = await sqlExecOne(qr)
+        const row = await sqlExecOne(qr);
         return {
-          error: false,
+          status: 0,
           data: row.insertId,
         }
       } catch(err) {
