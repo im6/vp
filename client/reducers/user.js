@@ -22,8 +22,16 @@ const user = handleActions({
   ['user/logoff'](state) {
     return state.merge({
       isAuth: false,
+      authReady: false,
       detail: null,
       facebookUrl: null,
+    });
+  },
+
+  ['user/logoff/success'](state, { payload }) {
+    return state.merge({
+      authReady: true,
+      facebookUrl: payload,
     });
   }
 }, Immutable.fromJS({

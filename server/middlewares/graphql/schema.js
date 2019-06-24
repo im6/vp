@@ -58,6 +58,7 @@ const schemaStr = `
     likeColor(input: LikeColorInputType!): LikeColorOutputType
     createColor(input: CreateColorInputType!): CreateColorOutputType
     adjudicateColor(input: LikeColorInputType!): AdjudicateColorOutputType
+    logoff: AuthOutputType
   }
   
   type Query {

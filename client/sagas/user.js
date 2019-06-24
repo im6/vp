@@ -17,6 +17,11 @@ const query = `query {
     }
   }
 }`;
+const logoffQl = `mutation {
+  logoff {
+    url
+  }
+}`;
 
 function* getAuth() {
   const payload = yield call(requester, '/graphql', { query });
@@ -43,7 +48,12 @@ function* getAuth() {
 }
 
 function* logoff() {
-  yield call(requester, '/api/logoff');
+  const res = yield call(requester, '/graphql', { query: logoffQl });
+  const payload = get(res, 'data.logoff.url', null);
+  yield put({
+    type: 'user/logoff/success',
+    payload,
+  });
 }
 
 function onOAuth(action) {

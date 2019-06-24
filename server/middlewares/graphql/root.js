@@ -9,6 +9,19 @@ import {
   showUser,
 } from '../../resource/oauth';
 
+/*
+req.session.app = {
+  oauth
+  isAuth
+  tokenInfo
+  dbInfo {
+    id
+    name
+    isAdmin
+  }
+}
+*/
+
 const root = {
   async auth (_, req) {
     const isAuth = get(req, 'session.app.isAuth', false);
@@ -186,8 +199,8 @@ const root = {
 
   async adjudicateColor(args, req) {
     const isAdmin = get(req, 'session.app.dbInfo.isAdmin');
-    if(isAdmin){
-      return new GraphQLError('no auth');
+    if(!isAdmin){
+      return new GraphQLError('adjudicate error: no admin access');
     }
     const { id, willLike } = args.input;
     const qr = willLike ? 
@@ -203,6 +216,20 @@ const root = {
       return new GraphQLError(err);
     });
   },
+
+  logoff(_, req) {
+    const username = get(req, 'session.app.dbInfo.name', '(unknow)')
+    console.log(`logoff ${username}, delete session`);
+    delete req.session.app;
+
+    const oauthState = uuid.v1();
+    req.session.app = {
+      oauthState,
+    };
+    return {
+      url: createFacebookLink(oauthState)
+    };
+  }
 };
 
 export default root;
