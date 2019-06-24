@@ -55,19 +55,23 @@ function* getUserColor(action) {
     query: colorql,
     variables: { cate },
   });
-  const gqlRes = get(payload, 'data.color', null);
-  if(gqlRes){
+  
+  const { errors } = payload;
+  if(errors){
+    yield put({
+      type: "color/getUserColor/fail",
+      payload: {
+        name: action.payload,
+      },
+    });
+  } else {
+    const data = get(payload, 'data.color', []);
     yield put({
       type: "color/getUserColor/success",
       payload: {
         name: action.payload === 'myPortfolio' ? 'myPortfolio' : 'myLiked',
-        data: gqlRes,
+        data,
       },
-    });
-  } else {
-    yield put({
-      type: "color/getUserColor/fail",
-      payload: null,
     });
   }
 }

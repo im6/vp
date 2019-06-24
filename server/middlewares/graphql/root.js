@@ -2,31 +2,81 @@ import uuid from 'uuid';
 import { escape } from 'mysql';
 import { GraphQLError } from 'graphql';
 import get from 'lodash.get';
+
+import { createFacebookLink } from './util';
 import { sqlExecOne } from '../../resource/mysqlConnection';
+import {
+  showUser,
+} from '../../resource/oauth';
 
 const root = {
-  async auth (arg, req) {
-    if(!get(req, 'session.app.isAuth', false)){
+  async auth (_, req) {
+    const isAuth = get(req, 'session.app.isAuth', false);
+    const token = get(req, 'session.app.tokenInfo.access_token', null)
+    if(isAuth && token) {
+      const qsObj = {
+        access_token: token,
+        fields: 'id,name,picture',
+      };
+      
+      try {
+        const { data: oauthData } = await showUser(qsObj);
+        const { name, id } = oauthData;
+        const qr0 = `SELECT * FROM colorpk_user WHERE oauth = 'fb' AND oauthid = ${escape(id)}`;
+        const userData = await sqlExecOne(qr0);
+        if(userData.length === 1){
+          const { isadmin, id } = userData[0];
+          req.session.app.dbInfo = {
+            id,
+            name,
+            isAdmin: isadmin || false
+          };
+          const qr1 = `SELECT color_id FROM colorpk_userlike WHERE user_id= ${escape(id)}`;
+          const likeData = await sqlExecOne(qr1);
+          return {
+            user: {
+              id,
+              name,
+              isadmin,
+              img: get(oauthData, 'picture.data.url', null),
+              likes: likeData.map(v => v.color_id),
+            },
+          };
+        } else {
+          // first time login, save it.
+          const qr = `INSERT INTO colorpk_user (oauth, name, oauthid, lastlogin) VALUES ('fb', '${name}', '${id}', NOW())`;
+          const { insertId: id } = sqlExecOne(qr);
+          req.session.app.dbInfo = {
+            id,
+            name,
+            isAdmin: false
+          };
+          return {
+            user: {
+              id,
+              name,
+              isadmin: false,
+              img: get(oauthData, 'picture.data.url', null),
+              likes: [],
+            },
+          };
+        }
+      } catch(err) {
+        return new GraphQLError(err);
+      }
+    } else {
       const oauthState = uuid.v1();
       const result = {
-        isAuth: false,
-        facebookUrl: privateFn.createFacebookLink(oauthState),
+        user: null,
+        url: createFacebookLink(oauthState),
       };
-      if(get(req, 'session.app.alert', null)){
-        result['alert'] = req.session.app.alert;
+      if(get(req, 'session.app.authError', null)){
+        result.authError = req.session.app.authError;
       }
-  
       req.session.app = {
-        isAuth: false,
         oauthState,
       };
-  
       return result;
-    }
-    else {
-      return {
-        isAuth: true
-      };
     }
   },
   async user ({ oauth, oauthid }, req) {

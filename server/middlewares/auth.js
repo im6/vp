@@ -68,10 +68,7 @@ export const oauthLogin = (req, res) => {
     console.log('inconsistant session, error msg in session');
     req.session.app = {
       isAuth: false,
-      alert: {
-        type: 0,
-        detail: 'Sorry, something error, please try again.'
-      }
+      authError: 'Sorry, something error, please try again.'
     };
     res.redirect("/");
   }

@@ -19,12 +19,9 @@ const schemaStr = `
 
   type User {
     id: ID!
-    oauth: String!
-    name: String
-    oauthid: String!
-    isadmin: Boolean
-    lastlogin: String
     img: String
+    isadmin: Boolean
+    name: String
     likes: [Int!]
   }
 
@@ -52,8 +49,9 @@ const schemaStr = `
   }
 
   type AuthOutputType {
-    isAuth: Boolean!
+    user: User
     url: String
+    authError: String
   }
 
   type Mutation {
