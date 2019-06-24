@@ -3,13 +3,13 @@ import { escape } from 'mysql';
 import { GraphQLError } from 'graphql';
 import get from 'lodash.get';
 
-import { createFacebookLink } from './util';
 import { sqlExecOne } from '../../resource/mysqlConnection';
 import {
   showUser,
+  createFacebookLink,
 } from '../../resource/oauth';
 
-/*
+/* ============ session schema ===============
 req.session.app = {
   oauth
   isAuth
@@ -20,7 +20,7 @@ req.session.app = {
     isAdmin
   }
 }
-*/
+  ============ session schema ===============  */
 
 const root = {
   async auth (_, req) {
@@ -92,23 +92,7 @@ const root = {
       return result;
     }
   },
-  async user ({ oauth, oauthid }, req) {
-    const qr = `SELECT * FROM colorpk_user WHERE oauth = '${oauth}' AND oauthid = ${escape(oauthid)}`;
-    return sqlExecOne(qr).then((data) => {
-      if(data.length > 0){
-        const {
-          id,
-          name,
-          isadmin
-        } = data[0]
-        return {
-          id, name, isadmin,
-        };
-      } else {
-        return null;
-      }
-    });
-  },
+
   async color (args, req) {
     const { category } = args;
     const userId = get(req, 'session.app.dbInfo.id');

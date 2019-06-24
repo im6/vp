@@ -62,7 +62,6 @@ const schemaStr = `
   
   type Query {
     color(category: ColorCategory!): [Color]
-    user(oauth: String, oauthid: String): User
     auth: AuthOutputType
   }
 

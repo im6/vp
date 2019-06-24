@@ -102,7 +102,7 @@ function* toggleLike(action) {
     }
   });
 
-  if(get(res, 'data.likeColor.status', 1) === 0) {
+  if(get(res, 'data.likeColor.status', 1) !== 0) {
     console.error('toggle like error');
   }
 }
