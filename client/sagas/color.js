@@ -24,6 +24,14 @@ const likeql = `mutation($val: LikeColorInputType!) {
   }
 `;
 
+const createql = `mutation($val: CreateColorInputType!) {
+    createColor(input: $val) {
+      data
+      error
+    }
+  }
+`
+
 function* watchers(a) {
   yield takeLatest("color/get", initColorList);
   yield takeLatest("color/getUserColor", getUserColor);
@@ -97,22 +105,32 @@ function* toggleLike(action) {
 }
 
 function* addNew(action) {
-  const result = yield call(requester, '/api/addNewColor', action.payload);
-  const colorinfo = action.payload;
-  if(result.error){
+  const res = yield call(requester, '/graphql', {
+    query: createql,
+    variables: {
+      val: action.payload,
+    },
+  });
+  
+  const error = get(res, 'data. createColor.error');
+
+  if(error){
     yield put({
       type: "color/addNew/fail",
       payload: null
     });
-    console.error('create new color failed! ' + result.result.code);
+    console.error('create new color failed!');
   } else {
+    const { color } = action.payload;
+    const id = get(res, 'data.createColor.data', null);
+
     yield put({
       type: "color/addNew/success",
       payload: {
-        ...colorinfo,
-        id: result.result.id.toString(),
-        name: result.result.name,
-        like: 0
+        id: id.toString(),
+        color,
+        name: '',
+        like: 0,
       },
     });
   }

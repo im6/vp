@@ -16,6 +16,7 @@ const schemaStr = `
     username: String
     createdate: String
   }
+
   type User {
     id: ID!
     oauth: String!
@@ -39,10 +40,12 @@ const schemaStr = `
     error: Boolean!
     data: String
   }
+
   type CreateColorOutputType {
     error: Boolean!
     data: Int!
   }
+
   type AdjudicateColorOutputType {
     error: Boolean!
     data: String
@@ -53,10 +56,12 @@ const schemaStr = `
     createColor(input: CreateColorInputType!): CreateColorOutputType
     adjudicateColor(input: LikeColorInputType!): AdjudicateColorOutputType
   }
+  
   type Query {
     color(category: ColorCategory!): [Color]
     user(oauth: String, oauthid: String): User
   }
+
   schema {
     query: Query
     mutation: Mutation
