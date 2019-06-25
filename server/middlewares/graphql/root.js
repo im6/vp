@@ -9,6 +9,12 @@ import {
   createFacebookLink,
 } from '../../resource/oauth';
 
+import {
+  isAuth,
+  isAdmin,
+  hasToken,
+} from '../helper';
+
 /* ============ session schema ===============
 req.session.app = {
   isAuth
@@ -25,9 +31,9 @@ req.session.app = {
 
 const root = {
   async auth (_, req) {
-    const isAuth = get(req, 'session.app.isAuth', false);
-    const token = get(req, 'session.app.tokenInfo.access_token', null)
-    if(isAuth && token) {
+    if(isAuth(req, true) && hasToken(req)) {
+      
+      const token = get(req, 'session.app.tokenInfo.access_token', null)
       const qsObj = {
         access_token: token,
         fields: 'id,name,picture',
@@ -101,10 +107,14 @@ const root = {
 
   async color (args, req) {
     const { category } = args;
-    const userId = get(req, 'session.app.dbInfo.id', null);
-    if (!userId && (['LIKES', 'PROFILE'].indexOf(category) > -1)) {
+    if (!isAuth(req) && (['LIKES', 'PROFILE'].indexOf(category) > -1)) {
       return new GraphQLError('color error: no user defined');
     }
+    if (!isAdmin(req) && category === 'ANONYMOUS') {
+      return new GraphQLError('color error: no admin access');
+    }
+
+    const userId = get(req, 'session.app.dbInfo.id', null);
     const uid = escape(userId);
     let qr = null;
 
@@ -125,7 +135,7 @@ const root = {
           qr = 'SELECT * FROM colorpk_color a WHERE a.display = 1';
         break;
       default:
-        qr = 'SELECT a.* FROM colorpk_color a WHERE a.display=0';
+        qr = 'SELECT a.* FROM colorpk_color a WHERE a.display = 0';
         break;
     }
     try {
@@ -148,8 +158,8 @@ const root = {
   async likeColor(args, req) {
     const { id, willLike } = args.input;
     try {
-      const userId = get(req, 'session.app.dbInfo.id', null);
-      if(userId){
+      if(isAuth(req)){
+        const userId = get(req, 'session.app.dbInfo.id', null);
         const userLikeQr = willLike ?
         `INSERT INTO colorpk_userlike (user_id, color_id) VALUES (${escape(userId)}, ${escape(id)})`:
         `DELETE FROM colorpk_userlike WHERE user_id= ${userId} AND color_id = ${escape(id)}`;
@@ -168,11 +178,14 @@ const root = {
 
   async createColor(args, req) {
     const { color } = args.input;
-    const hasAuth = get(req, 'session.app.isAuth', false);
+    const hasAuth = isAuth(req);
+
     const sessionUsername = get(req, 'session.app.dbInfo.name', null);
-    const sessionUserid = get(req, 'session.app.dbInfo.id', null)
+    const sessionUserid = get(req, 'session.app.dbInfo.id', null);
+
     const username = (hasAuth && sessionUsername)? `'${sessionUsername}'` : 'NULL';
     const userid = (hasAuth && sessionUserid)? `${sessionUserid}` : 'NULL';
+
     const displayItem = userid == 'NULL' ? 1 : 0;
     const random = (Math.random() * 10).toFixed();
 
@@ -193,8 +206,8 @@ const root = {
   },
 
   async adjudicateColor(args, req) {
-    const isAdmin = get(req, 'session.app.dbInfo.isAdmin');
-    if(!isAdmin){
+
+    if(!isAdmin(req)){
       return new GraphQLError('adjudicate error: no admin access');
     }
     const { id, willLike } = args.input;

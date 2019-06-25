@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack --config ./webpack/develop.js",
     "build": "webpack --config ./webpack/production.js",
-    "lint": "eslint --ext .js,.jsx"
+    "lint": "eslint ./webpack ./server ./client"
   },
   "repository": "git+https://github.com/jinouwuque/vp.git",
   "author": "im6 <ee2win@gmail.com>",
@@ -27,6 +27,11 @@
     "copy-webpack-plugin": "^5.0.3",
     "core-js": "^3.1.4",
     "css-loader": "^3.0.0",
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.14.2",
     "html-webpack-plugin": "^3.2.0",
     "immutable": "^4.0.0-rc.12",
     "js-cookie": "^2.2.0",

@@ -20,6 +20,8 @@ const getOauthQsObj = (_, qs) => {
   return result;
 }
 
+// not used anywhere, reference for middlware design
+
 export const isAuth = (req, res, next) => {
   if(get(req, 'session.app.isAuth', false)){
     next();

@@ -4,19 +4,19 @@
 
 ## Highlight
 
-- bulma
-- express.js
-- graphQL
-- mysql
-- react
-- redux
+- GraphQL
+- Express.js
+- MySQL
+- *Bulma*
+- React
+- Redux
 - react-redux
 - react-router
 - react-saga
-- webpack
-- babel
-- sass
+- Webpack
+- Babel
+- Sass
 - eslint
-- immutable.js
-- axios
+- Immutable.js
+- Axios
 - oAuth2(Facebook)

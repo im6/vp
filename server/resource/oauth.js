@@ -15,7 +15,7 @@ export const accessToken = (params) => {
     baseURL,
     method: 'get',
     url: '/oauth/access_token',
-    params
+    params,
   });
 }
 export const showUser = (params) => {
@@ -23,6 +23,6 @@ export const showUser = (params) => {
     baseURL,
     method: 'get',
     url: '/me',
-    params
+    params,
   });
 }
