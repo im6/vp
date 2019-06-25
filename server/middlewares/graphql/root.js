@@ -39,6 +39,7 @@ const root = {
         const qr0 = `SELECT * FROM colorpk_user WHERE oauth = 'fb' AND oauthid = ${escape(id)}`;
         const userData = await sqlExecOne(qr0);
         if(userData.length === 1){
+          // existing user.
           const { isadmin, id } = userData[0];
           req.session.app.dbInfo = {
             id,
