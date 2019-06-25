@@ -11,8 +11,9 @@ import {
 
 /* ============ session schema ===============
 req.session.app = {
-  oauth
   isAuth
+  oauth
+  oauthState
   tokenInfo
   dbInfo {
     id
@@ -46,6 +47,10 @@ const root = {
           };
           const qr1 = `SELECT color_id FROM colorpk_userlike WHERE user_id= ${escape(id)}`;
           const likeData = await sqlExecOne(qr1);
+
+          const qr2 = `UPDATE colorpk_user SET lastlogin=NOW() WHERE id=${escape(id)}`;
+          sqlExecOne(qr2);
+
           return {
             user: {
               id,
@@ -75,7 +80,7 @@ const root = {
           };
         }
       } catch(err) {
-        return new GraphQLError(err);
+        return new GraphQLError(err.toString());
       }
     } else {
       const oauthState = uuid.v1();
@@ -95,9 +100,9 @@ const root = {
 
   async color (args, req) {
     const { category } = args;
-    const userId = get(req, 'session.app.dbInfo.id');
+    const userId = get(req, 'session.app.dbInfo.id', null);
     if (!userId && (['LIKES', 'PROFILE'].indexOf(category) > -1)) {
-      return new GraphQLError('no user defined');
+      return new GraphQLError('color error: no user defined');
     }
     const uid = escape(userId);
     let qr = null;
@@ -135,20 +140,28 @@ const root = {
         };
       });
     } catch(err) {
-      return new GraphQLError(err);
+      return new GraphQLError(err.toString());
     }
   },
 
   async likeColor(args, req) {
     const { id, willLike } = args.input;
-    const qr = `UPDATE colorpk_color SET \`like\` = \`like\` ${willLike ? '+' : '-'}  1 WHERE id = ${escape(id)}`;
     try {
-      const resData = await sqlExecOne(qr)
+      const userId = get(req, 'session.app.dbInfo.id', null);
+      if(userId){
+        const userLikeQr = willLike ?
+        `INSERT INTO colorpk_userlike (user_id, color_id) VALUES (${escape(userId)}, ${escape(id)})`:
+        `DELETE FROM colorpk_userlike WHERE user_id= ${userId} AND color_id = ${escape(id)}`;
+        sqlExecOne(userLikeQr);
+      }
+
+      const qr = `UPDATE colorpk_color SET \`like\` = \`like\` ${willLike ? '+' : '-'}  1 WHERE id = ${escape(id)}`;
+      const resData = await sqlExecOne(qr);
       return {
         status: resData.affectedRows === 1 ? 0 : 1,
       };
     } catch(err) {
-      return new GraphQLError(err);
+      return new GraphQLError(err.toString());
     }
   },
 
@@ -171,10 +184,10 @@ const root = {
           data: row.insertId,
         }
       } catch(err) {
-        return new GraphQLError(err);
+        return new GraphQLError(err.toString());
       }
     } else {
-      return new GraphQLError('invalid color input');
+      return new GraphQLError('create error: invalid color input');
     }
   },
 
@@ -192,8 +205,8 @@ const root = {
       return {
         status: resData.affectedRows === 1 ? 0 : 1,
       };
-    } catch (error) {
-      return new GraphQLError(err);
+    } catch (err) {
+      return new GraphQLError(err.toString());
     }
   },
 
@@ -207,7 +220,7 @@ const root = {
       oauthState,
     };
     return {
-      url: createFacebookLink(oauthState)
+      url: createFacebookLink(oauthState),
     };
   }
 };

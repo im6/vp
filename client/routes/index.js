@@ -19,7 +19,6 @@ class Routes extends React.Component {
     const { dispatch } = this.props;
     const ac0 = createAction('color/get');
     dispatch(ac0());
-
     const ac1 = createAction('user/auth');
     dispatch(ac1());
   }
