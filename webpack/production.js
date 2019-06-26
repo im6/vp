@@ -105,7 +105,6 @@ const server = {
     extensions: ['.js'],
   },
   entry: [
-    "regenerator-runtime/runtime",
     path.join(__dirname, '../server'),
   ],
   output: {

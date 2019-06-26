@@ -48,7 +48,6 @@
     "redux-actions": "^2.6.5",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.3",
-    "regenerator-runtime": "^0.13.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.35.0",
@@ -68,6 +67,7 @@
     "helmet": "^3.18.0",
     "lodash.get": "^4.4.2",
     "mysql": "^2.17.1",
+    "regenerator-runtime": "^0.13.2",
     "uuid": "^3.3.2"
   },
   "pre-commit": []
