@@ -132,12 +132,16 @@ const root = {
         qr = `SELECT a.*, false as \`liked\` FROM colorpk_color a WHERE userid = ${uid} `;
         break;
       case 'ANONYMOUS':
-          qr = 'SELECT * FROM colorpk_color a WHERE a.display = 1';
+        qr = 'SELECT * FROM colorpk_color a WHERE a.display = 1';
         break;
       default:
-        qr = 'SELECT a.* FROM colorpk_color a WHERE a.display = 0';
         break;
     }
+
+    if (!qr) {
+      return new GraphQLError('color error: unknown query');
+    }
+
     try {
       const colors = await sqlExecOne(qr)
       return colors.map(v => {

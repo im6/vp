@@ -37,7 +37,7 @@ export const staticFile = (req, res, next) => {
 
 export const h5Route = (req, res, next) => {
   var subUrl = req.url.split('/');
-  if(FRONTURLs.indexOf(subUrl[1]) > -1){
+  if(FRONTURLs.includes(subUrl[1])){
     if(isDev) {
       console.log(`${req.method}: ${req.originalUrl}`);
     } else {
