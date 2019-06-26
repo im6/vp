@@ -2,10 +2,11 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser  from 'cookie-parser';
 import cookieSession from 'cookie-session';
+
 import csrf from 'csurf';
 import helmet from 'helmet';
-import route from '../route';
 import { oauthLogin } from '../middlewares/auth';
+import graphql from '../middlewares/graphql';
 import {
   h5Route,
   staticFile,
@@ -33,11 +34,14 @@ app.use(cookieSession({
   maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
   httpOnly: true,
 }));
-app.use(csrf());
+
 if (isDev) {
   app.get('/static/:fileName', staticFile);
+} else {
+  app.use(csrf());
 }
-app.use('/api', route);
+
+app.use('/graphql', graphql);
 app.get('/auth/:oauth', oauthLogin);
 app.get('/*', h5Route);
 app.use(onError);

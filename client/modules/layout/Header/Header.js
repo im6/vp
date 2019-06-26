@@ -81,7 +81,7 @@ class Header extends React.Component {
                 Like
               </Link>
               {
-                detail.get('isAdmin') &&
+                detail.get('isadmin') &&
                 <Link className="navbar-item"
                   to="/adminpanel"
                   onClick={this.onClickNav}

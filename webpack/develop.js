@@ -30,7 +30,6 @@ const client = {
     },
   },
   entry: [
-    '@babel/polyfill',
     './client/index.js',
   ],
   output: {

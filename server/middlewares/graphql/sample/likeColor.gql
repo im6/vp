@@ -1,0 +1,13 @@
+
+mutation($val: LikeColorInputType!) {
+  likeColor(input: $val) {
+    status
+  }
+}
+
+{
+  "val": {
+    "id": 1,
+    "willLike": true
+  }
+}

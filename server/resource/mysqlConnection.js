@@ -8,19 +8,16 @@ const pool = mysql.createPool({
   port     : env['SQL_PORT'],
   user     : env['SQL_USERNAME'],
   password : env['SQL_PASSWORD'],
-  database : env['SQL_DATABASE']
+  database : env['SQL_DATABASE'],
 });
 
-export const getPool = () => pool;
-export const sqlExecOne = qr => {
-  return new Promise((resolve, reject) => {
-    pool.query(qr, (err, rows, fields) => {
-      if(err) {
-        console.error(err);
-        reject(err);
-      } else {
-        resolve(rows);
-      }
-    });
+export const sqlExecOne = qr => new Promise((resolve, reject) => {
+  pool.query(qr, (err, rows) => {
+    if (err) {
+      console.error(err);
+      reject(err);
+    } else {
+      resolve(rows);
+    }
   });
-};
+});

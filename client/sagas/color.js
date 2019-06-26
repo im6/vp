@@ -3,11 +3,37 @@ import { call, put, fork } from 'redux-saga/effects';
 import requester from '../services/requester';
 import { createAction } from 'redux-actions';
 import { downloadCanvas } from '../misc/util.js';
+import get from 'lodash.get';
+
+const colorql = `query($cate: ColorCategory!) {
+  color(category: $cate) {
+    id
+    like
+    color
+    userid
+    username
+    createdate
+  }
+}`;
+
+const likeql = `mutation($val: LikeColorInputType!) {
+    likeColor(input: $val) {
+      status
+    }
+  }
+`;
+
+const createql = `mutation($val: CreateColorInputType!) {
+    createColor(input: $val) {
+      data
+      status
+    }
+  }
+`
 
 function* watchers(a) {
   yield takeLatest("color/get", initColorList);
   yield takeLatest("color/getUserColor", getUserColor);
-  yield takeLatest("color/loadMore", colorLoadMore);
   yield takeLatest("color/toggleLike", toggleLike);
   yield takeLatest("color/addNew", addNew);
   yield takeLatest('color/download', download);
@@ -23,79 +49,90 @@ function download(action){
 }
 
 function* getUserColor(action) {
-  const endpoint = action.payload === 'myPortfolio' ? 'initColorPortfolio' : 'initColorLike';
-  const resObj = yield call(requester, `/api/${endpoint}`);
-  if(resObj.error){
+  const cate = action.payload === 'myPortfolio' ? 'PROFILE' : 'LIKES'
+  const payload = yield call(requester, '/graphql', {
+    query: colorql,
+    variables: { cate },
+  });
+  
+  const { errors } = payload;
+  if(errors){
     yield put({
       type: "color/getUserColor/fail",
-      payload: action.payload,
+      payload: {
+        name: action.payload,
+      },
     });
   } else {
+    const data = get(payload, 'data.color', []);
     yield put({
       type: "color/getUserColor/success",
       payload: {
-        name: action.payload,
-        data: resObj.result,
+        name: action.payload === 'myPortfolio' ? 'myPortfolio' : 'myLiked',
+        data,
       },
     });
   }
 }
 
 function* initColorList() {
-  const payload = yield call(requester, '/api/initColorList');
-  if(payload.error){
+  const payload = yield call(requester, '/graphql', {
+    query: colorql,
+    variables: { cate: "PUBLIC" }
+  });
+  const gqlRes = get(payload, 'data.color', null)
+  if(gqlRes){
+    yield put({
+      type: "color/get/success",
+      payload: gqlRes
+    });
+  } else {
     yield put({
       type: "color/get/fail",
       payload: null,
-    });
-    console.error('create new color failed! ' + payload.result.code);
-  } else {
-    yield put({
-      type: "color/get/success",
-      payload: payload.result
-    });
-  }
-}
-
-function* colorLoadMore() {
-  try {
-    const payload = yield call(requester, '/api/initColorList');
-    yield put({
-      type: "color/loadMore/success",
-      payload: payload.result
-    });
-  } catch (e) {
-    yield put({
-      type: "color/loadMore/fail",
-      payload: {msg: e}
     });
   }
 }
 
 function* toggleLike(action) {
-  yield call(requester, '/api/toggleLike', {
-    ...action.payload,
-    id: parseInt(action.payload.id),
+  const res = yield call(requester, '/graphql', {
+    query: likeql,
+    variables: {
+      val: action.payload
+    }
   });
+
+  if(get(res, 'data.likeColor.status', 1) !== 0) {
+    console.error('toggle like error');
+  }
 }
 
 function* addNew(action) {
-  const result = yield call(requester, '/api/addNewColor', action.payload);
-  const colorinfo = action.payload;
-  if(result.error){
+  const res = yield call(requester, '/graphql', {
+    query: createql,
+    variables: {
+      val: action.payload,
+    },
+  });
+  
+  const status = get(res, 'data.createColor.status', 1);
+  if(status !== 0){
     yield put({
       type: "color/addNew/fail",
       payload: null
     });
-    console.error('create new color failed! ' + result.result.code);
+    console.error('create new color failed!');
   } else {
+    const { color } = action.payload;
+    const id = get(res, 'data.createColor.data', null);
+
     yield put({
       type: "color/addNew/success",
       payload: {
-        ...colorinfo,
-        id: result.result.id.toString(),
-        name: result.result.name,
-        like: 0
+        id: id.toString(),
+        color,
+        name: '',
+        like: 0,
       },
     });
   }

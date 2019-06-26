@@ -29,25 +29,6 @@ const color = handleActions({
       loading: false
     });
   },
-  ['color/loadMore'](state, action) {
-    return state.merge({
-      loading: true
-    });
-  },
-  ['color/loadMore/success'](state, action) {
-    let newList = state.get('list').concat(Immutable.fromJS(action.payload));
-    return state.merge({
-      list: newList,
-      loading: false
-    });
-  },
-  ['color/loadMore/fail'](state, action) {
-    console.error('loading color fail!');
-    return state.merge({
-      list: [],
-      loading: false
-    });
-  },
 
   ['color/toggleLike'](state, action) {
     const { willLike, id } = action.payload;
@@ -87,6 +68,7 @@ const color = handleActions({
   },
 
   ['color/getUserColor'](state, action) {
+    state = state.set(action.payload, []);
     return state.merge({
       loading: true
     });

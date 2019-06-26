@@ -1,3 +1,4 @@
+import "regenerator-runtime/runtime";
 import app from './app/index';
 import {
   serverIp,
@@ -7,4 +8,4 @@ import {
 const server = app.listen(serverPort, serverIp, () => {
   console.log(`${isDev ? 'dev' : 'prod'} is running: http://${serverIp}:${serverPort}`);
 });
-server.timeout = 1000 * 60;
+server.timeout = 1000 * 5;

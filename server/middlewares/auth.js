@@ -1,3 +1,5 @@
+
+import get from 'lodash.get';
 import {
   redirect_uri_fb,
   fbAppSecret,
@@ -18,46 +20,39 @@ const getOauthQsObj = (_, qs) => {
   return result;
 }
 
+// not used anywhere, reference for middlware design
+
 export const isAuth = (req, res, next) => {
-  try{
-    if(req.session.app.isAuth){
-      next();
-    } else{
-      next(401);
-    }
-  }
-  catch(err){
+  if(get(req, 'session.app.isAuth', false)){
+    next();
+  } else{
     next(401);
   }
 };
 
 export const isAdmin = (req, res, next) => {
-  try{
-    if(req.session.app.dbInfo.isAdmin){
-      next();
-    } else{
-      next(403);
-    }
-  }
-  catch(err){
+  if(get(req, 'session.app.dbInfo.isAdmin', false)){
+    next();
+  } else{
     next(403);
   }
 }
 
 export const oauthLogin = (req, res) => {
-  const qs = req.query,
-    oauthName = req.params.oauth;
-  if(qs.code &&
-    qs.state &&
-    req.session.app &&
-    qs.state === req.session.app.oauthState){
-    console.log(`redirected by ${oauthName} auth...`);
-    const qsObj = getOauthQsObj(oauthName, qs);
-    accessToken(qsObj).then((data) => {
-      data = data.data;
+  const code = get(req, 'query.code', null);
+  const state = get(req, 'query.state', null);
+  const oauth = get(req, 'params.oauth', null);
+  const sessionState = get(req, 'session.app.oauthState', null);
+
+  if(code &&
+    state &&
+    state === sessionState){
+    console.log(`redirected by ${oauth} auth...`);
+    const qsObj = getOauthQsObj(oauth, req.query);
+    accessToken(qsObj).then(({ data }) => {
       if(data.access_token){
         req.session.app = {
-          oauth: oauthName,
+          oauth,
           isAuth: true,
           tokenInfo: data
         };
@@ -68,10 +63,7 @@ export const oauthLogin = (req, res) => {
     console.log('inconsistant session, error msg in session');
     req.session.app = {
       isAuth: false,
-      alert: {
-        type: 0,
-        detail: 'Sorry, something error, please try again.'
-      }
+      authError: 'Sorry, something error, please try again.'
     };
     res.redirect("/");
   }

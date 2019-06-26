@@ -14,7 +14,6 @@ const client = {
     extensions: ['.js'],
   },
   entry: [
-    '@babel/polyfill',
     './client/index.js',
   ],
   output: {
