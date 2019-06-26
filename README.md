@@ -1,4 +1,4 @@
-# [ColorPK.com](http://react.colorpk.com)   (version 1.3)
+# [ColorPK.com](http://react.colorpk.com)   (v1.3.0)
 
 ![logo](https://github.com/zj1926/vp/blob/master/logo.png "colorpk.com")
 
