@@ -1,24 +1,15 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import cookieParser  from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 
-import csrf from 'csurf';
+import csrf from '../middlewares/csrfOverride';
 import helmet from 'helmet';
 import { oauthLogin } from '../middlewares/auth';
 import graphql from '../middlewares/graphql';
-import {
-  h5Route,
-  staticFile,
-} from '../middlewares/staticRender';
-import {
-  onError,
-  notFound,
-} from '../middlewares/errorHandler';
-import {
-  SESSION_SECRET,
-  _DEV_,
-} from '../config'
+import { h5Route, staticFile } from '../middlewares/staticRender';
+import { onError, notFound } from '../middlewares/errorHandler';
+import { SESSION_SECRET, _DEV_ } from '../config';
 
 const app = express();
 
@@ -27,18 +18,20 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(cookieSession({
-  name: 'session',
-  keys: [SESSION_SECRET],
-  domain: _DEV_ ? 'localhost' : 'react.colorpk.com',
-  maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
-  httpOnly: true,
-}));
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: [SESSION_SECRET],
+    domain: _DEV_ ? 'localhost' : 'react.colorpk.com',
+    maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
+    httpOnly: true,
+  })
+);
 
 if (_DEV_) {
   app.get('/static/:fileName', staticFile);
 } else {
-  app.use(csrf());
+  app.use(csrf);
 }
 
 app.use('/graphql', graphql);

@@ -4,6 +4,7 @@ export const {
   NODE_ENV,
   SERVER_PORT,
   SESSION_SECRET,
+  CSRF_EXCEPTION,
 
   FB_APP_KEY,
   FB_APP_SECRET,
