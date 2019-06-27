@@ -1,42 +1,35 @@
-
 import get from 'lodash.get';
-import {
-  redirect_uri_fb,
-  fbAppSecret,
-  fbAppKey,
-} from '../config';
-import {
-  accessToken
-} from '../resource/oauth';
+import { FB_REDIRECT_URL, FB_APP_SECRET, FB_APP_KEY } from '../config';
+import { accessToken } from '../resource/oauth';
 
 const getOauthQsObj = (_, qs) => {
   const { code } = qs;
   const result = {
-    client_id: fbAppKey,
-    client_secret: fbAppSecret,
+    client_id: FB_APP_KEY,
+    client_secret: FB_APP_SECRET,
     code,
-    redirect_uri: redirect_uri_fb
+    redirect_uri: FB_REDIRECT_URL,
   };
   return result;
-}
+};
 
 // not used anywhere, reference for middlware design
 
 export const isAuth = (req, res, next) => {
-  if(get(req, 'session.app.isAuth', false)){
+  if (get(req, 'session.app.isAuth', false)) {
     next();
-  } else{
+  } else {
     next(401);
   }
 };
 
 export const isAdmin = (req, res, next) => {
-  if(get(req, 'session.app.dbInfo.isAdmin', false)){
+  if (get(req, 'session.app.dbInfo.isAdmin', false)) {
     next();
-  } else{
+  } else {
     next(403);
   }
-}
+};
 
 export const oauthLogin = (req, res) => {
   const code = get(req, 'query.code', null);
@@ -44,27 +37,25 @@ export const oauthLogin = (req, res) => {
   const oauth = get(req, 'params.oauth', null);
   const sessionState = get(req, 'session.app.oauthState', null);
 
-  if(code &&
-    state &&
-    state === sessionState){
+  if (code && state && state === sessionState) {
     console.log(`redirected by ${oauth} auth...`);
     const qsObj = getOauthQsObj(oauth, req.query);
     accessToken(qsObj).then(({ data }) => {
-      if(data.access_token){
+      if (data.access_token) {
         req.session.app = {
           oauth,
           isAuth: true,
-          tokenInfo: data
+          tokenInfo: data,
         };
       }
-      res.redirect("/");
+      res.redirect('/');
     });
   } else {
     console.log('inconsistant session, error msg in session');
     req.session.app = {
       isAuth: false,
-      authError: 'Sorry, something error, please try again.'
+      authError: 'Sorry, something error, please try again.',
     };
-    res.redirect("/");
+    res.redirect('/');
   }
-}
+};

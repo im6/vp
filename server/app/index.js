@@ -16,8 +16,8 @@ import {
   notFound,
 } from '../middlewares/errorHandler';
 import {
-  sessionSecret,
-  isDev,
+  SESSION_SECRET,
+  _DEV_,
 } from '../config'
 
 const app = express();
@@ -29,13 +29,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cookieSession({
   name: 'session',
-  keys: [sessionSecret],
-  domain: isDev ? 'localhost' : 'react.colorpk.com',
+  keys: [SESSION_SECRET],
+  domain: _DEV_ ? 'localhost' : 'react.colorpk.com',
   maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
   httpOnly: true,
 }));
 
-if (isDev) {
+if (_DEV_) {
   app.get('/static/:fileName', staticFile);
 } else {
   app.use(csrf());

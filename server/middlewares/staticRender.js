@@ -1,5 +1,5 @@
 import path from 'path';
-import { isDev, staticUrl } from '../config';
+import { _DEV_, STATIC_URL } from '../config';
 
 const FRONTURLs = [
   '',
@@ -24,7 +24,7 @@ const { PWD } = process.env;
 
 export const staticFile = (req, res, next) => {
   const { fileName } = req.params;
-  const filePath = path.resolve(PWD, `./${staticUrl}/public/${fileName}`);
+  const filePath = path.resolve(PWD, `./${STATIC_URL}/public/${fileName}`);
   if (scriptUrl.includes(fileName)) {
     res.sendFile(filePath);
   } else {
@@ -35,12 +35,12 @@ export const staticFile = (req, res, next) => {
 export const h5Route = (req, res, next) => {
   var subUrl = req.url.split('/');
   if (FRONTURLs.includes(subUrl[1])) {
-    if (isDev) {
+    if (_DEV_) {
       console.log(`${req.method}: ${req.originalUrl}`);
     } else {
       res.cookie('_csrf', req.csrfToken());
     }
-    const indexPath = path.join(PWD, `./${staticUrl}/public/index.html`);
+    const indexPath = path.join(PWD, `./${STATIC_URL}/public/index.html`);
     res.sendFile(indexPath);
   } else {
     next();

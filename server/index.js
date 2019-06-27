@@ -1,11 +1,9 @@
-import "regenerator-runtime/runtime";
+import 'regenerator-runtime/runtime';
 import app from './app/index';
-import {
-  serverIp,
-  serverPort,
-  isDev,
-} from './config';
-const server = app.listen(serverPort, serverIp, () => {
-  console.log(`${isDev ? 'dev' : 'prod'} is running: http://${serverIp}:${serverPort}`);
+import { SERVER_IP, SERVER_PORT, NODE_ENV } from './config';
+const server = app.listen(SERVER_PORT, SERVER_IP, () => {
+  console.log(
+    `app(mode: ${NODE_ENV}) is running: http://${SERVER_IP}:${SERVER_PORT}`
+  );
 });
 server.timeout = 1000 * 5;
