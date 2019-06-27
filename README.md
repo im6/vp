@@ -7,7 +7,7 @@
 - GraphQL
 - Express.js
 - MySQL
-- *Bulma*
+- Bulma
 - React
 - Redux
 - react-redux
