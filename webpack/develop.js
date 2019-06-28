@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const ServerStartPlugin = require('./plugins/ServerStartPlugin');
@@ -9,7 +9,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const bulmaDir = /client\/modules\/app/;
 
-const json0 = fs.readFileSync(path.join(__dirname, '../.vscode/launch.json'), {encoding: 'utf8'});
+const json0 = fs.readFileSync(path.join(__dirname, '../.vscode/launch.json'), {
+  encoding: 'utf8',
+});
 const json1 = JSON.parse(json0);
 const appEnvs = json1.configurations[0].env;
 
@@ -26,12 +28,10 @@ const client = {
       cacheGroups: {
         default: false,
         vendors: false,
-      }
+      },
     },
   },
-  entry: [
-    './client/index.js',
-  ],
+  entry: ['./client/index.js'],
   output: {
     publicPath: '/static/',
     path: path.join(__dirname, '../local/public'),
@@ -42,13 +42,15 @@ const client = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: ['@babel/plugin-syntax-dynamic-import']
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env', '@babel/preset-react'],
+              plugins: ['@babel/plugin-syntax-dynamic-import'],
+            },
           },
-        }],
+        ],
       },
 
       {
@@ -86,26 +88,26 @@ const client = {
         ],
         exclude: bulmaDir,
       },
-    ]
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].css'
+      filename: '[name].css',
     }),
     new HtmlWebpackPlugin({
       title: 'ColorPK | Dev',
-      template: path.join(__dirname, '../client/template/index.html')
+      template: path.join(__dirname, '../client/template/index.html'),
     }),
     new CopyPlugin([
       {
         from: path.join(__dirname, '../client/template/404.html'),
-        to: path.join(__dirname, '../local/public/404.html')
+        to: path.join(__dirname, '../local/public/404.html'),
       },
     ]),
   ],
   watchOptions: {
-    ignored: /node_modules/
+    ignored: /node_modules/,
   },
 };
 
@@ -117,9 +119,7 @@ const server = {
   resolve: {
     extensions: ['.js'],
   },
-  entry: [
-    path.join(__dirname, '../server'),
-  ],
+  entry: [path.join(__dirname, '../server')],
   output: {
     publicPath: '/',
     path: path.join(__dirname, '../local'),
@@ -130,22 +130,22 @@ const server = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-            plugins: [],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+              plugins: [],
+            },
           },
-        }],
+        ],
       },
     ],
   },
-  plugins: [
-    new ServerStartPlugin(appEnvs),
-  ],
+  plugins: [new ServerStartPlugin(appEnvs)],
   watchOptions: {
-    ignored: /node_modules/
-  }
+    ignored: /node_modules/,
+  },
 };
 
 module.exports = [client, server];

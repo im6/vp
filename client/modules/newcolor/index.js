@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { createAction } from 'redux-actions';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import NewColor from './components/NewColor';
 
 const shared = {};
@@ -14,27 +14,34 @@ const mapStateToProps = ({ user }, { location: { pathname }, history }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     onAdd(colorValue) {
-      const cl0 = colorValue.map(v =>{
+      const cl0 = colorValue.map(v => {
         return v.substr(1);
       });
 
       const ac = createAction('color/addNew');
       const color = cl0.join('#');
-      if(color.length === 27) {
-        dispatch(ac({
-          color,
-        }));
+      if (color.length === 27) {
+        dispatch(
+          ac({
+            color,
+          })
+        );
       } else {
-        console.error("illegal color value size")
+        console.error('illegal color value size');
       }
     },
-    onRedirect(){
+    onRedirect() {
       shared.history.push('/');
-    }
-  }
+    },
+  };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewColor));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(NewColor)
+);

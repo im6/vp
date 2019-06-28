@@ -29,17 +29,9 @@ const createql = `mutation($val: CreateColorInputType!) {
       status
     }
   }
-`
+`;
 
-function* watchers(a) {
-  yield takeLatest("color/get", initColorList);
-  yield takeLatest("color/getUserColor", getUserColor);
-  yield takeLatest("color/toggleLike", toggleLike);
-  yield takeLatest("color/addNew", addNew);
-  yield takeLatest('color/download', download);
-}
-
-function download(action){
+function download(action) {
   const downloadUrl = downloadCanvas(action.payload.color);
   const aElem = document.createElement('a');
   aElem.href = downloadUrl;
@@ -49,16 +41,16 @@ function download(action){
 }
 
 function* getUserColor(action) {
-  const cate = action.payload === 'myPortfolio' ? 'PROFILE' : 'LIKES'
+  const cate = action.payload === 'myPortfolio' ? 'PROFILE' : 'LIKES';
   const payload = yield call(requester, '/graphql', {
     query: colorql,
     variables: { cate },
   });
-  
+
   const { errors } = payload;
-  if(errors){
+  if (errors) {
     yield put({
-      type: "color/getUserColor/fail",
+      type: 'color/getUserColor/fail',
       payload: {
         name: action.payload,
       },
@@ -66,7 +58,7 @@ function* getUserColor(action) {
   } else {
     const data = get(payload, 'data.color', []);
     yield put({
-      type: "color/getUserColor/success",
+      type: 'color/getUserColor/success',
       payload: {
         name: action.payload === 'myPortfolio' ? 'myPortfolio' : 'myLiked',
         data,
@@ -78,17 +70,17 @@ function* getUserColor(action) {
 function* initColorList() {
   const payload = yield call(requester, '/graphql', {
     query: colorql,
-    variables: { cate: "PUBLIC" }
+    variables: { cate: 'PUBLIC' },
   });
-  const gqlRes = get(payload, 'data.color', null)
-  if(gqlRes){
+  const gqlRes = get(payload, 'data.color', null);
+  if (gqlRes) {
     yield put({
-      type: "color/get/success",
-      payload: gqlRes
+      type: 'color/get/success',
+      payload: gqlRes,
     });
   } else {
     yield put({
-      type: "color/get/fail",
+      type: 'color/get/fail',
       payload: null,
     });
   }
@@ -98,11 +90,11 @@ function* toggleLike(action) {
   const res = yield call(requester, '/graphql', {
     query: likeql,
     variables: {
-      val: action.payload
-    }
+      val: action.payload,
+    },
   });
 
-  if(get(res, 'data.likeColor.status', 1) !== 0) {
+  if (get(res, 'data.likeColor.status', 1) !== 0) {
     console.error('toggle like error');
   }
 }
@@ -114,12 +106,12 @@ function* addNew(action) {
       val: action.payload,
     },
   });
-  
+
   const status = get(res, 'data.createColor.status', 1);
-  if(status !== 0){
+  if (status !== 0) {
     yield put({
-      type: "color/addNew/fail",
-      payload: null
+      type: 'color/addNew/fail',
+      payload: null,
     });
     console.error('create new color failed!');
   } else {
@@ -127,7 +119,7 @@ function* addNew(action) {
     const id = get(res, 'data.createColor.data', null);
 
     yield put({
-      type: "color/addNew/success",
+      type: 'color/addNew/success',
       payload: {
         id: id.toString(),
         color,
@@ -138,6 +130,14 @@ function* addNew(action) {
   }
 }
 
-export default function*(){
+function* watchers(a) {
+  yield takeLatest('color/get', initColorList);
+  yield takeLatest('color/getUserColor', getUserColor);
+  yield takeLatest('color/toggleLike', toggleLike);
+  yield takeLatest('color/addNew', addNew);
+  yield takeLatest('color/download', download);
+}
+
+export default function*() {
   yield fork(watchers);
 }

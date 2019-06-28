@@ -13,9 +13,7 @@ const client = {
   resolve: {
     extensions: ['.js'],
   },
-  entry: [
-    './client/index.js',
-  ],
+  entry: ['./client/index.js'],
   output: {
     publicPath: '//dkny.oss-cn-hangzhou.aliyuncs.com/2/',
     path: path.join(__dirname, '../dist/public'),
@@ -26,13 +24,15 @@ const client = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: ['@babel/plugin-syntax-dynamic-import'],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env', '@babel/preset-react'],
+              plugins: ['@babel/plugin-syntax-dynamic-import'],
+            },
           },
-        }],
+        ],
       },
       {
         test: /\.sass$/,
@@ -68,7 +68,7 @@ const client = {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].css'
+      filename: '[name].css',
     }),
     new CompressionPlugin({
       filename: '[path]',
@@ -82,7 +82,7 @@ const client = {
     new CopyPlugin([
       {
         from: path.join(__dirname, '../client/template/404.html'),
-        to: path.join(__dirname, '../dist/public/404.html')
+        to: path.join(__dirname, '../dist/public/404.html'),
       },
     ]),
   ],
@@ -92,7 +92,7 @@ const client = {
       cacheGroups: {
         default: false,
         vendors: false,
-      }
+      },
     },
   },
 };
@@ -104,9 +104,7 @@ const server = {
   resolve: {
     extensions: ['.js'],
   },
-  entry: [
-    path.join(__dirname, '../server'),
-  ],
+  entry: [path.join(__dirname, '../server')],
   output: {
     publicPath: '/',
     path: path.join(__dirname, '../dist'),
@@ -117,12 +115,14 @@ const server = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+            },
           },
-        }],
+        ],
       },
     ],
   },

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import style from './style.sass';
 
 class Header extends React.Component {
-  constructor(props){
+  constructor(props){ 
     super(props)
     this.state = {
       showMenu: false,

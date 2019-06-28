@@ -10,13 +10,8 @@ class NewColor extends React.PureComponent {
     super(props);
     this.state = {
       editColor: DEFAULTVALUE,
-      activeIndex : 0,
-      colorValue: [
-        null,
-        null,
-        null,
-        null
-      ],
+      activeIndex: 0,
+      colorValue: [null, null, null, null],
       pickerWd: 200,
     };
     this.onChangeActive = this.onChangeActive.bind(this);
@@ -26,21 +21,21 @@ class NewColor extends React.PureComponent {
     this.onPickColor = this.onPickColor.bind(this);
   }
 
-  showModal(){
+  showModal() {
     alert('Thank you for new colors');
   }
-  onReturn(){
+  onReturn() {
     this.props.onRedirect();
   }
 
-  onSubmit(){
+  onSubmit() {
     let good = true;
     this.state.colorValue.forEach(v => {
-      if(!/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(v)) {
+      if (!/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(v)) {
         good = false;
       }
     });
-    if(good) {
+    if (good) {
       this.props.onAdd([...this.state.colorValue]);
       this.showModal();
       this.resetColor();
@@ -49,71 +44,66 @@ class NewColor extends React.PureComponent {
     }
   }
 
-  onPickColor({ hex }){
+  onPickColor({ hex }) {
     const oper = this.state.colorValue;
     oper[this.state.activeIndex] = hex;
     this.setState({
       colorValue: oper,
-      editColor: hex
+      editColor: hex,
     });
   }
 
-  onChangeActive(activeIndex){
+  onChangeActive(activeIndex) {
     const editColor = this.state.colorValue[activeIndex] || DEFAULTVALUE;
     this.setState({
       activeIndex,
-      editColor
+      editColor,
     });
   }
 
-  extractResult(data){
+  extractResult(data) {
     this.setState({
-      colorValue: data
+      colorValue: data,
     });
   }
 
-  resetColor(){
+  resetColor() {
     this.setState({
-      colorValue: [
-        null,
-        null,
-        null,
-        null
-      ]
+      colorValue: [null, null, null, null],
     });
   }
 
   render() {
-    return <div className={style.container}>
-      <div className={style.floor0}>
-        <div>
-          <ChromePicker
-            color={ this.state.editColor }
-            onChangeComplete={this.onPickColor}
-          />
+    return (
+      <div className={style.container}>
+        <div className={style.floor0}>
+          <div>
+            <ChromePicker
+              color={this.state.editColor}
+              onChangeComplete={this.onPickColor}
+            />
+          </div>
+          <div>
+            <EditCanvas
+              colorValue={this.state.colorValue}
+              activeIndex={this.state.activeIndex}
+              changeActive={this.onChangeActive}
+            />
+          </div>
         </div>
-        <div>
-          <EditCanvas colorValue={this.state.colorValue}
-                      activeIndex={this.state.activeIndex}
-                      changeActive={this.onChangeActive}
-          />
+        <div className={style.floor1}>
+          <button className="button is-primary" onClick={this.onSubmit}>
+            Submit
+          </button>
+          <button className="button" onClick={this.resetColor}>
+            Reset
+          </button>
+          <button className="button is-info" onClick={this.onReturn}>
+            Return
+          </button>
         </div>
       </div>
-      <div className={style.floor1}>
-        <button className="button is-primary" onClick={this.onSubmit}>
-          Submit
-        </button>
-        <button
-          className="button"
-          onClick={this.resetColor}
-        >
-          Reset
-        </button>
-        <button className="button is-info" onClick={this.onReturn}>
-          Return
-        </button>
-      </div>
-    </div>
+    );
   }
 }
 

@@ -6,7 +6,7 @@ class ServerStartPlugin {
     this.child = null;
   }
 
-  onStdOut(data){
+  onStdOut(data) {
     const time = new Date().toTimeString();
     process.stdout.write(time.replace(/.*(\d{2}:\d{2}:\d{2}).*/, '[$1] '));
     process.stdout.write(data);
@@ -16,8 +16,7 @@ class ServerStartPlugin {
     compiler.hooks.done.tapAsync('ServerStartHook', (cp, callback) => {
       this.child && this.child.kill('SIGTERM');
       this.child = spawn('node', ['./local/server.js'], {
-        env: Object.assign({
-        }, process.env, this.envs),
+        env: Object.assign({}, process.env, this.envs),
         silent: false,
       });
       console.log('[server]: start server');

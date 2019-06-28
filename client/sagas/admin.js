@@ -19,20 +19,15 @@ const adjudicateql = `mutation($val: LikeColorInputType!) {
   adjudicateColor(input: $val) {
     status
   }
-}`
-
-function* watchers() {
-  yield takeLatest("admin/getList", getAnonymousColor);
-  yield takeLatest("admin/decideColor", postDecideColor);
-}
+}`;
 
 function* getAnonymousColor(action) {
   const payload = yield call(requester, '/graphql', {
     query: colorql,
-    variables: { cate: "ANONYMOUS" },
+    variables: { cate: 'ANONYMOUS' },
   });
-  const gqlRes = get(payload, 'data.color', null)
-  if(gqlRes){
+  const gqlRes = get(payload, 'data.color', null);
+  if (gqlRes) {
     yield put({
       type: 'admin/getList/success',
       payload: gqlRes,
@@ -49,21 +44,26 @@ function* postDecideColor(action) {
       val: action.payload,
     },
   });
-  const status = get(res, 'data.adjudicateColor.status', 1)
-  if(status !== 0) {
+  const status = get(res, 'data.adjudicateColor.status', 1);
+  if (status !== 0) {
     const payload = get(res, 'data.adjudicateColor.data', '');
     yield put({
-      type: "admin/decideColor/fail",
+      type: 'admin/decideColor/fail',
       payload,
     });
   } else {
     yield put({
-      type: "admin/decideColor/success",
-      payload: action.payload.id
+      type: 'admin/decideColor/success',
+      payload: action.payload.id,
     });
   }
 }
 
-export default function*(){
+function* watchers() {
+  yield takeLatest('admin/getList', getAnonymousColor);
+  yield takeLatest('admin/decideColor', postDecideColor);
+}
+
+export default function*() {
   yield fork(watchers);
 }

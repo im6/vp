@@ -27,21 +27,21 @@ const logoffQl = `mutation {
 function* getAuth() {
   const payload = yield call(requester, '/graphql', { query });
   const error = get(payload, 'data.error');
-  if(error){
+  if (error) {
     yield put({
-      type: "user/auth/fail",
+      type: 'user/auth/fail',
       payload: error,
     });
-  }else{
+  } else {
     const resData = get(payload, 'data.auth');
     yield put({
-      type: "user/auth/success",
+      type: 'user/auth/success',
       payload: resData,
     });
 
-    if(resData.user && resData.user.likes && resData.user.likes.length) {
+    if (resData.user && resData.user.likes && resData.user.likes.length) {
       yield put({
-        type: "color/set/likes",
+        type: 'color/set/likes',
         payload: resData.user.likes,
       });
     }
@@ -63,10 +63,10 @@ function onOAuth(action) {
 
 function* watchers(a) {
   yield takeLatest('user/auth', getAuth);
-  yield takeLatest("user/logoff", logoff);
+  yield takeLatest('user/logoff', logoff);
   yield takeLatest('user/onOAuth', onOAuth);
 }
 
-export default function*(){
+export default function*() {
   yield fork(watchers);
 }
