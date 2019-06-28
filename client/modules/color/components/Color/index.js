@@ -11,16 +11,16 @@ class Color extends React.Component {
     this.onLikeClick = this.onLikeClick.bind(this);
     this.onDownloadClick = this.onDownloadClick.bind(this);
   }
-  componentDidMount(){
+  componentDidMount() {
     const { url } = this.props.match;
-    if(url === '/portfolio') {
+    if (url === '/portfolio') {
       this.props.onEnterProfile('myPortfolio');
-    } else if(url === '/like') {
+    } else if (url === '/like') {
       this.props.onEnterProfile('myLiked');
     }
   }
 
-  onLikeClick(newState){
+  onLikeClick(newState) {
     const { id, willLike } = newState;
     this.props.onLike(id, willLike);
   }
@@ -35,34 +35,34 @@ class Color extends React.Component {
 
   render() {
     const { selectedId, loading } = this.props;
-    return <Fragment>
-      {
-        loading && <SpinLoader />
-      }
-      {
-        selectedId &&
-        <OneColor
-          selected={this.props.colorDef.get(selectedId)}
-          liked={this.props.liked.get(selectedId)}
-          onLike={this.onLikeClick}
-          onDownload={this.onDownloadClick}
-        />
-      }
-      <div className={style.container}>
-        <div className={style.list}>
-            {
-              this.props.list.map((v) => {
-                return <Box key={v}
+    return (
+      <Fragment>
+        {loading && <SpinLoader />}
+        {selectedId && (
+          <OneColor
+            selected={this.props.colorDef.get(selectedId)}
+            liked={this.props.liked.get(selectedId)}
+            onLike={this.onLikeClick}
+            onDownload={this.onDownloadClick}
+          />
+        )}
+        <div className={style.container}>
+          <div className={style.list}>
+            {this.props.list.map(v => {
+              return (
+                <Box
+                  key={v}
                   liked={this.props.liked.get(v)}
                   boxInfo={this.props.colorDef.get(v)}
                   onLikeClick={this.onLikeClick}
                   onCanvasClick={this.onEnterClick}
-                />;
-              })
-            }
+                />
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </Fragment>;
+      </Fragment>
+    );
   }
 }
 
