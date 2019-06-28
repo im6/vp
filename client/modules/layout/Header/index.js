@@ -17,10 +17,10 @@ const mapStateToProps = ({ user }, { location, history }) => {
     detail,
     authReady,
     facebookUrl,
-  }
+  };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     onOAuth(url) {
       const ac = createAction('user/onOAuth');
@@ -38,4 +38,9 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Header)
+);

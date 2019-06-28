@@ -8,8 +8,11 @@ const FinishModal = ({ isAuth }) => {
         publish.
       </p>
       <h3>
-        <b>OR</b> <br />
-        you could <b>sign in</b> and have it published instantly.
+        <b>OR</b>
+        <br />
+        you could
+        <b>sign in</b>
+        and have it published instantly.
       </h3>
     </div>
   );

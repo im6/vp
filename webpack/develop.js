@@ -135,7 +135,7 @@ const server = {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
-              plugins: [],
+              plugins: ['@babel/plugin-syntax-dynamic-import'],
             },
           },
         ],
