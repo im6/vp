@@ -1,8 +1,7 @@
-import { takeLatest } from 'redux-saga/effects';
-import { call, put, fork } from 'redux-saga/effects';
-import requester from '../services/requester';
-import { createAction } from 'redux-actions';
 import get from 'lodash.get';
+import { call, put, fork, takeLatest } from 'redux-saga/effects';
+import { createAction } from 'redux-actions';
+import requester from '../services/requester';
 
 const colorql = `query($cate: ColorCategory!) {
   color(category: $cate) {

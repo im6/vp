@@ -1,8 +1,8 @@
-import { takeLatest } from 'redux-saga/effects';
-import { call, put, fork } from 'redux-saga/effects';
-import requester from '../services/requester';
-import { createAction } from 'redux-actions';
 import get from 'lodash.get';
+import { call, put, fork, takeLatest } from 'redux-saga/effects';
+import { createAction } from 'redux-actions';
+
+import requester from '../services/requester';
 
 const query = `query {
   auth {
@@ -54,7 +54,7 @@ function onOAuth(action) {
   window.location.replace(action.payload);
 }
 
-function* watchers(a) {
+function* watchers() {
   yield takeLatest('user/auth', getAuth);
   yield takeLatest('user/logoff', logoff);
   yield takeLatest('user/onOAuth', onOAuth);

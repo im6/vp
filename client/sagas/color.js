@@ -1,9 +1,8 @@
-import { takeLatest } from 'redux-saga/effects';
-import { call, put, fork } from 'redux-saga/effects';
-import requester from '../services/requester';
+import get from 'lodash.get';
+import { call, put, fork, takeLatest } from 'redux-saga/effects';
 import { createAction } from 'redux-actions';
 import { downloadCanvas } from '../misc/util.js';
-import get from 'lodash.get';
+import requester from '../services/requester';
 
 const colorql = `query($cate: ColorCategory!) {
   color(category: $cate) {
@@ -37,7 +36,9 @@ function download(action) {
   aElem.href = downloadUrl;
   aElem.download = `colorpk_${action.payload.id}.png`;
   aElem.click();
-  aElem.parentNode && aElem.parentNode.removeChild(elem);
+  if (aElem.parentNode) {
+    aElem.parentNode.removeChild(aElem);
+  }
 }
 
 function* getUserColor(action) {
@@ -107,7 +108,7 @@ function* addNew(action) {
   if (status !== 0) {
     const failAction = createAction('color/addNew/fail');
     yield put(failAction());
-    console.error('create new color failed!');
+    alert('create new color failed!');
   } else {
     const { color } = action.payload;
     const id = get(res, 'data.createColor.data', null);
@@ -123,7 +124,7 @@ function* addNew(action) {
   }
 }
 
-function* watchers(a) {
+function* watchers() {
   yield takeLatest('color/get', initColorList);
   yield takeLatest('color/getUserColor', getUserColor);
   yield takeLatest('color/toggleLike', toggleLike);

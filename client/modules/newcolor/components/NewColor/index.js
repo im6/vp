@@ -21,9 +21,6 @@ class NewColor extends React.PureComponent {
     this.onPickColor = this.onPickColor.bind(this);
   }
 
-  showModal() {
-    alert('Thank you for new colors');
-  }
   onReturn() {
     this.props.onRedirect();
   }
@@ -37,8 +34,8 @@ class NewColor extends React.PureComponent {
     });
     if (good) {
       this.props.onAdd([...this.state.colorValue]);
-      this.showModal();
       this.resetColor();
+      alert('Thank you for new colors');
     } else {
       console.error('Invalid color');
     }
