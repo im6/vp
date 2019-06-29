@@ -21,17 +21,15 @@ const adjudicateql = `mutation($val: LikeColorInputType!) {
   }
 }`;
 
-function* getAnonymousColor(action) {
+function* getAnonymousColor() {
   const payload = yield call(requester, '/graphql', {
     query: colorql,
     variables: { cate: 'ANONYMOUS' },
   });
   const gqlRes = get(payload, 'data.color', null);
   if (gqlRes) {
-    yield put({
-      type: 'admin/getList/success',
-      payload: gqlRes,
-    });
+    const successAction = createAction('admin/getList/success');
+    yield put(successAction(gqlRes));
   } else {
     window.location.replace('/');
   }
@@ -47,15 +45,11 @@ function* postDecideColor(action) {
   const status = get(res, 'data.adjudicateColor.status', 1);
   if (status !== 0) {
     const payload = get(res, 'data.adjudicateColor.data', '');
-    yield put({
-      type: 'admin/decideColor/fail',
-      payload,
-    });
+    const failAction = createAction('admin/decideColor/fail');
+    yield put(failAction(payload));
   } else {
-    yield put({
-      type: 'admin/decideColor/success',
-      payload: action.payload.id,
-    });
+    const successAction = createAction('admin/decideColor/success');
+    yield put(successAction(action.payload.id));
   }
 }
 

@@ -74,15 +74,11 @@ function* initColorList() {
   });
   const gqlRes = get(payload, 'data.color', null);
   if (gqlRes) {
-    yield put({
-      type: 'color/get/success',
-      payload: gqlRes,
-    });
+    const sucessAction = createAction('color/get/success');
+    yield put(sucessAction(gqlRes));
   } else {
-    yield put({
-      type: 'color/get/fail',
-      payload: null,
-    });
+    const failAction = createAction('color/get/fail');
+    yield put(failAction());
   }
 }
 
@@ -109,24 +105,21 @@ function* addNew(action) {
 
   const status = get(res, 'data.createColor.status', 1);
   if (status !== 0) {
-    yield put({
-      type: 'color/addNew/fail',
-      payload: null,
-    });
+    const failAction = createAction('color/addNew/fail');
+    yield put(failAction());
     console.error('create new color failed!');
   } else {
     const { color } = action.payload;
     const id = get(res, 'data.createColor.data', null);
-
-    yield put({
-      type: 'color/addNew/success',
-      payload: {
+    const sucessAction = createAction('color/addNew/success');
+    yield put(
+      sucessAction({
         id: id.toString(),
         color,
         name: '',
         like: 0,
-      },
-    });
+      })
+    );
   }
 }
 

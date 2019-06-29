@@ -28,22 +28,17 @@ function* getAuth() {
   const payload = yield call(requester, '/graphql', { query });
   const error = get(payload, 'data.error');
   if (error) {
-    yield put({
-      type: 'user/auth/fail',
-      payload: error,
-    });
+    const ac0 = createAction('user/auth/fail');
+    yield put(ac0(error));
   } else {
     const resData = get(payload, 'data.auth');
-    yield put({
-      type: 'user/auth/success',
-      payload: resData,
-    });
+
+    const ac0 = createAction('user/auth/success');
+    yield put(ac0(resData));
 
     if (resData.user && resData.user.likes && resData.user.likes.length) {
-      yield put({
-        type: 'color/set/likes',
-        payload: resData.user.likes,
-      });
+      const ac1 = createAction('color/set/likes');
+      yield put(ac1(resData.user.likes));
     }
   }
 }
@@ -51,10 +46,8 @@ function* getAuth() {
 function* logoff() {
   const res = yield call(requester, '/graphql', { query: logoffQl });
   const payload = get(res, 'data.logoff.url', null);
-  yield put({
-    type: 'user/logoff/success',
-    payload,
-  });
+  const ac = createAction('user/logoff/success');
+  yield put(ac(payload));
 }
 
 function onOAuth(action) {
