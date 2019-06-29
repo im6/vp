@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import Color from './components/Color';
 
 const shared = {};
@@ -8,9 +8,18 @@ const storeMap = {
   '/popular': 'colorIdByLike',
   '/': 'colorId',
   '/like': 'myLiked',
-  '/portfolio': 'myPortfolio'
-}
-const mapStateToProps = ({ color }, { location: { pathname }, match: { params: { id: selectedId }}, history }) => {
+  '/portfolio': 'myPortfolio',
+};
+const mapStateToProps = (
+  { color },
+  {
+    location: { pathname },
+    match: {
+      params: { id: selectedId },
+    },
+    history,
+  }
+) => {
   const colorDef = color.get('colorDef');
   const liked = color.get('liked');
   shared.history = history;
@@ -24,14 +33,16 @@ const mapStateToProps = ({ color }, { location: { pathname }, match: { params: {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     onLike(id, willLike) {
       const ac = createAction('color/toggleLike');
-      dispatch(ac({
-        willLike,
-        id
-      }));
+      dispatch(
+        ac({
+          willLike,
+          id,
+        })
+      );
     },
     onEnter(color) {
       window.scrollTo(0, 0);
@@ -39,16 +50,23 @@ const mapDispatchToProps = (dispatch) => {
     },
     onDownload(color) {
       const ac = createAction('color/download');
-      dispatch(ac({
-        color: color.get('color'),
-        id: color.get('id')
-      }));
+      dispatch(
+        ac({
+          color: color.get('color'),
+          id: color.get('id'),
+        })
+      );
     },
     onEnterProfile(name) {
       const ac = createAction('color/getUserColor');
       dispatch(ac(name));
-    }
-  }
+    },
+  };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Color));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Color)
+);

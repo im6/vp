@@ -6,7 +6,7 @@ class ServerWatchingPlugin {
   }
 
   apply(compiler) {
-    compiler.hooks.afterPlugins.tap('ServerWatchPluginHook', cp => {
+    compiler.hooks.afterPlugins.tap('ServerWatchPluginHook', () => {
       console.log('[server]: compile server');
       webpack(this.options, (err, stats) => {
         if (err || stats.hasErrors()) {

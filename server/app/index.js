@@ -3,9 +3,9 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 
-import csrf from '../middlewares/csrfOverride';
 import helmet from 'helmet';
 import { oauthLogin } from '../middlewares/auth';
+import csrf from '../middlewares/csrfOverride';
 import graphql from '../middlewares/graphql';
 import { h5Route, staticFile } from '../middlewares/staticRender';
 import { onError, notFound } from '../middlewares/errorHandler';

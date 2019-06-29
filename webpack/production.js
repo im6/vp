@@ -11,7 +11,7 @@ const bulmaDir = /client\/modules\/app/;
 const client = {
   mode: 'production',
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.jsx'],
   },
   entry: ['./client/index.js'],
   output: {

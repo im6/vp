@@ -5,14 +5,16 @@ import Layout from '../layout';
 import './bulma.modules.sass';
 
 class App extends React.Component {
-  render(){
+  render() {
     const { dispatch } = this.props;
-    return <Layout>
-      <Routes dispatch={dispatch} />
-    </Layout>;
+    return (
+      <Layout>
+        <Routes dispatch={dispatch} />
+      </Layout>
+    );
   }
 }
 App.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
 };
 export default App;

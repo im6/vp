@@ -1,11 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const ServerStartPlugin = require('./plugins/ServerStartPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ServerStartPlugin = require('./plugins/ServerStartPlugin');
 
 const bulmaDir = /client\/modules\/app/;
 
@@ -20,7 +20,7 @@ const client = {
   mode: 'development',
   devtool: 'inline-source-map',
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.jsx'],
   },
   optimization: {
     splitChunks: {

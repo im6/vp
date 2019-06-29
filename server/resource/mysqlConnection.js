@@ -18,7 +18,7 @@ const pool = mysql.createPool({
   database,
 });
 
-export const sqlExecOne = qr =>
+export default qr =>
   new Promise((resolve, reject) => {
     pool.query(qr, (err, rows) => {
       if (err) {
