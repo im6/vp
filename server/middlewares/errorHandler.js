@@ -1,4 +1,6 @@
+/* eslint no-console: 0 */
 import path from 'path';
+
 const { PWD } = process.env;
 export const notFound = (req, res) => {
   console.error('NOT FOUND! url: ', req.url);

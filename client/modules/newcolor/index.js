@@ -30,7 +30,7 @@ const mapDispatchToProps = dispatch => {
           })
         );
       } else {
-        console.error('illegal color value size');
+        console.error('illegal color value size'); // eslint-disable-line no-console
       }
     },
     onRedirect() {

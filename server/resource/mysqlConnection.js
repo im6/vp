@@ -22,7 +22,7 @@ export default qr =>
   new Promise((resolve, reject) => {
     pool.query(qr, (err, rows) => {
       if (err) {
-        console.error(err);
+        console.error(err); // eslint-disable-line no-console
         reject(err);
       } else {
         resolve(rows);

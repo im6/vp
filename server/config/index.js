@@ -11,7 +11,7 @@ export const {
   FB_REDIRECT_URL,
 } = env;
 
-export const _DEV_ = NODE_ENV === 'development';
+export const _DEV_ = NODE_ENV === 'development'; // eslint-disable-line no-underscore-dangle
 export const FB_API_URL = 'https://graph.facebook.com/v3.3';
 export const SERVER_IP = 'localhost';
 export const STATIC_URL = _DEV_ ? 'local' : 'dist';

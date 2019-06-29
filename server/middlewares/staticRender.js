@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 import path from 'path';
 import { _DEV_, STATIC_URL } from '../config';
 
@@ -33,7 +34,7 @@ export const staticFile = (req, res, next) => {
 };
 
 export const h5Route = (req, res, next) => {
-  var subUrl = req.url.split('/');
+  const subUrl = req.url.split('/');
   if (FRONTURLs.includes(subUrl[1])) {
     if (_DEV_) {
       console.log(`${req.method}: ${req.originalUrl}`);

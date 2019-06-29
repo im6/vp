@@ -39,50 +39,50 @@ const root = {
         const userData = await sqlExecOne(qr0);
         if (userData.length === 1) {
           // existing user.
-          const { isadmin, id } = userData[0];
+          const { isadmin, id: userId } = userData[0];
           req.session.app.dbInfo = {
-            id,
+            id: userId,
             name,
             isAdmin: isadmin || false,
           };
           const qr1 = `SELECT color_id FROM colorpk_userlike WHERE user_id= ${escape(
-            id
+            userId
           )}`;
           const likeData = await sqlExecOne(qr1);
 
           const qr2 = `UPDATE colorpk_user SET lastlogin=NOW() WHERE id=${escape(
-            id
+            userId
           )}`;
           sqlExecOne(qr2);
 
           return {
             user: {
-              id,
+              id: userId,
               name,
               isadmin,
               img: get(oauthData, 'picture.data.url', null),
               likes: likeData.map(v => v.color_id),
             },
           };
-        } else {
-          // first time login, save it.
-          const qr = `INSERT INTO colorpk_user (oauth, name, oauthid, lastlogin) VALUES ('fb', '${name}', '${id}', NOW())`;
-          const { insertId: id } = sqlExecOne(qr);
-          req.session.app.dbInfo = {
-            id,
-            name,
-            isAdmin: false,
-          };
-          return {
-            user: {
-              id,
-              name,
-              isadmin: false,
-              img: get(oauthData, 'picture.data.url', null),
-              likes: [],
-            },
-          };
         }
+
+        // first time login, save it.
+        const qr = `INSERT INTO colorpk_user (oauth, name, oauthid, lastlogin) VALUES ('fb', '${name}', '${id}', NOW())`;
+        const { insertId } = await sqlExecOne(qr);
+        req.session.app.dbInfo = {
+          id: insertId,
+          name,
+          isAdmin: false,
+        };
+        return {
+          user: {
+            id: insertId,
+            name,
+            isadmin: false,
+            img: get(oauthData, 'picture.data.url', null),
+            likes: [],
+          },
+        };
       } catch (err) {
         return new GraphQLError(err.toString());
       }
@@ -234,7 +234,7 @@ const root = {
 
   logoff(_, req) {
     const username = get(req, 'session.app.dbInfo.name', '(unknow)');
-    console.log(`logoff ${username}, delete session`);
+    console.log(`logoff ${username}, delete session`); // eslint-disable-line no-console
     delete req.session.app;
 
     const oauthState = uuid.v1();

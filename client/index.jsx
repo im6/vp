@@ -11,8 +11,8 @@ import {
   combineReducers,
 } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { sagaInitiator } from './config/saga';
-import { moduleReducers } from './config/reducer';
+import sagaInitiator from './config/saga';
+import moduleReducers from './config/reducer';
 import App from './modules/app';
 
 const sagaMiddleware = createSagaMiddleware();

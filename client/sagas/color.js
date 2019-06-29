@@ -92,7 +92,7 @@ function* toggleLike(action) {
   });
 
   if (get(res, 'data.likeColor.status', 1) !== 0) {
-    console.error('toggle like error');
+    console.error('toggle like error'); // eslint-disable-line no-console
   }
 }
 
@@ -108,7 +108,7 @@ function* addNew(action) {
   if (status !== 0) {
     const failAction = createAction('color/addNew/fail');
     yield put(failAction());
-    alert('create new color failed!');
+    console.error('create new color failed!'); // eslint-disable-line no-console
   } else {
     const { color } = action.payload;
     const id = get(res, 'data.createColor.data', null);

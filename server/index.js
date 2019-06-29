@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 import 'regenerator-runtime/runtime';
 import app from './app/index';
 import { SERVER_IP, SERVER_PORT, NODE_ENV } from './config';

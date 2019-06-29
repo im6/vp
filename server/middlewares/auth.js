@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 import get from 'lodash.get';
 import { FB_REDIRECT_URL, FB_APP_SECRET, FB_APP_KEY } from '../config';
 import { accessToken } from '../resource/oauth';

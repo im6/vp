@@ -6,7 +6,7 @@ export function downloadCanvas(color) {
   const MARGIN = 13;
   const CANVASRATIO = 0.65;
 
-  const colors = color.split('#').map(v => '#' + v);
+  const colors = color.split('#').map(v => `#${v}`);
   const myCanvas = document.createElement('canvas');
   const ctx = myCanvas.getContext('2d');
 
@@ -24,18 +24,18 @@ export function downloadCanvas(color) {
   ctx.fillStyle = '#fff';
   ctx.fillRect(0, 0, WIDTH, HEIGHT * CANVASRATIO + MARGIN * 4);
 
-  ctx.fillStyle = colors[0];
+  [ctx.fillStyle] = colors;
   ctx.fillRect(MARGIN, MARGIN, WIDTH - MARGIN * 2, boxHts[0]);
-  ctx.fillStyle = colors[1];
+  [, ctx.fillStyle] = colors;
   ctx.fillRect(MARGIN, MARGIN + boxHts[0], WIDTH - MARGIN * 2, boxHts[1]);
-  ctx.fillStyle = colors[2];
+  [, , ctx.fillStyle] = colors;
   ctx.fillRect(
     MARGIN,
     MARGIN + boxHts[0] + boxHts[1],
     WIDTH - MARGIN * 2,
     boxHts[2]
   );
-  ctx.fillStyle = colors[3];
+  [, , , ctx.fillStyle] = colors;
   ctx.fillRect(
     MARGIN,
     MARGIN + boxHts[0] + boxHts[1] + boxHts[2],
