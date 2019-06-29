@@ -31,7 +31,7 @@ const client = {
       },
     },
   },
-  entry: ['./client/index.js'],
+  entry: ['./client/index'],
   output: {
     publicPath: '/static/',
     path: path.join(__dirname, '../local/public'),

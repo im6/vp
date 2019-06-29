@@ -13,7 +13,7 @@ const client = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  entry: ['./client/index.js'],
+  entry: ['./client/index'],
   output: {
     publicPath: '//dkny.oss-cn-hangzhou.aliyuncs.com/2/',
     path: path.join(__dirname, '../dist/public'),

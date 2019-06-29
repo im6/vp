@@ -43,8 +43,8 @@ export function downloadCanvas(color) {
     boxHts[3]
   );
 
-  const colorTxtPosition = CANVASRATIO * HEIGHT + 80,
-    space = 17;
+  const colorTxtPosition = CANVASRATIO * HEIGHT + 80;
+  const space = 17;
 
   ctx.font = '13px Arial';
   ctx.fillStyle = '#a3a3a3';
