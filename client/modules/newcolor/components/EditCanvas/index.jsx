@@ -7,16 +7,14 @@ class EditCanvas extends React.Component {
     return (
       <div className={style.box}>
         <div className={style.boxCanvas}>
-          {this.props.colorValue.map((v, k) => {
-            return (
-              <ColorRow
-                key={k}
-                colorValue={v}
-                isActive={k === this.props.activeIndex}
-                onRowClick={this.props.changeActive.bind(this, k)}
-              />
-            );
-          })}
+          {this.props.colorValue.map((v, k) => (
+            <ColorRow
+              key={k}
+              colorValue={v}
+              isActive={k === this.props.activeIndex}
+              onRowClick={this.props.changeActive.bind(this, k)}
+            />
+          ))}
         </div>
       </div>
     );

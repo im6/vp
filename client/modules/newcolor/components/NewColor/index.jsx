@@ -5,7 +5,7 @@ import style from './style.sass';
 
 const DEFAULTVALUE = '#81EEFF';
 
-class NewColor extends React.PureComponent {
+class NewColor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,12 +17,7 @@ class NewColor extends React.PureComponent {
     this.onChangeActive = this.onChangeActive.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.resetColor = this.resetColor.bind(this);
-    this.onReturn = this.onReturn.bind(this);
     this.onPickColor = this.onPickColor.bind(this);
-  }
-
-  onReturn() {
-    this.props.onRedirect();
   }
 
   onSubmit() {
@@ -42,10 +37,10 @@ class NewColor extends React.PureComponent {
   }
 
   onPickColor({ hex }) {
-    const oper = this.state.colorValue;
-    oper[this.state.activeIndex] = hex;
+    const { colorValue } = this.state;
+    colorValue[this.state.activeIndex] = hex;
     this.setState({
-      colorValue: oper,
+      colorValue,
       editColor: hex,
     });
   }
@@ -71,6 +66,7 @@ class NewColor extends React.PureComponent {
   }
 
   render() {
+    const { onRedirect } = this.props;
     return (
       <div className={style.container}>
         <div className={style.floor0}>
@@ -95,7 +91,7 @@ class NewColor extends React.PureComponent {
           <button className="button" onClick={this.resetColor}>
             Reset
           </button>
-          <button className="button is-info" onClick={this.onReturn}>
+          <button className="button is-info" onClick={onRedirect}>
             Return
           </button>
         </div>
