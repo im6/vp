@@ -35,12 +35,13 @@ class Color extends React.Component {
 
   render() {
     const { selectedId, loading } = this.props;
+    const hasSelected = this.props.colorDef.has(selectedId);
     return (
       <Fragment>
         {loading && <SpinLoader />}
-        {selectedId && (
+        {hasSelected && (
           <OneColor
-            selected={this.props.colorDef.get(selectedId)}
+            boxInfo={this.props.colorDef.get(selectedId)}
             liked={this.props.liked.get(selectedId)}
             onLike={this.onLikeClick}
             onDownload={this.onDownloadClick}

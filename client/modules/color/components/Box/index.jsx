@@ -30,6 +30,7 @@ class Box extends React.Component {
   }
 
   render() {
+    const { showUsername } = this.props;
     return (
       <div className={style.box}>
         <ColorCanvas
@@ -41,7 +42,7 @@ class Box extends React.Component {
           &nbsp;&nbsp;
           {this.props.boxInfo.get('like')}
         </button>
-        {this.props.boxInfo.get('username') && (
+        {showUsername && this.props.boxInfo.get('username') && (
           <p>{this.props.boxInfo.get('username')}</p>
         )}
       </div>
@@ -53,6 +54,7 @@ Box.propTypes = {
   boxInfo: PropTypes.object.isRequired,
   onLikeClick: PropTypes.func.isRequired,
   liked: PropTypes.bool,
+  showUsername: PropTypes.bool,
 };
 
 export default Box;

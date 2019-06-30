@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Box from '../Box';
 import style from './style.sass';
 import { noop } from '../../../../misc/util';
@@ -6,26 +7,22 @@ import { noop } from '../../../../misc/util';
 class OneColor extends React.Component {
   constructor(props) {
     super(props);
-    this.onLikeClick = this.onLikeClick.bind(this);
     this.onDownload = this.onDownload.bind(this);
   }
-  onLikeClick(data) {
-    this.props.onLike(data);
-  }
   onDownload() {
-    this.props.onDownload(this.props.selected);
+    this.props.onDownload(this.props.boxInfo);
   }
   render() {
-    const { liked, selected } = this.props;
-    if (!selected) return null;
+    const { liked, boxInfo, onLike } = this.props;
     return (
       <div className={style.center}>
         <div>
           <Box
             liked={liked}
-            boxInfo={selected}
-            onLikeClick={this.onLikeClick}
+            boxInfo={boxInfo}
+            onLikeClick={onLike}
             onCanvasClick={noop}
+            showUsername
           />
           <div className={style.center}>
             <button
@@ -40,5 +37,12 @@ class OneColor extends React.Component {
     );
   }
 }
+
+OneColor.propTypes = {
+  liked: PropTypes.bool,
+  boxInfo: PropTypes.object.isRequired,
+  onLike: PropTypes.func.isRequired,
+  onDownload: PropTypes.func.isRequired,
+};
 
 export default OneColor;
