@@ -1,5 +1,6 @@
 import React from 'react';
 
+const localStorageKey = 'colorpk1_lang';
 const translation = {
   eng: {
     language: 'Language',
@@ -116,8 +117,11 @@ export class LanguageContextProvider extends React.Component {
   constructor(props) {
     super(props);
     this.changeLang = this.changeLang.bind(this);
+    const localValue =
+      window.localStorage && window.localStorage.getItem(localStorageKey);
+    const defaultLang = localValue in translation ? localValue : 'eng';
     this.state = {
-      language: translation.eng,
+      language: translation[defaultLang],
       changeLang: this.changeLang,
     };
   }
@@ -125,6 +129,11 @@ export class LanguageContextProvider extends React.Component {
     this.setState({
       language: translation[lang],
     });
+    try {
+      window.localStorage.setItem(localStorageKey, lang);
+    } catch (error) {
+      // not support
+    }
   }
   render() {
     return (
