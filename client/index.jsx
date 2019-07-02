@@ -14,6 +14,7 @@ import createSagaMiddleware from 'redux-saga';
 import sagaInitiator from './config/saga';
 import moduleReducers from './config/reducer';
 import App from './modules/app';
+import { LanguageContextProvider } from './context/LanguageContext';
 
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
@@ -37,7 +38,9 @@ const store = createStore(
 sagaInitiator(sagaMiddleware);
 ReactDOM.render(
   <Provider store={store}>
-    <App dispatch={store.dispatch} />
+    <LanguageContextProvider>
+      <App dispatch={store.dispatch} />
+    </LanguageContextProvider>
   </Provider>,
   document.getElementById('app')
 );

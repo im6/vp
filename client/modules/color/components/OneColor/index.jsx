@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Box from '../Box';
 import style from './style.sass';
 import { noop } from '../../../../misc/util';
+import { LanguageContext } from '../../../../context/LanguageContext';
 
 class OneColor extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class OneColor extends React.Component {
   }
   render() {
     const { liked, boxInfo, onLike } = this.props;
+    const { language } = this.context;
     return (
       <div className={style.center}>
         <div>
@@ -29,7 +31,7 @@ class OneColor extends React.Component {
               onClick={this.onDownload}
               className="button is-fullwidth is-info"
             >
-              Download
+              {language.download}
             </button>
           </div>
         </div>
@@ -44,5 +46,5 @@ OneColor.propTypes = {
   onLike: PropTypes.func.isRequired,
   onDownload: PropTypes.func.isRequired,
 };
-
+OneColor.contextType = LanguageContext;
 export default OneColor;

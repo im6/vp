@@ -2,6 +2,7 @@ import React from 'react';
 import { ChromePicker } from 'react-color';
 import EditCanvas from '../EditCanvas';
 import style from './style.sass';
+import { LanguageContext } from '../../../../context/LanguageContext';
 
 const DEFAULTVALUE = '#81EEFF';
 
@@ -67,6 +68,7 @@ class NewColor extends React.Component {
 
   render() {
     const { onRedirect } = this.props;
+    const { language } = this.context;
     return (
       <div className={style.container}>
         <div className={style.floor0}>
@@ -86,18 +88,18 @@ class NewColor extends React.Component {
         </div>
         <div className={style.floor1}>
           <button className="button is-primary" onClick={this.onSubmit}>
-            Submit
+            {language.submit}
           </button>
           <button className="button" onClick={this.resetColor}>
-            Reset
+            {language.reset}
           </button>
           <button className="button is-info" onClick={onRedirect}>
-            Return
+            {language.return}
           </button>
         </div>
       </div>
     );
   }
 }
-
+NewColor.contextType = LanguageContext;
 export default NewColor;
