@@ -6,7 +6,7 @@ import cookieSession from 'cookie-session';
 import helmet from 'helmet';
 import { oauthLogin } from '../middlewares/auth';
 import csrf from '../middlewares/csrfOverride';
-import graphql from '../middlewares/graphql';
+import graphqlMiddleware from '../middlewares/graphql';
 import { h5Route, staticFile } from '../middlewares/staticRender';
 import { onError, notFound } from '../middlewares/errorHandler';
 import { SESSION_SECRET, _DEV_ } from '../config';
@@ -34,7 +34,7 @@ if (_DEV_) {
   app.use(csrf);
 }
 
-app.use('/graphql', graphql);
+app.use('/graphql', graphqlMiddleware);
 app.get('/auth/:oauth', oauthLogin);
 app.get('/*', h5Route);
 app.use(onError);
