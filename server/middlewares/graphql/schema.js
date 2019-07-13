@@ -44,7 +44,7 @@ const schemaStr = `
 
   type CreateColorOutputType {
     status: Int!
-    data: Int!
+    data: ID!
   }
 
   type AuthOutputType {

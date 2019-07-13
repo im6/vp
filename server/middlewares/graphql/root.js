@@ -24,9 +24,10 @@ req.session.app = {
 const root = {
   async auth(_, req) {
     if (isAuth(req, true) && hasToken(req)) {
-      const token = get(req, 'session.app.tokenInfo.access_token', null);
+      // has valid auth info, will verify
+      const accessToken = get(req, 'session.app.tokenInfo.access_token', null);
       const qsObj = {
-        access_token: token,
+        access_token: accessToken,
         fields: 'id,name,picture',
       };
 
@@ -42,7 +43,7 @@ const root = {
           const { isadmin, id: userId } = userData[0];
           req.session.app.dbInfo = {
             id: userId,
-            name,
+            name, // grab name from oauth
             isAdmin: isadmin || false,
           };
           const qr1 = `SELECT color_id FROM colorpk_userlike WHERE user_id= ${escape(
@@ -66,7 +67,7 @@ const root = {
           };
         }
 
-        // first time login, save it.
+        // user first time login, save it.
         const qr = `INSERT INTO colorpk_user (oauth, name, oauthid, lastlogin) VALUES ('fb', '${name}', '${id}', NOW())`;
         const { insertId } = await sqlExecOne(qr);
         req.session.app.dbInfo = {
@@ -87,6 +88,7 @@ const root = {
         return new GraphQLError(err.toString());
       }
     } else {
+      // no valid auth info, response auth state value
       const oauthState = uuid.v1();
       const result = {
         user: null,
@@ -133,11 +135,8 @@ const root = {
         qr = 'SELECT * FROM colorpk_color a WHERE a.display = 1';
         break;
       default:
+        // GraphQL will make sure category match enumeration type
         break;
-    }
-
-    if (!qr) {
-      return new GraphQLError('color error: unknown query');
     }
 
     try {
