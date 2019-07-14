@@ -57,6 +57,10 @@ const mapDispatchToProps = dispatch => {
         })
       );
     },
+    onShare(type) {
+      const ac = createAction('color/share');
+      dispatch(ac(type));
+    },
     onEnterProfile(name) {
       const ac = createAction('color/getUserColor');
       dispatch(ac(name));

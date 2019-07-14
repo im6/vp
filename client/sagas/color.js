@@ -41,6 +41,32 @@ function download(action) {
   }
 }
 
+function share({ payload }) {
+  // eslint-disable-next-line no-prototype-builtins
+  if (!window.hasOwnProperty('encodeURIComponent')) {
+    return;
+  }
+  const windowSize = 'left=350,top=250,width=500,height=300';
+  const subject = window.encodeURIComponent('Check this ColorPK Palette');
+  const pageLink = window.encodeURIComponent(window.location.href);
+
+  let url = null;
+  switch (payload) {
+    case 'twitter':
+      url = `https://twitter.com/intent/tweet?url=${pageLink}&text=${subject}`;
+      break;
+    case 'facebook':
+      url = `https://www.facebook.com/sharer/sharer.php?u=${pageLink}&quote=${subject}`;
+      break;
+    case 'email':
+      url = `mailto:?subject=${subject}&body=${pageLink}`;
+      break;
+    default:
+      return;
+  }
+  window.open(url, '', windowSize);
+}
+
 function* getUserColor(action) {
   const cate = action.payload === 'myPortfolio' ? 'PROFILE' : 'LIKES';
   const payload = yield call(requester, '/graphql', {
@@ -130,6 +156,7 @@ function* watchers() {
   yield takeLatest('color/toggleLike', toggleLike);
   yield takeLatest('color/addNew', addNew);
   yield takeLatest('color/download', download);
+  yield takeLatest('color/share', share);
 }
 
 export default function*() {

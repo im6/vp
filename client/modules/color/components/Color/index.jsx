@@ -34,7 +34,7 @@ class Color extends React.Component {
   }
 
   render() {
-    const { selectedId, loading } = this.props;
+    const { selectedId, loading, onShare } = this.props;
     const hasSelected = this.props.colorDef.has(selectedId);
     return (
       <Fragment>
@@ -45,6 +45,7 @@ class Color extends React.Component {
             liked={this.props.liked.get(selectedId)}
             onLike={this.onLikeClick}
             onDownload={this.onDownloadClick}
+            onShare={onShare}
           />
         )}
         <div className={style.container}>

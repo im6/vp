@@ -34,6 +34,32 @@ class OneColor extends React.Component {
               {language.download}
             </button>
           </div>
+          <div className={`buttons has-addons ${style.shareGroup}`}>
+            <span
+              className="button"
+              onClick={() => {
+                this.props.onShare('email');
+              }}
+            >
+              E-mail
+            </span>
+            <span
+              className="button"
+              onClick={() => {
+                this.props.onShare('facebook');
+              }}
+            >
+              FaceBook
+            </span>
+            <span
+              className="button"
+              onClick={() => {
+                this.props.onShare('twitter');
+              }}
+            >
+              Twitter
+            </span>
+          </div>
         </div>
       </div>
     );
