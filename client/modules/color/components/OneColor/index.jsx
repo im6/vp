@@ -34,14 +34,14 @@ class OneColor extends React.Component {
               {language.download}
             </button>
           </div>
-          <div className={`buttons has-addons ${style.shareGroup}`}>
+          <div className={`buttons has-addons is-centered ${style.shareGroup}`}>
             <span
               className="button"
               onClick={() => {
                 this.props.onShare('email');
               }}
             >
-              E-mail
+              {language.email}
             </span>
             <span
               className="button"
@@ -49,7 +49,7 @@ class OneColor extends React.Component {
                 this.props.onShare('facebook');
               }}
             >
-              FaceBook
+              {language.facebook}
             </span>
             <span
               className="button"
@@ -57,7 +57,7 @@ class OneColor extends React.Component {
                 this.props.onShare('twitter');
               }}
             >
-              Twitter
+              {language.twitter}
             </span>
           </div>
         </div>

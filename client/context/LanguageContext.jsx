@@ -19,6 +19,9 @@ const translation = {
     like: 'Like',
     admin: 'Admin',
     logOut: 'Log Out',
+    facebook: 'FaceBook',
+    twitter: 'Twitter',
+    email: 'E-Mail',
   },
   zh: {
     language: '多语言',
@@ -37,6 +40,9 @@ const translation = {
     like: '我的收藏',
     admin: '管理员',
     logOut: '注销',
+    facebook: '脸书',
+    twitter: '推特',
+    email: '电邮',
   },
   jpn: {
     language: '言語',
@@ -55,6 +61,9 @@ const translation = {
     like: '好む',
     admin: '管理者',
     logOut: 'サインアウト',
+    facebook: 'FaceBook',
+    twitter: 'さえずり',
+    email: 'Eメール',
   },
   kor: {
     language: '언어',
@@ -73,6 +82,9 @@ const translation = {
     like: '인기 있는 말',
     admin: '관리자',
     logOut: '로그 아웃하다',
+    facebook: '페이스 북',
+    twitter: '지저귀다',
+    email: '이메일',
   },
   spa: {
     language: 'idioma',
@@ -91,6 +103,9 @@ const translation = {
     like: 'favorita',
     admin: 'administración',
     logOut: 'cerrar sesión',
+    facebook: 'Facebook',
+    twitter: 'gorjeo',
+    email: 'correo electrónico',
   },
   rus: {
     language: 'Переводы',
@@ -109,6 +124,9 @@ const translation = {
     like: 'любимый',
     admin: 'админ',
     logOut: 'выйти',
+    facebook: 'Facebook',
+    twitter: 'щебет',
+    email: 'Эл. адрес',
   },
 };
 
