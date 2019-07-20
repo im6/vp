@@ -14,25 +14,7 @@ const getOauthQsObj = (_, qs) => {
   return result;
 };
 
-// not used anywhere, reference for middlware design
-
-export const isAuth = (req, res, next) => {
-  if (get(req, 'session.app.isAuth', false)) {
-    next();
-  } else {
-    next(401);
-  }
-};
-
-export const isAdmin = (req, res, next) => {
-  if (get(req, 'session.app.dbInfo.isAdmin', false)) {
-    next();
-  } else {
-    next(403);
-  }
-};
-
-export const oauthLogin = (req, res) => {
+export default (req, res) => {
   const code = get(req, 'query.code', null);
   const state = get(req, 'query.state', null);
   const oauth = get(req, 'params.oauth', null);

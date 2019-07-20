@@ -4,12 +4,13 @@ import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 
 import helmet from 'helmet';
-import { oauthLogin } from '../middlewares/auth';
+
+import { SESSION_SECRET, _DEV_ } from '../config';
+import oauthLogin from '../middlewares/auth';
+import onError from '../middlewares/errorHandler';
 import csrf from '../middlewares/csrfOverride';
 import graphqlMiddleware from '../middlewares/graphql';
 import { h5Route, staticFile } from '../middlewares/staticRender';
-import { onError, notFound } from '../middlewares/errorHandler';
-import { SESSION_SECRET, _DEV_ } from '../config';
 
 const app = express();
 
@@ -38,6 +39,5 @@ app.use('/graphql', graphqlMiddleware);
 app.get('/auth/:oauth', oauthLogin);
 app.get('/*', h5Route);
 app.use(onError);
-app.use(notFound);
 
 export default app;

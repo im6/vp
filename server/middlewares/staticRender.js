@@ -29,7 +29,7 @@ export const staticFile = (req, res, next) => {
   if (scriptUrl.includes(fileName)) {
     res.sendFile(filePath);
   } else {
-    next();
+    next(404);
   }
 };
 
@@ -44,6 +44,6 @@ export const h5Route = (req, res, next) => {
     const indexPath = path.join(PWD, `./${STATIC_URL}/public/index.html`);
     res.sendFile(indexPath);
   } else {
-    next();
+    next(404);
   }
 };
