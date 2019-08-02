@@ -36,11 +36,6 @@ const mapStateToProps = (
 const mapDispatchToProps = dispatch => {
   return {
     onInit(url) {
-      const ac0 = createAction('color/get');
-      dispatch(ac0());
-      const ac1 = createAction('user/auth');
-      dispatch(ac1());
-
       if (url === '/portfolio') {
         const ac = createAction('color/getUserColor');
         dispatch(ac('myPortfolio'));

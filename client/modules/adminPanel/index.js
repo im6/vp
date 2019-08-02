@@ -12,9 +12,6 @@ const mapDispatchToProps = dispatch => {
     onInit() {
       const ac0 = createAction('admin/getList');
       dispatch(ac0());
-
-      const ac1 = createAction('user/auth');
-      dispatch(ac1());
     },
     onApprove(id) {
       const actcr = createAction('admin/decideColor');

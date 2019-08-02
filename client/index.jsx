@@ -13,5 +13,9 @@ ReactDOM.render(
       <App />
     </LanguageContextProvider>
   </Provider>,
-  document.getElementById('app')
+  document.getElementById('app'),
+  () => {
+    store.dispatch({ type: 'color/get' });
+    store.dispatch({ type: 'user/auth' });
+  }
 );
