@@ -16,6 +16,10 @@ const mapStateToProps = ({ user }, { location: { pathname }, history }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    onInit() {
+      const ac1 = createAction('user/auth');
+      dispatch(ac1());
+    },
     onAdd(colorValue) {
       const cl0 = colorValue.map(v => {
         return v.substr(1);

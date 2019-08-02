@@ -4,7 +4,7 @@ import style from './style.sass';
 
 class AdminPanel extends React.PureComponent {
   componentDidMount() {
-    this.props.onInitLoad();
+    this.props.onInit();
   }
 
   onApprove(record) {

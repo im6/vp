@@ -21,6 +21,10 @@ class NewColor extends React.Component {
     this.onPickColor = this.onPickColor.bind(this);
   }
 
+  componentDidMount() {
+    this.props.onInit();
+  }
+
   onSubmit() {
     let good = true;
     this.state.colorValue.forEach(v => {

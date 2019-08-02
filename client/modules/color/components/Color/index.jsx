@@ -13,11 +13,7 @@ class Color extends React.Component {
   }
   componentDidMount() {
     const { url } = this.props.match;
-    if (url === '/portfolio') {
-      this.props.onEnterProfile('myPortfolio');
-    } else if (url === '/like') {
-      this.props.onEnterProfile('myLiked');
-    }
+    this.props.onInit(url);
   }
 
   onLikeClick(newState) {

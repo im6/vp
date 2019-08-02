@@ -10,7 +10,7 @@ import { LanguageContextProvider } from './context/LanguageContext';
 ReactDOM.render(
   <Provider store={store}>
     <LanguageContextProvider>
-      <App dispatch={store.dispatch} />
+      <App />
     </LanguageContextProvider>
   </Provider>,
   document.getElementById('app')

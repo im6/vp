@@ -9,9 +9,12 @@ function mapStateToProps({ admin }) {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    onInitLoad() {
-      const actcr = createAction('admin/getList');
-      dispatch(actcr());
+    onInit() {
+      const ac0 = createAction('admin/getList');
+      dispatch(ac0());
+
+      const ac1 = createAction('user/auth');
+      dispatch(ac1());
     },
     onApprove(id) {
       const actcr = createAction('admin/decideColor');
