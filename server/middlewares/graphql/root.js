@@ -57,13 +57,12 @@ const root = {
           sqlExecOne(qr2);
 
           return {
-            user: {
-              id: userId,
-              name,
-              isadmin,
-              img: get(oauthData, 'picture.data.url', null),
-              likes: likeData.map(v => v.color_id),
-            },
+            __typename: 'User',
+            id: userId,
+            name,
+            isadmin,
+            img: get(oauthData, 'picture.data.url', null),
+            likes: likeData.map(v => v.color_id),
           };
         }
 
@@ -77,6 +76,7 @@ const root = {
         };
         return {
           user: {
+            __typename: 'User',
             id: insertId,
             name,
             isadmin: false,
@@ -90,17 +90,15 @@ const root = {
     } else {
       // no valid auth info, response auth state value
       const oauthState = uuid.v1();
-      const result = {
-        user: null,
-        url: createFacebookLink(oauthState),
-      };
-      if (get(req, 'session.app.authError', null)) {
-        result.authError = req.session.app.authError;
-      }
       req.session.app = {
         oauthState,
       };
-      return result;
+      return {
+        __typename: 'AuthFailResponse',
+        url: createFacebookLink(oauthState),
+        error: get(req, 'session.app.authError', null),
+        status: 0,
+      };
     }
   },
 

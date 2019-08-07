@@ -5,19 +5,19 @@ import Immutable, { fromJS } from 'immutable';
 const user = handleActions(
   {
     ['user/auth/success'](state, action) {
-      const { user } = action.payload;
-      if (user) {
-        state = state.set('isAuth', true);
-        state = state.set('detail', fromJS(user));
-        return state;
-      } else {
-        const { url: facebookUrl } = action.payload;
-        return state.merge({
-          authReady: true,
-          facebookUrl,
-          isAuth: false,
-        });
-      }
+      const user = action.payload;
+      // state = state.set('authReady', false);
+      state = state.set('isAuth', true);
+      state = state.set('detail', fromJS(user));
+      return state;
+    },
+
+    ['user/auth/fail'](state, action) {
+      return state.merge({
+        authReady: true,
+        facebookUrl: action.payload,
+        isAuth: false,
+      });
     },
 
     ['user/logoff'](state) {

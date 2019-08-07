@@ -6,14 +6,16 @@ import requester from '../services/requester';
 
 const query = `query {
   auth {
-    url
-    authError
-    user {
+    ... on User {
       id
       name
       img
       isadmin
       likes
+    }
+    ... on AuthFailResponse {
+      url
+      error
     }
   }
 }`;
@@ -26,20 +28,20 @@ const logoffQl = `mutation {
 
 function* getAuth() {
   const payload = yield call(requester, '/graphql', { query });
-  const error = get(payload, 'data.error');
-  if (error) {
-    const ac0 = createAction('user/auth/fail');
-    yield put(ac0(error));
-  } else {
-    const resData = get(payload, 'data.auth');
+  // eslint-disable-next-line no-prototype-builtins
+  const good = payload.data.auth.hasOwnProperty('id');
 
+  if (good) {
+    const userData = get(payload, 'data.auth');
     const ac0 = createAction('user/auth/success');
-    yield put(ac0(resData));
-
-    if (resData.user && resData.user.likes && resData.user.likes.length) {
+    yield put(ac0(userData));
+    if (userData.likes && userData.likes.length) {
       const ac1 = createAction('color/set/likes');
-      yield put(ac1(resData.user.likes));
+      yield put(ac1(userData.likes));
     }
+  } else {
+    const ac0 = createAction('user/auth/fail');
+    yield put(ac0(get(payload, 'data.auth.url')));
   }
 }
 
