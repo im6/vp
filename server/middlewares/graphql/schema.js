@@ -8,6 +8,10 @@ const schemaStr = `
     ANONYMOUS
   }
 
+  interface MutationResponse {
+    status: Int!
+  }
+
   type Color {
     id: ID!
     like: Int!
@@ -34,15 +38,15 @@ const schemaStr = `
     color: String!
   }
 
-  type LikeColorOutputType {
+  type LikeColorOutputType implements MutationResponse {
     status: Int!
   }
 
-  type AdjudicateColorOutputType {
+  type AdjudicateColorOutputType implements MutationResponse {
     status: Int!
   }
 
-  type CreateColorOutputType {
+  type CreateColorOutputType implements MutationResponse {
     status: Int!
     data: ID!
   }
