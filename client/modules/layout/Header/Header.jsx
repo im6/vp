@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import style from './style.sass';
 import { LanguageContext } from '../../../context/LanguageContext';
@@ -36,7 +37,8 @@ class Header extends React.Component {
   }
 
   render() {
-    const { url, isAuth, detail, authReady } = this.props;
+    const { url, detail, facebookUrl } = this.props;
+    const isAuth = Boolean(detail);
     const { language, changeLang } = this.context;
 
     let imagUrl = isAuth
@@ -241,7 +243,7 @@ class Header extends React.Component {
                   {language.newColor}
                 </Link>
                 &nbsp;&nbsp;
-                {!isAuth && authReady && (
+                {!isAuth && facebookUrl && (
                   <a className="button is-info" onClick={this.onFBClick}>
                     {language.fbLogin}
                   </a>
@@ -255,5 +257,15 @@ class Header extends React.Component {
   }
 }
 
+Header.propTypes = {
+  url: PropTypes.string,
+  detail: PropTypes.object,
+  facebookUrl: PropTypes.string,
+
+  onLogout: PropTypes.func.isRequired,
+  onOAuth: PropTypes.func.isRequired,
+  onEnterProfile: PropTypes.func.isRequired,
+};
 Header.contextType = LanguageContext;
+
 export default Header;

@@ -6,39 +6,27 @@ const user = handleActions(
   {
     ['user/auth/success'](state, action) {
       const user = action.payload;
-      // state = state.set('authReady', false);
-      state = state.set('isAuth', true);
-      state = state.set('detail', fromJS(user));
-      return state;
+      return state.merge({
+        detail: fromJS(user),
+        facebookUrl: null,
+      });
     },
 
-    ['user/auth/fail'](state, action) {
+    ['user/auth/fail'](state, { payload }) {
       return state.merge({
-        authReady: true,
-        facebookUrl: action.payload,
-        isAuth: false,
+        detail: null,
+        facebookUrl: payload,
       });
     },
 
     ['user/logoff'](state) {
       return state.merge({
-        isAuth: false,
-        authReady: false,
         detail: null,
         facebookUrl: null,
       });
     },
-
-    ['user/logoff/success'](state, { payload }) {
-      return state.merge({
-        authReady: true,
-        facebookUrl: payload,
-      });
-    },
   },
   Immutable.fromJS({
-    authReady: false,
-    isAuth: false,
     detail: null,
     facebookUrl: null,
   })

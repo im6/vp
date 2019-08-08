@@ -48,7 +48,7 @@ function* getAuth() {
 function* logoff() {
   const res = yield call(requester, '/graphql', { query: logoffQl });
   const payload = get(res, 'data.logoff.url', null);
-  const ac = createAction('user/logoff/success');
+  const ac = createAction('user/auth/fail');
   yield put(ac(payload));
 }
 

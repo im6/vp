@@ -7,15 +7,11 @@ const shared = {};
 const mapStateToProps = ({ user }, { location, history }) => {
   shared.history = history;
   const { pathname: url } = location;
-  const isAuth = user.get('isAuth');
   const detail = user.get('detail');
-  const authReady = user.get('authReady');
   const facebookUrl = user.get('facebookUrl');
   return {
     url,
-    isAuth,
     detail,
-    authReady,
     facebookUrl,
   };
 };
