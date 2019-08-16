@@ -1,9 +1,8 @@
 import express from 'express';
+import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
-
-import helmet from 'helmet';
 
 import { SESSION_SECRET, _DEV_ } from '../config';
 import oauthLogin from '../middlewares/auth';

@@ -14,7 +14,7 @@ const getOauthQsObj = (_, qs) => {
   return result;
 };
 
-export default (req, res) => {
+export default async (req, res) => {
   const code = get(req, 'query.code', null);
   const state = get(req, 'query.state', null);
   const oauth = get(req, 'params.oauth', null);
@@ -23,22 +23,25 @@ export default (req, res) => {
   if (code && state && state === sessionState) {
     console.log(`redirected by ${oauth} auth...`);
     const qsObj = getOauthQsObj(oauth, req.query);
-    accessToken(qsObj).then(({ data }) => {
-      if (data.access_token) {
-        req.session.app = {
-          oauth,
-          isAuth: true,
-          tokenInfo: data,
-        };
-      }
-      res.redirect('/');
-    });
+    const { data } = await accessToken(qsObj);
+    if (data.access_token) {
+      req.session.app = {
+        oauth,
+        isAuth: true,
+        tokenInfo: data,
+      };
+    } else {
+      req.session.app = {
+        isAuth: false,
+        authError: 'get token failed.',
+      };
+    }
   } else {
     console.log('inconsistant session, error msg in session');
     req.session.app = {
       isAuth: false,
       authError: 'Sorry, something error, please try again.',
     };
-    res.redirect('/');
   }
+  res.redirect('/');
 };
