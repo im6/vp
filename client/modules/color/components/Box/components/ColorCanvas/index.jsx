@@ -3,17 +3,13 @@ import PropTypes from 'prop-types';
 import style from './style.sass';
 import ColorRow from '../ColorRow';
 
-class ColorCanvas extends React.Component {
-  render() {
-    return (
-      <div className={style.boxCanvas} onClick={this.props.onClick}>
-        {this.props.colorValue.split('#').map(v => {
-          return <ColorRow key={v} color={'#' + v} />;
-        })}
-      </div>
-    );
-  }
-}
+const ColorCanvas = ({ onClick, colorValue }) => (
+  <div className={style.boxCanvas} onClick={onClick}>
+    {colorValue.split('#').map(v => {
+      return <ColorRow key={v} color={'#' + v} />;
+    })}
+  </div>
+);
 
 ColorCanvas.propTypes = {
   colorValue: PropTypes.string.isRequired,
