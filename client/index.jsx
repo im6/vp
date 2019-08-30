@@ -1,11 +1,14 @@
 import 'core-js';
 import 'regenerator-runtime/runtime';
+import { customEventPolyFill } from './misc/util';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './modules/app';
 import store from './config/store';
 import { LanguageContextProvider } from './context/LanguageContext';
+
+customEventPolyFill();
 
 ReactDOM.render(
   <Provider store={store}>
@@ -19,3 +22,6 @@ ReactDOM.render(
     store.dispatch({ type: 'user/auth' });
   }
 );
+if (process.env.NODE_ENV !== 'development') {
+  window.dispatchEvent(new CustomEvent('_COLORPK_SCRIPT_READY'));
+}

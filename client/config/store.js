@@ -17,8 +17,6 @@ if (process.env.NODE_ENV === 'development') {
   const logger = require('redux-logger').default;
   middlewares.push(logger);
   compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose0;
-} else {
-  window.dispatchEvent(new Event('_COLORPK_SCRIPT_READY'));
 }
 
 const enhancers = applyMiddleware(...middlewares);

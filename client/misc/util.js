@@ -1,6 +1,6 @@
 export const noop = () => {};
 
-export function downloadCanvas(color) {
+export const downloadCanvas = color => {
   const HEIGHT = 420;
   const WIDTH = 340;
   const MARGIN = 13;
@@ -62,4 +62,27 @@ export function downloadCanvas(color) {
     myCanvas.remove();
   }
   return url;
-}
+};
+
+export const customEventPolyFill = () => {
+  if (typeof window.CustomEvent === 'function') return false; // If not IE
+  function CustomEvent(event, params0) {
+    const evt = document.createEvent('CustomEvent');
+    const params = params0 || {
+      bubbles: false,
+      cancelable: false,
+      detail: undefined,
+    };
+    evt.initCustomEvent(
+      event,
+      params.bubbles,
+      params.cancelable,
+      params.detail
+    );
+    return evt;
+  }
+
+  CustomEvent.prototype = window.Event.prototype;
+  window.CustomEvent = CustomEvent;
+  return false;
+};
