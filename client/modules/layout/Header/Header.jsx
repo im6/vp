@@ -183,7 +183,7 @@ class Header extends React.Component {
                 <a
                   className="navbar-item"
                   onClick={() => {
-                    changeLang('eng');
+                    changeLang('en');
                   }}
                 >
                   English
@@ -199,7 +199,7 @@ class Header extends React.Component {
                 <a
                   className="navbar-item"
                   onClick={() => {
-                    changeLang('jpn');
+                    changeLang('ja');
                   }}
                 >
                   日本語
@@ -207,7 +207,7 @@ class Header extends React.Component {
                 <a
                   className="navbar-item"
                   onClick={() => {
-                    changeLang('kor');
+                    changeLang('ko');
                   }}
                 >
                   한국어
@@ -215,7 +215,7 @@ class Header extends React.Component {
                 <a
                   className="navbar-item"
                   onClick={() => {
-                    changeLang('spa');
+                    changeLang('es');
                   }}
                 >
                   Español
@@ -223,7 +223,7 @@ class Header extends React.Component {
                 <a
                   className="navbar-item"
                   onClick={() => {
-                    changeLang('rus');
+                    changeLang('ru');
                   }}
                 >
                   Русский
