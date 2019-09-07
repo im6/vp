@@ -56,7 +56,7 @@ class Header extends React.Component {
       >
         <div className="navbar-brand">
           <Link className="navbar-item" to="/" onClick={this.onClickNav}>
-            <img src={imagUrl} height="32" />
+            <img src={imagUrl} height="32" width="32" />
           </Link>
           <a
             role="button"
