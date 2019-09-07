@@ -7,7 +7,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ServerStartPlugin = require('./plugins/ServerStartPlugin');
 
-const bulmaDir = /client\/modules\/app/;
+const { withoutCssModuleFiles } = require('./base');
 
 const json0 = fs.readFileSync(path.join(__dirname, '../.vscode/launch.json'), {
   encoding: 'utf8',
@@ -65,7 +65,7 @@ const client = {
           'css-loader',
           'sass-loader',
         ],
-        include: bulmaDir,
+        include: withoutCssModuleFiles,
       },
       {
         test: /\.sass$/,
@@ -86,7 +86,7 @@ const client = {
           },
           'sass-loader',
         ],
-        exclude: bulmaDir,
+        exclude: withoutCssModuleFiles,
       },
     ],
   },

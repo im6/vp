@@ -6,7 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
-const bulmaDir = /client\/modules\/app/;
+const { withoutCssModuleFiles } = require('./base');
 
 const client = {
   mode: 'production',
@@ -43,7 +43,7 @@ const client = {
           'css-loader',
           'sass-loader',
         ],
-        include: bulmaDir,
+        include: withoutCssModuleFiles,
       },
       {
         test: /\.sass$/,
@@ -61,7 +61,7 @@ const client = {
           },
           'sass-loader',
         ],
-        exclude: bulmaDir,
+        exclude: withoutCssModuleFiles,
       },
     ],
   },
