@@ -2,7 +2,7 @@ import 'core-js';
 import 'regenerator-runtime/runtime';
 import { customEventPolyFill } from './misc/util';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './modules/app';
 import store from './config/store';
@@ -10,7 +10,7 @@ import { LanguageContextProvider } from './context/LanguageContext';
 
 customEventPolyFill();
 
-ReactDOM.hydrate(
+hydrate(
   <Provider store={store}>
     <LanguageContextProvider>
       <App />
