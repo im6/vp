@@ -10,7 +10,7 @@ import { LanguageContextProvider } from './context/LanguageContext';
 
 customEventPolyFill();
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <Provider store={store}>
     <LanguageContextProvider>
       <App />
