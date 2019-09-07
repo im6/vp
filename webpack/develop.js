@@ -1,9 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ServerStartPlugin = require('./plugins/ServerStartPlugin');
 
@@ -12,6 +10,7 @@ const { withoutCssModuleFiles } = require('./base');
 const json0 = fs.readFileSync(path.join(__dirname, '../.vscode/launch.json'), {
   encoding: 'utf8',
 });
+
 const json1 = JSON.parse(json0);
 const appEnvs = json1.configurations[0].env;
 
@@ -95,16 +94,6 @@ const client = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
-    new HtmlWebpackPlugin({
-      title: 'ColorPK | Dev',
-      template: path.join(__dirname, '../client/template/index.html'),
-    }),
-    new CopyPlugin([
-      {
-        from: path.join(__dirname, '../client/template/404.html'),
-        to: path.join(__dirname, '../local/public/404.html'),
-      },
-    ]),
   ],
   watchOptions: {
     ignored: /node_modules/,
@@ -117,7 +106,7 @@ const server = {
   externals: [nodeExternals()],
   target: 'node',
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.jsx'],
   },
   entry: [path.join(__dirname, '../server')],
   output: {
@@ -134,11 +123,15 @@ const server = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env'],
+              presets: ['@babel/preset-env', '@babel/preset-react'],
               plugins: ['@babel/plugin-syntax-dynamic-import'],
             },
           },
         ],
+      },
+      {
+        test: /\.sass$/,
+        use: ['isomorphic-style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },

@@ -9,7 +9,7 @@ import oauthLogin from '../middlewares/auth';
 import onError from '../middlewares/errorHandler';
 import csrf from '../middlewares/csrfOverride';
 import graphqlMiddleware from '../middlewares/graphql';
-import { h5Route, staticFile } from '../middlewares/staticRender';
+import ssrMiddleware from '../middlewares/render';
 
 const app = express();
 
@@ -29,14 +29,16 @@ app.use(
 );
 
 if (_DEV_) {
-  app.get('/static/:fileName', staticFile);
+  // eslint-disable-next-line global-require
+  const staticFile = require('../middlewares/staticFile');
+  app.get('/static/:fileName', staticFile.default);
 } else {
   app.use(csrf);
 }
 
 app.use('/graphql', graphqlMiddleware);
 app.get('/auth/:oauth', oauthLogin);
-app.get('/*', h5Route);
+app.get('/*', ssrMiddleware);
 app.use(onError);
 
 export default app;

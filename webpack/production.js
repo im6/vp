@@ -1,7 +1,5 @@
 const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -66,7 +64,9 @@ const client = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['!404.html'],
+    }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
@@ -74,17 +74,6 @@ const client = {
       filename: '[path]',
       minRatio: 1,
     }),
-    new HtmlWebpackPlugin({
-      title: 'ColorPK | Your Best Color Picker, Pal',
-      template: path.join(__dirname, '../client/template/index.html'),
-      hash: true,
-    }),
-    new CopyPlugin([
-      {
-        from: path.join(__dirname, '../client/template/404.html'),
-        to: path.join(__dirname, '../dist/public/404.html'),
-      },
-    ]),
   ],
   optimization: {
     splitChunks: {
@@ -102,7 +91,7 @@ const server = {
   externals: [nodeExternals()],
   target: 'node',
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.jsx'],
   },
   entry: [path.join(__dirname, '../server')],
   output: {
@@ -119,10 +108,14 @@ const server = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env'],
+              presets: ['@babel/preset-env', '@babel/preset-react'],
             },
           },
         ],
+      },
+      {
+        test: /\.sass$/,
+        use: ['isomorphic-style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },
