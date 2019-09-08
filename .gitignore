@@ -3,4 +3,4 @@ node_modules
 .vscode
 npm-debug.log
 local
-dist/public/*[.js, .css]
+dist/public

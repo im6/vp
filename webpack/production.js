@@ -64,9 +64,7 @@ const client = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['!error.html'],
-    }),
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
