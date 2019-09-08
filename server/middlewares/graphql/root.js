@@ -5,7 +5,7 @@ import { GraphQLError } from 'graphql';
 
 import sqlExecOne from '../../resource/mysqlConnection';
 import { showUser, createFacebookLink } from '../../resource/oauth';
-import { isAuth, isAdmin, hasToken } from '../helper';
+import { isAuth, isAdmin, hasToken } from '../../helper';
 
 /* ============ session schema ===============
 req.session.app = {

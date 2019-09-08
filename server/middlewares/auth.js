@@ -2,6 +2,7 @@
 import get from 'lodash.get';
 import { FB_REDIRECT_URL, FB_APP_SECRET, FB_APP_KEY } from '../config';
 import { accessToken } from '../resource/oauth';
+import { isAuth as isAuthHelper, isAdmin as isAdminHelper } from '../helper';
 
 const getOauthQsObj = (_, qs) => {
   const { code } = qs;
@@ -14,7 +15,7 @@ const getOauthQsObj = (_, qs) => {
   return result;
 };
 
-export default async (req, res) => {
+export const oauthLogin = async (req, res) => {
   const code = get(req, 'query.code', null);
   const state = get(req, 'query.state', null);
   const oauth = get(req, 'params.oauth', null);
@@ -44,4 +45,20 @@ export default async (req, res) => {
     };
   }
   res.redirect('/');
+};
+
+export const isAuth = (req, res, next) => {
+  if (isAuthHelper(req)) {
+    next();
+  } else {
+    next('401 Unauthorized');
+  }
+};
+
+export const isAdmin = (req, res, next) => {
+  if (isAdminHelper(req)) {
+    next();
+  } else {
+    next('403 Forbidden');
+  }
 };

@@ -5,7 +5,8 @@ import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 
 import { SESSION_SECRET, _DEV_ } from '../config';
-import oauthLogin from '../middlewares/auth';
+
+import { oauthLogin, isAuth, isAdmin } from '../middlewares/auth';
 import { onError, onNotFound } from '../middlewares/errorHandler';
 import { csrfOverride, csrfCookie } from '../middlewares/csrfHandler';
 import graphqlMiddleware from '../middlewares/graphql';
@@ -45,9 +46,9 @@ app.get('/popular', csrfCookie, ssrMiddleware);
 app.get('/color/:colorId', csrfCookie, ssrMiddleware);
 app.get('/new', csrfCookie, ssrMiddleware);
 
-app.get('/like', csrfCookie, ssrMiddleware);
-app.get('/portfolio', csrfCookie, ssrMiddleware);
-app.get('/adminpanel', csrfCookie, ssrMiddleware);
+app.get('/like', csrfCookie, isAuth, ssrMiddleware);
+app.get('/portfolio', csrfCookie, isAuth, ssrMiddleware);
+app.get('/adminpanel', csrfCookie, isAdmin, ssrMiddleware);
 
 app.use(onNotFound);
 app.use(onError);
