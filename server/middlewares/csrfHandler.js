@@ -1,6 +1,6 @@
 import csrf from 'csurf';
 import get from 'lodash.get';
-import { CSRF_EXCEPTION, _DEV_ } from '../config';
+import { CSRF_EXCEPTION } from '../config';
 
 const csrfOrigin = csrf();
 export const csrfOverride = (...args) => {
@@ -15,11 +15,6 @@ export const csrfOverride = (...args) => {
 };
 
 export const csrfCookie = (req, res, next) => {
-  if (_DEV_) {
-    // eslint-disable-next-line no-console
-    console.log(`${req.method}: ${req.originalUrl}`);
-  } else {
-    res.cookie('_csrf', req.csrfToken());
-  }
+  res.cookie('_csrf', req.csrfToken());
   next();
 };

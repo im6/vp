@@ -33,9 +33,15 @@ if (_DEV_) {
   // eslint-disable-next-line global-require
   const staticFile = require('../middlewares/staticFile');
   app.get('/static/:fileName', staticFile.default);
-} else {
-  app.use(csrfOverride);
+
+  app.use((req, res, next) => {
+    // eslint-disable-next-line no-console
+    console.log(`${req.method}: ${req.originalUrl}`);
+    next();
+  });
 }
+
+app.use(csrfOverride);
 
 app.use('/graphql', graphqlMiddleware);
 app.get('/auth/:oauth', oauthLogin);
@@ -46,9 +52,9 @@ app.get('/popular', csrfCookie, ssrMiddleware);
 app.get('/color/:colorId', csrfCookie, ssrMiddleware);
 app.get('/new', csrfCookie, ssrMiddleware);
 
-app.get('/like', csrfCookie, isAuth, ssrMiddleware);
-app.get('/portfolio', csrfCookie, isAuth, ssrMiddleware);
-app.get('/adminpanel', csrfCookie, isAdmin, ssrMiddleware);
+app.get('/like', isAuth, ssrMiddleware);
+app.get('/portfolio', isAuth, ssrMiddleware);
+app.get('/adminpanel', isAdmin, ssrMiddleware);
 
 app.use(onNotFound);
 app.use(onError);
