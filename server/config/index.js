@@ -1,7 +1,6 @@
 const { env } = process;
 
 export const {
-  NODE_ENV,
   SERVER_PORT,
   SESSION_SECRET,
   CSRF_EXCEPTION,

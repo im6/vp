@@ -15,8 +15,10 @@ export default (req, res, next) => {
   const htmlDOM = (
     <Html
       title={`${
-        process.env.NODE_ENV === 'development' ? '(dev) ' : ''
-      }ColorPK | Your Best Color Picker`}
+        process.env.NODE_ENV === 'development'
+          ? '(dev) ColorPK'
+          : 'ColorPK | Your Best Color Picker'
+      }`}
       version={version}
       style={`${PUBLIC_PATH}main.css`}
       script={`${PUBLIC_PATH}main.js`}
