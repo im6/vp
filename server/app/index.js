@@ -6,7 +6,7 @@ import cookieSession from 'cookie-session';
 
 import { SESSION_SECRET, _DEV_ } from '../config';
 import oauthLogin from '../middlewares/auth';
-import onError from '../middlewares/errorHandler';
+import { onError, onNotFound } from '../middlewares/errorHandler';
 import { csrfOverride, csrfCookie } from '../middlewares/csrfHandler';
 import graphqlMiddleware from '../middlewares/graphql';
 import ssrMiddleware from '../middlewares/render';
@@ -49,6 +49,7 @@ app.get('/like', csrfCookie, ssrMiddleware);
 app.get('/portfolio', csrfCookie, ssrMiddleware);
 app.get('/adminpanel', csrfCookie, ssrMiddleware);
 
+app.use(onNotFound);
 app.use(onError);
 
 export default app;
