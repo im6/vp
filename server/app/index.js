@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 
-import { SESSION_SECRET, _DEV_ } from '../config';
+import { SESSION_SECRET } from '../config';
 
 import { oauthLogin, isAuth, isAdmin } from '../middlewares/auth';
 import { onError, onNotFound } from '../middlewares/errorHandler';
@@ -23,13 +23,16 @@ app.use(
   cookieSession({
     name: 'session',
     keys: [SESSION_SECRET],
-    domain: _DEV_ ? 'localhost' : 'react.colorpk.com',
+    domain:
+      process.env.NODE_ENV === 'development'
+        ? 'localhost'
+        : 'react.colorpk.com',
     maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
     httpOnly: true,
   })
 );
 
-if (_DEV_) {
+if (process.env.NODE_ENV === 'development') {
   // eslint-disable-next-line global-require
   const staticFile = require('../middlewares/staticFile');
   app.get('/static/:fileName', staticFile.default);

@@ -11,10 +11,11 @@ export const {
   FB_REDIRECT_URL,
 } = env;
 
-export const _DEV_ = NODE_ENV === 'development'; // eslint-disable-line no-underscore-dangle
 export const FB_API_URL = 'https://graph.facebook.com/v3.3';
 export const SERVER_IP = 'localhost';
-export const STATIC_URL = _DEV_ ? 'local' : 'dist';
-export const PUBLIC_PATH = _DEV_
-  ? '/static/'
-  : '//dkny.oss-cn-hangzhou.aliyuncs.com/2/';
+export const STATIC_URL =
+  process.env.NODE_ENV === 'development' ? 'local' : 'dist';
+export const PUBLIC_PATH =
+  process.env.NODE_ENV === 'development'
+    ? '/static/'
+    : '//dkny.oss-cn-hangzhou.aliyuncs.com/2/';
