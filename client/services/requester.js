@@ -14,9 +14,7 @@ const requester = (url, body) => {
   };
   return axios(options)
     .then(res => res.data)
-    .catch(err => {
-      console.log(err);
-    });
+    .catch(({ response }) => response.data);
 };
 
 export default requester;

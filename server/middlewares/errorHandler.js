@@ -15,7 +15,7 @@ export const onError = (err, req, res, next) => {
   const errorCode = typeof err === 'number' ? err : 400;
   if (req.method === 'POST') {
     res.status(errorCode).json({
-      error: true,
+      errors: true, // consistent with graphql error object
     });
   } else {
     res.status(errorCode).sendFile(errorPage);

@@ -29,8 +29,8 @@ const logoffQl = `mutation {
 function* getAuth() {
   const payload = yield call(requester, '/graphql', { query });
   // eslint-disable-next-line no-prototype-builtins
-  const authObj = get(payload, 'data.auth', {});
-  const good = authObj.hasOwnProperty('id');
+
+  const good = get(payload, 'data.auth.id', null);
   if (good) {
     const userData = get(payload, 'data.auth');
     const ac0 = createAction('user/auth/success');

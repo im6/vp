@@ -74,21 +74,20 @@ function* getUserColor(action) {
     variables: { cate },
   });
 
-  const { errors } = payload;
-  if (errors) {
-    yield put({
-      type: 'color/getUserColor/fail',
-      payload: {
-        name: action.payload,
-      },
-    });
-  } else {
-    const data = get(payload, 'data.color', []);
+  const data = get(payload, 'data.color', null);
+  if (data) {
     yield put({
       type: 'color/getUserColor/success',
       payload: {
         name: action.payload === 'myPortfolio' ? 'myPortfolio' : 'myLiked',
         data,
+      },
+    });
+  } else {
+    yield put({
+      type: 'color/getUserColor/fail',
+      payload: {
+        name: action.payload,
       },
     });
   }
