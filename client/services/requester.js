@@ -12,7 +12,11 @@ const requester = (url, body) => {
       ...body,
     },
   };
-  return axios(options).then(res => res.data);
+  return axios(options)
+    .then(res => res.data)
+    .catch(err => {
+      console.log(err);
+    });
 };
 
 export default requester;

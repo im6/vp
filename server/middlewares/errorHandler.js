@@ -12,5 +12,12 @@ export const onNotFound = (req, res, next) => {
 export const onError = (err, req, res, next) => {
   console.error('=====  Internal Error  =====');
   console.log(err.toString());
-  res.status(err).sendFile(errorPage);
+  const errorCode = typeof err === 'number' ? err : 400;
+  if (req.method === 'POST') {
+    res.status(errorCode).json({
+      error: true,
+    });
+  } else {
+    res.status(errorCode).sendFile(errorPage);
+  }
 };
