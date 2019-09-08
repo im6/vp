@@ -51,7 +51,7 @@ export const isAuth = (req, res, next) => {
   if (isAuthHelper(req)) {
     next();
   } else {
-    next('401 Unauthorized');
+    next(401);
   }
 };
 
@@ -59,6 +59,6 @@ export const isAdmin = (req, res, next) => {
   if (isAdminHelper(req)) {
     next();
   } else {
-    next('403 Forbidden');
+    next(403);
   }
 };
