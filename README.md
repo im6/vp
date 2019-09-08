@@ -9,7 +9,7 @@
 - MySQL
 - [Bulma](https://bulma.io/)
 - React
-- [React Server Side Rendering](https://reactjs.org/docs/react-dom-server.html)
+- [SSR](https://reactjs.org/docs/react-dom-server.html)
 - Redux
 - react-redux
 - react-router

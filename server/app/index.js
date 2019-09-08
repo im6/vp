@@ -7,7 +7,7 @@ import cookieSession from 'cookie-session';
 import { SESSION_SECRET, _DEV_ } from '../config';
 import oauthLogin from '../middlewares/auth';
 import onError from '../middlewares/errorHandler';
-import csrf from '../middlewares/csrfOverride';
+import { csrfOverride, csrfCookie } from '../middlewares/csrfHandler';
 import graphqlMiddleware from '../middlewares/graphql';
 import ssrMiddleware from '../middlewares/render';
 
@@ -33,12 +33,22 @@ if (_DEV_) {
   const staticFile = require('../middlewares/staticFile');
   app.get('/static/:fileName', staticFile.default);
 } else {
-  app.use(csrf);
+  app.use(csrfOverride);
 }
 
 app.use('/graphql', graphqlMiddleware);
 app.get('/auth/:oauth', oauthLogin);
-app.get('/*', ssrMiddleware);
+
+app.get('/', csrfCookie, ssrMiddleware);
+app.get('/latest', csrfCookie, ssrMiddleware);
+app.get('/popular', csrfCookie, ssrMiddleware);
+app.get('/color/:colorId', csrfCookie, ssrMiddleware);
+app.get('/new', csrfCookie, ssrMiddleware);
+
+app.get('/like', csrfCookie, ssrMiddleware);
+app.get('/portfolio', csrfCookie, ssrMiddleware);
+app.get('/adminpanel', csrfCookie, ssrMiddleware);
+
 app.use(onError);
 
 export default app;
