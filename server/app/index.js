@@ -18,7 +18,12 @@ app.set('x-powered-by', false);
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(
+  cookieParser(SESSION_SECRET, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV !== 'development',
+  })
+);
 app.use(
   cookieSession({
     name: 'session',
