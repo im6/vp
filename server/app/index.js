@@ -14,19 +14,14 @@ import ssrMiddleware from '../middlewares/render';
 
 const app = express();
 
-app.set('x-powered-by', false);
 if (process.env.NODE_ENV !== 'development') {
   app.set('trust proxy', true);
 }
+
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(
-  cookieParser(SESSION_SECRET, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV !== 'development',
-  })
-);
+app.use(cookieParser());
 app.use(
   cookieSession({
     name: 'session',
@@ -37,7 +32,6 @@ app.use(
         : 'react.colorpk.com',
     maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
     httpOnly: true,
-    secure: process.env.NODE_ENV !== 'development',
   })
 );
 
@@ -54,17 +48,6 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(csrfOverride);
-app.use((req, res, next) => {
-  console.log('req.ip', req.ip);
-  console.log('req.hostname ', req.hostname);
-  console.log('req.connection.remoteAddress', req.connection.remoteAddress);
-  console.log('req.protocol', req.protocol);
-  console.log('X-Forwarded-For', req.header('X-Forwarded-For'));
-  console.log('X-Forwarded-Host', req.header('X-Forwarded-Host'));
-  console.log('X-Real-IP', req.header('X-Real-IP'));
-
-  next();
-});
 
 app.use('/graphql', graphqlMiddleware);
 app.get('/auth/:oauth', oauthLogin);
