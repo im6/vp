@@ -16,7 +16,7 @@ const app = express();
 
 app.set('x-powered-by', false);
 if (process.env.NODE_ENV !== 'development') {
-  app.set('trust proxy', ip => ip === '127.0.0.1');
+  app.set('trust proxy', true);
 }
 app.use(helmet());
 app.use(bodyParser.json());
