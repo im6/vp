@@ -15,6 +15,9 @@ import ssrMiddleware from '../middlewares/render';
 const app = express();
 
 app.set('x-powered-by', false);
+if (process.env.NODE_ENV !== 'development') {
+  app.set('trust proxy', '127.0.0.1');
+}
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
