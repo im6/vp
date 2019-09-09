@@ -16,7 +16,7 @@ const app = express();
 
 app.set('x-powered-by', false);
 if (process.env.NODE_ENV !== 'development') {
-  app.set('trust proxy', '127.0.0.1');
+  app.set('trust proxy', ip => ip === '127.0.0.1');
 }
 app.use(helmet());
 app.use(bodyParser.json());
@@ -59,6 +59,10 @@ app.use((req, res, next) => {
   console.log('req.hostname ', req.hostname);
   console.log('req.connection.remoteAddress', req.connection.remoteAddress);
   console.log('req.protocol', req.protocol);
+  console.log('X-Forwarded-For', req.header('X-Forwarded-For'));
+  console.log('X-Forwarded-Host', req.header('X-Forwarded-Host'));
+  console.log('X-Real-IP', req.header('X-Real-IP'));
+
   next();
 });
 
