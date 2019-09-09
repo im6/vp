@@ -51,6 +51,13 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(csrfOverride);
+app.use((req, res, next) => {
+  console.log('req.ip', req.ip);
+  console.log('req.hostname ', req.hostname);
+  console.log('req.connection.remoteAddress', req.connection.remoteAddress);
+  console.log('req.protocol', req.protocol);
+  next();
+});
 
 app.use('/graphql', graphqlMiddleware);
 app.get('/auth/:oauth', oauthLogin);
