@@ -1,7 +1,7 @@
 import path from 'path';
 import { STATIC_URL } from '../config';
 
-const scriptUrl = [
+const scriptsList = [
   'main.js',
   'main.css',
   'newColor.js',
@@ -10,12 +10,17 @@ const scriptUrl = [
   'adminPanel.css',
 ];
 
+const scriptSet = scriptsList.reduce((acc, cur) => {
+  acc[cur] = true;
+  return acc;
+}, {});
+
 const { PWD } = process.env;
 
 export default (req, res, next) => {
   const { fileName } = req.params;
-  const filePath = path.resolve(PWD, `./${STATIC_URL}/public/${fileName}`);
-  if (scriptUrl.includes(fileName)) {
+  if (fileName in scriptSet) {
+    const filePath = path.resolve(PWD, `./${STATIC_URL}/public/${fileName}`);
     res.sendFile(filePath);
   } else {
     next(404);

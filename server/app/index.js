@@ -29,6 +29,7 @@ app.use(
         : 'react.colorpk.com',
     maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
     httpOnly: true,
+    secure: process.env.NODE_ENV !== 'development',
   })
 );
 

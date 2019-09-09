@@ -1,4 +1,3 @@
-/* eslint no-console: 0 */
 import uuid from 'uuid';
 import React from 'react';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
