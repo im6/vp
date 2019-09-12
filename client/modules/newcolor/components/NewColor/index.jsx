@@ -31,7 +31,6 @@ class NewColor extends React.Component {
     if (good) {
       this.props.onAdd([...this.state.colorValue]);
       this.resetColor();
-      alert('Thank you for new colors');
     } else {
       console.error('Invalid color');
     }

@@ -133,7 +133,7 @@ function* addNew(action) {
   if (status !== 0) {
     const failAction = createAction('color/addNew/fail');
     yield put(failAction());
-    console.error('create new color failed!'); // eslint-disable-line no-console
+    alert('create new color failed!');
   } else {
     const { color } = action.payload;
     const id = get(res, 'data.createColor.data', null);
@@ -146,6 +146,7 @@ function* addNew(action) {
         like: 0,
       })
     );
+    alert('Thank you for new colors');
   }
 }
 
