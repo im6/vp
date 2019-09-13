@@ -133,6 +133,7 @@ function* addNew(action) {
   if (status !== 0) {
     const failAction = createAction('color/addNew/fail');
     yield put(failAction());
+    // eslint-disable-next-line no-alert
     alert('create new color failed!');
   } else {
     const { color } = action.payload;
@@ -146,6 +147,7 @@ function* addNew(action) {
         like: 0,
       })
     );
+    // eslint-disable-next-line no-alert
     alert('Thank you for new colors');
   }
 }
