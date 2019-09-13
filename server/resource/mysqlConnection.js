@@ -18,9 +18,9 @@ const pool = mysql.createPool({
   database,
 });
 
-export default qr =>
+export default (qr, params = []) =>
   new Promise((resolve, reject) => {
-    pool.query(qr, (err, rows) => {
+    pool.query(qr, params, (err, rows) => {
       if (err) {
         console.error(err); // eslint-disable-line no-console
         reject(err);

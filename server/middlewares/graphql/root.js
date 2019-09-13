@@ -34,10 +34,8 @@ const root = {
       try {
         const { data: oauthData } = await showUser(qsObj);
         const { name, id } = oauthData;
-        const qr0 = `SELECT * FROM colorpk_user WHERE oauth = 'fb' AND oauthid = ${escape(
-          id
-        )}`;
-        const userData = await sqlExecOne(qr0);
+        const qr0 = `SELECT * FROM colorpk_user WHERE oauth = 'fb' AND oauthid = ?`;
+        const userData = await sqlExecOne(qr0, [id]);
         if (userData.length === 1) {
           // existing user.
           const { isadmin, id: userId } = userData[0];
@@ -46,15 +44,11 @@ const root = {
             name, // grab name from oauth
             isAdmin: isadmin || false,
           };
-          const qr1 = `SELECT color_id FROM colorpk_userlike WHERE user_id= ${escape(
-            userId
-          )}`;
-          const likeData = await sqlExecOne(qr1);
+          const qr1 = 'SELECT color_id FROM colorpk_userlike WHERE user_id= ?';
+          const likeData = await sqlExecOne(qr1, [userId]);
 
-          const qr2 = `UPDATE colorpk_user SET lastlogin=NOW() WHERE id=${escape(
-            userId
-          )}`;
-          sqlExecOne(qr2);
+          const qr2 = 'UPDATE colorpk_user SET lastlogin=NOW() WHERE id=?';
+          sqlExecOne(qr2, [userId]);
 
           return {
             __typename: 'User',
@@ -67,22 +61,20 @@ const root = {
         }
 
         // user first time login, save it.
-        const qr = `INSERT INTO colorpk_user (oauth, name, oauthid, lastlogin) VALUES ('fb', '${name}', '${id}', NOW())`;
-        const { insertId } = await sqlExecOne(qr);
+        const qr = `INSERT INTO colorpk_user (oauth, name, oauthid, lastlogin) VALUES ('fb', ?, ?, NOW())`;
+        const { insertId } = await sqlExecOne(qr, [name, id]);
         req.session.app.dbInfo = {
           id: insertId,
           name,
           isAdmin: false,
         };
         return {
-          user: {
-            __typename: 'User',
-            id: insertId,
-            name,
-            isadmin: false,
-            img: get(oauthData, 'picture.data.url', null),
-            likes: [],
-          },
+          __typename: 'User',
+          id: insertId,
+          name,
+          isadmin: false,
+          img: get(oauthData, 'picture.data.url', null),
+          likes: [],
         };
       } catch (err) {
         return new GraphQLError(err.toString());
@@ -114,23 +106,30 @@ const root = {
     const userId = get(req, 'session.app.dbInfo.id', null);
     const uid = escape(userId);
     let qr = null;
+    let colors = null;
 
     switch (category) {
       case 'PUBLIC':
         qr =
           'SELECT a.* FROM colorpk_color a WHERE a.display=0 ORDER BY `id` DESC';
+        colors = await sqlExecOne(qr);
         break;
       case 'LIKES':
-        qr = `SELECT a.* FROM colorpk_color a
+        qr = `
+          SELECT a.* FROM colorpk_color a
           INNER JOIN 
-          (SELECT color_id FROM colorpk_userlike WHERE user_id = ${uid}) b
+          (SELECT color_id FROM colorpk_userlike WHERE user_id = ?) b
           ON id = b.color_id`;
+        colors = await sqlExecOne(qr, [uid]);
         break;
       case 'PROFILE':
-        qr = `SELECT a.*, false as \`liked\` FROM colorpk_color a WHERE userid = ${uid} `;
+        qr =
+          'SELECT a.*, false as `liked` FROM colorpk_color a WHERE userid = ?';
+        colors = await sqlExecOne(qr, [uid]);
         break;
       case 'ANONYMOUS':
         qr = 'SELECT * FROM colorpk_color a WHERE a.display = 1';
+        colors = await sqlExecOne(qr);
         break;
       default:
         // GraphQL will make sure category match enumeration type
@@ -138,7 +137,6 @@ const root = {
     }
 
     try {
-      const colors = await sqlExecOne(qr);
       return colors.map(v => {
         return {
           id: v.id,
@@ -159,20 +157,20 @@ const root = {
     try {
       if (isAuth(req)) {
         const userId = get(req, 'session.app.dbInfo.id', null);
-        const userLikeQr = willLike
-          ? `INSERT INTO colorpk_userlike (user_id, color_id) VALUES (${escape(
-              userId
-            )}, ${escape(id)})`
-          : `DELETE FROM colorpk_userlike WHERE user_id= ${userId} AND color_id = ${escape(
-              id
-            )}`;
-        sqlExecOne(userLikeQr);
+        sqlExecOne(
+          willLike
+            ? 'INSERT INTO colorpk_userlike (user_id, color_id) VALUES (?, ?)'
+            : 'DELETE FROM colorpk_userlike WHERE user_id= ? AND color_id = ?',
+          [userId, id]
+        );
       }
 
-      const qr = `UPDATE colorpk_color SET \`like\` = \`like\` ${
-        willLike ? '+' : '-'
-      }  1 WHERE id = ${escape(id)}`;
-      const resData = await sqlExecOne(qr);
+      const resData = await sqlExecOne(
+        `UPDATE colorpk_color SET \`like\` = \`like\` ${
+          willLike ? '+' : '-'
+        }  1 WHERE id = ?`,
+        [id]
+      );
       return {
         status: resData.affectedRows === 1 ? 0 : 1,
       };
@@ -187,18 +185,17 @@ const root = {
 
     const sessionUsername = get(req, 'session.app.dbInfo.name', null);
     const sessionUserid = get(req, 'session.app.dbInfo.id', null);
+    const hasUserSignIn = hasAuth && sessionUsername;
+    const username = hasUserSignIn ? sessionUsername : null;
+    const userId = hasUserSignIn ? sessionUserid : null;
 
-    const username =
-      hasAuth && sessionUsername ? `'${sessionUsername}'` : 'NULL';
-    const userid = hasAuth && sessionUserid ? `${sessionUserid}` : 'NULL';
-
-    const displayItem = userid === 'NULL' ? 1 : 0;
     const random = (Math.random() * 10).toFixed();
-
     if (color.length === 27) {
-      const qr = `INSERT INTO colorpk_color (\`like\`, color, userid, username, colortype, display, createdate) VALUES (${random}, '${color}', ${userid}, ${username}, NULL, ${displayItem}, NOW())`;
       try {
-        const row = await sqlExecOne(qr);
+        const row = await sqlExecOne(
+          'INSERT INTO colorpk_color (`like`, color, userid, username, colortype, display, createdate) VALUES (?, ?, ?, ?, NULL, ?, NOW())',
+          [random, color, userId, username, hasUserSignIn ? 0 : 1]
+        );
         return {
           status: 0,
           data: row.insertId,
@@ -216,11 +213,13 @@ const root = {
       return new GraphQLError('adjudicate error: no admin access');
     }
     const { id, willLike } = args.input;
-    const qr = willLike
-      ? `UPDATE colorpk_color SET \`display\` = 0 WHERE id = ${escape(id)}`
-      : `DELETE FROM colorpk_color WHERE id = '${id}'`;
     try {
-      const resData = await sqlExecOne(qr);
+      const resData = await sqlExecOne(
+        willLike
+          ? 'UPDATE colorpk_color SET `display` = 0 WHERE id = ?'
+          : 'DELETE FROM colorpk_color WHERE id = ?',
+        [id]
+      );
       return {
         status: resData.affectedRows === 1 ? 0 : 1,
       };
