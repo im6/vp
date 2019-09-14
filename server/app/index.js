@@ -45,11 +45,15 @@ if (process.env.NODE_ENV === 'development') {
     console.log(`${req.method}: ${req.originalUrl}`);
     next();
   });
+} else {
+  // for GraphiQL
+  app.use(csrfOverride);
 }
 
-app.use(csrfOverride);
-
-app.use('/graphql', graphqlMiddleware);
+app[process.env.NODE_ENV === 'development' ? 'use' : 'post'](
+  '/graphql',
+  graphqlMiddleware
+);
 app.get('/auth/:oauth', oauthLogin);
 
 app.get('/', csrfCookie, ssrMiddleware);

@@ -7,20 +7,6 @@ import sqlExecOne from '../../resource/mysqlConnection';
 import { showUser, createFacebookLink } from '../../resource/oauth';
 import { isAuth, isAdmin, hasToken } from '../../helper';
 
-/* ============ session schema ===============
-req.session.app = {
-  isAuth
-  oauth
-  oauthState
-  tokenInfo
-  dbInfo {
-    id
-    name
-    isAdmin
-  }
-}
-  ============ session schema ===============  */
-
 const root = {
   async auth(_, req) {
     if (isAuth(req, true) && hasToken(req)) {

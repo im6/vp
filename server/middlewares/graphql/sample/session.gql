@@ -1,0 +1,13 @@
+{
+  app {
+    isAuth
+    oauth
+    oauthState
+    tokenInfo
+    dbInfo {
+      id
+      name
+      isAdmin
+    }
+  }
+}
