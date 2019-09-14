@@ -34,8 +34,10 @@ const root = {
       try {
         const { data: oauthData } = await showUser(qsObj);
         const { name, id } = oauthData;
-        const qr0 = `SELECT * FROM colorpk_user WHERE oauth = 'fb' AND oauthid = ?`;
-        const userData = await sqlExecOne(qr0, [id]);
+        const userData = await sqlExecOne(
+          `SELECT * FROM colorpk_user WHERE oauth = 'fb' AND oauthid = ?`,
+          [id]
+        );
         if (userData.length === 1) {
           // existing user.
           const { isadmin, id: userId } = userData[0];
@@ -44,11 +46,15 @@ const root = {
             name, // grab name from oauth
             isAdmin: isadmin || false,
           };
-          const qr1 = 'SELECT color_id FROM colorpk_userlike WHERE user_id= ?';
-          const likeData = await sqlExecOne(qr1, [userId]);
 
-          const qr2 = 'UPDATE colorpk_user SET lastlogin=NOW() WHERE id=?';
-          sqlExecOne(qr2, [userId]);
+          const likeData = await sqlExecOne(
+            'SELECT color_id FROM colorpk_userlike WHERE user_id= ?',
+            [userId]
+          );
+
+          sqlExecOne('UPDATE colorpk_user SET lastlogin=NOW() WHERE id=?', [
+            userId,
+          ]);
 
           return {
             __typename: 'User',
@@ -61,8 +67,10 @@ const root = {
         }
 
         // user first time login, save it.
-        const qr = `INSERT INTO colorpk_user (oauth, name, oauthid, lastlogin) VALUES ('fb', ?, ?, NOW())`;
-        const { insertId } = await sqlExecOne(qr, [name, id]);
+        const { insertId } = await sqlExecOne(
+          `INSERT INTO colorpk_user (oauth, name, oauthid, lastlogin) VALUES ('fb', ?, ?, NOW())`,
+          [name, id]
+        );
         req.session.app.dbInfo = {
           id: insertId,
           name,
@@ -105,31 +113,33 @@ const root = {
 
     const userId = get(req, 'session.app.dbInfo.id', null);
     const uid = escape(userId);
-    let qr = null;
     let colors = null;
 
     switch (category) {
       case 'PUBLIC':
-        qr =
-          'SELECT a.* FROM colorpk_color a WHERE a.display=0 ORDER BY `id` DESC';
-        colors = await sqlExecOne(qr);
+        colors = await sqlExecOne(
+          'SELECT a.* FROM colorpk_color a WHERE a.display=0 ORDER BY `id` DESC'
+        );
         break;
       case 'LIKES':
-        qr = `
-          SELECT a.* FROM colorpk_color a
+        colors = await sqlExecOne(
+          `SELECT a.* FROM colorpk_color a
           INNER JOIN 
           (SELECT color_id FROM colorpk_userlike WHERE user_id = ?) b
-          ON id = b.color_id`;
-        colors = await sqlExecOne(qr, [uid]);
+          ON id = b.color_id`,
+          [uid]
+        );
         break;
       case 'PROFILE':
-        qr =
-          'SELECT a.*, false as `liked` FROM colorpk_color a WHERE userid = ?';
-        colors = await sqlExecOne(qr, [uid]);
+        colors = await sqlExecOne(
+          'SELECT a.*, false as `liked` FROM colorpk_color a WHERE userid = ?',
+          [uid]
+        );
         break;
       case 'ANONYMOUS':
-        qr = 'SELECT * FROM colorpk_color a WHERE a.display = 1';
-        colors = await sqlExecOne(qr);
+        colors = await sqlExecOne(
+          'SELECT * FROM colorpk_color a WHERE a.display = 1'
+        );
         break;
       default:
         // GraphQL will make sure category match enumeration type
