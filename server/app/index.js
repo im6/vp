@@ -30,7 +30,7 @@ app.use(
       process.env.NODE_ENV === 'development'
         ? 'localhost'
         : 'react.colorpk.com',
-    maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
+    maxAge: 1000 * 60 * 60 * 24 * 3, // 3 days
     httpOnly: true,
   })
 );
