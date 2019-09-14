@@ -3,7 +3,7 @@ import get from 'lodash.get';
 import { CSRF_EXCEPTION } from '../config';
 
 const csrfOrigin = csrf();
-export const csrfOverride = (...args) => {
+export default (...args) => {
   // args will be [req, res, next]
   const self = this;
   if (get(args[0], 'body._csrf', null) === CSRF_EXCEPTION) {
@@ -12,9 +12,4 @@ export const csrfOverride = (...args) => {
   } else {
     csrfOrigin.apply(self, args);
   }
-};
-
-export const csrfCookie = (req, res, next) => {
-  res.cookie('_csrf', req.csrfToken());
-  next();
 };

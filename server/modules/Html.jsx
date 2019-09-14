@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import OpenGraph from './OpenGraph';
 
-const Html = ({ title, style, script, children, version }) => (
+const Html = ({ title, style, script, children, version, csrfToken, }) => (
   <html lang="en">
     <head>
       <meta charSet="utf-8" />
@@ -56,6 +56,7 @@ const Html = ({ title, style, script, children, version }) => (
         />
       </noscript>
       <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
+      <div id="csrf" data-token={csrfToken} />
       <script src={`${script}?${version}`} type="text/javascript" />
     </body>
   </html>
@@ -67,6 +68,7 @@ Html.propTypes = {
   style: PropTypes.string.isRequired,
   script: PropTypes.string.isRequired,
   children: PropTypes.string.isRequired,
+  csrfToken: PropTypes.string.isRequired,
 };
 
 export default Html;

@@ -1,14 +1,14 @@
 /* eslint-disable */
 import axios from 'axios';
-import cookie from 'js-cookie';
 
-const rfToken = cookie.get('_csrf');
+const tokenElem = document.querySelector('#csrf');
+const { token: _csrf } = tokenElem.dataset;
 const requester = (url, body) => {
   const options = {
     method: 'post',
     url,
     data: {
-      _csrf: rfToken,
+      _csrf,
       ...body,
     },
   };

@@ -21,6 +21,7 @@ export default (req, res, next) => {
       version={version}
       style={`${PUBLIC_PATH}main.css`}
       script={`${PUBLIC_PATH}main.js`}
+      csrfToken={req.csrfToken()}
     >
       {appHtml}
     </Html>

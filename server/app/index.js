@@ -8,11 +8,12 @@ import { SESSION_SECRET } from '../config';
 
 import { oauthLogin, isAuth, isAdmin } from '../middlewares/auth';
 import { onError, onNotFound } from '../middlewares/errorHandler';
-import { csrfOverride, csrfCookie } from '../middlewares/csrfHandler';
+import csrfOverride from '../middlewares/csrfHandler';
 import graphqlMiddleware from '../middlewares/graphql';
 import ssrMiddleware from '../middlewares/render';
 
 const app = express();
+const publicUrls = ['/', '/latest', '/popular', '/color/:colorId', '/new'];
 
 if (process.env.NODE_ENV !== 'development') {
   app.set('trust proxy', true);
@@ -46,7 +47,7 @@ if (process.env.NODE_ENV === 'development') {
     next();
   });
 } else {
-  // for GraphiQL
+  // For GraphiQL (development)
   app.use(csrfOverride);
 }
 
@@ -54,13 +55,14 @@ app[process.env.NODE_ENV === 'development' ? 'use' : 'post'](
   '/graphql',
   graphqlMiddleware
 );
+if (process.env.NODE_ENV === 'development') {
+  app.use(csrfOverride);
+}
 app.get('/auth/:oauth', oauthLogin);
 
-app.get('/', csrfCookie, ssrMiddleware);
-app.get('/latest', csrfCookie, ssrMiddleware);
-app.get('/popular', csrfCookie, ssrMiddleware);
-app.get('/color/:colorId', csrfCookie, ssrMiddleware);
-app.get('/new', csrfCookie, ssrMiddleware);
+publicUrls.forEach(url => {
+  app.get(url, ssrMiddleware);
+});
 
 app.get('/like', isAuth, ssrMiddleware);
 app.get('/portfolio', isAuth, ssrMiddleware);
