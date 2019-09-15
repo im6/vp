@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import OpenGraph from './OpenGraph';
+import Style from './Style';
 
 const Html = ({ title, style, script, children, version, csrfToken, }) => (
   <html lang="en">
@@ -26,7 +27,11 @@ const Html = ({ title, style, script, children, version, csrfToken, }) => (
         rel="shortcut icon"
         href="//dkny.oss-cn-hangzhou.aliyuncs.com/3/fav.ico"
       />
-      <link href={`${style}?${version}`} rel="stylesheet" />
+      {
+        process.env.NODE_ENV === 'development' ?
+        <link href={`${style}?${version}`} rel="stylesheet" /> :
+        <Style />
+      }
       <script
         dangerouslySetInnerHTML={{
           __html: `if(window.location.hostname.indexOf('colorpk.com') > -1){
