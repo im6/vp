@@ -113,7 +113,7 @@ const server = {
       },
       {
         test: /\.sass$/,
-        use: ['isomorphic-style-loader', 'css-loader', 'sass-loader'],
+        use: ['null-loader'],
       },
     ],
   },
