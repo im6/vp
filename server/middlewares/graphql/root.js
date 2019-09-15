@@ -1,6 +1,5 @@
 import uuid from 'uuid';
 import get from 'lodash.get';
-import { escape } from 'mysql';
 import { GraphQLError } from 'graphql';
 
 import sqlExecOne from '../../resource/mysqlConnection';
@@ -98,7 +97,6 @@ const root = {
     }
 
     const userId = get(req, 'session.app.dbInfo.id', null);
-    const uid = escape(userId);
     let colors = null;
 
     switch (category) {
@@ -113,13 +111,13 @@ const root = {
           INNER JOIN 
           (SELECT color_id FROM colorpk_userlike WHERE user_id = ?) b
           ON id = b.color_id`,
-          [uid]
+          [userId]
         );
         break;
       case 'PROFILE':
         colors = await sqlExecOne(
           'SELECT a.*, false as `liked` FROM colorpk_color a WHERE userid = ?',
-          [uid]
+          [userId]
         );
         break;
       case 'ANONYMOUS':
@@ -225,7 +223,7 @@ const root = {
   },
 
   logoff(_, req) {
-    const username = get(req, 'session.app.dbInfo.name', '(unknow)');
+    const username = get(req, 'session.app.dbInfo.name', '(unknown)');
     console.log(`logoff ${username}, delete session`); // eslint-disable-line no-console
     delete req.session.app;
 

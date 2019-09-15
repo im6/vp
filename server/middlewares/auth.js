@@ -19,9 +19,9 @@ export const oauthLogin = async (req, res) => {
   const code = get(req, 'query.code', null);
   const state = get(req, 'query.state', null);
   const oauth = get(req, 'params.oauth', null);
-  const sessionState = get(req, 'session.app.oauthState', null);
+  const oauthState = get(req, 'session.app.oauthState', null);
 
-  if (code && state && state === sessionState) {
+  if (code && state && state === oauthState) {
     console.log(`redirected by ${oauth} auth...`);
     const qsObj = getOauthQsObj(oauth, req.query);
     const { data } = await accessToken(qsObj);
