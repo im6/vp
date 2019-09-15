@@ -7,9 +7,9 @@ import TranslationIcon from '../../client/modules/layout/Header/TranslationIcon'
 const selectClassName = '_1-i7j';
 
 const App = ({ url }) => {
-  const showOneColor = url.match(/^\/color\/\d+$/);
   const selectPopular = url === '/popular';
   const selectLatest = url in { '/latest': true, '/': true };
+  const showOneColor = url.match(/^\/color\/\d+$/);
   const showColorList =
     showOneColor ||
     url in

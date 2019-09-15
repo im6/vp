@@ -30,6 +30,7 @@ class OneColor extends React.Component {
             <button
               onClick={this.onDownload}
               className="button is-fullwidth is-info"
+              aria-label={language.download}
             >
               {language.download}
             </button>

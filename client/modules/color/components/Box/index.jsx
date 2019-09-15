@@ -37,7 +37,11 @@ class Box extends React.Component {
           colorValue={this.props.boxInfo.get('color')}
           onClick={this.onCanvasClick}
         />
-        <button className="button is-small" onClick={this.onLikeClick}>
+        <button
+          className="button is-small"
+          onClick={this.onLikeClick}
+          aria-label="click and save"
+        >
           <Heart red={this.props.liked} />
           &nbsp;&nbsp;
           {this.props.boxInfo.get('like')}
