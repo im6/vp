@@ -7,7 +7,7 @@ const fileSet = scriptsList.reduce((acc, cur) => {
   acc[cur] = true;
   return acc;
 }, {});
-
+console.log('check');
 export default (req, res, next) => {
   const fileName = req.url;
   console.log(fileName);
@@ -16,6 +16,7 @@ export default (req, res, next) => {
     console.log(filePath);
     res.sendFile(filePath);
   } else {
+    console.log('prod 404');
     next(404);
   }
 };
