@@ -10,8 +10,10 @@ const fileSet = scriptsList.reduce((acc, cur) => {
 
 export default (req, res, next) => {
   const fileName = req.url;
+  console.log(fileName);
   if (fileName in fileSet) {
     const filePath = path.resolve(PWD, `./dist/${fileName}`);
+    console.log(filePath);
     res.sendFile(filePath);
   } else {
     next(404);
