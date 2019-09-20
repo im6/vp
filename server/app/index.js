@@ -38,8 +38,8 @@ app.use(
 
 if (process.env.NODE_ENV === 'development') {
   // eslint-disable-next-line global-require
-  const staticFile = require('../middlewares/staticFile');
-  app.get('/static/:fileName', staticFile.default);
+  const staticFile = require('../middlewares/staticFile').default;
+  app.get('/static/:fileName', staticFile);
 
   app.use((req, res, next) => {
     // eslint-disable-next-line no-console
@@ -48,10 +48,10 @@ if (process.env.NODE_ENV === 'development') {
   });
 } else {
   // eslint-disable-next-line global-require
-  const staticFileProd = require('../middlewares/staticFileProd');
-  app.get('/robots.txt', staticFileProd.default);
-  app.get('/favicon.ico', staticFileProd.default);
-  app.get('/sitemap.xml', staticFileProd.default);
+  const staticFileProd = require('../middlewares/staticFileProd').default;
+  app.get('/robots.txt', staticFileProd);
+  app.get('/favicon.ico', staticFileProd);
+  app.get('/sitemap.xml', staticFileProd);
   // For GraphiQL (development)
   app.use(csrfOverride);
 }
