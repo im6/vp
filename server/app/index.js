@@ -47,6 +47,11 @@ if (process.env.NODE_ENV === 'development') {
     next();
   });
 } else {
+  // eslint-disable-next-line global-require
+  const staticFileProd = require('../middlewares/staticFileProd');
+  app.get('/robots.txt', staticFileProd.default);
+  app.get('/favicon.ico', staticFileProd.default);
+  app.get('/sitemap.xml', staticFileProd.default);
   // For GraphiQL (development)
   app.use(csrfOverride);
 }
