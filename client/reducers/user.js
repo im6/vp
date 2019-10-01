@@ -2,6 +2,11 @@
 import { handleActions } from 'redux-actions';
 import Immutable, { fromJS } from 'immutable';
 
+const initialState = Immutable.fromJS({
+  detail: null,
+  facebookUrl: null,
+});
+
 const user = handleActions(
   {
     ['user/auth/success'](state, action) {
@@ -26,10 +31,7 @@ const user = handleActions(
       });
     },
   },
-  Immutable.fromJS({
-    detail: null,
-    facebookUrl: null,
-  })
+  initialState
 );
 
 export default user;

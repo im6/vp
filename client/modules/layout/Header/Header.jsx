@@ -28,6 +28,7 @@ class Header extends React.Component {
       });
     }
   }
+
   onFBClick(evt) {
     evt.preventDefault();
     this.props.onOAuth(this.props.facebookUrl);
@@ -45,9 +46,11 @@ class Header extends React.Component {
     let imagUrl = isAuth
       ? detail.get('img')
       : '//dkny.oss-cn-hangzhou.aliyuncs.com/2/icon.png';
-    if (process.env.NODE_ENV === 'development' && isAuth) {
-      imagUrl =
-        'http://dkny.oss-cn-hangzhou.aliyuncs.com/temp/test_profile.jpeg';
+    if (process.env.NODE_ENV === 'development') {
+      if (isAuth) {
+        imagUrl =
+          'http://dkny.oss-cn-hangzhou.aliyuncs.com/temp/test_profile.jpeg';
+      }
     }
     return (
       <nav

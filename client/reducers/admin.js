@@ -2,6 +2,11 @@
 import { handleActions } from 'redux-actions';
 import Immutable from 'immutable';
 
+const initialState = Immutable.fromJS({
+  list: [],
+  loading: false,
+});
+
 const admin = handleActions(
   {
     ['admin/getList'](state) {
@@ -37,10 +42,7 @@ const admin = handleActions(
       return state;
     },
   },
-  Immutable.fromJS({
-    list: [],
-    loading: false,
-  })
+  initialState
 );
 
 export default admin;

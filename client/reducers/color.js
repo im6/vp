@@ -2,6 +2,16 @@
 import { handleActions } from 'redux-actions';
 import Immutable, { fromJS } from 'immutable';
 
+const initialState = Immutable.fromJS({
+  loading: true,
+  colorId: [],
+  colorIdByLike: [],
+  colorDef: {},
+  liked: {},
+  myPortfolio: [],
+  myLiked: [],
+});
+
 const color = handleActions(
   {
     ['color/get'](state) {
@@ -109,15 +119,7 @@ const color = handleActions(
       return state;
     },
   },
-  Immutable.fromJS({
-    loading: true,
-    colorId: [],
-    colorIdByLike: [],
-    colorDef: {},
-    liked: {},
-    myPortfolio: [],
-    myLiked: [],
-  })
+  initialState
 );
 
 export default color;
