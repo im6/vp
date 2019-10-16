@@ -6,4 +6,4 @@ const SpinLoader = () => (
     <div className="spinLoader" />
   </div>
 );
-export default SpinLoader;
+export default React.memo(SpinLoader);
