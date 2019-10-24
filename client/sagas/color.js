@@ -2,6 +2,7 @@ import get from 'lodash.get';
 import { call, put, fork, takeLatest } from 'redux-saga/effects';
 import { createAction } from 'redux-actions';
 import { downloadCanvas } from '../misc/util.js';
+import likeManager from '../services/likeManager';
 import requester from '../services/requester';
 
 const colorql = `query($cate: ColorCategory!) {
@@ -109,15 +110,27 @@ function* initColorList() {
 }
 
 function* toggleLike(action) {
+  const { willLike, id, isAuth } = action.payload;
   const res = yield call(requester, '/graphql', {
     query: likeql,
     variables: {
-      val: action.payload,
+      val: {
+        id,
+        willLike,
+      },
     },
   });
 
   if (get(res, 'data.likeColor.status', 1) !== 0) {
     console.error('toggle like error'); // eslint-disable-line no-console
+  }
+
+  if (!isAuth) {
+    if (willLike) {
+      likeManager.addLike(parseInt(id));
+    } else {
+      likeManager.removeLike(parseInt(id));
+    }
   }
 }
 

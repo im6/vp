@@ -1,6 +1,7 @@
 import get from 'lodash.get';
 import { call, put, fork, takeLatest } from 'redux-saga/effects';
 import { createAction } from 'redux-actions';
+import likeManager from '../services/likeManager';
 
 import requester from '../services/requester';
 
@@ -42,6 +43,12 @@ function* getAuth() {
   } else {
     const ac0 = createAction('user/auth/fail');
     yield put(ac0(get(payload, 'data.auth.url')));
+    // grab from localstorage
+    const { initLikes } = likeManager;
+    if (initLikes.length) {
+      const ac1 = createAction('color/set/likes');
+      yield put(ac1(initLikes));
+    }
   }
 }
 
@@ -50,6 +57,13 @@ function* logoff() {
   const payload = get(res, 'data.logoff.url', null);
   const ac = createAction('user/auth/fail');
   yield put(ac(payload));
+
+  // use localstorage like again
+  const { initLikes } = likeManager;
+  if (initLikes.length) {
+    const ac1 = createAction('color/set/likes');
+    yield put(ac1(initLikes));
+  }
 }
 
 function onOAuth(action) {

@@ -1,5 +1,16 @@
 export const noop = () => {};
-
+const checkLocalStorage = () => {
+  const textKey = '_tls';
+  try {
+    window.localStorage.setItem(textKey, '1');
+    window.localStorage.getItem(textKey);
+    window.localStorage.removeItem(textKey);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+export const localStorageEnabled = checkLocalStorage();
 export const downloadCanvas = color => {
   const HEIGHT = 420;
   const WIDTH = 340;

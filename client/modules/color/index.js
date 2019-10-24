@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Color from './components/Color';
 
-const shared = {};
+const shared = {
+  isAuth: false,
+};
 const storeMap = {
   '/popular': 'colorIdByLike',
   '/': 'colorId',
@@ -11,7 +13,7 @@ const storeMap = {
   '/portfolio': 'myPortfolio',
 };
 const mapStateToProps = (
-  { color },
+  { color, user },
   {
     location: { pathname },
     match: {
@@ -20,6 +22,7 @@ const mapStateToProps = (
     history,
   }
 ) => {
+  shared.isAuth = Boolean(user.get('detail'));
   const colorDef = color.get('colorDef');
   const liked = color.get('liked');
   shared.history = history;
@@ -46,8 +49,10 @@ const mapDispatchToProps = dispatch => {
     },
     onLike(id, willLike) {
       const ac = createAction('color/toggleLike');
+      const { isAuth } = shared;
       dispatch(
         ac({
+          isAuth,
           willLike,
           id,
         })

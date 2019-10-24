@@ -21,7 +21,7 @@ class Box extends React.Component {
   onLikeClick() {
     this.props.onLikeClick({
       willLike: !this.props.liked,
-      id: this.props.boxInfo.get('id').toString(),
+      id: this.props.boxInfo.get('id'),
     });
   }
 
