@@ -1,4 +1,3 @@
-export const noop = () => {};
 const checkLocalStorage = () => {
   const textKey = '_tls';
   try {

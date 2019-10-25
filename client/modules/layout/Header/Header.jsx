@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import style from './style.sass';
 import TranslationIcon from './TranslationIcon';
+import LanguageDropdown from '../../../../isomorphic/LanguageDropdown';
 import { LanguageContext } from '../../../context/LanguageContext';
 
 class Header extends React.Component {
@@ -174,57 +175,7 @@ class Header extends React.Component {
                 <TranslationIcon />
                 <span className={style.languageText}>{language.language}</span>
               </a>
-
-              <div className="navbar-dropdown">
-                <a
-                  className="navbar-item"
-                  onClick={() => {
-                    changeLang('en');
-                  }}
-                >
-                  English
-                </a>
-                <a
-                  className="navbar-item"
-                  onClick={() => {
-                    changeLang('zh');
-                  }}
-                >
-                  简体中文
-                </a>
-                <a
-                  className="navbar-item"
-                  onClick={() => {
-                    changeLang('ja');
-                  }}
-                >
-                  日本語
-                </a>
-                <a
-                  className="navbar-item"
-                  onClick={() => {
-                    changeLang('ko');
-                  }}
-                >
-                  한국어
-                </a>
-                <a
-                  className="navbar-item"
-                  onClick={() => {
-                    changeLang('es');
-                  }}
-                >
-                  Español
-                </a>
-                <a
-                  className="navbar-item"
-                  onClick={() => {
-                    changeLang('ru');
-                  }}
-                >
-                  Русский
-                </a>
-              </div>
+              <LanguageDropdown onChange={changeLang} />
             </div>
           </div>
 

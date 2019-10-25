@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Box from '../Box';
 import style from './style.sass';
-import { noop } from '../../../../misc/util';
+import noop from '../../../../../isomorphic/noop';
 import { LanguageContext } from '../../../../context/LanguageContext';
 
 class OneColor extends React.Component {

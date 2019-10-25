@@ -3,6 +3,8 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import SpinLoader from '../../client/modules/color/components/SpinLoader';
 import TranslationIcon from '../../client/modules/layout/Header/TranslationIcon';
+import LanguageDropdown from '../../isomorphic/LanguageDropdown';
+import noop from '../../isomorphic/noop';
 
 const selectClassName = '_1-i7j';
 
@@ -85,14 +87,7 @@ const App = ({ url }) => {
                   <TranslationIcon />
                   <span className="_3QtW-">Language</span>
                 </a>
-                <div className="navbar-dropdown">
-                  <a className="navbar-item">English</a>
-                  <a className="navbar-item">简体中文</a>
-                  <a className="navbar-item">日本語</a>
-                  <a className="navbar-item">한국어</a>
-                  <a className="navbar-item">Español</a>
-                  <a className="navbar-item">Русский</a>
-                </div>
+                <LanguageDropdown onChange={noop} />
               </div>
             </div>
             <div className="navbar-end">
