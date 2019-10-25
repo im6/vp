@@ -127,9 +127,9 @@ function* toggleLike(action) {
 
   if (!isAuth) {
     if (willLike) {
-      likeManager.addLike(parseInt(id));
+      likeManager.addLike(parseInt(id, 10));
     } else {
-      likeManager.removeLike(parseInt(id));
+      likeManager.removeLike(parseInt(id, 10));
     }
   }
 }

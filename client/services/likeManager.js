@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { localStorageEnabled } from '../misc/util';
 
 const LSLIKEKEY = 'userLike';
@@ -16,13 +15,11 @@ class LikeManagement {
       );
       if (Array.isArray(currentLocalState)) {
         return currentLocalState;
-      } else {
-        window.localStorage.setItem(LSLIKEKEY, JSON.stringify([]));
-        return [];
       }
-    } else {
+      window.localStorage.setItem(LSLIKEKEY, JSON.stringify([]));
       return [];
     }
+    return [];
   }
 
   addLike(id) {

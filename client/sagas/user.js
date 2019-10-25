@@ -29,7 +29,6 @@ const logoffQl = `mutation {
 
 function* getAuth() {
   const payload = yield call(requester, '/graphql', { query });
-  // eslint-disable-next-line no-prototype-builtins
 
   const good = get(payload, 'data.auth.id', null);
   if (good) {
