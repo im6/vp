@@ -2,11 +2,10 @@ import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 import AdminPanel from './components/AdminPanel';
 
-function mapStateToProps({ admin }) {
-  return {
-    list: admin.get('list'),
-  };
-}
+const mapStateToProps = ({ admin }) => ({
+  list: admin.get('list'),
+});
+
 const mapDispatchToProps = dispatch => {
   return {
     onInit() {
