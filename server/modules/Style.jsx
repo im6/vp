@@ -2,7 +2,7 @@ import React from 'react';
 
 const __html = `
 @import url(https://fonts.googleapis.com/css?family=Roboto);
-._3yWUo{width:206px;margin:8px;padding:7px;border-radius:4px;background-color:white;display:inline-block;box-shadow:0 2px 3px 0.6px #d9d9d9;transition:box-shadow 0.3s ease-in-out}._3yWUo:hover{transition:box-shadow 0.8s;box-shadow:0 6px 9px 2px #cccccc}._3yWUo>button{margin-top:7px;font-size:1.3rem}._3yWUo>button>img{width:15px;margin-right:5px}._3yWUo>p{display:inline-block;margin:12px 0 0 12px}@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait){._3yWUo{width:142px;margin:5px;padding:5px}._3yWUo>button{margin-top:5px}._3yWUo>p{display:none}}
+._3yWUo{width:206px;margin:8px;padding:7px;border-radius:4px;background-color:white;display:inline-block;box-shadow:0 2px 3px 0.6px #d9d9d9;transition:box-shadow 0.3s ease-in-out}._3yWUo:hover{transition:box-shadow 0.8s;box-shadow:0 6px 9px 2px #cccccc}._3yWUo>button{margin-top:7px;font-size:1.3rem}._3yWUo>button>img{width:15px;margin-right:5px}._3yWUo>p{display:inline-block;margin:12px 0 0 12px}@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait){._3yWUo{width:142px;padding:5px}._3yWUo>button{margin-top:5px}._3yWUo>p{display:none}}
 
 ._1BgVE{height:230px;padding:0;margin:0;cursor:pointer}._1BgVE div:nth-child(1){border-radius:3px 3px 0px 0px;height:40%}._1BgVE div:nth-child(2){height:25%}._1BgVE div:nth-child(3){height:17.5%}._1BgVE div:nth-child(4){height:17.5%;border-radius:0px 0px 3px 3px}@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait){._1BgVE{height:160px}}
 
@@ -12,11 +12,11 @@ const __html = `
 
 ._10Zb-{display:flex;justify-content:center;padding:0 8px}._21zb1{margin-top:6px}._21zb1>span{font-size:0.877rem}@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait){._21zb1>span{font-size:0.58rem}}
 
-._1oXEb{display:flex;flex-wrap:wrap;justify-content:center;width:92%;margin:8px auto}._10E_t{background:rgba(230,230,230,0.95);min-height:1300px}@media (max-width: 768px){._1oXEb{width:99%}}@media (max-width: 321px){._1oXEb{width:100%}}
+._1oXEb{display:flex;flex-wrap:wrap;justify-content:center;width:92%;margin:0 auto}._10E_t{background:rgba(230,230,230,0.95);min-height:1300px}@media (max-width: 768px){._1oXEb{width:99%}}@media (max-width: 321px){._1oXEb{width:100%}}
 
 .spinContainer{height:60px;display:flex;justify-content:center;align-items:center}@keyframes spinLoader-spin{0%{transform:rotate(0deg)}100%{transform:rotate(-2160deg)}}@keyframes spinLoader-normal-opacity{0%{opacity:1}45%{opacity:0}55%{opacity:0}100%{opacity:1}}.spinLoader{animation:1.25s spinLoader-spin cubic-bezier(0.46, -0.4, 0.2, 1.51) infinite both;width:40px;height:40px;border-radius:50%;overflow:hidden}.spinLoader:before,.spinLoader:after{content:"";position:absolute;width:100%;height:100%;border-radius:50%;top:0;left:0;box-sizing:border-box;border:20px solid black;border-top-color:#fa4248;border-left-color:#5ddbba;border-bottom-color:#ede670;border-right-color:#64c3f2}.spinLoader:before{filter:blur(2px)}.spinLoader:after{animation:1.25s spinLoader-normal-opacity cubic-bezier(0.46, -0.4, 0.2, 1.51) infinite both}
 
-#app{height:100%;width:100%}html{height:100%;margin:0;background:rgba(230,230,230,0.95)}body{margin:0}a,h1,h2,h3,h4,h5,p,span,li,div,button{font-family:'Roboto', sans-serif}.Cqiyx{margin:0;padding:55px 0 0 0;width:100%;height:100%}
+#app{height:100%;width:100%}html{height:100%;margin:0;background:rgba(230,230,230,0.95)}body{margin:0}a,h1,h2,h3,h4,h5,p,span,li,div,button{font-family:'Roboto', sans-serif}.Cqiyx{margin:0;padding:65px 0;width:100%;height:100%}
 
 a{text-decoration:none}._1-i7j{color:#3273dc !important}._3QtW-{margin-left:5px}
 

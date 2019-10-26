@@ -71,6 +71,7 @@ const client = {
     new CompressionPlugin({
       filename: '[path]',
       minRatio: 1,
+      exclude: 'main.css',
     }),
   ],
   optimization: {
