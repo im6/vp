@@ -1,35 +1,35 @@
-$box-padding: 7px;
-$box-padding-mobile: 5px;
+$box-padding: 7px
+$box-padding-mobile: 5px
 
 .box
-  width: 206px;
-  margin: 8px;
-  padding: $box-padding;
-  border-radius: 4px;
-  background-color: white;
-  display: inline-block;
+  width: 206px
+  margin: 8px
+  padding: $box-padding
+  border-radius: 4px
+  background-color: white
+  display: inline-block
 
-  box-shadow: 0 2px 3px 0.6px #d9d9d9;
-  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 2px 3px 0.6px #d9d9d9
+  transition: box-shadow 0.3s ease-in-out
 
   &:hover 
-    transition: box-shadow 0.8s;
-    box-shadow: 0 6px 9px 2px #cccccc;
+    transition: box-shadow 0.8s
+    box-shadow: 0 6px 9px 2px #cccccc
   &>button
-    margin-top: $box-padding;
-    font-size: 1.3rem;
+    margin-top: $box-padding
+    font-size: 1.3rem
     &>img
-      width: 15px;
-      margin-right: 5px;
+      width: 15px
+      margin-right: 5px
   &>p
-    display: inline-block;
-    margin: 12px 0 0 12px;
+    display: inline-block
+    margin: 12px 0 0 12px
 
 @media only screen and (min-device-width : 375px) and (max-device-width : 812px) and (-webkit-device-pixel-ratio : 3) and (orientation : portrait)
   .box
-    width: 142px;
-    padding: $box-padding-mobile;
+    width: 142px
+    padding: $box-padding-mobile
     &>button
-      margin-top: $box-padding-mobile;
+      margin-top: $box-padding-mobile
     &>p
-      display: none;
+      display: none

@@ -1,48 +1,48 @@
-$cornerValue: 7px;
-$cornerValueInner: 3px;
+$cornerValue: 7px
+$cornerValueInner: 3px
 .box 
-  height: 244px;
-  width: 100%;
-  border: 1px solid #cccccc;
-  border-radius: $cornerValue;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 3px 0.6px #d9d9d9;
-  transition: box-shadow 0.3s ease-in-out;
-  padding: 2px;
+  height: 244px
+  width: 100%
+  border: 1px solid #cccccc
+  border-radius: $cornerValue
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  box-shadow: 0 0 3px 0.6px #d9d9d9
+  transition: box-shadow 0.3s ease-in-out
+  padding: 2px
 
   &:hover 
-    box-shadow: 0 1px 18px 2px #cccccc;
+    box-shadow: 0 1px 18px 2px #cccccc
   
 
   .boxCanvas 
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    width: 100%
+    height: 100%
+    display: flex
+    flex-direction: column
 
     div:nth-child(1)
-      border-radius: $cornerValueInner $cornerValueInner 0px 0px;
-      background-color: rgb(52, 43, 43);
-      height: 25%;
+      border-radius: $cornerValueInner $cornerValueInner 0px 0px
+      background-color: rgb(52, 43, 43)
+      height: 25%
     
 
     div:nth-child(2)
-      background-color: rgb(69, 157, 114);
-      height: 25%;
+      background-color: rgb(69, 157, 114)
+      height: 25%
     
 
     div:nth-child(3)
-      background-color: rgb(144, 210, 109);
-      height: 25%;
+      background-color: rgb(144, 210, 109)
+      height: 25%
     
 
     div:nth-child(4)
-      background-color: rgb(222, 251, 194);
-      height: 25%;
-      border-radius: 0px 0px $cornerValueInner $cornerValueInner;
+      background-color: rgb(222, 251, 194)
+      height: 25%
+      border-radius: 0px 0px $cornerValueInner $cornerValueInner
     
   
 
