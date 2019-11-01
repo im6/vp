@@ -1,18 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import style from './style.sass';
 import ColorRow from './components/ColorRow';
 
 class EditCanvas extends React.Component {
   render() {
+    const { colorValue, activeIndex, changeActive } = this.props;
     return (
       <div className={style.box}>
         <div className={style.boxCanvas}>
-          {this.props.colorValue.map((v, k) => (
+          {colorValue.map((v, k) => (
             <ColorRow
               key={k}
               colorValue={v}
-              isActive={k === this.props.activeIndex}
-              onRowClick={this.props.changeActive.bind(this, k)}
+              isActive={k === activeIndex}
+              onRowClick={changeActive.bind(this, k)}
             />
           ))}
         </div>
@@ -20,5 +22,11 @@ class EditCanvas extends React.Component {
     );
   }
 }
+
+EditCanvas.propTypes = {
+  colorValue: PropTypes.array.isRequired,
+  changeActive: PropTypes.func,
+  activeIndex: PropTypes.number,
+};
 
 export default EditCanvas;

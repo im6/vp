@@ -9,6 +9,7 @@ const Heart = ({ red }) => (
     viewBox="0 0 48 48"
     xmlns="http://www.w3.org/2000/svg"
   >
+    <title>Heart</title>
     <path
       className={red ? style.red : style.grey}
       d="M4.95,26A13.46,13.46,0,0,1,24,6.94,13.46,13.46,0,0,1,43.05,26L24,45Z"
