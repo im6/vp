@@ -1,12 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import style from './style.sass';
 
 class ColorRow extends React.Component {
-  clickHandler() {
-    this.props.onRowClick();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     const isSame =
       nextProps.colorValue == this.props.colorValue &&
       nextProps.isActive == this.props.isActive;
@@ -14,13 +11,14 @@ class ColorRow extends React.Component {
   }
 
   render() {
+    const { onRowClick, colorValue, isActive } = this.props;
     const rowStyle =
-      this.props.colorValue && this.props.colorValue != '#'
+      colorValue && colorValue != '#'
         ? {
-            backgroundColor: this.props.colorValue,
+            backgroundColor: colorValue,
           }
         : {
-            border: `1px solid ${this.props.isActive ? '#1a4cb6' : '#cccccc'}`,
+            border: `1px solid ${isActive ? '#1a4cb6' : '#cccccc'}`,
             backgroundImage:
               "url('data:image/png;base64,R0lGODdhCgAKAPAAAOXl5f///ywAAAAACgAKAEACEIQdqXt9GxyETrI279OIgwIAOw==')",
           };
@@ -29,10 +27,16 @@ class ColorRow extends React.Component {
       <div
         className={style.rowContainer}
         style={rowStyle}
-        onClick={this.props.onRowClick}
+        onClick={onRowClick}
       ></div>
     );
   }
 }
+
+ColorRow.propTypes = {
+  onRowClick: PropTypes.func.isRequired,
+  colorValue: PropTypes.string,
+  isActive: PropTypes.bool,
+};
 
 export default ColorRow;
