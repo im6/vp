@@ -11,10 +11,11 @@ class OneColor extends React.Component {
     this.onDownload = this.onDownload.bind(this);
   }
   onDownload() {
-    this.props.onDownload(this.props.boxInfo);
+    const { onDownload, boxInfo } = this.props;
+    onDownload(boxInfo);
   }
   render() {
-    const { liked, boxInfo, onLike } = this.props;
+    const { liked, boxInfo, onLike, onShare } = this.props;
     const { language } = this.context;
     return (
       <div className={style.center}>
@@ -39,7 +40,7 @@ class OneColor extends React.Component {
             <span
               className="button"
               onClick={() => {
-                this.props.onShare('email');
+                onShare('email');
               }}
             >
               {language.email}
@@ -47,7 +48,7 @@ class OneColor extends React.Component {
             <span
               className="button"
               onClick={() => {
-                this.props.onShare('facebook');
+                onShare('facebook');
               }}
             >
               {language.facebook}
@@ -55,7 +56,7 @@ class OneColor extends React.Component {
             <span
               className="button"
               onClick={() => {
-                this.props.onShare('twitter');
+                onShare('twitter');
               }}
             >
               {language.twitter}

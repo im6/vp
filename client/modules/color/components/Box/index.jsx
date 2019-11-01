@@ -12,29 +12,32 @@ class Box extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
+    const { liked, boxInfo } = this.props;
     return (
-      nextProps.liked !== this.props.liked ||
-      nextProps.boxInfo.get('id') !== this.props.boxInfo.get('id')
+      nextProps.liked !== liked ||
+      nextProps.boxInfo.get('id') !== boxInfo.get('id')
     );
   }
 
   onLikeClick() {
-    this.props.onLikeClick({
-      willLike: !this.props.liked,
-      id: this.props.boxInfo.get('id'),
+    const { liked, boxInfo, onLikeClick } = this.props;
+    onLikeClick({
+      willLike: !liked,
+      id: boxInfo.get('id'),
     });
   }
 
   onCanvasClick() {
-    this.props.onCanvasClick(this.props.boxInfo);
+    const { boxInfo, onCanvasClick } = this.props;
+    onCanvasClick(boxInfo);
   }
 
   render() {
-    const { showUsername } = this.props;
+    const { liked, boxInfo, showUsername } = this.props;
     return (
       <div className={style.box}>
         <ColorCanvas
-          colorValue={this.props.boxInfo.get('color')}
+          colorValue={boxInfo.get('color')}
           onClick={this.onCanvasClick}
         />
         <button
@@ -42,12 +45,12 @@ class Box extends React.Component {
           onClick={this.onLikeClick}
           aria-label="click and save"
         >
-          <Heart red={this.props.liked} />
+          <Heart red={liked} />
           &nbsp;&nbsp;
-          {this.props.boxInfo.get('like')}
+          {boxInfo.get('like')}
         </button>
-        {showUsername && this.props.boxInfo.get('username') && (
-          <p>{this.props.boxInfo.get('username')}</p>
+        {showUsername && boxInfo.get('username') && (
+          <p>{boxInfo.get('username')}</p>
         )}
       </div>
     );
