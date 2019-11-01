@@ -1,59 +1,54 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import Box from '../Box';
 import OneColor from '../OneColor';
 import style from './style.sass';
 import SpinLoader from '../SpinLoader';
 
 class Color extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onEnterClick = this.onEnterClick.bind(this);
-    this.onLikeClick = this.onLikeClick.bind(this);
-    this.onDownloadClick = this.onDownloadClick.bind(this);
-  }
   componentDidMount() {
-    const { url } = this.props.match;
-    this.props.onInit(url);
-  }
-
-  onLikeClick(newState) {
-    const { id, willLike } = newState;
-    this.props.onLike(id, willLike);
-  }
-
-  onEnterClick(color) {
-    this.props.onEnter(color);
-  }
-
-  onDownloadClick(color) {
-    this.props.onDownload(color);
+    const {
+      onInit,
+      match: { url },
+    } = this.props;
+    onInit(url);
   }
 
   render() {
-    const { selectedId, loading, onShare } = this.props;
-    const hasSelected = this.props.colorDef.has(selectedId);
+    const {
+      list,
+      liked,
+      colorDef,
+      hasSelected,
+      selectedId,
+      loading,
+      onLike,
+      onShare,
+      onEnter,
+      onDownload,
+    } = this.props;
     return (
       <Fragment>
         {loading && <SpinLoader />}
         {hasSelected && (
           <OneColor
-            boxInfo={this.props.colorDef.get(selectedId)}
-            liked={this.props.liked.get(selectedId)}
-            onLike={this.onLikeClick}
-            onDownload={this.onDownloadClick}
+            boxInfo={colorDef.get(selectedId)}
+            liked={liked.get(selectedId)}
+            onLike={onLike}
+            onDownload={onDownload}
             onShare={onShare}
           />
         )}
         <div className={style.container}>
           <div className={style.list}>
-            {this.props.list.map(v => {
+            {list.map(v => {
               return (
                 <Box
                   key={v}
-                  liked={this.props.liked.get(v)}
-                  boxInfo={this.props.colorDef.get(v)}
-                  onLikeClick={this.onLikeClick}
-                  onCanvasClick={this.onEnterClick}
+                  liked={liked.get(v)}
+                  boxInfo={colorDef.get(v)}
+                  onLikeClick={onLike}
+                  onCanvasClick={onEnter}
                 />
               );
             })}
@@ -63,5 +58,20 @@ class Color extends React.Component {
     );
   }
 }
+
+Color.propTypes = {
+  selectedId: PropTypes.string,
+  loading: PropTypes.bool,
+  hasSelected: PropTypes.bool,
+  liked: PropTypes.object.isRequired,
+  // list: PropTypes.array.isRequired,
+  match: PropTypes.object.isRequired,
+  colorDef: PropTypes.object.isRequired,
+  onInit: PropTypes.func.isRequired,
+  onLike: PropTypes.func.isRequired,
+  onEnter: PropTypes.func.isRequired,
+  onShare: PropTypes.func.isRequired,
+  onDownload: PropTypes.func.isRequired,
+};
 
 export default Color;

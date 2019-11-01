@@ -23,16 +23,19 @@ const mapStateToProps = (
   }
 ) => {
   shared.isAuth = Boolean(user.get('detail'));
+  shared.history = history;
+
   const colorDef = color.get('colorDef');
   const liked = color.get('liked');
-  shared.history = history;
   const list = color.get(storeMap[pathname] || 'colorId');
+  const hasSelected = colorDef.has(selectedId);
   return {
     loading: color.get('loading'),
     list,
     colorDef,
     liked,
     selectedId,
+    hasSelected,
   };
 };
 
@@ -47,7 +50,7 @@ const mapDispatchToProps = dispatch => {
         dispatch(ac('myLiked'));
       }
     },
-    onLike(id, willLike) {
+    onLike({ id, willLike }) {
       const ac = createAction('color/toggleLike');
       const { isAuth } = shared;
       dispatch(
