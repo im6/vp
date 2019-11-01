@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FinishModal = ({ isAuth }) => {
-  const noAuth = (
+  const noAuthElem = (
     <div>
       <p>
         Your new color is created successfully. We will review it before
@@ -25,7 +26,11 @@ const FinishModal = ({ isAuth }) => {
       </p>
     </div>
   );
-  return isAuth ? authElem : noAuth;
+  return isAuth ? authElem : noAuthElem;
+};
+
+FinishModal.propTypes = {
+  isAuth: PropTypes.bool,
 };
 
 export default FinishModal;
