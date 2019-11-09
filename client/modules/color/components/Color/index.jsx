@@ -64,7 +64,7 @@ Color.propTypes = {
   loading: PropTypes.bool,
   hasSelected: PropTypes.bool,
   liked: PropTypes.object.isRequired,
-  // list: PropTypes.array.isRequired,
+  list: PropTypes.array.isRequired,
   match: PropTypes.object.isRequired,
   colorDef: PropTypes.object.isRequired,
   onInit: PropTypes.func.isRequired,

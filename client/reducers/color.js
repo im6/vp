@@ -4,12 +4,12 @@ import Immutable, { fromJS } from 'immutable';
 
 const initialState = Immutable.fromJS({
   loading: true,
-  colorId: [],
-  colorIdByLike: [],
   colorDef: {},
   liked: {},
-  myPortfolio: [],
-  myLiked: [],
+  colorId: [], // main
+  colorIdByLike: [], // popular route
+  myPortfolio: [], // portfolio route
+  myLiked: [], // liked list route
 });
 
 const color = handleActions(
@@ -57,17 +57,6 @@ const color = handleActions(
         });
       }
       return state;
-    },
-
-    ['color/initLike'](state, action) {
-      const likedList = action.payload.like,
-        lcjs = {};
-      if (likedList) {
-        likedList.forEach(v => {
-          lcjs['d' + v] = true;
-        });
-      }
-      return state.update('liked', v => v.merge(lcjs));
     },
 
     ['color/addNew/success'](state, action) {

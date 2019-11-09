@@ -6,6 +6,7 @@ import Header from './Header';
 const shared = {};
 const mapStateToProps = ({ user }, { location, history }) => {
   shared.history = history;
+
   const { pathname: url } = location;
   const detail = user.get('detail');
   const facebookUrl = user.get('facebookUrl');
