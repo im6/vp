@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { createAction } from 'redux-actions';
-import { withRouter } from 'react-router-dom';
 import NewColor from './components/NewColor';
 
 const shared = {};
@@ -39,9 +38,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(NewColor)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewColor);
