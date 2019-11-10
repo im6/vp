@@ -41,6 +41,7 @@ class Color extends React.Component {
         )}
         <div className={style.container}>
           <div className={style.list}>
+            {!loading && list.length === 0 && <h1>No colors to show</h1>}
             {list.map(v => {
               return (
                 <Box
