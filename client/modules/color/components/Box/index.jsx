@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import style from './style.sass';
-import ColorCanvas from './components/ColorCanvas';
 import Heart from './components/Heart';
+import ColorCanvas from './components/ColorCanvas';
 
 class Box extends React.Component {
   constructor(props) {

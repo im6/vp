@@ -1,6 +1,7 @@
 import React from 'react';
-import ColorBar from '../ColorBar';
+import PropTypes from 'prop-types';
 import style from './style.sass';
+import ColorBar from '../ColorBar';
 
 class AdminPanel extends React.PureComponent {
   componentDidMount() {
@@ -48,5 +49,12 @@ class AdminPanel extends React.PureComponent {
     );
   }
 }
+
+AdminPanel.propTypes = {
+  list: PropTypes.object.isRequired,
+  onInit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onApprove: PropTypes.func.isRequired,
+};
 
 export default AdminPanel;
