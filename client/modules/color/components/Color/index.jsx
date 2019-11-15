@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Box from '../Box';
 import OneColor from '../OneColor';
 import style from './style.sass';
-import SpinLoader from '../SpinLoader';
+import SpinLoader from '../../../../../isomorphic/SpinLoader';
 
 class Color extends React.Component {
   componentDidMount() {

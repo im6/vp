@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Color from '../modules/color';
-import SpinLoader from '../modules/color/components/SpinLoader';
+import SpinLoader from '../../isomorphic/SpinLoader';
 
 const AsyncAdminPanel = lazy(() =>
   import(/* webpackChunkName: "adminPanel" */ '../modules/adminPanel')

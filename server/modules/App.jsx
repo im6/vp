@@ -1,27 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import SpinLoader from '../../client/modules/color/components/SpinLoader';
-import TranslationIcon from '../../client/modules/layout/Header/TranslationIcon';
-import LanguageDropdown from '../../isomorphic/LanguageDropdown';
+
 import noop from '../../isomorphic/noop';
+import ColorLoading from '../../isomorphic/ColorLoading';
+import LanguageDropdown from '../../isomorphic/LanguageDropdown';
+import TranslationIcon from '../../client/modules/layout/Header/TranslationIcon';
 
 const selectClassName = '_1-i7j';
 
 const App = ({ url }) => {
   const selectPopular = url === '/popular';
   const selectLatest = url in { '/latest': true, '/': true };
-  const showOneColor = url.match(/^\/color\/\d+$/);
-  const showColorList =
-    showOneColor ||
-    url in
-      {
-        '/latest': true,
-        '/': true,
-        '/popular': true,
-        '/like': true,
-        '/portfolio': true,
-      };
 
   return (
     <Fragment>
@@ -102,12 +92,7 @@ const App = ({ url }) => {
             </div>
           </div>
         </nav>
-        <SpinLoader />
-        {showColorList && (
-          <div className="_10E_t">
-            <div className="_1oXEb" />
-          </div>
-        )}
+        <ColorLoading url={url} />
       </div>
     </Fragment>
   );
