@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import SpinLoader from './SpinLoader';
 
 const ColorLoading = ({ url }) => {
@@ -14,14 +14,14 @@ const ColorLoading = ({ url }) => {
         '/portfolio': true,
       };
   return (
-    <React.Fragment>
+    <Fragment>
       <SpinLoader />
       {showColorList && (
         <div className="_10E_t">
           <div className="_1oXEb" />
         </div>
       )}
-    </React.Fragment>
+    </Fragment>
   );
 };
 
