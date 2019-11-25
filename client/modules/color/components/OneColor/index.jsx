@@ -37,30 +37,33 @@ class OneColor extends React.Component {
             </button>
           </div>
           <div className={`buttons has-addons is-centered ${style.shareGroup}`}>
-            <span
+            <button
               className="button"
+              title={language.email}
               onClick={() => {
                 onShare('email');
               }}
             >
               {language.email}
-            </span>
-            <span
+            </button>
+            <button
               className="button"
+              title={language.facebook}
               onClick={() => {
                 onShare('facebook');
               }}
             >
               {language.facebook}
-            </span>
-            <span
+            </button>
+            <button
               className="button"
+              title={language.twitter}
               onClick={() => {
                 onShare('twitter');
               }}
             >
               {language.twitter}
-            </span>
+            </button>
           </div>
         </div>
       </div>

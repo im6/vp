@@ -5,9 +5,16 @@
 
 .shareGroup
   margin-top: 6px
-  &>span
-    font-size: 0.877rem
+  &>button
+    font-size: 0.7rem
+    display: block
+    text-overflow: ellipsis
+    overflow: hidden
+    width: 75px
+
+
 
 @media only screen and (min-device-width : 375px) and (max-device-width : 812px) and (-webkit-device-pixel-ratio : 3) and (orientation : portrait)
-  .shareGroup >span
-    font-size: 0.58rem
+  .shareGroup >button
+    font-size: 8px
+    width: 52px
