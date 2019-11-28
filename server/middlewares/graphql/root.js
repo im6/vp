@@ -4,13 +4,13 @@ import { GraphQLError } from 'graphql';
 
 import sqlExecOne from '../../resource/mysqlConnection';
 import { showUser, createFacebookLink } from '../../resource/oauth';
-import { isAuth, isAdmin, hasToken } from '../../helper';
+import { isAuth, isAdmin, getToken } from '../../helper';
 
 const root = {
   async auth(_, req) {
-    if (isAuth(req, true) && hasToken(req)) {
-      // has valid auth info, will verify
-      const accessToken = get(req, 'session.app.tokenInfo.access_token', null);
+    const accessToken = getToken(req);
+    if (isAuth(req, true) && accessToken) {
+      // has valid auth info, will verify from oauth
       const qsObj = {
         access_token: accessToken,
         fields: 'id,name,picture',
@@ -52,7 +52,9 @@ const root = {
         }
 
         // user first time login, save it.
-        const { insertId } = await sqlExecOne(
+        const {
+          insertId,
+        } = await sqlExecOne(
           `INSERT INTO colorpk_user (oauth, name, oauthid, lastlogin) VALUES ('fb', ?, ?, NOW())`,
           [name, id]
         );
