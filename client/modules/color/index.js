@@ -84,7 +84,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Color);
+export default connect(mapStateToProps, mapDispatchToProps)(Color);

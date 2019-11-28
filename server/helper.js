@@ -11,9 +11,8 @@ export const getToken = req => {
   const token = get(req, 'session.app.tokenInfo.access_token', null);
   if (typeof token === 'string' && token.length > 0) {
     return token;
-  } else {
-    return null
   }
+  return null;
 };
 
 export const isAdmin = req => {

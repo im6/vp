@@ -17,7 +17,7 @@ const { PWD } = process.env;
 
 export default (req, res, next) => {
   const { fileName } = req.params;
-  if (fileName in scriptSet) {
+  if (Object.prototype.hasOwnProperty.call(scriptSet, fileName)) {
     const filePath = path.resolve(PWD, `./${STATIC_URL}/public/${fileName}`);
     res.sendFile(filePath);
   } else {
