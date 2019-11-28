@@ -1,16 +1,14 @@
 import path from 'path';
 import { STATIC_URL } from '../config';
 
-const scriptsList = [
+const scriptSet = [
   'main.js',
   'main.css',
   'newColor.js',
   'newColor.css',
   'adminPanel.js',
   'adminPanel.css',
-];
-
-const scriptSet = scriptsList.reduce((acc, cur) => {
+].reduce((acc, cur) => {
   acc[cur] = true;
   return acc;
 }, {});

@@ -17,3 +17,7 @@ export const PUBLIC_PATH =
   process.env.NODE_ENV === 'development'
     ? '/static/'
     : '//dkny.oss-cn-hangzhou.aliyuncs.com/2/';
+
+if (process.env.NODE_ENV !== 'development') {
+  !CSRF_EXCEPTION && console.log('No CSRF exception defined');
+}

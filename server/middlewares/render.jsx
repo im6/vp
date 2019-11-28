@@ -8,7 +8,7 @@ import App from '../modules/App';
 
 const version = uuid.v1().substring(0, 8);
 
-export default (req, res, next) => {
+export default (req, res) => {
   const app = <App url={req.path} />;
   const appHtml = renderToString(app);
   const htmlDOM = (
