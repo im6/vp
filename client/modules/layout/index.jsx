@@ -4,19 +4,14 @@ import styles from './style.sass';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Header from './Header';
 
-class Layout extends React.Component {
-  render() {
-    const result = (
-      <div className={styles.layout}>
-        <Router>
-          <Header />
-          {this.props.children}
-        </Router>
-      </div>
-    );
-    return result;
-  }
-}
+const Layout = ({ children }) => (
+  <div className={styles.layout}>
+    <Router>
+      <Header />
+      {children}
+    </Router>
+  </div>
+);
 
 Layout.propTypes = {
   children: PropTypes.element.isRequired,
