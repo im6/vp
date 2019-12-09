@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './style.sass';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Header from './Header';
 
 const Layout = ({ children }) => (
   <div className={styles.layout}>
-    <Router>
+    <BrowserRouter>
       <Header />
       {children}
-    </Router>
+    </BrowserRouter>
   </div>
 );
 
