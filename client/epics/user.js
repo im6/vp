@@ -109,5 +109,5 @@ export const userLoginEpic = action$ =>
   action$.pipe(
     ofType('user/onOAuth'),
     tap(action1 => window.location.replace(action1.payload)),
-    map(() => empty())
+    ignoreElements()
   );
