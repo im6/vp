@@ -137,12 +137,12 @@ function* addNew(action) {
 }
 
 function* watchers() {
-  yield takeLatest('color/get', initColorList);
-  yield takeLatest('color/getUserColor', getUserColor);
-  yield takeLatest('color/toggleLike', toggleLike);
+  // yield takeLatest('color/get', initColorList);
+  // yield takeLatest('color/getUserColor', getUserColor);
+  //yield takeLatest('color/toggleLike', toggleLike);
   yield takeLatest('color/addNew', addNew);
-  yield takeLatest('color/download', download);
-  yield takeLatest('color/share', share);
+  // yield takeLatest('color/download', download);
+  // yield takeLatest('color/share', share);
 }
 
 export default function*() {
