@@ -53,8 +53,8 @@ function* postDecideColor(action) {
 }
 
 function* watchers() {
-  yield takeLatest('admin/getList', getAnonymousColor);
-  yield takeLatest('admin/decideColor', postDecideColor);
+  // yield takeLatest('admin/getList', getAnonymousColor);
+  // yield takeLatest('admin/decideColor', postDecideColor);
 }
 
 export default function*() {

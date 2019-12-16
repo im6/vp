@@ -70,9 +70,9 @@ function onOAuth(action) {
 }
 
 function* watchers() {
-  yield takeLatest('user/auth', getAuth);
-  yield takeLatest('user/logoff', logoff);
-  yield takeLatest('user/onOAuth', onOAuth);
+  // yield takeLatest('user/auth', getAuth);
+  // yield takeLatest('user/logoff', logoff);
+  // yield takeLatest('user/onOAuth', onOAuth);
 }
 
 export default function*() {
