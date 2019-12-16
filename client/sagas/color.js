@@ -1,7 +1,7 @@
 import get from 'lodash.get';
 import { call, put, fork, takeLatest } from 'redux-saga/effects';
 import { createAction } from 'redux-actions';
-import { downloadCanvas } from '../misc/util.js';
+import { download as downloadUtil, share as shareUtil } from '../misc/util.js';
 import likeManager from '../services/likeManager';
 import requester from '../services/requester';
 
@@ -32,40 +32,11 @@ const createql = `mutation($val: CreateColorInputType!) {
 `;
 
 function download(action) {
-  const downloadUrl = downloadCanvas(action.payload.color);
-  const aElem = document.createElement('a');
-  aElem.href = downloadUrl;
-  aElem.download = `colorpk_${action.payload.id}.png`;
-  aElem.click();
-  if (aElem.parentNode) {
-    aElem.parentNode.removeChild(aElem);
-  }
+  downloadUtil(`colorpk_${action.payload.id}.png`, action.payload.color);
 }
 
 function share({ payload }) {
-  // eslint-disable-next-line no-prototype-builtins
-  if (!window.hasOwnProperty('encodeURIComponent')) {
-    return;
-  }
-  const windowSize = 'left=350,top=250,width=500,height=300';
-  const subject = window.encodeURIComponent('Check this ColorPK Palette');
-  const pageLink = window.encodeURIComponent(window.location.href);
-
-  let url = null;
-  switch (payload) {
-    case 'twitter':
-      url = `https://twitter.com/intent/tweet?url=${pageLink}&text=${subject}`;
-      break;
-    case 'facebook':
-      url = `https://www.facebook.com/sharer/sharer.php?u=${pageLink}&quote=${subject}`;
-      break;
-    case 'email':
-      url = `mailto:?subject=${subject}&body=${pageLink}`;
-      break;
-    default:
-      return;
-  }
-  window.open(url, '', windowSize);
+  shareUtil(payload);
 }
 
 function* getUserColor(action) {

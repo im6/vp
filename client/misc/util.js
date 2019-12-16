@@ -10,7 +10,7 @@ const checkLocalStorage = () => {
   }
 };
 export const localStorageEnabled = checkLocalStorage();
-export const downloadCanvas = color => {
+const downloadCanvas = color => {
   const HEIGHT = 420;
   const WIDTH = 340;
   const MARGIN = 13;
@@ -74,6 +74,17 @@ export const downloadCanvas = color => {
   return url;
 };
 
+export const download = (title, colors) => {
+  const downloadUrl = downloadCanvas(colors);
+  const aElem = document.createElement('a');
+  aElem.href = downloadUrl;
+  aElem.download = title;
+  aElem.click();
+  if (aElem.parentNode) {
+    aElem.parentNode.removeChild(aElem);
+  }
+};
+
 export const customEventPolyFill = () => {
   if (typeof window.CustomEvent === 'function') return false; // If not IE
   function CustomEvent(event, params0) {
@@ -95,4 +106,30 @@ export const customEventPolyFill = () => {
   CustomEvent.prototype = window.Event.prototype;
   window.CustomEvent = CustomEvent;
   return false;
+};
+
+export const share = type => {
+  // eslint-disable-next-line no-prototype-builtins
+  if (!window.hasOwnProperty('encodeURIComponent')) {
+    return;
+  }
+  const windowSize = 'left=350,top=250,width=500,height=300';
+  const subject = window.encodeURIComponent('Check this ColorPK Palette');
+  const pageLink = window.encodeURIComponent(window.location.href);
+
+  let url = null;
+  switch (type) {
+    case 'twitter':
+      url = `https://twitter.com/intent/tweet?url=${pageLink}&text=${subject}`;
+      break;
+    case 'facebook':
+      url = `https://www.facebook.com/sharer/sharer.php?u=${pageLink}&quote=${subject}`;
+      break;
+    case 'email':
+      url = `mailto:?subject=${subject}&body=${pageLink}`;
+      break;
+    default:
+      return;
+  }
+  window.open(url, '', windowSize);
 };
