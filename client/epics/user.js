@@ -1,15 +1,7 @@
 import get from 'lodash.get';
 import { ofType } from 'redux-observable';
-import { iif, of, concat, empty, interval } from 'rxjs';
-import {
-  map,
-  mergeMap,
-  concatMap,
-  catchError,
-  mapTo,
-  tap,
-  ignoreElements,
-} from 'rxjs/operators';
+import { iif, of, concat } from 'rxjs';
+import { map, mergeMap, catchError, tap, ignoreElements } from 'rxjs/operators';
 import { requester } from '../services/requester';
 
 import likeManager from '../services/likeManager';
@@ -39,7 +31,7 @@ const logoffQl = `mutation {
 export const userAuthEpic = action$ =>
   action$.pipe(
     ofType('user/auth'),
-    mergeMap(action1 =>
+    mergeMap(() =>
       requester({
         query,
       }).pipe(
@@ -74,6 +66,7 @@ export const userAuthEpic = action$ =>
             payload: null,
           }).pipe(
             tap(() =>
+              // eslint-disable-next-line no-console
               console.error('error', get(error, 'response.errors[0].message'))
             )
           );
