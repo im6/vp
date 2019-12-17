@@ -18,8 +18,6 @@
 - Webpack
 - Babel
 - SaSS
-- eslint
-- [Axios](https://github.com/axios/axios)
 - oAuth2(Facebook)
 
 ## Link
