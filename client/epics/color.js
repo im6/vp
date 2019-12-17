@@ -14,7 +14,7 @@ import {
 } from 'rxjs/operators';
 
 import likeManager from '../services/likeManager';
-import { requester1 } from '../services/requester';
+import { requester } from '../services/requester';
 import { download, share } from '../misc/util.js';
 
 const colorql = `query($cate: ColorCategory!) {
@@ -43,11 +43,11 @@ const createql = `mutation($val: CreateColorInputType!) {
   }
 `;
 
-export const getInitColorsEpic = action$ =>
+const getInitColorsEpic = action$ =>
   action$.pipe(
     ofType('color/get'),
     mergeMap(() => {
-      return requester1({
+      return requester({
         query: colorql,
         variables: { cate: 'PUBLIC' },
       }).pipe(
@@ -69,7 +69,7 @@ export const getInitColorsEpic = action$ =>
     })
   );
 
-export const toggleLikeEpic = action$ =>
+const toggleLikeEpic = action$ =>
   action$.pipe(
     ofType('color/toggleLike'),
     tap(action0 => {
@@ -84,7 +84,7 @@ export const toggleLikeEpic = action$ =>
     }),
     mergeMap(action0 => {
       const { willLike, id } = action0.payload;
-      return requester1({
+      return requester({
         query: likeql,
         variables: {
           val: {
@@ -108,7 +108,7 @@ export const toggleLikeEpic = action$ =>
     })
   );
 
-export const colorDownloadEpic = action$ =>
+const colorDownloadEpic = action$ =>
   action$.pipe(
     ofType('color/download'),
     tap(({ payload }) => {
@@ -117,7 +117,7 @@ export const colorDownloadEpic = action$ =>
     ignoreElements()
   );
 
-export const colorShareEpic = action$ =>
+const colorShareEpic = action$ =>
   action$.pipe(
     ofType('color/share'),
     tap(({ payload }) => {
@@ -126,12 +126,12 @@ export const colorShareEpic = action$ =>
     ignoreElements()
   );
 
-export const getUserColorsEpic = action$ =>
+const getUserColorsEpic = action$ =>
   action$.pipe(
     ofType('color/getUserColor'),
     mergeMap(({ payload }) => {
       const cate = payload === 'myPortfolio' ? 'PROFILE' : 'LIKES';
-      return requester1({
+      return requester({
         query: colorql,
         variables: { cate },
       }).pipe(
@@ -170,3 +170,55 @@ export const getUserColorsEpic = action$ =>
       );
     })
   );
+
+const createColorEpic = action$ =>
+  action$.pipe(
+    ofType('color/addNew'),
+    mergeMap(({ payload }) => {
+      return requester({
+        query: createql,
+        variables: {
+          val: payload,
+        },
+      }).pipe(
+        map(action2 => {
+          const error = get(action2, 'response.data.createColor.status', 1);
+          if (error) {
+            return {
+              type: 'color/addNew/fail',
+            };
+          } else {
+            const id = get(action2, 'response.data.createColor.data', null);
+            const { color } = payload;
+            return {
+              type: 'color/addNew/success',
+              payload: {
+                id: id.toString(),
+                color,
+                name: '',
+                like: 0,
+              },
+            };
+          }
+        }),
+        tap(({ type }) => {
+          if (type === 'color/addNew/success') {
+            // eslint-disable-next-line no-alert
+            alert('Thank you for new colors');
+          } else {
+            // eslint-disable-next-line no-alert
+            alert('create new color failed!');
+          }
+        })
+      );
+    })
+  );
+
+export default [
+  getInitColorsEpic,
+  toggleLikeEpic,
+  colorDownloadEpic,
+  colorShareEpic,
+  getUserColorsEpic,
+  createColorEpic,
+];

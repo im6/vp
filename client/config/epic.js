@@ -1,27 +1,10 @@
 import { combineEpics } from 'redux-observable';
 
-import { adminAnonymousColorEpic, adminAdjudicateEpic } from '../epics/admin';
-import { userAuthEpic, userLogOffEpic, userLoginEpic } from '../epics/user';
+const context = require.context('../epics/', true, /\.js$/);
+const keys = context.keys();
+const epics = keys.reduce((acc, v) => {
+  acc = acc.concat(context(v).default);
+  return acc;
+}, []);
 
-import {
-  getInitColorsEpic,
-  getUserColorsEpic,
-  toggleLikeEpic,
-  colorShareEpic,
-  colorDownloadEpic,
-} from '../epics/color';
-
-export default combineEpics(
-  adminAnonymousColorEpic,
-  adminAdjudicateEpic,
-
-  userAuthEpic,
-  userLogOffEpic,
-  userLoginEpic,
-
-  getInitColorsEpic,
-  getUserColorsEpic,
-  toggleLikeEpic,
-  colorShareEpic,
-  colorDownloadEpic
-);
+export default combineEpics.apply(null, epics);

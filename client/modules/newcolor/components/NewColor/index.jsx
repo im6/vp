@@ -12,7 +12,7 @@ class NewColor extends React.Component {
     this.state = {
       editColor: DEFAULTVALUE,
       activeIndex: 0,
-      colorValue: [null, null, null, null],
+      colorValue: ['#4baea0', '#b6e6bd', '#f1f0cf', '#f0c9c9'],
       pickerWd: 200,
     };
     this.onChangeActive = this.onChangeActive.bind(this);
