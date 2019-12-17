@@ -1,23 +1,24 @@
 # [ColorPK.com](http://react.colorpk.com) v1
 
-![logo](https://github.com/zj1926/vp/blob/master/logo.png 'colorpk.com')
+![logo](https://github.com/zj1926/vp/blob/master/logo/logo.png 'colorpk.com')
+![rxjs](https://github.com/zj1926/vp/blob/master/logo/rxjs.png 'colorpk.com')
 
 ## Highlight
 
-- [GraphQL](https://graphql.org/)
-- Express.js
-- MySQL
-- [Bulma](https://bulma.io/)
 - React
+- [RxJS](http://reactivex.io/)
+- [GraphQL](https://graphql.org/)
+- [Immutable.js](https://immutable-js.github.io/immutable-js/)
+- [Bulma](https://bulma.io/)
+- Express.js
 - [SSR](https://reactjs.org/docs/react-dom-server.html)
-- Redux
+- MySQL
+- redux
 - react-redux
 - react-router
-- react-saga
 - Webpack
 - Babel
-- Sass
+- SaSS
 - eslint
-- [Immutable.js](https://immutable-js.github.io/immutable-js/)
 - [Axios](https://github.com/axios/axios)
 - oAuth2(Facebook)

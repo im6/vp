@@ -10,7 +10,7 @@ import {
   tap,
   ignoreElements,
 } from 'rxjs/operators';
-import { requester1 } from '../services/requester';
+import { requester } from '../services/requester';
 
 import likeManager from '../services/likeManager';
 
@@ -40,7 +40,7 @@ export const userAuthEpic = action$ =>
   action$.pipe(
     ofType('user/auth'),
     mergeMap(action1 =>
-      requester1({
+      requester({
         query,
       }).pipe(
         mergeMap(action2 => {
@@ -91,7 +91,7 @@ export const userLogOffEpic = action$ =>
           type: 'color/set/likes',
           payload: likeManager.initLikes || [],
         }),
-        requester1({
+        requester({
           query: logoffQl,
         }).pipe(
           map(action2 => {
@@ -111,3 +111,5 @@ export const userLoginEpic = action$ =>
     tap(action1 => window.location.replace(action1.payload)),
     ignoreElements()
   );
+
+export default [userAuthEpic, userLogOffEpic, userLoginEpic];
