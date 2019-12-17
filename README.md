@@ -1,7 +1,6 @@
 # [ColorPK.com](http://react.colorpk.com) v1
 
-![logo](https://github.com/zj1926/vp/blob/master/logo/logo.png 'colorpk.com')
-![rxjs](https://github.com/zj1926/vp/blob/master/logo/rxjs.png 'colorpk.com')
+![logo](https://github.com/zj1926/vp/blob/master/img/logo.png 'colorpk.com')
 
 ## Highlight
 
@@ -22,3 +21,7 @@
 - eslint
 - [Axios](https://github.com/axios/axios)
 - oAuth2(Facebook)
+
+## Link
+
+![Demo](https://github.com/zj1926/vp/blob/master/img/screenshot.png 'colorpk.com')
