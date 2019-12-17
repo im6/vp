@@ -91,9 +91,9 @@ const toggleLikeEpic = action$ =>
           },
         },
       }).pipe(
-        filter(ajaxRes => {
-          return get(ajaxRes, 'response.data.likeColor.status', 1) !== 0;
-        }),
+        filter(
+          ajaxRes => get(ajaxRes, 'response.data.likeColor.status', 1) !== 0
+        ),
         map(ajaxRes => get(ajaxRes, 'response.errors[0].message', true)),
         catchError(err => {
           return of(get(err, 'response.errors[0].message', true));
