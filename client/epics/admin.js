@@ -1,7 +1,7 @@
 import get from 'lodash.get';
 import { ofType } from 'redux-observable';
 import { iif, of } from 'rxjs';
-import { map, mergeMap, catchError, mapTo } from 'rxjs/operators';
+import { map, mergeMap, catchError } from 'rxjs/operators';
 import { requester } from '../services/requester';
 
 const colorql = `query($cate: ColorCategory!) {
@@ -24,7 +24,7 @@ const adjudicateql = `mutation($val: LikeColorInputType!) {
 const adminAnonymousColorEpic = action$ =>
   action$.pipe(
     ofType('admin/getList'),
-    mergeMap(action1 =>
+    mergeMap(() =>
       requester({
         query: colorql,
         variables: { cate: 'ANONYMOUS' },
@@ -33,7 +33,7 @@ const adminAnonymousColorEpic = action$ =>
           type: 'admin/getList/success',
           payload: get(ajaxRes, 'response.data.color', null),
         })),
-        catchError(error => {
+        catchError(() => {
           window.location.replace('/');
         })
       )

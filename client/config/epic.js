@@ -2,9 +2,6 @@ import { combineEpics } from 'redux-observable';
 
 const context = require.context('../epics/', true, /\.js$/);
 const keys = context.keys();
-const epics = keys.reduce((acc, v) => {
-  acc = acc.concat(context(v).default);
-  return acc;
-}, []);
+const epics = keys.reduce((acc, v) => acc.concat(context(v).default), []);
 
-export default combineEpics.apply(null, epics);
+export default combineEpics(...epics);

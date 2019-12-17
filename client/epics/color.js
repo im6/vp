@@ -1,14 +1,11 @@
 import get from 'lodash.get';
 import { ofType } from 'redux-observable';
-import { iif, of, concat, empty, interval } from 'rxjs';
+import { of } from 'rxjs';
 import {
   map,
   mergeMap,
-  concatMap,
   catchError,
-  mapTo,
   tap,
-  delay,
   filter,
   ignoreElements,
 } from 'rxjs/operators';
@@ -62,6 +59,7 @@ const getInitColorsEpic = action$ =>
         }),
         catchError(error => {
           return of({ type: 'color/get/fail' }).pipe(
+            // eslint-disable-next-line no-console
             tap(() => console.error(get(error, 'response.errors[0].message')))
           );
         })
@@ -145,17 +143,17 @@ const getUserColorsEpic = action$ =>
                 data,
               },
             };
-          } else {
-            return {
-              type: 'color/getUserColor/fail',
-              payload: {
-                name: payload,
-              },
-            };
           }
+          return {
+            type: 'color/getUserColor/fail',
+            payload: {
+              name: payload,
+            },
+          };
         }),
         catchError(error => {
           return of({ type: 'color/getUserColor/fail' }).pipe(
+            // eslint-disable-next-line no-console
             tap(() => console.error(get(error, 'response.errors[0].message'))),
             map(() => {
               return {
@@ -187,19 +185,18 @@ const createColorEpic = action$ =>
             return {
               type: 'color/addNew/fail',
             };
-          } else {
-            const id = get(action2, 'response.data.createColor.data', null);
-            const { color } = payload;
-            return {
-              type: 'color/addNew/success',
-              payload: {
-                id: id.toString(),
-                color,
-                name: '',
-                like: 0,
-              },
-            };
           }
+          const id = get(action2, 'response.data.createColor.data', null);
+          const { color } = payload;
+          return {
+            type: 'color/addNew/success',
+            payload: {
+              id: id.toString(),
+              color,
+              name: '',
+              like: 0,
+            },
+          };
         }),
         tap(({ type }) => {
           if (type === 'color/addNew/success') {

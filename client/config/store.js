@@ -6,9 +6,9 @@ import {
   combineReducers,
 } from 'redux';
 
-import moduleReducers from './reducer';
-import rootEpic from './epic';
 import { createEpicMiddleware } from 'redux-observable';
+import rootEpic from './epic';
+import moduleReducers from './reducer';
 
 const epicMiddleware = createEpicMiddleware();
 const middlewares = [epicMiddleware];
