@@ -11,7 +11,7 @@ import {
 } from 'rxjs/operators';
 
 import likeManager from '../services/likeManager';
-import { requester } from '../services/requester';
+import requester from '../services/requester';
 import { download, share } from '../misc/util.js';
 
 const colorql = `query($cate: ColorCategory!) {
