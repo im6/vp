@@ -2,7 +2,7 @@ import get from 'lodash.get';
 import { ofType } from 'redux-observable';
 import { iif, of, concat } from 'rxjs';
 import { map, mergeMap, catchError, tap, ignoreElements } from 'rxjs/operators';
-import { requester } from '../services/requester';
+import requester from '../services/requester';
 
 import likeManager from '../services/likeManager';
 

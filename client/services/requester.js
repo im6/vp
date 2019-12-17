@@ -4,7 +4,7 @@ import { ajax } from 'rxjs/ajax';
 const tokenElem = document.querySelector('#csrf');
 const { token: _csrf } = tokenElem.dataset;
 
-export const requester = body => {
+export default requester = body => {
   return ajax({
     url: '/graphql',
     method: 'POST',
