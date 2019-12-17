@@ -1,6 +1,6 @@
 # [ColorPK.com](http://react.colorpk.com) v1
 
-![logo](https://github.com/zj1926/vp/blob/master/img/logo.png 'colorpk.com')
+![Demo](https://github.com/zj1926/vp/blob/master/img/screenshot.png 'colorpk.com')
 
 ## Highlight
 
@@ -19,7 +19,3 @@
 - Babel
 - SaSS
 - oAuth2(Facebook)
-
-## Link
-
-![Demo](https://github.com/zj1926/vp/blob/master/img/screenshot.png 'colorpk.com')
