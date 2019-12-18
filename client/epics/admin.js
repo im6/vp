@@ -21,56 +21,57 @@ const adjudicateql = `mutation($val: LikeColorInputType!) {
   }
 }`;
 
-const adminAnonymousColorEpic = action$ =>
-  action$.pipe(
-    ofType('admin/getList'),
-    mergeMap(() =>
-      requester({
-        query: colorql,
-        variables: { cate: 'ANONYMOUS' },
-      }).pipe(
-        map(ajaxRes => ({
-          type: 'admin/getList/success',
-          payload: get(ajaxRes, 'response.data.color', null),
-        })),
-        catchError(() => {
-          window.location.replace('/');
-        })
-      )
-    )
-  );
-
-const adminAdjudicateEpic = action$ =>
-  action$.pipe(
-    ofType('admin/decideColor'),
-    mergeMap(action1 =>
-      requester({
-        query: adjudicateql,
-        variables: {
-          val: action1.payload,
-        },
-      }).pipe(
-        mergeMap(action2 =>
-          iif(
-            () => get(action2, 'response.data.adjudicateColor.status', 1) !== 0,
-            of({
-              type: 'admin/decideColor/fail',
-              payload: get(action2, 'response.data.adjudicateColor.data', ''),
-            }),
-            of({
-              type: 'admin/decideColor/success',
-              payload: action1.payload.id,
-            })
-          )
-        ),
-        catchError(ajaxRes =>
-          of({
-            type: 'admin/decideColor/fail',
-            payload: get(ajaxRes, 'response.errors[0].message', ''),
+export default [
+  action$ =>
+    action$.pipe(
+      ofType('admin/getList'),
+      mergeMap(() =>
+        requester({
+          query: colorql,
+          variables: { cate: 'ANONYMOUS' },
+        }).pipe(
+          map(ajaxRes => ({
+            type: 'admin/getList/success',
+            payload: get(ajaxRes, 'response.data.color', null),
+          })),
+          catchError(() => {
+            window.location.replace('/');
           })
         )
       )
-    )
-  );
+    ),
 
-export default [adminAnonymousColorEpic, adminAdjudicateEpic];
+  action$ =>
+    action$.pipe(
+      ofType('admin/decideColor'),
+      mergeMap(action1 =>
+        requester({
+          query: adjudicateql,
+          variables: {
+            val: action1.payload,
+          },
+        }).pipe(
+          mergeMap(action2 =>
+            iif(
+              () =>
+                get(action2, 'response.data.adjudicateColor.status', 1) !== 0,
+              of({
+                type: 'admin/decideColor/fail',
+                payload: get(action2, 'response.data.adjudicateColor.data', ''),
+              }),
+              of({
+                type: 'admin/decideColor/success',
+                payload: action1.payload.id,
+              })
+            )
+          ),
+          catchError(ajaxRes =>
+            of({
+              type: 'admin/decideColor/fail',
+              payload: get(ajaxRes, 'response.errors[0].message', ''),
+            })
+          )
+        )
+      )
+    ),
+];

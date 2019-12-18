@@ -28,81 +28,81 @@ const logoffQl = `mutation {
   }
 }`;
 
-export const userAuthEpic = action$ =>
-  action$.pipe(
-    ofType('user/auth'),
-    mergeMap(() =>
-      requester({
-        query,
-      }).pipe(
-        mergeMap(action2 => {
-          return iif(
-            () => get(action2, 'response.data.auth.id', null),
-            of(
-              {
-                type: 'user/auth/success',
-                payload: get(action2, 'response.data.auth'),
-              },
-              {
-                type: 'color/set/likes',
-                payload: get(action2, 'response.data.auth.likes', []),
-              }
-            ),
-            of(
-              {
-                type: 'user/auth/fail',
-                payload: get(action2, 'response.data.auth.url'),
-              },
-              {
-                type: 'color/set/likes',
-                payload: likeManager.initLikes || [],
-              }
-            )
-          );
-        }),
-        catchError(error => {
-          return of({
-            type: 'user/auth/fail',
-            payload: null,
-          }).pipe(
-            tap(() =>
-              // eslint-disable-next-line no-console
-              console.error('error', get(error, 'response.errors[0].message'))
-            )
-          );
-        })
-      )
-    )
-  );
-
-export const userLogOffEpic = action$ =>
-  action$.pipe(
-    ofType('user/logoff'),
-    mergeMap(() => {
-      return concat(
-        of({
-          type: 'color/set/likes',
-          payload: likeManager.initLikes || [],
-        }),
+export default [
+  action$ =>
+    action$.pipe(
+      ofType('user/auth'),
+      mergeMap(() =>
         requester({
-          query: logoffQl,
+          query,
         }).pipe(
-          map(action2 => {
-            return {
+          mergeMap(action2 => {
+            return iif(
+              () => get(action2, 'response.data.auth.id', null),
+              of(
+                {
+                  type: 'user/auth/success',
+                  payload: get(action2, 'response.data.auth'),
+                },
+                {
+                  type: 'color/set/likes',
+                  payload: get(action2, 'response.data.auth.likes', []),
+                }
+              ),
+              of(
+                {
+                  type: 'user/auth/fail',
+                  payload: get(action2, 'response.data.auth.url'),
+                },
+                {
+                  type: 'color/set/likes',
+                  payload: likeManager.initLikes || [],
+                }
+              )
+            );
+          }),
+          catchError(error => {
+            return of({
               type: 'user/auth/fail',
-              payload: get(action2, 'response.data.logoff.url', null),
-            };
+              payload: null,
+            }).pipe(
+              tap(() =>
+                // eslint-disable-next-line no-console
+                console.error('error', get(error, 'response.errors[0].message'))
+              )
+            );
           })
         )
-      );
-    })
-  );
+      )
+    ),
 
-export const userLoginEpic = action$ =>
-  action$.pipe(
-    ofType('user/onOAuth'),
-    tap(action1 => window.location.replace(action1.payload)),
-    ignoreElements()
-  );
+  action$ =>
+    action$.pipe(
+      ofType('user/logoff'),
+      mergeMap(() => {
+        return concat(
+          of({
+            type: 'color/set/likes',
+            payload: likeManager.initLikes || [],
+          }),
+          requester({
+            query: logoffQl,
+          }).pipe(
+            map(action2 => {
+              return {
+                type: 'user/auth/fail',
+                payload: get(action2, 'response.data.logoff.url', null),
+              };
+            })
+          )
+        );
+      })
+    ),
 
-export default [userAuthEpic, userLogOffEpic, userLoginEpic];
+  action$ =>
+    action$.pipe(
+      ofType('user/onOAuth'),
+      tap(action1 => window.location.replace(action1.payload)),
+      ignoreElements()
+    ),
+];
