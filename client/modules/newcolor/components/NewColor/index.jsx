@@ -67,7 +67,7 @@ class NewColor extends React.Component {
 
   render() {
     const { onRedirect } = this.props;
-    const { language } = this.context;
+    const language = this.context;
     return (
       <div className={style.container}>
         <div className={style.floor0}>
