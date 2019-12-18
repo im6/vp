@@ -1,17 +1,17 @@
 const path = require('path');
-const nodeExternals = require('webpack-node-externals');
+
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
-const { withoutCssModuleFiles } = require('./base');
+const {
+  withoutCssModuleFiles,
+  clientBaseConfig,
+  serverBaseConfig,
+} = require('./base');
 
-const client = {
+const client = Object.assign(clientBaseConfig, {
   mode: 'production',
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
-  entry: ['./client/index'],
   output: {
     publicPath: '//dkny.oss-cn-hangzhou.aliyuncs.com/2/',
     path: path.join(__dirname, '../dist/public'),
@@ -83,16 +83,10 @@ const client = {
       },
     },
   },
-};
+});
 
-const server = {
+const server = Object.assign(serverBaseConfig, {
   mode: 'production',
-  externals: [nodeExternals()],
-  target: 'node',
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
-  entry: [path.join(__dirname, '../server')],
   output: {
     publicPath: '/',
     path: path.join(__dirname, '../dist'),
@@ -119,6 +113,6 @@ const server = {
     ],
   },
   plugins: [],
-};
+});
 
 module.exports = [client, server];

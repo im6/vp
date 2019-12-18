@@ -1,11 +1,14 @@
 const fs = require('fs');
 const path = require('path');
-const nodeExternals = require('webpack-node-externals');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ServerStartPlugin = require('./plugins/ServerStartPlugin');
 
-const { withoutCssModuleFiles } = require('./base');
+const {
+  withoutCssModuleFiles,
+  clientBaseConfig,
+  serverBaseConfig,
+} = require('./base');
 
 const json0 = fs.readFileSync(path.join(__dirname, '../.vscode/launch.json'), {
   encoding: 'utf8',
@@ -14,13 +17,10 @@ const json0 = fs.readFileSync(path.join(__dirname, '../.vscode/launch.json'), {
 const json1 = JSON.parse(json0);
 const appEnvs = json1.configurations[0].env;
 
-const client = {
+const client = Object.assign(clientBaseConfig, {
   watch: true,
   mode: 'development',
   devtool: 'inline-source-map',
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
   optimization: {
     splitChunks: {
       chunks: 'all',
@@ -30,7 +30,6 @@ const client = {
       },
     },
   },
-  entry: ['./client/index'],
   output: {
     publicPath: '/static/',
     path: path.join(__dirname, '../local/public'),
@@ -98,17 +97,11 @@ const client = {
   watchOptions: {
     ignored: /node_modules/,
   },
-};
+});
 
-const server = {
+const server = Object.assign(serverBaseConfig, {
   watch: true,
   mode: 'development',
-  externals: [nodeExternals()],
-  target: 'node',
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
-  entry: [path.join(__dirname, '../server')],
   output: {
     publicPath: '/',
     path: path.join(__dirname, '../local'),
@@ -139,6 +132,6 @@ const server = {
   watchOptions: {
     ignored: /node_modules/,
   },
-};
+});
 
 module.exports = [client, server];
