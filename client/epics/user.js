@@ -5,6 +5,7 @@ import { map, mergeMap, catchError, tap, ignoreElements } from 'rxjs/operators';
 import requester from '../services/requester';
 
 import likeManager from '../services/likeManager';
+import Cookies from 'js-cookie';
 
 const query = `query {
   auth {
@@ -103,6 +104,15 @@ export default [
     action$.pipe(
       ofType('user/onOAuth'),
       tap(action1 => window.location.replace(action1.payload)),
+      ignoreElements()
+    ),
+
+  action$ =>
+    action$.pipe(
+      ofType('user/setLanguage'),
+      tap(action1 => {
+        Cookies.set('lang', action1.payload, { expires: 180 });
+      }),
       ignoreElements()
     ),
 ];

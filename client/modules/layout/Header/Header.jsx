@@ -42,7 +42,7 @@ class Header extends React.Component {
   render() {
     const { url, detail, facebookUrl } = this.props;
     const isAuth = Boolean(detail);
-    const { language, changeLang } = this.context;
+    const language = this.context;
 
     let imagUrl = isAuth
       ? detail.get('img')
@@ -175,7 +175,7 @@ class Header extends React.Component {
                 <TranslationIcon />
                 <span className={style.languageText}>{language.language}</span>
               </a>
-              <LanguageDropdown onChange={changeLang} />
+              <LanguageDropdown onChange={this.props.changeLang} />
             </div>
           </div>
 

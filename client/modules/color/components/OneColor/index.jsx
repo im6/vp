@@ -16,7 +16,7 @@ class OneColor extends React.Component {
   }
   render() {
     const { liked, boxInfo, onLike, onShare } = this.props;
-    const { language } = this.context;
+    const language = this.context;
     return (
       <div className={style.center}>
         <div>

@@ -1,10 +1,12 @@
 /* eslint-disable */
 import { handleActions } from 'redux-actions';
 import Immutable, { fromJS } from 'immutable';
+import Cookies from 'js-cookie';
 
 const initialState = Immutable.fromJS({
   detail: null,
   facebookUrl: null,
+  lang: Cookies.get('lang') || 'en',
 });
 
 const user = handleActions(
@@ -29,6 +31,10 @@ const user = handleActions(
         detail: null,
         facebookUrl: null,
       });
+    },
+
+    ['user/setLanguage'](state, { payload }) {
+      return state.set('lang', payload);
     },
   },
   initialState

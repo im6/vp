@@ -6,15 +6,15 @@ import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './modules/app';
 import store from './config/store';
-import { LanguageContextProvider } from './context/LanguageContext';
+import LangProvider from './context/LangContainer';
 
 customEventPolyFill();
 
 hydrate(
   <Provider store={store}>
-    <LanguageContextProvider>
+    <LangProvider>
       <App />
-    </LanguageContextProvider>
+    </LangProvider>
   </Provider>,
   document.getElementById('app'),
   () => {

@@ -40,6 +40,7 @@
     "eslint-plugin-react": "^7.17.0",
     "husky": "^3.1.0",
     "immutable": "^4.0.0-rc.12",
+    "js-cookie": "^2.2.1",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.13.0",
     "null-loader": "^3.0.0",
