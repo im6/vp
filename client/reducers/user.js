@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 const initialState = Immutable.fromJS({
   detail: null,
   facebookUrl: null,
-  lang: Cookies.get('lang') || 'en',
+  lang: Cookies.get('lang'),
 });
 
 const user = handleActions(
