@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Box from '../Box';
 import style from './style.sass';
 import noop from '../../../../../isomorphic/noop';
-import { LanguageContext } from '../../../../context/LanguageContext';
+import { LanguageContext } from '../../../../../isomorphic/LanguageContext';
 
 class OneColor extends React.Component {
   constructor(props) {

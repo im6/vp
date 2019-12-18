@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { LanguageContextProvider } from './LanguageContext';
+import { LanguageContextProvider } from '../../isomorphic/LanguageContext';
 
 const mapStateToProps = ({ user }) => {
   return {

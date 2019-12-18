@@ -4,16 +4,20 @@ import PropTypes from 'prop-types';
 
 import noop from '../../isomorphic/noop';
 import ColorLoading from '../../isomorphic/ColorLoading';
+import { LanguageContext } from '../../isomorphic/LanguageContext';
 import LanguageDropdown from '../../isomorphic/LanguageDropdown';
 import TranslationIcon from '../../client/modules/layout/Header/TranslationIcon';
 
 const selectClassName = '_1-i7j';
 
-const App = ({ url }) => {
-  const selectPopular = url === '/popular';
-  const selectLatest = url in { '/latest': true, '/': true };
+class App extends React.Component {
+  render() {
+    const { url } = this.props;
+    const selectPopular = url === '/popular';
+    const selectLatest = url in { '/latest': true, '/': true };
+    const language = this.context;
 
-  return (
+    return (
     <div className="Cqiyx">
       <nav
         className="navbar is-fixed-top"
@@ -48,33 +52,37 @@ const App = ({ url }) => {
               }`}
               href="/popular"
             >
-              Popular
+              {language.popular}
             </a>
             <a
               className={`navbar-item ${selectLatest ? selectClassName : ''}`}
               href="/latest"
             >
-              Latest
+              {language.latest}
             </a>
             <div className="navbar-item has-dropdown is-hoverable">
-              <a className="navbar-link">More</a>
+              <a className="navbar-link">
+                {language.more}
+              </a>
               <div className="navbar-dropdown">
                 <a className="navbar-item" href="//www.colorpk.com">
                   ColorPK v2.0
                 </a>
                 <a className="navbar-item" href="//www.colorpk.com/about">
-                  About
+                 {language.about}
                 </a>
                 <hr className="navbar-divider" />
                 <a className="navbar-item" href="//github.com/im6/vp/issues">
-                  Report an issue
+                  {language.reportIssue}
                 </a>
               </div>
             </div>
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link">
                 <TranslationIcon />
-                <span className="_3QtW-">Language</span>
+                <span className="_3QtW-">
+                  {language.language}
+                </span>
               </a>
               <LanguageDropdown onChange={noop} />
             </div>
@@ -83,7 +91,7 @@ const App = ({ url }) => {
             <div className="navbar-item">
               <div className="buttons">
                 <a className="button is-primary" href="/new">
-                  New Color
+                {language.newColor}
                 </a>
                 &nbsp;&nbsp;
               </div>
@@ -92,12 +100,13 @@ const App = ({ url }) => {
         </div>
       </nav>
       <ColorLoading url={url} />
-    </div>
-  );
-};
+    </div>)
+  }
+}
 
 App.propTypes = {
   url: PropTypes.string.isRequired,
 };
+App.contextType = LanguageContext;
 
 export default App;

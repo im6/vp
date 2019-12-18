@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import style from './style.sass';
 import TranslationIcon from './TranslationIcon';
 import LanguageDropdown from '../../../../isomorphic/LanguageDropdown';
-import { LanguageContext } from '../../../context/LanguageContext';
+import { LanguageContext } from '../../../../isomorphic/LanguageContext';
 
 class Header extends React.Component {
   constructor(props) {

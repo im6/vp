@@ -1,11 +1,12 @@
 import React from 'react';
-import { translation } from '../../isomorphic/translation';
+import { translation } from './translation';
 
 export const LanguageContext = React.createContext();
 export class LanguageContextProvider extends React.Component {
   render() {
+    const lang = translation[this.props.lang] || translation.en;
     return (
-      <LanguageContext.Provider value={translation[this.props.lang]}>
+      <LanguageContext.Provider value={lang}>
         {this.props.children}
       </LanguageContext.Provider>
     );

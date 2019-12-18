@@ -2,7 +2,7 @@ import React from 'react';
 import { ChromePicker } from 'react-color';
 import EditCanvas from '../EditCanvas';
 import style from './style.sass';
-import { LanguageContext } from '../../../../context/LanguageContext';
+import { LanguageContext } from '../../../../../isomorphic/LanguageContext';
 
 const DEFAULTVALUE = '#81EEFF';
 
