@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import SpinLoader from './SpinLoader';
 
 const ColorLoading = ({ url }) => {
@@ -23,6 +24,10 @@ const ColorLoading = ({ url }) => {
       )}
     </Fragment>
   );
+};
+
+ColorLoading.propTypes = {
+  url: PropTypes.string.isRequired,
 };
 
 export default ColorLoading;

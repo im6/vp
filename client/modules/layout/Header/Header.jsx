@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import style from './style.sass';
+import './style.sass';
 import TranslationIcon from './TranslationIcon';
 import LanguageDropdown from '../../../../isomorphic/LanguageDropdown';
 import { LanguageContext } from '../../../../isomorphic/LanguageContext';
+
+const selectedStyleName = 'cpk-header-selected';
 
 class Header extends React.Component {
   constructor(props) {
@@ -16,7 +18,15 @@ class Header extends React.Component {
     this.onLogout = this.onLogout.bind(this);
     this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
     this.onClickNav = this.onClickNav.bind(this);
+
+    this.linkElem = this.props.ssr ? 'a' : Link;
   }
+
+  hrefAttr(href) {
+    const { ssr } = this.props;
+    return ssr ? { href } : { to: href };
+  }
+
   toggleMobileMenu() {
     this.setState({
       showMenu: !this.state.showMenu,
@@ -43,6 +53,9 @@ class Header extends React.Component {
     const { url, detail, facebookUrl } = this.props;
     const isAuth = Boolean(detail);
     const language = this.context;
+    const { linkElem: LinkElem } = this;
+    const selectPopular = url === '/popular';
+    const selectLatest = url in { '/latest': true, '/': true };
 
     let imagUrl = isAuth
       ? detail.get('img')
@@ -60,9 +73,13 @@ class Header extends React.Component {
         aria-label="main navigation"
       >
         <div className="navbar-brand">
-          <Link className="navbar-item" to="/" onClick={this.onClickNav}>
+          <LinkElem
+            className="navbar-item"
+            {...this.hrefAttr('/')}
+            onClick={this.onClickNav}
+          >
             <img src={imagUrl} height="32" width="32" alt="colorpk icon" />
-          </Link>
+          </LinkElem>
           <a
             role="button"
             className="navbar-burger burger"
@@ -84,41 +101,43 @@ class Header extends React.Component {
               <div className="navbar-item has-dropdown is-hoverable">
                 <a
                   className={`navbar-link ${
-                    ['/like', '/portfolio'].includes(url) ? style.selected : ''
+                    ['/like', '/portfolio'].includes(url)
+                      ? selectedStyleName
+                      : ''
                   }`}
                 >
                   {detail.get('name')}
                 </a>
 
                 <div className="navbar-dropdown">
-                  <Link
+                  <LinkElem
                     className="navbar-item"
-                    to="/portfolio"
+                    {...this.hrefAttr('/portfolio')}
                     onClick={() => {
                       this.props.onEnterProfile('myPortfolio');
                       this.onClickNav();
                     }}
                   >
                     {language.profile}
-                  </Link>
-                  <Link
+                  </LinkElem>
+                  <LinkElem
                     className="navbar-item"
-                    to="/like"
+                    {...this.hrefAttr('/like')}
                     onClick={() => {
                       this.props.onEnterProfile('myLiked');
                       this.onClickNav();
                     }}
                   >
                     {language.like}
-                  </Link>
+                  </LinkElem>
                   {detail.get('isadmin') && (
-                    <Link
+                    <LinkElem
                       className="navbar-item"
-                      to="/adminpanel"
+                      {...this.hrefAttr('/adminpanel')}
                       onClick={this.onClickNav}
                     >
                       {language.admin}
-                    </Link>
+                    </LinkElem>
                   )}
                   <hr className="navbar-divider" />
                   <a
@@ -134,24 +153,22 @@ class Header extends React.Component {
               </div>
             )}
 
-            <Link
-              to="/popular"
+            <LinkElem
+              {...this.hrefAttr('/popular')}
               className={`navbar-item ${
-                url === '/popular' ? style.selected : ''
+                selectPopular ? selectedStyleName : ''
               }`}
               onClick={this.onClickNav}
             >
               {language.popular}
-            </Link>
-            <Link
-              to="/latest"
-              className={`navbar-item ${
-                ['/', '/latest'].includes(url) ? style.selected : ''
-              }`}
+            </LinkElem>
+            <LinkElem
+              {...this.hrefAttr('/latest')}
+              className={`navbar-item ${selectLatest ? selectedStyleName : ''}`}
               onClick={this.onClickNav}
             >
               {language.latest}
-            </Link>
+            </LinkElem>
 
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link">{language.more}</a>
@@ -173,22 +190,24 @@ class Header extends React.Component {
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link">
                 <TranslationIcon />
-                <span className={style.languageText}>{language.language}</span>
+                <span className="cpk-header-language-text">
+                  {language.language}
+                </span>
               </a>
-              <LanguageDropdown onChange={this.props.changeLang} />
+              <LanguageDropdown onChange={this.props.onChangeLang} />
             </div>
           </div>
 
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">
-                <Link
-                  to="/new"
+                <LinkElem
+                  {...this.hrefAttr('/new')}
                   className="button is-primary"
                   onClick={this.onClickNav}
                 >
                   {language.newColor}
-                </Link>
+                </LinkElem>
                 &nbsp;&nbsp;
                 {!isAuth && facebookUrl && (
                   <a className="button is-info" onClick={this.onFBClick}>
@@ -205,12 +224,14 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
+  ssr: PropTypes.bool,
   url: PropTypes.string,
   detail: PropTypes.object,
   facebookUrl: PropTypes.string,
 
   onLogout: PropTypes.func.isRequired,
   onOAuth: PropTypes.func.isRequired,
+  onChangeLang: PropTypes.func.isRequired,
   onEnterProfile: PropTypes.func.isRequired,
 };
 Header.contextType = LanguageContext;

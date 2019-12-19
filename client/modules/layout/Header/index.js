@@ -32,7 +32,7 @@ const mapDispatchToProps = dispatch => {
       const ac = createAction('color/getUserColor');
       dispatch(ac(name));
     },
-    changeLang(lang) {
+    onChangeLang(lang) {
       const ac = createAction('user/setLanguage');
       dispatch(ac(lang));
     },

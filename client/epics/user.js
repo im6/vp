@@ -1,11 +1,11 @@
 import get from 'lodash.get';
 import { ofType } from 'redux-observable';
 import { iif, of, concat } from 'rxjs';
+import Cookies from 'js-cookie';
 import { map, mergeMap, catchError, tap, ignoreElements } from 'rxjs/operators';
 import requester from '../services/requester';
 
 import likeManager from '../services/likeManager';
-import Cookies from 'js-cookie';
 
 const query = `query {
   auth {
