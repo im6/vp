@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './style.sass';
-import TranslationIcon from './TranslationIcon';
-import LanguageDropdown from '../../../../isomorphic/LanguageDropdown';
-import { LanguageContext } from '../../../../isomorphic/LanguageContext';
+import TranslationIcon from './components/TranslationIcon';
+import LanguageDropdown from './components/LanguageDropdown';
+import { LanguageContext } from '../LanguageContext';
 
 const selectedStyleName = 'cpk-header-selected';
 

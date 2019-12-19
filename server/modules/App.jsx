@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import noop from '../../isomorphic/noop';
 import ColorLoading from '../../isomorphic/ColorLoading';
-import Header from '../../client/modules/layout/Header/Header'
+import Header from '../../isomorphic/Header'
 import { LanguageContext } from '../../isomorphic/LanguageContext';
 
 const App = ({ url }) => <div className='cpk-layout'>

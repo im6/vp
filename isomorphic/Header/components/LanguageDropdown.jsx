@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { languages } from './translation';
+import { languages } from '../../translation';
 
 const LanguageDropdown = ({ onChange }) => (
   <div className="navbar-dropdown">
