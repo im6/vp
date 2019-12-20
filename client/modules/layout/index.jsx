@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Header from './Header';
 
 const Layout = ({ children }) => (
-  <div className="cpk-layout">
+  <div className="cpk-i3de6">
     <BrowserRouter>
       <Header />
       {children}

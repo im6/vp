@@ -3,11 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import noop from '../../isomorphic/noop';
-import ColorLoading from '../../isomorphic/ColorLoading';
-import Header from '../../isomorphic/Header'
+import SpinLoader from '../../isomorphic/SpinLoader';
+import Header from '../../isomorphic/Header';
 import { LanguageContext } from '../../isomorphic/LanguageContext';
 
-const App = ({ url }) => <div className='cpk-layout'>
+const App = ({ url }) => <div className='cpk-i3de6'>
   <Header
     ssr
     url={url}
@@ -17,7 +17,7 @@ const App = ({ url }) => <div className='cpk-layout'>
     onEnterProfile={noop}
     onChangeLang={noop}
   />
-  <ColorLoading url={url} />
+  <SpinLoader />
 </div>
 
 App.propTypes = {

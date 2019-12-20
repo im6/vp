@@ -1,16 +1,12 @@
 import React from 'react';
 import Routes from '../../routes';
 import Layout from '../layout';
-import ColorLoading from '../../../isomorphic/ColorLoading';
+import SpinLoader from '../../../isomorphic/SpinLoader';
 import './bulma.modules.sass';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    const {
-      location: { pathname },
-    } = window;
-    this.pathname = pathname;
     this.state = {
       isClient: false,
     };
@@ -21,11 +17,9 @@ class App extends React.Component {
     });
   }
   render() {
-    const { pathname, state } = this;
+    const { state } = this;
     const { isClient } = state;
-    return (
-      <Layout>{isClient ? <Routes /> : <ColorLoading url={pathname} />}</Layout>
-    );
+    return <Layout>{isClient ? <Routes /> : <SpinLoader />}</Layout>;
   }
 }
 

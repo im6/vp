@@ -6,7 +6,7 @@ import TranslationIcon from './components/TranslationIcon';
 import LanguageDropdown from './components/LanguageDropdown';
 import { LanguageContext } from '../LanguageContext';
 
-const selectedStyleName = 'cpk-header-selected';
+const selectedStyleName = 'cpk-hs5eq';
 
 class Header extends React.Component {
   constructor(props) {
@@ -190,9 +190,7 @@ class Header extends React.Component {
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link">
                 <TranslationIcon />
-                <span className="cpk-header-language-text">
-                  {language.language}
-                </span>
+                <span className="cpk-dc2am">{language.language}</span>
               </a>
               <LanguageDropdown onChange={this.props.onChangeLang} />
             </div>
