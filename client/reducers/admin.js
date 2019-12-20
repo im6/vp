@@ -33,13 +33,8 @@ const admin = handleActions(
     ['admin/decideColor/success'](state, action) {
       return state.merge({
         loading: false,
-        list: state.get('list').filter(v => v.get('id') != action.payload),
+        list: state.get('list').filter(v => v.get('id') !== action.payload),
       });
-    },
-
-    ['admin/decideColor/fail'](state, action) {
-      console.error('admin change error');
-      return state;
     },
   },
   initialState

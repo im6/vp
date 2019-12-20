@@ -182,13 +182,10 @@ export default [
             val: payload,
           },
         }).pipe(
+          filter(
+            action2 => get(action2, 'response.data.createColor.status', 1) === 0
+          ),
           map(action2 => {
-            const error = get(action2, 'response.data.createColor.status', 1);
-            if (error) {
-              return {
-                type: 'color/addNew/fail',
-              };
-            }
             const id = get(action2, 'response.data.createColor.data', null);
             const { color } = payload;
             return {
@@ -201,14 +198,9 @@ export default [
               },
             };
           }),
-          tap(({ type }) => {
-            if (type === 'color/addNew/success') {
-              // eslint-disable-next-line no-alert
-              alert('Thank you for new colors');
-            } else {
-              // eslint-disable-next-line no-alert
-              alert('create new color failed!');
-            }
+          tap(() => {
+            // eslint-disable-next-line no-alert
+            alert('Thank you for new colors');
           })
         );
       })

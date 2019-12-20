@@ -1,7 +1,6 @@
 import get from 'lodash.get';
 import { ofType } from 'redux-observable';
-import { iif, of } from 'rxjs';
-import { map, mergeMap, catchError } from 'rxjs/operators';
+import { map, mergeMap, filter, catchError } from 'rxjs/operators';
 import requester from '../services/requester';
 
 const colorql = `query($cate: ColorCategory!) {
@@ -51,26 +50,18 @@ export default [
             val: action1.payload,
           },
         }).pipe(
-          mergeMap(action2 =>
-            iif(
-              () =>
-                get(action2, 'response.data.adjudicateColor.status', 1) !== 0,
-              of({
-                type: 'admin/decideColor/fail',
-                payload: get(action2, 'response.data.adjudicateColor.data', ''),
-              }),
-              of({
-                type: 'admin/decideColor/success',
-                payload: action1.payload.id,
-              })
-            )
+          filter(
+            ajaxRes =>
+              get(ajaxRes, 'response.data.adjudicateColor.status', 1) === 0
           ),
-          catchError(ajaxRes =>
-            of({
-              type: 'admin/decideColor/fail',
-              payload: get(ajaxRes, 'response.errors[0].message', ''),
-            })
-          )
+          map(() => ({
+            type: 'admin/decideColor/success',
+            payload: action1.payload.id,
+          })),
+          catchError(() => {
+            // eslint-disable-next-line no-console
+            console.error('admin change error');
+          })
         )
       )
     ),

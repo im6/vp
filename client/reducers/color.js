@@ -15,9 +15,7 @@ const initialState = Immutable.fromJS({
 const color = handleActions(
   {
     ['color/get'](state) {
-      return state.merge({
-        loading: true,
-      });
+      return state.set('loading', true);
     },
 
     ['color/get/success'](state, action) {
@@ -69,15 +67,9 @@ const color = handleActions(
       return state;
     },
 
-    ['color/addNew/fail'](state, action) {
-      return state;
-    },
-
     ['color/getUserColor'](state, action) {
       state = state.set(action.payload, []);
-      return state.merge({
-        loading: true,
-      });
+      return state.set('loading', true);
     },
     ['color/getUserColor/success'](state, action) {
       const newList = [];
@@ -89,14 +81,12 @@ const color = handleActions(
         }
       });
       state = state.set(action.payload.name, newList);
-      state = state.set('loading', false);
-      return state;
+      return state.set('loading', false);
     },
 
     ['color/getUserColor/fail'](state, action) {
       state = state.set('loading', false);
-      state = state.set(action.payload.name, []);
-      return state;
+      return state.set(action.payload.name, []);
     },
 
     ['color/set/likes'](state, action) {
@@ -104,8 +94,7 @@ const color = handleActions(
         acc[cur] = true;
         return acc;
       }, {});
-      state = state.set('liked', fromJS(liked));
-      return state;
+      return state.set('liked', fromJS(liked));
     },
   },
   initialState
