@@ -7,7 +7,7 @@ exports.withoutCssModuleFiles = [
 ];
 
 exports.clientBaseConfig = {
-  entry: path.join(__dirname, '../client'),
+  entry: path.join(__dirname, '../src/client'),
   resolve: {
     extensions: ['.js', '.jsx'],
   },
@@ -16,7 +16,7 @@ exports.clientBaseConfig = {
 exports.serverBaseConfig = {
   target: 'node',
   externals: [nodeExternals()],
-  entry: path.join(__dirname, '../server'),
+  entry: path.join(__dirname, '../src/server'),
   resolve: {
     extensions: ['.js', '.jsx'],
   },

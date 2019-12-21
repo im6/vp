@@ -11,11 +11,14 @@ class ServerCopyStylePlugin {
     const self = this;
 
     compiler.hooks.done.tapAsync('ServerCopyStyleHook', (cp, callback) => {
-      const cssStyleFile = fs.readFileSync(self.styleFile, 'utf8');
-      const content = fs.readFileSync(self.distFile, 'utf8');
-      const updated = content.replace(self.search, `'${cssStyleFile}'`);
-      fs.writeFileSync(self.distFile, updated);
-      callback();
+      setTimeout(() => {
+        // wait for the client bundle to be ready
+        const cssStyleFile = fs.readFileSync(self.styleFile, 'utf8');
+        const content = fs.readFileSync(self.distFile, 'utf8');
+        const updated = content.replace(self.search, `'${cssStyleFile}'`);
+        fs.writeFileSync(self.distFile, updated);
+        callback();
+      }, 2000);
     });
   }
 }
