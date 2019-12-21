@@ -117,7 +117,7 @@ const server = Object.assign(serverBaseConfig, {
   },
   plugins: [
     new ServerCopyStylePlugin({
-      search: /\"MY-STYLE-PLACEHOLDER\"/,
+      search: /"MY-STYLE-PLACEHOLDER"/,
       distFile: './dist/server.js',
       styleFile: './dist/public/main.css',
     }),

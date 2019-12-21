@@ -29,7 +29,7 @@ const Html = ({ title, style, script, children, version, csrfToken, }) => (
       {
         process.env.NODE_ENV === 'development' ?
         <link href={`${style}?${version}`} rel="stylesheet" /> :
-        <style dangerouslySetInnerHTML={{ __html: 'MY-STYLE-PLACEHOLDER' }} />
+        <style dangerouslySetInnerHTML={{ __html: "MY-STYLE-PLACEHOLDER" }} />
       }
       <script
         dangerouslySetInnerHTML={{

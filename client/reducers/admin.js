@@ -10,9 +10,7 @@ const initialState = Immutable.fromJS({
 const admin = handleActions(
   {
     ['admin/getList'](state) {
-      return state.merge({
-        loading: true,
-      });
+      return state.set('loading', true);
     },
 
     ['admin/getList/success'](state, action) {
@@ -31,10 +29,11 @@ const admin = handleActions(
     },
 
     ['admin/decideColor/success'](state, action) {
-      return state.merge({
-        loading: false,
-        list: state.get('list').filter(v => v.get('id') !== action.payload),
-      });
+      state = state.updateIn(['list'], list =>
+        list.filter(v => v.get('id') !== action.payload)
+      );
+
+      return state.set('loading', false);
     },
   },
   initialState
