@@ -1,10 +1,6 @@
 # [ColorPK.com](http://react.colorpk.com) v1
 
-[logo](https://github.com/zj1926/vp/blob/master/img/logo.png 'colorpk.com')
-=
-[rxjs](https://github.com/zj1926/vp/blob/master/img/react.png)
-+
-[react](https://github.com/zj1926/vp/blob/master/img/rxjs.png)
+# ![logo](https://github.com/zj1926/vp/blob/master/img/logo.png 'colorpk.com') \= ![react](https://github.com/zj1926/vp/blob/master/img/rxjs.png 'colorpk.com') + ![rxjs](https://github.com/zj1926/vp/blob/master/img/react.png 'colorpk.com') + ![graphql](https://github.com/zj1926/vp/blob/master/img/graphql.png 'colorpk.com')
 
 ## Highlight
 
