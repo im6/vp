@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Color from './components/Color';
 
 const shared = {
+  history: null,
   isAuth: false,
 };
 const storeMap = {
@@ -55,7 +56,7 @@ const mapDispatchToProps = dispatch => {
       const { isAuth } = shared;
       dispatch(
         ac({
-          isAuth,
+          isAuth, // used client like manager only
           willLike,
           id,
         })
