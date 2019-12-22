@@ -1,11 +1,11 @@
 /* eslint-disable */
 import { handleActions } from 'redux-actions';
-import Immutable, { fromJS } from 'immutable';
+import { fromJS, Map } from 'immutable';
 
-const initialState = Immutable.fromJS({
+const initialState = Map({
   loading: true,
-  colorDef: {},
-  liked: {},
+  colorDef: Map({}),
+  liked: Map({}),
   colorId: [], // main
   colorIdByLike: [], // popular route
   myPortfolio: [], // portfolio route

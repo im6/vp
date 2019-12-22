@@ -1,5 +1,4 @@
 import { createAction } from 'redux-actions';
-import { isImmutable } from 'immutable';
 import { connect } from 'react-redux';
 import Color from './components/Color';
 
@@ -28,10 +27,8 @@ const mapStateToProps = (
   const colorDef = color.get('colorDef');
   const liked = color.get('liked');
   const hasSelected = colorDef.has(selectedId);
-  let list = color.get(storeMap[pathname] || 'colorId');
-  if (isImmutable(list)) {
-    list = list.toJS();
-  }
+  const list = color.get(storeMap[pathname] || 'colorId');
+
   return {
     loading: color.get('loading'),
     list,
