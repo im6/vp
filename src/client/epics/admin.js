@@ -1,6 +1,7 @@
 import get from 'lodash.get';
 import { ofType } from 'redux-observable';
-import { map, mergeMap, filter, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { map, mergeMap, filter, catchError, tap } from 'rxjs/operators';
 import requester from '../services/requester';
 
 const colorql = `query($cate: ColorCategory!) {
@@ -34,7 +35,15 @@ export default [
             payload: get(ajaxRes, 'response.data.color', null),
           })),
           catchError(() => {
-            window.location.replace('/');
+            return of({
+              type: 'admin/getList/fail',
+            }).pipe(
+              tap(() => {
+                // eslint-disable-next-line no-console
+                console.error('admin error');
+                // window.location.replace('/');
+              })
+            );
           })
         )
       )

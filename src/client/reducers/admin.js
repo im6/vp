@@ -21,9 +21,8 @@ const admin = handleActions(
     },
 
     ['admin/getList/fail'](state, action) {
-      console.error('admin error');
       return state.merge({
-        list: [],
+        list: Immutable.fromJS([]),
         loading: false,
       });
     },
