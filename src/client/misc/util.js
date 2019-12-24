@@ -9,7 +9,7 @@ const checkLocalStorage = () => {
     return false;
   }
 };
-export const localStorageEnabled = checkLocalStorage();
+
 const downloadCanvas = color => {
   const HEIGHT = 420;
   const WIDTH = 340;
@@ -73,6 +73,8 @@ const downloadCanvas = color => {
   }
   return url;
 };
+
+export const localStorageEnabled = checkLocalStorage();
 
 export const download = (title, colors) => {
   const downloadUrl = downloadCanvas(colors);
