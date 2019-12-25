@@ -1,6 +1,6 @@
 {
   "name": "vp",
-  "version": "1.18.1",
+  "version": "1.19.0",
   "description": "source code of react.colorpk.com",
   "main": "index.js",
   "scripts": {
