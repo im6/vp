@@ -58,8 +58,9 @@ class Box extends React.Component {
 }
 
 Box.propTypes = {
-  boxInfo: PropTypes.object.isRequired,
+  boxInfo: PropTypes.object.isRequired, // immutable object
   onLikeClick: PropTypes.func.isRequired,
+  onCanvasClick: PropTypes.func.isRequired,
   liked: PropTypes.bool,
   showUsername: PropTypes.bool,
 };
