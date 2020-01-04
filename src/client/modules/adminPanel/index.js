@@ -4,6 +4,7 @@ import AdminPanel from './components/AdminPanel';
 
 const mapStateToProps = ({ admin }) => ({
   list: admin.get('list'),
+  loading: admin.get('loading'),
 });
 
 const mapDispatchToProps = dispatch => {

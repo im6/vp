@@ -17,13 +17,14 @@ class AdminPanel extends React.PureComponent {
   }
 
   render() {
+    const { loading } = this.props;
     const colors = this.props.list.toJS();
     return (
       <div className={style.container}>
         <br />
         <br />
         <br />
-        {colors.length === 0 && <h1>No colors to decide.</h1>}
+        {!loading && colors.length === 0 && <h1>No colors to decide.</h1>}
         {colors.map(v => {
           return (
             <div key={v.id} className={style.oneRow}>
@@ -52,6 +53,7 @@ class AdminPanel extends React.PureComponent {
 
 AdminPanel.propTypes = {
   list: PropTypes.object.isRequired,
+  loading: PropTypes.bool,
   onInit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   onApprove: PropTypes.func.isRequired,
