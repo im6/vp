@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ChromePicker } from 'react-color';
 import EditCanvas from '../EditCanvas';
 import style from './style.sass';
@@ -101,4 +102,8 @@ class NewColor extends React.Component {
   }
 }
 NewColor.contextType = LanguageContext;
+NewColor.propTypes = {
+  onAdd: PropTypes.func,
+  onRedirect: PropTypes.func,
+};
 export default NewColor;
