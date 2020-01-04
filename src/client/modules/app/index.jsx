@@ -8,18 +8,18 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isClient: false,
+      showLoading: true,
     };
   }
   componentDidMount() {
     this.setState({
-      isClient: true,
+      showLoading: false,
     });
   }
   render() {
     const { state } = this;
-    const { isClient } = state;
-    return <Layout>{isClient ? <Routes /> : <SpinLoader />}</Layout>;
+    const { showLoading } = state;
+    return <Layout>{showLoading ? <SpinLoader /> : <Routes />}</Layout>;
   }
 }
 
