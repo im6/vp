@@ -1,16 +1,18 @@
 
 .rowContainer
-  display: flex
-  align-items: flex-end
-  justify-content: space-between
+  position: relative
 
   .text
-    transition: opacity 0.3s ease-in-out
+    position: absolute
+    bottom: 0;
+    left: 0;
+
+    transition: opacity 0.25s ease-in-out
     background-color: rgba(0,0,0,0.22)
     color: white
     font-size: 1.6rem
     opacity: 0
-    padding: 0 12px 0 8px
+    padding: 0 10px
     margin: 0
     cursor: auto
 
@@ -20,5 +22,3 @@
 @media (max-width: 768px)
   .rowContainer .text
     font-size: 0.8rem
-
-
