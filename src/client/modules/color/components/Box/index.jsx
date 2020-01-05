@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import style from './style.sass';
-import Heart from './components/Heart';
+import LikeButton from './components/LikeButton';
 import ColorCanvas from './components/ColorCanvas';
 
 class Box extends React.Component {
@@ -40,15 +40,11 @@ class Box extends React.Component {
           colorValue={boxInfo.get('color')}
           onClick={this.onCanvasClick}
         />
-        <button
-          className="button is-small"
-          onClick={this.onLikeClick}
-          aria-label="click and save"
-        >
-          <Heart red={liked} />
-          &nbsp;&nbsp;
-          {boxInfo.get('like')}
-        </button>
+        <LikeButton
+          liked={liked}
+          likeNum={boxInfo.get('like')}
+          onToggle={this.onLikeClick}
+        />
         {showUsername && boxInfo.get('username') && (
           <p>{boxInfo.get('username')}</p>
         )}
