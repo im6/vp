@@ -37,6 +37,7 @@ class Box extends React.Component {
     return (
       <div className={style.box}>
         <ColorCanvas
+          vertical
           colorValue={boxInfo.get('color')}
           onClick={this.onCanvasClick}
         />
