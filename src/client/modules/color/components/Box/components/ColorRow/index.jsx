@@ -6,11 +6,11 @@ const disableBubble = evt => {
   evt.stopPropagation();
 };
 const ColorRow = ({ color }) => (
-  <div className={style.rowContainer} style={{ backgroundColor: color }}>
+  <li className={style.rowContainer} style={{ backgroundColor: color }}>
     <h1 className={style.text} onClick={disableBubble}>
       {color}
     </h1>
-  </div>
+  </li>
 );
 
 ColorRow.propTypes = {

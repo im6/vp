@@ -4,11 +4,11 @@ import style from './style.sass';
 import ColorRow from '../ColorRow';
 
 const ColorCanvas = ({ onClick, colorValue }) => (
-  <div className={style.boxCanvas} onClick={onClick}>
+  <ul className={style.boxCanvas} onClick={onClick}>
     {colorValue.split('#').map(v => {
       return <ColorRow key={v} color={'#' + v} />;
     })}
-  </div>
+  </ul>
 );
 
 ColorCanvas.propTypes = {
