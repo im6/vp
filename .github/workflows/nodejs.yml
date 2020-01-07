@@ -2,28 +2,34 @@ name: Node CI
 
 on:
   push:
-    branches: 
-      - auto
+    branches:
+      - master
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: [10.x]
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: npm install, build, and test
-      run: |
-        npm ci
-        npm run build
-        npm --version
-        echo "test here haha"
-      env:
-        CI: true
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install, eslint and build
+        run: |
+          npm i
+          npm run lint
+          npm run build
+        env:
+          CI: true
+      - name: setup aliyun oss
+        uses: manyuanrong/setup-ossutil@master
+        with:
+          endpoint: ${{ secrets.oss_region }}
+          access-key-id: ${{ secrets.oss_app_key }}
+          access-key-secret: ${{ secrets.oss_app_secret }}
+      - name: cp files to aliyun
+        run: ossutil cp -rf dist/public oss://${{ secrets.oss_bucket }}/2/ --meta=Cache-Control:"public, max-age=1728002"#Content-Encoding:gzip
