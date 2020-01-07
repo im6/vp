@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import OpenGraph from './OpenGraph';
 
-const Html = ({ title, style, script, children, version, csrfToken, }) => (
+const Html = ({ title, style, script, children, version, csrfToken }) => (
   <html lang="en">
     <head>
       <meta charSet="utf-8" />
@@ -26,11 +26,7 @@ const Html = ({ title, style, script, children, version, csrfToken, }) => (
         rel="shortcut icon"
         href="//dkny.oss-cn-hangzhou.aliyuncs.com/3/fav.ico"
       />
-      {
-        process.env.NODE_ENV === 'development' ?
-        <link href={`${style}?${version}`} rel="stylesheet" /> :
-        <style dangerouslySetInnerHTML={{ __html: "MY-STYLE-PLACEHOLDER" }} />
-      }
+      <link href={`${style}?${version}`} rel="stylesheet" />
       <script
         dangerouslySetInnerHTML={{
           __html: `if(window.location.hostname.indexOf('colorpk.com') > -1){

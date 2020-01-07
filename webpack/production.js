@@ -4,7 +4,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const ServerCopyStylePlugin = require('./plugins/ServerCopyStylePlugin');
 
 const {
   withoutCssModuleFiles,
@@ -74,7 +73,6 @@ const client = Object.assign(clientBaseConfig, {
     new CompressionPlugin({
       filename: '[path]',
       minRatio: 1,
-      exclude: 'main.css',
     }),
   ],
   optimization: {
@@ -115,13 +113,7 @@ const server = Object.assign(serverBaseConfig, {
       },
     ],
   },
-  plugins: [
-    new ServerCopyStylePlugin({
-      search: /"MY-STYLE-PLACEHOLDER"/,
-      distFile: './dist/server.js',
-      styleFile: './dist/public/main.css',
-    }),
-  ],
+  plugins: [],
 });
 
 module.exports = [client, server];
