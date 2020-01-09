@@ -33,11 +33,11 @@ class Box extends React.Component {
   }
 
   render() {
-    const { liked, boxInfo, showUsername } = this.props;
+    const { liked, boxInfo, vertical, showUsername } = this.props;
     return (
       <div className={style.box}>
         <ColorCanvas
-          vertical
+          vertical={vertical}
           colorValue={boxInfo.get('color')}
           onClick={this.onCanvasClick}
         />
@@ -59,6 +59,7 @@ Box.propTypes = {
   onLikeClick: PropTypes.func.isRequired,
   onCanvasClick: PropTypes.func.isRequired,
   liked: PropTypes.bool,
+  vertical: PropTypes.bool,
   showUsername: PropTypes.bool,
 };
 

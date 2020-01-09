@@ -4,6 +4,7 @@ import { fromJS, Map } from 'immutable';
 
 const initialState = Map({
   loading: true,
+  showVertical: new Date().getHours() > 15,
   colorDef: Map({}),
   liked: Map({}),
   colorId: [], // main

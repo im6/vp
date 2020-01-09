@@ -22,6 +22,7 @@ class Color extends React.Component {
       hasSelected,
       selectedId,
       loading,
+      vertical,
       onLike,
       onShare,
       onEnter,
@@ -46,6 +47,7 @@ class Color extends React.Component {
               return (
                 <Box
                   key={v}
+                  vertical={vertical}
                   liked={liked.get(v)}
                   boxInfo={colorDef.get(v)}
                   onLikeClick={onLike}
@@ -63,6 +65,7 @@ class Color extends React.Component {
 Color.propTypes = {
   selectedId: PropTypes.string,
   loading: PropTypes.bool,
+  vertical: PropTypes.bool,
   hasSelected: PropTypes.bool,
   liked: PropTypes.object.isRequired,
   list: PropTypes.array.isRequired,
