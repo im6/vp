@@ -2,7 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import OpenGraph from './OpenGraph';
 
-const Html = ({ title, style, script, children, version, csrfToken }) => (
+const Html = ({
+  title,
+  style,
+  script,
+  children,
+  version,
+  csrfToken,
+  lastBuildDate,
+}) => (
   <html lang="en">
     <head>
       <meta charSet="utf-8" />
@@ -41,6 +49,7 @@ const Html = ({ title, style, script, children, version, csrfToken }) => (
               window.dataLayer.push({
                 'scriptLoadingTime': Date.now() - initLoadTime
               });
+              console.log('server last build: ${lastBuildDate}');
             });
           }`,
         }}
@@ -64,6 +73,7 @@ const Html = ({ title, style, script, children, version, csrfToken }) => (
 
 Html.propTypes = {
   title: PropTypes.string.isRequired,
+  lastBuildDate: PropTypes.string.isRequired,
   version: PropTypes.string.isRequired,
   style: PropTypes.string.isRequired,
   script: PropTypes.string.isRequired,

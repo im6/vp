@@ -1,5 +1,5 @@
 const path = require('path');
-
+const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -74,6 +74,11 @@ const client = Object.assign(clientBaseConfig, {
       filename: '[path]',
       minRatio: 1,
     }),
+    new webpack.DefinePlugin({
+      'process.env.lastBuildDate': JSON.stringify(
+        `${new Date().toLocaleString()} UTC`
+      ),
+    }),
   ],
   optimization: {
     splitChunks: {
@@ -113,7 +118,13 @@ const server = Object.assign(serverBaseConfig, {
       },
     ],
   },
-  plugins: [],
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.lastBuildDate': JSON.stringify(
+        `${new Date().toLocaleString()} EST`
+      ),
+    }),
+  ],
 });
 
 module.exports = [client, server];

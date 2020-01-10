@@ -27,6 +27,7 @@ export default (req, res) => {
       style={`${PUBLIC_PATH}main.css`}
       script={`${PUBLIC_PATH}main.js`}
       csrfToken={req.csrfToken()}
+      lastBuildDate={process.env.lastBuildDate}
     >
       {appHtml}
     </Html>
