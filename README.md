@@ -19,3 +19,4 @@
 - Babel
 - SaSS
 - oAuth2(Facebook)
+- [React Testing Library](https://testing-library.com/)
