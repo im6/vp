@@ -4,13 +4,14 @@
   "description": "source code of react.colorpk.com",
   "main": "index.js",
   "scripts": {
+    "test": "jest --coverage",
+    "lint": "eslint ./webpack ./src",
     "start": "webpack --config ./webpack/develop.js",
-    "build": "webpack --config ./webpack/production.js",
-    "lint": "eslint ./webpack ./src"
+    "build": "webpack --config ./webpack/production.js"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "npm run lint && npm t"
     }
   },
   "repository": "git+https://github.com/jinouwuque/vp.git",
@@ -23,8 +24,9 @@
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/plugin-syntax-dynamic-import": "^7.7.4",
-    "@babel/preset-env": "^7.7.7",
-    "@babel/preset-react": "^7.7.4",
+    "@babel/preset-env": "^7.8.0",
+    "@babel/preset-react": "^7.8.0",
+    "@testing-library/react": "^9.4.0",
     "babel-loader": "^8.0.6",
     "bulma": "^0.8.0",
     "clean-webpack-plugin": "^3.0.0",
@@ -35,11 +37,13 @@
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jest": "^23.6.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.17.0",
     "husky": "^4.0.4",
     "immutable": "^4.0.0-rc.12",
+    "jest": "^24.9.0",
     "js-cookie": "^2.2.1",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.0",
@@ -77,5 +81,59 @@
     "react-router-dom": "^5.1.2",
     "regenerator-runtime": "^0.13.3",
     "uuid": "^3.3.3"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb",
+      "prettier"
+    ],
+    "plugins": [
+      "react",
+      "jsx-a11y",
+      "import",
+      "prettier",
+      "jest"
+    ],
+    "rules": {
+      "import/no-extraneous-dependencies": 0,
+      "import/extensions": 0,
+      "react/forbid-prop-types": 0,
+      "prettier/prettier": [
+        "error"
+      ]
+    },
+    "env": {
+      "browser": true,
+      "jest/globals": true
+    }
+  },
+  "jest": {
+    "verbose": false,
+    "clearMocks": true,
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|sass)$": "<rootDir>/__mocks__/styleMock.js"
+    },
+    "coverageDirectory": "coverage",
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": -10
+      }
+    }
   }
 }
