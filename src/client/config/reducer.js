@@ -1,5 +1,9 @@
 /* eslint func-names: 0 */
-const context = require.context('../reducers/', false, /\.js$/);
+const context = require.context(
+  '../reducers/',
+  false,
+  /^(?!.*\.spec\.js$).*\.js$/
+);
 const keys = context.keys();
 
 export default keys.reduce((res, v) => {
