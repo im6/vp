@@ -3,13 +3,18 @@ import { createAction } from 'redux-actions';
 import NewColor from './components/NewColor';
 
 const shared = {};
-const mapStateToProps = ({ user }, { location: { pathname }, history }) => {
+const mapStateToProps = (
+  { user },
+  { location: { pathname, search }, history }
+) => {
+  const defaultColors = search.match(/[a-f0-9]{24}/);
   const showUpload = pathname === '/extract';
   shared.history = history;
   const isAuth = user.get('isAuth');
   return {
     showUpload,
     isAuth,
+    defaultColors: defaultColors && defaultColors[0],
   };
 };
 

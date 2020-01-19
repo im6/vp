@@ -1,6 +1,6 @@
 import get from 'lodash.get';
 import { ofType } from 'redux-observable';
-import { of } from 'rxjs';
+import { iif, of } from 'rxjs';
 import {
   map,
   mergeMap,
@@ -182,25 +182,38 @@ export default [
             val: payload,
           },
         }).pipe(
-          filter(
-            action2 => get(action2, 'response.data.createColor.status', 1) === 0
-          ),
-          map(action2 => {
+          mergeMap(action2 => {
+            const isGood =
+              !get(action2, 'response.errors') &&
+              get(action2, 'response.data.createColor.status', 1) === 0;
             const id = get(action2, 'response.data.createColor.data', null);
             const { color } = payload;
-            return {
-              type: 'color/addNew/success',
-              payload: {
-                id: id.toString(),
-                color,
-                name: '',
-                like: 0,
-              },
+            const successPayload = id && {
+              id: id.toString(),
+              color,
+              name: '',
+              like: 0,
             };
+            return iif(
+              () => isGood,
+              of({
+                type: 'color/addNew/success',
+                payload: successPayload,
+              }),
+              of({
+                type: 'color/addNew/fail',
+                payload: get(action2, 'response.errors[0].message'),
+              })
+            );
           }),
-          tap(() => {
-            // eslint-disable-next-line no-alert
-            alert('Thank you for new colors');
+          tap(({ type }) => {
+            if (type === 'color/addNew/fail') {
+              // eslint-disable-next-line no-alert
+              alert('Error on creating color');
+            } else {
+              // eslint-disable-next-line no-alert
+              alert('Thank you for new colors');
+            }
           })
         );
       })

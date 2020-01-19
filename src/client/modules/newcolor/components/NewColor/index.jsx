@@ -10,10 +10,18 @@ const DEFAULTVALUE = '#81EEFF';
 class NewColor extends React.Component {
   constructor(props) {
     super(props);
+    const { defaultColors } = this.props;
     this.state = {
       editColor: DEFAULTVALUE,
       activeIndex: 0,
-      colorValue: [null, null, null, null],
+      colorValue: defaultColors
+        ? [
+            `#${defaultColors.substring(0, 6)}`,
+            `#${defaultColors.substring(6, 12)}`,
+            `#${defaultColors.substring(12, 18)}`,
+            `#${defaultColors.substring(18, 24)}`,
+          ]
+        : [null, null, null, null],
       pickerWd: 200,
     };
     this.onChangeActive = this.onChangeActive.bind(this);
@@ -103,6 +111,7 @@ class NewColor extends React.Component {
 }
 NewColor.contextType = LanguageContext;
 NewColor.propTypes = {
+  defaultColors: PropTypes.string,
   onAdd: PropTypes.func,
   onRedirect: PropTypes.func,
 };
