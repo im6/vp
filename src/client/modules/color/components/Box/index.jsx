@@ -12,10 +12,11 @@ class Box extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    const { liked, boxInfo } = this.props;
+    const { liked, boxInfo, vertical } = this.props;
     return (
       nextProps.liked !== liked ||
-      nextProps.boxInfo.get('id') !== boxInfo.get('id')
+      nextProps.boxInfo.get('id') !== boxInfo.get('id') ||
+      nextProps.vertical !== vertical
     );
   }
 
