@@ -8,8 +8,7 @@ class ServerStartPlugin {
     process.stdout.write(data);
   }
 
-  constructor(envs) {
-    this.envs = envs;
+  constructor() {
     this.child = null;
   }
 
@@ -21,7 +20,6 @@ class ServerStartPlugin {
       this.child = spawn('node', ['./local/server.js'], {
         env: {
           ...process.env,
-          ...this.envs,
         },
         silent: false,
       });

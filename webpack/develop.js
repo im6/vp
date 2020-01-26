@@ -1,4 +1,3 @@
-const fs = require('fs');
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -9,13 +8,6 @@ const {
   clientBaseConfig,
   serverBaseConfig,
 } = require('./base');
-
-const json0 = fs.readFileSync(path.join(__dirname, '../.vscode/launch.json'), {
-  encoding: 'utf8',
-});
-
-const json1 = JSON.parse(json0);
-const appEnvs = json1.configurations[0].env;
 
 const client = Object.assign(clientBaseConfig, {
   watch: true,
@@ -128,7 +120,7 @@ const server = Object.assign(serverBaseConfig, {
       },
     ],
   },
-  plugins: [new ServerStartPlugin(appEnvs)],
+  plugins: [new ServerStartPlugin()],
   watchOptions: {
     ignored: /node_modules/,
   },
