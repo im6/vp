@@ -3,6 +3,7 @@ node_modules
 .idea
 .vscode
 npm-debug.log
+package-lock.json
 local
 dist/public
 coverage
