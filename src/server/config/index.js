@@ -15,7 +15,6 @@ export const {
 } = env;
 
 export const FB_API_URL = 'https://graph.facebook.com/v3.3';
-export const SERVER_IP = 'localhost';
 export const STATIC_URL =
   process.env.NODE_ENV === 'development' ? 'local' : 'dist';
 export const PUBLIC_PATH =

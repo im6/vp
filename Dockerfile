@@ -1,11 +1,9 @@
-ARG HOME=/usr/src/app
-
 FROM node:12.14.1
-WORKDIR $HOME
+RUN mkdir -p /home/app/node_modules && chown -R node:node /home/app
+WORKDIR /home/app
 COPY package.json ./
-RUN echo '-- install dependency --'
-RUN npm ci --production
-COPY . .
+USER node
+RUN npm i --production
+COPY --chown=node:node . .
 EXPOSE 3000
 CMD [ "node", "dist/server.js" ]
-RUN echo '-- complete --'
