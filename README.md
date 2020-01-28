@@ -9,6 +9,7 @@
 - [GraphQL](https://graphql.org/)
 - [Immutable.js](https://immutable-js.github.io/immutable-js/)
 - [Bulma](https://bulma.io/)
+- Docker
 - Express.js
 - [SSR](https://reactjs.org/docs/react-dom-server.html)
 - MySQL

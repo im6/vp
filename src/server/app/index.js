@@ -48,7 +48,7 @@ if (process.env.NODE_ENV === 'development') {
   app.get('/robots.txt', staticFileProd);
   app.get('/favicon.ico', staticFileProd);
   app.get('/sitemap.xml', staticFileProd);
-  // For GraphiQL (development)
+
   app.use(csrfOverride);
 }
 
@@ -57,6 +57,7 @@ app[process.env.NODE_ENV === 'development' ? 'use' : 'post'](
   graphqlMiddleware
 );
 if (process.env.NODE_ENV === 'development') {
+  // GraphiQL doesn't go through csrf
   app.use(csrfOverride);
 }
 app.get('/auth/:oauth', oauthLogin);
