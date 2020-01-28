@@ -7,7 +7,6 @@ const { env } = process;
 
 export const {
   SERVER_PORT,
-  SERVER_DOMAIN,
   SESSION_SECRET,
   CSRF_EXCEPTION,
   FB_APP_KEY,
