@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 
-import { SESSION_SECRET } from '../config';
+import { SESSION_SECRET, SERVER_DOMAIN } from '../config';
 
 import { oauthLogin, isAuth, isAdmin } from '../middlewares/auth';
 import { onError, onNotFound } from '../middlewares/errorHandler';
@@ -27,10 +27,7 @@ app.use(
   cookieSession({
     name: 'session',
     keys: [SESSION_SECRET],
-    domain:
-      process.env.NODE_ENV === 'development'
-        ? 'localhost'
-        : 'react.colorpk.com',
+    domain: SERVER_DOMAIN,
     maxAge: 1000 * 60 * 60 * 24 * 3, // 3 days
     httpOnly: true,
   })
