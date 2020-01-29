@@ -7,7 +7,11 @@ import cookieSession from 'cookie-session';
 import { SESSION_SECRET } from '../config';
 
 import { oauthLogin, isAuth, isAdmin } from '../middlewares/auth';
-import { onError, onNotFound } from '../middlewares/errorHandler';
+import {
+  onError,
+  onNotFound,
+  onAppEngineSignal,
+} from '../middlewares/errorHandler';
 import csrfOverride from '../middlewares/csrfHandler';
 import graphqlMiddleware from '../middlewares/graphql';
 import ssrMiddleware from '../middlewares/render';
@@ -48,6 +52,7 @@ if (process.env.NODE_ENV === 'development') {
   app.get('/robots.txt', staticFileProd);
   app.get('/favicon.ico', staticFileProd);
   app.get('/sitemap.xml', staticFileProd);
+  app.get('/_ah/start', onAppEngineSignal); // gcp status check
 
   app.use(csrfOverride);
 }

@@ -4,6 +4,10 @@ import path from 'path';
 const { PWD } = process.env;
 const errorPage = path.resolve(PWD, './dist/error.html');
 
+export const onAppEngineSignal = (_, res) => {
+  res.json({ status: 'ok' });
+};
+
 export const onNotFound = (req, res) => {
   console.error(`Error: 404, ${req.url} not found`);
   res.status(400).sendFile(errorPage);
