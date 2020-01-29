@@ -1,0 +1,11 @@
+.env
+.nvmrc
+.github
+coverage
+img
+local
+node_modules
+src
+webpack
+npm-debug.log
+package-lock.json

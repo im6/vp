@@ -4,9 +4,10 @@
   "description": "source code of react.colorpk.com",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/server.js",
     "test": "jest --coverage",
     "lint": "eslint ./webpack ./src",
-    "start": "webpack --config ./webpack/develop.js",
+    "dev": "webpack --config ./webpack/develop.js",
     "build": "webpack --config ./webpack/production.js"
   },
   "husky": {

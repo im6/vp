@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'development') {
 const { env } = process;
 
 export const {
-  SERVER_PORT,
+  PORT,
   SESSION_SECRET,
   CSRF_EXCEPTION,
   FB_APP_KEY,
