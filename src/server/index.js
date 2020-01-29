@@ -1,4 +1,5 @@
 /* eslint no-console: 0 */
+import { exec } from 'child_process';
 import 'regenerator-runtime/runtime';
 import app from './app';
 import { PORT } from './config';
@@ -11,3 +12,11 @@ const server = app.listen(port, () =>
   )
 );
 server.timeout = 1000 * 5;
+
+exec('curl ifconfig.me', (err, stdout, stderr) => {
+  if (err) {
+    console.error(stderr);
+    return;
+  }
+  console.log(`public IP addr: ${stdout}`);
+});
