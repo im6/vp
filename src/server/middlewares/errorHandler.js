@@ -4,8 +4,9 @@ import path from 'path';
 const { PWD } = process.env;
 const errorPage = path.resolve(PWD, './dist/error.html');
 
-export const onAppEngineSignal = (_, res) => {
-  res.json({ status: 'ok' });
+export const onGcpAppEngSig = (req, res) => {
+  const { action } = req.params;
+  res.json({ status: `${action} - ok` });
 };
 
 export const onNotFound = (req, res) => {

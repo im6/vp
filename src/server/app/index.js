@@ -10,7 +10,7 @@ import { oauthLogin, isAuth, isAdmin } from '../middlewares/auth';
 import {
   onError,
   onNotFound,
-  onAppEngineSignal,
+  onGcpAppEngSig,
 } from '../middlewares/errorHandler';
 import csrfOverride from '../middlewares/csrfHandler';
 import graphqlMiddleware from '../middlewares/graphql';
@@ -52,7 +52,8 @@ if (process.env.NODE_ENV === 'development') {
   app.get('/robots.txt', staticFileProd);
   app.get('/favicon.ico', staticFileProd);
   app.get('/sitemap.xml', staticFileProd);
-  app.get('/_ah/start', onAppEngineSignal); // gcp status check
+
+  app.get('/_ah/:action', onGcpAppEngSig); // gcp status check
 
   app.use(csrfOverride);
 }
