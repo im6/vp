@@ -1,4 +1,4 @@
-const { translation, languages } = require('./translation.js');
+const { translation, languages } = require('./index.js');
 
 describe('language list', () => {
   test('total language provided', () => {

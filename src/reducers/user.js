@@ -1,9 +1,9 @@
 /* eslint-disable */
 import { handleActions } from 'redux-actions';
-import Immutable, { fromJS } from 'immutable';
+import { fromJS } from 'immutable';
 import Cookies from 'js-cookie';
 
-const initialState = Immutable.fromJS({
+const initialState = fromJS({
   detail: null,
   facebookUrl: null,
   lang: Cookies.get('lang'),

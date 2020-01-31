@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ChromePicker } from 'react-color';
 import EditCanvas from '../EditCanvas';
 import style from './style.sass';
-import { LanguageContext } from '../../../../../isomorphic/LanguageContext';
+import { LanguageContext } from 'components/LanguageContext';
 
 const DEFAULTVALUE = '#81EEFF';
 

@@ -9,6 +9,7 @@ const {
   withoutCssModuleFiles,
   clientBaseConfig,
   serverBaseConfig,
+  localIdentName,
 } = require('./base');
 
 const client = Object.assign(clientBaseConfig, {
@@ -54,7 +55,7 @@ const client = Object.assign(clientBaseConfig, {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[hash:base64:5]',
+                localIdentName,
               },
             },
           },
@@ -114,7 +115,18 @@ const server = Object.assign(serverBaseConfig, {
       },
       {
         test: /\.sass$/,
-        use: ['null-loader'],
+        use: [
+          {
+            loader: 'css-loader',
+            options: {
+              onlyLocals: true,
+              modules: {
+                localIdentName,
+              },
+            },
+          },
+          'sass-loader',
+        ],
       },
     ],
   },

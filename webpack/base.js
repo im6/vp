@@ -1,23 +1,29 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
+const resolve = {
+  extensions: ['.js', '.jsx'],
+  alias: {
+    components: path.resolve(__dirname, '../src/components'),
+    containers: path.resolve(__dirname, '../src/containers'),
+  },
+};
+
 exports.withoutCssModuleFiles = [
-  /client\/modules\/app\/bulma.modules.sass/,
-  /isomorphic\/SpinLoader\/style.sass/,
+  /bulma.modules.sass/,
+  /SpinLoader\/style.sass/,
 ];
 
 exports.clientBaseConfig = {
+  resolve,
   entry: path.join(__dirname, '../src/client'),
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
 };
 
 exports.serverBaseConfig = {
   target: 'node',
+  resolve,
   externals: [nodeExternals()],
   entry: path.join(__dirname, '../src/server'),
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
 };
+
+exports.localIdentName = '[hash:base64:5]';

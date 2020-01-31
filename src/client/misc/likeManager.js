@@ -1,4 +1,4 @@
-import { localStorageEnabled } from '../misc/util';
+import { localStorageEnabled } from './util';
 
 const LSLIKEKEY = 'userLike';
 

@@ -3,9 +3,9 @@ import { ofType } from 'redux-observable';
 import { iif, of, concat } from 'rxjs';
 import Cookies from 'js-cookie';
 import { map, mergeMap, catchError, tap, ignoreElements } from 'rxjs/operators';
-import requester from '../services/requester';
+import requester from '../misc/requester';
 
-import likeManager from '../services/likeManager';
+import likeManager from '../misc/likeManager';
 
 const query = `query {
   auth {

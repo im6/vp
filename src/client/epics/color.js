@@ -10,8 +10,8 @@ import {
   ignoreElements,
 } from 'rxjs/operators';
 
-import likeManager from '../services/likeManager';
-import requester from '../services/requester';
+import likeManager from '../misc/likeManager';
+import requester from '../misc/requester';
 import { download, share } from '../misc/util.js';
 
 const colorql = `query($cate: ColorCategory!) {

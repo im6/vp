@@ -1,19 +1,36 @@
 import uuid from 'uuid';
 import React from 'react';
+import { fromJS } from 'immutable';
+import { Provider } from 'react-redux';
+import { StaticRouter } from 'react-router';
+import { createStore, combineReducers } from 'redux';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 
 import { PUBLIC_PATH } from '../config';
-import Html from '../modules/Html';
-import App from '../modules/App';
-import { LanguageContextProvider } from '../../isomorphic/LanguageContext';
+import Html from 'components/Html';
+import App from 'components/App';
+import LangProvider from 'containers/Lang';
+import moduleReducers from '../../reducers';
 
 const version = uuid.v1().substring(0, 8);
 
 export default (req, res) => {
+  const store = createStore(combineReducers(moduleReducers), {
+    user: fromJS({
+      detail: null,
+      facebookUrl: null,
+      lang: req.cookies.lang,
+    }),
+  });
+
   const app = (
-    <LanguageContextProvider lang={req.cookies.lang}>
-      <App url={req.path} />
-    </LanguageContextProvider>
+    <StaticRouter location={req.url}>
+      <Provider store={store}>
+        <LangProvider>
+          <App />
+        </LangProvider>
+      </Provider>
+    </StaticRouter>
   );
   const appHtml = renderToString(app);
   const htmlDOM = (

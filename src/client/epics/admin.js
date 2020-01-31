@@ -2,7 +2,7 @@ import get from 'lodash.get';
 import { ofType } from 'redux-observable';
 import { of } from 'rxjs';
 import { map, mergeMap, filter, catchError, tap } from 'rxjs/operators';
-import requester from '../services/requester';
+import requester from '../misc/requester';
 
 const colorql = `query($cate: ColorCategory!) {
   color(category: $cate) {

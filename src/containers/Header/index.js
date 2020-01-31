@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { createAction } from 'redux-actions';
 import { withRouter } from 'react-router-dom';
-import Header from '../../../../isomorphic/Header';
+import Header from 'components/Header';
 
 const shared = {};
 const mapStateToProps = ({ user }, { location, history }) => {

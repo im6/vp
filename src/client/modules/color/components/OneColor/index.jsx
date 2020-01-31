@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import Box from '../Box';
 import style from './style.sass';
-import { LanguageContext } from '../../../../../isomorphic/LanguageContext';
+import { LanguageContext } from 'components/LanguageContext';
 
 const OneColor = ({ liked, boxInfo, onLike, onShare, onDownload }) => {
   const language = useContext(LanguageContext);

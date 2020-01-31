@@ -4,18 +4,20 @@ import { customEventPolyFill } from './misc/util';
 import React from 'react';
 import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './modules/app';
+import App from 'components/App';
 import store from './config/store';
-import LangProvider from './context/LangContainer';
-
+import LangProvider from 'containers/Lang';
+import { BrowserRouter } from 'react-router-dom';
 customEventPolyFill();
 
 hydrate(
-  <Provider store={store}>
-    <LangProvider>
-      <App />
-    </LangProvider>
-  </Provider>,
+  <BrowserRouter>
+    <Provider store={store}>
+      <LangProvider>
+        <App />
+      </LangProvider>
+    </Provider>
+  </BrowserRouter>,
   document.getElementById('app'),
   () => {
     store.dispatch({ type: 'color/get' });
