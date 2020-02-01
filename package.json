@@ -127,9 +127,15 @@
   "jest": {
     "verbose": false,
     "clearMocks": true,
+    "moduleDirectories": [
+      "node_modules",
+      "<rootDir>/src/testing"
+    ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js",
-      "\\.(css|sass)$": "<rootDir>/src/__mocks__/styleMock.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/testing/fileMock.js",
+      "\\.(css|sass)$": "<rootDir>/src/testing/styleMock.js",
+      "^components/(.*)": "<rootDir>/src/components/$1",
+      "^containers/(.*)": "<rootDir>/src/containers/$1"
     },
     "coverageDirectory": "coverage",
     "coverageThreshold": {

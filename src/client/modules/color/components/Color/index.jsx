@@ -9,7 +9,6 @@ const Color = ({
   list,
   liked,
   colorDef,
-  hasSelected,
   selectedId,
   loading,
   vertical,
@@ -20,7 +19,7 @@ const Color = ({
 }) => (
   <Fragment>
     {loading && <SpinLoader />}
-    {hasSelected && (
+    {selectedId && (
       <OneColor
         boxInfo={colorDef.get(selectedId)}
         liked={liked.get(selectedId)}
@@ -53,10 +52,8 @@ Color.propTypes = {
   selectedId: PropTypes.string,
   loading: PropTypes.bool,
   vertical: PropTypes.bool,
-  hasSelected: PropTypes.bool,
   liked: PropTypes.object.isRequired,
   list: PropTypes.array.isRequired,
-  match: PropTypes.object.isRequired,
   colorDef: PropTypes.object.isRequired,
   onLike: PropTypes.func.isRequired,
   onEnter: PropTypes.func.isRequired,

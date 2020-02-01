@@ -41,8 +41,7 @@ const mapStateToProps = (
     list,
     colorDef,
     liked,
-    selectedId,
-    hasSelected,
+    selectedId: hasSelected ? selectedId : null,
     vertical: color.get('showVertical'),
   };
 };
