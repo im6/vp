@@ -15,6 +15,7 @@ const query = `query {
       img
       isadmin
       likes
+      owns
     }
     ... on AuthFailResponse {
       url

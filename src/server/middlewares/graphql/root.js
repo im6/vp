@@ -37,6 +37,11 @@ const root = {
             [userId]
           );
 
+          const ownData = await sqlExecOne(
+            'SELECT a.id FROM colorpk_color a WHERE a.userid=?',
+            [userId]
+          );
+
           sqlExecOne('UPDATE colorpk_user SET lastlogin=NOW() WHERE id=?', [
             userId,
           ]);
@@ -48,6 +53,7 @@ const root = {
             isadmin,
             img: get(oauthData, 'picture.data.url', null),
             likes: likeData.map(v => v.color_id),
+            owns: ownData.map(v => v.id),
           };
         }
 
@@ -70,6 +76,7 @@ const root = {
           isadmin: false,
           img: get(oauthData, 'picture.data.url', null),
           likes: [],
+          owns: [],
         };
       } catch (err) {
         return new GraphQLError(err.toString());

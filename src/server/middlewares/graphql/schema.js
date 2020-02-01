@@ -26,7 +26,8 @@ const schemaStr = `
     img: String
     isadmin: Boolean
     name: String
-    likes: [Int!]
+    likes: [ID!]
+    owns: [ID!]
   }
 
   input LikeColorInputType {
