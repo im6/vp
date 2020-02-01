@@ -1,12 +1,11 @@
 /* eslint-disable */
 import { handleActions } from 'redux-actions';
 import { fromJS } from 'immutable';
-import Cookies from 'js-cookie';
 
 const initialState = fromJS({
   detail: null,
   facebookUrl: null,
-  lang: Cookies.get('lang'),
+  lang: null,
 });
 
 const user = handleActions(

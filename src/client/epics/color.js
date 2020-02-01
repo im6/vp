@@ -75,9 +75,9 @@ export default [
         const { willLike, id, isAuth } = action0.payload;
         if (!isAuth) {
           if (willLike) {
-            likeManager.addLike(parseInt(id, 10));
+            likeManager.addLike(id);
           } else {
-            likeManager.removeLike(parseInt(id, 10));
+            likeManager.removeLike(id);
           }
         }
       }),

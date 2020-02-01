@@ -28,7 +28,7 @@ const mapStateToProps = (
   const colorDef = color.get('colorDef');
   const liked = color.get('liked');
   const hasSelected = colorDef.has(selectedId);
-  const list = color.get(storeMap[pathname] || 'colorId');
+  const list = color.get(storeMap[pathname] || 'colorId').toJS();
 
   return {
     loading: color.get('loading'),

@@ -1,4 +1,5 @@
 /* eslint global-require:0, no-underscore-dangle: 0 */
+import { fromJS } from 'immutable';
 import {
   createStore,
   applyMiddleware,
@@ -21,9 +22,14 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const enhancers = applyMiddleware(...middlewares);
+const initState = window._REDUXSTATE_;
 const store = createStore(
   combineReducers(moduleReducers),
-  {},
+  {
+    user: fromJS(initState.user),
+    color: fromJS(initState.color),
+    admin: fromJS(initState.admin),
+  },
   compose(enhancers)
 );
 

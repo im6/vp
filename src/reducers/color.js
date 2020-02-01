@@ -1,12 +1,12 @@
 /* eslint-disable */
 import { handleActions } from 'redux-actions';
-import { fromJS, Map } from 'immutable';
+import { fromJS, List, Map } from 'immutable';
 
-const initialState = Map({
-  loading: true,
-  showVertical: new Date().getHours() > 15,
-  colorDef: Map({}),
-  liked: Map({}),
+const initialState = fromJS({
+  loading: false,
+  showVertical: true,
+  colorDef: {},
+  liked: {},
   colorId: [], // main
   colorIdByLike: [], // popular route
   myPortfolio: [], // portfolio route
@@ -20,25 +20,25 @@ const color = handleActions(
     },
 
     ['color/get/success'](state, action) {
-      const colorId = [],
-        colorDef = {};
+      let colorId = List(),
+        colorDef = Map();
       action.payload.forEach(v => {
-        colorId.push(v.id.toString());
-        colorDef[v.id] = v;
+        colorId = colorId.push(v.id);
+        colorDef = colorDef.set(v.id, fromJS(v));
       });
       const colorIdByLike = action.payload
         .sort((a, b) => b.like - a.like)
-        .map(v => v.id.toString());
+        .map(v => v.id);
       return state.merge({
-        colorId: colorId,
-        colorIdByLike,
-        colorDef: fromJS(colorDef),
+        colorId,
+        colorIdByLike: fromJS(colorIdByLike),
+        colorDef,
         loading: false,
       });
     },
     ['color/get/fail'](state) {
       return state.merge({
-        colorId: [],
+        colorId: List(),
         loading: false,
       });
     },
@@ -50,7 +50,11 @@ const color = handleActions(
         ['colorDef', id, 'like'],
         v => v + (willLike ? 1 : -1)
       );
-      if (!willLike) {
+      if (willLike) {
+        state = state.update('myLiked', v => {
+          return v.push(id);
+        });
+      } else {
         state = state.updateIn(['myLiked'], v => {
           return v.filter(v1 => v1 !== id);
         });
@@ -61,41 +65,38 @@ const color = handleActions(
     ['color/addNew/success'](state, action) {
       const { id } = action.payload;
       state = state.setIn(['colorDef', id], fromJS(action.payload));
-      state = state.updateIn(['colorId'], v => {
-        v.unshift(id);
-        return v;
-      });
+      state = state.update('colorId', v => v.unshift(id));
       return state;
     },
 
     ['color/getUserColor'](state, action) {
-      state = state.set(action.payload, []);
+      state = state.set(action.payload, List());
       return state.set('loading', true);
     },
     ['color/getUserColor/success'](state, action) {
       const newList = [];
-      action.payload.data.forEach(cur => {
-        const idStr = cur.id.toString();
-        newList.push(idStr);
-        if (!state.getIn(['colorDef', idStr])) {
-          state = state.setIn(['colorDef', idStr], fromJS(cur));
+      const { data, name } = action.payload;
+      data.forEach(cur => {
+        const { id } = cur;
+        newList.push(id);
+        if (!state.getIn(['colorDef', id])) {
+          state = state.setIn(['colorDef', id], fromJS(cur));
         }
       });
-      state = state.set(action.payload.name, newList);
+      state = state.set(name, fromJS(newList));
       return state.set('loading', false);
     },
 
     ['color/getUserColor/fail'](state, action) {
       state = state.set('loading', false);
-      return state.set(action.payload.name, []);
+      return state.set(action.payload.name, List());
     },
 
     ['color/set/likes'](state, action) {
       const liked = action.payload.reduce((acc, cur) => {
-        acc[cur] = true;
-        return acc;
-      }, {});
-      return state.set('liked', fromJS(liked));
+        return acc.set(String(cur), true);
+      }, Map());
+      return state.set('liked', liked);
     },
   },
   initialState

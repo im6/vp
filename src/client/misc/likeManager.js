@@ -33,7 +33,7 @@ class LikeManagement {
   removeLike(id) {
     if (this.hasLocalStorage) {
       let userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
-      userLike = userLike.filter(v => v !== id);
+      userLike = userLike.filter(v => v != id); // eslint-disable-line eqeqeq
       window.localStorage.setItem(LSLIKEKEY, JSON.stringify(userLike));
     }
   }

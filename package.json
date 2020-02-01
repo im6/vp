@@ -2,6 +2,9 @@
   "name": "vp",
   "version": "1.21.0",
   "description": "source code of react.colorpk.com",
+  "engines": {
+    "node": ">= 8.x"
+  },
   "main": "index.js",
   "scripts": {
     "start": "node dist/server.js",
@@ -81,6 +84,7 @@
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
     "regenerator-runtime": "^0.13.3",
+    "serialize-javascript": "^2.1.2",
     "uuid": "^3.4.0"
   },
   "prettier": {

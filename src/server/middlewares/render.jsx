@@ -45,6 +45,7 @@ export default (req, res) => {
       script={`${PUBLIC_PATH}main.js`}
       csrfToken={req.csrfToken()}
       lastBuildDate={process.env.lastBuildDate || 'dev'}
+      initState={store.getState()}
     >
       {appHtml}
     </Html>
