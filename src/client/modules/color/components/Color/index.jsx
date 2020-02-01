@@ -5,62 +5,49 @@ import OneColor from '../OneColor';
 import style from './style.sass';
 import SpinLoader from 'components/SpinLoader';
 
-class Color extends React.Component {
-  // componentDidMount() {
-  //   const {
-  //     onInit,
-  //     match: { url },
-  //   } = this.props;
-  //   onInit(url);
-  // }
-
-  render() {
-    const {
-      list,
-      liked,
-      colorDef,
-      hasSelected,
-      selectedId,
-      loading,
-      vertical,
-      onLike,
-      onShare,
-      onEnter,
-      onDownload,
-    } = this.props;
-    return (
-      <Fragment>
-        {loading && <SpinLoader />}
-        {hasSelected && (
-          <OneColor
-            boxInfo={colorDef.get(selectedId)}
-            liked={liked.get(selectedId)}
-            onLike={onLike}
-            onDownload={onDownload}
-            onShare={onShare}
-          />
-        )}
-        <div className={style.container}>
-          <div className={style.list}>
-            {!loading && list.length === 0 && <h1>No colors to show</h1>}
-            {list.map(v => {
-              return (
-                <Box
-                  key={v}
-                  vertical={vertical}
-                  liked={liked.get(v)}
-                  boxInfo={colorDef.get(v)}
-                  onLikeClick={onLike}
-                  onCanvasClick={onEnter}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </Fragment>
-    );
-  }
-}
+const Color = ({
+  list,
+  liked,
+  colorDef,
+  hasSelected,
+  selectedId,
+  loading,
+  vertical,
+  onLike,
+  onShare,
+  onEnter,
+  onDownload,
+}) => (
+  <Fragment>
+    {loading && <SpinLoader />}
+    {hasSelected && (
+      <OneColor
+        boxInfo={colorDef.get(selectedId)}
+        liked={liked.get(selectedId)}
+        onLike={onLike}
+        onDownload={onDownload}
+        onShare={onShare}
+      />
+    )}
+    <div className={style.container}>
+      <div className={style.list}>
+        {!loading && list.length === 0 && <h1>No colors to show</h1>}
+        {list.map(v => {
+          return (
+            <Box
+              key={v}
+              vertical={vertical}
+              liked={liked.get(v)}
+              boxInfo={colorDef.get(v)}
+              onLikeClick={onLike}
+              onCanvasClick={onEnter}
+            />
+          );
+        })}
+      </div>
+    </div>
+  </Fragment>
+);
 
 Color.propTypes = {
   selectedId: PropTypes.string,

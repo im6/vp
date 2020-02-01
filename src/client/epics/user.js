@@ -10,7 +10,6 @@ import likeManager from '../misc/likeManager';
 const query = `query {
   auth {
     ... on User {
-      id
       name
       img
       isadmin
@@ -40,7 +39,7 @@ export default [
         }).pipe(
           mergeMap(action2 => {
             return iif(
-              () => get(action2, 'response.data.auth.id', null),
+              () => !get(action2, 'response.data.auth.url', null),
               of(
                 {
                   type: 'user/auth/success',

@@ -3,8 +3,6 @@ import { buildSchema } from 'graphql';
 const schemaStr = `
   enum ColorCategory {
     PUBLIC
-    LIKES
-    PROFILE
     ANONYMOUS
   }
 
@@ -16,13 +14,12 @@ const schemaStr = `
     id: ID!
     like: Int!
     color: String!
-    userid: Int
+    userid: ID
     username: String
     createdate: String
   }
 
   type User {
-    id: ID!
     img: String
     isadmin: Boolean
     name: String

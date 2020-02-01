@@ -18,10 +18,10 @@ const root = {
 
       try {
         const { data: oauthData } = await showUser(qsObj);
-        const { name, id } = oauthData;
+        const { name, id: oauthId } = oauthData;
         const userData = await sqlExecOne(
           `SELECT * FROM colorpk_user WHERE oauth = 'fb' AND oauthid = ?`,
-          [id]
+          [oauthId]
         );
         if (userData.length === 1) {
           // existing user.
@@ -48,7 +48,6 @@ const root = {
 
           return {
             __typename: 'User',
-            id: userId,
             name,
             isadmin,
             img: get(oauthData, 'picture.data.url', null),
@@ -62,7 +61,7 @@ const root = {
           insertId,
         } = await sqlExecOne(
           `INSERT INTO colorpk_user (oauth, name, oauthid, lastlogin) VALUES ('fb', ?, ?, NOW())`,
-          [name, id]
+          [name, oauthId]
         );
         req.session.app.dbInfo = {
           id: insertId,
@@ -98,35 +97,16 @@ const root = {
 
   async color(args, req) {
     const { category } = args;
-    if (!isAuth(req) && ['LIKES', 'PROFILE'].indexOf(category) > -1) {
-      return new GraphQLError('color error: no user defined');
-    }
     if (!isAdmin(req) && category === 'ANONYMOUS') {
       return new GraphQLError('color error: no admin access');
     }
 
-    const userId = get(req, 'session.app.dbInfo.id', null);
     let colors = null;
 
     switch (category) {
       case 'PUBLIC':
         colors = await sqlExecOne(
           'SELECT a.* FROM colorpk_color a WHERE a.display=0 ORDER BY `id` DESC'
-        );
-        break;
-      case 'LIKES':
-        colors = await sqlExecOne(
-          `SELECT a.* FROM colorpk_color a
-          INNER JOIN 
-          (SELECT color_id FROM colorpk_userlike WHERE user_id = ?) b
-          ON id = b.color_id`,
-          [userId]
-        );
-        break;
-      case 'PROFILE':
-        colors = await sqlExecOne(
-          'SELECT a.*, false as `liked` FROM colorpk_color a WHERE userid = ?',
-          [userId]
         );
         break;
       case 'ANONYMOUS':
