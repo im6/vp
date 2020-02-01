@@ -28,10 +28,6 @@ const mapDispatchToProps = dispatch => {
       dispatch(ac());
       shared.history.push('/');
     },
-    onEnterProfile(name) {
-      const ac = createAction('color/getUserColor');
-      dispatch(ac(name));
-    },
     onChangeLang(lang) {
       const ac = createAction('user/setLanguage');
       dispatch(ac(lang));

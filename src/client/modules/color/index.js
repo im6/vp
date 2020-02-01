@@ -6,11 +6,13 @@ const shared = {
   history: null,
   isAuth: false,
 };
+
 const storeMap = {
-  '/popular': 'colorIdByLike',
-  '/': 'colorId',
-  '/like': 'myLiked',
-  '/portfolio': 'myPortfolio',
+  '/': 'colorIdAllByDate',
+  '/latest': 'colorIdAllByDate',
+  '/popular': 'colorIdAllByLike',
+  '/like': false, // convert by dict
+  '/portfolio': 'colorIdByMyOwn',
 };
 const mapStateToProps = (
   { color, user },
@@ -28,7 +30,11 @@ const mapStateToProps = (
   const colorDef = color.get('colorDef');
   const liked = color.get('liked');
   const hasSelected = colorDef.has(selectedId);
-  const list = color.get(storeMap[pathname] || 'colorId').toJS();
+
+  const list =
+    pathname === '/like'
+      ? liked.keySeq().toArray()
+      : color.get(storeMap[pathname] || 'colorIdAllByDate').toJS();
 
   return {
     loading: color.get('loading'),
@@ -43,15 +49,6 @@ const mapStateToProps = (
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInit(url) {
-      if (url === '/portfolio') {
-        const ac = createAction('color/getUserColor');
-        dispatch(ac('myPortfolio'));
-      } else if (url === '/like') {
-        const ac = createAction('color/getUserColor');
-        dispatch(ac('myLiked'));
-      }
-    },
     onLike({ id, willLike }) {
       const ac = createAction('color/toggleLike');
       const { isAuth } = shared;

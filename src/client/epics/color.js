@@ -127,53 +127,6 @@ export default [
 
   action$ =>
     action$.pipe(
-      ofType('color/getUserColor'),
-      mergeMap(({ payload }) => {
-        const cate = payload === 'myPortfolio' ? 'PROFILE' : 'LIKES';
-        return requester({
-          query: colorql,
-          variables: { cate },
-        }).pipe(
-          map(action2 => {
-            const data = get(action2, 'response.data.color', null);
-            if (data) {
-              return {
-                type: 'color/getUserColor/success',
-                payload: {
-                  name: payload === 'myPortfolio' ? 'myPortfolio' : 'myLiked',
-                  data,
-                },
-              };
-            }
-            return {
-              type: 'color/getUserColor/fail',
-              payload: {
-                name: payload,
-              },
-            };
-          }),
-          catchError(error => {
-            return of({ type: 'color/getUserColor/fail' }).pipe(
-              tap(() =>
-                // eslint-disable-next-line no-console
-                console.error(get(error, 'response.errors[0].message'))
-              ),
-              map(() => {
-                return {
-                  type: 'color/getUserColor/fail',
-                  payload: {
-                    name: payload,
-                  },
-                };
-              })
-            );
-          })
-        );
-      })
-    ),
-
-  action$ =>
-    action$.pipe(
       ofType('color/addNew'),
       mergeMap(({ payload }) => {
         return requester({

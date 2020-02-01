@@ -49,6 +49,10 @@ export default [
                 {
                   type: 'color/set/likes',
                   payload: get(action2, 'response.data.auth.likes', []),
+                },
+                {
+                  type: 'color/set/owns',
+                  payload: get(action2, 'response.data.auth.owns', []),
                 }
               ),
               of(
@@ -59,6 +63,10 @@ export default [
                 {
                   type: 'color/set/likes',
                   payload: likeManager.initLikes || [],
+                },
+                {
+                  type: 'color/set/owns',
+                  payload: [],
                 }
               )
             );

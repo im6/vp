@@ -101,7 +101,6 @@ class Header extends React.Component {
                     className="navbar-item"
                     to="/portfolio"
                     onClick={() => {
-                      this.props.onEnterProfile('myPortfolio');
                       this.onClickNav();
                     }}
                   >
@@ -111,7 +110,6 @@ class Header extends React.Component {
                     to="/like"
                     className="navbar-item"
                     onClick={() => {
-                      this.props.onEnterProfile('myLiked');
                       this.onClickNav();
                     }}
                   >
@@ -217,7 +215,6 @@ Header.propTypes = {
   onLogout: PropTypes.func.isRequired,
   onOAuth: PropTypes.func.isRequired,
   onChangeLang: PropTypes.func.isRequired,
-  onEnterProfile: PropTypes.func.isRequired,
 };
 Header.contextType = LanguageContext;
 

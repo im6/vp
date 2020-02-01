@@ -17,7 +17,7 @@ import graphqlMiddleware from '../middlewares/graphql';
 import ssrMiddleware from '../middlewares/render';
 
 const app = express();
-const publicUrls = ['/', '/latest', '/popular', '/color/:colorId', '/new'];
+const publicUrls = ['/', '/latest', '/popular', '/color/:id', '/new'];
 
 if (process.env.NODE_ENV !== 'development') {
   app.set('trust proxy', true);

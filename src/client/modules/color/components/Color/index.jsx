@@ -6,13 +6,13 @@ import style from './style.sass';
 import SpinLoader from 'components/SpinLoader';
 
 class Color extends React.Component {
-  componentDidMount() {
-    const {
-      onInit,
-      match: { url },
-    } = this.props;
-    onInit(url);
-  }
+  // componentDidMount() {
+  //   const {
+  //     onInit,
+  //     match: { url },
+  //   } = this.props;
+  //   onInit(url);
+  // }
 
   render() {
     const {
@@ -71,7 +71,6 @@ Color.propTypes = {
   list: PropTypes.array.isRequired,
   match: PropTypes.object.isRequired,
   colorDef: PropTypes.object.isRequired,
-  onInit: PropTypes.func.isRequired,
   onLike: PropTypes.func.isRequired,
   onEnter: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
