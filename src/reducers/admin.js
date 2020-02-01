@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable no-useless-computed-key, object-shorthand  */
 import { handleActions } from 'redux-actions';
 import Immutable from 'immutable';
 
@@ -20,7 +20,7 @@ const admin = handleActions(
       });
     },
 
-    ['admin/getList/fail'](state, action) {
+    ['admin/getList/fail'](state) {
       return state.merge({
         list: Immutable.fromJS([]),
         loading: false,
@@ -28,11 +28,11 @@ const admin = handleActions(
     },
 
     ['admin/decideColor/success'](state, action) {
-      state = state.updateIn(['list'], list =>
+      const newState = state.updateIn(['list'], list =>
         list.filter(v => v.get('id') !== action.payload)
       );
 
-      return state.set('loading', false);
+      return newState.set('loading', false);
     },
   },
   initialState

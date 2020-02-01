@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable no-useless-computed-key, object-shorthand  */
 import { handleActions } from 'redux-actions';
 import { fromJS, List, Map } from 'immutable';
 
@@ -21,8 +21,8 @@ const color = handleActions(
     },
 
     ['color/get/success'](state, { payload }) {
-      let colorIdAllByDate = List(),
-        colorDef = Map();
+      let colorIdAllByDate = List();
+      let colorDef = Map();
       payload.forEach(v => {
         colorIdAllByDate = colorIdAllByDate.push(v.id);
         colorDef = colorDef.set(v.id, fromJS(v));
@@ -46,24 +46,22 @@ const color = handleActions(
       });
     },
 
-    ['color/toggleLike'](state, action) {
-      const { willLike, id } = action.payload;
-      state = willLike
+    ['color/toggleLike'](state, { payload }) {
+      const { willLike, id } = payload;
+      const newState = willLike
         ? state.setIn(['liked', id], true)
         : state.deleteIn(['liked', id]);
-      state = state.updateIn(
+      return newState.updateIn(
         ['colorDef', id, 'like'],
         v => v + (willLike ? 1 : -1)
       );
-      return state;
     },
 
-    ['color/addNew/success'](state, action) {
-      const { id } = action.payload;
-      state = state.setIn(['colorDef', id], fromJS(action.payload));
-      state = state.update('colorIdAllByDate', v => v.unshift(id));
-      state = state.update('colorIdAllByLike', v => v.push(id));
-      return state;
+    ['color/addNew/success'](state, { payload }) {
+      const { id } = payload;
+      let newState = state.setIn(['colorDef', id], fromJS(payload));
+      newState = newState.update('colorIdAllByDate', v => v.unshift(id));
+      return newState.update('colorIdAllByLike', v => v.push(id));
     },
 
     ['color/set/likes'](state, { payload }) {

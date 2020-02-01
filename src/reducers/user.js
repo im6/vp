@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable no-useless-computed-key, object-shorthand  */
 import { handleActions } from 'redux-actions';
 import { fromJS } from 'immutable';
 
@@ -10,10 +10,9 @@ const initialState = fromJS({
 
 const user = handleActions(
   {
-    ['user/auth/success'](state, action) {
-      const user = action.payload;
+    ['user/auth/success'](state, { payload: detail }) {
       return state.merge({
-        detail: fromJS(user),
+        detail: fromJS(detail),
         facebookUrl: null,
       });
     },
