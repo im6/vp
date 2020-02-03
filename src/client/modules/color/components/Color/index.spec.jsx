@@ -65,7 +65,7 @@ describe('render properly', () => {
   test('render with data', () => {
     const { getByText } = render(
       <Color
-        list={ids}
+        list={[...ids, '100']}
         liked={liked}
         colorDef={colorDef}
         selectedId={ids[0]}
