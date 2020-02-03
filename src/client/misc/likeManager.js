@@ -7,12 +7,12 @@ class LikeManagement {
     this.hasLocalStorage = localStorageEnabled;
     if (this.hasLocalStorage) {
       // todo: clean up in the near future
-      this.cleanUpType();
+      LikeManagement.cleanUpType();
     }
     this.initLikes = this.getInitLike();
   }
 
-  cleanUpType() {
+  static cleanUpType() {
     const userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
     const strIds = userLike.filter(v => typeof v === 'string');
     window.localStorage.setItem(LSLIKEKEY, JSON.stringify(strIds));
