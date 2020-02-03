@@ -6,6 +6,7 @@ import TranslationIcon from './components/TranslationIcon';
 import LanguageDropdown from './components/LanguageDropdown';
 import { LanguageContext } from '../LanguageContext';
 
+const iconUrl = '//dkny.oss-cn-hangzhou.aliyuncs.com/2/icon.png';
 const { selected: selectedStyleName } = style;
 
 class Header extends React.Component {
@@ -47,16 +48,8 @@ class Header extends React.Component {
     const language = this.context;
     const selectPopular = url === '/popular';
     const selectLatest = url in { '/latest': true, '/': true };
+    const imagUrl = (isAuth && detail.get('img')) || iconUrl;
 
-    let imagUrl = isAuth
-      ? detail.get('img')
-      : '//dkny.oss-cn-hangzhou.aliyuncs.com/2/icon.png';
-    if (process.env.NODE_ENV === 'development') {
-      if (isAuth) {
-        imagUrl =
-          'http://dkny.oss-cn-hangzhou.aliyuncs.com/temp/test_profile.jpeg';
-      }
-    }
     return (
       <nav
         className="navbar is-fixed-top"

@@ -11,13 +11,19 @@ import Html from 'components/Html';
 import App from 'components/App';
 import LangProvider from 'containers/Lang';
 import moduleReducers from '../../reducers';
+import { isAuth, isAdmin } from '../helper';
 
 const version = uuid.v1().substring(0, 8);
 
 export default (req, res) => {
   const store = createStore(combineReducers(moduleReducers), {
     user: fromJS({
-      detail: null,
+      detail: isAuth(req)
+        ? {
+            name: 'loading',
+            isadmin: isAdmin(req),
+          }
+        : null,
       facebookUrl: null,
       lang: req.cookies.lang,
     }),
