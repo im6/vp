@@ -32,16 +32,17 @@ const Color = ({
       <div className={style.list}>
         {!loading && list.length === 0 && <h1>No colors to show</h1>}
         {list.map(v => {
-          return (
+          const boxInfo = colorDef.get(v);
+          return boxInfo ? (
             <Box
               key={v}
               vertical={vertical}
               liked={liked.get(v)}
-              boxInfo={colorDef.get(v)}
+              boxInfo={boxInfo}
               onLikeClick={onLike}
               onCanvasClick={onEnter}
             />
-          );
+          ) : null;
         })}
       </div>
     </div>

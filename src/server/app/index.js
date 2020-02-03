@@ -17,7 +17,7 @@ import graphqlMiddleware from '../middlewares/graphql';
 import ssrMiddleware from '../middlewares/render';
 
 const app = express();
-const publicUrls = ['/', '/latest', '/popular', '/color/:id', '/new'];
+const publicUrls = ['/', '/latest', '/popular', '/color/:id', '/new', '/like'];
 
 if (process.env.NODE_ENV !== 'development') {
   app.set('trust proxy', true);
@@ -72,7 +72,6 @@ publicUrls.forEach(url => {
   app.get(url, ssrMiddleware);
 });
 
-app.get('/like', isAuth, ssrMiddleware);
 app.get('/portfolio', isAuth, ssrMiddleware);
 app.get('/adminpanel', isAdmin, ssrMiddleware);
 

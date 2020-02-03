@@ -4,13 +4,15 @@ import { withRouter } from 'react-router-dom';
 import Header from 'components/Header';
 
 const shared = {};
-const mapStateToProps = ({ user }, { location, history }) => {
+const mapStateToProps = ({ user, color }, { location, history }) => {
   shared.history = history;
-
   const { pathname: url } = location;
   const detail = user.get('detail');
   const facebookUrl = user.get('facebookUrl');
+  const likeNum = color.get('liked').size;
+
   return {
+    likeNum,
     url,
     detail,
     facebookUrl,

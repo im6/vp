@@ -43,11 +43,12 @@ class Header extends React.Component {
   }
 
   render() {
-    const { url, detail, facebookUrl } = this.props;
+    const { url, detail, likeNum, facebookUrl } = this.props;
     const isAuth = Boolean(detail);
     const language = this.context;
     const selectPopular = url === '/popular';
     const selectLatest = url in { '/latest': true, '/': true };
+    const selectSaved = url === '/like';
     const imagUrl = (isAuth && detail.get('img')) || iconUrl;
 
     return (
@@ -77,7 +78,7 @@ class Header extends React.Component {
           className={`navbar-menu ${this.state.showMenu ? 'is-active' : ''}`}
         >
           <div className="navbar-start">
-            {isAuth && (
+            {isAuth ? (
               <div className="navbar-item has-dropdown is-hoverable">
                 <a
                   className={`navbar-link ${
@@ -129,6 +130,17 @@ class Header extends React.Component {
                   </a>
                 </div>
               </div>
+            ) : (
+              <Link
+                to="/like"
+                className={`navbar-item ${
+                  selectSaved ? selectedStyleName : ''
+                }`}
+                onClick={this.onClickNav}
+              >
+                {language.like}
+                {likeNum > 0 && ` (${likeNum})`}
+              </Link>
             )}
 
             <Link
@@ -205,6 +217,7 @@ Header.propTypes = {
   url: PropTypes.string,
   detail: PropTypes.object,
   facebookUrl: PropTypes.string,
+  likeNum: PropTypes.number,
   onLogout: PropTypes.func.isRequired,
   onOAuth: PropTypes.func.isRequired,
   onChangeLang: PropTypes.func.isRequired,
