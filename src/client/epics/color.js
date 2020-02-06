@@ -1,4 +1,5 @@
 import get from 'lodash.get';
+import Cookies from 'js-cookie';
 import { ofType } from 'redux-observable';
 import { iif, of } from 'rxjs';
 import {
@@ -170,5 +171,13 @@ export default [
           })
         );
       })
+    ),
+  action$ =>
+    action$.pipe(
+      ofType('color/setDirection'),
+      tap(({ payload }) => {
+        Cookies.set('canvas', payload ? '1' : '0', { expires: 180 });
+      }),
+      ignoreElements()
     ),
 ];

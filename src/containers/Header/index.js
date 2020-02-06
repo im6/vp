@@ -10,12 +10,14 @@ const mapStateToProps = ({ user, color }, { location, history }) => {
   const detail = user.get('detail');
   const facebookUrl = user.get('facebookUrl');
   const likeNum = color.get('liked').size;
+  const showVertical = color.get('showVertical');
 
   return {
     likeNum,
     url,
     detail,
     facebookUrl,
+    showVertical,
   };
 };
 
@@ -33,6 +35,10 @@ const mapDispatchToProps = dispatch => {
     onChangeLang(lang) {
       const ac = createAction('user/setLanguage');
       dispatch(ac(lang));
+    },
+    onChangeCanvasDirection(isVertical) {
+      const ac = createAction('color/setDirection');
+      dispatch(ac(isVertical));
     },
   };
 };

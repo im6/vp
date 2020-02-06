@@ -1,23 +1,26 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Box from '../Box';
 import style from './style.sass';
 import { LanguageContext } from 'components/LanguageContext';
 
-const OneColor = ({ liked, boxInfo, onLike, onShare, onDownload }) => {
+const OneColor = ({
+  liked,
+  boxInfo,
+  vertical,
+  onLike,
+  onShare,
+  onDownload,
+}) => {
   const language = useContext(LanguageContext);
-  const [isVertical, setVertical] = useState(false);
   return (
     <div className={style.center}>
       <div>
         <Box
-          vertical={isVertical}
+          vertical={vertical}
           liked={liked}
           boxInfo={boxInfo}
           onLikeClick={onLike}
-          onCanvasClick={() => {
-            setVertical(!isVertical);
-          }}
           showUsername
         />
         <div className={style.center}>
@@ -66,6 +69,7 @@ const OneColor = ({ liked, boxInfo, onLike, onShare, onDownload }) => {
 OneColor.propTypes = {
   liked: PropTypes.bool,
   boxInfo: PropTypes.object.isRequired,
+  vertical: PropTypes.bool,
   onLike: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
   onDownload: PropTypes.func.isRequired,

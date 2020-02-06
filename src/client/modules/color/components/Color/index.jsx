@@ -23,6 +23,7 @@ const Color = ({
       <OneColor
         boxInfo={colorDef.get(selectedId)}
         liked={liked.get(selectedId)}
+        vertical={vertical}
         onLike={onLike}
         onDownload={onDownload}
         onShare={onShare}

@@ -19,6 +19,7 @@ class Header extends React.Component {
     this.onLogout = this.onLogout.bind(this);
     this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
     this.onClickNav = this.onClickNav.bind(this);
+    this.onClickTitleIcon = this.onClickTitleIcon.bind(this);
   }
 
   toggleMobileMenu() {
@@ -38,12 +39,18 @@ class Header extends React.Component {
     this.props.onOAuth(this.props.facebookUrl);
   }
 
+  onClickTitleIcon() {
+    const { onChangeCanvasDirection, showVertical } = this.props;
+    this.onClickNav();
+    onChangeCanvasDirection(!showVertical);
+  }
+
   onLogout() {
     this.props.onLogout();
   }
 
   render() {
-    const { url, detail, likeNum, facebookUrl } = this.props;
+    const { url, detail, likeNum, showVertical, facebookUrl } = this.props;
     const isAuth = Boolean(detail);
     const language = this.context;
     const selectPopular = url === '/popular';
@@ -58,9 +65,17 @@ class Header extends React.Component {
         aria-label="main navigation"
       >
         <div className="navbar-brand">
-          <Link to="/" className="navbar-item" onClick={this.onClickNav}>
-            <img src={imagUrl} height="32" width="32" alt="colorpk icon" />
-          </Link>
+          <div
+            title="click to rotate"
+            className={`navbar-item ${style.iconWrapper}`}
+            onClick={this.onClickTitleIcon}
+          >
+            <img
+              src={imagUrl}
+              className={`${showVertical ? '' : style.rotate}`}
+              alt="colorpk icon"
+            />
+          </div>
           <a
             role="button"
             className="navbar-burger burger"
@@ -218,9 +233,11 @@ Header.propTypes = {
   detail: PropTypes.object,
   facebookUrl: PropTypes.string,
   likeNum: PropTypes.number,
+  showVertical: PropTypes.bool,
   onLogout: PropTypes.func.isRequired,
   onOAuth: PropTypes.func.isRequired,
   onChangeLang: PropTypes.func.isRequired,
+  onChangeCanvasDirection: PropTypes.func.isRequired,
 };
 Header.contextType = LanguageContext;
 

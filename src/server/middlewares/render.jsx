@@ -16,6 +16,7 @@ import { isAuth, isAdmin } from '../helper';
 const version = uuid.v1().substring(0, 8);
 
 export default (req, res) => {
+  const { lang, canvas } = req.cookies;
   const store = createStore(combineReducers(moduleReducers), {
     user: fromJS({
       detail: isAuth(req)
@@ -25,7 +26,16 @@ export default (req, res) => {
           }
         : null,
       facebookUrl: null,
-      lang: req.cookies.lang,
+      lang,
+    }),
+    color: fromJS({
+      loading: true,
+      showVertical: canvas === '1',
+      colorDef: {},
+      liked: {},
+      colorIdAllByDate: [],
+      colorIdAllByLike: [],
+      colorIdByMyOwn: [],
     }),
   });
 

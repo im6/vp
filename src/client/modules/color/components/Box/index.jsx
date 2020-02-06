@@ -64,4 +64,8 @@ Box.propTypes = {
   showUsername: PropTypes.bool,
 };
 
+Box.defaultProps = {
+  onCanvasClick: () => {},
+};
+
 export default Box;
