@@ -56,7 +56,8 @@ class Header extends React.Component {
     const selectPopular = url === '/popular';
     const selectLatest = url in { '/latest': true, '/': true };
     const selectSaved = url === '/like';
-    const imagUrl = (isAuth && detail.get('img')) || iconUrl;
+    const userImgUrl = isAuth && detail.get('img');
+    const imagUrl = userImgUrl || iconUrl;
 
     return (
       <nav
@@ -72,7 +73,7 @@ class Header extends React.Component {
           >
             <img
               src={imagUrl}
-              className={`${showVertical ? '' : style.rotate}`}
+              className={`${userImgUrl || showVertical ? '' : style.rotate}`}
               alt="colorpk icon"
             />
           </div>
