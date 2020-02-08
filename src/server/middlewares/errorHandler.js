@@ -1,8 +1,9 @@
 /* eslint no-console: 0, no-unused-vars: 0 */
 import path from 'path';
+import { SERVER_STATIC_PATH } from '../config';
 
 const { PWD } = process.env;
-const errorPage = path.resolve(PWD, './dist/error.html');
+const errorPage = path.resolve(PWD, `${SERVER_STATIC_PATH}/error.html`);
 
 export const onGcpAppEngSig = (req, res) => {
   const { action } = req.params;

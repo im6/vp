@@ -22,6 +22,8 @@ export const PUBLIC_PATH =
     ? '/static/'
     : '//dkny.oss-cn-hangzhou.aliyuncs.com/2/';
 
+export const SERVER_STATIC_PATH = `./${STATIC_URL}/server`;
+
 if (process.env.NODE_ENV !== 'development' && !CSRF_EXCEPTION) {
   // eslint-disable-next-line no-console
   console.log('No CSRF exception defined');

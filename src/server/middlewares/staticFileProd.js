@@ -1,4 +1,5 @@
 import path from 'path';
+import { SERVER_STATIC_PATH } from '../config';
 
 const { PWD } = process.env;
 
@@ -13,7 +14,7 @@ const fileSet = ['/robots.txt', '/sitemap.xml', '/favicon.ico'].reduce(
 export default (req, res, next) => {
   const { url } = req;
   if (Object.prototype.hasOwnProperty.call(fileSet, url)) {
-    const filePath = path.resolve(PWD, `./dist${url}`);
+    const filePath = path.resolve(PWD, `${SERVER_STATIC_PATH}${url}`);
     res.sendFile(filePath);
   } else {
     next(404);
