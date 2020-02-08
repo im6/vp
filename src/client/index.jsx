@@ -4,17 +4,21 @@ import { customEventPolyFill } from './misc/util';
 import React from 'react';
 import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
-import App from 'components/App';
+import Layout from 'components/Layout';
 import store from './config/store';
+import Routes from './routes';
 import LangProvider from 'containers/Lang';
 import { BrowserRouter } from 'react-router-dom';
+
 customEventPolyFill();
 
 hydrate(
   <BrowserRouter>
     <Provider store={store}>
       <LangProvider>
-        <App />
+        <Layout>
+          <Routes />
+        </Layout>
       </LangProvider>
     </Provider>
   </BrowserRouter>,

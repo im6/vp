@@ -1,11 +1,11 @@
 import React from 'react';
-import Routes from '../../client/routes';
+import PropTypes from 'prop-types';
 import './bulma.modules.sass';
 import style from './style.sass';
 import Header from 'containers/Header';
 import SpinLoader from 'components/SpinLoader';
 
-class App extends React.Component {
+class Layout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,13 +21,18 @@ class App extends React.Component {
     const {
       state: { showLoading },
     } = this;
+    const { children } = this.props;
     return (
       <div className={style.container}>
         <Header />
-        {showLoading ? <SpinLoader /> : <Routes />}
+        {showLoading ? <SpinLoader /> : children}
       </div>
     );
   }
 }
 
-export default App;
+Layout.propTypes = {
+  children: PropTypes.node,
+};
+
+export default Layout;

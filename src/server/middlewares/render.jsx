@@ -8,7 +8,7 @@ import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 
 import { PUBLIC_PATH } from '../config';
 import Html from 'components/Html';
-import App from 'components/App';
+import Layout from 'components/Layout';
 import LangProvider from 'containers/Lang';
 import moduleReducers from '../../reducers';
 import { isAuth, isAdmin } from '../helper';
@@ -43,7 +43,7 @@ export default (req, res) => {
     <StaticRouter location={req.url}>
       <Provider store={store}>
         <LangProvider>
-          <App />
+          <Layout />
         </LangProvider>
       </Provider>
     </StaticRouter>
