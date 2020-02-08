@@ -27,5 +27,4 @@ exports.serverBaseConfig = {
 };
 
 exports.localIdentName = '[hash:base64:5]';
-
 exports.staticAssetsPath = 'assets/static';

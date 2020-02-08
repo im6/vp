@@ -97,8 +97,7 @@ const server = Object.assign(serverBaseConfig, {
   mode: 'development',
   output: {
     publicPath: '/',
-    path: path.join(__dirname, '../local'),
-    filename: 'server.js',
+    path: path.join(__dirname, '../local/server'),
   },
   module: {
     rules: [
@@ -132,7 +131,7 @@ const server = Object.assign(serverBaseConfig, {
       },
     ],
   },
-  plugins: [new ServerStartPlugin()],
+  plugins: [new CleanWebpackPlugin(), new ServerStartPlugin()],
   watchOptions: {
     ignored: /node_modules/,
   },

@@ -98,8 +98,7 @@ const server = Object.assign(serverBaseConfig, {
   mode: 'production',
   output: {
     publicPath: '/',
-    path: path.join(__dirname, '../dist'),
-    filename: 'server.js',
+    path: path.join(__dirname, '../dist/server'),
   },
   module: {
     rules: [
@@ -133,6 +132,7 @@ const server = Object.assign(serverBaseConfig, {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
       'process.env.lastBuildDate': JSON.stringify(
         `${new Date().toLocaleString()} EST`
@@ -140,9 +140,9 @@ const server = Object.assign(serverBaseConfig, {
     }),
     new CopyWebpackPlugin([
       { from: `${staticAssetsPath}/error.html` },
-      { from: `${staticAssetsPath}/assets/favicon.ico` },
-      { from: `${staticAssetsPath}/assets/robots.txt` },
-      { from: `${staticAssetsPath}/assets/sitemap.xml` },
+      { from: `${staticAssetsPath}/favicon.ico` },
+      { from: `${staticAssetsPath}/robots.txt` },
+      { from: `${staticAssetsPath}/sitemap.xml` },
     ]),
   ],
 });
