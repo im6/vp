@@ -4,12 +4,14 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const {
   withoutCssModuleFiles,
   clientBaseConfig,
   serverBaseConfig,
   localIdentName,
+  staticAssetsPath,
 } = require('./base');
 
 const client = Object.assign(clientBaseConfig, {
@@ -136,6 +138,12 @@ const server = Object.assign(serverBaseConfig, {
         `${new Date().toLocaleString()} EST`
       ),
     }),
+    new CopyWebpackPlugin([
+      { from: `${staticAssetsPath}/error.html` },
+      { from: `${staticAssetsPath}/assets/favicon.ico` },
+      { from: `${staticAssetsPath}/assets/robots.txt` },
+      { from: `${staticAssetsPath}/assets/sitemap.xml` },
+    ]),
   ],
 });
 

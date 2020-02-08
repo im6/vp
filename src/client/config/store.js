@@ -28,7 +28,6 @@ const store = createStore(
   {
     user: fromJS(initState.user),
     color: fromJS(initState.color),
-    admin: fromJS(initState.admin),
   },
   compose(enhancers)
 );
