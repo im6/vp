@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /portfolio
+Disallow: /like
+Disallow: /adminpanel
+
+Sitemap: https://react.colorpk.com/sitemap.xml

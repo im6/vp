@@ -96,8 +96,8 @@ const server = Object.assign(serverBaseConfig, {
   watch: true,
   mode: 'development',
   output: {
-    publicPath: '/',
     path: path.join(__dirname, '../local/server'),
+    filename: 'index.js',
   },
   module: {
     rules: [

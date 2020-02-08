@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node dist/server/main.js",
+    "start": "node dist/server",
     "test": "jest --coverage",
     "lint": "eslint ./webpack ./src",
     "dev": "webpack --config ./webpack/develop.js",
