@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 
-import { SESSION_SECRET } from '../config';
+import { SESSION_SECRET, SERVER_META_FILES } from '../config';
 
 import { oauthLogin, isAuth, isAdmin } from '../middlewares/auth';
 import {
@@ -37,10 +37,7 @@ app.use(
 );
 
 if (process.env.NODE_ENV === 'development') {
-  // eslint-disable-next-line global-require
-  const staticFile = require('../middlewares/staticFile').default;
-  app.get('/static/:fileName', staticFile);
-
+  app.use('/static', express.static('local/public'));
   app.use((req, res, next) => {
     // eslint-disable-next-line no-console
     console.log(`${req.method}: ${req.originalUrl}`);
@@ -48,13 +45,11 @@ if (process.env.NODE_ENV === 'development') {
   });
 } else {
   // eslint-disable-next-line global-require
-  const staticFileProd = require('../middlewares/staticFileProd').default;
-  app.get('/robots.txt', staticFileProd);
-  app.get('/favicon.ico', staticFileProd);
-  app.get('/sitemap.xml', staticFileProd);
-
+  const staticFileProd = require('../middlewares/staticFile').default;
+  SERVER_META_FILES.forEach(v => {
+    app.get(v, staticFileProd);
+  });
   app.get('/_ah/:action', onGcpAppEngSig); // gcp status check
-
   app.use(csrfOverride);
 }
 

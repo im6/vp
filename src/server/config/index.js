@@ -23,6 +23,11 @@ export const PUBLIC_PATH =
     : '//dkny.oss-cn-hangzhou.aliyuncs.com/2/';
 
 export const SERVER_STATIC_PATH = `./${STATIC_URL}/server`;
+export const SERVER_META_FILES = [
+  '/robots.txt',
+  '/sitemap.xml',
+  '/favicon.ico',
+];
 
 if (process.env.NODE_ENV !== 'development' && !CSRF_EXCEPTION) {
   // eslint-disable-next-line no-console

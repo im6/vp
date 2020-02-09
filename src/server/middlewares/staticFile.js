@@ -1,24 +1,17 @@
 import path from 'path';
-import { STATIC_URL } from '../config';
+import { SERVER_STATIC_PATH, SERVER_META_FILES } from '../config';
 
-const scriptSet = [
-  'main.js',
-  'main.css',
-  'newColor.js',
-  'newColor.css',
-  'adminPanel.js',
-  'adminPanel.css',
-].reduce((acc, cur) => {
+const { PWD } = process.env;
+
+const fileSet = SERVER_META_FILES.reduce((acc, cur) => {
   acc[cur] = true;
   return acc;
 }, {});
 
-const { PWD } = process.env;
-
 export default (req, res, next) => {
-  const { fileName } = req.params;
-  if (Object.prototype.hasOwnProperty.call(scriptSet, fileName)) {
-    const filePath = path.resolve(PWD, `./${STATIC_URL}/public/${fileName}`);
+  const { url } = req;
+  if (Object.prototype.hasOwnProperty.call(fileSet, url)) {
+    const filePath = path.resolve(PWD, `${SERVER_STATIC_PATH}${url}`);
     res.sendFile(filePath);
   } else {
     next(404);
