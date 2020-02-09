@@ -27,6 +27,7 @@ export default (req, res) => {
         : null,
       facebookUrl: null,
       lang,
+      loading: true,
     }),
     color: fromJS({
       loading: true,

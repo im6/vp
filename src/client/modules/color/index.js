@@ -14,6 +14,7 @@ const storeMap = {
   '/like': false, // convert by dict
   '/portfolio': 'colorIdByMyOwn',
 };
+
 const mapStateToProps = (
   { color, user },
   {
@@ -24,7 +25,8 @@ const mapStateToProps = (
     history,
   }
 ) => {
-  shared.isAuth = Boolean(user.get('detail'));
+  const isAuth = Boolean(user.get('detail'));
+  shared.isAuth = isAuth;
   shared.history = history;
 
   const colorDef = color.get('colorDef');
@@ -36,8 +38,13 @@ const mapStateToProps = (
       ? liked.keySeq().toArray()
       : color.get(storeMap[pathname] || 'colorIdAllByDate').toJS();
 
+  const loading =
+    (isAuth && pathname === '/like') || pathname === '/portfolio'
+      ? color.get('loading') || user.get('loading')
+      : color.get('loading');
+
   return {
-    loading: color.get('loading'),
+    loading,
     list,
     colorDef,
     liked,

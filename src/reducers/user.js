@@ -6,14 +6,21 @@ const initialState = fromJS({
   detail: null,
   facebookUrl: null,
   lang: null,
+  loading: false,
 });
 
 const user = handleActions(
   {
+    ['user/auth'](state) {
+      return state.merge({
+        loading: true,
+      });
+    },
     ['user/auth/success'](state, { payload: detail }) {
       return state.merge({
         detail: fromJS(detail),
         facebookUrl: null,
+        loading: false,
       });
     },
 
@@ -21,6 +28,7 @@ const user = handleActions(
       return state.merge({
         detail: null,
         facebookUrl: payload,
+        loading: false,
       });
     },
 
