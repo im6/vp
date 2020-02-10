@@ -9,3 +9,4 @@ package-lock.json
 local
 dist/public
 coverage
+assets

@@ -141,7 +141,7 @@ const server = Object.assign(serverBaseConfig, {
       { from: `${staticAssetsPath}/robots.txt` },
       { from: `${staticAssetsPath}/sitemap.xml` },
     ]),
-    new ServerStartPlugin(),
+    new ServerStartPlugin('./local/server'),
   ],
   watchOptions: {
     ignored: /node_modules/,

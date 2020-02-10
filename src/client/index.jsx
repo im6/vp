@@ -9,6 +9,7 @@ import store from './config/store';
 import Routes from './routes';
 import LangProvider from 'containers/Lang';
 import { BrowserRouter } from 'react-router-dom';
+import './bulma.modules.sass';
 
 customEventPolyFill();
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './bulma.modules.sass';
 import style from './style.sass';
 import Header from 'containers/Header';
 import SpinLoader from 'components/SpinLoader';

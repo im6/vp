@@ -8,8 +8,9 @@ class ServerStartPlugin {
     process.stdout.write(data);
   }
 
-  constructor() {
+  constructor(serverEntry) {
     this.child = null;
+    this.serverEntry = serverEntry;
   }
 
   apply(compiler) {
@@ -17,7 +18,7 @@ class ServerStartPlugin {
       if (this.child) {
         this.child.kill('SIGTERM');
       }
-      this.child = spawn('node', ['./local/server'], {
+      this.child = spawn('node', [this.serverEntry], {
         env: {
           ...process.env,
         },

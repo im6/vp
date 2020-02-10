@@ -1,8 +1,8 @@
 .env
 .nvmrc
 .github
+assets
 coverage
-img
 local
 node_modules
 src
