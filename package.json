@@ -7,11 +7,11 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node dist/server",
-    "test": "jest --coverage",
-    "lint": "eslint ./webpack ./src",
     "dev": "webpack --config ./webpack/develop.js",
-    "build": "webpack --config ./webpack/production.js"
+    "lint": "eslint ./webpack ./src",
+    "test": "jest --coverage",
+    "build": "webpack --config ./webpack/production.js",
+    "start": "node dist/server"
   },
   "husky": {
     "hooks": {

@@ -2,15 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 
 import LangProvider from '../containers/Lang';
 import store from './testStore';
 
 const AllTheProviders = ({ children }) => {
   return (
-    <Provider store={store}>
-      <LangProvider>{children}</LangProvider>
-    </Provider>
+    <MemoryRouter>
+      <Provider store={store}>
+        <LangProvider>{children}</LangProvider>
+      </Provider>
+    </MemoryRouter>
   );
 };
 
