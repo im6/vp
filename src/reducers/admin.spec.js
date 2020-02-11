@@ -3,15 +3,10 @@ import adminReducer from './admin';
 
 describe('test user reducer behavior', () => {
   test('action of admin/getList', () => {
-    expect(
-      adminReducer(fromJS({ loading: false }), {
-        type: 'admin/getList',
-      }).equals(
-        fromJS({
-          loading: true,
-        })
-      )
-    ).toBeTruthy();
+    const newState = adminReducer(fromJS({ loading: false }), {
+      type: 'admin/getList',
+    });
+    expect(newState.get('loading')).toBeTruthy();
   });
   test('action of admin/getList/success', () => {
     const list = [{}, {}];
