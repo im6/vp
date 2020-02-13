@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { languages } from '../../../translation';
 
-const LanguageDropdown = ({ onChange }) => (
+const LanguageDropdown = ({ languages, onChange }) => (
   <div className="navbar-dropdown">
     {languages.map(v => (
       <a
@@ -20,6 +19,7 @@ const LanguageDropdown = ({ onChange }) => (
 
 LanguageDropdown.propTypes = {
   onChange: PropTypes.func.isRequired,
+  languages: PropTypes.array.isRequired,
 };
 
 export default LanguageDropdown;

@@ -50,7 +50,14 @@ class Header extends React.Component {
   }
 
   render() {
-    const { url, detail, likeNum, showVertical, facebookUrl } = this.props;
+    const {
+      url,
+      detail,
+      likeNum,
+      showVertical,
+      facebookUrl,
+      languages,
+    } = this.props;
     const isAuth = Boolean(detail);
     const language = this.context;
     const selectPopular = url === '/popular';
@@ -200,7 +207,10 @@ class Header extends React.Component {
                   {language.language}
                 </span>
               </a>
-              <LanguageDropdown onChange={this.props.onChangeLang} />
+              <LanguageDropdown
+                languages={languages}
+                onChange={this.props.onChangeLang}
+              />
             </div>
           </div>
 
@@ -235,6 +245,7 @@ Header.propTypes = {
   facebookUrl: PropTypes.string,
   likeNum: PropTypes.number,
   showVertical: PropTypes.bool,
+  languages: PropTypes.array.isRequired,
   onLogout: PropTypes.func.isRequired,
   onOAuth: PropTypes.func.isRequired,
   onChangeLang: PropTypes.func.isRequired,

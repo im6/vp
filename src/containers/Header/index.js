@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { createAction } from 'redux-actions';
 import { withRouter } from 'react-router-dom';
 import Header from 'components/Header';
+import { languages } from '../../translation';
 
 const shared = {};
 const mapStateToProps = ({ user, color }, { location, history }) => {
@@ -18,6 +19,7 @@ const mapStateToProps = ({ user, color }, { location, history }) => {
     detail,
     facebookUrl,
     showVertical,
+    languages,
   };
 };
 
