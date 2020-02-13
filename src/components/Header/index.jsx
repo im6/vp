@@ -85,7 +85,7 @@ class Header extends React.Component {
             />
           </div>
           <a
-            role="button"
+            role="nav toggle btn"
             className="navbar-burger burger"
             aria-label="menu"
             aria-expanded="false"
