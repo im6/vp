@@ -1,6 +1,6 @@
 # [ColorPK.com](http://react.colorpk.com) v1 ![](https://github.com/im6/vp/workflows/build/badge.svg)
 
-# ![logo](https://github.com/zj1926/vp/blob/master/assets/img/logo.png 'colorpk.com') \= ![rxjs](https://github.com/zj1926/vp/blob/master/assets/img/rxjs.png 'RxJS') + ![react](https://github.com/zj1926/vp/blob/master/assets/img/react.png 'react') + ![graphql](https://github.com/zj1926/vp/blob/master/assets/img/graphql.png 'graphql')
+# ![logo](https://github.com/zj1926/vp/blob/master/assets/img/logo.png 'colorpk.com') \= ![rxjs](https://github.com/zj1926/vp/blob/master/assets/img/rxjs.png 'RxJS') + ![react](https://github.com/zj1926/vp/blob/master/assets/img/react.png 'React') + ![graphql](https://github.com/zj1926/vp/blob/master/assets/img/graphql.png 'GraphQL')
 
 ## Highlight
 
@@ -12,6 +12,7 @@
 - Docker
 - Express.js
 - [SSR](https://reactjs.org/docs/react-dom-server.html)
+- [React Testing Library](https://testing-library.com/)
 - MySQL
 - redux
 - react-redux
@@ -20,4 +21,3 @@
 - Babel
 - SaSS
 - oAuth2(Facebook)
-- [React Testing Library](https://testing-library.com/)
