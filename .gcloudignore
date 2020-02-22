@@ -9,3 +9,4 @@ src
 webpack
 npm-debug.log
 package-lock.json
+README.md
