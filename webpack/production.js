@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 const {
   withoutCssModuleFiles,
@@ -16,6 +17,7 @@ const {
 
 const client = Object.assign(clientBaseConfig, {
   mode: 'production',
+  devtool: 'hidden-source-map', // debug
   output: {
     publicPath: '//dkny.oss-cn-hangzhou.aliyuncs.com/2/',
     path: path.join(__dirname, '../dist/public'),
@@ -61,6 +63,12 @@ const client = Object.assign(clientBaseConfig, {
               },
             },
           },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [autoprefixer()],
+            },
+          },
           'sass-loader',
         ],
         exclude: withoutCssModuleFiles,
@@ -69,10 +77,10 @@ const client = Object.assign(clientBaseConfig, {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new OptimizeCssAssetsPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
+    new OptimizeCssAssetsPlugin(),
     new CompressionPlugin({
       filename: '[path]',
       minRatio: 1,
@@ -84,6 +92,7 @@ const client = Object.assign(clientBaseConfig, {
     }),
   ],
   optimization: {
+    minimize: false,
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
