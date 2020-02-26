@@ -14,8 +14,10 @@ class LikeManagement {
 
   static cleanUpType() {
     const userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
-    const strIds = userLike.filter(v => typeof v === 'string');
-    window.localStorage.setItem(LSLIKEKEY, JSON.stringify(strIds));
+    if (Array.isArray(userLike)) {
+      const strIds = userLike.filter(v => typeof v === 'string');
+      window.localStorage.setItem(LSLIKEKEY, JSON.stringify(strIds));
+    }
   }
 
   getInitLike() {
