@@ -17,7 +17,7 @@ const {
 
 const client = Object.assign(clientBaseConfig, {
   mode: 'production',
-  devtool: 'hidden-source-map', // debug
+  // devtool: 'hidden-source-map', // debug
   output: {
     publicPath: '//dkny.oss-cn-hangzhou.aliyuncs.com/2/',
     path: path.join(__dirname, '../dist/public'),
@@ -92,7 +92,7 @@ const client = Object.assign(clientBaseConfig, {
     }),
   ],
   optimization: {
-    minimize: false,
+    // minimize: false,
     splitChunks: {
       chunks: 'all',
       cacheGroups: {

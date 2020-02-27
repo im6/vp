@@ -39,8 +39,6 @@ class LikeManagement {
       const userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
       userLike.push(id);
       window.localStorage.setItem(LSLIKEKEY, JSON.stringify(userLike));
-      const err = null;
-      err.filter();
     }
   }
 
