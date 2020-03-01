@@ -7,12 +7,13 @@ describe('render properly', () => {
   test('render Header with anonymouse', () => {
     const onLogin = jest.fn();
     const onRotate = jest.fn();
+    const likeNum = 2;
     const { getByText, getByTitle, getByLabelText, rerender } = render(
       <Header
         url="/popular"
         detail={null}
         facebookUrl="//www.facebook.com"
-        likeNum={2}
+        likeNum={likeNum}
         showVertical
         languages={[]}
         onLogout={jest.fn()}
@@ -26,7 +27,7 @@ describe('render properly', () => {
         url="/like"
         detail={null}
         facebookUrl="//www.facebook.com"
-        likeNum={2}
+        likeNum={likeNum}
         showVertical
         languages={[]}
         onLogout={jest.fn()}
@@ -38,6 +39,7 @@ describe('render properly', () => {
     fireEvent.click(getByText('Facebook Login'));
     fireEvent.click(getByLabelText('menu'));
     fireEvent.click(getByTitle('click to rotate'));
+    fireEvent.click(getByText(`Like (${likeNum})`));
     expect(onLogin).toBeCalled();
   });
 

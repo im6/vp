@@ -19,6 +19,7 @@ class Header extends React.Component {
     this.onLogout = this.onLogout.bind(this);
     this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
     this.onClickNav = this.onClickNav.bind(this);
+    this.onClickNavLike = this.onClickNavLike.bind(this);
     this.onClickTitleIcon = this.onClickTitleIcon.bind(this);
   }
 
@@ -33,6 +34,10 @@ class Header extends React.Component {
         showMenu: false,
       });
     }
+  }
+  onClickNavLike() {
+    this.onClickNav();
+    window.scrollTo(0, 0);
   }
   onFBClick(evt) {
     evt.preventDefault();
@@ -159,7 +164,7 @@ class Header extends React.Component {
                 className={`navbar-item ${
                   selectSaved ? selectedStyleName : ''
                 }`}
-                onClick={this.onClickNav}
+                onClick={this.onClickNavLike}
               >
                 {language.like}
                 {likeNum > 0 && ` (${likeNum})`}
