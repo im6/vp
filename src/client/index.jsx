@@ -33,7 +33,3 @@ if (process.env.NODE_ENV !== 'development') {
   window.dispatchEvent(new CustomEvent('_COLORPK_SCRIPT_READY'));
   console.log('client last build: ', process.env.lastBuildDate);
 }
-
-window.onerror = (a, b, c, d, e, f, g) => {
-  console.log(a);
-};

@@ -69,6 +69,5 @@ export default (req, res) => {
   );
   const html = renderToStaticMarkup(htmlDOM);
   res.status(200);
-  res.header('Access-Control-Allow-Origin', '*');
   res.send(`<!DOCTYPE html>${html}`);
 };
