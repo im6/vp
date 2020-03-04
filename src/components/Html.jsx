@@ -62,11 +62,7 @@ const Html = ({
           __html: `window.${reduxName}=${serialize(initState)}`,
         }}
       />
-      <script
-        src={`${script}?${version}`}
-        type="text/javascript"
-        crossorigin="anonymous"
-      />
+      <script src={`${script}?${version}`} type="text/javascript" />
     </body>
   </html>
 );
