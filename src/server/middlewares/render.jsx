@@ -69,6 +69,6 @@ export default (req, res) => {
   );
   const html = renderToStaticMarkup(htmlDOM);
   res.status(200);
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'https://react.colorpk.com');
   res.send(`<!DOCTYPE html>${html}`);
 };
