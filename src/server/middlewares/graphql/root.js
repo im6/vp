@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import { v1 as uuidV1 } from 'uuid';
 import get from 'lodash.get';
 import { GraphQLError } from 'graphql';
 
@@ -51,8 +51,8 @@ const root = {
             name,
             isadmin,
             img: get(oauthData, 'picture.data.url', null),
-            likes: likeData.map(v => v.color_id),
-            owns: ownData.map(v => v.id),
+            likes: likeData.map((v) => v.color_id),
+            owns: ownData.map((v) => v.id),
           };
         }
 
@@ -82,7 +82,7 @@ const root = {
       }
     } else {
       // no valid auth info, response auth state value
-      const oauthState = uuid.v1();
+      const oauthState = uuidV1();
       req.session.app = {
         oauthState,
       };
@@ -120,7 +120,7 @@ const root = {
     }
 
     try {
-      return colors.map(v => {
+      return colors.map((v) => {
         return {
           id: v.id,
           like: v.like,
@@ -216,7 +216,7 @@ const root = {
     console.log(`logoff ${username}, delete session`); // eslint-disable-line no-console
     delete req.session.app;
 
-    const oauthState = uuid.v1();
+    const oauthState = uuidV1();
     req.session.app = {
       oauthState,
     };

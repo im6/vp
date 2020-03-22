@@ -7,7 +7,7 @@ const mapStateToProps = ({ admin }) => ({
   loading: admin.get('loading'),
 });
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onInit() {
       const ac0 = createAction('admin/getList');

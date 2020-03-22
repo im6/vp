@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import { v1 as uuidV1 } from 'uuid';
 import React from 'react';
 import { fromJS } from 'immutable';
 import { Provider } from 'react-redux';
@@ -13,7 +13,7 @@ import LangProvider from 'containers/Lang';
 import moduleReducers from '../../reducers';
 import { isAuth, isAdmin } from '../helper';
 
-const version = uuid.v1().substring(0, 8);
+const version = uuidV1().substring(0, 8);
 
 export default (req, res) => {
   const { lang, canvas } = req.cookies;

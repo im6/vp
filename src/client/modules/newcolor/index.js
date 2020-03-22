@@ -18,10 +18,10 @@ const mapStateToProps = (
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onAdd(colorValue) {
-      const cl0 = colorValue.map(v => {
+      const cl0 = colorValue.map((v) => {
         return v.substr(1);
       });
 

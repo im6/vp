@@ -46,7 +46,7 @@ describe('test user reducer behavior', () => {
       }).equals(
         fromJS({
           loading: false,
-          list: list.filter(v => v.id !== selectedId),
+          list: list.filter((v) => v.id !== selectedId),
         })
       )
     ).toBeTruthy();

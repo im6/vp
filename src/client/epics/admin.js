@@ -22,7 +22,7 @@ const adjudicateql = `mutation($val: LikeColorInputType!) {
 }`;
 
 export default [
-  action$ =>
+  (action$) =>
     action$.pipe(
       ofType('admin/getList'),
       mergeMap(() =>
@@ -30,7 +30,7 @@ export default [
           query: colorql,
           variables: { cate: 'ANONYMOUS' },
         }).pipe(
-          map(ajaxRes => ({
+          map((ajaxRes) => ({
             type: 'admin/getList/success',
             payload: get(ajaxRes, 'response.data.color', null),
           })),
@@ -49,10 +49,10 @@ export default [
       )
     ),
 
-  action$ =>
+  (action$) =>
     action$.pipe(
       ofType('admin/decideColor'),
-      mergeMap(action1 =>
+      mergeMap((action1) =>
         requester({
           query: adjudicateql,
           variables: {
@@ -60,7 +60,7 @@ export default [
           },
         }).pipe(
           filter(
-            ajaxRes =>
+            (ajaxRes) =>
               get(ajaxRes, 'response.data.adjudicateColor.status', 1) === 0
           ),
           map(() => ({

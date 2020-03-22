@@ -30,14 +30,14 @@ const logoffQl = `mutation {
 }`;
 
 export default [
-  action$ =>
+  (action$) =>
     action$.pipe(
       ofType('user/auth'),
       mergeMap(() =>
         requester({
           query,
         }).pipe(
-          mergeMap(action2 => {
+          mergeMap((action2) => {
             return iif(
               () => !get(action2, 'response.data.auth.url', null),
               of(
@@ -70,7 +70,7 @@ export default [
               )
             );
           }),
-          catchError(error => {
+          catchError((error) => {
             return of({
               type: 'user/auth/fail',
               payload: null,
@@ -85,7 +85,7 @@ export default [
       )
     ),
 
-  action$ =>
+  (action$) =>
     action$.pipe(
       ofType('user/logoff'),
       mergeMap(() => {
@@ -97,7 +97,7 @@ export default [
           requester({
             query: logoffQl,
           }).pipe(
-            map(action2 => {
+            map((action2) => {
               return {
                 type: 'user/auth/fail',
                 payload: get(action2, 'response.data.logoff.url', null),
@@ -108,17 +108,17 @@ export default [
       })
     ),
 
-  action$ =>
+  (action$) =>
     action$.pipe(
       ofType('user/onOAuth'),
-      tap(action1 => window.location.replace(action1.payload)),
+      tap((action1) => window.location.replace(action1.payload)),
       ignoreElements()
     ),
 
-  action$ =>
+  (action$) =>
     action$.pipe(
       ofType('user/setLanguage'),
-      tap(action1 => {
+      tap((action1) => {
         Cookies.set('lang', action1.payload, { expires: 180 });
       }),
       ignoreElements()

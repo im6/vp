@@ -28,8 +28,8 @@ const admin = handleActions(
     },
 
     ['admin/decideColor/success'](state, action) {
-      const newState = state.updateIn(['list'], list =>
-        list.filter(v => v.get('id') !== action.payload)
+      const newState = state.updateIn(['list'], (list) =>
+        list.filter((v) => v.get('id') !== action.payload)
       );
 
       return newState.set('loading', false);

@@ -42,7 +42,7 @@ const createql = `mutation($val: CreateColorInputType!) {
 `;
 
 export default [
-  action$ =>
+  (action$) =>
     action$.pipe(
       ofType('color/get'),
       mergeMap(() => {
@@ -50,7 +50,7 @@ export default [
           query: colorql,
           variables: { cate: 'PUBLIC' },
         }).pipe(
-          map(action2 => {
+          map((action2) => {
             const colors = get(action2, 'response.data.color', null);
             return colors
               ? {
@@ -59,7 +59,7 @@ export default [
                 }
               : { type: 'color/get/fail' };
           }),
-          catchError(error => {
+          catchError((error) => {
             return of({ type: 'color/get/fail' }).pipe(
               // eslint-disable-next-line no-console
               tap(() => console.error(get(error, 'response.errors[0].message')))
@@ -69,10 +69,10 @@ export default [
       })
     ),
 
-  action$ =>
+  (action$) =>
     action$.pipe(
       ofType('color/toggleLike'),
-      tap(action0 => {
+      tap((action0) => {
         const { willLike, id, isAuth } = action0.payload;
         if (!isAuth) {
           if (willLike) {
@@ -82,7 +82,7 @@ export default [
           }
         }
       }),
-      mergeMap(action0 => {
+      mergeMap((action0) => {
         const { willLike, id } = action0.payload;
         return requester({
           query: likeql,
@@ -94,13 +94,13 @@ export default [
           },
         }).pipe(
           filter(
-            ajaxRes => get(ajaxRes, 'response.data.likeColor.status', 1) !== 0
+            (ajaxRes) => get(ajaxRes, 'response.data.likeColor.status', 1) !== 0
           ),
-          map(ajaxRes => get(ajaxRes, 'response.errors[0].message', true)),
-          catchError(err => {
+          map((ajaxRes) => get(ajaxRes, 'response.errors[0].message', true)),
+          catchError((err) => {
             return of(get(err, 'response.errors[0].message', true));
           }),
-          tap(err => {
+          tap((err) => {
             console.error('toggle like error: ', err); // eslint-disable-line no-console
           }),
           ignoreElements()
@@ -108,7 +108,7 @@ export default [
       })
     ),
 
-  action$ =>
+  (action$) =>
     action$.pipe(
       ofType('color/download'),
       tap(({ payload }) => {
@@ -117,7 +117,7 @@ export default [
       ignoreElements()
     ),
 
-  action$ =>
+  (action$) =>
     action$.pipe(
       ofType('color/share'),
       tap(({ payload }) => {
@@ -126,7 +126,7 @@ export default [
       ignoreElements()
     ),
 
-  action$ =>
+  (action$) =>
     action$.pipe(
       ofType('color/addNew'),
       mergeMap(({ payload }) => {
@@ -136,7 +136,7 @@ export default [
             val: payload,
           },
         }).pipe(
-          mergeMap(action2 => {
+          mergeMap((action2) => {
             const isGood =
               !get(action2, 'response.errors') &&
               get(action2, 'response.data.createColor.status', 1) === 0;
@@ -172,7 +172,7 @@ export default [
         );
       })
     ),
-  action$ =>
+  (action$) =>
     action$.pipe(
       ofType('color/setDirection'),
       tap(({ payload }) => {

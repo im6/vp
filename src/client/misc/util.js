@@ -10,13 +10,13 @@ const checkLocalStorage = () => {
   }
 };
 
-const downloadCanvas = color => {
+const downloadCanvas = (color) => {
   const HEIGHT = 420;
   const WIDTH = 340;
   const MARGIN = 13;
   const CANVASRATIO = 0.65;
 
-  const colors = color.split('#').map(v => `#${v}`);
+  const colors = color.split('#').map((v) => `#${v}`);
   const myCanvas = document.createElement('canvas');
   const ctx = myCanvas.getContext('2d');
 
@@ -110,7 +110,7 @@ export const customEventPolyFill = () => {
   return false;
 };
 
-export const share = type => {
+export const share = (type) => {
   // eslint-disable-next-line no-prototype-builtins
   if (!window.hasOwnProperty('encodeURIComponent')) {
     return;

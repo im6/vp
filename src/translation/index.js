@@ -153,7 +153,7 @@ const raw = [
   },
 ];
 
-export const languages = raw.map(v => {
+export const languages = raw.map((v) => {
   return {
     code: v.code,
     name: v.name,

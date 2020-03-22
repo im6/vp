@@ -53,7 +53,7 @@ const mapStateToProps = (
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onLike({ id, willLike }) {
       const ac = createAction('color/toggleLike');

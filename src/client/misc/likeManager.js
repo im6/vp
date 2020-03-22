@@ -15,7 +15,7 @@ class LikeManagement {
   static cleanUpType() {
     const userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
     if (Array.isArray(userLike)) {
-      const strIds = userLike.filter(v => typeof v === 'string');
+      const strIds = userLike.filter((v) => typeof v === 'string');
       window.localStorage.setItem(LSLIKEKEY, JSON.stringify(strIds));
     }
   }
@@ -45,7 +45,7 @@ class LikeManagement {
   removeLike(id) {
     if (this.hasLocalStorage) {
       let userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
-      userLike = userLike.filter(v => v != id); // eslint-disable-line eqeqeq
+      userLike = userLike.filter((v) => v != id); // eslint-disable-line eqeqeq
       window.localStorage.setItem(LSLIKEKEY, JSON.stringify(userLike));
     }
   }

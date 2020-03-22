@@ -7,7 +7,7 @@ export const isAuth = (req, ignoreUserId) => {
   );
 };
 
-export const getToken = req => {
+export const getToken = (req) => {
   const token = get(req, 'session.app.tokenInfo.access_token', null);
   if (typeof token === 'string' && token.length > 0) {
     return token;
@@ -15,6 +15,6 @@ export const getToken = req => {
   return null;
 };
 
-export const isAdmin = req => {
+export const isAdmin = (req) => {
   return isAuth(req) && get(req, 'session.app.dbInfo.isAdmin', false);
 };

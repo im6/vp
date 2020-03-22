@@ -23,13 +23,13 @@ const color = handleActions(
     ['color/get/success'](state, { payload }) {
       let colorIdAllByDate = List();
       let colorDef = Map();
-      payload.forEach(v => {
+      payload.forEach((v) => {
         colorIdAllByDate = colorIdAllByDate.push(v.id);
         colorDef = colorDef.set(v.id, fromJS(v));
       });
       const colorIdAllByLike = payload
         .sort((a, b) => b.like - a.like)
-        .map(v => v.id);
+        .map((v) => v.id);
       return state.merge({
         colorIdAllByDate,
         colorIdAllByLike: fromJS(colorIdAllByLike),
@@ -53,15 +53,15 @@ const color = handleActions(
         : state.deleteIn(['liked', id]);
       return newState.updateIn(
         ['colorDef', id, 'like'],
-        v => v + (willLike ? 1 : -1)
+        (v) => v + (willLike ? 1 : -1)
       );
     },
 
     ['color/addNew/success'](state, { payload }) {
       const { id } = payload;
       let newState = state.setIn(['colorDef', id], fromJS(payload));
-      newState = newState.update('colorIdAllByDate', v => v.unshift(id));
-      return newState.update('colorIdAllByLike', v => v.push(id));
+      newState = newState.update('colorIdAllByDate', (v) => v.unshift(id));
+      return newState.update('colorIdAllByLike', (v) => v.push(id));
     },
 
     ['color/set/likes'](state, { payload }) {

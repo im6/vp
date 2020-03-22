@@ -13,12 +13,12 @@ describe('translation correctness', () => {
     let allNameCovered = true;
     let noExtraNames = true;
 
-    languages.forEach(lang => {
+    languages.forEach((lang) => {
       const transSet = translation[lang.code];
       if (Object.keys(transSet).length !== engKeys.length) {
         noExtraNames = false;
       }
-      engKeys.forEach(name => {
+      engKeys.forEach((name) => {
         const res = transSet[name];
         if (!res) {
           allNameCovered = false;

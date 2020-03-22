@@ -47,7 +47,7 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   // eslint-disable-next-line global-require
   const staticFileProd = require('../middlewares/staticFile').default;
-  SERVER_META_FILES.forEach(v => {
+  SERVER_META_FILES.forEach((v) => {
     app.get(v, staticFileProd);
   });
   app.get('/_ah/:action', onGcpAppEngSig); // gcp status check
@@ -64,7 +64,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 app.get('/auth/:oauth', oauthLogin);
 
-publicUrls.forEach(url => {
+publicUrls.forEach((url) => {
   app.get(url, ssrMiddleware);
 });
 
