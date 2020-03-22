@@ -106,15 +106,7 @@ const server = Object.assign(serverBaseConfig, {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env', '@babel/preset-react'],
-              plugins: ['@babel/plugin-syntax-dynamic-import'],
-            },
-          },
-        ],
+        use: ['babel-loader'],
       },
       {
         test: /\.sass$/,
