@@ -4,6 +4,9 @@ import { fromJS } from 'immutable';
 import Header from '.';
 
 describe('render properly', () => {
+  beforeAll(() => {
+    global.scrollTo = jest.fn();
+  });
   test('render Header with anonymouse', () => {
     const onLogin = jest.fn();
     const onRotate = jest.fn();
