@@ -12,10 +12,16 @@ const {
   staticAssetsPath,
 } = require('./base');
 
-const client = Object.assign(clientBaseConfig, {
+const devBase = {
   watch: true,
   mode: 'development',
   devtool: 'inline-source-map',
+  watchOptions: {
+    ignored: /node_modules/,
+  },
+};
+
+const client = Object.assign(clientBaseConfig, devBase, {
   optimization: {
     splitChunks: {
       chunks: 'all',
@@ -89,14 +95,9 @@ const client = Object.assign(clientBaseConfig, {
       filename: '[name].css',
     }),
   ],
-  watchOptions: {
-    ignored: /node_modules/,
-  },
 });
 
-const server = Object.assign(serverBaseConfig, {
-  watch: true,
-  mode: 'development',
+const server = Object.assign(serverBaseConfig, devBase, {
   output: {
     path: path.join(__dirname, '../local/server'),
     filename: 'index.js',
@@ -135,9 +136,6 @@ const server = Object.assign(serverBaseConfig, {
     ]),
     new ServerStartPlugin('./local/server'),
   ],
-  watchOptions: {
-    ignored: /node_modules/,
-  },
 });
 
 module.exports = [client, server];

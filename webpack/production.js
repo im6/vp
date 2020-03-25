@@ -15,8 +15,11 @@ const {
   staticAssetsPath,
 } = require('./base');
 
-const client = Object.assign(clientBaseConfig, {
+const prodBase = {
   mode: 'production',
+};
+
+const client = Object.assign(clientBaseConfig, prodBase, {
   output: {
     publicPath: '//dkny.oss-cn-hangzhou.aliyuncs.com/2/',
     path: path.join(__dirname, '../dist/public'),
@@ -102,8 +105,7 @@ const client = Object.assign(clientBaseConfig, {
   },
 });
 
-const server = Object.assign(serverBaseConfig, {
-  mode: 'production',
+const server = Object.assign(serverBaseConfig, prodBase, {
   output: {
     path: path.join(__dirname, '../dist/server'),
     filename: 'index.js',
