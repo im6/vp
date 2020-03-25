@@ -10,6 +10,7 @@ const {
   serverBaseConfig,
   localIdentName,
   staticAssetsPath,
+  include,
 } = require('./base');
 
 const devBase = {
@@ -40,7 +41,7 @@ const client = Object.assign(clientBaseConfig, devBase, {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        include,
         use: [
           {
             loader: 'babel-loader',
@@ -54,6 +55,7 @@ const client = Object.assign(clientBaseConfig, devBase, {
 
       {
         test: /\.sass$/,
+        include: withoutCssModuleFiles,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -64,10 +66,10 @@ const client = Object.assign(clientBaseConfig, devBase, {
           'css-loader',
           'sass-loader',
         ],
-        include: withoutCssModuleFiles,
       },
       {
         test: /\.sass$/,
+        exclude: withoutCssModuleFiles.concat([/node_modules/]),
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -85,7 +87,6 @@ const client = Object.assign(clientBaseConfig, devBase, {
           },
           'sass-loader',
         ],
-        exclude: withoutCssModuleFiles,
       },
     ],
   },
@@ -106,11 +107,12 @@ const server = Object.assign(serverBaseConfig, devBase, {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        include,
         use: ['babel-loader'],
       },
       {
         test: /\.sass$/,
+        include,
         use: [
           {
             loader: 'css-loader',

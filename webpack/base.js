@@ -28,3 +28,4 @@ exports.serverBaseConfig = {
 
 exports.localIdentName = '[hash:base64:5]';
 exports.staticAssetsPath = 'assets/static';
+exports.include = path.resolve(__dirname, '../src');
