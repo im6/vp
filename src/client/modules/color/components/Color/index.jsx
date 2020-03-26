@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Box from '../Box';
 import OneColor from '../OneColor';
@@ -16,37 +16,42 @@ const Color = ({
   onShare,
   onEnter,
   onDownload,
-}) => (
-  <Fragment>
-    {loading && <SpinLoader />}
-    {selectedId && (
-      <OneColor
-        boxInfo={colorDef.get(selectedId)}
-        liked={liked.get(selectedId)}
-        vertical={vertical}
-        onLike={onLike}
-        onDownload={onDownload}
-        onShare={onShare}
-      />
-    )}
-    <div className={style.list}>
-      {!loading && list.length === 0 && <h1>No colors to show</h1>}
-      {list.map(v => {
-        const boxInfo = colorDef.get(v);
-        return boxInfo ? (
-          <Box
-            key={v}
-            vertical={vertical}
-            liked={liked.get(v)}
-            boxInfo={boxInfo}
-            onLikeClick={onLike}
-            onCanvasClick={onEnter}
-          />
-        ) : null;
-      })}
-    </div>
-  </Fragment>
-);
+}) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [selectedId]);
+  return (
+    <Fragment>
+      {loading && <SpinLoader />}
+      {selectedId && (
+        <OneColor
+          boxInfo={colorDef.get(selectedId)}
+          liked={liked.get(selectedId)}
+          vertical={vertical}
+          onLike={onLike}
+          onDownload={onDownload}
+          onShare={onShare}
+        />
+      )}
+      <div className={style.list}>
+        {!loading && list.length === 0 && <h1>No colors to show</h1>}
+        {list.map((v) => {
+          const boxInfo = colorDef.get(v);
+          return boxInfo ? (
+            <Box
+              key={v}
+              vertical={vertical}
+              liked={liked.get(v)}
+              boxInfo={boxInfo}
+              onLikeClick={onLike}
+              onCanvasClick={onEnter}
+            />
+          ) : null;
+        })}
+      </div>
+    </Fragment>
+  );
+};
 
 Color.propTypes = {
   selectedId: PropTypes.string,

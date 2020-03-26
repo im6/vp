@@ -4,6 +4,9 @@ import Color from '.';
 import { fromJS, Map } from 'immutable';
 
 describe('render properly', () => {
+  beforeAll(() => {
+    global.scrollTo = jest.fn();
+  });
   const raw = {
     '1': {
       id: '1',

@@ -83,6 +83,7 @@ describe('render properly', () => {
         onChangeCanvasDirection={jest.fn()}
       />
     );
+    fireEvent.click(getByText('Popular'));
     fireEvent.click(getByText('Profile'));
     fireEvent.click(getByText('Like'));
     fireEvent.click(getByText('Log Out'));
