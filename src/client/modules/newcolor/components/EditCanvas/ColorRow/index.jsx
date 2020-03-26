@@ -28,7 +28,7 @@ class ColorRow extends React.Component {
         className={style.rowContainer}
         style={rowStyle}
         onClick={onRowClick}
-      ></div>
+      />
     );
   }
 }

@@ -13,21 +13,12 @@ const mapDispatchToProps = (dispatch) => {
       const ac0 = createAction('admin/getList');
       dispatch(ac0());
     },
-    onApprove(id) {
+    onAdjudicate(id, willLike) {
       const actcr = createAction('admin/decideColor');
       dispatch(
         actcr({
           id,
-          willLike: true,
-        })
-      );
-    },
-    onDelete(id) {
-      const actcr = createAction('admin/decideColor');
-      dispatch(
-        actcr({
-          id,
-          willLike: false,
+          willLike,
         })
       );
     },
