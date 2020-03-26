@@ -110,16 +110,6 @@ const Header = ({
                     {language.admin}
                   </Link>
                 )}
-                <hr className="navbar-divider" />
-                <a
-                  className="navbar-item"
-                  onClick={(evt) => {
-                    evt.preventDefault();
-                    onLogout();
-                  }}
-                >
-                  {language.logOut}
-                </a>
               </div>
             </div>
           ) : (
@@ -185,16 +175,29 @@ const Header = ({
                 {language.newColor}
               </Link>
               &nbsp;&nbsp;
-              {!isAuth && facebookUrl && (
-                <a
-                  className="button is-info"
+              {isAuth ? (
+                <button
+                  className="button is-danger"
                   onClick={(evt) => {
                     evt.preventDefault();
-                    onOAuth(facebookUrl);
+                    onLogout();
+                    onCloseNav();
                   }}
                 >
-                  {language.fbLogin}
-                </a>
+                  {language.logOut}
+                </button>
+              ) : (
+                facebookUrl && (
+                  <a
+                    className="button is-info"
+                    onClick={(evt) => {
+                      evt.preventDefault();
+                      onOAuth(facebookUrl);
+                    }}
+                  >
+                    {language.fbLogin}
+                  </a>
+                )
               )}
             </div>
           </div>
