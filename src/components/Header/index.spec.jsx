@@ -40,7 +40,7 @@ describe('render properly', () => {
       />
     );
     fireEvent.click(getByText('Facebook Login'));
-    fireEvent.click(getByLabelText('menu'));
+    fireEvent.click(getByLabelText('nav menu'));
     fireEvent.click(getByTitle('click to rotate'));
     fireEvent.click(getByText(`Like (${likeNum})`));
     expect(onLogin).toBeCalled();

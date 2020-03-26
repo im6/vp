@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ChromePicker } from 'react-color';
 import EditCanvas from '../EditCanvas';
@@ -7,111 +7,87 @@ import { LanguageContext } from 'components/LanguageContext';
 
 const DEFAULTVALUE = '#81EEFF';
 
-class NewColor extends React.Component {
-  constructor(props) {
-    super(props);
-    const { defaultColors } = this.props;
-    this.state = {
-      editColor: DEFAULTVALUE,
-      activeIndex: 0,
-      colorValue: defaultColors
-        ? [
-            `#${defaultColors.substring(0, 6)}`,
-            `#${defaultColors.substring(6, 12)}`,
-            `#${defaultColors.substring(12, 18)}`,
-            `#${defaultColors.substring(18, 24)}`,
-          ]
-        : [null, null, null, null],
-    };
-    this.onClickRow = this.onClickRow.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.resetColor = this.resetColor.bind(this);
-    this.onPickColor = this.onPickColor.bind(this);
-  }
+const NewColor = ({ defaultColors, onAdd, onRedirect }) => {
+  const language = useContext(LanguageContext);
 
-  onSubmit() {
+  const [editColor, setEditColor] = useState(DEFAULTVALUE);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [colorValue, setColorValue] = useState(
+    defaultColors
+      ? [
+          `#${defaultColors.substring(0, 6)}`,
+          `#${defaultColors.substring(6, 12)}`,
+          `#${defaultColors.substring(12, 18)}`,
+          `#${defaultColors.substring(18, 24)}`,
+        ]
+      : [null, null, null, null]
+  );
+
+  const onSubmit = () => {
     let good = true;
-    this.state.colorValue.forEach((v) => {
+    colorValue.forEach((v) => {
       if (!/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(v)) {
         good = false;
       }
     });
     if (good) {
-      this.props.onAdd([...this.state.colorValue]);
-      this.resetColor();
+      onAdd([...colorValue]);
+      resetColor();
     } else {
       console.error('Invalid color');
     }
-  }
+  };
 
-  onPickColor({ hex }) {
-    const { colorValue } = this.state;
-    colorValue[this.state.activeIndex] = hex;
-    this.setState({
-      colorValue,
-      editColor: hex,
-    });
-  }
+  const onPickColor = ({ hex }) => {
+    const newColorValue = [...colorValue];
+    newColorValue[activeIndex] = hex;
+    setColorValue(newColorValue);
+    setEditColor(hex);
+  };
 
-  onClickRow(activeIndex) {
-    const editColor = this.state.colorValue[activeIndex] || DEFAULTVALUE;
-    this.setState({
-      activeIndex,
-      editColor,
-    });
-  }
+  const onClickRow = (activeIndex) => {
+    const editColor = colorValue[activeIndex] || DEFAULTVALUE;
+    setEditColor(editColor);
+    setActiveIndex(activeIndex);
+  };
 
-  extractResult(data) {
-    this.setState({
-      colorValue: data,
-    });
-  }
+  const resetColor = () => {
+    setColorValue([null, null, null, null]);
+  };
 
-  resetColor() {
-    this.setState({
-      colorValue: [null, null, null, null],
-    });
-  }
-
-  render() {
-    const { onRedirect } = this.props;
-    const language = this.context;
-    return (
-      <div className={style.container}>
-        <div className={style.floor0}>
-          <div>
-            <ChromePicker
-              color={this.state.editColor}
-              onChangeComplete={this.onPickColor}
-            />
-          </div>
-          <div>
-            <EditCanvas
-              colorValue={this.state.colorValue}
-              activeIndex={this.state.activeIndex}
-              onClickRow={this.onClickRow}
-            />
-          </div>
+  return (
+    <div className={style.container}>
+      <div className={style.floor0}>
+        <div>
+          <ChromePicker color={editColor} onChangeComplete={onPickColor} />
         </div>
-        <div className={style.floor1}>
-          <button className="button is-primary" onClick={this.onSubmit}>
-            {language.submit}
-          </button>
-          <button className="button" onClick={this.resetColor}>
-            {language.reset}
-          </button>
-          <button className="button is-info" onClick={onRedirect}>
-            {language.return}
-          </button>
+        <div>
+          <EditCanvas
+            colorValue={colorValue}
+            activeIndex={activeIndex}
+            onClickRow={onClickRow}
+          />
         </div>
       </div>
-    );
-  }
-}
-NewColor.contextType = LanguageContext;
+      <div className={style.floor1}>
+        <button className="button is-primary" onClick={onSubmit}>
+          {language.submit}
+        </button>
+        <button className="button" onClick={resetColor}>
+          {language.reset}
+        </button>
+        <button className="button is-info" onClick={onRedirect}>
+          {language.return}
+        </button>
+      </div>
+    </div>
+  );
+};
+
 NewColor.propTypes = {
   defaultColors: PropTypes.string,
   onAdd: PropTypes.func,
   onRedirect: PropTypes.func,
 };
+
 export default NewColor;

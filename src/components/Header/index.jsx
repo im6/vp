@@ -52,6 +52,7 @@ const Header = ({
       <div className="navbar-brand">
         <div
           title="click to rotate"
+          aria-label="click to rotate"
           className={`navbar-item ${style.iconWrapper}`}
           onClick={onClickRotate}
         >
@@ -64,7 +65,7 @@ const Header = ({
         <a
           role="nav toggle btn"
           className="navbar-burger burger"
-          aria-label="menu"
+          aria-label="nav menu"
           aria-expanded="false"
           onClick={() => toggleMenu((v) => !v)}
         >
