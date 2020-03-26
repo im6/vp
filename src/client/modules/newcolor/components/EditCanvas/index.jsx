@@ -3,24 +3,27 @@ import PropTypes from 'prop-types';
 import style from './style.sass';
 import ColorRow from './ColorRow';
 
-const EditCanvas = ({ colorValue, activeIndex, changeActive }) => (
-  <div className={style.box}>
-    <div className={style.boxCanvas}>
-      {colorValue.map((v, k) => (
-        <ColorRow
-          key={k}
-          colorValue={v}
-          isActive={k === activeIndex}
-          onRowClick={changeActive.bind(this, k)}
-        />
-      ))}
+const EditCanvas = ({ colorValue, activeIndex, onClickRow }) => {
+  const onRowClickLocal = (v) => () => onClickRow(v);
+  return (
+    <div className={style.box}>
+      <div className={style.boxCanvas}>
+        {colorValue.map((v, k) => (
+          <ColorRow
+            key={k}
+            colorValue={v}
+            isActive={k === activeIndex}
+            onRowClick={onRowClickLocal(k)}
+          />
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 EditCanvas.propTypes = {
   colorValue: PropTypes.array.isRequired,
-  changeActive: PropTypes.func,
+  onClickRow: PropTypes.func.isRequired,
   activeIndex: PropTypes.number,
 };
 

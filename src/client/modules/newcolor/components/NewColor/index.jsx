@@ -22,9 +22,8 @@ class NewColor extends React.Component {
             `#${defaultColors.substring(18, 24)}`,
           ]
         : [null, null, null, null],
-      pickerWd: 200,
     };
-    this.onChangeActive = this.onChangeActive.bind(this);
+    this.onClickRow = this.onClickRow.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.resetColor = this.resetColor.bind(this);
     this.onPickColor = this.onPickColor.bind(this);
@@ -32,7 +31,7 @@ class NewColor extends React.Component {
 
   onSubmit() {
     let good = true;
-    this.state.colorValue.forEach(v => {
+    this.state.colorValue.forEach((v) => {
       if (!/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(v)) {
         good = false;
       }
@@ -54,7 +53,7 @@ class NewColor extends React.Component {
     });
   }
 
-  onChangeActive(activeIndex) {
+  onClickRow(activeIndex) {
     const editColor = this.state.colorValue[activeIndex] || DEFAULTVALUE;
     this.setState({
       activeIndex,
@@ -90,7 +89,7 @@ class NewColor extends React.Component {
             <EditCanvas
               colorValue={this.state.colorValue}
               activeIndex={this.state.activeIndex}
-              changeActive={this.onChangeActive}
+              onClickRow={this.onClickRow}
             />
           </div>
         </div>
