@@ -1,6 +1,6 @@
 import csrf from 'csurf';
 import get from 'lodash.get';
-import { CSRF_EXCEPTION } from '../config';
+import { CSRF_EXCEPTION } from '../../constant';
 
 const csrfOrigin = csrf();
 export default (...args) => {

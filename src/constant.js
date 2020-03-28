@@ -33,3 +33,7 @@ if (process.env.NODE_ENV !== 'development' && !CSRF_EXCEPTION) {
   // eslint-disable-next-line no-console
   console.log('No CSRF exception defined');
 }
+if (!PORT) {
+  // eslint-disable-next-line no-console
+  console.log('No port defined.');
+}

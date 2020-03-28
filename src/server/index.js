@@ -2,13 +2,11 @@
 import { exec } from 'child_process';
 import 'regenerator-runtime/runtime';
 import app from './app';
-import { PORT } from './config';
+import { PORT } from '../constant';
 
-const port = PORT || 8080;
-
-const server = app.listen(port, () =>
+const server = app.listen(PORT, () =>
   console.log(
-    `app (mode: ${process.env.NODE_ENV}) is running on: http://localhost:${port}`
+    `app (mode: ${process.env.NODE_ENV}) is running on: http://localhost:${PORT}`
   )
 );
 server.timeout = 1000 * 5;

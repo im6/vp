@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cookieSession from 'cookie-session';
 
-import { SESSION_SECRET, SERVER_META_FILES } from '../config';
+import { SESSION_SECRET, SERVER_META_FILES } from '../../constant';
 
 import { oauthLogin, isAuth, isAdmin } from '../middlewares/auth';
 import {

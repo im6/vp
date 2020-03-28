@@ -1,6 +1,6 @@
 /* eslint no-console: 0, no-unused-vars: 0 */
 import path from 'path';
-import { SERVER_STATIC_PATH } from '../config';
+import { SERVER_STATIC_PATH } from '../../constant';
 
 const { PWD } = process.env;
 const errorPage = path.resolve(PWD, `${SERVER_STATIC_PATH}/error.html`);

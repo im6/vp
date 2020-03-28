@@ -1,5 +1,5 @@
 import path from 'path';
-import { SERVER_STATIC_PATH, SERVER_META_FILES } from '../config';
+import { SERVER_STATIC_PATH, SERVER_META_FILES } from '../../constant';
 
 const { PWD } = process.env;
 

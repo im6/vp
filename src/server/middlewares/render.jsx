@@ -6,7 +6,7 @@ import { StaticRouter } from 'react-router';
 import { createStore, combineReducers } from 'redux';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 
-import { PUBLIC_PATH } from '../config';
+import { PUBLIC_PATH } from '../../constant';
 import Html from 'components/Html';
 import Layout from 'components/Layout';
 import LangProvider from 'containers/Lang';
