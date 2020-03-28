@@ -1,6 +1,7 @@
-$br: 3px
+@import "../../../../../../../constant.sass"
+
 .boxCanvas
-  height: 230px
+  height: $canvas-height-style-0
   padding: 0
   margin: 0
   cursor: pointer
@@ -8,7 +9,7 @@ $br: 3px
   &>li
     list-style-type: none
     &:nth-child(1)
-      border-radius: $br $br 0px 0px
+      border-radius: $canvas-border-radius $canvas-border-radius 0px 0px
       height: 40%
 
     &:nth-child(2)
@@ -19,12 +20,12 @@ $br: 3px
 
     &:nth-child(4)
       height: 17.5%
-      border-radius: 0px 0px $br $br
+      border-radius: 0px 0px $canvas-border-radius $canvas-border-radius
     &>h1
       font-size: 1.6rem // font size different with .boxCanvas1
 
 .boxCanvas1
-  height: 130px
+  height: $canvas-height-style-1
   padding: 0
   margin: 0
   cursor: pointer
@@ -34,9 +35,9 @@ $br: 3px
     width: 25%
     height: 100%
     &:nth-child(1)
-      border-radius: $br 0px 0px $br
+      border-radius: $canvas-border-radius 0px 0px $canvas-border-radius
     &:nth-child(4)
-      border-radius: 0px $br $br 0px
+      border-radius: 0px $canvas-border-radius $canvas-border-radius 0px
     &>h1
       font-size: 0.75rem
       writing-mode: vertical-rl
@@ -45,6 +46,6 @@ $br: 3px
 
 @media only screen and (min-device-width : 375px) and (max-device-width : 812px) and (orientation : portrait)
   .boxCanvas 
-    height: 160px
+    height: $canvas-height-style-0-mobile
   .boxCanvas1
-    height: 100px
+    height: $canvas-height-style-1-mobile

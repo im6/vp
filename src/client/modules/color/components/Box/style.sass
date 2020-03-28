@@ -1,12 +1,11 @@
-$box-padding: 7px
-$box-padding-mobile: 5px
+@import "../../../../../constant.sass"
 
 .box
-  width: 206px
-  margin: 8px
+  width: $box-width
+  margin: $box-margin
   box-sizing: content-box
   padding: $box-padding
-  border-radius: 4px
+  border-radius: $box-border-radius
   background-color: white
   display: inline-block
 
@@ -28,7 +27,7 @@ $box-padding-mobile: 5px
 
 @media only screen and (min-device-width : 375px) and (max-device-width : 812px) and (orientation : portrait)
   .box
-    width: 142px
+    width: $box-width-mobile
     padding: $box-padding-mobile
     &>button
       margin-top: $box-padding-mobile
