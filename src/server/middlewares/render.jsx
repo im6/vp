@@ -6,7 +6,12 @@ import { StaticRouter } from 'react-router';
 import { createStore, combineReducers } from 'redux';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 
-import { PUBLIC_PATH } from '../../constant';
+import { PUBLIC_PATH } from '../constant.server';
+import {
+  canvasOrientationKey,
+  langSelectionKey,
+  canvasDefaultVertical,
+} from '../../constant';
 import Html from 'components/Html';
 import Layout from 'components/Layout';
 import LangProvider from 'containers/Lang';
@@ -16,7 +21,11 @@ import { isAuth, isAdmin } from '../helper';
 const version = uuidV1().substring(0, 8);
 
 export default (req, res) => {
-  const { lang, canvas } = req.cookies;
+  const showVertical =
+    typeof req.cookies[canvasOrientationKey] === 'undefined'
+      ? canvasDefaultVertical
+      : req.cookies[canvasOrientationKey] === '1';
+
   const store = createStore(combineReducers(moduleReducers), {
     user: fromJS({
       detail: isAuth(req)
@@ -26,12 +35,12 @@ export default (req, res) => {
           }
         : null,
       facebookUrl: null,
-      lang,
+      lang: req.cookies[langSelectionKey],
       loading: true,
     }),
     color: fromJS({
       loading: true,
-      showVertical: canvas === '1',
+      showVertical,
       colorDef: {},
       liked: {},
       colorIdAllByDate: [],

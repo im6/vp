@@ -2,7 +2,7 @@
 import { exec } from 'child_process';
 import 'regenerator-runtime/runtime';
 import app from './app';
-import { PORT } from '../constant';
+import { PORT } from './constant.server';
 
 const server = app.listen(PORT, () =>
   console.log(

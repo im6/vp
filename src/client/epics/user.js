@@ -6,6 +6,7 @@ import { map, mergeMap, catchError, tap, ignoreElements } from 'rxjs/operators';
 import requester from '../misc/requester';
 
 import likeManager from '../misc/likeManager';
+import { langSelectionKey } from '../../constant';
 
 const query = `query {
   auth {
@@ -119,7 +120,7 @@ export default [
     action$.pipe(
       ofType('user/setLanguage'),
       tap((action1) => {
-        Cookies.set('lang', action1.payload, { expires: 180 });
+        Cookies.set(langSelectionKey, action1.payload, { expires: 180 });
       }),
       ignoreElements()
     ),

@@ -11,6 +11,8 @@ import {
   ignoreElements,
 } from 'rxjs/operators';
 
+import { canvasOrientationKey } from '../../constant';
+
 import likeManager from '../misc/likeManager';
 import requester from '../misc/requester';
 import { download, share } from '../misc/util.js';
@@ -176,7 +178,9 @@ export default [
     action$.pipe(
       ofType('color/setDirection'),
       tap(({ payload }) => {
-        Cookies.set('canvas', payload ? '1' : '0', { expires: 180 });
+        Cookies.set(canvasOrientationKey, payload ? '1' : '0', {
+          expires: 180,
+        });
       }),
       ignoreElements()
     ),
