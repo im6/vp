@@ -10,8 +10,8 @@ const resolve = {
 };
 
 exports.withoutCssModuleFiles = [
-  /bulma.modules.sass/,
-  /SpinLoader\/style.sass/,
+  /src\/client\/bulma.modules.sass/,
+  /components\/SpinLoader\/style.sass/,
 ];
 
 exports.clientBaseConfig = {

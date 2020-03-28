@@ -8,23 +8,23 @@ class Layout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showLoading: true,
+      loading: true,
     };
   }
   componentDidMount() {
     this.setState({
-      showLoading: false,
+      loading: false,
     });
   }
   render() {
     const {
-      state: { showLoading },
+      state: { loading },
     } = this;
     const { children } = this.props;
     return (
       <div className={style.container}>
         <Header />
-        {showLoading ? <SpinLoader /> : children}
+        {loading ? <SpinLoader /> : children}
       </div>
     );
   }

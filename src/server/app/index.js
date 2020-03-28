@@ -50,7 +50,7 @@ if (process.env.NODE_ENV === 'development') {
   SERVER_META_FILES.forEach((v) => {
     app.get(v, staticFileProd);
   });
-  app.get('/_ah/:action', onGcpAppEngSig); // gcp status check
+  app.get('/_ah/:action', onGcpAppEngSig); // gcp status actuator
   app.use(csrfOverride);
 }
 
