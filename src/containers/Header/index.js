@@ -4,9 +4,7 @@ import { withRouter } from 'react-router-dom';
 import Header from 'components/Header';
 import { languages } from '../../translation';
 
-const shared = {};
 const mapStateToProps = ({ user, color }, { location, history }) => {
-  shared.history = history;
   const { pathname: url } = location;
   const detail = user.get('detail');
   const facebookUrl = user.get('facebookUrl');
@@ -20,6 +18,7 @@ const mapStateToProps = ({ user, color }, { location, history }) => {
     languages,
     facebookUrl,
     showVertical,
+    onRedirect: history.push,
   };
 };
 
@@ -32,7 +31,6 @@ export const mapDispatchToProps = (dispatch) => {
     onLogout() {
       const ac = createAction('user/logoff');
       dispatch(ac());
-      shared.history.push('/');
     },
     onChangeLang(lang) {
       const ac = createAction('user/setLanguage');

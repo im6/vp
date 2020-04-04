@@ -18,6 +18,7 @@ const Header = ({
   languages,
   onOAuth,
   onLogout,
+  onRedirect,
   onChangeLang,
   onChangeCanvasDirection,
 }) => {
@@ -182,6 +183,7 @@ const Header = ({
                   onClick={(evt) => {
                     evt.preventDefault();
                     onLogout();
+                    onRedirect('/');
                     onCloseNav();
                   }}
                 >
@@ -217,6 +219,7 @@ Header.propTypes = {
   languages: PropTypes.array.isRequired,
   onLogout: PropTypes.func.isRequired,
   onOAuth: PropTypes.func.isRequired,
+  onRedirect: PropTypes.func.isRequired,
   onChangeLang: PropTypes.func.isRequired,
   onChangeCanvasDirection: PropTypes.func.isRequired,
 };
