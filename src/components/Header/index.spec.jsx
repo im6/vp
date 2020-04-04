@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent } from 'test-utils';
 import { fromJS } from 'immutable';
 import Header from '.';
+import { cdnUrl } from '../../constant';
 
 describe('render properly', () => {
   beforeAll(() => {
@@ -111,8 +112,6 @@ describe('render properly', () => {
         onChangeCanvasDirection={jest.fn()}
       />
     );
-    expect(getByRole('img').src).toBe(
-      'http://dkny.oss-cn-hangzhou.aliyuncs.com/2/icon.png'
-    );
+    expect(getByRole('img').src).toBe(`http:${cdnUrl}/icon.png`);
   });
 });

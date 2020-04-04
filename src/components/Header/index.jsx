@@ -5,8 +5,8 @@ import style from './style.sass';
 import TranslationIcon from './components/TranslationIcon';
 import LanguageDropdown from './components/LanguageDropdown';
 import { LanguageContext } from '../LanguageContext';
+import { cdnUrl } from '../../constant';
 
-const iconUrl = '//dkny.oss-cn-hangzhou.aliyuncs.com/2/icon.png';
 const { selected: selectedStyleName } = style;
 
 const Header = ({
@@ -29,7 +29,7 @@ const Header = ({
   const selectLatest = url in { '/latest': true, '/': true };
   const selectSaved = url === '/like';
   const userImgUrl = isAuth && detail.get('img');
-  const imagUrl = userImgUrl || iconUrl;
+  const imagUrl = userImgUrl || `${cdnUrl}/icon.png`;
 
   const onCloseNav = () => {
     toggleMenu(false);

@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { cdnUrl } from '../constant';
 
 const OgMeta = () => (
   <Fragment>
@@ -9,10 +10,7 @@ const OgMeta = () => (
       property="og:description"
       content="ColorPK - Faster lighter and nicer color palette | 全球最大色彩搭配网站 | 颜色搭配 | 艺术设计"
     />
-    <meta
-      property="og:image"
-      content="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/icon.png"
-    />
+    <meta property="og:image" content={`${cdnUrl}/icon.png`} />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="620" />
@@ -25,10 +23,7 @@ const OgMeta = () => (
       property="twitter:description"
       content="ColorPK - Faster lighter and nicer color palette | 全球最大色彩搭配网站 | 颜色搭配 | 艺术设计"
     />
-    <meta
-      property="twitter:image:src"
-      content="http://dkny.oss-cn-hangzhou.aliyuncs.com/2/icon.png"
-    />
+    <meta property="twitter:image:src" content={`${cdnUrl}/icon.png`} />
     <meta property="twitter:image:width" content="1200" />
     <meta property="twitter:image:height" content="1200" />
   </Fragment>

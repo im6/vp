@@ -1,3 +1,5 @@
+import { cdnUrl } from '../constant';
+
 if (process.env.NODE_ENV === 'development') {
   // eslint-disable-next-line global-require
   require('dotenv').config();
@@ -18,9 +20,7 @@ export const FB_API_URL = 'https://graph.facebook.com/v3.3';
 export const STATIC_URL =
   process.env.NODE_ENV === 'development' ? 'local' : 'dist';
 export const PUBLIC_PATH =
-  process.env.NODE_ENV === 'development'
-    ? '/static/'
-    : '//dkny.oss-cn-hangzhou.aliyuncs.com/2/';
+  process.env.NODE_ENV === 'development' ? '/static/' : `${cdnUrl}/`;
 
 export const SERVER_STATIC_PATH = `./${STATIC_URL}/server`;
 export const SERVER_META_FILES = [
