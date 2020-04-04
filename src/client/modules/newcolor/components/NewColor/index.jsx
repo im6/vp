@@ -76,7 +76,12 @@ const NewColor = ({ defaultColors, onAdd, onRedirect }) => {
         <button className="button" onClick={resetColor}>
           {language.reset}
         </button>
-        <button className="button is-info" onClick={onRedirect}>
+        <button
+          className="button is-info"
+          onClick={() => {
+            onRedirect('/');
+          }}
+        >
           {language.return}
         </button>
       </div>

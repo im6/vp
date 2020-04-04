@@ -2,18 +2,17 @@ import { connect } from 'react-redux';
 import { createAction } from 'redux-actions';
 import NewColor from './components/NewColor';
 
-const shared = {};
 const mapStateToProps = (
   { user },
   { location: { pathname, search }, history }
 ) => {
   const defaultColors = search.match(/[a-f0-9]{24}/);
   const showUpload = pathname === '/extract';
-  shared.history = history;
   const isAuth = user.get('isAuth');
   return {
     showUpload,
     isAuth,
+    onRedirect: history.push,
     defaultColors: defaultColors && defaultColors[0],
   };
 };
@@ -36,9 +35,6 @@ const mapDispatchToProps = (dispatch) => {
       } else {
         console.error('illegal color value size'); // eslint-disable-line no-console
       }
-    },
-    onRedirect() {
-      shared.history.push('/');
     },
   };
 };

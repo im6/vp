@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Color from './components/Color';
 
 const shared = {
-  history: null,
   isAuth: false,
 };
 
@@ -27,7 +26,6 @@ const mapStateToProps = (
 ) => {
   const isAuth = Boolean(user.get('detail'));
   shared.isAuth = isAuth;
-  shared.history = history;
 
   const colorDef = color.get('colorDef');
   const liked = color.get('liked');
@@ -50,6 +48,7 @@ const mapStateToProps = (
     liked,
     selectedId: hasSelected ? selectedId : null,
     vertical: color.get('showVertical'),
+    onEnter: history.push,
   };
 };
 
@@ -65,9 +64,6 @@ const mapDispatchToProps = (dispatch) => {
           id,
         })
       );
-    },
-    onEnter(color) {
-      shared.history.push(`/color/${color.get('id')}`);
     },
     onDownload(color) {
       const ac = createAction('color/download');

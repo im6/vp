@@ -20,6 +20,9 @@ const Color = ({
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [selectedId]);
+  const onCanvasClick = (color) => {
+    onEnter(`/color/${color.get('id')}`);
+  };
   return (
     <Fragment>
       {loading && <SpinLoader />}
@@ -44,7 +47,7 @@ const Color = ({
               liked={liked.get(v)}
               boxInfo={boxInfo}
               onLikeClick={onLike}
-              onCanvasClick={onEnter}
+              onCanvasClick={onCanvasClick}
             />
           ) : null;
         })}
