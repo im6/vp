@@ -16,7 +16,6 @@ const Header = ({
   showVertical,
   facebookUrl,
   languages,
-  onOAuth,
   onLogout,
   onRedirect,
   onChangeLang,
@@ -191,13 +190,7 @@ const Header = ({
                 </button>
               ) : (
                 facebookUrl && (
-                  <a
-                    className="button is-info"
-                    onClick={(evt) => {
-                      evt.preventDefault();
-                      onOAuth(facebookUrl);
-                    }}
-                  >
+                  <a className="button is-info" href={facebookUrl}>
                     {language.fbLogin}
                   </a>
                 )
@@ -218,7 +211,6 @@ Header.propTypes = {
   showVertical: PropTypes.bool,
   languages: PropTypes.array.isRequired,
   onLogout: PropTypes.func.isRequired,
-  onOAuth: PropTypes.func.isRequired,
   onRedirect: PropTypes.func.isRequired,
   onChangeLang: PropTypes.func.isRequired,
   onChangeCanvasDirection: PropTypes.func.isRequired,

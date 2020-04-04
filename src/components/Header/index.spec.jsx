@@ -9,7 +9,6 @@ describe('render properly', () => {
     global.scrollTo = jest.fn();
   });
   test('render Header with anonymouse', () => {
-    const onLogin = jest.fn();
     const onRotate = jest.fn();
     const likeNum = 2;
     const { getByText, getByTitle, getByLabelText, rerender } = render(
@@ -21,7 +20,7 @@ describe('render properly', () => {
         showVertical
         languages={[]}
         onLogout={jest.fn()}
-        onOAuth={onLogin}
+        onRedirect={jest.fn()}
         onChangeLang={jest.fn()}
         onChangeCanvasDirection={onRotate}
       />
@@ -35,16 +34,15 @@ describe('render properly', () => {
         showVertical
         languages={[]}
         onLogout={jest.fn()}
-        onOAuth={onLogin}
+        onRedirect={jest.fn()}
         onChangeLang={jest.fn()}
         onChangeCanvasDirection={onRotate}
       />
     );
-    fireEvent.click(getByText('Facebook Login'));
     fireEvent.click(getByLabelText('nav menu'));
     fireEvent.click(getByTitle('click to rotate'));
     fireEvent.click(getByText(`Like (${likeNum})`));
-    expect(onLogin).toBeCalled();
+    expect(getByText('Facebook Login')).toBeTruthy();
   });
 
   test('render Header with login Status', () => {
@@ -65,7 +63,7 @@ describe('render properly', () => {
         showVertical
         languages={[]}
         onLogout={onLogout}
-        onOAuth={jest.fn()}
+        onRedirect={jest.fn()}
         onChangeLang={jest.fn()}
         onChangeCanvasDirection={jest.fn()}
       />
@@ -79,7 +77,7 @@ describe('render properly', () => {
         showVertical
         languages={[]}
         onLogout={onLogout}
-        onOAuth={jest.fn()}
+        onRedirect={jest.fn()}
         onChangeLang={jest.fn()}
         onChangeCanvasDirection={jest.fn()}
       />
@@ -107,7 +105,7 @@ describe('render properly', () => {
         likeNum={2}
         languages={[]}
         onLogout={onLogout}
-        onOAuth={jest.fn()}
+        onRedirect={jest.fn()}
         onChangeLang={jest.fn()}
         onChangeCanvasDirection={jest.fn()}
       />

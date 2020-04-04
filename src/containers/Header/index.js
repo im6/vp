@@ -24,10 +24,6 @@ const mapStateToProps = ({ user, color }, { location, history }) => {
 
 export const mapDispatchToProps = (dispatch) => {
   return {
-    onOAuth(url) {
-      const ac = createAction('user/onOAuth');
-      dispatch(ac(url));
-    },
     onLogout() {
       const ac = createAction('user/logoff');
       dispatch(ac());

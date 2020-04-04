@@ -111,13 +111,6 @@ export default [
 
   (action$) =>
     action$.pipe(
-      ofType('user/onOAuth'),
-      tap((action1) => window.location.replace(action1.payload)),
-      ignoreElements()
-    ),
-
-  (action$) =>
-    action$.pipe(
       ofType('user/setLanguage'),
       tap((action1) => {
         Cookies.set(langSelectionKey, action1.payload, { expires: 180 });

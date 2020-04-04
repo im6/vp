@@ -9,10 +9,9 @@ describe('render properly', () => {
     fireEvent.click(getByText('English'));
     const dispatch = jest.fn();
     const mapper = mapDispatchToProps(dispatch);
-    mapper.onOAuth();
     mapper.onLogout();
     mapper.onChangeLang();
     mapper.onChangeCanvasDirection();
-    expect(dispatch).toBeCalledTimes(4);
+    expect(dispatch).toBeCalledTimes(3);
   });
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'test-utils';
+import { render, fireEvent } from 'test-utils';
 import Color from '.';
 import { fromJS, Map } from 'immutable';
 
@@ -80,5 +80,22 @@ describe('render properly', () => {
       />
     );
     expect(getByText('Download')).toBeTruthy();
+  });
+  test('click to enter', () => {
+    const { container } = render(
+      <Color
+        list={[...ids, '100']}
+        liked={liked}
+        colorDef={colorDef}
+        vertical
+        onLike={cb}
+        onShare={cb}
+        onEnter={cb}
+        onDownload={cb}
+      />
+    );
+
+    fireEvent.click(container.querySelector('ul'));
+    expect(cb).toBeCalled();
   });
 });
