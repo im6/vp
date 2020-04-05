@@ -1,9 +1,10 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Box from '../Box';
 import OneColor from '../OneColor';
 import style from './style.sass';
 import SpinLoader from 'components/SpinLoader';
+import { LanguageContext } from 'components/LanguageContext';
 
 const Color = ({
   list,
@@ -17,6 +18,7 @@ const Color = ({
   onEnter,
   onDownload,
 }) => {
+  const language = useContext(LanguageContext);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [selectedId]);
@@ -37,7 +39,7 @@ const Color = ({
         />
       )}
       <div className={style.list}>
-        {!loading && list.length === 0 && <h1>No colors to show</h1>}
+        {!loading && list.length === 0 && <h1>{language.noColorsToShow}</h1>}
         {list.map((v) => {
           const boxInfo = colorDef.get(v);
           return boxInfo ? (

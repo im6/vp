@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent } from 'test-utils';
 import Color from '.';
 import { fromJS, Map } from 'immutable';
+import { translation } from '../../../../../translation/index';
 
 describe('render properly', () => {
   beforeAll(() => {
@@ -63,7 +64,7 @@ describe('render properly', () => {
       />
     );
 
-    expect(getByText('No colors to show')).toBeTruthy();
+    expect(getByText(translation.en.noColorsToShow)).toBeTruthy();
   });
   test('render with data', () => {
     const { getByText } = render(

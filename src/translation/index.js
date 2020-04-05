@@ -24,6 +24,7 @@ const raw = [
       facebook: 'FaceBook',
       twitter: 'Twitter',
       email: 'E-Mail',
+      noColorsToShow: 'No colors to display',
     },
   },
   {
@@ -49,6 +50,7 @@ const raw = [
       facebook: '脸书',
       twitter: '推特',
       email: '电邮',
+      noColorsToShow: '没有可以显示的颜色',
     },
   },
   {
@@ -74,6 +76,7 @@ const raw = [
       facebook: 'FaceBook',
       twitter: 'さえずり',
       email: 'Eメール',
+      noColorsToShow: '表示する色がありません',
     },
   },
   {
@@ -99,6 +102,7 @@ const raw = [
       facebook: '페이스 북',
       twitter: '지저귀다',
       email: '이메일',
+      noColorsToShow: '표시 할 색상이 없습니다',
     },
   },
   {
@@ -124,6 +128,7 @@ const raw = [
       facebook: 'Facebook',
       twitter: 'gorjeo',
       email: 'correo electrónico',
+      noColorsToShow: 'No hay color para mostrar',
     },
   },
   {
@@ -149,6 +154,7 @@ const raw = [
       facebook: 'Facebook',
       twitter: 'щебет',
       email: 'Эл. адрес',
+      noColorsToShow: 'Нет цвета для отображения',
     },
   },
 ];
