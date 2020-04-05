@@ -7,7 +7,7 @@ import LanguageDropdown from './components/LanguageDropdown';
 import { LanguageContext } from '../LanguageContext';
 import { cdnUrl } from '../../constant';
 
-const { selected: selectedStyleName } = style;
+const { selected } = style;
 
 const Header = ({
   url,
@@ -81,7 +81,7 @@ const Header = ({
             <div className="navbar-item has-dropdown is-hoverable">
               <a
                 className={`navbar-link ${
-                  ['/like', '/portfolio'].includes(url) ? selectedStyleName : ''
+                  ['/like', '/portfolio'].includes(url) ? selected : ''
                 }`}
               >
                 {detail.get('name')}
@@ -116,7 +116,7 @@ const Header = ({
           ) : (
             <Link
               to="/like"
-              className={`navbar-item ${selectSaved ? selectedStyleName : ''}`}
+              className={`navbar-item ${selectSaved ? selected : ''}`}
               onClick={onClickToScroll}
             >
               {language.like}
@@ -126,14 +126,14 @@ const Header = ({
 
           <Link
             to="/popular"
-            className={`navbar-item ${selectPopular ? selectedStyleName : ''}`}
+            className={`navbar-item ${selectPopular ? selected : ''}`}
             onClick={onCloseNav}
           >
             {language.popular}
           </Link>
           <Link
             to="/latest"
-            className={`navbar-item ${selectLatest ? selectedStyleName : ''}`}
+            className={`navbar-item ${selectLatest ? selected : ''}`}
             onClick={onCloseNav}
           >
             {language.latest}
