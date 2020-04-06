@@ -24,7 +24,7 @@ const client = Object.assign(clientBaseConfig, prodBase, {
   output: {
     publicPath: '//dkny.oss-cn-hangzhou.aliyuncs.com/2/',
     path: path.join(__dirname, '../dist/public'),
-    filename: '[name].js',
+    filename: '[name].js?[contenthash]',
   },
   module: {
     rules: [
