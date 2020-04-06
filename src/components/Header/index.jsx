@@ -189,11 +189,9 @@ const Header = ({
                   {language.logOut}
                 </button>
               ) : (
-                facebookUrl && (
-                  <a className="button is-info" href={facebookUrl}>
-                    {language.fbLogin}
-                  </a>
-                )
+                <a className="button is-info" href={facebookUrl}>
+                  {language.fbLogin}
+                </a>
               )}
             </div>
           </div>

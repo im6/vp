@@ -1,7 +1,8 @@
 /* eslint no-console: 0 */
 import get from 'lodash.get';
+import { v1 as uuidV1 } from 'uuid';
 import { FB_REDIRECT_URL, FB_APP_SECRET, FB_APP_KEY } from '../constant.server';
-import { accessToken } from '../resource/oauth';
+import { accessToken, createFacebookLink } from '../resource/oauth';
 import { isAuth as isAuthHelper, isAdmin as isAdminHelper } from '../helper';
 
 const getOauthQsObj = (_, qs) => {
@@ -45,6 +46,21 @@ export const oauthLogin = async (req, res) => {
     };
   }
   res.redirect('/');
+};
+
+export const oauthLogout = (req, res) => {
+  const username = get(req, 'session.app.dbInfo.name', 'unknown');
+  console.log(`logoff (${username}), delete session`); // eslint-disable-line no-console
+  delete req.session.app;
+
+  const oauthState = uuidV1();
+  req.session.app = {
+    oauthState,
+  };
+
+  res.json({
+    url: createFacebookLink(oauthState),
+  });
 };
 
 export const isAuth = (req, res, next) => {

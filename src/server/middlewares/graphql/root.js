@@ -1,13 +1,12 @@
-import { v1 as uuidV1 } from 'uuid';
 import get from 'lodash.get';
 import { GraphQLError } from 'graphql';
 
 import sqlExecOne from '../../resource/mysqlConnection';
-import { showUser, createFacebookLink } from '../../resource/oauth';
+import { showUser } from '../../resource/oauth';
 import { isAuth, isAdmin, getToken } from '../../helper';
 
 const root = {
-  async auth(_, req) {
+  async user(_, req) {
     const accessToken = getToken(req);
     if (isAuth(req, true) && accessToken) {
       // has valid auth info, will verify from oauth
@@ -47,7 +46,6 @@ const root = {
           ]);
 
           return {
-            __typename: 'User',
             name,
             isadmin,
             img: get(oauthData, 'picture.data.url', null),
@@ -69,8 +67,6 @@ const root = {
           isAdmin: false,
         };
         return {
-          __typename: 'User',
-          id: insertId,
           name,
           isadmin: false,
           img: get(oauthData, 'picture.data.url', null),
@@ -81,17 +77,7 @@ const root = {
         return new GraphQLError(err.toString());
       }
     } else {
-      // no valid auth info, response auth state value
-      const oauthState = uuidV1();
-      req.session.app = {
-        oauthState,
-      };
-      return {
-        __typename: 'AuthFailResponse',
-        url: createFacebookLink(oauthState),
-        error: get(req, 'session.app.authError', null),
-        status: 0,
-      };
+      return null;
     }
   },
 
@@ -209,20 +195,6 @@ const root = {
     } catch (err) {
       return new GraphQLError(err.toString());
     }
-  },
-
-  logoff(_, req) {
-    const username = get(req, 'session.app.dbInfo.name', '(unknown)');
-    console.log(`logoff ${username}, delete session`); // eslint-disable-line no-console
-    delete req.session.app;
-
-    const oauthState = uuidV1();
-    req.session.app = {
-      oauthState,
-    };
-    return {
-      url: createFacebookLink(oauthState),
-    };
   },
 };
 
