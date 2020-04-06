@@ -49,24 +49,15 @@ const schemaStr = `
     data: ID!
   }
 
-  type AuthFailResponse implements MutationResponse {
-    status: Int!
-    url: String!
-    error: String
-  }
-
-  union AuthOutputType = User | AuthFailResponse
-
   type Mutation {
     likeColor(input: LikeColorInputType!): LikeColorOutputType
     createColor(input: CreateColorInputType!): CreateColorOutputType
     adjudicateColor(input: LikeColorInputType!): AdjudicateColorOutputType
-    logoff: AuthFailResponse
   }
   
   type Query {
     color(category: ColorCategory!): [Color]
-    auth: AuthOutputType
+    user: User
   }
 
   schema {

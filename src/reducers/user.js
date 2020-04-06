@@ -19,15 +19,13 @@ const user = handleActions(
     ['user/auth/success'](state, { payload: detail }) {
       return state.merge({
         detail: fromJS(detail),
-        facebookUrl: null,
         loading: false,
       });
     },
 
-    ['user/auth/fail'](state, { payload }) {
+    ['user/auth/fail'](state) {
       return state.merge({
         detail: null,
-        facebookUrl: payload,
         loading: false,
       });
     },
@@ -35,7 +33,12 @@ const user = handleActions(
     ['user/logoff'](state) {
       return state.merge({
         detail: null,
-        facebookUrl: null,
+      });
+    },
+
+    ['user/logoff/success'](state, { payload }) {
+      return state.merge({
+        facebookUrl: payload,
       });
     },
 

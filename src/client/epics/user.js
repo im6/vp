@@ -1,6 +1,7 @@
 import get from 'lodash.get';
 import { ofType } from 'redux-observable';
 import { iif, of, concat } from 'rxjs';
+import { ajax } from 'rxjs/ajax';
 import Cookies from 'js-cookie';
 import { map, mergeMap, catchError, tap, ignoreElements } from 'rxjs/operators';
 import requester from '../misc/requester';
@@ -9,24 +10,12 @@ import likeManager from '../misc/likeManager';
 import { langSelectionKey } from '../../constant';
 
 const query = `query {
-  auth {
-    ... on User {
-      name
-      img
-      isadmin
-      likes
-      owns
-    }
-    ... on AuthFailResponse {
-      url
-      error
-    }
-  }
-}`;
-
-const logoffQl = `mutation {
-  logoff {
-    url
+  user {
+    name
+    img
+    isadmin
+    likes
+    owns
   }
 }`;
 
@@ -40,25 +29,24 @@ export default [
         }).pipe(
           mergeMap((action2) => {
             return iif(
-              () => !get(action2, 'response.data.auth.url', null),
+              () => get(action2, 'response.data.user', null),
               of(
                 {
                   type: 'user/auth/success',
-                  payload: get(action2, 'response.data.auth'),
+                  payload: get(action2, 'response.data.user'),
                 },
                 {
                   type: 'color/set/likes',
-                  payload: get(action2, 'response.data.auth.likes', []),
+                  payload: get(action2, 'response.data.user.likes', []),
                 },
                 {
                   type: 'color/set/owns',
-                  payload: get(action2, 'response.data.auth.owns', []),
+                  payload: get(action2, 'response.data.user.owns', []),
                 }
               ),
               of(
                 {
                   type: 'user/auth/fail',
-                  payload: get(action2, 'response.data.auth.url'),
                 },
                 {
                   type: 'color/set/likes',
@@ -95,13 +83,11 @@ export default [
             type: 'color/set/likes',
             payload: likeManager.initLikes || [],
           }),
-          requester({
-            query: logoffQl,
-          }).pipe(
-            map((action2) => {
+          ajax.getJSON('/auth/logout').pipe(
+            map(({ url }) => {
               return {
-                type: 'user/auth/fail',
-                payload: get(action2, 'response.data.logoff.url', null),
+                type: 'user/logoff/success',
+                payload: url,
               };
             })
           )

@@ -6,7 +6,7 @@ import cookieSession from 'cookie-session';
 
 import { SESSION_SECRET, SERVER_META_FILES } from '../constant.server';
 
-import { oauthLogin, isAuth, isAdmin } from '../middlewares/auth';
+import { oauthLogin, oauthLogout, isAuth, isAdmin } from '../middlewares/auth';
 import {
   onError,
   onNotFound,
@@ -62,6 +62,8 @@ if (process.env.NODE_ENV === 'development') {
   // GraphiQL doesn't go through csrf
   app.use(csrfOverride);
 }
+
+app.get('/auth/logout', oauthLogout);
 app.get('/auth/:oauth', oauthLogin);
 
 publicUrls.forEach((url) => {

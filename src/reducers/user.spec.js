@@ -4,13 +4,12 @@ import userReducer from './user';
 describe('test user reducer behavior', () => {
   test('action of user/logoff', () => {
     expect(
-      userReducer(new Map({ detail: {}, facebookUrl: 'url' }), {
+      userReducer(new Map({ detail: {} }), {
         type: 'user/logoff',
       })
     ).toEqual(
       Map({
         detail: null,
-        facebookUrl: null,
       })
     );
   });
@@ -28,29 +27,25 @@ describe('test user reducer behavior', () => {
   test('action of user/auth/success', () => {
     const userInfo = { name: 'tom' };
     expect(
-      userReducer(new Map({ detail: {}, facebookUrl: 'url' }), {
+      userReducer(new Map({ detail: {} }), {
         type: 'user/auth/success',
         payload: userInfo,
       })
     ).toEqual(
       fromJS({
         detail: userInfo,
-        facebookUrl: null,
         loading: false,
       })
     );
   });
   test('action of user/auth/fail', () => {
-    const url = 'new url';
     expect(
-      userReducer(new Map({ detail: {}, facebookUrl: 'url' }), {
+      userReducer(new Map({ detail: {}, loading: true }), {
         type: 'user/auth/fail',
-        payload: url,
       })
     ).toEqual(
       Map({
         detail: null,
-        facebookUrl: url,
         loading: false,
       })
     );
@@ -65,6 +60,19 @@ describe('test user reducer behavior', () => {
     ).toEqual(
       Map({
         lang,
+      })
+    );
+  });
+  test('action of user/logoff/success', () => {
+    const fbUrl = 'some fb url';
+    expect(
+      userReducer(new Map({ facebookUrl: null }), {
+        type: 'user/logoff/success',
+        payload: fbUrl,
+      })
+    ).toEqual(
+      Map({
+        facebookUrl: fbUrl,
       })
     );
   });
