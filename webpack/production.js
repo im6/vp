@@ -81,7 +81,7 @@ const client = Object.assign(clientBaseConfig, prodBase, {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: '[name].css?[contenthash]',
     }),
     new OptimizeCssAssetsPlugin(),
     new CompressionPlugin({
