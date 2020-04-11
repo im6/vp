@@ -8,7 +8,7 @@ import {
 } from 'redux';
 
 import { createEpicMiddleware } from 'redux-observable';
-import rootEpic from './epic';
+import rootEpic from '../epics';
 import moduleReducers from '../../reducers';
 
 const epicMiddleware = createEpicMiddleware();
