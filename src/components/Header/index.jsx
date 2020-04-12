@@ -28,6 +28,7 @@ const Header = ({
   const selectPopular = url === '/popular';
   const selectLatest = url in { '/latest': true, '/': true };
   const selectSaved = url === '/like';
+  const selectCreate = url === '/new';
   const userImgUrl = isAuth && detail.get('img');
   const imagUrl = userImgUrl || `${cdnUrl}/icon.png`;
 
@@ -168,13 +169,15 @@ const Header = ({
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <Link
-                to="/new"
-                className="button is-primary"
-                onClick={onClickToScroll}
-              >
-                {language.newColor}
-              </Link>
+              {!selectCreate && (
+                <Link
+                  to="/new"
+                  className="button is-primary"
+                  onClick={onClickToScroll}
+                >
+                  {language.newColor}
+                </Link>
+              )}
               &nbsp;&nbsp;
               {isAuth ? (
                 <button
