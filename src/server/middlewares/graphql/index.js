@@ -1,6 +1,6 @@
 import graphqlHTTP from 'express-graphql';
-import rootValue from './root.js';
-import schema from './schema.js';
+import rootValue from './root';
+import schema from './schema';
 
 export default graphqlHTTP({
   schema,

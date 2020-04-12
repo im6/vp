@@ -3,6 +3,7 @@
   "version": "1.21.5",
   "description": "source code of react.colorpk.com",
   "engines": {
+    "npm": ">=6.13.4",
     "node": ">= 12.x"
   },
   "main": "index.js",
@@ -119,11 +120,16 @@
       "jest"
     ],
     "rules": {
+      "prettier/prettier": 2,
       "import/no-extraneous-dependencies": 0,
-      "import/extensions": 0,
-      "import/no-unresolved": 0,
-      "prettier/prettier": [
-        "error"
+      "import/no-unresolved": [
+        2,
+        {
+          "ignore": [
+            "^components/",
+            "^containers/"
+          ]
+        }
       ]
     },
     "env": {

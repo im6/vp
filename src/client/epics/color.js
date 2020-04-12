@@ -15,7 +15,7 @@ import { canvasOrientationKey } from '../../constant';
 
 import likeManager from '../misc/likeManager';
 import requester from '../misc/requester';
-import { download, share } from '../misc/util.js';
+import { download, share } from '../misc/util';
 
 const colorql = `query($cate: ColorCategory!) {
   color(category: $cate) {
