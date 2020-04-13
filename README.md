@@ -11,6 +11,7 @@
 - [Bulma](https://bulma.io/)
 - Docker
 - Express.js
+- Redis
 - [SSR](https://reactjs.org/docs/react-dom-server.html)
 - [React Testing Library](https://testing-library.com/)
 - MySQL

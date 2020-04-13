@@ -2,9 +2,9 @@ import helmet from 'helmet';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import cookieSession from 'cookie-session';
+import redisSession from '../resource/redisSession';
 
-import { SESSION_SECRET, SERVER_META_FILES } from '../constant.server';
+import { SERVER_META_FILES } from '../constant.server';
 
 import { oauthLogin, oauthLogout, isAuth, isAdmin } from '../middlewares/auth';
 import {
@@ -27,15 +27,7 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(
-  cookieSession({
-    name: 'session',
-    keys: [SESSION_SECRET],
-    maxAge: 1000 * 60 * 60 * 24 * 3, // 3 days
-    httpOnly: true,
-    sameSite: 'strict',
-  })
-);
+app.use(redisSession);
 
 if (process.env.NODE_ENV === 'development') {
   app.use('/static', express.static('local/public'));
