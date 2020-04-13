@@ -11,7 +11,7 @@ const {
 } = process.env;
 
 if (!host || !port || !password) {
-  console.error('missing redis connection info');
+  console.error('missing redis connection info'); // eslint-disable-line no-console
   process.exit(1);
 }
 
@@ -23,16 +23,16 @@ const redisClient = redis.createClient({
 });
 
 redisClient.on('error', (error) => {
-  console.error(error);
+  console.error(error); // eslint-disable-line no-console
   process.exit(1);
 });
 
 redisClient.on('reconnecting', (_, attmpt) => {
-  console.log(`reconnecting, attempt: ${attmpt}`);
+  console.log(`reconnecting, attempt: ${attmpt}`); // eslint-disable-line no-console
 });
 
 redisClient.on('connect', () => {
-  console.log('Redis connect successfully.');
+  console.log('Redis connect successfully.'); // eslint-disable-line no-console
 });
 
 export default session({
