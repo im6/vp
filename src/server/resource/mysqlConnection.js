@@ -18,6 +18,14 @@ const pool = mysql.createPool({
   database,
 });
 
+pool.query('SELECT 1 + 1 AS solution', (err, res) => {
+  if (err || res[0].solution !== 2) {
+    console.error(err); // eslint-disable-line no-console
+    process.exit(1);
+  }
+  console.log('MySQL connect successfully.'); // eslint-disable-line no-console
+});
+
 export default (qr, params = []) =>
   new Promise((resolve, reject) => {
     pool.query(qr, params, (err, rows) => {
