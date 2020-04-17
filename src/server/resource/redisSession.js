@@ -20,6 +20,7 @@ const redisClient = redis.createClient({
   host,
   port,
   password,
+  prefix: 'vp:',
 });
 
 redisClient.on('error', (error) => {
