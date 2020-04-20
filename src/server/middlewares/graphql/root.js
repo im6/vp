@@ -123,9 +123,6 @@ const root = {
 
   async likeColor({ input }, req) {
     const { id, willLike } = input;
-    if (!willLike) {
-      return new GraphQLError('you have to like it');
-    }
     try {
       if (isAuth(req)) {
         const userId = get(req, 'session.app.dbInfo.id', null);
@@ -137,14 +134,17 @@ const root = {
         );
       }
 
-      const resData = await sqlExecOne(
-        `UPDATE colorpk_color SET \`like\` = \`like\` ${
-          willLike ? '+' : '-'
-        }  1 WHERE id = ?`,
-        [id]
-      );
+      if (willLike) {
+        const resData = await sqlExecOne(
+          `UPDATE colorpk_color SET \`like\` = \`like\` + 1 WHERE id = ?`,
+          [id]
+        );
+        return {
+          status: resData.affectedRows === 1 ? 0 : 1,
+        };
+      }
       return {
-        status: resData.affectedRows === 1 ? 0 : 1,
+        status: 0,
       };
     } catch (err) {
       return new GraphQLError(err.toString());
