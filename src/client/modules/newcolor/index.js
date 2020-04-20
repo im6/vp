@@ -19,22 +19,9 @@ const mapStateToProps = (
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAdd(colorValue) {
-      const cl0 = colorValue.map((v) => {
-        return v.substr(1);
-      });
-
+    onAdd(color) {
       const ac = createAction('color/addNew');
-      const color = cl0.join('#');
-      if (color.length === 27) {
-        dispatch(
-          ac({
-            color,
-          })
-        );
-      } else {
-        console.error('illegal color value size'); // eslint-disable-line no-console
-      }
+      dispatch(ac({ color }));
     },
   };
 };

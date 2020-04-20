@@ -4,6 +4,7 @@ import { GraphQLError } from 'graphql';
 import sqlExecOne from '../../resource/mysqlConnection';
 import { showUser } from '../../resource/oauth';
 import { isAuth, isAdmin, getToken } from '../../helper';
+import { isColorHex } from '../../../util';
 
 const root = {
   async user(_, req) {
@@ -81,8 +82,7 @@ const root = {
     }
   },
 
-  async color(args, req) {
-    const { category } = args;
+  async color({ category }, req) {
     if (!isAdmin(req) && category === 'ANONYMOUS') {
       return new GraphQLError('color error: no admin access');
     }
@@ -121,8 +121,8 @@ const root = {
     }
   },
 
-  async likeColor(args, req) {
-    const { id, willLike } = args.input;
+  async likeColor({ input }, req) {
+    const { id, willLike } = input;
     if (!willLike) {
       return new GraphQLError('you have to like it');
     }
@@ -151,40 +151,38 @@ const root = {
     }
   },
 
-  async createColor(args, req) {
-    const { color } = args.input;
-    const hasAuth = isAuth(req);
+  async createColor({ input }, req) {
+    const { color } = input;
+    if (!isColorHex(`#${color}`)) {
+      return new GraphQLError('create error: invalid color input');
+    }
 
     const sessionUsername = get(req, 'session.app.dbInfo.name', null);
     const sessionUserid = get(req, 'session.app.dbInfo.id', null);
-    const hasUserSignIn = hasAuth && sessionUsername;
+    const hasUserSignIn = isAuth(req) && sessionUsername;
     const username = hasUserSignIn ? sessionUsername : null;
     const userId = hasUserSignIn ? sessionUserid : null;
+    const random = (Math.random() * 20).toFixed();
 
-    const random = (Math.random() * 10).toFixed();
-    if (color.length === 27) {
-      try {
-        const row = await sqlExecOne(
-          'INSERT INTO colorpk_color (`like`, color, userid, username, colortype, display, createdate) VALUES (?, ?, ?, ?, NULL, ?, NOW())',
-          [random, color, userId, username, hasUserSignIn ? 0 : 1]
-        );
-        return {
-          status: 0,
-          data: row.insertId,
-        };
-      } catch (err) {
-        return new GraphQLError(err.toString());
-      }
-    } else {
-      return new GraphQLError('create error: invalid color input');
+    try {
+      const row = await sqlExecOne(
+        'INSERT INTO colorpk_color (`like`, color, userid, username, colortype, display, createdate) VALUES (?, ?, ?, ?, NULL, ?, NOW())',
+        [random, color, userId, username, hasUserSignIn ? 0 : 1]
+      );
+      return {
+        status: 0,
+        data: row.insertId,
+      };
+    } catch (err) {
+      return new GraphQLError(err.toString());
     }
   },
 
-  async adjudicateColor(args, req) {
+  async adjudicateColor({ input }, req) {
     if (!isAdmin(req)) {
       return new GraphQLError('adjudicate error: no admin access');
     }
-    const { id, willLike } = args.input;
+    const { id, willLike } = input;
     try {
       const resData = await sqlExecOne(
         willLike

@@ -4,6 +4,7 @@ import { ChromePicker } from 'react-color';
 import EditCanvas from '../EditCanvas';
 import style from './style.sass';
 import { LanguageContext } from 'components/LanguageContext';
+import { isColorHex } from '../../../../../util';
 
 const DEFAULTVALUE = '#81EEFF';
 
@@ -24,14 +25,10 @@ const NewColor = ({ defaultColors, onAdd, onRedirect }) => {
   );
 
   const onSubmit = () => {
-    let good = true;
-    colorValue.forEach((v) => {
-      if (!/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(v)) {
-        good = false;
-      }
-    });
+    const colorStr = colorValue.join('');
+    const good = isColorHex(colorStr);
     if (good) {
-      onAdd([...colorValue]);
+      onAdd(colorStr.substr(1));
       resetColor();
     } else {
       console.error('Invalid color');
