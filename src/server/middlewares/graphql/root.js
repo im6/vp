@@ -123,6 +123,9 @@ const root = {
 
   async likeColor(args, req) {
     const { id, willLike } = args.input;
+    if (!willLike) {
+      return new GraphQLError('you have to like it');
+    }
     try {
       if (isAuth(req)) {
         const userId = get(req, 'session.app.dbInfo.id', null);
