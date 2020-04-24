@@ -21,7 +21,6 @@ const prodBase = {
 };
 
 const client = Object.assign(clientBaseConfig, prodBase, {
-  mode: 'development',
   output: {
     publicPath: '//dkny.oss-cn-hangzhou.aliyuncs.com/2/',
     path: path.join(__dirname, '../dist/public'),

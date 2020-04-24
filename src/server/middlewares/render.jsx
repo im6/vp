@@ -84,8 +84,8 @@ export default (req, res) => {
           : 'ColorPK | Your Best Color Picker'
       }`}
       version={version}
-      style={`${PUBLIC_PATH}main.css`}
-      script={`${PUBLIC_PATH}main.js`}
+      style={`${PUBLIC_PATH}/main.css`}
+      script={`${PUBLIC_PATH}/main.js`}
       csrfToken={req.csrfToken()}
       lastBuildDate={process.env.lastBuildDate || 'dev'}
       initState={store.getState()}
@@ -95,6 +95,6 @@ export default (req, res) => {
   );
   const html = renderToStaticMarkup(htmlDOM);
   res.status(200);
-  res.header('Access-Control-Allow-Origin', '*');
+  // res.header('Access-Control-Allow-Origin', '*');
   res.send(`<!DOCTYPE html>${html}`);
 };
