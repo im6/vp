@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import OpenGraph from './OpenGraph';
 import serialize from 'serialize-javascript';
-
-const reduxName = '_REDUXSTATE_';
+import { reduxName } from '../constant';
 
 const Html = ({
   title,

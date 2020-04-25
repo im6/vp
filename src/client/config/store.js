@@ -10,6 +10,7 @@ import {
 import { createEpicMiddleware } from 'redux-observable';
 import rootEpic from '../epics';
 import moduleReducers from '../../reducers';
+import { reduxName } from '../../constant';
 
 const epicMiddleware = createEpicMiddleware();
 const middlewares = [epicMiddleware];
@@ -22,7 +23,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const enhancers = applyMiddleware(...middlewares);
-const initState = window._REDUXSTATE_;
+const initState = window[reduxName];
 const store = createStore(
   combineReducers(moduleReducers),
   {
