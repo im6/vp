@@ -2,8 +2,10 @@
 import path from 'path';
 import { SERVER_STATIC_PATH } from '../constant.server';
 
-const { PWD } = process.env;
-const errorPage = path.resolve(PWD, `${SERVER_STATIC_PATH}/error.html`);
+const errorPage = path.resolve(
+  process.cwd(),
+  `${SERVER_STATIC_PATH}/error.html`
+);
 
 export const onGcpAppEngSig = (req, res) => {
   const { action } = req.params;

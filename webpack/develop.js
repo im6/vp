@@ -129,7 +129,6 @@ const server = Object.assign(serverBaseConfig, devBase, {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
       { from: `${staticAssetsPath}/error.html` },
       { from: `${staticAssetsPath}/favicon.ico` },
