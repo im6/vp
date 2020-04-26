@@ -40,4 +40,4 @@ jobs:
           access-key-id: ${{ secrets.oss_app_key }}
           access-key-secret: ${{ secrets.oss_app_secret }}
       - name: cp files to aliyun
-        run: ossutil cp -rf dist/public oss://${{ secrets.oss_bucket }}/2/ --meta=Cache-Control:"public, max-age=1728000"#Content-Encoding:gzip
+        run: ossutil cp -rf dist/public oss://${{ secrets.oss_bucket }}/2/ --meta=Cache-Control:"public, max-age=2592000"#Content-Encoding:gzip
