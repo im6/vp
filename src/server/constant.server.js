@@ -35,5 +35,6 @@ if (process.env.NODE_ENV !== 'development' && !CSRF_EXCEPTION) {
 }
 if (!PORT) {
   // eslint-disable-next-line no-console
-  console.log('No port defined.');
+  console.error('No port defined.');
+  process.exit(1);
 }
