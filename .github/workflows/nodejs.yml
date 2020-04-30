@@ -36,12 +36,12 @@ jobs:
         env:
           CI: true
       - name: setup aliyun oss
-        if: ${{ RUNOSS }}
+        if: ${{ os.environ['RUNOSS'] }}
         uses: manyuanrong/setup-ossutil@master
         with:
           endpoint: ${{ secrets.oss_region }}
           access-key-id: ${{ secrets.oss_app_key }}
           access-key-secret: ${{ secrets.oss_app_secret }}
       - name: cp files to aliyun
-        if: ${{ RUNOSS }}
+        if: ${{ os.environ['RUNOSS'] }}
         run: ossutil cp -rf dist/public oss://${{ secrets.oss_bucket }}/2/ --meta=Cache-Control:"public, max-age=2592000"#Content-Encoding:gzip
