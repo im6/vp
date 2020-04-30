@@ -25,21 +25,21 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: npm install, test and build
+      - name: npm install and test
         run: |
           npm i
           npm run lint
           npm t
-          npm run build
-        env:
-          CI: true
+      - name: npm build
+        if: true
+        run: npm run build
       - name: setup aliyun oss
-        if: false
+        if: true
         uses: manyuanrong/setup-ossutil@master
         with:
           endpoint: ${{ secrets.oss_region }}
           access-key-id: ${{ secrets.oss_app_key }}
           access-key-secret: ${{ secrets.oss_app_secret }}
       - name: cp files to aliyun
-        if: false
+        if: true
         run: ossutil cp -rf dist/public oss://${{ secrets.oss_bucket }}/2/ --meta=Cache-Control:"public, max-age=2592000"#Content-Encoding:gzip
