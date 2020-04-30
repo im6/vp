@@ -31,15 +31,15 @@ jobs:
           npm run lint
           npm t
       - name: npm build
-        if: true
+        if: false
         run: npm run build
       - name: setup aliyun oss
-        if: true
+        if: false
         uses: manyuanrong/setup-ossutil@master
         with:
           endpoint: ${{ secrets.oss_region }}
           access-key-id: ${{ secrets.oss_app_key }}
           access-key-secret: ${{ secrets.oss_app_secret }}
       - name: cp files to aliyun
-        if: true
+        if: false
         run: ossutil cp -rf dist/public oss://${{ secrets.oss_bucket }}/2/ --meta=Cache-Control:"public, max-age=2592000"#Content-Encoding:gzip
