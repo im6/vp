@@ -12,6 +12,7 @@ class Layout extends React.Component {
     };
   }
   componentDidMount() {
+    // keep it because of the timing of hook reason: // https://reactjs.org/docs/hooks-reference.html#timing-of-effects
     this.setState({
       loading: false,
     });
