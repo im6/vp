@@ -6,17 +6,16 @@
 
 - React
 - [RxJS](http://reactivex.io/)
+- Express.js
 - [GraphQL](https://graphql.org/)
+- [SSR](https://reactjs.org/docs/react-dom-server.html)
 - [Immutable.js](https://immutable-js.github.io/immutable-js/)
 - [Bulma](https://bulma.io/)
 - Docker
-- Express.js
 - Redis
-- [SSR](https://reactjs.org/docs/react-dom-server.html)
 - [React Testing Library](https://testing-library.com/)
 - MySQL
-- redux
-- react-redux
+- Redux
 - react-router
 - Webpack
 - Babel
