@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import style from './style.sass';
 import LikeButton from './components/LikeButton';
@@ -53,13 +53,4 @@ Box.defaultProps = {
   onCanvasClick: () => {},
 };
 
-const isEqual = (prevProps, nextProps) => {
-  const { liked, boxInfo, vertical } = prevProps;
-  return (
-    nextProps.liked === liked &&
-    nextProps.boxInfo.get('id') === boxInfo.get('id') &&
-    nextProps.vertical === vertical
-  );
-};
-
-export default memo(Box, isEqual);
+export default Box;
