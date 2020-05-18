@@ -25,9 +25,10 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: npm install and test
+      - name: npm install
+        run: npm i
+      - name: npm lint & test
         run: |
-          npm i
           npm run lint
           npm t
       - name: npm build
