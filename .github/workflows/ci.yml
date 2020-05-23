@@ -30,13 +30,13 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: npm install
+      - name: install
         run: npm i
-      - name: npm lint & test
-        run: |
-          npm run lint
-          npm t
-      - name: npm build
+      - name: lint
+        run: npm run lint
+      - name: test
+        run: npm t
+      - name: build
         if: false
         run: npm run build
       - name: setup aliyun oss
