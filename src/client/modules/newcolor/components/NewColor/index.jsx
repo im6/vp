@@ -87,9 +87,9 @@ const NewColor = ({ defaultColors, onAdd, onRedirect }) => {
 };
 
 NewColor.propTypes = {
+  onAdd: PropTypes.func.isRequired,
+  onRedirect: PropTypes.func.isRequired,
   defaultColors: PropTypes.string,
-  onAdd: PropTypes.func,
-  onRedirect: PropTypes.func,
 };
 
 export default NewColor;
