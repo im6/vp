@@ -1,7 +1,7 @@
 import get from 'lodash.get';
 import Cookies from 'js-cookie';
-import { ofType } from 'redux-observable';
 import { iif, of } from 'rxjs';
+import { ofType } from 'redux-observable';
 import {
   map,
   mergeMap,
@@ -11,11 +11,10 @@ import {
   ignoreElements,
 } from 'rxjs/operators';
 
-import { canvasOrientationKey } from '../../constant';
-
-import likeManager from '../misc/likeManager';
 import requester from '../misc/requester';
+import likeManager from '../misc/likeManager';
 import { download, share } from '../misc/util';
+import { canvasOrientationKey } from '../../constant';
 
 const colorql = `query($cate: ColorCategory!) {
   color(category: $cate) {
