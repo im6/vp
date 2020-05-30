@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import style from './style.sass';
 import ColorBar from '../ColorBar';
 
-const AdminPanel = ({ loading, list, onAdjudicate, onInit }) => {
-  useEffect(() => {
-    onInit();
-  }, []);
+const AdminPanel = ({ loading, list, onAdjudicate, onInitList }) => {
   const colors = list.toJS();
+
+  useEffect(() => {
+    if (colors.length === 0) onInitList();
+  }, []);
+
   const onAdjudicateLocal = (id, willLike) => () => onAdjudicate(id, willLike);
   return (
     <div className={style.container}>
@@ -43,7 +45,7 @@ const AdminPanel = ({ loading, list, onAdjudicate, onInit }) => {
 AdminPanel.propTypes = {
   list: PropTypes.object.isRequired,
   loading: PropTypes.bool,
-  onInit: PropTypes.func.isRequired,
+  onInitList: PropTypes.func.isRequired,
   onAdjudicate: PropTypes.func.isRequired,
 };
 

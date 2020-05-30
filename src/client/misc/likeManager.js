@@ -5,7 +5,7 @@ const LSLIKEKEY = 'userLike';
 class LikeManagement {
   constructor() {
     this.hasLocalStorage = localStorageEnabled;
-    if (this.hasLocalStorage) {
+    if (localStorageEnabled) {
       // todo: clean up in the near future
       LikeManagement.cleanUpType();
     }

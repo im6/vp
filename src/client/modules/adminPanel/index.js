@@ -9,7 +9,7 @@ const mapStateToProps = ({ admin }) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onInit() {
+    onInitList() {
       const ac0 = createAction('admin/getList');
       dispatch(ac0());
     },
