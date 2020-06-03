@@ -1,7 +1,7 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const ServerStartPlugin = require('./plugins/ServerStartPlugin');
 
 const {
@@ -129,12 +129,9 @@ const server = Object.assign(serverBaseConfig, devBase, {
     ],
   },
   plugins: [
-    new CopyWebpackPlugin([
-      { from: `${staticAssetsPath}/error.html` },
-      { from: `${staticAssetsPath}/favicon.ico` },
-      { from: `${staticAssetsPath}/robots.txt` },
-      { from: `${staticAssetsPath}/sitemap.xml` },
-    ]),
+    new CopyPlugin({
+      patterns: [{ from: `${staticAssetsPath}/error.html` }],
+    }),
     new ServerStartPlugin('./local/server'),
   ],
 });

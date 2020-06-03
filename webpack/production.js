@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 const {
@@ -18,6 +18,9 @@ const {
 
 const prodBase = {
   mode: 'production',
+  performance: {
+    hints: 'warning',
+  },
 };
 
 const client = Object.assign(clientBaseConfig, prodBase, {
@@ -143,12 +146,14 @@ const server = Object.assign(serverBaseConfig, prodBase, {
         `${new Date().toLocaleString()} EST`
       ),
     }),
-    new CopyWebpackPlugin([
-      { from: `${staticAssetsPath}/error.html` },
-      { from: `${staticAssetsPath}/favicon.ico` },
-      { from: `${staticAssetsPath}/robots.txt` },
-      { from: `${staticAssetsPath}/sitemap.xml` },
-    ]),
+    new CopyPlugin({
+      patterns: [
+        { from: `${staticAssetsPath}/error.html` },
+        { from: `${staticAssetsPath}/favicon.ico` },
+        { from: `${staticAssetsPath}/robots.txt` },
+        { from: `${staticAssetsPath}/sitemap.xml` },
+      ],
+    }),
   ],
 });
 
