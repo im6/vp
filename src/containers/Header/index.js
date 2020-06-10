@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import Header from 'components/Header';
 import { languages } from '../../translation';
 
-const mapStateToProps = ({ user, color }, { location, history }) => {
+const mapStateToProps = ({ user, color }, { location }) => {
   const { pathname: url } = location;
   const detail = user.get('detail');
   const facebookUrl = user.get('facebookUrl');
@@ -18,7 +18,6 @@ const mapStateToProps = ({ user, color }, { location, history }) => {
     languages,
     facebookUrl,
     showVertical,
-    onRedirect: history.push,
   };
 };
 

@@ -17,7 +17,6 @@ const Header = ({
   facebookUrl,
   languages,
   onLogout,
-  onRedirect,
   onChangeLang,
   onChangeCanvasDirection,
 }) => {
@@ -180,17 +179,16 @@ const Header = ({
               )}
               &nbsp;&nbsp;
               {isAuth ? (
-                <button
+                <Link
                   className="button is-danger"
-                  onClick={(evt) => {
-                    evt.preventDefault();
+                  to="/"
+                  onClick={() => {
                     onLogout();
-                    onRedirect('/');
                     onCloseNav();
                   }}
                 >
                   {language.logOut}
-                </button>
+                </Link>
               ) : (
                 <a className="button is-info" href={facebookUrl}>
                   {language.fbLogin}
@@ -212,7 +210,6 @@ Header.propTypes = {
   showVertical: PropTypes.bool,
   languages: PropTypes.array.isRequired,
   onLogout: PropTypes.func.isRequired,
-  onRedirect: PropTypes.func.isRequired,
   onChangeLang: PropTypes.func.isRequired,
   onChangeCanvasDirection: PropTypes.func.isRequired,
 };

@@ -20,7 +20,6 @@ describe('render properly', () => {
         showVertical
         languages={[]}
         onLogout={jest.fn()}
-        onRedirect={jest.fn()}
         onChangeLang={jest.fn()}
         onChangeCanvasDirection={onRotate}
       />
@@ -34,7 +33,6 @@ describe('render properly', () => {
         showVertical
         languages={[]}
         onLogout={jest.fn()}
-        onRedirect={jest.fn()}
         onChangeLang={jest.fn()}
         onChangeCanvasDirection={onRotate}
       />
@@ -63,7 +61,6 @@ describe('render properly', () => {
         showVertical
         languages={[]}
         onLogout={onLogout}
-        onRedirect={jest.fn()}
         onChangeLang={jest.fn()}
         onChangeCanvasDirection={jest.fn()}
       />
@@ -77,7 +74,6 @@ describe('render properly', () => {
         showVertical
         languages={[]}
         onLogout={onLogout}
-        onRedirect={jest.fn()}
         onChangeLang={jest.fn()}
         onChangeCanvasDirection={jest.fn()}
       />
@@ -105,7 +101,6 @@ describe('render properly', () => {
         likeNum={2}
         languages={[]}
         onLogout={onLogout}
-        onRedirect={jest.fn()}
         onChangeLang={jest.fn()}
         onChangeCanvasDirection={jest.fn()}
       />
