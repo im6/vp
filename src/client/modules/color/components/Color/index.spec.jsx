@@ -50,6 +50,26 @@ describe('render properly', () => {
 
     expect(getByText(translation.en.noColorsToShow)).toBeTruthy();
   });
+  test('render undefined color id', () => {
+    const undefinedId = 798;
+    const { getByText } = render(
+      <Color
+        list={[]}
+        liked={liked}
+        colorDef={colorDef}
+        selectedId={undefinedId}
+        vertical
+        onLike={cb}
+        onShare={cb}
+        onEnter={cb}
+        onDownload={cb}
+      />
+    );
+
+    expect(
+      getByText(`${translation.en.undefinedColorId} (${undefinedId})`)
+    ).toBeTruthy();
+  });
   test('render with data', () => {
     const { getByText } = render(
       <Color

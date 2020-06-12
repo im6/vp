@@ -25,15 +25,17 @@ const Color = ({
   const onCanvasClick = (id) => {
     onEnter(`/color/${id}`);
   };
+  const selectedColor = selectedId && colorDef.get(selectedId);
+  const colorNotFound = selectedId && !selectedColor;
   return (
     <Fragment>
       {loading && <SpinLoader />}
-      {selectedId && (
+      {selectedColor && (
         <OneColor
-          id={colorDef.getIn([selectedId, 'id'])}
-          username={colorDef.getIn([selectedId, 'username'])}
-          likeNum={colorDef.getIn([selectedId, 'like'])}
-          value={colorDef.getIn([selectedId, 'color'])}
+          id={selectedColor.get('id')}
+          username={selectedColor.get('username')}
+          likeNum={selectedColor.get('like')}
+          value={selectedColor.get('color')}
           liked={liked.get(selectedId)}
           vertical={vertical}
           onLike={onLike}
@@ -41,8 +43,15 @@ const Color = ({
           onShare={onShare}
         />
       )}
-      <div className={style.list}>
+      <div className={style.text}>
+        {!loading && colorNotFound && (
+          <h1>
+            {language.undefinedColorId} ({selectedId})
+          </h1>
+        )}
         {!loading && list.length === 0 && <h1>{language.noColorsToShow}</h1>}
+      </div>
+      <div className={style.list}>
         {list.map((v) => {
           const boxInfo = colorDef.get(v);
           return boxInfo ? (

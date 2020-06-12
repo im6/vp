@@ -29,7 +29,6 @@ const mapStateToProps = (
 
   const colorDef = color.get('colorDef');
   const liked = color.get('liked');
-  const hasSelected = colorDef.has(selectedId);
 
   const list =
     pathname === '/like'
@@ -46,7 +45,7 @@ const mapStateToProps = (
     list,
     colorDef,
     liked,
-    selectedId: hasSelected ? selectedId : null,
+    selectedId,
     vertical: color.get('showVertical'),
     onEnter: history.push,
   };

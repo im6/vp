@@ -25,6 +25,7 @@ const raw = [
       twitter: 'Twitter',
       email: 'E-Mail',
       noColorsToShow: 'No colors to display',
+      undefinedColorId: 'Color ID is not defined',
     },
   },
   {
@@ -51,6 +52,7 @@ const raw = [
       twitter: '推特',
       email: '电邮',
       noColorsToShow: '没有可以显示的颜色',
+      undefinedColorId: '颜色ID未定义',
     },
   },
   {
@@ -77,6 +79,7 @@ const raw = [
       twitter: 'さえずり',
       email: 'Eメール',
       noColorsToShow: '表示する色がありません',
+      undefinedColorId: 'IDが定義されていません',
     },
   },
   {
@@ -103,6 +106,7 @@ const raw = [
       twitter: '지저귀다',
       email: '이메일',
       noColorsToShow: '표시 할 색상이 없습니다',
+      undefinedColorId: 'ID가 정의되지 않았습니다',
     },
   },
   {
@@ -129,6 +133,7 @@ const raw = [
       twitter: 'gorjeo',
       email: 'correo electrónico',
       noColorsToShow: 'No hay color para mostrar',
+      undefinedColorId: 'ID no está definido',
     },
   },
   {
@@ -155,6 +160,7 @@ const raw = [
       twitter: 'щебет',
       email: 'Эл. адрес',
       noColorsToShow: 'Нет цвета для отображения',
+      undefinedColorId: 'идентификатор не определен',
     },
   },
 ];
