@@ -6,7 +6,10 @@ import { LanguageContext } from 'components/LanguageContext';
 
 const OneColor = ({
   liked,
-  boxInfo,
+  id,
+  value,
+  likeNum,
+  username,
   vertical,
   onLike,
   onShare,
@@ -19,13 +22,16 @@ const OneColor = ({
         <Box
           vertical={vertical}
           liked={liked}
-          boxInfo={boxInfo}
+          id={id}
+          username={username}
+          likeNum={likeNum}
+          value={value}
           onLikeClick={onLike}
           showUsername
         />
         <div className={style.center}>
           <button
-            onClick={() => onDownload(boxInfo)}
+            onClick={() => onDownload(id, value)}
             className="button is-fullwidth is-info"
             aria-label={language.download}
           >
@@ -68,7 +74,10 @@ const OneColor = ({
 
 OneColor.propTypes = {
   liked: PropTypes.bool,
-  boxInfo: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
+  username: PropTypes.string,
+  likeNum: PropTypes.number,
+  value: PropTypes.string.isRequired,
   vertical: PropTypes.bool,
   onLike: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,

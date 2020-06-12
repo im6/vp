@@ -6,7 +6,10 @@ import ColorCanvas from './components/ColorCanvas';
 
 const Box = ({
   liked,
-  boxInfo,
+  id,
+  value,
+  likeNum,
+  username,
   vertical,
   showUsername,
   onLikeClick,
@@ -15,33 +18,30 @@ const Box = ({
   const onLikeClickLocal = () => {
     onLikeClick({
       willLike: !liked,
-      id: boxInfo.get('id'),
+      id,
     });
   };
   const onCanvasClickLocal = () => {
-    onCanvasClick(boxInfo);
+    onCanvasClick(id);
   };
   return (
     <div className={style.box}>
       <ColorCanvas
         vertical={vertical}
-        colorValue={boxInfo.get('color')}
+        colorValue={value}
         onClick={onCanvasClickLocal}
       />
-      <LikeButton
-        liked={liked}
-        likeNum={boxInfo.get('like')}
-        onToggle={onLikeClickLocal}
-      />
-      {showUsername && boxInfo.get('username') && (
-        <p>{boxInfo.get('username')}</p>
-      )}
+      <LikeButton liked={liked} likeNum={likeNum} onToggle={onLikeClickLocal} />
+      {showUsername && username && <p>{username}</p>}
     </div>
   );
 };
 
 Box.propTypes = {
-  boxInfo: PropTypes.object.isRequired, // immutable object
+  id: PropTypes.string.isRequired,
+  username: PropTypes.string,
+  likeNum: PropTypes.number,
+  value: PropTypes.string.isRequired,
   liked: PropTypes.bool,
   vertical: PropTypes.bool,
   showUsername: PropTypes.bool,

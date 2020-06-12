@@ -1,25 +1,19 @@
 import React from 'react';
 import { render, fireEvent } from 'test-utils';
 import Box from '.';
-import { fromJS } from 'immutable';
+import { boxInfo } from '../../../../../testing/dataMock';
 
 describe('render properly', () => {
-  const boxInfo = fromJS({
-    id: '1',
-    like: 4,
-    color: 'e5d12f#e5632f#d71a64#4c286f',
-    userid: null,
-    username: 'tom',
-    createdate: '1522956515000',
-  });
-
   const clickCb = jest.fn();
   const canvasCb = jest.fn();
 
   test('render properly with click', () => {
     const { container, getByText, rerender } = render(
       <Box
-        boxInfo={boxInfo}
+        id={boxInfo.id}
+        username={boxInfo.username}
+        value={boxInfo.color}
+        likeNum={boxInfo.like}
         onLikeClick={clickCb}
         onCanvasClick={canvasCb}
         liked
@@ -29,7 +23,10 @@ describe('render properly', () => {
     );
     rerender(
       <Box
-        boxInfo={boxInfo}
+        id={boxInfo.id}
+        username={boxInfo.username}
+        value={boxInfo.color}
+        likeNum={boxInfo.like}
         onLikeClick={clickCb}
         onCanvasClick={canvasCb}
         liked
@@ -40,7 +37,10 @@ describe('render properly', () => {
 
     rerender(
       <Box
-        boxInfo={boxInfo}
+        id={boxInfo.id}
+        username={boxInfo.username}
+        value={boxInfo.color}
+        likeNum={boxInfo.like}
         onLikeClick={clickCb}
         onCanvasClick={canvasCb}
         liked

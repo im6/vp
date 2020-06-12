@@ -65,14 +65,9 @@ const mapDispatchToProps = (dispatch) => {
         })
       );
     },
-    onDownload(color) {
+    onDownload(id, color) {
       const ac = createAction('color/download');
-      dispatch(
-        ac({
-          color: color.get('color'),
-          id: color.get('id'),
-        })
-      );
+      dispatch(ac({ id, color }));
     },
     onShare(type) {
       const ac = createAction('color/share');

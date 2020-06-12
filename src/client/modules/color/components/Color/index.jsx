@@ -22,15 +22,18 @@ const Color = ({
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [selectedId]);
-  const onCanvasClick = (color) => {
-    onEnter(`/color/${color.get('id')}`);
+  const onCanvasClick = (id) => {
+    onEnter(`/color/${id}`);
   };
   return (
     <Fragment>
       {loading && <SpinLoader />}
       {selectedId && (
         <OneColor
-          boxInfo={colorDef.get(selectedId)}
+          id={colorDef.getIn([selectedId, 'id'])}
+          username={colorDef.getIn([selectedId, 'username'])}
+          likeNum={colorDef.getIn([selectedId, 'like'])}
+          value={colorDef.getIn([selectedId, 'color'])}
           liked={liked.get(selectedId)}
           vertical={vertical}
           onLike={onLike}
@@ -47,7 +50,10 @@ const Color = ({
               key={v}
               vertical={vertical}
               liked={liked.get(v)}
-              boxInfo={boxInfo}
+              id={boxInfo.get('id')}
+              username={boxInfo.get('username')}
+              likeNum={boxInfo.get('like')}
+              value={boxInfo.get('color')}
               onLikeClick={onLike}
               onCanvasClick={onCanvasClick}
             />

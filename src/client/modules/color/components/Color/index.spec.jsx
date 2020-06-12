@@ -3,32 +3,16 @@ import { render, fireEvent } from 'test-utils';
 import Color from '.';
 import { fromJS, Map } from 'immutable';
 import { translation } from '../../../../../translation/index';
+import { colorDefSample } from '../../../../../testing/dataMock';
 
 describe('render properly', () => {
   beforeAll(() => {
     global.scrollTo = jest.fn();
   });
-  const raw = {
-    '1': {
-      id: '1',
-      like: 4,
-      color: 'e5d12f#e5632f#d71a64#4c286f',
-      userid: null,
-      username: null,
-      createdate: '1522956515000',
-    },
-    '2': {
-      id: '2',
-      like: 4,
-      color: 'e5d12f#e5632f#d71a64#4c286f',
-      userid: null,
-      username: null,
-      createdate: '1522956515000',
-    },
-  };
+
   const liked = Map({ '1': true, '2': true });
-  const colorDef = fromJS(raw);
-  const ids = Object.keys(raw);
+  const colorDef = fromJS(colorDefSample);
+  const ids = Object.keys(colorDefSample);
 
   const cb = jest.fn();
 

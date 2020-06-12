@@ -1,18 +1,9 @@
 import React from 'react';
 import { render, fireEvent } from 'test-utils';
 import Box from '.';
-import { fromJS } from 'immutable';
+import { boxInfo } from '../../../../../testing/dataMock';
 
 describe('render properly', () => {
-  const boxInfo = fromJS({
-    id: '1',
-    like: 4,
-    color: 'e5d12f#e5632f#d71a64#4c286f',
-    userid: null,
-    username: 'tom',
-    createdate: '1522956515000',
-  });
-
   const likeCb = jest.fn();
   const shareCb = jest.fn();
   const downloadCb = jest.fn();
@@ -21,7 +12,10 @@ describe('render properly', () => {
     const { container, getByText } = render(
       <Box
         liked
-        boxInfo={boxInfo}
+        id={boxInfo.id}
+        username={boxInfo.username}
+        value={boxInfo.color}
+        likeNum={boxInfo.like}
         onLike={likeCb}
         onShare={shareCb}
         onDownload={downloadCb}
