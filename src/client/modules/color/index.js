@@ -2,10 +2,6 @@ import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 import Color from './components/Color';
 
-const shared = {
-  isAuth: false,
-};
-
 const storeMap = {
   '/': 'colorIdAllByDate',
   '/latest': 'colorIdAllByDate',
@@ -25,7 +21,6 @@ const mapStateToProps = (
   }
 ) => {
   const isAuth = Boolean(user.get('detail'));
-  shared.isAuth = isAuth;
 
   const colorDef = color.get('colorDef');
   const liked = color.get('liked');
@@ -41,6 +36,7 @@ const mapStateToProps = (
       : color.get('loading');
 
   return {
+    isAuth,
     loading,
     list,
     colorDef,
@@ -53,9 +49,8 @@ const mapStateToProps = (
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLike({ id, willLike }) {
+    onLike({ id, willLike }, isAuth) {
       const ac = createAction('color/toggleLike');
-      const { isAuth } = shared;
       dispatch(
         ac({
           isAuth, // used client like manager only

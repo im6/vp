@@ -7,6 +7,7 @@ import SpinLoader from 'components/SpinLoader';
 import { LanguageContext } from 'components/LanguageContext';
 
 const Color = ({
+  isAuth,
   list,
   liked,
   colorDef,
@@ -25,6 +26,9 @@ const Color = ({
   const onCanvasClick = (id) => {
     onEnter(`/color/${id}`);
   };
+  const onLikeLocal = (a) => {
+    onLike(a, isAuth);
+  };
   const selectedColor = selectedId && colorDef.get(selectedId);
   const colorNotFound = selectedId && !selectedColor;
   return (
@@ -38,7 +42,7 @@ const Color = ({
           value={selectedColor.get('color')}
           liked={liked.get(selectedId)}
           vertical={vertical}
-          onLike={onLike}
+          onLike={onLikeLocal}
           onDownload={onDownload}
           onShare={onShare}
         />
@@ -63,7 +67,7 @@ const Color = ({
               username={boxInfo.get('username')}
               likeNum={boxInfo.get('like')}
               value={boxInfo.get('color')}
-              onLikeClick={onLike}
+              onLikeClick={onLikeLocal}
               onCanvasClick={onCanvasClick}
             />
           ) : null;
@@ -74,6 +78,7 @@ const Color = ({
 };
 
 Color.propTypes = {
+  isAuth: PropTypes.bool,
   selectedId: PropTypes.string,
   loading: PropTypes.bool,
   vertical: PropTypes.bool,

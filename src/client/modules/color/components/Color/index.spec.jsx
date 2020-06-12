@@ -51,7 +51,7 @@ describe('render properly', () => {
     expect(getByText(translation.en.noColorsToShow)).toBeTruthy();
   });
   test('render undefined color id', () => {
-    const undefinedId = 798;
+    const undefinedId = '798';
     const { getByText } = render(
       <Color
         list={[]}
@@ -101,6 +101,22 @@ describe('render properly', () => {
     );
 
     fireEvent.click(container.querySelector('ul'));
+    expect(cb).toBeCalled();
+  });
+  test('click to like', () => {
+    const { container } = render(
+      <Color
+        list={[...ids, '100']}
+        liked={liked}
+        colorDef={colorDef}
+        vertical
+        onLike={cb}
+        onShare={cb}
+        onEnter={cb}
+        onDownload={cb}
+      />
+    );
+    fireEvent.click(container.querySelector('button'));
     expect(cb).toBeCalled();
   });
 });
