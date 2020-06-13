@@ -1,10 +1,18 @@
 # [ColorPK.com](http://react.colorpk.com) v1 ![](https://github.com/im6/vp/workflows/build/badge.svg)
 
-# ![logo](https://github.com/zj1926/vp/blob/master/assets/img/logo.png 'colorpk.com') \= ![rxjs](https://github.com/zj1926/vp/blob/master/assets/img/rxjs.png 'RxJS') + ![react](https://github.com/zj1926/vp/blob/master/assets/img/react.png 'React') + ![graphql](https://github.com/zj1926/vp/blob/master/assets/img/graphql.png 'GraphQL')
+<p align="center">
+  <img width="80" height="80" src="https://github.com/im6/vp/blob/master/assets/img/logo.png" title="ColorPK">
+  =
+  <img width="80" height="80" src="https://github.com/im6/vp/blob/master/assets/img/rxjs.png" title="RxJS">
+  +
+  <img width="80" height="80" src="https://github.com/im6/vp/blob/master/assets/img/react.png" title="React.js">
+  +
+  <img width="80" height="80" src="https://github.com/im6/vp/blob/master/assets/img/graphql.png" title="GraphQL">
+</p>
 
 ## Highlight
 
-- React
+- React.js
 - [RxJS](http://reactivex.io/)
 - Express.js
 - [GraphQL](https://graphql.org/)
@@ -13,6 +21,7 @@
 - [Bulma](https://bulma.io/)
 - Docker
 - Redis
+- Google App Engine
 - [React Testing Library](https://testing-library.com/)
 - MySQL
 - Redux
