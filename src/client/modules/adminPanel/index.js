@@ -1,8 +1,9 @@
 import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
-import AdminPanel from './components/AdminPanel';
+import AdminPanel from './AdminPanel';
 
-const mapStateToProps = ({ admin }) => ({
+const mapStateToProps = ({ admin, color }) => ({
+  vertical: color.get('showVertical'),
   list: admin.get('list'),
   loading: admin.get('loading'),
 });
