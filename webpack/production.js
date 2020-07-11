@@ -26,9 +26,9 @@ const prodBase = {
 
 const client = Object.assign(clientBaseConfig, prodBase, {
   output: {
-    publicPath: `https://cdn.jsdelivr.net/gh/im6/vp@v${version}/dist/public`,
+    publicPath: `https://cdn.jsdelivr.net/gh/im6/vp@v${version}/dist/public/`,
     path: path.join(__dirname, '../dist/public'),
-    filename: '[name].js?[contenthash]',
+    filename: '[name].js', // '[name].js?[contenthash]',
   },
   module: {
     rules: [
