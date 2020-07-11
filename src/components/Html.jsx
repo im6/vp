@@ -9,7 +9,6 @@ const Html = ({
   style,
   script,
   children,
-  version,
   csrfToken,
   lastBuildDate,
   initState,
@@ -37,7 +36,7 @@ const Html = ({
         rel="shortcut icon"
         href="//dkny.oss-cn-hangzhou.aliyuncs.com/3/fav.ico"
       />
-      <link href={`${style}?${version}`} rel="stylesheet" />
+      <link href={style} rel="stylesheet" />
       <script
         dangerouslySetInnerHTML={{
           __html: `if(window.location.hostname.indexOf('colorpk.com') > -1){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-5LX6LV3');} var initLoadTime = Date.now();window.addEventListener('_COLORPK_SCRIPT_READY', function(){window.dataLayer.push({'scriptLoadingTime': Date.now() - initLoadTime});console.log('server last build: ${lastBuildDate}');});
@@ -61,7 +60,7 @@ const Html = ({
           __html: `window.${reduxName}=${serialize(initState)}`,
         }}
       />
-      <script src={`${script}?${version}`} type="text/javascript" />
+      <script src={script} type="text/javascript" />
     </body>
   </html>
 );
@@ -69,7 +68,6 @@ const Html = ({
 Html.propTypes = {
   title: PropTypes.string.isRequired,
   lastBuildDate: PropTypes.string.isRequired,
-  version: PropTypes.string.isRequired,
   style: PropTypes.string.isRequired,
   script: PropTypes.string.isRequired,
   children: PropTypes.string.isRequired,

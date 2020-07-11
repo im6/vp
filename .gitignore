@@ -4,7 +4,6 @@
 .env
 npm-debug.log
 package-lock.json
-dist/public
 local
 coverage
 node_modules

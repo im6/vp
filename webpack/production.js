@@ -88,6 +88,7 @@ const client = Object.assign(clientBaseConfig, prodBase, {
     }),
     new OptimizeCssAssetsPlugin(),
     new CompressionPlugin({
+      exclude: /.*/, // use CDN instead of OSS
       filename: '[path]',
       minRatio: 1,
     }),

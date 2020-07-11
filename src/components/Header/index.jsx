@@ -5,7 +5,7 @@ import style from './style.sass';
 import TranslationIcon from './components/TranslationIcon';
 import LanguageDropdown from './components/LanguageDropdown';
 import { LanguageContext } from '../LanguageContext';
-import { cdnUrl } from '../../constant';
+import { imgCdnUrl } from '../../constant';
 
 const { selected } = style;
 
@@ -29,7 +29,7 @@ const Header = ({
   const selectSaved = url === '/like';
   const selectCreate = url === '/new';
   const userImgUrl = isAuth && detail.get('img');
-  const imagUrl = userImgUrl || `${cdnUrl}/icon.png`;
+  const imagUrl = userImgUrl || `${imgCdnUrl}/icon.png`;
 
   const onCloseNav = () => {
     toggleMenu(false);

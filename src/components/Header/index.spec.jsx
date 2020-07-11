@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent } from 'test-utils';
 import { fromJS } from 'immutable';
 import Header from '.';
-import { cdnUrl } from '../../constant';
+import { imgCdnUrl } from '../../constant';
 
 describe('render properly', () => {
   beforeAll(() => {
@@ -105,6 +105,6 @@ describe('render properly', () => {
         onChangeCanvasDirection={jest.fn()}
       />
     );
-    expect(getByRole('img').src).toBe(`http:${cdnUrl}/icon.png`);
+    expect(getByRole('img').src).toBe(`http:${imgCdnUrl}/icon.png`);
   });
 });

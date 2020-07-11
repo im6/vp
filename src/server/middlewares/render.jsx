@@ -19,8 +19,6 @@ import moduleReducers from '../../reducers';
 import { isAuth, isAdmin } from '../helper';
 import { createFacebookLink } from '../resource/oauth';
 
-const version = uuidV1().substring(0, 8);
-
 export default (req, res) => {
   const authOk = isAuth(req, true);
   let userDetail = {
@@ -83,7 +81,6 @@ export default (req, res) => {
           ? '(dev) ColorPK'
           : 'ColorPK | Your Best Color Picker'
       }`}
-      version={version}
       style={`${PUBLIC_PATH}/main.css`}
       script={`${PUBLIC_PATH}/main.js`}
       csrfToken={req.csrfToken()}
