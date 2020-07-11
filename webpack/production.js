@@ -6,6 +6,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const { version } = require('../package.json');
 
 const {
   withoutCssModuleFiles,
@@ -25,7 +26,7 @@ const prodBase = {
 
 const client = Object.assign(clientBaseConfig, prodBase, {
   output: {
-    publicPath: '//dkny.oss-cn-hangzhou.aliyuncs.com/2/',
+    publicPath: `https://cdn.jsdelivr.net/gh/im6/vp@v${version}/dist/public`,
     path: path.join(__dirname, '../dist/public'),
     filename: '[name].js?[contenthash]',
   },
