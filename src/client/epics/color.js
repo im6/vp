@@ -13,7 +13,7 @@ import {
 
 import requester from '../misc/requester';
 import likeManager from '../misc/likeManager';
-import { download, share } from '../misc/util';
+import { download, share, copyText } from '../misc/util';
 import { canvasOrientationKey } from '../../constant';
 
 const colorql = `query($cate: ColorCategory!) {
@@ -180,6 +180,14 @@ export default [
         Cookies.set(canvasOrientationKey, payload ? '1' : '0', {
           expires: 180,
         });
+      }),
+      ignoreElements()
+    ),
+  (action$) =>
+    action$.pipe(
+      ofType('color/copy'),
+      tap(({ payload }) => {
+        copyText(payload.substring(1));
       }),
       ignoreElements()
     ),

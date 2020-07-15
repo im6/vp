@@ -13,7 +13,8 @@ const Box = ({
   vertical,
   showUsername,
   onLikeClick,
-  onCanvasClick,
+  onClickText,
+  onClickCanvas,
 }) => {
   const onLikeClickLocal = () => {
     onLikeClick({
@@ -21,15 +22,16 @@ const Box = ({
       id,
     });
   };
-  const onCanvasClickLocal = () => {
-    onCanvasClick(id);
+  const onClickCanvasLocal = () => {
+    onClickCanvas(id);
   };
   return (
     <div className={style.box}>
       <ColorCanvas
         vertical={vertical}
         colorValue={value}
-        onClick={onCanvasClickLocal}
+        onClickText={onClickText}
+        onClickCanvas={onClickCanvasLocal}
       />
       <LikeButton liked={liked} likeNum={likeNum} onToggle={onLikeClickLocal} />
       {showUsername && username && <p>{username}</p>}
@@ -46,11 +48,13 @@ Box.propTypes = {
   vertical: PropTypes.bool,
   showUsername: PropTypes.bool,
   onLikeClick: PropTypes.func.isRequired,
-  onCanvasClick: PropTypes.func.isRequired,
+  onClickText: PropTypes.func.isRequired,
+  onClickCanvas: PropTypes.func.isRequired,
 };
 
 Box.defaultProps = {
-  onCanvasClick: () => {},
+  onClickText: () => {},
+  onClickCanvas: () => {},
 };
 
 export default Box;

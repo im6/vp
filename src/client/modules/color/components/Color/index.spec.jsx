@@ -26,6 +26,7 @@ describe('render properly', () => {
         loading
         vertical
         onLike={cb}
+        onCopy={cb}
         onShare={cb}
         onEnter={cb}
         onDownload={cb}
@@ -42,6 +43,7 @@ describe('render properly', () => {
         selectedId={null}
         vertical
         onLike={cb}
+        onCopy={cb}
         onShare={cb}
         onEnter={cb}
         onDownload={cb}
@@ -60,6 +62,7 @@ describe('render properly', () => {
         selectedId={undefinedId}
         vertical
         onLike={cb}
+        onCopy={cb}
         onShare={cb}
         onEnter={cb}
         onDownload={cb}
@@ -79,6 +82,7 @@ describe('render properly', () => {
         selectedId={ids[0]}
         vertical
         onLike={cb}
+        onCopy={cb}
         onShare={cb}
         onEnter={cb}
         onDownload={cb}
@@ -94,6 +98,7 @@ describe('render properly', () => {
         colorDef={colorDef}
         vertical
         onLike={cb}
+        onCopy={cb}
         onShare={cb}
         onEnter={cb}
         onDownload={cb}
@@ -111,6 +116,7 @@ describe('render properly', () => {
         colorDef={colorDef}
         vertical
         onLike={cb}
+        onCopy={cb}
         onShare={cb}
         onEnter={cb}
         onDownload={cb}

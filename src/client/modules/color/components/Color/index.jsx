@@ -17,11 +17,14 @@ const Color = ({
   onLike,
   onShare,
   onEnter,
+  onCopy,
   onDownload,
 }) => {
   const language = useContext(LanguageContext);
   useEffect(() => {
-    window.scrollTo(0, 0);
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 50);
   }, [selectedId]);
   const onCanvasClick = (id) => {
     onEnter(`/color/${id}`);
@@ -68,7 +71,8 @@ const Color = ({
               likeNum={boxInfo.get('like')}
               value={boxInfo.get('color')}
               onLikeClick={onLikeLocal}
-              onCanvasClick={onCanvasClick}
+              onClickText={onCopy}
+              onClickCanvas={onCanvasClick}
             />
           ) : null;
         })}
@@ -86,6 +90,7 @@ Color.propTypes = {
   list: PropTypes.array.isRequired,
   colorDef: PropTypes.object.isRequired,
   onLike: PropTypes.func.isRequired,
+  onCopy: PropTypes.func.isRequired,
   onEnter: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
   onDownload: PropTypes.func.isRequired,

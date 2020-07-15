@@ -135,3 +135,14 @@ export const share = (type) => {
   }
   window.open(url, '', windowSize);
 };
+
+export const copyText = (txt) => {
+  const inputElem = document.createElement('INPUT');
+  const { body } = document;
+  body.appendChild(inputElem);
+  inputElem.value = txt;
+  inputElem.select();
+  inputElem.setSelectionRange(0, 99999); // For mobile devices
+  document.execCommand('copy');
+  body.removeChild(inputElem);
+};

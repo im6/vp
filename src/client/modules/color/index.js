@@ -67,6 +67,10 @@ const mapDispatchToProps = (dispatch) => {
       const ac = createAction('color/share');
       dispatch(ac(type));
     },
+    onCopy(txt) {
+      const ac = createAction('color/copy');
+      dispatch(ac(txt));
+    },
   };
 };
 
