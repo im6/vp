@@ -9,7 +9,11 @@ const ColorRow = ({ color, onClickText }) => {
   };
   return (
     <li className={style.rowContainer} style={{ backgroundColor: color }}>
-      <span className={style.text} onClick={onClickTextLocal}>
+      <span
+        aria-hidden="true"
+        className={style.text}
+        onClick={onClickTextLocal}
+      >
         {color}
       </span>
     </li>
