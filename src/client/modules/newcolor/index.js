@@ -17,6 +17,10 @@ const mapDispatchToProps = (dispatch) => {
       const ac = createAction('color/addNew');
       dispatch(ac({ color }));
     },
+    onNotify(actionName, colorStr) {
+      const ac = createAction(actionName);
+      dispatch(ac(colorStr));
+    },
   };
 };
 

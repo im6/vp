@@ -17,6 +17,7 @@ describe('render properly', () => {
         value={boxInfo.color}
         likeNum={boxInfo.like}
         onLike={likeCb}
+        onCopy={jest.fn()}
         onShare={shareCb}
         onDownload={downloadCb}
       />

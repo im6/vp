@@ -8,7 +8,7 @@ import { isColorHex } from '../../../../../util';
 
 const DEFAULTVALUE = '#81EEFF';
 
-const NewColor = ({ defaultColors, onAdd, onRedirect }) => {
+const NewColor = ({ defaultColors, onAdd, onNotify, onRedirect }) => {
   const language = useContext(LanguageContext);
 
   const [editColor, setEditColor] = useState(DEFAULTVALUE);
@@ -31,7 +31,7 @@ const NewColor = ({ defaultColors, onAdd, onRedirect }) => {
       onAdd(colorStr.substr(1));
       resetColor();
     } else {
-      console.error('Invalid color');
+      onNotify('modal/newColor/invalid', colorStr);
     }
   };
 
@@ -88,6 +88,7 @@ const NewColor = ({ defaultColors, onAdd, onRedirect }) => {
 
 NewColor.propTypes = {
   onAdd: PropTypes.func.isRequired,
+  onNotify: PropTypes.func.isRequired,
   onRedirect: PropTypes.func.isRequired,
   defaultColors: PropTypes.string,
 };

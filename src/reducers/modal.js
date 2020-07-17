@@ -22,13 +22,19 @@ const modal = handleActions(
     },
     ['modal/newColor/success']() {
       return {
-        message: 'Create color successfully.',
+        message: 'Create color successfully, thanks.',
         type: 'success',
       };
     },
     ['modal/newColor/fail']() {
       return {
         message: 'Create color failed.',
+        type: 'danger',
+      };
+    },
+    ['modal/newColor/invalid'](_, { payload }) {
+      return {
+        message: `Invalid color value: ${payload}`,
         type: 'danger',
       };
     },
