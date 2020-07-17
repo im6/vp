@@ -1,11 +1,14 @@
 .box
-  top: 5px;
-  right: 5px;
-  z-index: 30;
   position: fixed;
-  transition: transform 0.4s
+  top: 6px;
+  right: 6px;
+  z-index: 30;
+  
+  transform: translateY(-68px);
+  animation: slideDown 2.2s 0s 1 ease forwards;
 
-.show
-  transform: translateY(0px);
-.hide
-  transform: translateY(-130px);
+@-webkit-keyframes slideDown
+    0%, 100% { transform: translateY(-68px); }
+    8%, 91% { transform: translateY(0px); }
+
+

@@ -12,6 +12,7 @@ const OneColor = ({
   username,
   vertical,
   onLike,
+  onCopy,
   onShare,
   onDownload,
 }) => {
@@ -27,6 +28,7 @@ const OneColor = ({
           likeNum={likeNum}
           value={value}
           onLikeClick={onLike}
+          onClickText={onCopy}
           showUsername
         />
         <div className={style.center}>
@@ -80,6 +82,7 @@ OneColor.propTypes = {
   value: PropTypes.string.isRequired,
   vertical: PropTypes.bool,
   onLike: PropTypes.func.isRequired,
+  onCopy: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
   onDownload: PropTypes.func.isRequired,
 };

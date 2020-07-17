@@ -3,7 +3,8 @@ import { createAction } from 'redux-actions';
 import NewColor from './components/NewColor';
 
 const mapStateToProps = (_, { location: { search }, history }) => {
-  const defaultColors = search.match(/[a-f0-9]{24}/);
+  const searchLower = search.toLowerCase();
+  const defaultColors = searchLower.match(/[a-f0-9]{24}/);
   return {
     onRedirect: history.push,
     defaultColors: defaultColors && defaultColors[0],

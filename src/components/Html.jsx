@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import OpenGraph from './OpenGraph';
 import serialize from 'serialize-javascript';
-import { reduxName } from '../constant';
+import { tempDomId, reduxName } from '../constant';
 
 const Html = ({
   title,
@@ -54,6 +54,7 @@ const Html = ({
         />
       </noscript>
       <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
+      <div id={tempDomId} />
       <div id="csrf" data-token={csrfToken} />
       <script
         dangerouslySetInnerHTML={{

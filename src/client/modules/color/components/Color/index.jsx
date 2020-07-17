@@ -45,6 +45,7 @@ const Color = ({
           value={selectedColor.get('color')}
           liked={liked.get(selectedId)}
           vertical={vertical}
+          onCopy={onCopy}
           onLike={onLikeLocal}
           onDownload={onDownload}
           onShare={onShare}
