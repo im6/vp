@@ -1,3 +1,5 @@
+import { tempDomId } from '../../constant';
+
 const checkLocalStorage = () => {
   const textKey = '_tls';
   try {
@@ -138,7 +140,7 @@ export const share = (type) => {
 
 export const copyText = (txt) => {
   const inputElem = document.createElement('INPUT');
-  const { body } = document;
+  const body = document.getElementById(tempDomId);
   body.appendChild(inputElem);
   inputElem.value = txt;
   inputElem.select();

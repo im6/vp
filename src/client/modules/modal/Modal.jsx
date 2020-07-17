@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import style from './style.sass';
+import Portal from './Portal';
 
 const Modal = ({ type, message }) => {
-  const visible = typeof message === 'string' && message.length > 0;
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    if (typeof message === 'string' && message.length > 0) {
+      setVisible(true);
+      setTimeout(() => {
+        setVisible(false);
+      }, 2500);
+    }
+  }, [message]);
+
   return (
-    <div
-      className={`notification is-${type} ${style.box} ${
-        visible ? style.show : style.hide
-      }`}
-    >
-      {message}
-    </div>
+    visible && (
+      <Portal>
+        <div className={`notification is-${type} ${style.box}`}>{message}</div>
+      </Portal>
+    )
   );
 };
 

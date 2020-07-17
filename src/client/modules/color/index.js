@@ -70,6 +70,9 @@ const mapDispatchToProps = (dispatch) => {
     onCopy(txt) {
       const ac = createAction('color/copy');
       dispatch(ac(txt));
+
+      const ac1 = createAction('modal/copy');
+      dispatch(ac1(txt));
     },
   };
 };

@@ -151,24 +151,25 @@ export default [
             };
             return iif(
               () => isGood,
-              of({
-                type: 'color/addNew/success',
-                payload: successPayload,
-              }),
-              of({
-                type: 'color/addNew/fail',
-                payload: get(action2, 'response.errors[0].message'),
-              })
+              of(
+                {
+                  type: 'color/addNew/success',
+                  payload: successPayload,
+                },
+                {
+                  type: 'modal/newColor/success',
+                }
+              ),
+              of(
+                {
+                  type: 'color/addNew/fail',
+                  payload: get(action2, 'response.errors[0].message'),
+                },
+                {
+                  type: 'modal/newColor/fail',
+                }
+              )
             );
-          }),
-          tap(({ type }) => {
-            if (type === 'color/addNew/fail') {
-              // eslint-disable-next-line no-alert
-              alert('Error on creating color');
-            } else {
-              // eslint-disable-next-line no-alert
-              alert('Thank you for new colors');
-            }
           })
         );
       })

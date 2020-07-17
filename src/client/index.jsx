@@ -10,6 +10,7 @@ import Routes from './routes';
 import LangProvider from 'containers/Lang';
 import { BrowserRouter } from 'react-router-dom';
 import './bulma.modules.sass';
+import Modal from './modules/modal';
 
 customEventPolyFill();
 
@@ -18,6 +19,7 @@ hydrate(
     <Provider store={store}>
       <LangProvider>
         <Layout>
+          <Modal />
           <Routes />
         </Layout>
       </LangProvider>

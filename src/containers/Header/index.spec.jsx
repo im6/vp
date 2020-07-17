@@ -12,6 +12,6 @@ describe('render properly', () => {
     mapper.onLogout();
     mapper.onChangeLang();
     mapper.onChangeCanvasDirection();
-    expect(dispatch).toBeCalledTimes(3);
+    expect(dispatch).toBeCalledTimes(4);
   });
 });
