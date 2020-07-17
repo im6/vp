@@ -1,14 +1,16 @@
-.box
-  position: fixed;
-  top: 6px;
-  right: 6px;
-  z-index: 30;
+$margin: 6px
+$timeout: 2.2s
+$yOffset: -68px
 
-  transform: translateY(-68px);
-  animation: slideDown 2.2s 0s 1 ease forwards;
+.box
+  position: fixed
+  top: $margin
+  right: $margin
+  z-index: 30
+
+  transform: translateY($yOffset)
+  animation: slideDown $timeout 0s 1 ease forwards
 
 @-webkit-keyframes slideDown
-    0%, 100% { transform: translateY(-68px); }
+    0%, 100% { transform: translateY($yOffset); }
     8%, 91% { transform: translateY(0px); }
-
-
