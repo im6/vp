@@ -23,7 +23,7 @@ const AdminPanel = ({ vertical, loading, list, onAdjudicate, onInitList }) => {
             vertical={vertical}
             likeNum={v.like}
             liked={false}
-            onLikeClick={onAdjudicateLocal(v.id, true)}
+            onClickLike={onAdjudicateLocal(v.id, true)}
           />
           <br />
           &nbsp;&nbsp;

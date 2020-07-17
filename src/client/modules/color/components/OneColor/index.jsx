@@ -27,7 +27,7 @@ const OneColor = ({
           username={username}
           likeNum={likeNum}
           value={value}
-          onLikeClick={onLike}
+          onClickLike={onLike}
           onClickText={onCopy}
           showUsername
         />

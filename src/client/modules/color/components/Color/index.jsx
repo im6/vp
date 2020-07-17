@@ -71,7 +71,7 @@ const Color = ({
               username={boxInfo.get('username')}
               likeNum={boxInfo.get('like')}
               value={boxInfo.get('color')}
-              onLikeClick={onLikeLocal}
+              onClickLike={onLikeLocal}
               onClickText={onCopy}
               onClickCanvas={onCanvasClick}
             />

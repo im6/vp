@@ -13,7 +13,7 @@ describe('render properly', () => {
         username={boxInfo.username}
         value={boxInfo.color}
         likeNum={boxInfo.like}
-        onLikeClick={clickCb}
+        onClickLike={clickCb}
         liked
         vertical
         showUsername
@@ -25,7 +25,7 @@ describe('render properly', () => {
         username={boxInfo.username}
         value={boxInfo.color}
         likeNum={boxInfo.like}
-        onLikeClick={clickCb}
+        onClickLike={clickCb}
         liked
         vertical={false}
         showUsername
@@ -38,7 +38,7 @@ describe('render properly', () => {
         username={boxInfo.username}
         value={boxInfo.color}
         likeNum={boxInfo.like}
-        onLikeClick={clickCb}
+        onClickLike={clickCb}
         liked
         vertical={false}
         showUsername

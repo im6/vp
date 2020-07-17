@@ -12,12 +12,12 @@ const Box = ({
   username,
   vertical,
   showUsername,
-  onLikeClick,
+  onClickLike,
   onClickText,
   onClickCanvas,
 }) => {
-  const onLikeClickLocal = () => {
-    onLikeClick({
+  const onClickLikeLocal = () => {
+    onClickLike({
       willLike: !liked,
       id,
     });
@@ -33,7 +33,7 @@ const Box = ({
         onClickText={onClickText}
         onClickCanvas={onClickCanvasLocal}
       />
-      <LikeButton liked={liked} likeNum={likeNum} onToggle={onLikeClickLocal} />
+      <LikeButton liked={liked} likeNum={likeNum} onToggle={onClickLikeLocal} />
       {showUsername && username && <p>{username}</p>}
     </div>
   );
@@ -47,7 +47,7 @@ Box.propTypes = {
   liked: PropTypes.bool,
   vertical: PropTypes.bool,
   showUsername: PropTypes.bool,
-  onLikeClick: PropTypes.func.isRequired,
+  onClickLike: PropTypes.func.isRequired,
   onClickText: PropTypes.func.isRequired,
   onClickCanvas: PropTypes.func.isRequired,
 };
