@@ -2,13 +2,15 @@
 
 $margin: 6px
 $timeout: 2s
-$yOffset: -68px
+$yOffset: -70px
+$textHeight: 25px
 
 .box
   position: fixed
   top: $margin
   right: $margin
   z-index: 30
+  display: flex
 
   transform: translateY($yOffset)
   animation: slideDown $timeout 0s 1 ease forwards
@@ -18,6 +20,12 @@ $yOffset: -68px
 
   -moz-transform: translateY($yOffset)
   -moz-animation: slideDown $timeout 0s 1 ease forwards
+
+.text
+  line-height: $textHeight
+  text-align: center
+  margin-left: 10px
+  font-size: 1.1rem
 
 @keyframes slideDown
     0%, 100% { transform: translateY($yOffset); }
