@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import style from './style.sass';
 import TranslationIcon from './components/TranslationIcon';
 import LanguageDropdown from './components/LanguageDropdown';
+import ToggleButton from './components/ToggleButton';
 import { LanguageContext } from '../LanguageContext';
 import { imgCdnUrl } from '../../constant';
 
@@ -62,17 +63,7 @@ const Header = ({
             alt="colorpk icon"
           />
         </div>
-        <a
-          role="nav toggle btn"
-          className="navbar-burger burger"
-          aria-label="nav menu"
-          aria-expanded="false"
-          onClick={() => toggleMenu((v) => !v)}
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
+        <ToggleButton onClick={() => toggleMenu((v) => !v)} />
       </div>
 
       <div className={`navbar-menu ${isMenuOpen ? 'is-active' : ''}`}>
