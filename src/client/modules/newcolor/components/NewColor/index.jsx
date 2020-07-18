@@ -8,7 +8,7 @@ import { isValidColorStr } from '../../../../../util';
 
 const DEFAULTVALUE = '#81EEFF';
 
-const NewColor = ({ defaultColors, onAdd, onNotify, onRedirect }) => {
+const NewColor = ({ defaultColors, onAdd, onColorInvalid, onRedirect }) => {
   const language = useContext(LanguageContext);
 
   const [editColor, setEditColor] = useState(DEFAULTVALUE);
@@ -31,7 +31,7 @@ const NewColor = ({ defaultColors, onAdd, onNotify, onRedirect }) => {
       onAdd(colorStr.substr(1));
       resetColor();
     } else {
-      onNotify('modal/color/addNew/invalid', colorStr);
+      onColorInvalid();
     }
   };
 
@@ -88,7 +88,7 @@ const NewColor = ({ defaultColors, onAdd, onNotify, onRedirect }) => {
 
 NewColor.propTypes = {
   onAdd: PropTypes.func.isRequired,
-  onNotify: PropTypes.func.isRequired,
+  onColorInvalid: PropTypes.func.isRequired,
   onRedirect: PropTypes.func.isRequired,
   defaultColors: PropTypes.string,
 };

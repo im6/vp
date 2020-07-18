@@ -17,9 +17,9 @@ const mapDispatchToProps = (dispatch) => {
       const ac = createAction('color/addNew');
       dispatch(ac({ color }));
     },
-    onNotify(actionName, colorStr) {
-      const ac = createAction(actionName);
-      dispatch(ac(colorStr));
+    onColorInvalid() {
+      const ac = createAction('modal/color/addNew/invalid');
+      dispatch(ac());
     },
   };
 };

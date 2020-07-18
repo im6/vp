@@ -35,9 +35,9 @@ const modal = handleActions(
         type: 'danger',
       };
     },
-    ['modal/color/copy'](_, { payload }) {
+    ['modal/color/copy']() {
       return {
-        message: `Copy to clipboard successfully: ${payload}`,
+        message: 'Copy to clipboard successfully',
         type: 'success',
       };
     },
@@ -53,9 +53,9 @@ const modal = handleActions(
         type: 'danger',
       };
     },
-    ['modal/color/addNew/invalid'](_, { payload }) {
+    ['modal/color/addNew/invalid']() {
       return {
-        message: `Invalid color value: ${payload}`,
+        message: 'Invalid color value.',
         type: 'danger',
       };
     },
