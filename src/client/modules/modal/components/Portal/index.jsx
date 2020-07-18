@@ -1,6 +1,6 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import { tempDomId } from '../../../constant';
+import { tempDomId } from '../../../../../constant';
 
 const modalRoot = document.getElementById(tempDomId);
 

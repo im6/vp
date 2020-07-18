@@ -6,15 +6,24 @@ import CheckIcon from './CheckIcon';
 import ExclamationIcon from './ExclamationIcon';
 
 const StatusIcon = ({ type }) => {
-  let icon;
+  let path;
   if (type === 'link' || type === 'info') {
-    icon = <InfoIcon />;
+    path = <InfoIcon />;
   } else if (type === 'danger' || type === 'warning') {
-    icon = <ExclamationIcon />;
+    path = <ExclamationIcon />;
   } else if (type === 'primary' || type === 'success') {
-    icon = <CheckIcon />;
+    path = <CheckIcon />;
   }
-  return icon;
+  return (
+    <svg
+      width="25"
+      height="25"
+      viewBox="0 0 1792 1792"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {path}
+    </svg>
+  );
 };
 
 StatusIcon.propTypes = {
