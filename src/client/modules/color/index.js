@@ -62,6 +62,9 @@ const mapDispatchToProps = (dispatch) => {
     onDownload(id, color) {
       const ac = createAction('color/download');
       dispatch(ac({ id, color }));
+
+      const ac1 = createAction('modal/color/download');
+      dispatch(ac1());
     },
     onShare(type) {
       const ac = createAction('color/share');

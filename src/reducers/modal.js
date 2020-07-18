@@ -68,6 +68,13 @@ const modal = handleActions(
         flag: !flag,
       };
     },
+    ['modal/color/download']({ flag }) {
+      return {
+        message: 'Downloading ...',
+        type: 'link',
+        flag: !flag,
+      };
+    },
 
     // user reducer
 
