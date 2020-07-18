@@ -4,7 +4,7 @@ import { GraphQLError } from 'graphql';
 import sqlExecOne from '../../resource/mysqlConnection';
 import { showUser } from '../../resource/oauth';
 import { isAuth, isAdmin, getToken } from '../../helper';
-import { isColorHex } from '../../../util';
+import { isValidColorStr } from '../../../util';
 
 const root = {
   async user(_, req) {
@@ -153,7 +153,7 @@ const root = {
 
   async createColor({ input }, req) {
     const { color } = input;
-    if (!isColorHex(`#${color}`)) {
+    if (!isValidColorStr(`#${color}`)) {
       return new GraphQLError('create error: invalid color input');
     }
 

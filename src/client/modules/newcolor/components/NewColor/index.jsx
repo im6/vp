@@ -4,7 +4,7 @@ import { ChromePicker } from 'react-color';
 import EditCanvas from '../EditCanvas';
 import style from './style.sass';
 import { LanguageContext } from 'components/LanguageContext';
-import { isColorHex } from '../../../../../util';
+import { isValidColorStr } from '../../../../../util';
 
 const DEFAULTVALUE = '#81EEFF';
 
@@ -26,7 +26,7 @@ const NewColor = ({ defaultColors, onAdd, onNotify, onRedirect }) => {
 
   const onSubmit = () => {
     const colorStr = colorValue.join('');
-    const good = isColorHex(colorStr);
+    const good = isValidColorStr(colorStr);
     if (good) {
       onAdd(colorStr.substr(1));
       resetColor();
