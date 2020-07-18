@@ -60,10 +60,10 @@ export default [
                 }
               : { type: 'color/get/fail' };
           }),
-          catchError((error) => {
-            return of({ type: 'color/get/fail' }).pipe(
-              // eslint-disable-next-line no-console
-              tap(() => console.error(get(error, 'response.errors[0].message')))
+          catchError(() => {
+            return of(
+              { type: 'color/get/fail' },
+              { type: 'modal/color/get/fail' }
             );
           })
         );
@@ -157,7 +157,7 @@ export default [
                   payload: successPayload,
                 },
                 {
-                  type: 'modal/newColor/success',
+                  type: 'modal/color/addNew/success',
                 }
               ),
               of(
@@ -166,7 +166,7 @@ export default [
                   payload: get(action2, 'response.errors[0].message'),
                 },
                 {
-                  type: 'modal/newColor/fail',
+                  type: 'modal/color/addNew/fail',
                 }
               )
             );

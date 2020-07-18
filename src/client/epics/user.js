@@ -60,15 +60,15 @@ export default [
               )
             );
           }),
-          catchError((error) => {
-            return of({
-              type: 'user/auth/fail',
-              payload: null,
-            }).pipe(
-              tap(() =>
-                // eslint-disable-next-line no-console
-                console.error('error', get(error, 'response.errors[0].message'))
-              )
+          catchError(() => {
+            return of(
+              {
+                type: 'user/auth/fail',
+                payload: null,
+              },
+              {
+                type: 'modal/user/auth/fail',
+              }
             );
           })
         )

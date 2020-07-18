@@ -71,7 +71,7 @@ const mapDispatchToProps = (dispatch) => {
       const ac = createAction('color/copy');
       dispatch(ac(txt));
 
-      const ac1 = createAction('modal/copy');
+      const ac1 = createAction('modal/color/copy');
       dispatch(ac1(txt));
     },
   };

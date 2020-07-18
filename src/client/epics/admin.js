@@ -1,7 +1,7 @@
 import get from 'lodash.get';
 import { ofType } from 'redux-observable';
 import { of } from 'rxjs';
-import { map, mergeMap, filter, catchError, tap } from 'rxjs/operators';
+import { map, mergeMap, filter, catchError } from 'rxjs/operators';
 import requester from '../misc/requester';
 
 const colorql = `query($cate: ColorCategory!) {
@@ -35,14 +35,13 @@ export default [
             payload: get(ajaxRes, 'response.data.color', null),
           })),
           catchError(() => {
-            return of({
-              type: 'admin/getList/fail',
-            }).pipe(
-              tap(() => {
-                // eslint-disable-next-line no-console
-                console.error('admin error');
-                // window.location.replace('/');
-              })
+            return of(
+              {
+                type: 'admin/getList/fail',
+              },
+              {
+                type: 'modal/admin/getList/fail',
+              }
             );
           })
         )
@@ -68,8 +67,9 @@ export default [
             payload: action1.payload.id,
           })),
           catchError(() => {
-            // eslint-disable-next-line no-console
-            console.error('admin change error');
+            return of({
+              type: 'modal/admin/decideColor/fail',
+            });
           })
         )
       )

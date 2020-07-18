@@ -27,7 +27,7 @@ export const mapDispatchToProps = (dispatch) => {
       const ac = createAction('user/logoff');
       dispatch(ac());
 
-      const ac1 = createAction('modal/logoff');
+      const ac1 = createAction('modal/user/logoff');
       dispatch(ac1());
     },
     onChangeLang(lang) {

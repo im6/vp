@@ -31,7 +31,7 @@ const NewColor = ({ defaultColors, onAdd, onNotify, onRedirect }) => {
       onAdd(colorStr.substr(1));
       resetColor();
     } else {
-      onNotify('modal/newColor/invalid', colorStr);
+      onNotify('modal/color/addNew/invalid', colorStr);
     }
   };
 

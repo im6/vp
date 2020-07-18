@@ -8,33 +8,57 @@ const initialState = {
 
 const modal = handleActions(
   {
-    ['modal/copy'](_, { payload }) {
+    ['modal/color/copy'](_, { payload }) {
       return {
         message: `Copy to clipboard successfully: ${payload}`,
         type: 'success',
       };
     },
-    ['modal/logoff']() {
+    ['modal/user/logoff']() {
       return {
         message: 'Logout successfully.',
         type: 'info',
       };
     },
-    ['modal/newColor/success']() {
+    ['modal/color/addNew/success']() {
       return {
         message: 'Create color successfully, thanks.',
         type: 'success',
       };
     },
-    ['modal/newColor/fail']() {
+    ['modal/color/addNew/fail']() {
       return {
         message: 'Create color failed.',
         type: 'danger',
       };
     },
-    ['modal/newColor/invalid'](_, { payload }) {
+    ['modal/color/addNew/invalid'](_, { payload }) {
       return {
         message: `Invalid color value: ${payload}`,
+        type: 'danger',
+      };
+    },
+    ['modal/admin/getList/fail']() {
+      return {
+        message: 'Admin data error',
+        type: 'danger',
+      };
+    },
+    ['modal/user/auth/fail']() {
+      return {
+        message: 'Log in failed',
+        type: 'danger',
+      };
+    },
+    ['modal/color/get/fail']() {
+      return {
+        message: 'Get color data error.',
+        type: 'danger',
+      };
+    },
+    ['modal/admin/decideColor/fail']() {
+      return {
+        message: 'Adjudicate failed',
         type: 'danger',
       };
     },
