@@ -6,7 +6,7 @@ import Portal from './components/Portal';
 import StatusIcon from './components/StatusIcon';
 
 const visibleTimeout = 2000;
-const Modal = ({ type, message, time }) => {
+const Modal = ({ type, message, flag }) => {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     if (!visible && typeof message === 'string' && message.length > 0) {
@@ -15,7 +15,7 @@ const Modal = ({ type, message, time }) => {
         setVisible(false);
       }, visibleTimeout);
     }
-  }, [time]);
+  }, [flag]);
 
   return (
     visible && (
@@ -30,7 +30,7 @@ const Modal = ({ type, message, time }) => {
 };
 
 Modal.propTypes = {
-  time: PropTypes.number.isRequired,
+  flag: PropTypes.bool.isRequired,
   message: PropTypes.string,
   type: PropTypes.string,
 };

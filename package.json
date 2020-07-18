@@ -11,6 +11,7 @@
     "dev": "webpack --config ./webpack/develop.js",
     "lint": "eslint ./webpack ./src",
     "test": "jest --coverage",
+    "t": "yarn lint && yarn test",
     "build": "webpack --config ./webpack/production.js",
     "start": "node dist/server"
   },
