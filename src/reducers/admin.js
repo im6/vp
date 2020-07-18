@@ -27,12 +27,12 @@ const admin = handleActions(
       });
     },
 
-    ['admin/decideColor/success'](state, action) {
+    ['admin/decideColor'](state, { payload }) {
       const newState = state.updateIn(['list'], (list) =>
-        list.filter((v) => v.get('id') !== action.payload)
+        list.filter((v) => v.get('id') !== payload.id)
       );
 
-      return newState.set('loading', false);
+      return newState;
     },
   },
   initialState

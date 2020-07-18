@@ -36,16 +36,15 @@ describe('test user reducer behavior', () => {
       )
     ).toBeTruthy();
   });
-  test('action of admin/decideColor/success', () => {
+  test('action of admin/decideColor', () => {
     const list = [{ id: 1 }, { id: 2 }];
     const selectedId = list[0].id;
     expect(
-      adminReducer(fromJS({ loading: true, list: fromJS(list) }), {
-        type: 'admin/decideColor/success',
-        payload: selectedId,
+      adminReducer(fromJS({ list: fromJS(list) }), {
+        type: 'admin/decideColor',
+        payload: { id: selectedId },
       }).equals(
         fromJS({
-          loading: false,
           list: list.filter((v) => v.id !== selectedId),
         })
       )

@@ -56,6 +56,12 @@ const modal = handleActions(
         type: 'danger',
       };
     },
+    ['modal/admin/decideColor/success']() {
+      return {
+        message: 'Adjudicate successfully',
+        type: 'success',
+      };
+    },
     ['modal/admin/decideColor/fail']() {
       return {
         message: 'Adjudicate failed',

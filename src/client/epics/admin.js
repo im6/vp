@@ -63,7 +63,7 @@ export default [
               get(ajaxRes, 'response.data.adjudicateColor.status', 1) === 0
           ),
           map(() => ({
-            type: 'admin/decideColor/success',
+            type: 'modal/admin/decideColor/success',
             payload: action1.payload.id,
           })),
           catchError(() => {
