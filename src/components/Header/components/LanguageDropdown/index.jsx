@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const LanguageDropdown = ({ languages, onChange }) => (
   <div className="navbar-dropdown">
-    {languages.map(v => (
+    {languages.map((v) => (
       <a
         className="navbar-item"
         key={v.code}

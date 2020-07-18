@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from 'test-utils';
-import LangDropdown from './LanguageDropdown';
+import LangDropdown from './index';
 
 describe('render properly', () => {
   const languages = [
