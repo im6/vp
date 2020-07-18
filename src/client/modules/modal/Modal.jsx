@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import style from './style.sass';
 import Portal from './Portal';
 
+const visibleTimeout = 2000;
 const Modal = ({ type, message, time }) => {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
-    if (typeof message === 'string' && message.length > 0) {
+    if (!visible && typeof message === 'string' && message.length > 0) {
       setVisible(true);
       setTimeout(() => {
         setVisible(false);
-      }, 2200);
+      }, visibleTimeout);
     }
   }, [time]);
 
