@@ -1,4 +1,4 @@
-# [ColorPK.com](http://react.colorpk.com) v1 ![](https://github.com/im6/vp/workflows/build/badge.svg)
+# [ColorPK.com](http://react.colorpk.com) v1 ![badge](https://github.com/im6/vp/workflows/build/badge.svg)
 
 <p align="left">
   <img width="80" height="80" src="https://github.com/im6/vp/blob/master/assets/img/logo.png" title="ColorPK">

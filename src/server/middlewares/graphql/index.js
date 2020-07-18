@@ -1,4 +1,4 @@
-import graphqlHTTP from 'express-graphql';
+import { graphqlHTTP } from 'express-graphql';
 import rootValue from './root';
 import schema from './schema';
 
