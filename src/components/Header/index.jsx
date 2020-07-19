@@ -130,7 +130,9 @@ const Header = ({
             {language.latest}
           </Link>
 
-          <div className="navbar-item has-dropdown is-hoverable">
+          <div
+            className={`navbar-item has-dropdown is-hoverable ${style.wideScreenOnly}`}
+          >
             <a className="navbar-link">{language.more}</a>
 
             <div className="navbar-dropdown">
