@@ -1,6 +1,7 @@
 // https://css-tricks.com/pop-from-top-notification/
 
 $margin: 8px
+$margin-mobile: 3px
 $timeout: 2s
 $yOffset: -73px
 $textHeight: 25px
@@ -41,4 +42,8 @@ $textHeight: 25px
 
 @media only screen and (min-device-width : 375px) and (max-device-width : 812px) and (orientation : portrait)
   .box
-    display: none
+    top: $margin-mobile
+    right: $margin-mobile
+  .text
+    font-size: 0.8rem
+
