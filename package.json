@@ -94,7 +94,7 @@
     "uuid": "^8.2.0"
   },
   "prettier": {
-    "endOfLine": "lf",
+    "endOfLine": "auto",
     "trailingComma": "es5",
     "tabWidth": 2,
     "semi": true,
@@ -126,10 +126,6 @@
     "rules": {
       "prettier/prettier": 2,
       "import/no-extraneous-dependencies": 0,
-      "linebreak-style": [
-        "error",
-        "unix"
-      ],
       "import/no-unresolved": [
         2,
         {
