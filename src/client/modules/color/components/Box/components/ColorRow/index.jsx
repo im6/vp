@@ -6,7 +6,6 @@ const ColorRow = ({ color, onClickText }) => {
   const onClickTextLocal = (evt) => {
     onClickText(evt.target.innerText);
     evt.stopPropagation();
-    evt.preventDefault();
   };
   return (
     <li className={style.rowContainer} style={{ backgroundColor: color }}>
