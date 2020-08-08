@@ -58,7 +58,7 @@ const Html = ({
       <div id="csrf" data-token={csrfToken} />
       <script
         dangerouslySetInnerHTML={{
-          __html: `window.${reduxName}=${serialize(initState)}`,
+          __html: `window.${reduxName}=${serialize(initState)};`,
         }}
       />
       <script src={script} type="text/javascript" />
