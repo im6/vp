@@ -1,15 +1,5 @@
-import React from 'react';
-import { translation } from '../../translation';
+import { createContext } from 'react';
 
-const DEFAULTLANG = 'en';
+const LanguageContext = createContext();
 
-export const LanguageContext = React.createContext();
-
-export const LanguageContextProvider = ({ lang, children }) => {
-  const langSet = translation[lang] || translation[DEFAULTLANG];
-  return (
-    <LanguageContext.Provider value={langSet}>
-      {children}
-    </LanguageContext.Provider>
-  );
-};
+export default LanguageContext;

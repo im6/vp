@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Box from '../Box';
 import style from './style.sass';
-import { LanguageContext } from 'components/LanguageContext';
+import LanguageContext from 'components/LanguageContext';
 
 const OneColor = ({
   liked,

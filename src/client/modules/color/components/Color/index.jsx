@@ -4,7 +4,7 @@ import Box from '../Box';
 import OneColor from '../OneColor';
 import style from './style.sass';
 import SpinLoader from 'components/SpinLoader';
-import { LanguageContext } from 'components/LanguageContext';
+import LanguageContext from 'components/LanguageContext';
 
 const Color = ({
   isAuth,

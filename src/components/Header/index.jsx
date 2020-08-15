@@ -5,7 +5,7 @@ import style from './style.sass';
 import TranslationIcon from './components/TranslationIcon';
 import LanguageDropdown from './components/LanguageDropdown';
 import ToggleButton from './components/ToggleButton';
-import { LanguageContext } from '../LanguageContext';
+import LanguageContext from 'components/LanguageContext';
 import { imgCdnUrl } from '../../constant';
 
 const { selected } = style;

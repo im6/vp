@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import { LanguageContextProvider } from 'components/LanguageContext';
+import LanguageProvider from 'components/LanguageContext/Provider';
 
 const mapStateToProps = ({ user }) => ({
   lang: user.get('lang'),
 });
 
-export default connect(mapStateToProps)(LanguageContextProvider);
+export default connect(mapStateToProps)(LanguageProvider);
