@@ -165,14 +165,17 @@ const raw = [
   },
 ];
 
-export const languages = raw.map((v) => {
-  return {
+const languages = [];
+const translation = {};
+const languageCodes = {};
+
+raw.forEach((v) => {
+  languages.push({
     code: v.code,
     name: v.name,
-  };
+  });
+  translation[v.code] = v.data;
+  languageCodes[v.code] = true;
 });
 
-export const translation = raw.reduce((acc, val) => {
-  acc[val.code] = val.data;
-  return acc;
-}, {});
+export { languages, translation, languageCodes };

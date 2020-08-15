@@ -8,8 +8,9 @@ import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 
 import { PUBLIC_PATH } from '../constant.server';
 import {
-  canvasOrientationKey,
   langSelectionKey,
+  defaultLanguageKey,
+  canvasOrientationKey,
   canvasDefaultVertical,
 } from '../../constant';
 import Html from 'components/Html';
@@ -17,12 +18,16 @@ import Layout from 'components/Layout';
 import LangProvider from 'containers/Lang';
 import moduleReducers from '../../reducers';
 import { isAuth, isAdmin } from '../helper';
+import { languageCodes } from '../../translation';
 import { createFacebookLink } from '../resource/oauth';
 
 export default (req, res) => {
   const authOk = isAuth(req, true);
+  const langCookie = req.cookies[langSelectionKey];
+  const lang =
+    langCookie && languageCodes[langCookie] ? langCookie : defaultLanguageKey;
   let userDetail = {
-    lang: req.cookies[langSelectionKey],
+    lang,
     loading: true,
   };
 

@@ -1,6 +1,7 @@
 import { version } from '../package.json';
 
 export const tempDomId = 'temp';
+export const defaultLanguageKey = 'en';
 
 export const canvasDefaultVertical = true;
 export const imgCdnUrl = '//dkny.oss-cn-hangzhou.aliyuncs.com/2';

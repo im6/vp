@@ -2,10 +2,12 @@
 import { handleActions } from 'redux-actions';
 import { fromJS } from 'immutable';
 
+import { defaultLanguageKey } from '../constant';
+
 const initialState = fromJS({
   detail: null,
   facebookUrl: null,
-  lang: null,
+  lang: defaultLanguageKey, // for testing purpose only
   loading: false,
 });
 
