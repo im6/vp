@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import { tempDomId } from '../../../../../constant';
 
@@ -22,5 +23,9 @@ class Portal extends React.Component {
     return createPortal(this.props.children, this.el);
   }
 }
+
+Portal.propTypes = {
+  children: PropTypes.node,
+};
 
 export default Portal;
