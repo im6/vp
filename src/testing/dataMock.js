@@ -8,8 +8,8 @@ export const boxInfo = {
 };
 
 export const colorDefSample = {
-  '1': boxInfo,
-  '2': {
+  1: boxInfo,
+  2: {
     id: '2',
     like: 4,
     color: 'e5d12f#e5632f#d71a64#4c286f',

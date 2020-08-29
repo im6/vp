@@ -23,9 +23,11 @@ if (process.env.NODE_ENV !== 'development') {
   app.set('trust proxy', true);
 }
 
-app.use(helmet({
-  contentSecurityPolicy: false,
-}));
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
