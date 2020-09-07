@@ -11,17 +11,15 @@ const mapStateToProps = (_, { location: { search }, history }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onAdd(color) {
-      const ac = createAction('color/addNew');
-      dispatch(ac({ color }));
-    },
-    onColorInvalid() {
-      const ac = createAction('modal/color/addNew/invalid');
-      dispatch(ac());
-    },
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  onAdd(color) {
+    const ac = createAction('color/addNew');
+    dispatch(ac({ color }));
+  },
+  onColorInvalid() {
+    const ac = createAction('modal/color/addNew/invalid');
+    dispatch(ac());
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewColor);

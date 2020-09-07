@@ -47,37 +47,35 @@ const mapStateToProps = (
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onLike({ id, willLike }, isAuth) {
-      const ac = createAction('color/toggleLike');
-      dispatch(
-        ac({
-          isAuth, // used client like manager only
-          willLike,
-          id,
-        })
-      );
-    },
-    onDownload(id, color) {
-      const ac = createAction('color/download');
-      dispatch(ac({ id, color }));
+const mapDispatchToProps = (dispatch) => ({
+  onLike({ id, willLike }, isAuth) {
+    const ac = createAction('color/toggleLike');
+    dispatch(
+      ac({
+        isAuth, // used client like manager only
+        willLike,
+        id,
+      })
+    );
+  },
+  onDownload(id, color) {
+    const ac = createAction('color/download');
+    dispatch(ac({ id, color }));
 
-      const ac1 = createAction('modal/color/download');
-      dispatch(ac1());
-    },
-    onShare(type) {
-      const ac = createAction('color/share');
-      dispatch(ac(type));
-    },
-    onCopy(txt) {
-      const ac = createAction('color/copy');
-      dispatch(ac(txt));
+    const ac1 = createAction('modal/color/download');
+    dispatch(ac1());
+  },
+  onShare(type) {
+    const ac = createAction('color/share');
+    dispatch(ac(type));
+  },
+  onCopy(txt) {
+    const ac = createAction('color/copy');
+    dispatch(ac(txt));
 
-      const ac1 = createAction('modal/color/copy');
-      dispatch(ac1());
-    },
-  };
-};
+    const ac1 = createAction('modal/color/copy');
+    dispatch(ac1());
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Color);
