@@ -74,7 +74,9 @@ const client = Object.assign(clientBaseConfig, prodBase, {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: [autoprefixer()],
+              postcssOptions: {
+                plugins: [autoprefixer()],
+              },
             },
           },
           'sass-loader',

@@ -22,6 +22,7 @@ const Color = ({
 }) => {
   const language = useContext(LanguageContext);
   useEffect(() => {
+    /* istanbul ignore next */
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, 50);
