@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/im6/vp#readme",
   "devDependencies": {
-    "@babel/core": "7.11.6",
+    "@babel/core": "^7.12.0",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-env": "7.11.5",
     "@babel/preset-react": "^7.10.4",
@@ -82,8 +82,8 @@
     "immutable": "^4.0.0-rc.12",
     "lodash.get": "^4.4.2",
     "mysql": "^2.18.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "redis": "^3.0.2",
@@ -103,12 +103,7 @@
   "babel": {
     "presets": [
       "@babel/preset-env",
-      [
-        "@babel/preset-react",
-        {
-          "runtime": "classic"
-        }
-      ]
+      "@babel/preset-react"
     ]
   },
   "eslintConfig": {
