@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import style from './style.sass';
 
@@ -21,4 +21,4 @@ Heart.propTypes = {
   red: PropTypes.bool,
 };
 
-export default React.memo(Heart);
+export default memo(Heart);

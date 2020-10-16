@@ -1,11 +1,11 @@
-import React from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import { tempDomId } from '../../../../../constant';
 
 const modalRoot = document.getElementById(tempDomId);
 
-class Portal extends React.Component {
+class Portal extends Component {
   constructor(props) {
     super(props);
     this.el = document.createElement('div');

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useContext } from 'react';
+import { Fragment, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Box from '../Box';
 import OneColor from '../OneColor';

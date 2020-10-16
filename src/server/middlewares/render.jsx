@@ -1,5 +1,4 @@
 import { v1 as uuidV1 } from 'uuid';
-import React from 'react';
 import { fromJS } from 'immutable';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router';

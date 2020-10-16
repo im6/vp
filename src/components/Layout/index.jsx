@@ -1,10 +1,10 @@
-import React from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './style.sass';
 import Header from 'containers/Header';
 import SpinLoader from 'components/SpinLoader';
 
-class Layout extends React.Component {
+class Layout extends Component {
   constructor(props) {
     super(props);
     this.state = {
