@@ -42,17 +42,8 @@ const client = Object.assign(clientBaseConfig, devBase, {
       {
         test: /\.jsx?$/,
         include,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env', '@babel/preset-react'],
-              plugins: ['@babel/plugin-syntax-dynamic-import'],
-            },
-          },
-        ],
+        use: ['babel-loader'],
       },
-
       {
         test: /\.sass$/,
         include: withoutCssModuleFiles,
