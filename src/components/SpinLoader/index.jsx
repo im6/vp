@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import './style.sass';
 
 const SpinLoader = () => (
@@ -6,4 +6,4 @@ const SpinLoader = () => (
     <div className="spinLoader" />
   </div>
 );
-export default React.memo(SpinLoader);
+export default memo(SpinLoader);

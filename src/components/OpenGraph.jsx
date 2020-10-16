@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 
 const ogTitle = 'ColorPK v1';
 const ogSiteName = 'colorpk';

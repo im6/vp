@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import OpenGraph from './OpenGraph';
 import serialize from 'serialize-javascript';

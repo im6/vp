@@ -1,7 +1,6 @@
 import 'core-js';
 import 'regenerator-runtime/runtime';
 import { customEventPolyFill } from './misc/util';
-import React from 'react';
 import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
 import Layout from 'components/Layout';

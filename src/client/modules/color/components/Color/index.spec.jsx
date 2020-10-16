@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, fireEvent } from 'test-utils';
 import Color from '.';
 import { fromJS, Map } from 'immutable';

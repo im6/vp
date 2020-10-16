@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, fireEvent } from 'test-utils';
 import Box from '.';
 import { boxInfo } from '../../../../../testing/dataMock';
