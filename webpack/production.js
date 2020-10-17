@@ -15,6 +15,7 @@ const {
   localIdentName,
   staticAssetsPath,
   include,
+  serverModule,
 } = require('./base');
 
 const prodBase = {
@@ -110,31 +111,7 @@ const server = Object.assign(serverBaseConfig, prodBase, {
     path: path.join(__dirname, '../dist/server'),
     filename: 'index.js',
   },
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        include,
-        use: ['babel-loader'],
-      },
-      {
-        test: /\.sass$/,
-        include,
-        use: [
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                localIdentName,
-                exportOnlyLocals: true,
-              },
-            },
-          },
-          'sass-loader',
-        ],
-      },
-    ],
-  },
+  module: serverModule,
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.DefinePlugin({

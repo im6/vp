@@ -1,6 +1,9 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
+const localIdentName = '[hash:base64:5]';
+const include = path.resolve(__dirname, '../src');
+
 const resolve = {
   extensions: ['.js', '.jsx'],
   alias: {
@@ -26,6 +29,32 @@ exports.serverBaseConfig = {
   entry: path.join(__dirname, '../src/server'),
 };
 
-exports.localIdentName = '[hash:base64:5]';
+exports.include = include;
+exports.localIdentName = localIdentName;
 exports.staticAssetsPath = 'assets/static';
-exports.include = path.resolve(__dirname, '../src');
+
+exports.serverModule = {
+  rules: [
+    {
+      test: /\.jsx?$/,
+      include,
+      use: ['babel-loader'],
+    },
+    {
+      test: /\.sass$/,
+      include,
+      use: [
+        {
+          loader: 'css-loader',
+          options: {
+            modules: {
+              localIdentName,
+              exportOnlyLocals: true,
+            },
+          },
+        },
+        'sass-loader',
+      ],
+    },
+  ],
+};

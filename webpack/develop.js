@@ -11,6 +11,7 @@ const {
   localIdentName,
   staticAssetsPath,
   include,
+  serverModule,
 } = require('./base');
 
 const devBase = {
@@ -47,27 +48,13 @@ const client = Object.assign(clientBaseConfig, devBase, {
       {
         test: /\.sass$/,
         include: withoutCssModuleFiles,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: true,
-            },
-          },
-          'css-loader',
-          'sass-loader',
-        ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.sass$/,
         exclude: withoutCssModuleFiles.concat([/node_modules/]),
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: true,
-            },
-          },
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -94,31 +81,7 @@ const server = Object.assign(serverBaseConfig, devBase, {
     path: path.join(__dirname, '../local/server'),
     filename: 'index.js',
   },
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        include,
-        use: ['babel-loader'],
-      },
-      {
-        test: /\.sass$/,
-        include,
-        use: [
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                localIdentName,
-                exportOnlyLocals: true,
-              },
-            },
-          },
-          'sass-loader',
-        ],
-      },
-    ],
-  },
+  module: serverModule,
   plugins: [
     new CopyPlugin({
       patterns: [{ from: `${staticAssetsPath}/error.html` }],
