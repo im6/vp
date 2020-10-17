@@ -35,14 +35,7 @@ const client = Object.assign(clientBaseConfig, prodBase, {
       {
         test: /\.jsx?$/,
         include,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              plugins: ['@babel/plugin-syntax-dynamic-import'],
-            },
-          },
-        ],
+        use: ['babel-loader'],
       },
       {
         test: /\.sass$/,
