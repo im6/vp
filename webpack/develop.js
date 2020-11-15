@@ -48,7 +48,16 @@ const client = Object.assign(clientBaseConfig, devBase, {
       {
         test: /\.sass$/,
         include: withoutCssModuleFiles,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: false,
+            },
+          },
+          'sass-loader',
+        ],
       },
       {
         test: /\.sass$/,

@@ -45,7 +45,12 @@ const client = Object.assign(clientBaseConfig, prodBase, {
           {
             loader: MiniCssExtractPlugin.loader,
           },
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: false,
+            },
+          },
           'sass-loader',
         ],
       },
