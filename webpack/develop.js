@@ -26,10 +26,10 @@ const devBase = {
 const client = Object.assign(clientBaseConfig, devBase, {
   optimization: {
     splitChunks: {
-      chunks: 'all',
+      chunks: 'async',
       cacheGroups: {
         default: false,
-        vendors: false,
+        defaultVendors: false,
       },
     },
   },

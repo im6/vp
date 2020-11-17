@@ -1,4 +1,4 @@
-import { version } from '../package.json';
+const { version } = require('../package.json');
 
 export const tempDomId = 'temp';
 export const defaultLanguageKey = 'en';

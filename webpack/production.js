@@ -102,10 +102,10 @@ const client = Object.assign(clientBaseConfig, prodBase, {
   optimization: {
     // minimize: false,
     splitChunks: {
-      chunks: 'all',
+      chunks: 'async',
       cacheGroups: {
         default: false,
-        vendors: false,
+        defaultVendors: false,
       },
     },
   },
