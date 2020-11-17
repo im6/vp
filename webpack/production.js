@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const autoprefixer = require('autoprefixer');
@@ -100,7 +101,6 @@ const client = Object.assign(clientBaseConfig, prodBase, {
     }),
   ],
   optimization: {
-    // minimize: false,
     splitChunks: {
       chunks: 'async',
       cacheGroups: {
@@ -108,6 +108,12 @@ const client = Object.assign(clientBaseConfig, prodBase, {
         defaultVendors: false,
       },
     },
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+      }),
+    ],
   },
 });
 
