@@ -3,8 +3,7 @@
   "version": "1.25.0",
   "description": "source code of react.colorpk.com",
   "engines": {
-    "npm": ">=6.13.4",
-    "node": ">= 12.x"
+    "node": ">= 14.x"
   },
   "main": "index.js",
   "scripts": {
@@ -49,6 +48,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^4.3.0",
     "jest": "^26.6.3",
     "js-cookie": "^2.2.1",
@@ -114,7 +114,8 @@
   "eslintConfig": {
     "extends": [
       "airbnb",
-      "prettier"
+      "prettier",
+      "plugin:react-hooks/recommended"
     ],
     "plugins": [
       "react",
