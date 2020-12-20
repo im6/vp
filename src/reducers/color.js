@@ -65,9 +65,7 @@ const color = handleActions(
     },
 
     ['color/set/likes'](state, { payload }) {
-      const liked = payload.reduce((acc, cur) => {
-        return acc.set(cur, true);
-      }, Map());
+      const liked = payload.reduce((acc, cur) => acc.set(cur, true), Map());
       return state.set('liked', liked);
     },
     ['color/set/owns'](state, { payload }) {

@@ -28,8 +28,8 @@ export default [
         requester({
           query,
         }).pipe(
-          mergeMap((action2) => {
-            return iif(
+          mergeMap((action2) =>
+            iif(
               () => get(action2, 'response.data.user', null),
               of(
                 {
@@ -58,10 +58,10 @@ export default [
                   payload: [],
                 }
               )
-            );
-          }),
-          catchError(() => {
-            return of(
+            )
+          ),
+          catchError(() =>
+            of(
               {
                 type: 'user/auth/fail',
                 payload: null,
@@ -69,8 +69,8 @@ export default [
               {
                 type: 'modal/user/auth/fail',
               }
-            );
-          })
+            )
+          )
         )
       )
     ),
@@ -78,22 +78,20 @@ export default [
   (action$) =>
     action$.pipe(
       ofType('user/logoff'),
-      mergeMap(() => {
-        return concat(
+      mergeMap(() =>
+        concat(
           of({
             type: 'color/set/likes',
             payload: likeManager.initLikes || [],
           }),
           ajax.getJSON('/auth/logout').pipe(
-            map(({ url }) => {
-              return {
-                type: 'user/logoff/success',
-                payload: url,
-              };
-            })
+            map(({ url }) => ({
+              type: 'user/logoff/success',
+              payload: url,
+            }))
           )
-        );
-      })
+        )
+      )
     ),
 
   (action$) =>

@@ -1,6 +1,4 @@
-export const isColorHex = (str) => {
-  return /^(#[a-f0-9]{6}){4}$/.test(str);
-};
+export const isColorHex = (str) => /^(#[a-f0-9]{6}){4}$/.test(str);
 
 export const isFourDiff = (str) => {
   const checkObj = {
@@ -22,6 +20,4 @@ export const isFourDiff = (str) => {
   return checkObj.cnt === strArray.length;
 };
 
-export const isValidColorStr = (str) => {
-  return isColorHex(str) && isFourDiff(str);
-};
+export const isValidColorStr = (str) => isColorHex(str) && isFourDiff(str);

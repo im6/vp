@@ -1,11 +1,10 @@
 import get from 'lodash.get';
 
-export const isAuth = (req, ignoreUserId) => {
-  return Boolean(
+export const isAuth = (req, ignoreUserId) =>
+  Boolean(
     get(req, 'session.app.isAuth', false) &&
       (ignoreUserId || get(req, 'session.app.dbInfo.id', null))
   );
-};
 
 export const getToken = (req) => {
   const token = get(req, 'session.app.tokenInfo.access_token', null);
@@ -15,6 +14,5 @@ export const getToken = (req) => {
   return null;
 };
 
-export const isAdmin = (req) => {
-  return isAuth(req) && get(req, 'session.app.dbInfo.isAdmin', false);
-};
+export const isAdmin = (req) =>
+  isAuth(req) && get(req, 'session.app.dbInfo.isAdmin', false);

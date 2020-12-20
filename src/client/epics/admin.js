@@ -34,16 +34,16 @@ export default [
             type: 'admin/getList/success',
             payload: get(ajaxRes, 'response.data.color', null),
           })),
-          catchError(() => {
-            return of(
+          catchError(() =>
+            of(
               {
                 type: 'admin/getList/fail',
               },
               {
                 type: 'modal/admin/getList/fail',
               }
-            );
-          })
+            )
+          )
         )
       )
     ),
@@ -66,11 +66,11 @@ export default [
             type: 'modal/admin/decideColor/success',
             payload: action1.payload.id,
           })),
-          catchError(() => {
-            return of({
+          catchError(() =>
+            of({
               type: 'modal/admin/decideColor/fail',
-            });
-          })
+            })
+          )
         )
       )
     ),

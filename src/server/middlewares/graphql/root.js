@@ -106,16 +106,14 @@ const root = {
     }
 
     try {
-      return colors.map((v) => {
-        return {
-          id: v.id,
-          like: v.like,
-          color: v.color,
-          userid: v.userid,
-          username: v.username,
-          createdate: v.createdate,
-        };
-      });
+      return colors.map((v) => ({
+        id: v.id,
+        like: v.like,
+        color: v.color,
+        userid: v.userid,
+        username: v.username,
+        createdate: v.createdate,
+      }));
     } catch (err) {
       return new GraphQLError(err.toString());
     }

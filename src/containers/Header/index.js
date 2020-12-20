@@ -21,24 +21,22 @@ const mapStateToProps = ({ user, color }, { location }) => {
   };
 };
 
-export const mapDispatchToProps = (dispatch) => {
-  return {
-    onLogout() {
-      const ac = createAction('user/logoff');
-      dispatch(ac());
+export const mapDispatchToProps = (dispatch) => ({
+  onLogout() {
+    const ac = createAction('user/logoff');
+    dispatch(ac());
 
-      const ac1 = createAction('modal/user/logoff');
-      dispatch(ac1());
-    },
-    onChangeLang(lang) {
-      const ac = createAction('user/setLanguage');
-      dispatch(ac(lang));
-    },
-    onChangeCanvasDirection(isVertical) {
-      const ac = createAction('color/setDirection');
-      dispatch(ac(isVertical));
-    },
-  };
-};
+    const ac1 = createAction('modal/user/logoff');
+    dispatch(ac1());
+  },
+  onChangeLang(lang) {
+    const ac = createAction('user/setLanguage');
+    dispatch(ac(lang));
+  },
+  onChangeCanvasDirection(isVertical) {
+    const ac = createAction('color/setDirection');
+    dispatch(ac(isVertical));
+  },
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

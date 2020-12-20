@@ -10,19 +10,17 @@ export const createFacebookLink = (state) => {
   return url;
 };
 
-export const accessToken = (params) => {
-  return axios({
+export const accessToken = (params) =>
+  axios({
     baseURL,
     method: 'get',
     url: '/oauth/access_token',
     params,
   });
-};
-export const showUser = (params) => {
-  return axios({
+export const showUser = (params) =>
+  axios({
     baseURL,
     method: 'get',
     url: '/me',
     params,
   });
-};

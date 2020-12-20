@@ -46,8 +46,8 @@ export default [
   (action$) =>
     action$.pipe(
       ofType('color/get'),
-      mergeMap(() => {
-        return requester({
+      mergeMap(() =>
+        requester({
           query: colorql,
           variables: { cate: 'PUBLIC' },
         }).pipe(
@@ -60,14 +60,11 @@ export default [
                 }
               : { type: 'color/get/fail' };
           }),
-          catchError(() => {
-            return of(
-              { type: 'color/get/fail' },
-              { type: 'modal/color/get/fail' }
-            );
-          })
-        );
-      })
+          catchError(() =>
+            of({ type: 'color/get/fail' }, { type: 'modal/color/get/fail' })
+          )
+        )
+      )
     ),
 
   (action$) =>
@@ -98,9 +95,7 @@ export default [
             (ajaxRes) => get(ajaxRes, 'response.data.likeColor.status', 1) !== 0
           ),
           map((ajaxRes) => get(ajaxRes, 'response.errors[0].message', true)),
-          catchError((err) => {
-            return of(get(err, 'response.errors[0].message', true));
-          }),
+          catchError((err) => of(get(err, 'response.errors[0].message', true))),
           tap((err) => {
             console.error('toggle like error: ', err); // eslint-disable-line no-console
           }),
@@ -130,8 +125,8 @@ export default [
   (action$) =>
     action$.pipe(
       ofType('color/addNew'),
-      mergeMap(({ payload }) => {
-        return requester({
+      mergeMap(({ payload }) =>
+        requester({
           query: createql,
           variables: {
             val: payload,
@@ -171,8 +166,8 @@ export default [
               )
             );
           })
-        );
-      })
+        )
+      )
     ),
   (action$) =>
     action$.pipe(
