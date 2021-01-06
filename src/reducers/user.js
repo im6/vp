@@ -2,12 +2,9 @@
 import { handleActions } from 'redux-actions';
 import { fromJS } from 'immutable';
 
-import { defaultLanguageKey } from '../constant';
-
 const initialState = fromJS({
   detail: null,
   facebookUrl: null,
-  lang: defaultLanguageKey, // for testing purpose only
   loading: false,
 });
 
@@ -42,10 +39,6 @@ const user = handleActions(
       return state.merge({
         facebookUrl: payload,
       });
-    },
-
-    ['user/setLanguage'](state, { payload }) {
-      return state.set('lang', payload);
     },
   },
   initialState

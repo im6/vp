@@ -9,8 +9,7 @@ describe('render properly', () => {
     const dispatch = jest.fn();
     const mapper = mapDispatchToProps(dispatch);
     mapper.onLogout();
-    mapper.onChangeLang();
     mapper.onChangeCanvasDirection();
-    expect(dispatch).toBeCalledTimes(4);
+    expect(dispatch).toBeCalledTimes(3);
   });
 });

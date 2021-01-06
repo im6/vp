@@ -1,14 +1,12 @@
 import get from 'lodash.get';
-import Cookies from 'js-cookie';
 
 import { ajax } from 'rxjs/ajax';
 import { iif, of, concat } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { map, mergeMap, catchError, tap, ignoreElements } from 'rxjs/operators';
+import { map, mergeMap, catchError } from 'rxjs/operators';
 
 import requester from '../misc/requester';
 import likeManager from '../misc/likeManager';
-import { langSelectionKey } from '../../constant';
 
 const query = `query {
   user {
@@ -92,14 +90,5 @@ export default [
           )
         )
       )
-    ),
-
-  (action$) =>
-    action$.pipe(
-      ofType('user/setLanguage'),
-      tap((action1) => {
-        Cookies.set(langSelectionKey, action1.payload, { expires: 180 });
-      }),
-      ignoreElements()
     ),
 ];

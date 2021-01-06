@@ -50,19 +50,6 @@ describe('test user reducer behavior', () => {
       })
     );
   });
-  test('action of user/setLanguage', () => {
-    const lang = 'english';
-    expect(
-      userReducer(new Map({ lang: null }), {
-        type: 'user/setLanguage',
-        payload: lang,
-      })
-    ).toEqual(
-      Map({
-        lang,
-      })
-    );
-  });
   test('action of user/logoff/success', () => {
     const fbUrl = 'some fb url';
     expect(
