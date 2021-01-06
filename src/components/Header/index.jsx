@@ -18,7 +18,6 @@ const Header = ({
   facebookUrl,
   languages,
   onLogout,
-  onChangeLang,
   onChangeCanvasDirection,
 }) => {
   const [isMenuOpen, toggleMenu] = useState(false);
@@ -203,7 +202,6 @@ Header.propTypes = {
   showVertical: PropTypes.bool,
   languages: PropTypes.array.isRequired,
   onLogout: PropTypes.func.isRequired,
-  onChangeLang: PropTypes.func.isRequired,
   onChangeCanvasDirection: PropTypes.func.isRequired,
 };
 

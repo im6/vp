@@ -29,10 +29,6 @@ export const mapDispatchToProps = (dispatch) => ({
     const ac1 = createAction('modal/user/logoff');
     dispatch(ac1());
   },
-  onChangeLang(lang) {
-    const ac = createAction('user/setLanguage');
-    dispatch(ac(lang));
-  },
   onChangeCanvasDirection(isVertical) {
     const ac = createAction('color/setDirection');
     dispatch(ac(isVertical));
