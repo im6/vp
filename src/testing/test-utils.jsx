@@ -5,12 +5,15 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { LanguageProvider } from '../context/Language/index';
 import store from './testStore';
+import { defaultLanguageKey } from '../constant';
 
 const AllTheProviders = ({ children }) => {
   return (
     <MemoryRouter>
       <Provider store={store}>
-        <LanguageProvider initLang="en">{children}</LanguageProvider>
+        <LanguageProvider initLang={defaultLanguageKey}>
+          {children}
+        </LanguageProvider>
       </Provider>
     </MemoryRouter>
   );

@@ -1,5 +1,6 @@
 import 'core-js';
 import 'regenerator-runtime/runtime';
+import { langSelectionKey } from '../constant';
 import { customEventPolyFill } from './misc/util';
 import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -12,11 +13,10 @@ import Modal from './modules/modal';
 import { LanguageProvider } from '../context/Language/index';
 
 customEventPolyFill();
-const lang = window._REDUXSTATE_.user.lang;
 hydrate(
   <BrowserRouter>
     <Provider store={store}>
-      <LanguageProvider initLang={lang}>
+      <LanguageProvider initLang={window[langSelectionKey]}>
         <Layout>
           <Modal />
           <Routes />
