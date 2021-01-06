@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { ChromePicker } from 'react-color';
 import EditCanvas from '../EditCanvas';
 import style from './style.sass';
-import LanguageContext from 'components/LanguageContext';
+import useTranslationContext from '../../../../../hooks/useTranslationContext';
 import { isValidColorStr } from '../../../../../util';
 
 const DEFAULTVALUE = '#81EEFF';
 
 const NewColor = ({ defaultColors, onAdd, onColorInvalid, onRedirect }) => {
-  const language = useContext(LanguageContext);
+  const [language] = useTranslationContext();
 
   const [editColor, setEditColor] = useState(DEFAULTVALUE);
   const [activeIndex, setActiveIndex] = useState(0);

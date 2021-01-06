@@ -6,22 +6,22 @@ import { Provider } from 'react-redux';
 import Layout from 'components/Layout';
 import store from './config/store';
 import Routes from './routes';
-import LangProvider from 'containers/Lang';
 import { BrowserRouter } from 'react-router-dom';
 import './bulma.modules.sass';
 import Modal from './modules/modal';
+import { LanguageProvider } from '../context/Language/index';
 
 customEventPolyFill();
-
+const lang = window._REDUXSTATE_.user.lang;
 hydrate(
   <BrowserRouter>
     <Provider store={store}>
-      <LangProvider>
+      <LanguageProvider initLang={lang}>
         <Layout>
           <Modal />
           <Routes />
         </Layout>
-      </LangProvider>
+      </LanguageProvider>
     </Provider>
   </BrowserRouter>,
   document.getElementById('app'),

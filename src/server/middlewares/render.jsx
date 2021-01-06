@@ -14,7 +14,7 @@ import {
 } from '../../constant';
 import Html from 'components/Html';
 import Layout from 'components/Layout';
-import LangProvider from 'containers/Lang';
+import { LanguageProvider } from '../../context/Language/index';
 import moduleReducers from '../../reducers';
 import { isAuth, isAdmin } from '../helper';
 import { languageCodes } from '../../translation';
@@ -71,9 +71,9 @@ export default (req, res) => {
   const app = (
     <StaticRouter location={req.url}>
       <Provider store={store}>
-        <LangProvider>
+        <LanguageProvider initLang={lang}>
           <Layout />
-        </LangProvider>
+        </LanguageProvider>
       </Provider>
     </StaticRouter>
   );

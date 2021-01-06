@@ -3,14 +3,14 @@ import { Provider } from 'react-redux';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import LangProvider from '../containers/Lang';
+import { LanguageProvider } from '../context/Language/index';
 import store from './testStore';
 
 const AllTheProviders = ({ children }) => {
   return (
     <MemoryRouter>
       <Provider store={store}>
-        <LangProvider>{children}</LangProvider>
+        <LanguageProvider initLang="en">{children}</LanguageProvider>
       </Provider>
     </MemoryRouter>
   );
