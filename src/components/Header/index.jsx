@@ -1,12 +1,12 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import style from './style.sass';
 import TranslationIcon from './components/TranslationIcon';
 import LanguageDropdown from './components/LanguageDropdown';
 import ToggleButton from './components/ToggleButton';
-import LanguageContext from 'components/LanguageContext';
 import { imgCdnUrl } from '../../constant';
+import useTranslationContext from '../../hooks/useTranslationContext';
 
 const { selected } = style;
 
@@ -22,7 +22,7 @@ const Header = ({
   onChangeCanvasDirection,
 }) => {
   const [isMenuOpen, toggleMenu] = useState(false);
-  const language = useContext(LanguageContext);
+  const [language, setLanguage] = useTranslationContext();
 
   const isAuth = Boolean(detail);
   const selectPopular = url === '/popular';
@@ -154,7 +154,7 @@ const Header = ({
               <TranslationIcon />
               <span className={style.translationText}>{language.language}</span>
             </a>
-            <LanguageDropdown languages={languages} onChange={onChangeLang} />
+            <LanguageDropdown languages={languages} onChange={setLanguage} />
           </div>
         </div>
 

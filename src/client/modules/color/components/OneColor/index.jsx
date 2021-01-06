@@ -1,8 +1,7 @@
-import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Box from '../Box';
 import style from './style.sass';
-import LanguageContext from 'components/LanguageContext';
+import useTranslationContext from '../../../../../hooks/useTranslationContext';
 
 const OneColor = ({
   liked,
@@ -16,7 +15,7 @@ const OneColor = ({
   onShare,
   onDownload,
 }) => {
-  const language = useContext(LanguageContext);
+  const [language] = useTranslationContext();
   return (
     <div className={style.center}>
       <div>

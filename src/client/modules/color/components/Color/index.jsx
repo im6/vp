@@ -1,10 +1,10 @@
-import { Fragment, useEffect, useContext } from 'react';
+import { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Box from '../Box';
 import OneColor from '../OneColor';
 import style from './style.sass';
 import SpinLoader from 'components/SpinLoader';
-import LanguageContext from 'components/LanguageContext';
+import useTranslationContext from '../../../../../hooks/useTranslationContext';
 
 const Color = ({
   isAuth,
@@ -20,7 +20,7 @@ const Color = ({
   onCopy,
   onDownload,
 }) => {
-  const language = useContext(LanguageContext);
+  const [language] = useTranslationContext();
   useEffect(() => {
     /* istanbul ignore next */
     setTimeout(() => {
