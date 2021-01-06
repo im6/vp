@@ -25,14 +25,11 @@ export default (req, res) => {
   const langCookie = req.cookies[langSelectionKey];
   const lang =
     langCookie && languageCodes[langCookie] ? langCookie : defaultLanguageKey;
-  let userDetail = {
-    lang,
-    loading: true,
-  };
+  let userDetail;
 
   if (authOk) {
     userDetail = {
-      ...userDetail,
+      loading: true,
       detail: {
         name: 'loading',
         isadmin: isAdmin(req),
@@ -44,7 +41,7 @@ export default (req, res) => {
       oauthState,
     };
     userDetail = {
-      ...userDetail,
+      loading: true,
       detail: null,
       facebookUrl: createFacebookLink(oauthState),
     };
@@ -85,6 +82,7 @@ export default (req, res) => {
           ? '(dev) ColorPK'
           : 'ColorPK | Your Best Color Picker'
       }`}
+      languageCode={lang}
       style={`${PUBLIC_PATH}/main.css`}
       script={`${PUBLIC_PATH}/main.js`}
       csrfToken={req.csrfToken()}
