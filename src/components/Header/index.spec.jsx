@@ -8,7 +8,6 @@ describe('render properly', () => {
     global.scrollTo = jest.fn();
   });
   test('render Header with anonymouse', () => {
-    const onRotate = jest.fn();
     const likeNum = 2;
     const { getByText, getByTitle, getByLabelText, rerender } = render(
       <Header
@@ -16,10 +15,8 @@ describe('render properly', () => {
         detail={null}
         facebookUrl="//www.facebook.com"
         likeNum={likeNum}
-        showVertical
         languages={[]}
         onLogout={jest.fn()}
-        onChangeCanvasDirection={onRotate}
       />
     );
     rerender(
@@ -28,10 +25,8 @@ describe('render properly', () => {
         detail={null}
         facebookUrl="//www.facebook.com"
         likeNum={likeNum}
-        showVertical
         languages={[]}
         onLogout={jest.fn()}
-        onChangeCanvasDirection={onRotate}
       />
     );
     fireEvent.click(getByLabelText('nav menu'));
@@ -55,7 +50,6 @@ describe('render properly', () => {
         detail={fromJS(userInfo)}
         facebookUrl="//www.facebook.com"
         likeNum={2}
-        showVertical
         languages={[]}
         onLogout={onLogout}
         onChangeCanvasDirection={jest.fn()}
@@ -67,7 +61,6 @@ describe('render properly', () => {
         detail={fromJS(userInfo)}
         facebookUrl="//www.facebook.com"
         likeNum={2}
-        showVertical
         languages={[]}
         onLogout={onLogout}
         onChangeCanvasDirection={jest.fn()}

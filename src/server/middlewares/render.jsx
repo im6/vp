@@ -13,7 +13,7 @@ import {
   canvasDefaultVertical,
 } from '../../constant';
 import Html from 'components/Html';
-import Layout from 'components/Layout';
+import { LayoutProvider } from '../../context/Layout/index';
 import { LanguageProvider } from '../../context/Language/index';
 import moduleReducers from '../../reducers';
 import { isAuth, isAdmin } from '../helper';
@@ -23,10 +23,14 @@ import { createFacebookLink } from '../resource/oauth';
 export default (req, res) => {
   const authOk = isAuth(req, true);
   const langCookie = req.cookies[langSelectionKey];
+  const verticalCookie = req.cookies[canvasOrientationKey];
   const lang =
     langCookie && languageCodes[langCookie] ? langCookie : defaultLanguageKey;
-  let userDetail;
+  const isVertical = ['0', '1'].includes(verticalCookie)
+    ? verticalCookie === '1'
+    : canvasDefaultVertical;
 
+  let userDetail;
   if (authOk) {
     userDetail = {
       loading: true,
@@ -47,16 +51,10 @@ export default (req, res) => {
     };
   }
 
-  const showVertical =
-    typeof req.cookies[canvasOrientationKey] === 'undefined'
-      ? canvasDefaultVertical
-      : req.cookies[canvasOrientationKey] === '1';
-
   const store = createStore(combineReducers(moduleReducers), {
     user: fromJS(userDetail),
     color: fromJS({
       loading: true,
-      showVertical,
       colorDef: {},
       liked: {},
       colorIdAllByDate: [],
@@ -69,7 +67,7 @@ export default (req, res) => {
     <StaticRouter location={req.url}>
       <Provider store={store}>
         <LanguageProvider initLang={lang}>
-          <Layout />
+          <LayoutProvider initVertical={isVertical} />
         </LanguageProvider>
       </Provider>
     </StaticRouter>
@@ -83,6 +81,7 @@ export default (req, res) => {
           : 'ColorPK | Your Best Color Picker'
       }`}
       languageCode={lang}
+      isVertical={isVertical}
       style={`${PUBLIC_PATH}/main.css`}
       script={`${PUBLIC_PATH}/main.js`}
       csrfToken={req.csrfToken()}

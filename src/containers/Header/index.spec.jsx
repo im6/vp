@@ -9,7 +9,6 @@ describe('render properly', () => {
     const dispatch = jest.fn();
     const mapper = mapDispatchToProps(dispatch);
     mapper.onLogout();
-    mapper.onChangeCanvasDirection();
-    expect(dispatch).toBeCalledTimes(3);
+    expect(dispatch).toBeCalledTimes(2);
   });
 });

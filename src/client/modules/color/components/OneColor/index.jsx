@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import Box from '../Box';
 import style from './style.sass';
+import useLayoutContext from '../../../../../hooks/useLayoutContext';
 import useTranslationContext from '../../../../../hooks/useTranslationContext';
 
 const OneColor = ({
@@ -9,18 +10,18 @@ const OneColor = ({
   value,
   likeNum,
   username,
-  vertical,
   onLike,
   onCopy,
   onShare,
   onDownload,
 }) => {
+  const [isVertical] = useLayoutContext();
   const [language] = useTranslationContext();
   return (
     <div className={style.center}>
       <div>
         <Box
-          vertical={vertical}
+          vertical={isVertical}
           liked={liked}
           id={id}
           username={username}
@@ -79,7 +80,6 @@ OneColor.propTypes = {
   username: PropTypes.string,
   likeNum: PropTypes.number,
   value: PropTypes.string.isRequired,
-  vertical: PropTypes.bool,
   onLike: PropTypes.func.isRequired,
   onCopy: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,

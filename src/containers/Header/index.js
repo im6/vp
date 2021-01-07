@@ -9,7 +9,6 @@ const mapStateToProps = ({ user, color }, { location }) => {
   const detail = user.get('detail');
   const facebookUrl = user.get('facebookUrl');
   const likeNum = color.get('liked').size;
-  const showVertical = color.get('showVertical');
 
   return {
     url,
@@ -17,7 +16,6 @@ const mapStateToProps = ({ user, color }, { location }) => {
     likeNum,
     languages,
     facebookUrl,
-    showVertical,
   };
 };
 
@@ -28,10 +26,6 @@ export const mapDispatchToProps = (dispatch) => ({
 
     const ac1 = createAction('modal/user/logoff');
     dispatch(ac1());
-  },
-  onChangeCanvasDirection(isVertical) {
-    const ac = createAction('color/setDirection');
-    dispatch(ac(isVertical));
   },
 });
 

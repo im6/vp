@@ -1,7 +1,12 @@
 import PropTypes from 'prop-types';
 import OpenGraph from './OpenGraph';
 import serialize from 'serialize-javascript';
-import { tempDomId, reduxName, langSelectionKey } from '../constant';
+import {
+  tempDomId,
+  reduxName,
+  langSelectionKey,
+  canvasOrientationKey,
+} from '../constant';
 
 const Html = ({
   title,
@@ -9,6 +14,7 @@ const Html = ({
   script,
   children,
   csrfToken,
+  isVertical,
   languageCode,
   lastBuildDate,
   initState,
@@ -60,7 +66,7 @@ const Html = ({
         dangerouslySetInnerHTML={{
           __html: `window.${reduxName}=${serialize(
             initState
-          )}; window.${langSelectionKey}="${languageCode}";`,
+          )}; window.${langSelectionKey}="${languageCode}"; window.${canvasOrientationKey}=${isVertical}; `,
         }}
       />
       <script src={script} type="text/javascript" />
@@ -70,6 +76,7 @@ const Html = ({
 
 Html.propTypes = {
   title: PropTypes.string.isRequired,
+  isVertical: PropTypes.bool.isRequired,
   languageCode: PropTypes.string.isRequired,
   lastBuildDate: PropTypes.string.isRequired,
   style: PropTypes.string.isRequired,

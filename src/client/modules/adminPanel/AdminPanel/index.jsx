@@ -2,8 +2,10 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import style from './style.sass';
 import Box from '../../color/components/Box';
+import useLayoutContext from '../../../../hooks/useLayoutContext';
 
-const AdminPanel = ({ vertical, loading, list, onAdjudicate, onInitList }) => {
+const AdminPanel = ({ loading, list, onAdjudicate, onInitList }) => {
+  const [isVertical] = useLayoutContext();
   const colors = list.toJS();
 
   useEffect(() => {
@@ -20,7 +22,7 @@ const AdminPanel = ({ vertical, loading, list, onAdjudicate, onInitList }) => {
           <Box
             value={v.color}
             id={v.id}
-            vertical={vertical}
+            vertical={isVertical}
             likeNum={v.like}
             liked={false}
             onClickLike={onAdjudicateLocal(v.id, true)}
@@ -40,7 +42,6 @@ const AdminPanel = ({ vertical, loading, list, onAdjudicate, onInitList }) => {
 };
 
 AdminPanel.propTypes = {
-  vertical: PropTypes.bool,
   list: PropTypes.object.isRequired,
   loading: PropTypes.bool,
   onInitList: PropTypes.func.isRequired,
