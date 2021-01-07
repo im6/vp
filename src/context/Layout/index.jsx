@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
 import { createContext, useState, useEffect } from 'react';
 import { canvasOrientationKey } from '../../constant';
@@ -19,4 +20,10 @@ export const LayoutProvider = ({ initVertical, testOnly, children }) => {
       {childrenElem}
     </LayoutContext.Provider>
   );
+};
+
+LayoutProvider.propTypes = {
+  testOnly: PropTypes.bool,
+  initVertical: PropTypes.bool,
+  children: PropTypes.node,
 };

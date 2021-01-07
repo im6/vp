@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Cookies from 'js-cookie';
 import { createContext, useState, useEffect } from 'react';
 import { translation as allTranslation } from '../../translation';
@@ -16,4 +17,9 @@ export const LanguageProvider = ({ initLang, children }) => {
       {children}
     </LanguageContext.Provider>
   );
+};
+
+LanguageProvider.propTypes = {
+  initLang: PropTypes.string,
+  children: PropTypes.node,
 };
