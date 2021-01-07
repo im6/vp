@@ -42,7 +42,6 @@ const mapStateToProps = (
     colorDef,
     liked,
     selectedId,
-    vertical: color.get('showVertical'),
     onEnter: history.push,
   };
 };

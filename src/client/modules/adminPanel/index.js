@@ -2,8 +2,7 @@ import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 import AdminPanel from './AdminPanel';
 
-const mapStateToProps = ({ admin, color }) => ({
-  vertical: color.get('showVertical'),
+const mapStateToProps = ({ admin }) => ({
   list: admin.get('list'),
   loading: admin.get('loading'),
 });

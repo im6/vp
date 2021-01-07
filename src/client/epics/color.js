@@ -1,5 +1,4 @@
 import get from 'lodash.get';
-import Cookies from 'js-cookie';
 import { iif, of } from 'rxjs';
 import { ofType } from 'redux-observable';
 import {
@@ -14,7 +13,6 @@ import {
 import requester from '../misc/requester';
 import likeManager from '../misc/likeManager';
 import { download, share, copyText } from '../misc/util';
-import { canvasOrientationKey } from '../../constant';
 
 const colorql = `query($cate: ColorCategory!) {
   color(category: $cate) {
@@ -168,16 +166,6 @@ export default [
           })
         )
       )
-    ),
-  (action$) =>
-    action$.pipe(
-      ofType('color/setDirection'),
-      tap(({ payload }) => {
-        Cookies.set(canvasOrientationKey, payload ? '1' : '0', {
-          expires: 180,
-        });
-      }),
-      ignoreElements()
     ),
   (action$) =>
     action$.pipe(

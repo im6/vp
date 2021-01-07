@@ -6,21 +6,14 @@ import TranslationIcon from './components/TranslationIcon';
 import LanguageDropdown from './components/LanguageDropdown';
 import ToggleButton from './components/ToggleButton';
 import { imgCdnUrl } from '../../constant';
+import useLayoutContext from '../../hooks/useLayoutContext';
 import useTranslationContext from '../../hooks/useTranslationContext';
 
 const { selected } = style;
 
-const Header = ({
-  url,
-  detail,
-  likeNum,
-  showVertical,
-  facebookUrl,
-  languages,
-  onLogout,
-  onChangeCanvasDirection,
-}) => {
+const Header = ({ url, detail, likeNum, facebookUrl, languages, onLogout }) => {
   const [isMenuOpen, toggleMenu] = useState(false);
+  const [isVertical, setVertical] = useLayoutContext();
   const [language, setLanguage] = useTranslationContext();
 
   const isAuth = Boolean(detail);
@@ -40,7 +33,7 @@ const Header = ({
   };
   const onClickRotate = () => {
     toggleMenu(false);
-    onChangeCanvasDirection(!showVertical);
+    setVertical(!isVertical);
   };
 
   return (
@@ -58,7 +51,7 @@ const Header = ({
         >
           <img
             src={imagUrl}
-            className={`${userImgUrl || showVertical ? '' : style.rotate}`}
+            className={`${userImgUrl || isVertical ? '' : style.rotate}`}
             alt="colorpk icon"
           />
         </div>
@@ -199,10 +192,8 @@ Header.propTypes = {
   detail: PropTypes.object,
   facebookUrl: PropTypes.string,
   likeNum: PropTypes.number,
-  showVertical: PropTypes.bool,
   languages: PropTypes.array.isRequired,
   onLogout: PropTypes.func.isRequired,
-  onChangeCanvasDirection: PropTypes.func.isRequired,
 };
 
 export default Header;

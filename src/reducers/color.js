@@ -4,7 +4,6 @@ import { fromJS, List, Map } from 'immutable';
 
 const initialState = fromJS({
   loading: false,
-  showVertical: true,
 
   colorDef: {},
   liked: {},
@@ -70,9 +69,6 @@ const color = handleActions(
     },
     ['color/set/owns'](state, { payload }) {
       return state.set('colorIdByMyOwn', List(payload));
-    },
-    ['color/setDirection'](state, { payload }) {
-      return state.set('showVertical', payload);
     },
   },
   initialState

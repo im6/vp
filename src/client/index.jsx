@@ -1,15 +1,15 @@
 import 'core-js';
 import 'regenerator-runtime/runtime';
-import { langSelectionKey } from '../constant';
+import { langSelectionKey, canvasOrientationKey } from '../constant';
 import { customEventPolyFill } from './misc/util';
 import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
-import Layout from 'components/Layout';
 import store from './config/store';
 import Routes from './routes';
 import { BrowserRouter } from 'react-router-dom';
 import './bulma.modules.sass';
 import Modal from './modules/modal';
+import { LayoutProvider } from '../context/Layout/index';
 import { LanguageProvider } from '../context/Language/index';
 
 customEventPolyFill();
@@ -17,10 +17,10 @@ hydrate(
   <BrowserRouter>
     <Provider store={store}>
       <LanguageProvider initLang={window[langSelectionKey]}>
-        <Layout>
+        <LayoutProvider initVertical={window[canvasOrientationKey]}>
           <Modal />
           <Routes />
-        </Layout>
+        </LayoutProvider>
       </LanguageProvider>
     </Provider>
   </BrowserRouter>,

@@ -5,6 +5,7 @@ import OneColor from '../OneColor';
 import style from './style.sass';
 import SpinLoader from 'components/SpinLoader';
 import useTranslationContext from '../../../../../hooks/useTranslationContext';
+import useLayoutContext from '../../../../../hooks/useLayoutContext';
 
 const Color = ({
   isAuth,
@@ -13,13 +14,13 @@ const Color = ({
   colorDef,
   selectedId,
   loading,
-  vertical,
   onLike,
   onShare,
   onEnter,
   onCopy,
   onDownload,
 }) => {
+  const [isVertical] = useLayoutContext();
   const [language] = useTranslationContext();
   useEffect(() => {
     /* istanbul ignore next */
@@ -45,7 +46,6 @@ const Color = ({
           likeNum={selectedColor.get('like')}
           value={selectedColor.get('color')}
           liked={liked.get(selectedId)}
-          vertical={vertical}
           onCopy={onCopy}
           onLike={onLikeLocal}
           onDownload={onDownload}
@@ -66,7 +66,7 @@ const Color = ({
           return boxInfo ? (
             <Box
               key={v}
-              vertical={vertical}
+              vertical={isVertical}
               liked={liked.get(v)}
               id={boxInfo.get('id')}
               username={boxInfo.get('username')}
@@ -87,7 +87,6 @@ Color.propTypes = {
   isAuth: PropTypes.bool,
   selectedId: PropTypes.string,
   loading: PropTypes.bool,
-  vertical: PropTypes.bool,
   liked: PropTypes.object.isRequired,
   list: PropTypes.array.isRequired,
   colorDef: PropTypes.object.isRequired,

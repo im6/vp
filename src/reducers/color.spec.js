@@ -124,12 +124,4 @@ describe('test user reducer behavior', () => {
     });
     expect(newState.get('colorIdByMyOwn').toJS()).toEqual(ownedIds);
   });
-  test('action of color/setDirection', () => {
-    const isVertical = true;
-    const newState = colorReducer(fromJS({ loading: false }), {
-      type: 'color/setDirection',
-      payload: isVertical,
-    });
-    expect(newState.get('showVertical')).toBe(isVertical);
-  });
 });
