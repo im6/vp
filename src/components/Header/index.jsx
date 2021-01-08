@@ -17,12 +17,15 @@ const Header = ({ url, detail, likeNum, facebookUrl, languages, onLogout }) => {
   const [language, setLanguage] = useTranslationContext();
 
   const isAuth = Boolean(detail);
-  const selectPopular = url === '/popular';
-  const selectLatest = url in { '/latest': true, '/': true };
-  const selectSaved = url === '/like';
-  const selectCreate = url === '/new';
+  const isAdmin = isAuth && detail.get('isadmin');
   const userImgUrl = isAuth && detail.get('img');
   const imagUrl = userImgUrl || `${imgCdnUrl}/icon.png`;
+
+  const selectPopular = url === '/popular';
+  const selectLatest = ['/', '/latest'].includes(url);
+  const selectProfile = ['/like', '/portfolio'].includes(url);
+  const selectSaved = url === '/like';
+  const selectCreate = url === '/new';
 
   const onCloseNav = () => {
     toggleMenu(false);
@@ -62,11 +65,7 @@ const Header = ({ url, detail, likeNum, facebookUrl, languages, onLogout }) => {
         <div className="navbar-start">
           {isAuth ? (
             <div className="navbar-item has-dropdown is-hoverable">
-              <a
-                className={`navbar-link ${
-                  ['/like', '/portfolio'].includes(url) ? selected : ''
-                }`}
-              >
+              <a className={`navbar-link ${selectProfile ? selected : ''}`}>
                 {detail.get('name')}
               </a>
 
@@ -85,7 +84,7 @@ const Header = ({ url, detail, likeNum, facebookUrl, languages, onLogout }) => {
                 >
                   {language.like}
                 </Link>
-                {detail.get('isadmin') && (
+                {isAdmin && (
                   <Link
                     to="/adminpanel"
                     className="navbar-item"
