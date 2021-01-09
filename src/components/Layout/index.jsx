@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './style.sass';
-import Header from 'containers/Header';
+import Header from '../Header/container';
 import SpinLoader from 'components/SpinLoader';
 
 class Layout extends Component {

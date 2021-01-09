@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { createAction } from 'redux-actions';
 import { withRouter } from 'react-router-dom';
-import Header from 'components/Header';
+import Header from './index';
 import { languages } from '../../translation';
 
 const mapStateToProps = ({ user, color }, { location }) => {

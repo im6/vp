@@ -131,8 +131,7 @@
         2,
         {
           "ignore": [
-            "^components/",
-            "^containers/"
+            "^components/"
           ]
         }
       ]
@@ -152,8 +151,7 @@
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/testing/fileMock.js",
       "\\.(css|sass)$": "<rootDir>/src/testing/styleMock.js",
-      "^components/(.*)": "<rootDir>/src/components/$1",
-      "^containers/(.*)": "<rootDir>/src/containers/$1"
+      "^components/(.*)": "<rootDir>/src/components/$1"
     },
     "coverageDirectory": "coverage",
     "coverageThreshold": {

@@ -1,5 +1,5 @@
 import { render, fireEvent } from 'test-utils';
-import Header, { mapDispatchToProps } from '.';
+import Header, { mapDispatchToProps } from './container';
 
 describe('render properly', () => {
   test('render LangDropdown correct', () => {
