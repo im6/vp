@@ -8,12 +8,16 @@ import { LanguageProvider } from '../context/Language/index';
 import store from './testStore';
 import { defaultLanguageKey, canvasDefaultVertical } from '../constant';
 
+jest.mock('../components/Layout/index', () => ({ children }) => (
+  <div>{children}</div>
+));
+
 const AllTheProviders = ({ children }) => {
   return (
     <MemoryRouter>
       <Provider store={store}>
         <LanguageProvider initLang={defaultLanguageKey}>
-          <LayoutProvider initVertical={canvasDefaultVertical} testOnly>
+          <LayoutProvider initVertical={canvasDefaultVertical}>
             {children}
           </LayoutProvider>
         </LanguageProvider>

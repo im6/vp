@@ -6,24 +6,20 @@ import Layout from 'components/Layout';
 
 export const LayoutContext = createContext();
 
-export const LayoutProvider = ({ initVertical, testOnly, children }) => {
+export const LayoutProvider = ({ initVertical, children }) => {
   const [isVertical, setVertical] = useState(initVertical);
   useEffect(() => {
     Cookies.set(canvasOrientationKey, isVertical ? '1' : '0', { expires: 180 });
   }, [isVertical]);
 
-  /* istanbul ignore next */
-  const childrenElem = testOnly ? children : <Layout>{children}</Layout>;
-
   return (
     <LayoutContext.Provider value={[isVertical, setVertical]}>
-      {childrenElem}
+      <Layout>{children}</Layout>
     </LayoutContext.Provider>
   );
 };
 
 LayoutProvider.propTypes = {
-  testOnly: PropTypes.bool,
   initVertical: PropTypes.bool,
   children: PropTypes.node,
 };
