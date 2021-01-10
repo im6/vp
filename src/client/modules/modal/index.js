@@ -1,6 +1,16 @@
 import { connect } from 'react-redux';
+import { createAction } from 'redux-actions';
 import Modal from './Modal';
 
-const mapStateToProps = ({ modal }) => modal;
+const mapStateToProps = ({ modal }) => ({
+  content: modal.toJSON(),
+});
 
-export default connect(mapStateToProps)(Modal);
+const mapDispatchToProps = (dispatch) => ({
+  onTimeout(type) {
+    const ac = createAction('modal/reset');
+    dispatch(ac(type));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);

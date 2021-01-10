@@ -24,7 +24,7 @@ class Portal extends Component {
 }
 
 Portal.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 };
 
 export default Portal;
