@@ -9,7 +9,7 @@ describe('render properly', () => {
     global.scrollTo = jest.fn();
   });
 
-  const liked = Map({ '1': true, '2': true });
+  const liked = Map({ 1: true, 2: true });
   const colorDef = fromJS(colorDefSample);
   const ids = Object.keys(colorDefSample);
 
@@ -107,8 +107,8 @@ describe('render properly', () => {
     fireEvent.click(container.querySelector('ul'));
     expect(cb).toBeCalled();
   });
-  test('click to like', () => {
-    const { container } = render(
+  test('click to like and copy', () => {
+    const { container, getByText } = render(
       <Color
         list={[...ids, '100']}
         liked={liked}
@@ -122,6 +122,7 @@ describe('render properly', () => {
       />
     );
     fireEvent.click(container.querySelector('button'));
-    expect(cb).toBeCalled();
+    fireEvent.click(getByText('#e5d12f'));
+    expect(cb).toHaveBeenCalledTimes(2);
   });
 });
