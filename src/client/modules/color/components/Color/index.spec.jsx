@@ -2,7 +2,7 @@ import { render, fireEvent } from 'test-utils';
 import Color from '.';
 import { fromJS, Map } from 'immutable';
 import { translation } from '../../../../../translation/index';
-import { colorDefSample } from '../../../../../testing/dataMock';
+import { selectedColor, colorDefSample } from '../../../../../testing/dataMock';
 
 describe('render properly', () => {
   beforeAll(() => {
@@ -122,7 +122,7 @@ describe('render properly', () => {
       />
     );
     fireEvent.click(container.querySelector('button'));
-    fireEvent.click(getByText('#e5d12f'));
+    fireEvent.click(getByText(selectedColor));
     expect(cb).toHaveBeenCalledTimes(2);
   });
 });
