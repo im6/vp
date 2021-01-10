@@ -2,12 +2,12 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import style from './style.sass';
-import TranslationIcon from './components/TranslationIcon';
-import LanguageDropdown from './components/LanguageDropdown';
-import ToggleButton from './components/ToggleButton';
-import { imgCdnUrl } from '../../constant';
-import useLayoutContext from '../../hooks/useLayoutContext';
-import useTranslationContext from '../../hooks/useTranslationContext';
+import TranslationIcon from '../TranslationIcon';
+import LanguageDropdown from '../LanguageDropdown';
+import ToggleButton from '../ToggleButton';
+import { imgCdnUrl } from '../../../../constant';
+import useLayoutContext from '../../../../hooks/useLayoutContext';
+import useTranslationContext from '../../../../hooks/useTranslationContext';
 
 const { selected } = style;
 
