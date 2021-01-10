@@ -10,20 +10,6 @@ const visibleTimeout = 2000; // same time as $timeout value in style file
 const Modal = ({ content, onTimeout }) => {
   const timerRef = useRef(null);
   const { type, message } = content;
-  useEffect(() => {
-    if (timerRef.current && type) {
-      // new content kicks in during displaying
-    } else if (!timerRef.current && type) {
-      timerRef.current = setTimeout(() => {
-        onTimeout();
-      }, visibleTimeout);
-    } else if (timerRef.current && !type) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    } else {
-      // idle
-    }
-  }, [content]);
 
   useEffect(
     () => () => {
@@ -31,6 +17,20 @@ const Modal = ({ content, onTimeout }) => {
     },
     []
   );
+  useEffect(() => {
+    if (!timerRef.current && type) {
+      timerRef.current = setTimeout(() => {
+        onTimeout();
+      }, visibleTimeout);
+    } else if (timerRef.current && !type) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    } else if (timerRef.current && type) {
+      // new content kicks in during old content displaying
+    } else {
+      // idle
+    }
+  }, [content]);
 
   const visible = Boolean(type);
   return visible ? (
