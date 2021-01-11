@@ -114,8 +114,7 @@ export const customEventPolyFill = () => {
 };
 
 export const share = (type) => {
-  // eslint-disable-next-line no-prototype-builtins
-  if (!window.hasOwnProperty('encodeURIComponent')) {
+  if (!Object.prototype.hasOwnProperty.call(window, 'encodeURIComponent')) {
     return;
   }
   const windowSize = 'left=350,top=250,width=500,height=300';

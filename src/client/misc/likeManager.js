@@ -45,7 +45,7 @@ class LikeManagement {
   removeLike(id) {
     if (this.hasLocalStorage) {
       const userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
-      const newUserLike = userLike.filter((v) => v != id); // eslint-disable-line eqeqeq
+      const newUserLike = userLike.filter((v) => v !== id);
       window.localStorage.setItem(LSLIKEKEY, JSON.stringify(newUserLike));
     }
   }
