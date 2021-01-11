@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { LayoutProvider } from '../context/Layout/index';
-import { LanguageProvider } from '../context/Language/index';
+import { LayoutProvider } from '../contexts/Layout/index';
+import { LanguageProvider } from '../contexts/Language/index';
 import store from './testStore';
 import { defaultLanguageKey, canvasDefaultVertical } from '../constant';
 

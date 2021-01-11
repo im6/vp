@@ -13,8 +13,8 @@ import {
   canvasDefaultVertical,
 } from '../../constant';
 import Html from 'components/Html';
-import { LayoutProvider } from '../../context/Layout/index';
-import { LanguageProvider } from '../../context/Language/index';
+import { LayoutProvider } from '../../contexts/Layout/index';
+import { LanguageProvider } from '../../contexts/Language/index';
 import moduleReducers from '../../reducers';
 import { isAuth, isAdmin } from '../helper';
 import { languageCodes } from '../../translation';

@@ -9,8 +9,8 @@ import Routes from './routes';
 import { BrowserRouter } from 'react-router-dom';
 import './bulma.modules.sass';
 import Modal from './modules/modal';
-import { LayoutProvider } from '../context/Layout/index';
-import { LanguageProvider } from '../context/Language/index';
+import { LayoutProvider } from '../contexts/Layout/index';
+import { LanguageProvider } from '../contexts/Language/index';
 
 customEventPolyFill();
 hydrate(
