@@ -72,7 +72,6 @@ export default (req, res) => {
       </Provider>
     </StaticRouter>
   );
-  const appHtml = renderToString(app);
   const htmlDOM = (
     <Html
       title={`${
@@ -88,10 +87,11 @@ export default (req, res) => {
       lastBuildDate={process.env.lastBuildDate || 'dev'}
       initState={store.getState()}
     >
-      {appHtml}
+      {renderToString(app)}
     </Html>
   );
   const html = renderToStaticMarkup(htmlDOM);
+
   res.status(200);
   // res.header('Access-Control-Allow-Origin', '*');
   res.send(`<!DOCTYPE html>${html}`);
