@@ -2,8 +2,8 @@ import { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import style from './style.sass';
-import Portal from './components/Portal';
-import StatusIcon from './components/StatusIcon';
+import Portal from '../Portal';
+import StatusIcon from '../StatusIcon';
 
 const visibleTimeout = 2000; // same time as $timeout value in style file
 
