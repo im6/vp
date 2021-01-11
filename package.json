@@ -1,6 +1,6 @@
 {
   "name": "vp",
-  "version": "1.25.0",
+  "version": "1.26.0",
   "description": "source code of react.colorpk.com",
   "engines": {
     "node": ">= 14.x"
