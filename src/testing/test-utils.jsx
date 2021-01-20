@@ -16,8 +16,11 @@ const AllTheProviders = ({ children }) => {
   return (
     <MemoryRouter>
       <Provider store={store}>
-        <LanguageProvider initLang={defaultLanguageKey}>
-          <LayoutProvider initVertical={canvasDefaultVertical}>
+        <LanguageProvider initLang={defaultLanguageKey} onChange={jest.fn()}>
+          <LayoutProvider
+            initVertical={canvasDefaultVertical}
+            onChange={jest.fn()}
+          >
             {children}
           </LayoutProvider>
         </LanguageProvider>

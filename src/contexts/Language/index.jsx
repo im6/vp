@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types';
-import Cookies from 'js-cookie';
 import { createContext, useState, useEffect } from 'react';
 import { translation as allTranslation } from '../../translation';
-import { cookieExpireTime, langSelectionKey } from '../../constant';
 
 export const LanguageContext = createContext();
 
-export const LanguageProvider = ({ initLang, children }) => {
+export const LanguageProvider = ({ children, initLang, onChange }) => {
   const [lang, setLang] = useState(initLang);
   useEffect(() => {
-    Cookies.set(langSelectionKey, lang, { expires: cookieExpireTime });
+    onChange(lang);
   }, [lang]);
 
   return (
@@ -20,6 +18,7 @@ export const LanguageProvider = ({ initLang, children }) => {
 };
 
 LanguageProvider.propTypes = {
-  initLang: PropTypes.string,
   children: PropTypes.node,
+  initLang: PropTypes.string,
+  onChange: PropTypes.func,
 };

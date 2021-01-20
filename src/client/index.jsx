@@ -1,7 +1,7 @@
 import 'core-js';
 import 'regenerator-runtime/runtime';
 import { langSelectionKey, canvasOrientationKey } from '../constant';
-import { customEventPolyFill } from './misc/util';
+import { setCookie, customEventPolyFill } from './misc/util';
 import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './config/store';
@@ -16,8 +16,18 @@ customEventPolyFill();
 hydrate(
   <BrowserRouter>
     <Provider store={store}>
-      <LanguageProvider initLang={window[langSelectionKey]}>
-        <LayoutProvider initVertical={window[canvasOrientationKey]}>
+      <LanguageProvider
+        initLang={window[langSelectionKey]}
+        onChange={(l) => {
+          setCookie(langSelectionKey, l);
+        }}
+      >
+        <LayoutProvider
+          initVertical={window[canvasOrientationKey]}
+          onChange={(v) => {
+            setCookie(canvasOrientationKey, v);
+          }}
+        >
           <Modal />
           <Routes />
         </LayoutProvider>

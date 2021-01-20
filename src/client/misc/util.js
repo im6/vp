@@ -1,4 +1,5 @@
-import { tempDomId } from '../../constant';
+import Cookies from 'js-cookie';
+import { tempDomId, cookieExpireTime } from '../../constant';
 
 const checkLocalStorage = () => {
   const textKey = '_tls';
@@ -147,4 +148,10 @@ export const copyText = (txt) => {
   inputElem.setSelectionRange(0, 99999); // For mobile devices
   document.execCommand('copy');
   body.removeChild(inputElem);
+};
+
+export const setCookie = (key, value) => {
+  Cookies.set(key, value, {
+    expires: cookieExpireTime,
+  });
 };

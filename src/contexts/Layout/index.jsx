@@ -1,17 +1,13 @@
 import PropTypes from 'prop-types';
-import Cookies from 'js-cookie';
 import { createContext, useState, useEffect } from 'react';
-import { cookieExpireTime, canvasOrientationKey } from '../../constant';
 import Layout from 'components/Layout';
 
 export const LayoutContext = createContext();
 
-export const LayoutProvider = ({ initVertical, children }) => {
+export const LayoutProvider = ({ children, initVertical, onChange }) => {
   const [isVertical, setVertical] = useState(initVertical);
   useEffect(() => {
-    Cookies.set(canvasOrientationKey, isVertical ? '1' : '0', {
-      expires: cookieExpireTime,
-    });
+    onChange(isVertical ? '1' : '0');
   }, [isVertical]);
 
   return (
@@ -22,6 +18,7 @@ export const LayoutProvider = ({ initVertical, children }) => {
 };
 
 LayoutProvider.propTypes = {
-  initVertical: PropTypes.bool,
   children: PropTypes.node,
+  initVertical: PropTypes.bool,
+  onChange: PropTypes.func,
 };
