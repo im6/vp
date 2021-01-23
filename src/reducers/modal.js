@@ -3,8 +3,8 @@ import { fromJS } from 'immutable';
 import { handleActions } from 'redux-actions';
 
 const initialState = fromJS({
-  message: null,
   type: null,
+  message: null,
 });
 
 const modal = handleActions(
