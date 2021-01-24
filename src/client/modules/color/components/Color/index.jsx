@@ -42,15 +42,22 @@ const Color = ({
       {selectedColor && (
         <OneColor
           id={selectedColor.get('id')}
-          username={selectedColor.get('username')}
-          starNum={selectedColor.get('star')}
           value={selectedColor.get('color')}
-          starred={liked.get(selectedId)}
-          onCopy={onCopy}
-          onLike={onLikeLocal}
-          onDownload={onDownload}
           onShare={onShare}
-        />
+          onDownload={onDownload}
+        >
+          <Box
+            vertical={isVertical}
+            starred={liked.get(selectedId)}
+            id={selectedColor.get('id')}
+            username={selectedColor.get('username')}
+            starNum={selectedColor.get('star')}
+            value={selectedColor.get('color')}
+            onClickLike={onLikeLocal}
+            onClickText={onCopy}
+            showUsername
+          />
+        </OneColor>
       )}
       <div className={style.text}>
         {!loading && colorNotFound && (
