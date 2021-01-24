@@ -2,9 +2,9 @@ import { memo } from 'react';
 import Box from './Box';
 
 const isEqual = (prevProps, nextProps) => {
-  const { liked, id, vertical } = prevProps;
+  const { starred, id, vertical } = prevProps;
   return (
-    nextProps.liked === liked &&
+    nextProps.starred === starred &&
     nextProps.id === id &&
     nextProps.vertical === vertical
   );

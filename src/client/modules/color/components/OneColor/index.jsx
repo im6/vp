@@ -5,7 +5,7 @@ import useLayoutContext from '../../../../../hooks/useLayoutContext';
 import useTranslationContext from '../../../../../hooks/useTranslationContext';
 
 const OneColor = ({
-  liked,
+  starred,
   id,
   value,
   starNum,
@@ -22,7 +22,7 @@ const OneColor = ({
       <div>
         <Box
           vertical={isVertical}
-          liked={liked}
+          starred={starred}
           id={id}
           username={username}
           starNum={starNum}
@@ -75,7 +75,7 @@ const OneColor = ({
 };
 
 OneColor.propTypes = {
-  liked: PropTypes.bool,
+  starred: PropTypes.bool,
   id: PropTypes.string.isRequired,
   username: PropTypes.string,
   starNum: PropTypes.number,

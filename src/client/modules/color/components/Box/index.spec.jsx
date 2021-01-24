@@ -13,7 +13,7 @@ describe('render properly', () => {
         value={boxInfo.color}
         starNum={boxInfo.star}
         onClickLike={clickCb}
-        liked
+        starred
         vertical
         showUsername
       />
@@ -25,7 +25,7 @@ describe('render properly', () => {
         value={boxInfo.color}
         starNum={boxInfo.star}
         onClickLike={clickCb}
-        liked
+        starred
         vertical={false}
         showUsername
       />
@@ -38,7 +38,7 @@ describe('render properly', () => {
         value={boxInfo.color}
         starNum={boxInfo.star}
         onClickLike={clickCb}
-        liked
+        starred
         vertical={false}
         showUsername
       />

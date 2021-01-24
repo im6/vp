@@ -10,11 +10,11 @@ describe('render properly', () => {
   test('render properly with click', () => {
     const { container, getByText } = render(
       <Box
-        liked
         id={boxInfo.id}
         username={boxInfo.username}
         value={boxInfo.color}
         starNum={boxInfo.star}
+        starred
         onLike={likeCb}
         onCopy={jest.fn()}
         onShare={shareCb}
