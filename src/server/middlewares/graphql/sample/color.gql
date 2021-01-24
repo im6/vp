@@ -3,9 +3,9 @@ query($cate: ColorCategory!) {
     id
     like
     color
-    userid
+    userId
     username
-    createdate
+    createdDate
   }
 }
 

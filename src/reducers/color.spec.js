@@ -5,27 +5,27 @@ describe('test user reducer behavior', () => {
   const testColor = [
     {
       id: '529',
-      like: 2,
+      star: 2,
       color: '7b7d87#e7e6e1#ffffff#656faf',
-      userid: null,
+      userId: null,
       username: null,
-      createdate: '1578156028000',
+      createdDate: '1578156028000',
     },
     {
       id: '528',
-      like: 15,
+      star: 15,
       color: 'acd5d6#ecf1f1#ffffff#c0ccc9',
-      userid: null,
+      userId: null,
       username: null,
-      createdate: '1578155992000',
+      createdDate: '1578155992000',
     },
     {
       id: '527',
-      like: 19,
+      star: 19,
       color: 'b87fb1#ffffff#eaecf7#858dbb',
-      userid: null,
+      userId: null,
       username: null,
-      createdate: '1578155962000',
+      createdDate: '1578155962000',
     },
   ];
   const colorDef = testColor.reduce((acc, v) => {
@@ -33,7 +33,7 @@ describe('test user reducer behavior', () => {
     return acc;
   }, {});
   const colorIdAllByDate = ['529', '528', '527'];
-  const colorIdAllByLike = ['527', '528', '529'];
+  const colorIdAllByStar = ['527', '528', '529'];
 
   test('action of color/get', () => {
     const newState = colorReducer(fromJS({ loading: false }), {
@@ -52,7 +52,7 @@ describe('test user reducer behavior', () => {
         fromJS({
           loading: false,
           colorIdAllByDate,
-          colorIdAllByLike,
+          colorIdAllByStar,
           colorDef,
         })
       )
@@ -66,7 +66,7 @@ describe('test user reducer behavior', () => {
         fromJS({
           loading: false,
           colorIdAllByDate: [],
-          colorIdAllByLike: [],
+          colorIdAllByStar: [],
         })
       )
     ).toBeTruthy();
@@ -97,7 +97,7 @@ describe('test user reducer behavior', () => {
   test('action of color/addNew/success', () => {
     const newColorId = '1';
     const newState = colorReducer(
-      fromJS({ loading: false, colorIdAllByDate, colorIdAllByLike }),
+      fromJS({ loading: false, colorIdAllByDate, colorIdAllByStar }),
       {
         type: 'color/addNew/success',
         payload: {

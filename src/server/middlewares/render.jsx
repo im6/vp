@@ -36,7 +36,7 @@ export default (req, res) => {
       loading: true,
       detail: {
         name: 'loading',
-        isadmin: isAdmin(req),
+        isAdmin: isAdmin(req),
       },
     };
   } else {
@@ -58,7 +58,7 @@ export default (req, res) => {
       colorDef: {},
       liked: {},
       colorIdAllByDate: [],
-      colorIdAllByLike: [],
+      colorIdAllByStar: [],
       colorIdByMyOwn: [],
     }),
   });

@@ -17,11 +17,11 @@ import { download, share, copyText } from '../misc/util';
 const colorql = `query($cate: ColorCategory!) {
   color(category: $cate) {
     id
-    like
+    star
     color
-    userid
+    userId
     username
-    createdate
+    createdDate
   }
 }`;
 
@@ -140,7 +140,7 @@ export default [
               id: id.toString(),
               color,
               name: '',
-              like: 0,
+              star: 0,
             };
             return iif(
               () => isGood,

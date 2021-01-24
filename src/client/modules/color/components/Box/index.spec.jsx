@@ -11,7 +11,7 @@ describe('render properly', () => {
         id={boxInfo.id}
         username={boxInfo.username}
         value={boxInfo.color}
-        likeNum={boxInfo.like}
+        starNum={boxInfo.star}
         onClickLike={clickCb}
         liked
         vertical
@@ -23,7 +23,7 @@ describe('render properly', () => {
         id={boxInfo.id}
         username={boxInfo.username}
         value={boxInfo.color}
-        likeNum={boxInfo.like}
+        starNum={boxInfo.star}
         onClickLike={clickCb}
         liked
         vertical={false}
@@ -36,7 +36,7 @@ describe('render properly', () => {
         id={boxInfo.id}
         username={boxInfo.username}
         value={boxInfo.color}
-        likeNum={boxInfo.like}
+        starNum={boxInfo.star}
         onClickLike={clickCb}
         liked
         vertical={false}

@@ -20,16 +20,17 @@ const root = {
         const { data: oauthData } = await showUser(qsObj);
         const { name, id: oauthId } = oauthData;
         const userData = await sqlExecOne(
-          `SELECT * FROM colorpk_user WHERE oauth = 'fb' AND oauthid = ?`,
+          `SELECT * FROM colorpk_user WHERE oauth = 'fb' AND oauth_id = ?`,
           [oauthId]
         );
         if (userData.length === 1) {
           // existing user.
-          const { isadmin, id: userId } = userData[0];
+          const { is_admin: isAdminInt, id: userId } = userData[0];
+
           req.session.app.dbInfo = {
             id: userId,
             name, // grab name from oauth
-            isAdmin: isadmin || false,
+            isAdmin: isAdminInt || false,
           };
 
           const likeData = await sqlExecOne(
@@ -38,17 +39,17 @@ const root = {
           );
 
           const ownData = await sqlExecOne(
-            'SELECT a.id FROM colorpk_color a WHERE a.userid=?',
+            'SELECT a.id FROM colorpk_color a WHERE a.user_id=?',
             [userId]
           );
 
-          sqlExecOne('UPDATE colorpk_user SET lastlogin=NOW() WHERE id=?', [
+          sqlExecOne('UPDATE colorpk_user SET last_login=NOW() WHERE id=?', [
             userId,
           ]);
 
           return {
             name,
-            isadmin,
+            isAdmin: isAdminInt || false,
             img: get(oauthData, 'picture.data.url', null),
             likes: likeData.map((v) => v.color_id),
             owns: ownData.map((v) => v.id),
@@ -59,7 +60,7 @@ const root = {
         const {
           insertId,
         } = await sqlExecOne(
-          `INSERT INTO colorpk_user (oauth, name, oauthid, lastlogin) VALUES ('fb', ?, ?, NOW())`,
+          `INSERT INTO colorpk_user (oauth, name, oauth_id, last_login) VALUES ('fb', ?, ?, NOW())`,
           [name, oauthId]
         );
         req.session.app.dbInfo = {
@@ -69,7 +70,7 @@ const root = {
         };
         return {
           name,
-          isadmin: false,
+          isAdmin: false,
           img: get(oauthData, 'picture.data.url', null),
           likes: [],
           owns: [],
@@ -108,11 +109,11 @@ const root = {
     try {
       return colors.map((v) => ({
         id: v.id,
-        like: v.like,
+        star: v.star,
         color: v.color,
-        userid: v.userid,
+        userId: v.user_id,
         username: v.username,
-        createdate: v.createdate,
+        createdDate: v.created_date,
       }));
     } catch (err) {
       return new GraphQLError(err.toString());
@@ -134,7 +135,7 @@ const root = {
 
       if (willLike) {
         const resData = await sqlExecOne(
-          `UPDATE colorpk_color SET \`like\` = \`like\` + 1 WHERE id = ?`,
+          `UPDATE colorpk_color SET \`star\` = \`star\` + 1 WHERE id = ?`,
           [id]
         );
         return {
@@ -164,7 +165,7 @@ const root = {
 
     try {
       const row = await sqlExecOne(
-        'INSERT INTO colorpk_color (`like`, color, userid, username, colortype, display, createdate) VALUES (?, ?, ?, ?, NULL, ?, NOW())',
+        'INSERT INTO colorpk_color (`star`, color, user_id, username, color_type, display, created_date) VALUES (?, ?, ?, ?, NULL, ?, NOW())',
         [random, color, userId, username, hasUserSignIn ? 0 : 1]
       );
       return {

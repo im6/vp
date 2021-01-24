@@ -9,7 +9,7 @@ const initialState = fromJS({
   liked: {},
 
   colorIdAllByDate: [],
-  colorIdAllByLike: [],
+  colorIdAllByStar: [],
   colorIdByMyOwn: [],
 });
 
@@ -26,12 +26,12 @@ const color = handleActions(
         colorIdAllByDate = colorIdAllByDate.push(v.id);
         colorDef = colorDef.set(v.id, fromJS(v));
       });
-      const colorIdAllByLike = payload
-        .sort((a, b) => b.like - a.like)
+      const colorIdAllByStar = payload
+        .sort((a, b) => b.star - a.star)
         .map((v) => v.id);
       return state.merge({
         colorIdAllByDate,
-        colorIdAllByLike: fromJS(colorIdAllByLike),
+        colorIdAllByStar: fromJS(colorIdAllByStar),
         colorDef,
         loading: false,
       });
@@ -40,7 +40,7 @@ const color = handleActions(
     ['color/get/fail'](state) {
       return state.merge({
         colorIdAllByDate: List(),
-        colorIdAllByLike: List(),
+        colorIdAllByStar: List(),
         loading: false,
       });
     },
@@ -51,7 +51,7 @@ const color = handleActions(
         ? state.setIn(['liked', id], true)
         : state.deleteIn(['liked', id]);
       return newState.updateIn(
-        ['colorDef', id, 'like'],
+        ['colorDef', id, 'star'],
         (v) => v + (willLike ? 1 : -1)
       );
     },
@@ -60,7 +60,7 @@ const color = handleActions(
       const { id } = payload;
       let newState = state.setIn(['colorDef', id], fromJS(payload));
       newState = newState.update('colorIdAllByDate', (v) => v.unshift(id));
-      return newState.update('colorIdAllByLike', (v) => v.push(id));
+      return newState.update('colorIdAllByStar', (v) => v.push(id));
     },
 
     ['color/set/likes'](state, { payload }) {
