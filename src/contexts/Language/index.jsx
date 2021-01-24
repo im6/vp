@@ -18,7 +18,7 @@ export const LanguageProvider = ({ children, initLang, onChange }) => {
 };
 
 LanguageProvider.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.element.isRequired,
   initLang: PropTypes.string,
   onChange: PropTypes.func,
 };

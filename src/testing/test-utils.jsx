@@ -30,7 +30,7 @@ const AllTheProviders = ({ children }) => {
 };
 
 AllTheProviders.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.element,
 };
 
 const customRender = (ui, options) =>
