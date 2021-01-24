@@ -5,6 +5,7 @@ const LikeButton = ({ starred, onToggle, starNum }) => (
   <button
     className="button is-small"
     onClick={onToggle}
+    title={starred ? 'Saved' : 'Click to save'}
     aria-label="click and save"
   >
     <Heart red={starred} />
