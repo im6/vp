@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import Heart from './Heart';
 
-const HeartButton = ({ starred, onToggle, starNum }) => (
+const HeartButton = ({ starred, onClick, starNum }) => (
   <button
     className="button is-small"
-    onClick={onToggle}
+    onClick={onClick}
     title={starred ? 'Saved' : 'Click to save'}
     aria-label="click and save"
   >
@@ -17,7 +17,7 @@ const HeartButton = ({ starred, onToggle, starNum }) => (
 HeartButton.propTypes = {
   starNum: PropTypes.number.isRequired,
   starred: PropTypes.bool,
-  onToggle: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default HeartButton;

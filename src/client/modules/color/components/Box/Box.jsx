@@ -35,7 +35,7 @@ const Box = ({
       <HeartButton
         starred={starred}
         starNum={starNum}
-        onToggle={onClickLikeLocal}
+        onClick={onClickLikeLocal}
       />
       {showUsername && username && <p>{username}</p>}
     </div>
