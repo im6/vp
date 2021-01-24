@@ -12,7 +12,6 @@ import Modal from './modules/modal';
 import { LayoutProvider } from '../contexts/Layout/index';
 import { LanguageProvider } from '../contexts/Language/index';
 
-customEventPolyFill();
 hydrate(
   <BrowserRouter>
     <Provider store={store}>
@@ -41,6 +40,7 @@ hydrate(
   }
 );
 if (process.env.NODE_ENV !== 'development') {
+  customEventPolyFill();
   window.dispatchEvent(new CustomEvent('_COLORPK_SCRIPT_READY'));
   console.log('client last build: ', process.env.lastBuildDate);
 }
