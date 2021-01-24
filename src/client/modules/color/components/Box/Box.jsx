@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import style from './style.sass';
-import LikeButton from './components/LikeButton';
+import HeartButton from './components/HeartButton';
 import ColorCanvas from './components/ColorCanvas';
 
 const Box = ({
@@ -32,7 +32,7 @@ const Box = ({
         onClickText={onClickText}
         onClickCanvas={onClickCanvasLocal}
       />
-      <LikeButton
+      <HeartButton
         starred={starred}
         starNum={starNum}
         onToggle={onClickLikeLocal}
