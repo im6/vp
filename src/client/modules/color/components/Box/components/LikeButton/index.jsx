@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Heart from './Heart';
 
-const LikeButton = ({ liked, onToggle, likeNum }) => (
+const LikeButton = ({ liked, onToggle, starNum }) => (
   <button
     className="button is-small"
     onClick={onToggle}
@@ -9,12 +9,12 @@ const LikeButton = ({ liked, onToggle, likeNum }) => (
   >
     <Heart red={liked} />
     &nbsp;&nbsp;
-    {likeNum}
+    {starNum}
   </button>
 );
 
 LikeButton.propTypes = {
-  likeNum: PropTypes.number.isRequired,
+  starNum: PropTypes.number.isRequired,
   liked: PropTypes.bool,
   onToggle: PropTypes.func.isRequired,
 };

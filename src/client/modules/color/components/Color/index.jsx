@@ -43,7 +43,7 @@ const Color = ({
         <OneColor
           id={selectedColor.get('id')}
           username={selectedColor.get('username')}
-          likeNum={selectedColor.get('like')}
+          starNum={selectedColor.get('star')}
           value={selectedColor.get('color')}
           liked={liked.get(selectedId)}
           onCopy={onCopy}
@@ -70,7 +70,7 @@ const Color = ({
               liked={liked.get(v)}
               id={boxInfo.get('id')}
               username={boxInfo.get('username')}
-              likeNum={boxInfo.get('like')}
+              starNum={boxInfo.get('star')}
               value={boxInfo.get('color')}
               onClickLike={onLikeLocal}
               onClickText={onCopy}

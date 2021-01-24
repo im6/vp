@@ -7,11 +7,11 @@ import requester from '../misc/requester';
 const colorql = `query($cate: ColorCategory!) {
   color(category: $cate) {
     id
-    like
+    star
     color
-    userid
+    userId
     username
-    createdate
+    createdDate
   }
 }`;
 

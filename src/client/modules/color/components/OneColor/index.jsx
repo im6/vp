@@ -8,7 +8,7 @@ const OneColor = ({
   liked,
   id,
   value,
-  likeNum,
+  starNum,
   username,
   onLike,
   onCopy,
@@ -25,7 +25,7 @@ const OneColor = ({
           liked={liked}
           id={id}
           username={username}
-          likeNum={likeNum}
+          starNum={starNum}
           value={value}
           onClickLike={onLike}
           onClickText={onCopy}
@@ -78,7 +78,7 @@ OneColor.propTypes = {
   liked: PropTypes.bool,
   id: PropTypes.string.isRequired,
   username: PropTypes.string,
-  likeNum: PropTypes.number,
+  starNum: PropTypes.number,
   value: PropTypes.string.isRequired,
   onLike: PropTypes.func.isRequired,
   onCopy: PropTypes.func.isRequired,

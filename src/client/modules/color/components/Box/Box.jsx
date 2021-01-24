@@ -7,7 +7,7 @@ const Box = ({
   liked,
   id,
   value,
-  likeNum,
+  starNum,
   username,
   vertical,
   showUsername,
@@ -32,7 +32,7 @@ const Box = ({
         onClickText={onClickText}
         onClickCanvas={onClickCanvasLocal}
       />
-      <LikeButton liked={liked} likeNum={likeNum} onToggle={onClickLikeLocal} />
+      <LikeButton liked={liked} starNum={starNum} onToggle={onClickLikeLocal} />
       {showUsername && username && <p>{username}</p>}
     </div>
   );
@@ -41,7 +41,7 @@ const Box = ({
 Box.propTypes = {
   id: PropTypes.string.isRequired,
   username: PropTypes.string,
-  likeNum: PropTypes.number,
+  starNum: PropTypes.number,
   value: PropTypes.string.isRequired,
   liked: PropTypes.bool,
   vertical: PropTypes.bool,

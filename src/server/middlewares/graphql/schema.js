@@ -12,16 +12,16 @@ const schemaStr = `
 
   type Color {
     id: ID!
-    like: Int!
+    star: Int!
     color: String!
-    userid: ID
+    userId: ID
     username: String
-    createdate: String
+    createdDate: String
   }
 
   type User {
     img: String
-    isadmin: Boolean
+    isAdmin: Boolean
     name: String
     likes: [ID!]
     owns: [ID!]

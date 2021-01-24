@@ -40,7 +40,7 @@ describe('render properly', () => {
     const userInfo = {
       name: 'tom',
       img: 'http://www.image.com',
-      isadmin: true,
+      isAdmin: true,
       likes: ['528', '529'],
       owns: ['12', '13'],
     };

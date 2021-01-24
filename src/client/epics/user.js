@@ -12,7 +12,7 @@ const query = `query {
   user {
     name
     img
-    isadmin
+    isAdmin
     likes
     owns
   }

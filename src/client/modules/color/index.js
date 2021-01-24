@@ -5,7 +5,7 @@ import Color from './components/Color';
 const storeMap = {
   '/': 'colorIdAllByDate',
   '/latest': 'colorIdAllByDate',
-  '/popular': 'colorIdAllByLike',
+  '/popular': 'colorIdAllByStar',
   '/like': false, // convert by dict
   '/portfolio': 'colorIdByMyOwn',
 };

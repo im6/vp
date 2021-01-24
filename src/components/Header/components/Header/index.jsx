@@ -17,7 +17,7 @@ const Header = ({ url, detail, likeNum, facebookUrl, languages, onLogout }) => {
   const [language, setLanguage] = useTranslationContext();
 
   const isAuth = Boolean(detail);
-  const isAdmin = isAuth && detail.get('isadmin');
+  const isAdmin = isAuth && detail.get('isAdmin');
   const userImgUrl = isAuth && detail.get('img');
   const imagUrl = userImgUrl || `${imgCdnUrl}/icon.png`;
 
