@@ -4,10 +4,10 @@ import LikeButton from './components/LikeButton';
 import ColorCanvas from './components/ColorCanvas';
 
 const Box = ({
-  liked,
   id,
   value,
   starNum,
+  starred,
   username,
   vertical,
   showUsername,
@@ -17,7 +17,7 @@ const Box = ({
 }) => {
   const onClickLikeLocal = () => {
     onClickLike({
-      willLike: !liked,
+      willLike: !starred,
       id,
     });
   };
@@ -32,7 +32,11 @@ const Box = ({
         onClickText={onClickText}
         onClickCanvas={onClickCanvasLocal}
       />
-      <LikeButton liked={liked} starNum={starNum} onToggle={onClickLikeLocal} />
+      <LikeButton
+        starred={starred}
+        starNum={starNum}
+        onToggle={onClickLikeLocal}
+      />
       {showUsername && username && <p>{username}</p>}
     </div>
   );
@@ -43,7 +47,7 @@ Box.propTypes = {
   username: PropTypes.string,
   starNum: PropTypes.number,
   value: PropTypes.string.isRequired,
-  liked: PropTypes.bool,
+  starred: PropTypes.bool,
   vertical: PropTypes.bool,
   showUsername: PropTypes.bool,
   onClickLike: PropTypes.func.isRequired,

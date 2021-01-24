@@ -45,7 +45,7 @@ const Color = ({
           username={selectedColor.get('username')}
           starNum={selectedColor.get('star')}
           value={selectedColor.get('color')}
-          liked={liked.get(selectedId)}
+          starred={liked.get(selectedId)}
           onCopy={onCopy}
           onLike={onLikeLocal}
           onDownload={onDownload}
@@ -67,7 +67,7 @@ const Color = ({
             <Box
               key={v}
               vertical={isVertical}
-              liked={liked.get(v)}
+              starred={liked.get(v)}
               id={boxInfo.get('id')}
               username={boxInfo.get('username')}
               starNum={boxInfo.get('star')}
