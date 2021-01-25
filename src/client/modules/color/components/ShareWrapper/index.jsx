@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import style from './style.sass';
 import useTranslationContext from '../../../../../hooks/useTranslationContext';
 
-const OneColor = ({ id, value, children, onShare, onDownload }) => {
+const ShareWrapper = ({ id, value, children, onShare, onDownload }) => {
   const [language] = useTranslationContext();
   return (
     <div className={style.center}>
@@ -51,7 +51,7 @@ const OneColor = ({ id, value, children, onShare, onDownload }) => {
   );
 };
 
-OneColor.propTypes = {
+ShareWrapper.propTypes = {
   id: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   children: PropTypes.element.isRequired,
@@ -59,4 +59,4 @@ OneColor.propTypes = {
   onDownload: PropTypes.func.isRequired,
 };
 
-export default OneColor;
+export default ShareWrapper;

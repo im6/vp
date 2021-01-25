@@ -1,9 +1,10 @@
 import { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Box from '../Box';
-import OneColor from '../OneColor';
+
 import style from './style.sass';
 import SpinLoader from 'components/SpinLoader';
+import Box from '../Box';
+import ShareWrapper from '../ShareWrapper';
 import useTranslationContext from '../../../../../hooks/useTranslationContext';
 import useLayoutContext from '../../../../../hooks/useLayoutContext';
 
@@ -40,7 +41,7 @@ const Color = ({
     <Fragment>
       {loading && <SpinLoader />}
       {selectedColor && (
-        <OneColor
+        <ShareWrapper
           id={selectedColor.get('id')}
           value={selectedColor.get('color')}
           onShare={onShare}
@@ -57,7 +58,7 @@ const Color = ({
             onClickText={onCopy}
             showUsername
           />
-        </OneColor>
+        </ShareWrapper>
       )}
       <div className={style.text}>
         {!loading && colorNotFound && (

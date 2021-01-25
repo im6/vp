@@ -1,5 +1,5 @@
 import { render, fireEvent } from 'test-utils';
-import OneColorWrapper from '.';
+import ShareWrapper from '.';
 import { boxInfo } from '../../../../../testing/dataMock';
 
 describe('render properly', () => {
@@ -8,14 +8,14 @@ describe('render properly', () => {
 
   test('render properly with click', () => {
     const { getByText } = render(
-      <OneColorWrapper
+      <ShareWrapper
         id={boxInfo.id}
         value={boxInfo.color}
         onShare={shareCb}
         onDownload={downloadCb}
       >
         <div />
-      </OneColorWrapper>
+      </ShareWrapper>
     );
 
     fireEvent.click(getByText('Download'));
