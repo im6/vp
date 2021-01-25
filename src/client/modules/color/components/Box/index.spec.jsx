@@ -12,7 +12,7 @@ describe('render properly', () => {
         username={boxInfo.username}
         value={boxInfo.color}
         starNum={boxInfo.star}
-        onClickLike={clickCb}
+        onClickHeart={clickCb}
         starred
         vertical
         showUsername
@@ -24,7 +24,7 @@ describe('render properly', () => {
         username={boxInfo.username}
         value={boxInfo.color}
         starNum={boxInfo.star}
-        onClickLike={clickCb}
+        onClickHeart={clickCb}
         starred
         vertical={false}
         showUsername
@@ -37,7 +37,7 @@ describe('render properly', () => {
         username={boxInfo.username}
         value={boxInfo.color}
         starNum={boxInfo.star}
-        onClickLike={clickCb}
+        onClickHeart={clickCb}
         starred
         vertical={false}
         showUsername

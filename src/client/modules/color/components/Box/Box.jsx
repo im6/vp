@@ -11,12 +11,12 @@ const Box = ({
   username,
   vertical,
   showUsername,
-  onClickLike,
   onClickText,
+  onClickHeart,
   onClickCanvas,
 }) => {
-  const onClickLikeLocal = () => {
-    onClickLike({
+  const onClickHeartLocal = () => {
+    onClickHeart({
       willLike: !starred,
       id,
     });
@@ -35,7 +35,7 @@ const Box = ({
       <HeartButton
         starred={starred}
         starNum={starNum}
-        onClick={onClickLikeLocal}
+        onClick={onClickHeartLocal}
       />
       {showUsername && username && <p>{username}</p>}
     </div>
@@ -50,7 +50,7 @@ Box.propTypes = {
   starred: PropTypes.bool,
   vertical: PropTypes.bool,
   showUsername: PropTypes.bool,
-  onClickLike: PropTypes.func.isRequired,
+  onClickHeart: PropTypes.func.isRequired,
   onClickText: PropTypes.func.isRequired,
   onClickCanvas: PropTypes.func.isRequired,
 };

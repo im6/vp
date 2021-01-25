@@ -54,7 +54,7 @@ const Color = ({
             username={selectedColor.get('username')}
             starNum={selectedColor.get('star')}
             value={selectedColor.get('color')}
-            onClickLike={onLikeLocal}
+            onClickHeart={onLikeLocal}
             onClickText={onCopy}
             showUsername
           />
@@ -80,7 +80,7 @@ const Color = ({
               username={boxInfo.get('username')}
               starNum={boxInfo.get('star')}
               value={boxInfo.get('color')}
-              onClickLike={onLikeLocal}
+              onClickHeart={onLikeLocal}
               onClickText={onCopy}
               onClickCanvas={onCanvasClick}
             />

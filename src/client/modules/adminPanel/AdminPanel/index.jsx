@@ -25,7 +25,7 @@ const AdminPanel = ({ loading, list, onAdjudicate, onInitList }) => {
             vertical={isVertical}
             starNum={v.star}
             starred={false}
-            onClickLike={onAdjudicateLocal(v.id, true)}
+            onClickHeart={onAdjudicateLocal(v.id, true)}
           />
           <br />
           &nbsp;&nbsp;
