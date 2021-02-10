@@ -1,7 +1,6 @@
 .DS_Store
 .idea
 .vscode
-.env
 npm-debug.log
 package-lock.json
 local

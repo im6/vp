@@ -2,7 +2,9 @@ import { codeCdnUrl } from '../constant';
 
 if (process.env.NODE_ENV === 'development') {
   // eslint-disable-next-line global-require
-  require('dotenv').config();
+  require('dotenv').config({
+    path: '../vp.env',
+  });
 }
 
 const { env } = process;
