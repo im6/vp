@@ -1,6 +1,6 @@
 import helmet from 'helmet';
 import express from 'express';
-import bodyParser from 'body-parser';
+import { json as bpJson, urlencoded as bpUrlencoded } from 'body-parser';
 import cookieParser from 'cookie-parser';
 import redisSession from '../resource/redisSession';
 
@@ -28,8 +28,8 @@ app.use(
     contentSecurityPolicy: false,
   })
 );
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bpJson());
+app.use(bpUrlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(redisSession);
 
