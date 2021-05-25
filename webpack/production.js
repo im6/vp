@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const { version } = require('../package.json');
@@ -88,7 +88,7 @@ const client = Object.assign(clientBaseConfig, prodBase, {
     new MiniCssExtractPlugin({
       filename: '[name].css', // '[name].css?[contenthash]',
     }),
-    new OptimizeCssAssetsPlugin(),
+    new CssMinimizerPlugin(),
     new CompressionPlugin({
       exclude: /.*/, // use CDN instead of OSS, so exclude all files temporarily
       filename: '[path]',

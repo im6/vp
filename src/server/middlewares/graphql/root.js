@@ -57,9 +57,7 @@ const root = {
         }
 
         // user first time login, save it.
-        const {
-          insertId,
-        } = await sqlExecOne(
+        const { insertId } = await sqlExecOne(
           `INSERT INTO colorpk_user (oauth, name, oauth_id, last_login) VALUES ('fb', ?, ?, NOW())`,
           [name, oauthId]
         );
