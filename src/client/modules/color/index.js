@@ -17,7 +17,6 @@ const mapStateToProps = (
     match: {
       params: { id: selectedId },
     },
-    history,
   }
 ) => {
   const isAuth = Boolean(user.get('detail'));
@@ -42,7 +41,6 @@ const mapStateToProps = (
     colorDef,
     liked,
     selectedId,
-    onEnter: history.push,
   };
 };
 

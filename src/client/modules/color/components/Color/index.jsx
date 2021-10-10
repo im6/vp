@@ -1,5 +1,6 @@
 import { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 import style from './style.sass';
 import SpinLoader from 'components/SpinLoader';
@@ -17,10 +18,10 @@ const Color = ({
   loading,
   onLike,
   onShare,
-  onEnter,
   onCopy,
   onDownload,
 }) => {
+  const history = useHistory();
   const [isVertical] = useLayoutContext();
   const [language] = useTranslationContext();
   useEffect(() => {
@@ -30,7 +31,7 @@ const Color = ({
     }, 50);
   }, [selectedId]);
   const onCanvasClick = (id) => {
-    onEnter(`/color/${id}`);
+    history.push(`/color/${id}`);
   };
   const onLikeLocal = (a) => {
     onLike(a, isAuth);
@@ -100,7 +101,6 @@ Color.propTypes = {
   colorDef: PropTypes.object.isRequired,
   onLike: PropTypes.func.isRequired,
   onCopy: PropTypes.func.isRequired,
-  onEnter: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
   onDownload: PropTypes.func.isRequired,
 };

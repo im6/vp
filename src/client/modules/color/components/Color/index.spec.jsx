@@ -27,7 +27,6 @@ describe('render properly', () => {
         onLike={cb}
         onCopy={cb}
         onShare={cb}
-        onEnter={cb}
         onDownload={cb}
       />
     );
@@ -44,7 +43,6 @@ describe('render properly', () => {
         onLike={cb}
         onCopy={cb}
         onShare={cb}
-        onEnter={cb}
         onDownload={cb}
       />
     );
@@ -63,7 +61,6 @@ describe('render properly', () => {
         onLike={cb}
         onCopy={cb}
         onShare={cb}
-        onEnter={cb}
         onDownload={cb}
       />
     );
@@ -83,7 +80,6 @@ describe('render properly', () => {
         onLike={cb}
         onCopy={cb}
         onShare={cb}
-        onEnter={cb}
         onDownload={cb}
       />
     );
@@ -99,13 +95,12 @@ describe('render properly', () => {
         onLike={cb}
         onCopy={cb}
         onShare={cb}
-        onEnter={cb}
         onDownload={cb}
       />
     );
 
     fireEvent.click(container.querySelector('ul'));
-    expect(cb).toBeCalled();
+    expect(cb).not.toBeCalled(); // trigger history hook event
   });
   test('click to like and copy', () => {
     const { container, getByText } = render(
@@ -117,7 +112,6 @@ describe('render properly', () => {
         onLike={cb}
         onCopy={cb}
         onShare={cb}
-        onEnter={cb}
         onDownload={cb}
       />
     );
