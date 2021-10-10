@@ -29,7 +29,7 @@
     "babel-loader": "^8.2.2",
     "bulma": "^0.9.3",
     "clean-webpack-plugin": "^4.0.0",
-    "compression-webpack-plugin": "^8.0.1",
+    "compression-webpack-plugin": "^9.0.0",
     "copy-webpack-plugin": "^9.0.1",
     "core-js": "^3.18.2",
     "css-loader": "^6.4.0",
