@@ -35,7 +35,7 @@
     "css-loader": "^6.4.0",
     "css-minimizer-webpack-plugin": "^3.1.1",
     "dotenv": "^10.0.0",
-    "eslint": "^7.32.0",
+    "eslint": "^8.0.1",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.2",
@@ -62,7 +62,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
-    "axios": "^0.22.0",
+    "axios": "^0.23.0",
     "body-parser": "^1.19.0",
     "connect-redis": "^6.0.0",
     "cookie-parser": "^1.4.5",
