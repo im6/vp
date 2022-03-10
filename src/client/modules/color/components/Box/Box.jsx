@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import style from './style.sass';
 import HeartButton from './components/HeartButton';
@@ -24,19 +25,31 @@ const Box = ({
   const onClickCanvasLocal = () => {
     onClickCanvas(id);
   };
-  return (
-    <div className={style.box}>
+  const canvasMemo = useMemo(
+    () => (
       <ColorCanvas
         vertical={vertical}
         colorValue={value}
         onClickText={onClickText}
         onClickCanvas={onClickCanvasLocal}
       />
+    ),
+    [vertical, value]
+  );
+  const btnMemo = useMemo(
+    () => (
       <HeartButton
         starred={starred}
         starNum={starNum}
         onClick={onClickHeartLocal}
       />
+    ),
+    [starred, starNum]
+  );
+  return (
+    <div className={style.box}>
+      {canvasMemo}
+      {btnMemo}
       {showUsername && username && <p>{username}</p>}
     </div>
   );
