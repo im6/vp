@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
@@ -30,12 +30,12 @@ const Color = ({
       window.scrollTo(0, 0);
     }, 50);
   }, [selectedId]);
-  const onCanvasClick = (id) => {
+  const onCanvasClick = useCallback((id) => {
     history.push(`/color/${id}`);
-  };
-  const onLikeLocal = (a) => {
+  }, []);
+  const onLikeLocal = useCallback((a) => {
     onLike(a, isAuth);
-  };
+  }, []);
   const selectedColor = selectedId && colorDef.get(selectedId);
   const colorNotFound = selectedId && !selectedColor;
   return (
