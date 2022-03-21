@@ -7,7 +7,7 @@ export const LanguageContext = createContext();
 export const LanguageProvider = ({ children, initLang, onChange }) => {
   const [lang, setLang] = useState(initLang);
   useEffect(() => {
-    onChange(lang);
+    onChange(lang); // trigger client-only side effect
   }, [lang]);
 
   return (

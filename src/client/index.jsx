@@ -24,7 +24,7 @@ hydrate(
         <LayoutProvider
           initVertical={window[canvasOrientationKey]}
           onChange={(v) => {
-            setCookie(canvasOrientationKey, v);
+            setCookie(canvasOrientationKey, v ? '1' : '0');
           }}
         >
           <Modal />

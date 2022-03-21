@@ -7,7 +7,7 @@ export const LayoutContext = createContext();
 export const LayoutProvider = ({ children, initVertical, onChange }) => {
   const [isVertical, setVertical] = useState(initVertical);
   useEffect(() => {
-    onChange(isVertical ? '1' : '0');
+    onChange(isVertical); // trigger client-only side effect
   }, [isVertical]);
 
   return (
