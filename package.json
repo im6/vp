@@ -43,7 +43,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "7.26.1",
-    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "jest": "^27.2.5",
     "js-cookie": "^3.0.1",
     "mini-css-extract-plugin": "^2.4.2",
@@ -120,6 +120,8 @@
     "rules": {
       "prettier/prettier": 2,
       "import/no-extraneous-dependencies": 0,
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
       "import/no-unresolved": [
         2,
         {
