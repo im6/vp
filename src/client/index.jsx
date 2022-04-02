@@ -2,7 +2,7 @@ import 'core-js';
 import 'regenerator-runtime/runtime';
 import { langSelectionKey, canvasOrientationKey } from '../constant';
 import { setCookie, customEventPolyFill } from './misc/util';
-import { hydrate } from 'react-dom';
+import { hydrateRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import store from './config/store';
 import Routes from './routes';
@@ -12,7 +12,8 @@ import Modal from './modules/modal';
 import { LayoutProvider } from '../contexts/Layout/index';
 import { LanguageProvider } from '../contexts/Language/index';
 
-hydrate(
+hydrateRoot(
+  document.getElementById('app'),
   <BrowserRouter>
     <Provider store={store}>
       <LanguageProvider
@@ -32,13 +33,9 @@ hydrate(
         </LayoutProvider>
       </LanguageProvider>
     </Provider>
-  </BrowserRouter>,
-  document.getElementById('app'),
-  () => {
-    store.dispatch({ type: 'color/get' });
-    store.dispatch({ type: 'user/auth' });
-  }
+  </BrowserRouter>
 );
+
 if (process.env.NODE_ENV !== 'development') {
   customEventPolyFill();
   window.dispatchEvent(new CustomEvent('_COLORPK_SCRIPT_READY'));
