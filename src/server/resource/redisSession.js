@@ -1,4 +1,4 @@
-import redis from 'redis';
+import { createClient } from 'redis';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
 
@@ -16,28 +16,28 @@ if (!host || !port || !password) {
 }
 
 const RedisStore = connectRedis(session);
-const redisClient = redis.createClient({
-  host,
-  port,
-  password,
-  prefix: 'vp:',
+const client = createClient({
+  url: `redis://:${password}@${host}:${port}`,
+  legacyMode: true,
 });
 
-redisClient.on('error', (error) => {
+client.on('error', (error) => {
   console.error(error); // eslint-disable-line no-console
   process.exit(1);
 });
 
-redisClient.on('reconnecting', (_, attmpt) => {
+client.on('reconnecting', (_, attmpt) => {
   console.log(`reconnecting, attempt: ${attmpt}`); // eslint-disable-line no-console
 });
 
-redisClient.on('connect', () => {
+client.on('connect', () => {
   console.log('Redis connect successfully.'); // eslint-disable-line no-console
 });
 
+client.connect().catch(console.error);
+
 export default session({
-  store: new RedisStore({ client: redisClient }),
+  store: new RedisStore({ client }),
   secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
