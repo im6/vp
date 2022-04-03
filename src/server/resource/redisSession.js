@@ -34,7 +34,7 @@ client.on('connect', () => {
   console.log('Redis connect successfully.'); // eslint-disable-line no-console
 });
 
-client.connect().catch(console.error);
+client.connect();
 
 export default session({
   store: new RedisStore({ client }),
