@@ -55,7 +55,7 @@ const Header = ({ url, detail, likeNum, facebookUrl, languages, onLogout }) => {
           <img
             src={imagUrl}
             className={`${userImgUrl || isVertical ? '' : style.rotate}`}
-            alt="colorpk icon"
+            alt="icon"
           />
         </div>
         <ToggleButton onClick={() => toggleMenu((v) => !v)} />

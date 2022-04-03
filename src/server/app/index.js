@@ -26,6 +26,7 @@ if (process.env.NODE_ENV !== 'development') {
 app.use(
   helmet({
     contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
   })
 );
 app.use(bpJson());
