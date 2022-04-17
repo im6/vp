@@ -1,17 +1,14 @@
 import { connect } from 'react-redux';
 import { createAction } from 'redux-actions';
-import { withRouter } from 'react-router-dom';
 import Header from './components/Header';
 import { languages } from '../../translation';
 
-const mapStateToProps = ({ user, color }, { location }) => {
-  const { pathname: url } = location;
+const mapStateToProps = ({ user, color }) => {
   const detail = user.get('detail');
   const facebookUrl = user.get('facebookUrl');
   const likeNum = color.get('liked').size;
 
   return {
-    url,
     detail,
     likeNum,
     languages,
@@ -29,4 +26,4 @@ export const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

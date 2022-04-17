@@ -1,7 +1,7 @@
 import { v1 as uuidV1 } from 'uuid';
 import { fromJS } from 'immutable';
 import { Provider } from 'react-redux';
-import { StaticRouter } from 'react-router';
+import { StaticRouter } from 'react-router-dom/server';
 import { createStore, combineReducers } from 'redux';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 

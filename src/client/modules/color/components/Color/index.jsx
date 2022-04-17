@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import style from './style.sass';
 import SpinLoader from 'components/SpinLoader';
@@ -14,14 +14,14 @@ const Color = ({
   list,
   liked,
   colorDef,
-  selectedId,
   loading,
   onLike,
   onShare,
   onCopy,
   onDownload,
 }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
+  const { id: selectedId } = useParams();
   const [isVertical] = useLayoutContext();
   const [language] = useTranslationContext();
   useEffect(() => {
@@ -34,7 +34,7 @@ const Color = ({
     };
   }, [selectedId]);
   const onCanvasClick = useCallback((id) => {
-    history.push(`/color/${id}`);
+    navigate(`/color/${id}`);
   }, []);
   const onLikeLocal = useCallback((a) => {
     onLike(a, isAuth);
@@ -97,7 +97,6 @@ const Color = ({
 
 Color.propTypes = {
   isAuth: PropTypes.bool,
-  selectedId: PropTypes.string,
   loading: PropTypes.bool,
   liked: PropTypes.object.isRequired,
   list: PropTypes.array.isRequired,

@@ -2,35 +2,16 @@ import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 import Color from './components/Color';
 
-const storeMap = {
-  '/': 'colorIdAllByDate',
-  '/latest': 'colorIdAllByDate',
-  '/popular': 'colorIdAllByStar',
-  '/like': false, // convert by dict
-  '/portfolio': 'colorIdByMyOwn',
-};
-
-const mapStateToProps = (
-  { color, user },
-  {
-    location: { pathname },
-    match: {
-      params: { id: selectedId },
-    },
-  }
-) => {
+const mapStateToProps = ({ color, user }, { source }) => {
   const isAuth = Boolean(user.get('detail'));
-
   const colorDef = color.get('colorDef');
   const liked = color.get('liked');
 
   const list =
-    pathname === '/like'
-      ? liked.keySeq().toArray()
-      : color.get(storeMap[pathname] || 'colorIdAllByDate').toJS();
+    source === 'saved' ? liked.keySeq().toArray() : color.get(source).toJS();
 
   const loading =
-    (isAuth && pathname === '/like') || pathname === '/portfolio'
+    (isAuth && source === 'saved') || source === 'colorIdByMyOwn'
       ? color.get('loading') || user.get('loading')
       : color.get('loading');
 
@@ -40,7 +21,6 @@ const mapStateToProps = (
     list,
     colorDef,
     liked,
-    selectedId,
   };
 };
 
