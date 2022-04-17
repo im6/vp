@@ -1,6 +1,7 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { ChromePicker } from 'react-color';
+import { useNavigate, useLocation } from 'react-router-dom';
 import EditCanvas from '../EditCanvas';
 import style from './style.sass';
 import useTranslationContext from '../../../../../hooks/useTranslationContext';
@@ -8,8 +9,13 @@ import { isValidColorStr } from '../../../../../util';
 
 const DEFAULTVALUE = '#81EEFF';
 
-const NewColor = ({ defaultColors, onAdd, onColorInvalid, onRedirect }) => {
+const NewColor = ({ onAdd, onColorInvalid }) => {
   const [language] = useTranslationContext();
+  const navigate = useNavigate();
+  const { search } = useLocation();
+  const searchLower = search.toLowerCase();
+  const defaultColorsPotential = searchLower.match(/[a-f0-9]{24}/);
+  const defaultColors = defaultColorsPotential && defaultColorsPotential[0];
 
   const [editColor, setEditColor] = useState(DEFAULTVALUE);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -76,7 +82,7 @@ const NewColor = ({ defaultColors, onAdd, onColorInvalid, onRedirect }) => {
         <button
           className="button is-info"
           onClick={() => {
-            onRedirect('/');
+            navigate('/');
           }}
         >
           {language.return}
@@ -89,8 +95,6 @@ const NewColor = ({ defaultColors, onAdd, onColorInvalid, onRedirect }) => {
 NewColor.propTypes = {
   onAdd: PropTypes.func.isRequired,
   onColorInvalid: PropTypes.func.isRequired,
-  onRedirect: PropTypes.func.isRequired,
-  defaultColors: PropTypes.string,
 };
 
 export default NewColor;

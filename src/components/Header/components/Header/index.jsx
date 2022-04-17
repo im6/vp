@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import style from './style.sass';
 import TranslationIcon from '../TranslationIcon';
 import LanguageDropdown from '../LanguageDropdown';
@@ -11,7 +11,9 @@ import useTranslationContext from '../../../../hooks/useTranslationContext';
 
 const { selected } = style;
 
-const Header = ({ url, detail, likeNum, facebookUrl, languages, onLogout }) => {
+const Header = ({ detail, likeNum, facebookUrl, languages, onLogout }) => {
+  const location = useLocation();
+  const url = location.pathname;
   const [isMenuOpen, toggleMenu] = useState(false);
   const [isVertical, setVertical] = useLayoutContext();
   const [language, setLanguage] = useTranslationContext();
@@ -187,7 +189,6 @@ const Header = ({ url, detail, likeNum, facebookUrl, languages, onLogout }) => {
 };
 
 Header.propTypes = {
-  url: PropTypes.string,
   detail: PropTypes.object,
   facebookUrl: PropTypes.string,
   likeNum: PropTypes.number,
