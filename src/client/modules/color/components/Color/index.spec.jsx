@@ -21,7 +21,6 @@ describe('render properly', () => {
         list={[]}
         liked={liked}
         colorDef={colorDef}
-        selectedId={null}
         loading
         vertical
         onLike={cb}
@@ -38,7 +37,6 @@ describe('render properly', () => {
         list={[]}
         liked={liked}
         colorDef={colorDef}
-        selectedId={null}
         vertical
         onLike={cb}
         onCopy={cb}
@@ -48,42 +46,6 @@ describe('render properly', () => {
     );
 
     expect(getByText(translation.en.noColorsToShow)).toBeTruthy();
-  });
-  test('render undefined color id', () => {
-    const undefinedId = '798';
-    const { getByText } = render(
-      <Color
-        list={[]}
-        liked={liked}
-        colorDef={colorDef}
-        selectedId={undefinedId}
-        vertical
-        onLike={cb}
-        onCopy={cb}
-        onShare={cb}
-        onDownload={cb}
-      />
-    );
-
-    expect(
-      getByText(`${translation.en.undefinedColorId} (${undefinedId})`)
-    ).toBeTruthy();
-  });
-  test('render with data', () => {
-    const { getByText } = render(
-      <Color
-        list={[...ids, '100']}
-        liked={liked}
-        colorDef={colorDef}
-        selectedId={ids[0]}
-        vertical
-        onLike={cb}
-        onCopy={cb}
-        onShare={cb}
-        onDownload={cb}
-      />
-    );
-    expect(getByText('Download')).toBeTruthy();
   });
   test('click to enter', () => {
     const { container } = render(

@@ -26,11 +26,11 @@ const Color = ({
   const [language] = useTranslationContext();
   useEffect(() => {
     /* istanbul ignore next */
-    const timeoutId = setTimeout(() => {
+    const ref = setTimeout(() => {
       window.scrollTo(0, 0);
     }, 50);
     return () => {
-      clearTimeout(timeoutId);
+      clearTimeout(ref);
     };
   }, [selectedId]);
   const onCanvasClick = useCallback((id) => {
