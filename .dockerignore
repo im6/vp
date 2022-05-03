@@ -3,6 +3,7 @@ node_modules
 .idea
 .vscode
 .nvmrc
+.env
 npm-debug.log
 package-lock.json
 local
