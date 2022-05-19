@@ -1,5 +1,6 @@
 import 'core-js';
 import 'regenerator-runtime/runtime';
+import { StrictMode } from 'react';
 import { langSelectionKey, canvasOrientationKey } from '../constant';
 import { setCookie, customEventPolyFill } from './misc/util';
 import { hydrateRoot } from 'react-dom/client';
@@ -14,26 +15,28 @@ import { LanguageProvider } from '../contexts/Language/index';
 
 hydrateRoot(
   document.getElementById('app'),
-  <BrowserRouter>
-    <Provider store={store}>
-      <LanguageProvider
-        initLang={window[langSelectionKey]}
-        onChange={(l) => {
-          setCookie(langSelectionKey, l);
-        }}
-      >
-        <LayoutProvider
-          initVertical={window[canvasOrientationKey]}
-          onChange={(v) => {
-            setCookie(canvasOrientationKey, v ? '1' : '0');
+  <StrictMode>
+    <BrowserRouter>
+      <Provider store={store}>
+        <LanguageProvider
+          initLang={window[langSelectionKey]}
+          onChange={(l) => {
+            setCookie(langSelectionKey, l);
           }}
         >
-          <Modal />
-          <Routes />
-        </LayoutProvider>
-      </LanguageProvider>
-    </Provider>
-  </BrowserRouter>
+          <LayoutProvider
+            initVertical={window[canvasOrientationKey]}
+            onChange={(v) => {
+              setCookie(canvasOrientationKey, v ? '1' : '0');
+            }}
+          >
+            <Modal />
+            <Routes />
+          </LayoutProvider>
+        </LanguageProvider>
+      </Provider>
+    </BrowserRouter>
+  </StrictMode>
 );
 
 if (process.env.NODE_ENV !== 'development') {
