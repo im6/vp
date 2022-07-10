@@ -1,20 +1,13 @@
 /* eslint no-console: 0 */
 import get from 'lodash.get';
 import { v1 as uuidV1 } from 'uuid';
-import { FB_REDIRECT_URL, FB_APP_SECRET, FB_APP_KEY } from '../constant.server';
-import { accessToken, createFacebookLink } from '../resource/oauth';
+import {
+  fetchFacebookToken,
+  fetchWeiboToken,
+  fetchGithubToken,
+  createLoginLink,
+} from '../resource/oauth';
 import { isAuth as isAuthHelper, isAdmin as isAdminHelper } from '../helper';
-
-const getOauthQsObj = (_, qs) => {
-  const { code } = qs;
-  const result = {
-    client_id: FB_APP_KEY,
-    client_secret: FB_APP_SECRET,
-    code,
-    redirect_uri: FB_REDIRECT_URL,
-  };
-  return result;
-};
 
 export const oauthLogin = async (req, res) => {
   const code = get(req, 'query.code', null);
@@ -24,13 +17,22 @@ export const oauthLogin = async (req, res) => {
 
   if (code && state && state === oauthState) {
     console.log(`redirected by ${oauth} auth...`);
-    const qsObj = getOauthQsObj(oauth, req.query);
-    const { data } = await accessToken(qsObj);
-    if (data.access_token) {
+    let tokenInfo = null;
+    if (oauth === 'fb') {
+      tokenInfo = await fetchFacebookToken(code);
+    } else if (oauth === 'wb') {
+      tokenInfo = await fetchWeiboToken(code);
+    } else if (oauth === 'gh') {
+      tokenInfo = await fetchGithubToken(code);
+    } else {
+      throw new Error();
+    }
+
+    if (tokenInfo) {
       req.session.app = {
         oauth,
         isAuth: true,
-        tokenInfo: data,
+        tokenInfo,
       };
     } else {
       req.session.app = {
@@ -59,7 +61,9 @@ export const oauthLogout = (req, res) => {
   };
 
   res.json({
-    url: createFacebookLink(oauthState),
+    weiboUrl: createLoginLink('wb', oauthState),
+    githubUrl: createLoginLink('gh', oauthState),
+    facebookUrl: createLoginLink('fb', oauthState),
   });
 };
 

@@ -39,6 +39,9 @@ hydrateRoot(
   </StrictMode>
 );
 
+store.dispatch({ type: 'color/get' });
+store.dispatch({ type: 'user/auth' });
+
 if (process.env.NODE_ENV !== 'development') {
   customEventPolyFill();
   window.dispatchEvent(new CustomEvent('_COLORPK_SCRIPT_READY'));

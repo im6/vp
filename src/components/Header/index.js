@@ -5,6 +5,8 @@ import { languages } from '../../translation';
 
 const mapStateToProps = ({ user, color }) => {
   const detail = user.get('detail');
+  const weiboUrl = user.get('weiboUrl');
+  const githubUrl = user.get('githubUrl');
   const facebookUrl = user.get('facebookUrl');
   const likeNum = color.get('liked').size;
 
@@ -12,6 +14,8 @@ const mapStateToProps = ({ user, color }) => {
     detail,
     likeNum,
     languages,
+    weiboUrl,
+    githubUrl,
     facebookUrl,
   };
 };

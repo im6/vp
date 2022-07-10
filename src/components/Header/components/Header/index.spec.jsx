@@ -13,6 +13,8 @@ describe('render properly', () => {
       <Header
         url="/popular"
         detail={null}
+        weiboUrl="//www.weibo.com"
+        githubUrl="//www.github.com"
         facebookUrl="//www.facebook.com"
         likeNum={likeNum}
         languages={[]}
@@ -23,6 +25,8 @@ describe('render properly', () => {
       <Header
         url="/like"
         detail={null}
+        weiboUrl="//www.weibo.com"
+        githubUrl="//www.github.com"
         facebookUrl="//www.facebook.com"
         likeNum={likeNum}
         languages={[]}
@@ -48,6 +52,8 @@ describe('render properly', () => {
       <Header
         url="/like"
         detail={fromJS(userInfo)}
+        weiboUrl="//www.weibo.com"
+        githubUrl="//www.github.com"
         facebookUrl="//www.facebook.com"
         likeNum={2}
         languages={[]}
@@ -85,6 +91,8 @@ describe('render properly', () => {
       <Header
         url="/like"
         detail={fromJS(userInfo)}
+        weiboUrl="//www.weibo.com"
+        githubUrl="//www.github.com"
         facebookUrl="//www.facebook.com"
         likeNum={2}
         languages={[]}

@@ -11,7 +11,15 @@ import useTranslationContext from '../../../../hooks/useTranslationContext';
 
 const { selected } = style;
 
-const Header = ({ detail, likeNum, facebookUrl, languages, onLogout }) => {
+const Header = ({
+  detail,
+  likeNum,
+  weiboUrl,
+  githubUrl,
+  facebookUrl,
+  languages,
+  onLogout,
+}) => {
   const location = useLocation();
   const url = location.pathname;
   const [isMenuOpen, toggleMenu] = useState(false);
@@ -169,11 +177,14 @@ const Header = ({ detail, likeNum, facebookUrl, languages, onLogout }) => {
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link">{language.navLogin}</a>
               <div className="navbar-dropdown">
-                <a className="navbar-item" href={facebookUrl}>
+                <a className="navbar-item" href={weiboUrl}>
                   微博
                 </a>
-                <a className="navbar-item" href={facebookUrl}>
+                <a className="navbar-item" href={githubUrl}>
                   GitHub
+                </a>
+                <a className="navbar-item" href={facebookUrl}>
+                  FaceBook
                 </a>
               </div>
             </div>
@@ -197,6 +208,8 @@ const Header = ({ detail, likeNum, facebookUrl, languages, onLogout }) => {
 
 Header.propTypes = {
   detail: PropTypes.object,
+  weiboUrl: PropTypes.string,
+  githubUrl: PropTypes.string,
   facebookUrl: PropTypes.string,
   likeNum: PropTypes.number,
   languages: PropTypes.array.isRequired,

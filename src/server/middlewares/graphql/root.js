@@ -2,26 +2,33 @@ import get from 'lodash.get';
 import { GraphQLError } from 'graphql';
 
 import sqlExecOne from '../../resource/mysqlConnection';
-import { showUser } from '../../resource/oauth';
-import { isAuth, isAdmin, getToken } from '../../helper';
+import {
+  fetchFacebookProfile,
+  fetchWeiboProfile,
+  fetchGithubProfile,
+} from '../../resource/oauth';
+import { isAuth, isAdmin, getTokenInfo } from '../../helper';
 import { isValidColorStr } from '../../../util';
 
 const root = {
   async user(_, req) {
-    const accessToken = getToken(req);
-    if (isAuth(req, true) && accessToken) {
-      // has valid auth info, will verify from oauth
-      const qsObj = {
-        access_token: accessToken,
-        fields: 'id,name,picture',
-      };
-
+    const tokenInfo = getTokenInfo(req);
+    if (isAuth(req, true) && tokenInfo) {
+      const oauthType = req.session.app.oauth;
       try {
-        const { data: oauthData } = await showUser(qsObj);
-        const { name, id: oauthId } = oauthData;
+        let oauthData = null;
+        if (oauthType === 'fb') {
+          oauthData = await fetchFacebookProfile(tokenInfo);
+        } else if (oauthType === 'wb') {
+          oauthData = await fetchWeiboProfile(tokenInfo);
+        } else if (oauthType === 'gh') {
+          oauthData = await fetchGithubProfile(tokenInfo);
+        }
+
+        const { name, oauthId } = oauthData;
         const userData = await sqlExecOne(
-          `SELECT * FROM colorpk_user WHERE oauth = 'fb' AND oauth_id = ?`,
-          [oauthId]
+          `SELECT * FROM colorpk_user WHERE oauth = ? AND oauth_id = ?`,
+          [oauthType, oauthId]
         );
         if (userData.length === 1) {
           // existing user.
@@ -50,7 +57,7 @@ const root = {
           return {
             name,
             isAdmin: isAdminInt || false,
-            img: get(oauthData, 'picture.data.url', null),
+            img: oauthData.img || null,
             likes: likeData.map((v) => v.color_id),
             owns: ownData.map((v) => v.id),
           };
@@ -58,8 +65,8 @@ const root = {
 
         // user first time login, save it.
         const { insertId } = await sqlExecOne(
-          `INSERT INTO colorpk_user (oauth, name, oauth_id, last_login) VALUES ('fb', ?, ?, NOW())`,
-          [name, oauthId]
+          `INSERT INTO colorpk_user (oauth, name, oauth_id, last_login) VALUES (?, ?, ?, NOW())`,
+          [oauthType, name, oauthId]
         );
         req.session.app.dbInfo = {
           id: insertId,
