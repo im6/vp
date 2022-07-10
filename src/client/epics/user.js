@@ -83,9 +83,9 @@ export default [
             payload: likeManager.initLikes || [],
           }),
           ajax.getJSON('/auth/logout').pipe(
-            map(({ url }) => ({
+            map((res) => ({
               type: 'user/logoff/success',
-              payload: url,
+              payload: res,
             }))
           )
         )

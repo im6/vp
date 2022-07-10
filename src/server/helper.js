@@ -6,13 +6,7 @@ export const isAuth = (req, ignoreUserId) =>
       (ignoreUserId || get(req, 'session.app.dbInfo.id', null))
   );
 
-export const getToken = (req) => {
-  const token = get(req, 'session.app.tokenInfo.access_token', null);
-  if (typeof token === 'string' && token.length > 0) {
-    return token;
-  }
-  return null;
-};
+export const getTokenInfo = (req) => get(req, 'session.app.tokenInfo', null);
 
 export const isAdmin = (req) =>
   isAuth(req) && get(req, 'session.app.dbInfo.isAdmin', false);

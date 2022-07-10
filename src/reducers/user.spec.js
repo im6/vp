@@ -51,16 +51,19 @@ describe('test user reducer behavior', () => {
     );
   });
   test('action of user/logoff/success', () => {
-    const fbUrl = 'some fb url';
+    const facebookUrl = 'some fb url';
+    const weiboUrl = 'some wb url';
+    const githubUrl = 'some gh url';
+    const newUrlMap = {
+      facebookUrl,
+      weiboUrl,
+      githubUrl,
+    };
     expect(
       userReducer(new Map({ facebookUrl: null }), {
         type: 'user/logoff/success',
-        payload: fbUrl,
+        payload: newUrlMap,
       })
-    ).toEqual(
-      Map({
-        facebookUrl: fbUrl,
-      })
-    );
+    ).toEqual(Map(newUrlMap));
   });
 });

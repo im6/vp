@@ -18,7 +18,7 @@ import { LanguageProvider } from '../../contexts/Language/index';
 import moduleReducers from '../../reducers';
 import { isAuth, isAdmin } from '../helper';
 import { languageCodes } from '../../translation';
-import { createFacebookLink } from '../resource/oauth';
+import { createLoginLink } from '../resource/oauth';
 
 export default (req, res) => {
   const authOk = isAuth(req, true);
@@ -47,7 +47,9 @@ export default (req, res) => {
     userDetail = {
       loading: true,
       detail: null,
-      facebookUrl: createFacebookLink(oauthState),
+      weiboUrl: createLoginLink('wb', oauthState),
+      githubUrl: createLoginLink('gh', oauthState),
+      facebookUrl: createLoginLink('fb', oauthState),
     };
   }
 

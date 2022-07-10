@@ -36,9 +36,7 @@ const user = handleActions(
     },
 
     ['user/logoff/success'](state, { payload }) {
-      return state.merge({
-        facebookUrl: payload,
-      });
+      return state.merge(payload);
     },
   },
   initialState
