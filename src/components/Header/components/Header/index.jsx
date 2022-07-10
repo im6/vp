@@ -152,36 +152,43 @@ const Header = ({ detail, likeNum, facebookUrl, languages, onLogout }) => {
         </div>
 
         <div className="navbar-end">
-          <div className="navbar-item">
-            <div className="buttons">
-              {!selectCreate && (
-                <Link
-                  to="/new"
-                  className="button is-primary"
-                  onClick={onClickToScroll}
-                >
-                  {language.newColor}
-                </Link>
-              )}
-              &nbsp;&nbsp;
-              {isAuth ? (
-                <Link
-                  className="button is-danger"
-                  to="/"
-                  onClick={() => {
-                    onLogout();
-                    onCloseNav();
-                  }}
-                >
-                  {language.logOut}
-                </Link>
-              ) : (
-                <a className="button is-info" href={facebookUrl}>
-                  {language.fbLogin}
-                </a>
-              )}
+          {isAuth ? (
+            <div className="navbar-item">
+              <Link
+                className="button is-danger"
+                to="/"
+                onClick={() => {
+                  onLogout();
+                  onCloseNav();
+                }}
+              >
+                {language.logOut}
+              </Link>
             </div>
-          </div>
+          ) : (
+            <div className="navbar-item has-dropdown is-hoverable">
+              <a className="navbar-link">{language.navLogin}</a>
+              <div className="navbar-dropdown">
+                <a className="navbar-item" href={facebookUrl}>
+                  微博
+                </a>
+                <a className="navbar-item" href={facebookUrl}>
+                  GitHub
+                </a>
+              </div>
+            </div>
+          )}
+          {!selectCreate && (
+            <div className="navbar-item">
+              <Link
+                to="/new"
+                className="button is-primary"
+                onClick={onClickToScroll}
+              >
+                {language.newColor}
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>

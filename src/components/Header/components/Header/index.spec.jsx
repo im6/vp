@@ -32,7 +32,7 @@ describe('render properly', () => {
     fireEvent.click(getByLabelText('nav menu'));
     fireEvent.click(getByTitle('click to rotate'));
     fireEvent.click(getByText(`Like (${likeNum})`));
-    expect(getByText('Facebook Login')).toBeTruthy();
+    expect(getByText('Login')).toBeTruthy();
   });
 
   test('render Header with login Status', () => {

@@ -2,7 +2,7 @@ import { translation, languages } from '.';
 
 describe('language list', () => {
   test('total language provided', () => {
-    expect(languages).toHaveLength(6);
+    expect(languages).toHaveLength(5);
   });
 });
 
