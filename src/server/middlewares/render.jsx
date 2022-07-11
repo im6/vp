@@ -49,7 +49,10 @@ export default (req, res) => {
       detail: null,
       weiboUrl: createLoginLink('wb', oauthState),
       githubUrl: createLoginLink('gh', oauthState),
-      facebookUrl: createLoginLink('fb', oauthState),
+      facebookUrl:
+        process.env.NODE_ENV === 'development'
+          ? createLoginLink('fb', oauthState)
+          : null,
     };
   }
 

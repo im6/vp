@@ -183,9 +183,11 @@ const Header = ({
                 <a className="navbar-item" href={githubUrl}>
                   GitHub
                 </a>
-                <a className="navbar-item" href={facebookUrl}>
-                  FaceBook
-                </a>
+                {facebookUrl && (
+                  <a className="navbar-item" href={facebookUrl}>
+                    FaceBook
+                  </a>
+                )}
               </div>
             </div>
           )}
