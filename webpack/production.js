@@ -139,6 +139,13 @@ const server = Object.assign(serverBaseConfig, prodBase, {
       ],
     }),
   ],
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+      }),
+    ],
+  },
 });
 
 module.exports = [client, server];
