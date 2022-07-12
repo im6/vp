@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { createAction } from 'redux-actions';
+import { createAction } from '@reduxjs/toolkit';
 import NewColor from './components/NewColor';
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { createAction } from 'redux-actions';
+import { createAction } from '@reduxjs/toolkit';
 import Header from './components/Header';
 import { languages } from '../../translation';
 
