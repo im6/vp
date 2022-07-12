@@ -37,5 +37,6 @@ const admin = handleActions(
   },
   initialState
 );
+console.log(admin);
 
 export default admin;
