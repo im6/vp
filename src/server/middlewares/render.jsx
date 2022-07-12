@@ -2,7 +2,7 @@ import { v1 as uuidV1 } from 'uuid';
 import { fromJS } from 'immutable';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom/server';
-import { createStore, combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 
 import { PUBLIC_PATH } from '../constant.server';
@@ -56,16 +56,19 @@ export default (req, res) => {
     };
   }
 
-  const store = createStore(combineReducers(moduleReducers), {
-    user: fromJS(userDetail),
-    color: fromJS({
-      loading: true,
-      colorDef: {},
-      liked: {},
-      colorIdAllByDate: [],
-      colorIdAllByStar: [],
-      colorIdByMyOwn: [],
-    }),
+  const store = configureStore({
+    reducer: moduleReducers,
+    preloadedState: {
+      user: fromJS(userDetail),
+      color: fromJS({
+        loading: true,
+        colorDef: {},
+        liked: {},
+        colorIdAllByDate: [],
+        colorIdAllByStar: [],
+        colorIdByMyOwn: [],
+      }),
+    },
   });
 
   const app = (
