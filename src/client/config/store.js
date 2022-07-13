@@ -1,6 +1,11 @@
 /* eslint global-require:0, no-underscore-dangle: 0 */
 import { fromJS } from 'immutable';
-import { configureStore } from '@reduxjs/toolkit';
+import {
+  createStore,
+  applyMiddleware,
+  compose as reduxCompose,
+  combineReducers,
+} from 'redux';
 
 import { createEpicMiddleware } from 'redux-observable';
 import rootEpic from '../epics';
@@ -8,24 +13,25 @@ import moduleReducers from '../../reducers';
 import { reduxName } from '../../constant';
 
 const epicMiddleware = createEpicMiddleware();
-const middleware = [epicMiddleware];
+const middlewares = [epicMiddleware];
+let compose = reduxCompose;
 
 if (process.env.NODE_ENV === 'development') {
   const logger = require('redux-logger').default;
-  middleware.push(logger);
+  middlewares.push(logger);
+  compose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || reduxCompose;
 }
 
+const enhancers = applyMiddleware(...middlewares);
 const initState = window[reduxName];
-const preloadedState = {
-  user: fromJS(initState.user),
-  color: fromJS(initState.color),
-};
-const store = configureStore({
-  devTools: process.env.NODE_ENV === 'development',
-  reducer: moduleReducers,
-  middleware,
-  preloadedState,
-});
+const store = createStore(
+  combineReducers(moduleReducers),
+  {
+    user: fromJS(initState.user),
+    color: fromJS(initState.color),
+  },
+  compose(enhancers)
+);
 
 epicMiddleware.run(rootEpic);
 

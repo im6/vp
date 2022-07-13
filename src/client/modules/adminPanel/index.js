@@ -1,4 +1,4 @@
-import { createAction } from '@reduxjs/toolkit';
+import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 import AdminPanel from './AdminPanel';
 
