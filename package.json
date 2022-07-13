@@ -73,6 +73,7 @@
     "express-session": "^1.17.3",
     "graphql": "^16.5.0",
     "helmet": "^5.1.0",
+    "immer": "^9.0.15",
     "immutable": "^4.1.0",
     "lodash.get": "^4.4.2",
     "mysql": "^2.18.1",
@@ -128,6 +129,18 @@
         {
           "ignore": [
             "^components/"
+          ]
+        }
+      ],
+      "no-param-reassign": [
+        "error",
+        {
+          "props": true,
+          "ignorePropertyModificationsFor": [
+            "acc",
+            "req",
+            "res",
+            "draft"
           ]
         }
       ]

@@ -1,5 +1,4 @@
 import { render, fireEvent } from 'test-utils';
-import { fromJS } from 'immutable';
 import Header from '.';
 import { imgCdnUrl } from '../../../../constant';
 
@@ -51,7 +50,7 @@ describe('render properly', () => {
     const { getByText, rerender } = render(
       <Header
         url="/like"
-        detail={fromJS(userInfo)}
+        detail={userInfo}
         weiboUrl="//www.weibo.com"
         githubUrl="//www.github.com"
         facebookUrl="//www.facebook.com"
@@ -64,7 +63,7 @@ describe('render properly', () => {
     rerender(
       <Header
         url="/"
-        detail={fromJS(userInfo)}
+        detail={userInfo}
         facebookUrl="//www.facebook.com"
         likeNum={2}
         languages={[]}
@@ -90,7 +89,7 @@ describe('render properly', () => {
     const { getByRole } = render(
       <Header
         url="/like"
-        detail={fromJS(userInfo)}
+        detail={userInfo}
         weiboUrl="//www.weibo.com"
         githubUrl="//www.github.com"
         facebookUrl="//www.facebook.com"

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Color from './components/Color';
 
 const mapStateToProps = ({ color, user }, { source }) => {
-  const isAuth = Boolean(user.get('detail'));
+  const isAuth = Boolean(user.detail);
   const colorDef = color.get('colorDef');
   const liked = color.get('liked');
 
@@ -12,7 +12,7 @@ const mapStateToProps = ({ color, user }, { source }) => {
 
   const loading =
     (isAuth && source === 'saved') || source === 'colorIdByMyOwn'
-      ? color.get('loading') || user.get('loading')
+      ? color.get('loading') || user.loading
       : color.get('loading');
 
   return {

@@ -4,10 +4,7 @@ import Header from './components/Header';
 import { languages } from '../../translation';
 
 const mapStateToProps = ({ user, color }) => {
-  const detail = user.get('detail');
-  const weiboUrl = user.get('weiboUrl');
-  const githubUrl = user.get('githubUrl');
-  const facebookUrl = user.get('facebookUrl');
+  const { detail, weiboUrl, githubUrl, facebookUrl } = user;
   const likeNum = color.get('liked').size;
 
   return {

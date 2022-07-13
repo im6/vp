@@ -1,42 +1,48 @@
 /* eslint-disable no-useless-computed-key, object-shorthand  */
 import { handleActions } from 'redux-actions';
-import { fromJS } from 'immutable';
+import produce from 'immer';
 
-const initialState = fromJS({
+const initialState = {
   detail: null,
+  weiboUrl: null,
+  githubUrl: null,
   facebookUrl: null,
   loading: false,
-});
+};
 
 const user = handleActions(
   {
     ['user/auth'](state) {
-      return state.merge({
-        loading: true,
+      return produce(state, (draft) => {
+        draft.loading = true;
       });
     },
     ['user/auth/success'](state, { payload: detail }) {
-      return state.merge({
-        detail: fromJS(detail),
-        loading: false,
+      return produce(state, (draft) => {
+        draft.loading = false;
+        draft.detail = detail;
       });
     },
 
     ['user/auth/fail'](state) {
-      return state.merge({
-        detail: null,
-        loading: false,
+      return produce(state, (draft) => {
+        draft.loading = false;
+        draft.detail = null;
       });
     },
 
     ['user/logoff'](state) {
-      return state.merge({
-        detail: null,
+      return produce(state, (draft) => {
+        draft.detail = null;
       });
     },
 
     ['user/logoff/success'](state, { payload }) {
-      return state.merge(payload);
+      return produce(state, (draft) => {
+        Object.assign(draft, payload, {
+          detail: null,
+        });
+      });
     },
   },
   initialState

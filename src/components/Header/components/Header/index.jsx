@@ -27,8 +27,8 @@ const Header = ({
   const [language, setLanguage] = useTranslationContext();
 
   const isAuth = Boolean(detail);
-  const isAdmin = isAuth && detail.get('isAdmin');
-  const userImgUrl = isAuth && detail.get('img');
+  const isAdmin = isAuth && detail.isAdmin;
+  const userImgUrl = isAuth && detail.img;
   const imagUrl = userImgUrl || `${imgCdnUrl}/icon.png`;
 
   const selectPopular = url === '/popular';
@@ -76,7 +76,7 @@ const Header = ({
           {isAuth ? (
             <div className="navbar-item has-dropdown is-hoverable">
               <a className={`navbar-link ${selectProfile ? selected : ''}`}>
-                {detail.get('name')}
+                {detail.name}
               </a>
 
               <div className="navbar-dropdown">
