@@ -2,10 +2,7 @@ import { createAction } from 'redux-actions';
 import { connect } from 'react-redux';
 import AdminPanel from './AdminPanel';
 
-const mapStateToProps = ({ admin }) => ({
-  list: admin.get('list'),
-  loading: admin.get('loading'),
-});
+const mapStateToProps = ({ admin }) => admin;
 
 const mapDispatchToProps = (dispatch) => ({
   onInitList() {

@@ -1,53 +1,58 @@
-import { fromJS } from 'immutable';
 import adminReducer from './admin';
 
 describe('test user reducer behavior', () => {
   test('action of admin/getList', () => {
-    const newState = adminReducer(fromJS({ loading: false }), {
-      type: 'admin/getList',
-    });
-    expect(newState.get('loading')).toBeTruthy();
+    const newState = adminReducer(
+      { loading: false },
+      {
+        type: 'admin/getList',
+      }
+    );
+    expect(newState.loading).toBeTruthy();
   });
   test('action of admin/getList/success', () => {
     const list = [{}, {}];
     expect(
-      adminReducer(fromJS({ loading: {}, list: null }), {
-        type: 'admin/getList/success',
-        payload: list,
-      }).equals(
-        fromJS({
-          loading: false,
-          list,
-        })
+      adminReducer(
+        { loading: true, list: null },
+        {
+          type: 'admin/getList/success',
+          payload: list,
+        }
       )
-    ).toBeTruthy();
+    ).toEqual({
+      loading: false,
+      list,
+    });
   });
   test('action of admin/getList/fail', () => {
     const list = [{}, {}];
     expect(
-      adminReducer(fromJS({ loading: {}, list: null }), {
-        type: 'admin/getList/fail',
-        payload: list,
-      }).equals(
-        fromJS({
-          loading: false,
-          list: [],
-        })
+      adminReducer(
+        { loading: {}, list: null },
+        {
+          type: 'admin/getList/fail',
+          payload: list,
+        }
       )
-    ).toBeTruthy();
+    ).toEqual({
+      loading: false,
+      list: [],
+    });
   });
   test('action of admin/decideColor', () => {
     const list = [{ id: 1 }, { id: 2 }];
     const selectedId = list[0].id;
     expect(
-      adminReducer(fromJS({ list: fromJS(list) }), {
-        type: 'admin/decideColor',
-        payload: { id: selectedId },
-      }).equals(
-        fromJS({
-          list: list.filter((v) => v.id !== selectedId),
-        })
+      adminReducer(
+        { list },
+        {
+          type: 'admin/decideColor',
+          payload: { id: selectedId },
+        }
       )
-    ).toBeTruthy();
+    ).toEqual({
+      list: list.filter((v) => v.id !== selectedId),
+    });
   });
 });
