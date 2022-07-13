@@ -27,7 +27,7 @@ const initState = window[reduxName];
 const store = createStore(
   combineReducers(moduleReducers),
   {
-    user: fromJS(initState.user),
+    user: initState.user,
     color: fromJS(initState.color),
   },
   compose(enhancers)

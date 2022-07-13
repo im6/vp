@@ -57,7 +57,7 @@ export default (req, res) => {
   }
 
   const store = createStore(combineReducers(moduleReducers), {
-    user: fromJS(userDetail),
+    user: userDetail,
     color: fromJS({
       loading: true,
       colorDef: {},
