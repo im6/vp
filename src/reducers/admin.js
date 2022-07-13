@@ -1,38 +1,38 @@
 /* eslint-disable no-useless-computed-key, object-shorthand  */
 import { handleActions } from 'redux-actions';
-import Immutable from 'immutable';
+import produce from 'immer';
 
-const initialState = Immutable.fromJS({
+const initialState = {
   list: null,
   loading: false,
-});
+};
 
 const admin = handleActions(
   {
     ['admin/getList'](state) {
-      return state.set('loading', true);
+      return produce(state, (draft) => {
+        draft.loading = true;
+      });
     },
 
     ['admin/getList/success'](state, action) {
-      return state.merge({
-        loading: false,
-        list: Immutable.fromJS(action.payload),
+      return produce(state, (draft) => {
+        draft.loading = false;
+        draft.list = action.payload;
       });
     },
 
     ['admin/getList/fail'](state) {
-      return state.merge({
-        list: Immutable.fromJS([]),
-        loading: false,
+      return produce(state, (draft) => {
+        draft.loading = false;
+        draft.list = [];
       });
     },
 
     ['admin/decideColor'](state, { payload }) {
-      const newState = state.updateIn(['list'], (list) =>
-        list.filter((v) => v.get('id') !== payload.id)
-      );
-
-      return newState;
+      return produce(state, (draft) => {
+        draft.list = state.list.filter((v) => v.id !== payload.id);
+      });
     },
   },
   initialState

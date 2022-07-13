@@ -16,8 +16,8 @@ const AdminPanel = ({ loading, list, onAdjudicate, onInitList }) => {
   return (
     <div className={style.container}>
       {!loading &&
-        (list && list.size > 0 ? (
-          list.toJS().map((v) => (
+        (list && list.length > 0 ? (
+          list.map((v) => (
             <div key={v.id}>
               <Box
                 value={v.color}
@@ -45,7 +45,7 @@ const AdminPanel = ({ loading, list, onAdjudicate, onInitList }) => {
 };
 
 AdminPanel.propTypes = {
-  list: PropTypes.object,
+  list: PropTypes.array,
   loading: PropTypes.bool,
   onInitList: PropTypes.func.isRequired,
   onAdjudicate: PropTypes.func.isRequired,
