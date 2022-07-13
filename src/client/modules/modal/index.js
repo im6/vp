@@ -3,7 +3,7 @@ import { createAction } from 'redux-actions';
 import Modal from './components/Modal';
 
 const mapStateToProps = ({ modal }) => ({
-  content: modal.toJSON(),
+  content: modal,
 });
 
 const mapDispatchToProps = (dispatch) => ({

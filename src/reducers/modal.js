@@ -1,11 +1,10 @@
 /* eslint-disable no-useless-computed-key, object-shorthand  */
-import { fromJS } from 'immutable';
 import { handleActions } from 'redux-actions';
 
-const initialState = fromJS({
+const initialState = {
   type: null,
   message: null,
-});
+};
 
 const modal = handleActions(
   {
@@ -16,76 +15,76 @@ const modal = handleActions(
     // admin reducer
 
     ['modal/admin/getList/fail']() {
-      return fromJS({
-        message: 'Admin data error',
+      return {
         type: 'danger',
-      });
+        message: 'Admin data error',
+      };
     },
     ['modal/admin/decideColor/success']() {
-      return fromJS({
-        message: 'Adjudicate successfully',
+      return {
         type: 'success',
-      });
+        message: 'Adjudicate successfully',
+      };
     },
     ['modal/admin/decideColor/fail']() {
-      return fromJS({
-        message: 'Adjudicate failed',
+      return {
         type: 'danger',
-      });
+        message: 'Adjudicate failed',
+      };
     },
 
     // color reducer
 
     ['modal/color/get/fail']() {
-      return fromJS({
-        message: 'Get color data error.',
+      return {
         type: 'danger',
-      });
+        message: 'Get color data error.',
+      };
     },
     ['modal/color/copy']() {
-      return fromJS({
-        message: 'Copy to clipboard successfully',
+      return {
         type: 'success',
-      });
+        message: 'Copy to clipboard successfully',
+      };
     },
     ['modal/color/addNew/success']() {
-      return fromJS({
-        message: 'Create color successfully, thanks.',
+      return {
         type: 'success',
-      });
+        message: 'Create color successfully, thanks.',
+      };
     },
     ['modal/color/addNew/fail']() {
-      return fromJS({
-        message: 'Create color failed.',
+      return {
         type: 'danger',
-      });
+        message: 'Create color failed.',
+      };
     },
     ['modal/color/addNew/invalid']() {
-      return fromJS({
-        message: 'Invalid color value.',
+      return {
         type: 'danger',
-      });
+        message: 'Invalid color value.',
+      };
     },
     ['modal/color/download']() {
-      return fromJS({
-        message: 'Downloading ...',
+      return {
         type: 'link',
-      });
+        message: 'Downloading ...',
+      };
     },
 
     // user reducer
 
     ['modal/user/logoff']() {
-      return fromJS({
-        message: 'Logout successfully.',
+      return {
         type: 'info',
-      });
+        message: 'Logout successfully.',
+      };
     },
     ['modal/user/auth/fail']() {
-      return fromJS({
-        message: 'Log in failed',
+      return {
         type: 'danger',
-      });
+        message: 'Log in failed',
+      };
     },
   },
   initialState
