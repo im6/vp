@@ -86,6 +86,12 @@ const modal = handleActions(
         message: 'Log in failed',
       };
     },
+    ['modal/user/greet'](_, { payload }) {
+      return {
+        type: 'success',
+        message: `Welcome back, ${payload}`,
+      };
+    },
   },
   initialState
 );
