@@ -1,4 +1,3 @@
-import { fromJS } from 'immutable';
 import colorReducer from './color';
 
 describe('test user reducer behavior', () => {
@@ -36,68 +35,79 @@ describe('test user reducer behavior', () => {
   const colorIdAllByStar = ['527', '528', '529'];
 
   test('action of color/get', () => {
-    const newState = colorReducer(fromJS({ loading: false }), {
-      type: 'color/get',
-    });
-    expect(newState.get('loading')).toBeTruthy();
+    const newState = colorReducer(
+      { loading: false },
+      {
+        type: 'color/get',
+      }
+    );
+    expect(newState.loading).toBeTruthy();
   });
 
   test('action of color/get/success', () => {
-    const newState = colorReducer(fromJS({ loading: true }), {
-      type: 'color/get/success',
-      payload: testColor,
+    const newState = colorReducer(
+      { loading: true },
+      {
+        type: 'color/get/success',
+        payload: testColor,
+      }
+    );
+    expect(newState).toEqual({
+      loading: false,
+      colorIdAllByDate,
+      colorIdAllByStar,
+      colorDef,
     });
-    expect(
-      newState.equals(
-        fromJS({
-          loading: false,
-          colorIdAllByDate,
-          colorIdAllByStar,
-          colorDef,
-        })
-      )
-    ).toBeTruthy();
   });
   test('action of color/get/fail', () => {
     expect(
-      colorReducer(fromJS({ loading: false }), {
-        type: 'color/get/fail',
-      }).equals(
-        fromJS({
-          loading: false,
-          colorIdAllByDate: [],
-          colorIdAllByStar: [],
-        })
+      colorReducer(
+        { loading: false },
+        {
+          type: 'color/get/fail',
+        }
       )
-    ).toBeTruthy();
+    ).toEqual({
+      loading: false,
+      colorIdAllByDate: [],
+      colorIdAllByStar: [],
+    });
   });
   test('action of color/toggleLike click like', () => {
-    const newState = colorReducer(fromJS({ colorDef }), {
-      type: 'color/toggleLike',
-      payload: {
-        willLike: true,
-        id: testColor[0].id,
-      },
-    });
+    const liked = {};
+    const newState = colorReducer(
+      { colorDef, liked },
+      {
+        type: 'color/toggleLike',
+        payload: {
+          willLike: true,
+          id: testColor[0].id,
+        },
+      }
+    );
 
-    expect(newState.getIn(['liked', '527'])).toBeTruthy();
+    expect(newState.liked['527']).toBeTruthy();
   });
 
   test('action of color/toggleLike click unlike', () => {
-    const newState = colorReducer(fromJS({ colorDef }), {
-      type: 'color/toggleLike',
-      payload: {
-        willLike: false,
-        id: testColor[0].id,
-      },
-    });
+    const liked = { 527: true };
+    const newState = colorReducer(
+      { colorDef, liked },
+      {
+        type: 'color/toggleLike',
+        payload: {
+          willLike: false,
+          id: testColor[0].id,
+        },
+      }
+    );
 
-    expect(newState.getIn(['liked', '527'])).toBeFalsy();
+    expect(newState.liked['527']).toBeFalsy();
   });
   test('action of color/addNew/success', () => {
     const newColorId = '1';
     const newState = colorReducer(
-      fromJS({ loading: false, colorIdAllByDate, colorIdAllByStar }),
+      { loading: false, colorIdAllByDate, colorIdAllByStar, colorDef },
       {
         type: 'color/addNew/success',
         payload: {
@@ -106,22 +116,28 @@ describe('test user reducer behavior', () => {
         },
       }
     );
-    expect(newState.getIn(['colorIdAllByDate', '0'])).toBe(newColorId);
+    expect(newState.colorIdAllByDate[0]).toBe(newColorId);
   });
   test('action of color/set/likes', () => {
     const newLikeId = '528';
-    const newState = colorReducer(fromJS({ loading: false }), {
-      type: 'color/set/likes',
-      payload: [newLikeId],
-    });
-    expect(newState.getIn(['liked', newLikeId])).toBeTruthy();
+    const newState = colorReducer(
+      { loading: false },
+      {
+        type: 'color/set/likes',
+        payload: [newLikeId],
+      }
+    );
+    expect(newState.liked[newLikeId]).toBeTruthy();
   });
   test('action of color/set/owns', () => {
     const ownedIds = [1, 2, 3];
-    const newState = colorReducer(fromJS({ loading: false }), {
-      type: 'color/set/owns',
-      payload: ownedIds,
-    });
-    expect(newState.get('colorIdByMyOwn').toJS()).toEqual(ownedIds);
+    const newState = colorReducer(
+      { loading: false },
+      {
+        type: 'color/set/owns',
+        payload: ownedIds,
+      }
+    );
+    expect(newState.colorIdByMyOwn).toEqual(ownedIds);
   });
 });

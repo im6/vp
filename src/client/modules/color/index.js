@@ -4,16 +4,14 @@ import Color from './components/Color';
 
 const mapStateToProps = ({ color, user }, { source }) => {
   const isAuth = Boolean(user.detail);
-  const colorDef = color.get('colorDef');
-  const liked = color.get('liked');
+  const { colorDef, liked } = color;
 
-  const list =
-    source === 'saved' ? liked.keySeq().toArray() : color.get(source).toJS();
+  const list = source === 'saved' ? Object.keys(liked) : color[source];
 
   const loading =
     (isAuth && source === 'saved') || source === 'colorIdByMyOwn'
-      ? color.get('loading') || user.loading
-      : color.get('loading');
+      ? color.loading || user.loading
+      : color.loading;
 
   return {
     isAuth,

@@ -1,5 +1,4 @@
 import { v1 as uuidV1 } from 'uuid';
-import { fromJS } from 'immutable';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom/server';
 import { createStore, combineReducers } from 'redux';
@@ -58,14 +57,14 @@ export default (req, res) => {
 
   const store = createStore(combineReducers(moduleReducers), {
     user: userDetail,
-    color: fromJS({
+    color: {
       loading: true,
       colorDef: {},
       liked: {},
       colorIdAllByDate: [],
       colorIdAllByStar: [],
       colorIdByMyOwn: [],
-    }),
+    },
   });
 
   const app = (

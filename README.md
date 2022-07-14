@@ -17,7 +17,7 @@
 - Express.js
 - [GraphQL](https://graphql.org/)
 - [SSR](https://reactjs.org/docs/react-dom-server.html)
-- [Immutable.js](https://immutable-js.github.io/immutable-js/)
+- ~~Immutable.js~~ Immer
 - [Bulma](https://bulma.io/)
 - Docker
 - Redis
