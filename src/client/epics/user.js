@@ -1,7 +1,7 @@
 import get from 'lodash.get';
 
 import { ajax } from 'rxjs/ajax';
-import { iif, of, concat } from 'rxjs';
+import { iif, of, concat, throwError } from 'rxjs';
 import { ofType } from 'redux-observable';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 
@@ -26,8 +26,11 @@ export default [
         requester({
           query,
         }).pipe(
-          mergeMap((action2) =>
-            iif(
+          mergeMap((action2) => {
+            if (get(action2, 'response.errors', null)) {
+              return throwError();
+            }
+            return iif(
               () => get(action2, 'response.data.user', null),
               of(
                 {
@@ -41,6 +44,10 @@ export default [
                 {
                   type: 'color/set/owns',
                   payload: get(action2, 'response.data.user.owns', []),
+                },
+                {
+                  type: 'modal/user/greet',
+                  payload: get(action2, 'response.data.user.name'),
                 }
               ),
               of(
@@ -56,13 +63,15 @@ export default [
                   payload: [],
                 }
               )
-            )
-          ),
+            );
+          }),
           catchError(() =>
             of(
               {
                 type: 'user/auth/fail',
-                payload: null,
+              },
+              {
+                type: 'user/logoff',
               },
               {
                 type: 'modal/user/auth/fail',
