@@ -1,6 +1,5 @@
 import { render } from 'test-utils';
 import Color from '.';
-import { fromJS, Map } from 'immutable';
 import { translation } from '../../../../../translation/index';
 import { colorDefSample } from '../../../../../testing/dataMock';
 
@@ -18,8 +17,8 @@ describe('render properly', () => {
     global.scrollTo = jest.fn();
   });
 
-  const liked = Map({ 1: true, 2: true });
-  const colorDef = fromJS(colorDefSample);
+  const liked = { 1: true, 2: true };
+  const colorDef = colorDefSample;
   const cb = jest.fn();
   test('render undefined color id', () => {
     const { getByText } = render(

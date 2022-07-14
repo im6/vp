@@ -39,25 +39,25 @@ const Color = ({
   const onLikeLocal = useCallback((a) => {
     onLike(a, isAuth);
   }, []);
-  const selectedColor = selectedId && colorDef.get(selectedId);
+  const selectedColor = selectedId && colorDef[selectedId];
   const colorNotFound = selectedId && !selectedColor;
   return (
     <Fragment>
       {loading && <SpinLoader />}
       {selectedColor && (
         <ShareWrapper
-          id={selectedColor.get('id')}
-          value={selectedColor.get('color')}
+          id={selectedColor.id}
+          value={selectedColor.color}
           onShare={onShare}
           onDownload={onDownload}
         >
           <Box
             vertical={isVertical}
-            starred={liked.get(selectedId)}
-            id={selectedColor.get('id')}
-            username={selectedColor.get('username')}
-            starNum={selectedColor.get('star')}
-            value={selectedColor.get('color')}
+            starred={liked[selectedId]}
+            id={selectedColor.id}
+            username={selectedColor.username}
+            starNum={selectedColor.star}
+            value={selectedColor.color}
             onClickHeart={onLikeLocal}
             onClickText={onCopy}
             showUsername
@@ -74,16 +74,16 @@ const Color = ({
       </div>
       <div className={style.list}>
         {list.map((v) => {
-          const boxInfo = colorDef.get(v);
+          const boxInfo = colorDef[v];
           return boxInfo ? (
             <Box
               key={v}
               vertical={isVertical}
-              starred={liked.get(v)}
-              id={boxInfo.get('id')}
-              username={boxInfo.get('username')}
-              starNum={boxInfo.get('star')}
-              value={boxInfo.get('color')}
+              starred={liked[v]}
+              id={boxInfo.id}
+              username={boxInfo.username}
+              starNum={boxInfo.star}
+              value={boxInfo.color}
               onClickHeart={onLikeLocal}
               onClickText={onCopy}
               onClickCanvas={onCanvasClick}
