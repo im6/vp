@@ -29,4 +29,4 @@
 - Webpack
 - Babel
 - SaSS
-- oAuth2(Facebook)
+- oAuth2
