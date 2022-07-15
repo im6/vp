@@ -1,0 +1,35 @@
+// https://css-tricks.com/pop-from-top-notification/
+
+$margin: 8px
+$margin-mobile: 3px
+$yOffset: -75px
+$textHeight: 25px
+
+.visible
+  transform: translateY(0px)
+
+.hidden
+  transform: translateY($yOffset)
+
+.box
+  position: fixed
+  top: $margin
+  right: $margin
+  z-index: 30
+  display: flex
+  transition: transform 0.35s;
+  transition-timing-function: ease;
+
+.text
+  line-height: $textHeight
+  text-align: center
+  margin-left: 10px
+  font-size: 1.1rem
+
+@media only screen and (min-device-width : 375px) and (max-device-width : 812px) and (orientation : portrait)
+  .box
+    top: $margin-mobile
+    right: $margin-mobile
+  .text
+    font-size: 0.8rem
+

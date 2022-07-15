@@ -1,14 +1,16 @@
 import get from 'lodash.get';
-import { iif, of } from 'rxjs';
-import { ofType } from 'redux-observable';
 import {
+  of,
+  iif,
   map,
-  mergeMap,
-  catchError,
   tap,
   filter,
+  mergeMap,
+  catchError,
+  throttleTime,
   ignoreElements,
-} from 'rxjs/operators';
+} from 'rxjs';
+import { ofType } from 'redux-observable';
 
 import requester from '../misc/requester';
 import likeManager from '../misc/likeManager';
@@ -68,6 +70,7 @@ export default [
   (action$) =>
     action$.pipe(
       ofType('color/toggleLike'),
+      throttleTime(5000),
       tap((action0) => {
         const { willLike, id, isAuth } = action0.payload;
         if (!isAuth) {
@@ -105,6 +108,7 @@ export default [
   (action$) =>
     action$.pipe(
       ofType('color/download'),
+      throttleTime(5000),
       tap(({ payload }) => {
         download(`colorpk_${payload.id}.png`, payload.color);
       }),
