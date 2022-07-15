@@ -1,9 +1,8 @@
 import get from 'lodash.get';
 
 import { ajax } from 'rxjs/ajax';
-import { iif, of, concat, throwError } from 'rxjs';
+import { iif, of, map, mergeMap, catchError, concat, throwError } from 'rxjs';
 import { ofType } from 'redux-observable';
-import { map, mergeMap, catchError } from 'rxjs/operators';
 
 import requester from '../misc/requester';
 import likeManager from '../misc/likeManager';
