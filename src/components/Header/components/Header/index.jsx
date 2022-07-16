@@ -160,20 +160,7 @@ const Header = ({
         </div>
 
         <div className="navbar-end">
-          {isAuth ? (
-            <div className="navbar-item">
-              <Link
-                className="button is-danger"
-                to="/"
-                onClick={() => {
-                  onLogout();
-                  onCloseNav();
-                }}
-              >
-                {language.logOut}
-              </Link>
-            </div>
-          ) : (
+          {!isAuth && (
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link">{language.navLogin}</a>
               <div className="navbar-dropdown">
@@ -191,17 +178,31 @@ const Header = ({
               </div>
             </div>
           )}
-          {!selectCreate && (
-            <div className="navbar-item">
-              <Link
-                to="/new"
-                className="button is-primary"
-                onClick={onClickToScroll}
-              >
-                {language.newColor}
-              </Link>
+          <div className="navbar-item">
+            <div className="buttons">
+              {isAuth && (
+                <Link
+                  className="button is-danger"
+                  to="/"
+                  onClick={() => {
+                    onLogout();
+                    onCloseNav();
+                  }}
+                >
+                  {language.logOut}
+                </Link>
+              )}
+              {!selectCreate && (
+                <Link
+                  to="/new"
+                  className="button is-primary"
+                  onClick={onClickToScroll}
+                >
+                  {language.newColor}
+                </Link>
+              )}
             </div>
-          )}
+          </div>
         </div>
       </div>
     </nav>
