@@ -2,14 +2,12 @@
 
 $margin: 8px
 $margin-mobile: 3px
-$yOffset: -75px
-$textHeight: 25px
 
 .visible
   transform: translateY(0px)
 
 .hidden
-  transform: translateY($yOffset)
+  transform: translateY(-75px)
 
 .box
   position: fixed
@@ -21,7 +19,7 @@ $textHeight: 25px
   transition-timing-function: ease;
 
 .text
-  line-height: $textHeight
+  line-height: 25px
   text-align: center
   margin-left: 10px
   font-size: 1.1rem

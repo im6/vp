@@ -1,22 +1,9 @@
 import { useSelector } from 'react-redux';
-import style from './style.sass';
-import Portal from './components/Portal';
-import StatusIcon from './components/StatusIcon';
+import Modal from './components/Modal';
 
-// all types: ['link', 'info', 'danger', 'warning', 'success', 'primary'];
-
-const Modal = () => {
-  const { visible, type, message } = useSelector(({ modal }) => modal);
-  if (!type) return null;
-  const statusStyle = visible ? style.visible : style.hidden;
-  return (
-    <Portal>
-      <div className={`notification is-${type} ${style.box} ${statusStyle}`}>
-        <StatusIcon type={type} />
-        <div className={style.text}>{message}</div>
-      </div>
-    </Portal>
-  );
+const ModalContainer = () => {
+  const state = useSelector(({ modal }) => modal);
+  return <Modal {...state} />;
 };
 
-export default Modal;
+export default ModalContainer;
