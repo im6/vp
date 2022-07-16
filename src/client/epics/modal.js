@@ -13,7 +13,7 @@ export default [
         concat(
           of({
             type: 'modal/cycle/show',
-          }).pipe(delay(1)),
+          }).pipe(delay(50)),
           of({
             type: 'modal/cycle/hide',
           }).pipe(delay(modalDisplayTimeout)),
