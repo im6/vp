@@ -66,11 +66,9 @@ const downloadCanvas = (color) => {
 
   ctx.font = '15px Arial';
   ctx.fillStyle = '#909090';
-  ctx.fillText(colors[0], MARGIN, colorTxtPosition);
-  ctx.fillText(colors[1], MARGIN, colorTxtPosition + space);
-  ctx.fillText(colors[2], MARGIN, colorTxtPosition + space * 2);
-  ctx.fillText(colors[3], MARGIN, colorTxtPosition + space * 3);
-
+  for (let i = 0; i < 4; i += 1) {
+    ctx.fillText(colors[i], MARGIN, colorTxtPosition + space * i);
+  }
   const url = myCanvas.toDataURL();
   if ('remove' in myCanvas) {
     myCanvas.remove();
