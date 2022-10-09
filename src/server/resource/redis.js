@@ -1,8 +1,4 @@
 import { createClient } from 'redis';
-import session from 'express-session';
-import connectRedis from 'connect-redis';
-
-import { SESSION_SECRET } from '../constant.server';
 
 const {
   REDIS_HOST: host,
@@ -15,7 +11,6 @@ if (!host || !port || !password) {
   process.exit(1);
 }
 
-const RedisStore = connectRedis(session);
 const client = createClient({
   url: `redis://:${password}@${host}:${port}`,
   legacyMode: true,
@@ -34,11 +29,10 @@ client.on('connect', () => {
   console.log('Redis connect successfully.'); // eslint-disable-line no-console
 });
 
-client.connect();
+async function init() {
+  await client.connect();
+}
 
-export default session({
-  store: new RedisStore({ client }),
-  secret: SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-});
+init();
+
+export default client;

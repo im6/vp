@@ -2,7 +2,7 @@ import helmet from 'helmet';
 import express from 'express';
 import { json as bpJson, urlencoded as bpUrlencoded } from 'body-parser';
 import cookieParser from 'cookie-parser';
-import redisSession from '../resource/redisSession';
+import session from '../resource/session';
 
 import { SERVER_META_FILES } from '../constant.server';
 
@@ -32,7 +32,7 @@ app.use(
 app.use(bpJson());
 app.use(bpUrlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(redisSession);
+app.use(session);
 
 if (process.env.NODE_ENV === 'development') {
   app.use('/static', express.static('local/public'));
