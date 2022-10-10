@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime';
 import { StrictMode } from 'react';
 import { langSelectionKey, canvasOrientationKey } from '../constant';
 import { setCookie, customEventPolyFill } from './misc/util';
