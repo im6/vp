@@ -1,5 +1,6 @@
 /* eslint no-console: 0 */
 import { exec } from 'child_process';
+import 'regenerator-runtime/runtime';
 import app from './app';
 import { PORT } from './constant.server';
 
