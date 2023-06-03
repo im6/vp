@@ -1,6 +1,5 @@
-/* eslint-disable no-useless-computed-key, object-shorthand  */
-import { handleActions } from 'redux-actions';
-import produce from 'immer';
+/* eslint-disable no-param-reassign */
+import { createAction, createReducer } from '@reduxjs/toolkit';
 
 const initialState = {
   detail: null,
@@ -10,42 +9,29 @@ const initialState = {
   loading: false,
 };
 
-const user = handleActions(
-  {
-    ['user/auth'](state) {
-      return produce(state, (draft) => {
-        draft.loading = true;
-      });
-    },
-    ['user/auth/success'](state, { payload: detail }) {
-      return produce(state, (draft) => {
-        draft.loading = false;
-        draft.detail = detail;
-      });
-    },
-
-    ['user/auth/fail'](state) {
-      return produce(state, (draft) => {
-        draft.loading = false;
-        draft.detail = null;
-      });
-    },
-
-    ['user/logoff'](state) {
-      return produce(state, (draft) => {
-        draft.detail = null;
-      });
-    },
-
-    ['user/logoff/success'](state, { payload }) {
-      return produce(state, (draft) => {
-        Object.assign(draft, payload, {
-          detail: null,
-        });
-      });
-    },
-  },
-  initialState
-);
+const user = createReducer(initialState, (builder) => {
+  builder
+    .addCase(createAction('user/auth'), (state) => {
+      state.loading = true;
+    })
+    .addCase(createAction('user/auth/success'), (state, action) => {
+      state.loading = false;
+      state.detail = action.payload;
+    })
+    .addCase(createAction('user/auth/fail'), (state) => {
+      state.loading = false;
+      state.detail = null;
+    })
+    .addCase(createAction('user/logoff'), (state) => {
+      state.detail = null;
+    })
+    .addCase(createAction('user/logoff/success'), (state, action) => {
+      const { weiboUrl, githubUrl, facebookUrl } = action.payload;
+      state.detail = null;
+      state.weiboUrl = weiboUrl;
+      state.githubUrl = githubUrl;
+      state.facebookUrl = facebookUrl;
+    });
+});
 
 export default user;

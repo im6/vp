@@ -1,41 +1,27 @@
-/* eslint-disable no-useless-computed-key, object-shorthand  */
-import { handleActions } from 'redux-actions';
-import produce from 'immer';
+/* eslint-disable no-param-reassign */
+import { createAction, createReducer } from '@reduxjs/toolkit';
 
 const initialState = {
   list: null,
   loading: false,
 };
 
-const admin = handleActions(
-  {
-    ['admin/getList'](state) {
-      return produce(state, (draft) => {
-        draft.loading = true;
-      });
-    },
-
-    ['admin/getList/success'](state, action) {
-      return produce(state, (draft) => {
-        draft.loading = false;
-        draft.list = action.payload;
-      });
-    },
-
-    ['admin/getList/fail'](state) {
-      return produce(state, (draft) => {
-        draft.loading = false;
-        draft.list = [];
-      });
-    },
-
-    ['admin/decideColor'](state, { payload }) {
-      return produce(state, (draft) => {
-        draft.list = state.list.filter((v) => v.id !== payload.id);
-      });
-    },
-  },
-  initialState
-);
+const admin = createReducer(initialState, (builder) => {
+  builder
+    .addCase(createAction('admin/getList'), (state) => {
+      state.loading = true;
+    })
+    .addCase(createAction('admin/getList/success'), (state, action) => {
+      state.loading = false;
+      state.list = action.payload;
+    })
+    .addCase(createAction('admin/getList/fail'), (state) => {
+      state.loading = false;
+      state.list = [];
+    })
+    .addCase(createAction('admin/decideColor'), (state, action) => {
+      state.list = state.list.filter((v) => v.id !== action.payload.id);
+    });
+});
 
 export default admin;

@@ -1,6 +1,5 @@
-/* eslint-disable no-useless-computed-key, object-shorthand  */
-import { handleActions } from 'redux-actions';
-import produce from 'immer';
+/* eslint-disable no-param-reassign */
+import { createAction, createReducer } from '@reduxjs/toolkit';
 
 const initialState = {
   type: null,
@@ -8,116 +7,78 @@ const initialState = {
   visible: false,
 };
 
-const modal = handleActions(
-  {
-    ['modal/cycle/show'](state) {
-      return produce(state, (draft) => {
-        draft.visible = true;
-      });
-    },
-    ['modal/cycle/hide'](state) {
-      return produce(state, (draft) => {
-        draft.visible = false;
-      });
-    },
-    ['modal/cycle/reset']() {
-      return initialState;
-    },
-
+const modal = createReducer(initialState, (builder) => {
+  builder
+    .addCase(createAction('modal/cycle/reset'), () => initialState)
+    .addCase(createAction('modal/cycle/show'), (state) => {
+      state.visible = true;
+    })
+    .addCase(createAction('modal/cycle/hide'), (state) => {
+      state.visible = false;
+    })
     // admin reducer
-
-    ['modal/admin/getList/fail']() {
-      return {
-        type: 'danger',
-        message: 'Admin data error',
-        visible: false,
-      };
-    },
-    ['modal/admin/decideColor/success']() {
-      return {
-        type: 'success',
-        message: 'Adjudicate successfully',
-        visible: false,
-      };
-    },
-    ['modal/admin/decideColor/fail']() {
-      return {
-        type: 'danger',
-        message: 'Adjudicate failed',
-        visible: false,
-      };
-    },
-
+    .addCase(createAction('modal/admin/getList/fail'), () => ({
+      type: 'danger',
+      message: 'Admin data error',
+      visible: false,
+    }))
+    .addCase(createAction('modal/admin/decideColor/success'), () => ({
+      type: 'success',
+      message: 'Adjudicate successfully',
+      visible: false,
+    }))
+    .addCase(createAction('modal/admin/decideColor/fail'), () => ({
+      type: 'danger',
+      message: 'Adjudicate failed',
+      visible: false,
+    }))
     // color reducer
-
-    ['modal/color/get/fail']() {
-      return {
-        type: 'danger',
-        message: 'Get color data error.',
-        visible: false,
-      };
-    },
-    ['modal/color/copy']() {
-      return {
-        type: 'success',
-        message: 'Copy to clipboard successfully',
-        visible: false,
-      };
-    },
-    ['modal/color/addNew/success']() {
-      return {
-        type: 'success',
-        message: 'Create color successfully, thanks.',
-        visible: false,
-      };
-    },
-    ['modal/color/addNew/fail']() {
-      return {
-        type: 'danger',
-        message: 'Create color failed.',
-        visible: false,
-      };
-    },
-    ['modal/color/addNew/invalid']() {
-      return {
-        type: 'danger',
-        message: 'Invalid color value.',
-        visible: false,
-      };
-    },
-    ['modal/color/download']() {
-      return {
-        type: 'link',
-        message: 'Downloading ...',
-        visible: false,
-      };
-    },
-
+    .addCase(createAction('modal/color/get/fail'), () => ({
+      type: 'danger',
+      message: 'Get color data error.',
+      visible: false,
+    }))
+    .addCase(createAction('modal/color/copy'), () => ({
+      type: 'success',
+      message: 'Copy to clipboard successfully',
+      visible: false,
+    }))
+    .addCase(createAction('modal/color/addNew/success'), () => ({
+      type: 'success',
+      message: 'Create color successfully, thanks.',
+      visible: false,
+    }))
+    .addCase(createAction('modal/color/addNew/fail'), () => ({
+      type: 'danger',
+      message: 'Create color failed.',
+      visible: false,
+    }))
+    .addCase(createAction('modal/color/addNew/invalid'), () => ({
+      type: 'danger',
+      message: 'Invalid color value.',
+      visible: false,
+    }))
+    .addCase(createAction('modal/color/download'), () => ({
+      type: 'link',
+      message: 'Downloading ...',
+      visible: false,
+    }))
     // user reducer
-
-    ['modal/user/logoff']() {
-      return {
-        type: 'info',
-        message: 'Logout successfully.',
-        visible: false,
-      };
-    },
-    ['modal/user/auth/fail']() {
-      return {
-        type: 'danger',
-        message: 'Log in failed',
-        visible: false,
-      };
-    },
-    ['modal/user/greet'](_, { payload }) {
-      return {
-        type: 'success',
-        message: `Welcome back, ${payload}`,
-        visible: false,
-      };
-    },
-  },
-  initialState
-);
+    .addCase(createAction('modal/user/logoff'), () => ({
+      type: 'info',
+      message: 'Logout successfully.',
+      visible: false,
+    }))
+    .addCase(createAction('modal/user/auth/fail'), () => ({
+      type: 'danger',
+      message: 'Log in failed',
+      visible: false,
+    }))
+    .addCase(createAction('modal/user/greet'), (_, action) => ({
+      type: 'success',
+      message: `Welcome back, ${action.payload}`,
+      visible: false,
+    }));
+});
 
 export default modal;
