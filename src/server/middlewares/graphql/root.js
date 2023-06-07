@@ -21,6 +21,7 @@ import {
   getUserSaveColorList,
   upsertUserSaveColor,
   deleteUserSaveColor,
+  deleteColorFromUserSave,
 } from '../../resource/mongodb/crud';
 
 const root = {
@@ -175,6 +176,7 @@ const root = {
       }
       // will unlike operation
       const status = await deleteColor(id);
+      await deleteColorFromUserSave(id);
       return {
         status,
       };

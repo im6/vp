@@ -137,3 +137,12 @@ export const deleteUserSaveColor = async (userId, colorId) => {
   const res = await userSaveCollection.deleteOne(filterObj);
   return res;
 };
+
+export const deleteColorFromUserSave = async (colorId) => {
+  const userSaveCollection = clientConn.db('colorpk').collection('userSave');
+  const filterObj = {
+    color: new ObjectId(colorId),
+  };
+  const res = await userSaveCollection.deleteMany(filterObj);
+  return res;
+};
