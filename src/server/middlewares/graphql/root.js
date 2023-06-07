@@ -1,7 +1,6 @@
 import get from 'lodash.get';
 import { GraphQLError } from 'graphql';
 
-import sqlExecOne from '../../resource/mysqlConnection';
 import {
   fetchFacebookProfile,
   fetchWeiboProfile,
@@ -9,6 +8,20 @@ import {
 } from '../../resource/oauth';
 import { isAuth, isAdmin, getTokenInfo } from '../../helper';
 import { isValidColorStr } from '../../../util';
+import {
+  getColorList,
+  createColorDocument,
+  flipColorVisibility,
+  deleteColor,
+  incrementColorStar,
+  getColorsByUser,
+  checkUser,
+  createUser,
+  updateUserLoginDate,
+  getUserSaveColorList,
+  upsertUserSaveColor,
+  deleteUserSaveColor,
+} from '../../resource/mongodb/crud';
 
 const root = {
   async user(_, req) {
@@ -26,50 +39,42 @@ const root = {
         }
 
         const { name, oauthId } = oauthData;
-        const userData = await sqlExecOne(
-          `SELECT * FROM colorpk_user WHERE oauth = ? AND oauth_id = ?`,
-          [oauthType, oauthId]
-        );
-        if (userData.length === 1) {
+        const optionalUser = await checkUser(oauthType, oauthId);
+
+        if (optionalUser) {
           // existing user.
-          const { is_admin: isAdminInt, id: userId } = userData[0];
+          const { isAdmin: hasAdminFlag, userId } = optionalUser;
 
           req.session.app.dbInfo = {
             id: userId,
             name, // grab name from oauth
-            isAdmin: isAdminInt || false,
+            isAdmin: hasAdminFlag,
           };
 
-          const likeData = await sqlExecOne(
-            'SELECT color_id FROM colorpk_userlike WHERE user_id= ?',
-            [userId]
-          );
+          const ownDataArr = await getColorsByUser(userId);
+          const saveDataArr = await getUserSaveColorList(userId);
 
-          const ownData = await sqlExecOne(
-            'SELECT a.id FROM colorpk_color a WHERE a.user_id=?',
-            [userId]
-          );
-
-          sqlExecOne('UPDATE colorpk_user SET last_login=NOW() WHERE id=?', [
-            userId,
-          ]);
-
+          await updateUserLoginDate(userId);
           return {
             name,
-            isAdmin: isAdminInt || false,
+            isAdmin: hasAdminFlag,
             img: oauthData.img || null,
-            likes: likeData.map((v) => v.color_id),
-            owns: ownData.map((v) => v.id),
+            likes: saveDataArr,
+            owns: ownDataArr,
           };
         }
 
         // user first time login, save it.
-        const { insertId } = await sqlExecOne(
-          `INSERT INTO colorpk_user (oauth, name, oauth_id, last_login) VALUES (?, ?, ?, NOW())`,
-          [oauthType, name, oauthId]
-        );
+        const newUserId = await createUser({
+          oAuthId: oauthId,
+          oAuthType: oauthType,
+          name,
+          isAdmin: false,
+          lastLogin: new Date(),
+        });
+
         req.session.app.dbInfo = {
-          id: insertId,
+          id: newUserId,
           name,
           isAdmin: false,
         };
@@ -93,33 +98,9 @@ const root = {
       return new GraphQLError('color error: no admin access');
     }
 
-    let colors = null;
-
-    switch (category) {
-      case 'PUBLIC':
-        colors = await sqlExecOne(
-          'SELECT a.* FROM colorpk_color a WHERE a.display=0 ORDER BY `id` DESC'
-        );
-        break;
-      case 'ANONYMOUS':
-        colors = await sqlExecOne(
-          'SELECT * FROM colorpk_color a WHERE a.display = 1'
-        );
-        break;
-      default:
-        // GraphQL will make sure category match enumeration type
-        break;
-    }
-
     try {
-      return colors.map((v) => ({
-        id: v.id,
-        star: v.star,
-        color: v.color,
-        userId: v.user_id,
-        username: v.username,
-        createdDate: v.created_date,
-      }));
+      const colors = await getColorList(category);
+      return colors;
     } catch (err) {
       return new GraphQLError(err.toString());
     }
@@ -130,21 +111,17 @@ const root = {
     try {
       if (isAuth(req)) {
         const userId = get(req, 'session.app.dbInfo.id', null);
-        sqlExecOne(
-          willLike
-            ? 'INSERT INTO colorpk_userlike (user_id, color_id) VALUES (?, ?)'
-            : 'DELETE FROM colorpk_userlike WHERE user_id= ? AND color_id = ?',
-          [userId, id]
-        );
+        if (willLike) {
+          await upsertUserSaveColor(userId, id);
+        } else {
+          await deleteUserSaveColor(userId, id);
+        }
       }
 
       if (willLike) {
-        const resData = await sqlExecOne(
-          `UPDATE colorpk_color SET \`star\` = \`star\` + 1 WHERE id = ?`,
-          [id]
-        );
+        const status = await incrementColorStar(id);
         return {
-          status: resData.affectedRows === 1 ? 0 : 1,
+          status,
         };
       }
       return {
@@ -161,21 +138,23 @@ const root = {
       return new GraphQLError('create error: invalid color input');
     }
 
-    const sessionUsername = get(req, 'session.app.dbInfo.name', null);
     const sessionUserid = get(req, 'session.app.dbInfo.id', null);
-    const hasUserSignIn = isAuth(req) && sessionUsername;
-    const username = hasUserSignIn ? sessionUsername : null;
-    const userId = hasUserSignIn ? sessionUserid : null;
-    const random = (Math.random() * 20).toFixed();
+    const userId = isAuth(req) ? sessionUserid : null;
 
     try {
-      const row = await sqlExecOne(
-        'INSERT INTO colorpk_color (`star`, color, user_id, username, color_type, display, created_date) VALUES (?, ?, ?, ?, NULL, ?, NOW())',
-        [random, color, userId, username, hasUserSignIn ? 0 : 1]
+      const newId = await createColorDocument(
+        {
+          star: (Math.random() * 20).toFixed(),
+          color,
+          createdBy: undefined, // define later
+          hidden: !userId,
+          createdDate: new Date(),
+        },
+        userId
       );
       return {
         status: 0,
-        data: row.insertId,
+        data: newId,
       };
     } catch (err) {
       return new GraphQLError(err.toString());
@@ -188,14 +167,16 @@ const root = {
     }
     const { id, willLike } = input;
     try {
-      const resData = await sqlExecOne(
-        willLike
-          ? 'UPDATE colorpk_color SET `display` = 0 WHERE id = ?'
-          : 'DELETE FROM colorpk_color WHERE id = ?',
-        [id]
-      );
+      if (willLike) {
+        const status = await flipColorVisibility(id);
+        return {
+          status,
+        };
+      }
+      // will unlike operation
+      const status = await deleteColor(id);
       return {
-        status: resData.affectedRows === 1 ? 0 : 1,
+        status,
       };
     } catch (err) {
       return new GraphQLError(err.toString());

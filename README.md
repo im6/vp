@@ -22,7 +22,7 @@
 - Redis
 - Google App Engine
 - [React Testing Library](https://testing-library.com/)
-- MySQL
+- MongoDB
 - Redux
 - react-router
 - Webpack

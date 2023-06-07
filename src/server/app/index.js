@@ -3,6 +3,7 @@ import express from 'express';
 import { json as bpJson, urlencoded as bpUrlencoded } from 'body-parser';
 import cookieParser from 'cookie-parser';
 import redisSession from '../resource/redisSession';
+import { connect } from '../resource/mongodb/connection';
 
 import { SERVER_META_FILES } from '../constant.server';
 
@@ -18,6 +19,8 @@ import ssrMiddleware from '../middlewares/render';
 
 const app = express();
 const publicUrls = ['/', '/latest', '/popular', '/color/:id', '/new', '/like'];
+
+connect();
 
 if (process.env.NODE_ENV !== 'development') {
   app.set('trust proxy', true);

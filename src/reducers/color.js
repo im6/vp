@@ -22,7 +22,7 @@ const color = createReducer(initialState, (builder) => {
       const colorIdAllByDate = [];
       const colorDef = {};
       payload.forEach((v) => {
-        colorIdAllByDate.push(v.id);
+        colorIdAllByDate.push(v.id); // default order is by Date
         colorDef[v.id] = v;
       });
       const colorIdAllByStar = payload
