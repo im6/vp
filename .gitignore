@@ -6,4 +6,3 @@ package-lock.json
 local
 coverage
 node_modules
-dist
