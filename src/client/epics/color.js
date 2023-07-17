@@ -5,7 +5,7 @@ import {
   map,
   tap,
   filter,
-  mergeMap,
+  switchMap,
   catchError,
   throttleTime,
   ignoreElements,
@@ -46,7 +46,7 @@ export default [
   (action$) =>
     action$.pipe(
       ofType('color/get'),
-      mergeMap(() =>
+      switchMap(() =>
         requester({
           query: colorql,
           variables: { cate: 'PUBLIC' },
@@ -81,7 +81,7 @@ export default [
           }
         }
       }),
-      mergeMap((action0) => {
+      switchMap((action0) => {
         const { willLike, id } = action0.payload;
         return requester({
           query: likeql,
@@ -127,14 +127,14 @@ export default [
   (action$) =>
     action$.pipe(
       ofType('color/addNew'),
-      mergeMap(({ payload }) =>
+      switchMap(({ payload }) =>
         requester({
           query: createql,
           variables: {
             val: payload,
           },
         }).pipe(
-          mergeMap((action2) => {
+          switchMap((action2) => {
             const isGood =
               !get(action2, 'response.errors') &&
               get(action2, 'response.data.createColor.status', 1) === 0;
