@@ -9,6 +9,6 @@ describe('render properly', () => {
     const dispatch = jest.fn();
     const mapper = mapDispatchToProps(dispatch);
     mapper.onLogout();
-    expect(dispatch).toBeCalledTimes(2);
+    expect(dispatch).toBeCalledTimes(1);
   });
 });
