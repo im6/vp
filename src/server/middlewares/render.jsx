@@ -1,7 +1,7 @@
 import { v1 as uuidV1 } from 'uuid';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom/server';
-import { createStore, combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 
 import { PUBLIC_PATH } from '../constant.server';
@@ -54,16 +54,18 @@ export default (req, res) => {
           : null,
     };
   }
-
-  const store = createStore(combineReducers(moduleReducers), {
-    user: userDetail,
-    color: {
-      loading: true,
-      colorDef: {},
-      liked: {},
-      colorIdAllByDate: [],
-      colorIdAllByStar: [],
-      colorIdByMyOwn: [],
+  const store = configureStore({
+    reducer: moduleReducers,
+    preloadedState: {
+      user: userDetail,
+      color: {
+        loading: true,
+        colorDef: {},
+        liked: {},
+        colorIdAllByDate: [],
+        colorIdAllByStar: [],
+        colorIdByMyOwn: [],
+      },
     },
   });
 
