@@ -1,6 +1,6 @@
 import get from 'lodash.get';
 import { ofType } from 'redux-observable';
-import { of, map, mergeMap, filter, catchError } from 'rxjs';
+import { of, map, switchMap, filter, catchError } from 'rxjs';
 import requester from '../misc/requester';
 
 const colorql = `query($cate: ColorCategory!) {
@@ -24,14 +24,14 @@ export default [
   (action$) =>
     action$.pipe(
       ofType('admin/getList'),
-      mergeMap(() =>
+      switchMap(() =>
         requester({
           query: colorql,
           variables: { cate: 'ANONYMOUS' },
         }).pipe(
-          map((ajaxRes) => ({
+          map((res) => ({
             type: 'admin/getList/success',
-            payload: get(ajaxRes, 'response.data.color', null),
+            payload: get(res, 'response.data.color', null),
           })),
           catchError(() =>
             of(
@@ -39,7 +39,8 @@ export default [
                 type: 'admin/getList/fail',
               },
               {
-                type: 'modal/admin/getList/fail',
+                type: 'modal',
+                payload: ['danger', 'Admin data error'],
               }
             )
           )
@@ -50,7 +51,7 @@ export default [
   (action$) =>
     action$.pipe(
       ofType('admin/decideColor'),
-      mergeMap((action1) =>
+      switchMap((action1) =>
         requester({
           query: adjudicateql,
           variables: {
@@ -58,16 +59,16 @@ export default [
           },
         }).pipe(
           filter(
-            (ajaxRes) =>
-              get(ajaxRes, 'response.data.adjudicateColor.status', 1) === 0
+            (res) => get(res, 'response.data.adjudicateColor.status', 1) === 0
           ),
           map(() => ({
-            type: 'modal/admin/decideColor/success',
-            payload: action1.payload.id,
+            type: 'modal',
+            payload: ['success', 'Adjudicate successfully'],
           })),
           catchError(() =>
             of({
-              type: 'modal/admin/decideColor/fail',
+              type: 'modal',
+              payload: ['danger', 'Adjudicate failed'],
             })
           )
         )

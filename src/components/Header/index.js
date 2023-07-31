@@ -21,9 +21,6 @@ export const mapDispatchToProps = (dispatch) => ({
   onLogout() {
     const ac = createAction('user/logoff');
     dispatch(ac());
-
-    const ac1 = createAction('modal/user/logoff');
-    dispatch(ac1());
   },
 });
 

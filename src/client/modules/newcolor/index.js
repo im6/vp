@@ -8,8 +8,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ac({ color }));
   },
   onColorInvalid() {
-    const ac = createAction('modal/color/addNew/invalid');
-    dispatch(ac());
+    const ac = createAction('modal');
+    dispatch(ac(['danger', 'Invalid color value.']));
   },
 });
 

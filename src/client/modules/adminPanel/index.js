@@ -6,13 +6,13 @@ const mapStateToProps = ({ admin }) => admin;
 
 const mapDispatchToProps = (dispatch) => ({
   onInitList() {
-    const ac0 = createAction('admin/getList');
-    dispatch(ac0());
+    const ac = createAction('admin/getList');
+    dispatch(ac());
   },
   onAdjudicate(id, willLike) {
-    const actcr = createAction('admin/decideColor');
+    const ac = createAction('admin/decideColor');
     dispatch(
-      actcr({
+      ac({
         id,
         willLike,
       })

@@ -1,24 +1,31 @@
-import { of, throttleTime, switchMap, filter, delay, concat } from 'rxjs';
+import { of, switchMap, delay, concat } from 'rxjs';
+import { ofType } from 'redux-observable';
 
+const actionDelay = 50; // give some space between each redux action
 const modalDisplayTimeout = 2500;
-const transitionTime = 350; // same as Modal style value
+const transitionTime = 350; // same as Modal style transition time value
 
 export default [
   (action$) =>
     action$.pipe(
-      filter((v) => /^modal/.test(v.type)),
-      filter((v) => !/^modal\/cycle/.test(v.type)),
-      throttleTime(2000),
-      switchMap(() =>
+      ofType('modal'),
+      switchMap((v) =>
         concat(
           of({
-            type: 'modal/cycle/show',
-          }).pipe(delay(50)),
+            type: 'modal/reset',
+          }),
           of({
-            type: 'modal/cycle/hide',
+            type: 'modal/set',
+            payload: v.payload,
+          }).pipe(delay(actionDelay)),
+          of({
+            type: 'modal/show',
+          }).pipe(delay(actionDelay)),
+          of({
+            type: 'modal/hide',
           }).pipe(delay(modalDisplayTimeout)),
           of({
-            type: 'modal/cycle/reset',
+            type: 'modal/reset',
           }).pipe(delay(transitionTime + 1))
         )
       )

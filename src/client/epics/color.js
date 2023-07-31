@@ -8,13 +8,12 @@ import {
   switchMap,
   catchError,
   throttleTime,
-  ignoreElements,
 } from 'rxjs';
 import { ofType } from 'redux-observable';
 
 import requester from '../misc/requester';
 import likeManager from '../misc/likeManager';
-import { download, share, copyText } from '../misc/util';
+import { download, copyText } from '../misc/util';
 
 const colorql = `query($cate: ColorCategory!) {
   color(category: $cate) {
@@ -51,8 +50,8 @@ export default [
           query: colorql,
           variables: { cate: 'PUBLIC' },
         }).pipe(
-          map((action2) => {
-            const colors = get(action2, 'response.data.color', null);
+          map((res) => {
+            const colors = get(res, 'response.data.color', null);
             return colors
               ? {
                   type: 'color/get/success',
@@ -61,7 +60,13 @@ export default [
               : { type: 'color/get/fail' };
           }),
           catchError(() =>
-            of({ type: 'color/get/fail' }, { type: 'modal/color/get/fail' })
+            of(
+              { type: 'color/get/fail' },
+              {
+                type: 'modal',
+                payload: ['danger', 'Get color data error.'],
+              }
+            )
           )
         )
       )
@@ -70,7 +75,7 @@ export default [
   (action$) =>
     action$.pipe(
       ofType('color/toggleLike'),
-      throttleTime(5000),
+      throttleTime(2000),
       tap((action0) => {
         const { willLike, id, isAuth } = action0.payload;
         if (!isAuth) {
@@ -99,8 +104,7 @@ export default [
           catchError((err) => of(get(err, 'response.errors[0].message', true))),
           tap((err) => {
             console.error('toggle like error: ', err); // eslint-disable-line no-console
-          }),
-          ignoreElements()
+          })
         );
       })
     ),
@@ -112,21 +116,16 @@ export default [
       tap(({ payload }) => {
         download(`colorpk_${payload.id}.png`, payload.color);
       }),
-      ignoreElements()
-    ),
-
-  (action$) =>
-    action$.pipe(
-      ofType('color/share'),
-      tap(({ payload }) => {
-        share(payload);
-      }),
-      ignoreElements()
+      map(() => ({
+        type: 'modal',
+        payload: ['link', 'Downloading ...'],
+      }))
     ),
 
   (action$) =>
     action$.pipe(
       ofType('color/addNew'),
+      throttleTime(5000),
       switchMap(({ payload }) =>
         requester({
           query: createql,
@@ -134,11 +133,11 @@ export default [
             val: payload,
           },
         }).pipe(
-          switchMap((action2) => {
+          switchMap((res) => {
             const isGood =
-              !get(action2, 'response.errors') &&
-              get(action2, 'response.data.createColor.status', 1) === 0;
-            const id = get(action2, 'response.data.createColor.data', null);
+              !get(res, 'response.errors') &&
+              get(res, 'response.data.createColor.status', 1) === 0;
+            const id = get(res, 'response.data.createColor.data', null);
             const { color } = payload;
             const successPayload = id && {
               id: id.toString(),
@@ -154,16 +153,18 @@ export default [
                   payload: successPayload,
                 },
                 {
-                  type: 'modal/color/addNew/success',
+                  type: 'modal',
+                  payload: ['success', 'Create color successfully, thanks.'],
                 }
               ),
               of(
                 {
                   type: 'color/addNew/fail',
-                  payload: get(action2, 'response.errors[0].message'),
+                  payload: get(res, 'response.errors[0].message'),
                 },
                 {
-                  type: 'modal/color/addNew/fail',
+                  type: 'modal',
+                  payload: ['danger', 'Create color failed.'],
                 }
               )
             );
@@ -177,6 +178,9 @@ export default [
       tap(({ payload }) => {
         copyText(payload.substring(1));
       }),
-      ignoreElements()
+      map(() => ({
+        type: 'modal',
+        payload: ['success', 'Copy to clipboard successfully'],
+      }))
     ),
 ];

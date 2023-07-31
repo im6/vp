@@ -1,7 +1,7 @@
 import get from 'lodash.get';
 
 import { ajax } from 'rxjs/ajax';
-import { iif, of, map, mergeMap, catchError, concat, throwError } from 'rxjs';
+import { iif, of, map, switchMap, catchError, merge, throwError } from 'rxjs';
 import { ofType } from 'redux-observable';
 
 import requester from '../misc/requester';
@@ -21,16 +21,16 @@ export default [
   (action$) =>
     action$.pipe(
       ofType('user/auth'),
-      mergeMap(() =>
+      switchMap(() =>
         requester({
           query,
         }).pipe(
-          mergeMap((action2) => {
-            if (get(action2, 'response.errors', null)) {
+          switchMap((action2) => {
+            if (get(action2, 'response.errors')) {
               return throwError();
             }
             return iif(
-              () => get(action2, 'response.data.user', null),
+              () => get(action2, 'response.data.user', false),
               of(
                 {
                   type: 'user/auth/success',
@@ -45,8 +45,11 @@ export default [
                   payload: get(action2, 'response.data.user.owns', []),
                 },
                 {
-                  type: 'modal/user/greet',
-                  payload: get(action2, 'response.data.user.name'),
+                  type: 'modal',
+                  payload: [
+                    'success',
+                    `Welcome back, ${get(action2, 'response.data.user.name')}`,
+                  ],
                 }
               ),
               of(
@@ -73,7 +76,8 @@ export default [
                 type: 'user/logoff',
               },
               {
-                type: 'modal/user/auth/fail',
+                type: 'modal',
+                payload: ['danger', 'Log in failed'],
               }
             )
           )
@@ -84,11 +88,15 @@ export default [
   (action$) =>
     action$.pipe(
       ofType('user/logoff'),
-      mergeMap(() =>
-        concat(
+      switchMap(() =>
+        merge(
           of({
             type: 'color/set/likes',
             payload: likeManager.initLikes || [],
+          }),
+          of({
+            type: 'modal',
+            payload: ['info', 'Logout successfully.'],
           }),
           ajax.getJSON('/auth/logout').pipe(
             map((res) => ({
