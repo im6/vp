@@ -4,6 +4,8 @@ import { MongoClient, ServerApiVersion } from 'mongodb';
 const { MONGO_CONN, MONGO_CRED_PATH: credentials } = process.env;
 
 if (!MONGO_CONN || !credentials) {
+  console.log('MONGO_CONN', MONGO_CONN);
+  console.log('credentials', credentials);
   throw new Error('MongoDB connection info is missing.');
 }
 
