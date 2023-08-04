@@ -66,6 +66,7 @@ const Header = ({
             src={imagUrl}
             className={`${userImgUrl || isVertical ? '' : style.rotate}`}
             alt="icon"
+            referrerPolicy="origin"
           />
         </div>
         <ToggleButton onClick={() => toggleMenu((v) => !v)} />
