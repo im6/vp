@@ -42,6 +42,6 @@ store.dispatch({ type: 'user/auth' });
 
 if (process.env.NODE_ENV !== 'development') {
   customEventPolyFill();
-  window.dispatchEvent(new CustomEvent('_COLORPK_SCRIPT_READY'));
+  window.dispatchEvent(new CustomEvent('_COLORBRO_SCRIPT_READY'));
   console.log('client last build: ', process.env.lastBuildDate);
 }

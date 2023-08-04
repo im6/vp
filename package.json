@@ -1,7 +1,7 @@
 {
   "name": "vp",
   "version": "1.30.0",
-  "description": "source code of react.colorpk.com",
+  "description": "source code of colorbro.com",
   "engines": {
     "node": ">= 16.x"
   },

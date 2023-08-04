@@ -82,8 +82,8 @@ export default (req, res) => {
     <Html
       title={`${
         process.env.NODE_ENV === 'development'
-          ? '(dev) ColorPK'
-          : 'ColorPK | Your Best Color Picker'
+          ? '(dev) ColorBro'
+          : 'ColorBro | Your Best Color Picker'
       }`}
       languageCode={lang}
       isVertical={isVertical}

@@ -114,7 +114,7 @@ export default [
       ofType('color/download'),
       throttleTime(5000),
       tap(({ payload }) => {
-        download(`colorpk_${payload.id}.png`, payload.color);
+        download(`colorbro_${payload.id}.png`, payload.color);
       }),
       map(() => ({
         type: 'modal',

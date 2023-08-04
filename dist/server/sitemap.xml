@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://react.colorpk.com</loc>
+    <loc>https://www.colorbro.com</loc>
     <lastmod>2019-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://react.colorpk.com/latest</loc>
+    <loc>https://www.colorbro.com/latest</loc>
     <lastmod>2019-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://react.colorpk.com/popular</loc>
+    <loc>https://www.colorbro.com/popular</loc>
     <lastmod>2019-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://react.colorpk.com/new</loc>
+    <loc>https://www.colorbro.com/new</loc>
     <lastmod>2019-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

@@ -137,10 +137,7 @@ const Header = ({
             <a className="navbar-link">{language.more}</a>
 
             <div className="navbar-dropdown">
-              <a className="navbar-item" href="//www.colorpk.com">
-                ColorPK v2.0
-              </a>
-              <a className="navbar-item" href="//www.colorpk.com/about">
+              <a className="navbar-item" href="//www.javascript.fun/about/">
                 {language.about}
               </a>
               <hr className="navbar-divider" />

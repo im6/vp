@@ -62,7 +62,7 @@ const downloadCanvas = (color) => {
 
   ctx.font = '13px Arial';
   ctx.fillStyle = '#a3a3a3';
-  ctx.fillText('ColorPK.com', WIDTH - MARGIN - 78, HEIGHT * 0.74);
+  ctx.fillText('ColorBro.com', WIDTH - MARGIN - 78, HEIGHT * 0.74);
 
   ctx.font = '15px Arial';
   ctx.fillStyle = '#909090';
@@ -117,7 +117,7 @@ export const share = (type) => {
     return;
   }
   const windowSize = 'left=350,top=250,width=500,height=300';
-  const subject = window.encodeURIComponent('Check this ColorPK Palette');
+  const subject = window.encodeURIComponent('Check this ColorBro Palette');
   const pageLink = window.encodeURIComponent(window.location.href);
 
   let url = null;

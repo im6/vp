@@ -2,9 +2,10 @@
 import { ObjectId } from 'mongodb';
 import { clientConn } from './connection';
 
+const dbName = 'colorpk';
 // color collection
 export const getColorList = async (category) => {
-  const colorCollection = clientConn.db('colorpk').collection('colors');
+  const colorCollection = clientConn.db(dbName).collection('colors');
   let res = [];
   switch (category) {
     case 'PUBLIC':
@@ -36,7 +37,7 @@ export const getColorList = async (category) => {
 };
 
 export const getColorsByUser = async (userId) => {
-  const colorCollection = clientConn.db('colorpk').collection('colors');
+  const colorCollection = clientConn.db(dbName).collection('colors');
   const res = await colorCollection
     .find({ createdBy: new ObjectId(userId) })
     .toArray();
@@ -44,7 +45,7 @@ export const getColorsByUser = async (userId) => {
 };
 
 export const createColorDocument = async (newObj, userId) => {
-  const colorCollection = clientConn.db('colorpk').collection('colors');
+  const colorCollection = clientConn.db(dbName).collection('colors');
   const payload = { ...newObj };
   if (userId) {
     payload.createdBy = new ObjectId(userId);
@@ -54,7 +55,7 @@ export const createColorDocument = async (newObj, userId) => {
 };
 
 export const flipColorVisibility = async (id) => {
-  const colorCollection = clientConn.db('colorpk').collection('colors');
+  const colorCollection = clientConn.db(dbName).collection('colors');
   const res = await colorCollection.updateOne(
     { _id: new ObjectId(id) },
     { $set: { hidden: false } }
@@ -63,7 +64,7 @@ export const flipColorVisibility = async (id) => {
 };
 
 export const incrementColorStar = async (id) => {
-  const colorCollection = clientConn.db('colorpk').collection('colors');
+  const colorCollection = clientConn.db(dbName).collection('colors');
   const updateRes = await colorCollection.updateOne(
     { _id: new ObjectId(id) },
     { $inc: { star: 1 } }
@@ -72,14 +73,14 @@ export const incrementColorStar = async (id) => {
 };
 
 export const deleteColor = async (id) => {
-  const colorCollection = clientConn.db('colorpk').collection('colors');
+  const colorCollection = clientConn.db(dbName).collection('colors');
   const res = await colorCollection.deleteOne({ _id: new ObjectId(id) });
   return res.deletedCount === 1 ? 0 : 1;
 };
 
 // user collection
 export const checkUser = async (oAuthType, oAuthId) => {
-  const userCollection = clientConn.db('colorpk').collection('users');
+  const userCollection = clientConn.db(dbName).collection('users');
   const optionalUser = await userCollection.findOne({
     oAuthId,
     oAuthType,
@@ -92,12 +93,12 @@ export const checkUser = async (oAuthType, oAuthId) => {
     : null;
 };
 export const createUser = async (newObject) => {
-  const userCollection = clientConn.db('colorpk').collection('users');
+  const userCollection = clientConn.db(dbName).collection('users');
   const res = await userCollection.insertOne(newObject);
   return res.insertedId;
 };
 export const updateUserLoginDate = async (userId) => {
-  const userCollection = clientConn.db('colorpk').collection('users');
+  const userCollection = clientConn.db(dbName).collection('users');
   await userCollection.updateOne(
     { _id: new ObjectId(userId) },
     { $set: { lastLogin: new Date() } }
@@ -106,14 +107,14 @@ export const updateUserLoginDate = async (userId) => {
 
 // userSave collection
 export const getUserSaveColorList = async (userId) => {
-  const userSaveCollection = clientConn.db('colorpk').collection('userSave');
+  const userSaveCollection = clientConn.db(dbName).collection('userSave');
   const res = await userSaveCollection
     .find({ user: new ObjectId(userId) })
     .toArray();
   return res.map((v) => v.color);
 };
 export const upsertUserSaveColor = async (userId, colorId) => {
-  const userSaveCollection = clientConn.db('colorpk').collection('userSave');
+  const userSaveCollection = clientConn.db(dbName).collection('userSave');
   const filterObj = {
     user: new ObjectId(userId),
     color: new ObjectId(colorId),
@@ -129,7 +130,7 @@ export const upsertUserSaveColor = async (userId, colorId) => {
 };
 
 export const deleteUserSaveColor = async (userId, colorId) => {
-  const userSaveCollection = clientConn.db('colorpk').collection('userSave');
+  const userSaveCollection = clientConn.db(dbName).collection('userSave');
   const filterObj = {
     user: new ObjectId(userId),
     color: new ObjectId(colorId),
@@ -139,7 +140,7 @@ export const deleteUserSaveColor = async (userId, colorId) => {
 };
 
 export const deleteColorFromUserSave = async (colorId) => {
-  const userSaveCollection = clientConn.db('colorpk').collection('userSave');
+  const userSaveCollection = clientConn.db(dbName).collection('userSave');
   const filterObj = {
     color: new ObjectId(colorId),
   };
