@@ -63,7 +63,10 @@ export const oauthLogout = (req, res) => {
   res.json({
     weiboUrl: createLoginLink('wb', oauthState),
     githubUrl: createLoginLink('gh', oauthState),
-    facebookUrl: createLoginLink('fb', oauthState),
+    facebookUrl:
+      process.env.NODE_ENV === 'development'
+        ? createLoginLink('fb', oauthState)
+        : null,
   });
 };
 
