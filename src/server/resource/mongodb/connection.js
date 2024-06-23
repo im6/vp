@@ -8,8 +8,7 @@ if (!MONGO_CONN || !credentials) {
 }
 
 const client = new MongoClient(MONGO_CONN, {
-  sslKey: credentials,
-  sslCert: credentials,
+  tlsCertificateKeyFile: credentials,
   serverApi: ServerApiVersion.v1,
 });
 
