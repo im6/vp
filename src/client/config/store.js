@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const store = configureStore({
   reducer: reducerSlices,
-  middleware: middlewares,
+  middleware: () => middlewares,
   devTools: process.env.NODE_ENV === 'development',
   preloadedState: window[reduxName],
 });

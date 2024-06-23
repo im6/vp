@@ -12,9 +12,9 @@ const Box = ({
   username,
   vertical,
   showUsername,
-  onClickText,
+  onClickText = () => {},
   onClickHeart,
-  onClickCanvas,
+  onClickCanvas = () => {},
 }) => {
   const onClickHeartLocal = () => {
     onClickHeart({
@@ -64,13 +64,8 @@ Box.propTypes = {
   vertical: PropTypes.bool,
   showUsername: PropTypes.bool,
   onClickHeart: PropTypes.func.isRequired,
-  onClickText: PropTypes.func.isRequired,
-  onClickCanvas: PropTypes.func.isRequired,
-};
-
-Box.defaultProps = {
-  onClickText: () => {},
-  onClickCanvas: () => {},
+  onClickText: PropTypes.func,
+  onClickCanvas: PropTypes.func,
 };
 
 export default Box;
