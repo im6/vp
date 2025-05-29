@@ -34,7 +34,7 @@ describe('render properly', () => {
     );
     fireEvent.click(getByLabelText('nav menu'));
     fireEvent.click(getByTitle('click to rotate'));
-    fireEvent.click(getByText(`Like (${likeNum})`));
+    fireEvent.click(getByText(`Saved (${likeNum})`));
     expect(getByText('Login')).toBeTruthy();
   });
 
@@ -73,7 +73,7 @@ describe('render properly', () => {
     );
     fireEvent.click(getByText('Popular'));
     fireEvent.click(getByText('Profile'));
-    fireEvent.click(getByText('Like'));
+    fireEvent.click(getByText('Saved'));
     fireEvent.click(getByText('Log Out'));
     expect(onLogout).toBeCalled();
   });

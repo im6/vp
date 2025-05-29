@@ -62,6 +62,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
+    "@testing-library/dom": "^10.4.0",
     "axios": "^1.9.0",
     "body-parser": "^2.2.0",
     "connect-redis": "^8.1.0",
