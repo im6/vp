@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ChromePicker } from 'react-color';
 import { useNavigate, useLocation } from 'react-router-dom';
 import EditCanvas from '../EditCanvas';
-import style from './style.sass';
+import * as style from './style.sass';
 import useTranslationContext from '../../../../../hooks/useTranslationContext';
 import { isValidColorStr } from '../../../../../util';
 

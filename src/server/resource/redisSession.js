@@ -1,6 +1,6 @@
 import { createClient } from 'redis';
 import session from 'express-session';
-import RedisStore from 'connect-redis';
+import { RedisStore } from 'connect-redis';
 
 import { SESSION_SECRET } from '../constant.server';
 

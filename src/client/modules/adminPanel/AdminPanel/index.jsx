@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import style from './style.sass';
+import * as style from './style.sass';
 import Box from '../../color/components/Box';
 import useLayoutContext from '../../../../hooks/useLayoutContext';
 

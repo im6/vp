@@ -11,6 +11,10 @@ const resolve = {
   },
 };
 
+const sass = {
+  loader: 'sass-loader',
+};
+
 exports.withoutCssModuleFiles = [
   /src(\\|\/)client(\\|\/)bulma.modules.sass/,
   /components(\\|\/)SpinLoader(\\|\/)style.sass/,
@@ -32,6 +36,8 @@ exports.include = include;
 exports.localIdentName = localIdentName;
 exports.staticAssetsPath = 'assets/static';
 
+exports.sassLoader = sass;
+
 exports.serverModule = {
   rules: [
     {
@@ -52,7 +58,7 @@ exports.serverModule = {
             },
           },
         },
-        'sass-loader',
+        sass,
       ],
     },
   ],

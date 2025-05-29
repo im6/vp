@@ -18,7 +18,7 @@ const raw = [
       reset: 'Reset',
       return: 'Return',
       profile: 'Profile',
-      like: 'Like',
+      like: 'Saved',
       admin: 'Admin',
       logOut: 'Log Out',
       facebook: 'FaceBook',

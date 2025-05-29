@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import style from './style.sass';
+import * as style from './style.sass';
 import ColorRow from './ColorRow';
 
 const EditCanvas = ({ colorValue, activeIndex, onClickRow }) => {

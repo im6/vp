@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import style from './style.sass';
+import * as style from './style.sass';
 
 const Heart = ({ red }) => (
   <svg

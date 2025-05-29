@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import style from './style.sass';
+import * as style from './style.sass';
 import HeartButton from './components/HeartButton';
 import ColorCanvas from './components/ColorCanvas';
 

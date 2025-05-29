@@ -2,7 +2,7 @@ import { Fragment, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import style from './style.sass';
+import * as style from './style.sass';
 import SpinLoader from 'components/SpinLoader';
 import Box from '../Box';
 import ShareWrapper from '../ShareWrapper';

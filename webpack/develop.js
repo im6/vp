@@ -11,6 +11,7 @@ const {
   localIdentName,
   staticAssetsPath,
   include,
+  sassLoader,
   serverModule,
 } = require('./base');
 
@@ -56,7 +57,7 @@ const client = Object.assign(clientBaseConfig, devBase, {
               modules: false,
             },
           },
-          'sass-loader',
+          sassLoader,
         ],
       },
       {
@@ -72,7 +73,7 @@ const client = Object.assign(clientBaseConfig, devBase, {
               },
             },
           },
-          'sass-loader',
+          sassLoader,
         ],
       },
     ],
